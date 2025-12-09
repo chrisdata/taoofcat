@@ -9,20 +9,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
-        /* 颜色和通用变量 (保留 ChatGPT 版本) */
+        /* 颜色和通用变量：极简的黑白灰 */
         :root {
-            --bg: #f8f5f0; /* 背景米白色 */
+            --bg: #FFFFFF; /* 纯白色背景 */
             --text-main: #222222;
-            --text-muted: #6e6e73; /* 调整为更接近 Apple 的柔和灰色 */
-            --accent: #b88c5a; /* 主色调：柔和的棕色/金色 */
-            --accent-soft: #e7d5b8;
-            --border-soft: #e5ded2;
-            --max-width: 1100px; /* 增加最大宽度以适应分段式大图布局 */
-            --radius-lg: 16px;
-            --shadow-soft: 0 10px 30px rgba(0,0,0,0.06);
+            --text-muted: #6e6e73;
+            --accent: #4a5d66; /* 调整主色调为内敛的深灰/墨色 */
+            --accent-soft: #f0f0f0; /* 极浅的灰色用于点缀 */
+            --border-soft: #e5e5e5; /* 极浅的边框 */
+            --max-width: 1000px;
+            --radius-lg: 12px;
+            --shadow-soft: 0 4px 15px rgba(0,0,0,0.03); /* 几乎看不见的柔和阴影 */
+            --font-serif: "Playfair Display", serif;
+            --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         }
 
-        /* 基础重置 */
+        /* 基础重置与留白 */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -30,78 +32,70 @@
         }
 
         body {
-            font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-family: var(--font-sans);
             background: var(--bg);
             color: var(--text-main);
-            line-height: 1.6;
+            line-height: 1.7; /* 增加行高，禅风留白的关键 */
             -webkit-font-smoothing: antialiased;
         }
 
         a { color: inherit; text-decoration: none; }
 
-        /* NAV - 样式不变 */
+        /* NAV - 样式不变，但颜色更中性 */
         header {
             padding: 16px 20px 0;
             position: sticky;
             top: 0;
             z-index: 20;
-            backdrop-filter: blur(12px);
-            background: linear-gradient(to bottom, rgba(248,245,240,0.96), rgba(248,245,240,0.85) 60%, transparent);
-            border-bottom: 1px solid var(--border-soft); /* 增加底部边框提高清晰度 */
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid var(--border-soft);
         }
-        .nav {
-            max-width: 1200px; /* 导航栏可以稍宽 */
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-        }
-        .nav-left, .nav-right, .logo-circle, .nav-title-main, .nav-sub { /* 沿用原 CSS */ }
-        .btn-outline, .btn-primary { /* 沿用原 CSS */ }
+        .nav { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 50px; }
         .nav-left { display: flex; align-items: center; gap: 10px; }
-        .logo-circle { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--accent-soft); display: flex; align-items: center; justify-content: center; font-size: 18px; }
-        .nav-title-main { font-family: "Playfair Display", serif; font-size: 20px; letter-spacing: 0.05em; }
+        .logo-circle { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border-soft); display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--accent); }
+        .nav-title-main { font-family: var(--font-serif); font-size: 20px; letter-spacing: 0.05em; }
         .nav-sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); }
         .nav-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-        .btn-outline, .btn-primary { border-radius: 999px; padding: 7px 14px; font-size: 12px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; transition: all 0.18s ease; white-space: nowrap; }
-        .btn-outline { border: 1px solid var(--border-soft); background: rgba(255,255,255,0.7); }
-        .btn-primary { border: none; background: var(--accent); color: white; box-shadow: 0 10px 25px rgba(0,0,0,0.12); }
-        .btn-primary:hover { background: #a57d51; transform: translateY(-1px); box-shadow: 0 16px 30px rgba(0,0,0,0.18); }
+        .btn-outline, .btn-primary { border-radius: 999px; padding: 7px 14px; font-size: 12px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; transition: all 0.18s ease; white-space: nowrap; font-weight: 500;}
+        .btn-outline { border: 1px solid var(--border-soft); background: var(--bg); }
+        .btn-primary { border: none; background: var(--accent); color: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .btn-primary:hover { background: #33424a; transform: translateY(-1px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
 
-        /* 全新：分段式布局容器 */
+        /* 禅风：分段式布局容器 */
         section {
-            padding: 80px 20px; /* 上下留出更大的空间 */
-            min-height: 85vh; /* 保证每段占据大部分屏幕 */
+            padding: 120px 20px; /* 极致的垂直留白 */
+            min-height: 80vh; 
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
-            text-align: center; /* 默认居中 */
+            text-align: center;
+            border-bottom: 1px solid var(--border-soft); /* 使用细线分隔，而非颜色 */
+            background: var(--bg);
         }
 
         .content-wrapper {
             max-width: var(--max-width);
             width: 100%;
             margin: 0 auto;
-            /* 移除内层 box-shadow，让内容更“轻盈” */
         }
 
         /* 核心文本样式 */
         .section-title {
-            font-family: "Playfair Display", serif;
-            font-size: 44px; /* 增大标题 */
+            font-family: var(--font-serif);
+            font-size: 40px; 
             font-weight: 700;
-            margin-bottom: 20px;
-            line-height: 1.1;
+            margin-bottom: 15px;
+            line-height: 1.2;
         }
 
         .section-subtitle {
-            font-size: 18px; /* 增大副标题 */
+            font-size: 16px; 
             color: var(--text-muted);
-            margin-bottom: 25px;
-            max-width: 700px;
+            margin-bottom: 30px;
+            max-width: 650px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -109,19 +103,19 @@
         .eyebrow {
             font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.25em; /* 增加字母间距 */
             color: var(--accent);
-            margin-bottom: 12px;
-            font-weight: 600;
+            margin-bottom: 15px;
+            font-weight: 500;
         }
         
         .hero-big {
-            font-size: 64px; /* 英雄区标题最大化 */
+            font-size: 56px; 
             line-height: 1.1;
-            font-family: "Playfair Display", serif;
+            font-family: var(--font-serif);
             font-weight: 700;
-            margin-bottom: 20px;
-            max-width: 800px;
+            margin-bottom: 25px;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -129,7 +123,7 @@
         .hero-note {
             font-size: 14px;
             color: var(--text-muted);
-            margin-top: 20px;
+            margin-top: 25px;
         }
 
         .section-actions {
@@ -140,391 +134,96 @@
             flex-wrap: wrap;
         }
 
-        /* 全新：图文交错布局 (iPhone 风格的核心) */
+        /* 禅风：图文交错布局 */
         .image-text-block {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* 默认两列 */
-            gap: 60px;
-            align-items: center;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px; /* 增加图文间距 */
+            align-items: flex-start; /* 顶部对齐 */
             text-align: left;
-            margin: 60px 0;
-            padding: 40px 0;
+            margin: 80px 0;
+            padding: 20px 0;
         }
 
         .image-container img {
             width: 100%;
             height: auto;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-soft);
-            transition: transform 0.3s ease;
+            border-radius: 0; /* 水墨风格移除圆角 */
+            box-shadow: none; /* 移除阴影 */
+            border: 1px solid var(--border-soft); /* 保持图片边缘清晰 */
         }
         
         /* 奇数行反转 (图片在左，文字在右) */
         .image-text-block:nth-child(even) {
-            direction: rtl; /* 利用 rtl 交换列顺序 */
-            text-align: left; /* 保持文字方向不变 */
+            direction: rtl; 
+            text-align: left;
         }
         .image-text-block:nth-child(even) .text-content {
             direction: ltr;
         }
         
         .image-text-block .text-content h3 {
-            font-family: "Playfair Display", serif;
-            font-size: 32px;
+            font-family: var(--font-serif);
+            font-size: 28px;
             margin-bottom: 10px;
-            color: var(--accent);
+            color: var(--text-main);
         }
         .image-text-block .text-content p {
-            font-size: 16px;
+            font-size: 15px;
             color: var(--text-main);
-            margin-bottom: 15px;
-        }
-        .image-text-block .text-content .tile-label {
-            margin-bottom: 5px;
-        }
-
-        /* SECTION 2 & 3 特殊排版 */
-        .pill-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 30px;
-            margin-bottom: 30px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .pill-line {
-            font-size: 16px;
-            padding: 15px 20px;
-            border-radius: 12px;
-            background: rgba(255,255,255,0.7);
-            border: 1px solid var(--border-soft);
-            color: var(--text-main);
-            text-align: left;
-            transition: background 0.2s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            margin-bottom: 10px;
         }
         
+        /* SECTION 3 - 三力量 Tile 调整 */
         .three-cols {
             display: grid;
             grid-template-columns: repeat(3, minmax(0,1fr));
-            gap: 20px; /* 加大间距 */
-            margin-top: 40px;
+            gap: 30px; 
+            margin-top: 50px;
         }
         
         .tile {
-            padding: 20px; /* 加大内边距 */
+            padding: 25px;
             border-radius: var(--radius-lg);
-            background: #fff;
+            background: var(--bg);
             border: 1px solid var(--border-soft);
-            box-shadow: var(--shadow-soft);
+            box-shadow: none; /* 移除阴影 */
             text-align: left;
-            transition: transform 0.2s ease;
+            transition: border-color 0.2s ease;
         }
         .tile:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            border-color: var(--accent); /* 鼠标悬停时，边框变深 */
+            transform: none;
         }
-        .tile-label { color: var(--accent); font-weight: 600; }
-        .tile-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--text-main); }
-        .tile p { font-size: 14px; color: var(--text-muted); }
+        .tile-label { color: var(--accent); font-weight: 600; font-size: 12px; }
+        .tile-title { font-size: 18px; font-weight: 600; margin-bottom: 10px; color: var(--text-main); }
+        .tile p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
 
-        /* SECTION 4 - 重点强调 */
+        /* SECTION 4 - 列表 */
         .list-bullets {
             font-size: 16px;
             color: var(--text-muted);
-            padding-left: 25px;
+            padding-left: 20px;
             text-align: left;
             max-width: 700px;
-            margin: 20px auto;
+            margin: 25px auto;
         }
         .list-bullets li {
-            margin-bottom: 8px;
-            line-height: 1.8;
+            margin-bottom: 10px;
         }
-        .list-bullets strong {
-            color: var(--text-main);
+        
+        /* SECTION 5 - CTA */
+        .sec-subscribe {
+            border-bottom: none;
+            background: var(--accent-soft); /* 底部使用极浅灰做衬托 */
         }
-
-
-        /* BACKGROUNDS PER SECTION */
-        .sec-hero { background: linear-gradient(135deg, #f2e5d2 0%, #f8f5f0 50%, #fdfbf8 100%); }
-        .sec-wounds { background: linear-gradient(45deg, #efe4da 0%, #f7f2eb 48%, #f8f5f0 100%); }
-        .sec-forces { background: linear-gradient(225deg, #f1e9dd 0%, #f8f5f0 55%, #fdfbf8 100%); }
-        .sec-purpose { background: linear-gradient(315deg, #f4ebe0 0%, #f8f5f0 60%, #fdfbf8 100%); }
-        .sec-subscribe { background: var(--accent-soft); color: var(--text-main); }
-        .sec-subscribe .section-title { color: var(--text-main); }
-        .sec-subscribe .section-subtitle { color: var(--text-main); }
-
 
         /* FOOTER */
         footer {
-            border-top: 1px solid #e1d8cc;
-            padding: 20px 20px 30px; /* 加大页脚间距 */
+            border-top: 1px solid var(--border-soft);
+            padding: 30px 20px;
             font-size: 12px;
             color: var(--text-muted);
-            background: #fdfbf8; /* 使用更亮白的背景 */
+            background: var(--bg);
         }
-        .footer-inner { /* 沿用原 CSS */ }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .hero-big { font-size: 52px; }
-            .section-title { font-size: 36px; }
-            .image-text-block { gap: 40px; }
-        }
-
-        @media (max-width: 768px) {
-            section {
-                padding: 60px 16px;
-                min-height: auto;
-            }
-            .hero-big {
-                font-size: 40px;
-            }
-            .section-title {
-                font-size: 30px;
-            }
-            .section-subtitle {
-                font-size: 16px;
-            }
-            .image-text-block {
-                grid-template-columns: 1fr; /* 手机上堆叠 */
-                gap: 30px;
-                direction: ltr !important; /* 确保堆叠顺序一致 */
-                margin: 40px 0;
-            }
-            .image-text-block .text-content {
-                order: 2; /* 文字在下面 */
-            }
-            .image-text-block .image-container {
-                order: 1; /* 图片在上面 */
-            }
-            .three-cols {
-                grid-template-columns: minmax(0,1fr);
-                gap: 16px;
-            }
-        }
-    </style>
-</head>
-<body>
-<div class="page">
-    <header>
-        <div class="nav">
-            <div class="nav-left">
-                <div class="logo-circle">猫</div>
-                <div>
-                    <div class="nav-title-main">Tao of Cat</div>
-                    <div class="nav-sub">AI · Cats · Tao</div>
-                </div>
-            </div>
-            <div class="nav-right">
-                <a href="https://taoofcat.substack.com" class="btn-outline" target="_blank" rel="noopener">
-                    Letters
-                </a>
-                <a href="https://taoofcat.substack.com" class="btn-primary" target="_blank" rel="noopener">
-                    Subscribe
-                </a>
-            </div>
-        </div>
-    </header>
-
-    <main>
-        <section class="sec-hero" id="top">
-            <div class="content-wrapper" style="max-width: 900px;">
-                <div class="eyebrow">A quiet path for modern hearts</div>
-                <div class="hero-big">
-                    A softer way to exist<br>in a restless world.
-                </div>
-                <p class="section-subtitle">
-                    Tao of Cat is where **AI, cats and the Tao meet** – for people who think deeply, feel quietly, and are tired of carrying everything alone.
-                </p>
-                <div class="section-actions">
-                    <a href="https://taoofcat.substack.com" target="_blank" rel="noopener" class="btn-primary">
-                        Join Tao of Cat Letters
-                    </a>
-                    <a href="#forces" class="btn-outline">
-                        Why this path is gentle
-                    </a>
-                </div>
-                <p class="hero-note">
-                    Not self-help. Not productivity. Just a gentler way to be human.
-                </p>
-
-                <div style="margin-top: 60px;">
-                    <img src="./images/hero-cat-large.jpg" alt="A cat sleeping peacefully in sunlight, representing the Tao of Cat" style="width: 100%; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.1);">
-                    </div>
-            </div>
-        </section>
-
-        <section class="sec-wounds" id="wounds">
-            <div class="content-wrapper">
-                <h2 class="section-title">What hurts inside</h2>
-                <p class="section-subtitle">
-                    Most of us live with a quiet mix of anxiety, loneliness and pressure. On the surface we are “fine”. Inside, something feels thin and tired.
-                </p>
-
-                <div class="image-text-block">
-                    <div class="text-content">
-                        <div class="eyebrow">The pain of not understanding</div>
-                        <h3>我们知道的很多，但理解的很少。</h3>
-                        <p>
-                            We know a lot, but understand very little.
-                            我们被信息洪流淹没，拥有无数知识和工具，但这些并未能转化成内心的平静或对自身处境的清晰认知。
-                        </p>
-                         <p style="font-style: italic; color: var(--text-main);">
-                            **原句：** We know a lot, but understand very little.
-                        </p>
-                    </div>
-                    <div class="image-container">
-                        <img src="./images/wound-1-overthink.jpg" alt="A person overwhelmed by thought bubbles, representing overthinking">
-                         </div>
-                </div>
-
-                <div class="image-text-block">
-                    <div class="text-content">
-                        <div class="eyebrow">The pain of not feeling held</div>
-                        <h3>我们被人群包围，但情感上无人看顾。</h3>
-                        <p>
-                            We are surrounded by people, but feel emotionally unattended.
-                            人际关系变得肤浅而匆忙，我们找不到一个可以卸下所有伪装、被温柔接纳的地方。孤独感是现代人最沉重的秘密。
-                        </p>
-                        <p style="font-style: italic; color: var(--text-main);">
-                            **原句：** We are surrounded by people, but feel emotionally unattended.
-                        </p>
-                    </div>
-                    <div class="image-container">
-                        <img src="./images/wound-2-loneliness.jpg" alt="A single cat looking out a window, representing quiet loneliness">
-                         </div>
-                </div>
-
-                <div class="image-text-block">
-                    <div class="text-content">
-                        <div class="eyebrow">The pain of not knowing the way</div>
-                        <h3>我们试图掌控生活，却感觉越来越迷失。</h3>
-                        <p>
-                            We try to control life, but feel more and more lost.
-                            规划、日程、效率——我们穷尽一切努力想要抓住生活，结果只是增加了更多的紧张和焦虑。生活本该流动，而不是被锁住。
-                        </p>
-                        <p style="font-style: italic; color: var(--text-main);">
-                            **原句：** We try to control life, but feel more and more lost.
-                        </p>
-                    </div>
-                    <div class="image-container">
-                        <img src="./images/wound-3-pressure.jpg" alt="A tightly wound clock or coil, representing pressure">
-                         </div>
-                </div>
-                
-                <p class="hero-note">
-                    Tao of Cat begins from a simple honesty: nothing is “wrong” with you. The way we live is simply too harsh for a soft heart.
-                </p>
-
-            </div>
-        </section>
-
-        <section class="sec-forces" id="forces">
-            <div class="content-wrapper">
-                <h2 class="section-title">Three companions on this path</h2>
-                <p class="section-subtitle">
-                    Tao of Cat is built on three companions – one for the **mind**, one for the **heart**, and one for the **spirit**.
-                </p>
-                
-                <div class="three-cols">
-                    <div class="tile">
-                        <div style="margin-bottom: 15px;">
-                             <img src="./images/force-1-ai.svg" alt="AI Icon" style="width: 48px; height: 48px;"> 
-                        </div>
-                        <div class="tile-label">AI · mind</div>
-                        <div class="tile-title">Clarity for your thoughts</div>
-                        <p>
-                            AI helps you organise what you feel and think, see patterns you can’t see alone, and bring order to the noise in your head.
-                        </p>
-                    </div>
-
-                    <div class="tile">
-                        <div style="margin-bottom: 15px;">
-                            <img src="./images/force-2-cat.svg" alt="Cat Icon" style="width: 48px; height: 48px;"> 
-                        </div>
-                        <div class="tile-label">Cat · heart</div>
-                        <div class="tile-title">Warmth without words</div>
-                        <p>
-                            Cats hold space without advice or judgment. They are a living reminder that quiet presence itself can be healing.
-                        </p>
-                    </div>
-
-                    <div class="tile">
-                        <div style="margin-bottom: 15px;">
-                            <img src="./images/force-3-tao.svg" alt="Tao Icon" style="width: 48px; height: 48px;"> 
-                        </div>
-                        <div class="tile-label">Tao · spirit</div>
-                        <div class="tile-title">Wisdom that doesn’t force</div>
-                        <p>
-                            Taoist wisdom invites you to move with life, not against it – to exchange control, tension and panic for rhythm, ease and trust.
-                        </p>
-                    </div>
-                </div>
-                </div>
-        </section>
-
-        <section class="sec-purpose" id="purpose">
-            <div class="content-wrapper">
-                <h2 class="section-title">What Tao of Cat is here to do</h2>
-                <p class="section-subtitle">
-                    This space exists to gently ease three modern pains:
-                </p>
-                <ul class="list-bullets">
-                    <li><strong>The pain of not understanding</strong> – eased by AI’s clear methods and perspective.</li>
-                    <li><strong>The pain of not feeling held</strong> – eased by the emotional presence of cats.</li>
-                    <li><strong>The pain of not knowing the way</strong> – eased by the Tao’s natural, effortless wisdom.</li>
-                </ul>
-
-                <p class="section-subtitle" style="margin-top:25px; font-weight: 500;">
-                    Everything here is simple and light. No fixing, no forcing – just slow, honest reminders that your softness is not a problem to solve.
-                </p>
-                
-                <div style="margin-top: 50px; max-width: 700px; margin-left: auto; margin-right: auto;">
-                    <img src="./images/purpose-diagram.jpg" alt="Simple diagram showing three forces converging on a heart, representing the easing of pain" style="width: 100%; border-radius: 16px; opacity: 0.9;">
-                     </div>
-            </div>
-        </section>
-
-        <section class="sec-subscribe" id="subscribe">
-            <div class="content-wrapper" style="max-width: 800px;">
-                <h2 class="section-title">Begin walking the path</h2>
-                <p class="section-subtitle">
-                    Tao of Cat Letters is a quiet newsletter – short reflections and gentle notes for anxious, sensitive, easily overwhelmed hearts.
-                </p>
-
-                <div class="subscribe-row" style="justify-content: center; text-align: center;">
-                    <p>
-                        No spam, no shouting, no “hacks”. Just one more soft presence in your week, reminding you that you don’t have to do life the way everyone else does.
-                    </p>
-                </div>
-                <div class="section-actions" style="margin-top: 20px;">
-                    <a href="https://taoofcat.substack.com" target="_blank" rel="noopener" class="btn-primary">
-                        Subscribe to Tao of Cat Letters
-                    </a>
-                </div>
-                
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-inner">
-            <div>© <span id="year"></span> Tao of Cat · A quiet path for modern hearts.</div>
-            <div class="footer-links">
-                <a href="#top">Top</a>
-                <a href="https://taoofcat.substack.com" target="_blank" rel="noopener">Newsletter</a>
-            </div>
-        </div>
-    </footer>
-</div>
-
-<script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-</script>
-</body>
-</html>
+        .footer-inner { max-width: var(--max-width
