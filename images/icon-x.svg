@@ -1,3 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
-    <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2.4-.2.1-.4.1-.6.1-2.4 0-4.5-1.7-4.9-4 1.3.1 2.7-.1 3.8-1.2-2.1-.1-3.7-1.4-4.2-3.4.7.1 1.5.2 2.1-.1C4.3 7.8 2.5 5 5 4c2.2 2.2 5.3 3.1 8 2.3-1.4-4 6-6 8-3.4z"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-platform">
+    <line x1="16" y1="8" x2="8" y2="16"></line>
+    <line x1="8" y1="8" x2="16" y2="16"></line>
+    <rect x="1" y="1" width="22" height="22" rx="3" ry="3" stroke-dasharray="2 3" opacity="0"></rect>
 </svg>
