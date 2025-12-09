@@ -226,4 +226,245 @@
             color: var(--text-muted);
             background: var(--bg);
         }
-        .footer-inner { max-width: var(--max-width
+        .footer-inner { max-width: var(--max-width); margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-big { font-size: 48px; }
+            .section-title { font-size: 36px; }
+            .image-text-block { gap: 40px; }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 80px 16px;
+                min-height: auto;
+            }
+            .hero-big { font-size: 36px; }
+            .section-title { font-size: 28px; }
+            .image-text-block {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                direction: ltr !important;
+                margin: 40px 0;
+            }
+            .image-text-block .text-content { order: 2; }
+            .image-text-block .image-container { order: 1; }
+            .three-cols {
+                grid-template-columns: minmax(0,1fr);
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <header>
+        <div class="nav">
+            <div class="nav-left">
+                <div class="logo-circle">猫</div>
+                <div>
+                    <div class="nav-title-main">Tao of Cat</div>
+                    <div class="nav-sub">AI · Cats · Tao</div>
+                </div>
+            </div>
+            <div class="nav-right">
+                <a href="https://taoofcat.substack.com" class="btn-outline" target="_blank" rel="noopener">
+                    Letters
+                </a>
+                <a href="https://taoofcat.substack.com" class="btn-primary" target="_blank" rel="noopener">
+                    Subscribe
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="sec-hero" id="top">
+            <div class="content-wrapper" style="max-width: 700px;">
+                <div class="eyebrow">A quiet path for modern hearts</div>
+                <div class="hero-big">
+                    A softer way to exist<br>in a restless world.
+                </div>
+                <p class="section-subtitle">
+                    Tao of Cat is where **AI, cats and the Tao meet** – for people who think deeply, feel quietly, and are tired of carrying everything alone.
+                </p>
+                <div class="section-actions">
+                    <a href="https://taoofcat.substack.com" target="_blank" rel="noopener" class="btn-primary">
+                        Join Tao of Cat Letters
+                    </a>
+                    <a href="#forces" class="btn-outline">
+                        Why this path is gentle
+                    </a>
+                </div>
+                <p class="hero-note">
+                    Not self-help. Not productivity. Just a gentler way to be human.
+                </p>
+
+                <div style="margin-top: 80px;">
+                    <img src="./images/hero-cat-ink-large.jpg" alt="Watercolour ink painting of a calm cat, representing the Tao of Cat" style="width: 100%; border: 1px solid var(--border-soft);">
+                    </div>
+            </div>
+        </section>
+
+        <section class="sec-wounds" id="wounds">
+            <div class="content-wrapper">
+                <h2 class="section-title">What hurts inside</h2>
+                <p class="section-subtitle">
+                    Most of us live with a quiet mix of anxiety, loneliness and pressure. On the surface we are “fine”. Inside, something feels thin and tired.
+                </p>
+
+                <div class="image-text-block">
+                    <div class="text-content">
+                        <div class="eyebrow">The pain of not understanding</div>
+                        <h3>我们知道的很多，但理解的很少。</h3>
+                        <p>
+                            We know a lot, but understand very little.
+                            我们被信息洪流淹没，拥有无数知识和工具，但这些并未能转化成内心的平静或对自身处境的清晰认知。
+                        </p>
+                    </div>
+                    <div class="image-container">
+                        <img src="./images/wound-1-ink-overthink.jpg" alt="Ink painting representing confused thoughts">
+                         </div>
+                </div>
+
+                <div class="image-text-block">
+                    <div class="text-content">
+                        <div class="eyebrow">The pain of not feeling held</div>
+                        <h3>我们被人群包围，但情感上无人看顾。</h3>
+                        <p>
+                            We are surrounded by people, but feel emotionally unattended.
+                            人际关系变得肤浅而匆忙，我们找不到一个可以卸下所有伪装、被温柔接纳的地方。孤独感是现代人最沉重的秘密。
+                        </p>
+                    </div>
+                    <div class="image-container">
+                        <img src="./images/wound-2-ink-loneliness.jpg" alt="Ink painting of a lone figure or cat">
+                         </div>
+                </div>
+
+                <div class="image-text-block">
+                    <div class="text-content">
+                        <div class="eyebrow">The pain of not knowing the way</div>
+                        <h3>我们试图掌控生活，却感觉越来越迷失。</h3>
+                        <p>
+                            We try to control life, but feel more and more lost.
+                            规划、日程、效率——我们穷尽一切努力想要抓住生活，结果只是增加了更多的紧张和焦虑。生活本该流动，而不是被锁住。
+                        </p>
+                    </div>
+                    <div class="image-container">
+                        <img src="./images/wound-3-ink-pressure.jpg" alt="Ink painting representing flowing water or nature's rhythm">
+                         </div>
+                </div>
+                
+                <p class="hero-note">
+                    Tao of Cat begins from a simple honesty: nothing is “wrong” with you. The way we live is simply too harsh for a soft heart.
+                </p>
+
+            </div>
+        </section>
+
+        <section class="sec-forces" id="forces">
+            <div class="content-wrapper">
+                <h2 class="section-title">Three companions on this path</h2>
+                <p class="section-subtitle">
+                    Tao of Cat is built on three companions – one for the **mind**, one for the **heart**, and one for the **spirit**.
+                </p>
+                
+                <div class="three-cols">
+                    <div class="tile">
+                        <div style="margin-bottom: 15px;">
+                             <img src="./images/force-1-ai-ink.svg" alt="AI Ink Icon" style="width: 40px; height: 40px; opacity: 0.8;"> 
+                        </div>
+                        <div class="tile-label">AI · mind</div>
+                        <div class="tile-title">Clarity for your thoughts</div>
+                        <p>
+                            AI helps you organise what you feel and think, see patterns you can’t see alone, and bring order to the noise in your head.
+                        </p>
+                    </div>
+
+                    <div class="tile">
+                        <div style="margin-bottom: 15px;">
+                            <img src="./images/force-2-cat-ink.svg" alt="Cat Ink Icon" style="width: 40px; height: 40px; opacity: 0.8;"> 
+                        </div>
+                        <div class="tile-label">Cat · heart</div>
+                        <div class="tile-title">Warmth without words</div>
+                        <p>
+                            Cats hold space without advice or judgment. They are a living reminder that quiet presence itself can be healing.
+                        </p>
+                    </div>
+
+                    <div class="tile">
+                        <div style="margin-bottom: 15px;">
+                            <img src="./images/force-3-tao-ink.svg" alt="Tao Ink Icon" style="width: 40px; height: 40px; opacity: 0.8;"> 
+                        </div>
+                        <div class="tile-label">Tao · spirit</div>
+                        <div class="tile-title">Wisdom that doesn’t force</div>
+                        <p>
+                            Taoist wisdom invites you to move with life, not against it – to exchange control, tension and panic for rhythm, ease and trust.
+                        </p>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <section class="sec-purpose" id="purpose">
+            <div class="content-wrapper">
+                <h2 class="section-title">What Tao of Cat is here to do</h2>
+                <p class="section-subtitle">
+                    This space exists to gently ease three modern pains:
+                </p>
+                <ul class="list-bullets">
+                    <li><strong>The pain of not understanding</strong> – eased by AI’s clear methods and perspective.</li>
+                    <li><strong>The pain of not feeling held</strong> – eased by the emotional presence of cats.</li>
+                    <li><strong>The pain of not knowing the way</strong> – eased by the Tao’s natural, effortless wisdom.</li>
+                </ul>
+
+                <p class="section-subtitle" style="margin-top:30px; font-weight: 500;">
+                    Everything here is simple and light. No fixing, no forcing – just slow, honest reminders that your softness is not a problem to solve.
+                </p>
+                
+                <div style="margin-top: 60px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    <img src="./images/purpose-ink-scene.jpg" alt="Simple ink painting of a mountain or quiet landscape" style="width: 100%; border: 1px solid var(--border-soft);">
+                     </div>
+            </div>
+        </section>
+
+        <section class="sec-subscribe" id="subscribe">
+            <div class="content-wrapper" style="max-width: 700px;">
+                <h2 class="section-title">Begin walking the path</h2>
+                <p class="section-subtitle">
+                    Tao of Cat Letters is a quiet newsletter – short reflections and gentle notes for anxious, sensitive, easily overwhelmed hearts.
+                </p>
+
+                <div class="subscribe-row" style="justify-content: center; text-align: center;">
+                    <p>
+                        No spam, no shouting, no “hacks”. Just one more soft presence in your week, reminding you that you don’t have to do life the way everyone else does.
+                    </p>
+                </div>
+                <div class="section-actions" style="margin-top: 25px;">
+                    <a href="https://taoofcat.substack.com" target="_blank" rel="noopener" class="btn-primary">
+                        Subscribe to Tao of Cat Letters
+                    </a>
+                </div>
+                
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div>© <span id="year"></span> Tao of Cat · A quiet path for modern hearts.</div>
+            <div class="footer-links">
+                <a href="#top">Top</a>
+                <a href="https://taoofcat.substack.com" target="_blank" rel="noopener">Newsletter</a>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
