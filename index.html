@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Tao of Cat – A gentle path where AI, cats and the Tao meet to ease modern anxiety, loneliness and overthinking." />
 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
     <style>
         /* 颜色和通用变量：极简的黑白灰 */
         :root {
@@ -19,9 +17,9 @@
             --border-soft: #e5e5e5; /* 极浅的边框 */
             --max-width: 1000px;
             --radius-lg: 12px;
-            --shadow-soft: 0 4px 15px rgba(0,0,0,0.03); /* 几乎看不见的柔和阴影 */
-            --font-serif: "Playfair Display", serif;
-            --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            --shadow-soft: 0 4px 15px rgba(0,0,0,0.03); 
+            --font-serif: "Playfair Display", Georgia, serif; /* 保留 Playfair Display 作为备选 */
+            --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", sans-serif; /* 使用系统字体优先 */
         }
 
         /* 基础重置与留白 */
@@ -49,7 +47,7 @@
             z-index: 20;
             backdrop-filter: blur(10px);
             background: rgba(255, 255, 255, 0.95);
-            border-bottom: 1px solid var(--border-soft);
+            border-bottom: 1px solid var(--border-soft); 
         }
         .nav { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 50px; }
         .nav-left { display: flex; align-items: center; gap: 10px; }
@@ -151,6 +149,9 @@
             border-radius: 0; /* 水墨风格移除圆角 */
             box-shadow: none; /* 移除阴影 */
             border: 1px solid var(--border-soft); /* 保持图片边缘清晰 */
+            /* 确保图片加载失败时不会破坏布局 */
+            min-height: 200px; 
+            display: block;
         }
         
         /* 奇数行反转 (图片在左，文字在右) */
@@ -187,12 +188,12 @@
             border-radius: var(--radius-lg);
             background: var(--bg);
             border: 1px solid var(--border-soft);
-            box-shadow: none; /* 移除阴影 */
+            box-shadow: none; 
             text-align: left;
             transition: border-color 0.2s ease;
         }
         .tile:hover {
-            border-color: var(--accent); /* 鼠标悬停时，边框变深 */
+            border-color: var(--accent); 
             transform: none;
         }
         .tile-label { color: var(--accent); font-weight: 600; font-size: 12px; }
@@ -215,7 +216,7 @@
         /* SECTION 5 - CTA */
         .sec-subscribe {
             border-bottom: none;
-            background: var(--accent-soft); /* 底部使用极浅灰做衬托 */
+            background: var(--accent-soft); 
         }
 
         /* FOOTER */
