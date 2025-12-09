@@ -7,22 +7,22 @@
     <meta name="description" content="Tao of Cat – A gentle path where AI, cats and the Tao meet to ease modern anxiety, loneliness and overthinking." />
 
     <style>
-        /* 颜色和通用变量：极简的黑白灰 */
+        /* Color and Utility Variables: Minimal Black, White, Grey */
         :root {
-            --bg: #FFFFFF; /* 纯白色背景 */
+            --bg: #FFFFFF; /* Pure White Background */
             --text-main: #222222;
             --text-muted: #6e6e73;
-            --accent: #4a5d66; /* 调整主色调为内敛的深灰/墨色 */
-            --accent-soft: #f0f0f0; /* 极浅的灰色用于点缀 */
-            --border-soft: #e5e5e5; /* 极浅的边框 */
+            --accent: #4a5d66; /* Deep Grey/Ink for accent */
+            --accent-soft: #f0f0f0; /* Extremely light grey for separators/background */
+            --border-soft: #e5e5e5; /* Extremely light border */
             --max-width: 1000px;
             --radius-lg: 12px;
             --shadow-soft: 0 4px 15px rgba(0,0,0,0.03); 
-            --font-serif: "Playfair Display", Georgia, serif; /* 保留 Playfair Display 作为备选 */
-            --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", sans-serif; /* 使用系统字体优先 */
+            --font-serif: "Playfair Display", Georgia, serif; 
+            --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", sans-serif; 
         }
 
-        /* 基础重置与留白 */
+        /* Base Reset and Whitespace */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -33,13 +33,13 @@
             font-family: var(--font-sans);
             background: var(--bg);
             color: var(--text-main);
-            line-height: 1.7; /* 增加行高，禅风留白的关键 */
+            line-height: 1.7; /* Increased line-height for visual space (留白) */
             -webkit-font-smoothing: antialiased;
         }
 
         a { color: inherit; text-decoration: none; }
 
-        /* NAV - 样式不变，但颜色更中性 */
+        /* NAV */
         header {
             padding: 16px 20px 0;
             position: sticky;
@@ -60,9 +60,9 @@
         .btn-primary { border: none; background: var(--accent); color: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .btn-primary:hover { background: #33424a; transform: translateY(-1px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
 
-        /* 禅风：分段式布局容器 */
+        /* Zen Style: Section Layout */
         section {
-            padding: 120px 20px; /* 极致的垂直留白 */
+            padding: 120px 20px; /* Max vertical whitespace */
             min-height: 80vh; 
             display: flex;
             align-items: center;
@@ -70,7 +70,7 @@
             position: relative;
             overflow: hidden;
             text-align: center;
-            border-bottom: 1px solid var(--border-soft); /* 使用细线分隔，而非颜色 */
+            border-bottom: 1px solid var(--border-soft); /* Subtle separator line */
             background: var(--bg);
         }
 
@@ -80,7 +80,7 @@
             margin: 0 auto;
         }
 
-        /* 核心文本样式 */
+        /* Typography */
         .section-title {
             font-family: var(--font-serif);
             font-size: 40px; 
@@ -101,7 +101,7 @@
         .eyebrow {
             font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 0.25em; /* 增加字母间距 */
+            letter-spacing: 0.25em; 
             color: var(--accent);
             margin-bottom: 15px;
             font-weight: 500;
@@ -132,12 +132,12 @@
             flex-wrap: wrap;
         }
 
-        /* 禅风：图文交错布局 */
+        /* Image and Text Block (图文交错) */
         .image-text-block {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px; /* 增加图文间距 */
-            align-items: flex-start; /* 顶部对齐 */
+            gap: 80px; 
+            align-items: flex-start; 
             text-align: left;
             margin: 80px 0;
             padding: 20px 0;
@@ -146,15 +146,14 @@
         .image-container img {
             width: 100%;
             height: auto;
-            border-radius: 0; /* 水墨风格移除圆角 */
-            box-shadow: none; /* 移除阴影 */
-            border: 1px solid var(--border-soft); /* 保持图片边缘清晰 */
-            /* 确保图片加载失败时不会破坏布局 */
+            border-radius: 0; 
+            box-shadow: none; 
+            border: none; /* <-- Removed border as requested */
             min-height: 200px; 
             display: block;
         }
         
-        /* 奇数行反转 (图片在左，文字在右) */
+        /* Reverse image/text order for even blocks */
         .image-text-block:nth-child(even) {
             direction: rtl; 
             text-align: left;
@@ -175,7 +174,7 @@
             margin-bottom: 10px;
         }
         
-        /* SECTION 3 - 三力量 Tile 调整 */
+        /* SECTION 3 - Tiles */
         .three-cols {
             display: grid;
             grid-template-columns: repeat(3, minmax(0,1fr));
@@ -200,7 +199,7 @@
         .tile-title { font-size: 18px; font-weight: 600; margin-bottom: 10px; color: var(--text-main); }
         .tile p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
 
-        /* SECTION 4 - 列表 */
+        /* SECTION 4 - List */
         .list-bullets {
             font-size: 16px;
             color: var(--text-muted);
@@ -303,7 +302,7 @@
                 </p>
 
                 <div style="margin-top: 80px;">
-                    <img src="./images/hero-cat-ink-large.jpg" alt="Watercolour ink painting of a calm cat, representing the Tao of Cat" style="width: 100%; border: 1px solid var(--border-soft);">
+                    <img src="./images/hero-cat-ink-large.png" alt="Watercolour ink painting of a calm cat, representing the Tao of Cat" style="width: 100%;">
                     </div>
             </div>
         </section>
@@ -318,40 +317,39 @@
                 <div class="image-text-block">
                     <div class="text-content">
                         <div class="eyebrow">The pain of not understanding</div>
-                                            <p>
-                            We know a lot, but understand very little.
-                                                </p>
+                        <h3>We know a lot, but understand very little.</h3>
+                        <p>
+                            We are drowned in a flood of information, owning countless knowledge and tools, but these have not translated into inner peace or clear self-awareness.
+                        </p>
                     </div>
                     <div class="image-container">
-                        <img src="./images/wound-1-ink-overthink.jpg" alt="Ink painting representing confused thoughts">
+                        <img src="./images/wound-1-ink-overthink.png" alt="Ink painting representing confused thoughts">
                          </div>
                 </div>
 
                 <div class="image-text-block">
                     <div class="text-content">
                         <div class="eyebrow">The pain of not feeling held</div>
-                     
+                        <h3>We are surrounded by people, but feel emotionally unattended.</h3>
                         <p>
-                            We are surrounded by people, but feel emotionally unattended.
-   
+                            Relationships become superficial and rushed. We cannot find a place to put down all our disguises and be gently accepted. Loneliness is the heaviest secret of modern hearts.
                         </p>
                     </div>
                     <div class="image-container">
-                        <img src="./images/wound-2-ink-loneliness.jpg" alt="Ink painting of a lone figure or cat">
+                        <img src="./images/wound-2-ink-loneliness.png" alt="Ink painting of a lone figure or cat">
                          </div>
                 </div>
 
                 <div class="image-text-block">
                     <div class="text-content">
                         <div class="eyebrow">The pain of not knowing the way</div>
-         
+                        <h3>We try to control life, but feel more and more lost.</h3>
                         <p>
-                            We try to control life, but feel more and more lost.
-                    
+                            Planning, scheduling, efficiency—we exhaust every effort to hold onto life, only to increase tension and anxiety. Life should flow, not be locked down.
                         </p>
                     </div>
                     <div class="image-container">
-                        <img src="./images/wound-3-ink-pressure.jpg" alt="Ink painting representing flowing water or nature's rhythm">
+                        <img src="./images/wound-3-ink-pressure.png" alt="Ink painting representing flowing water or nature's rhythm">
                          </div>
                 </div>
                 
@@ -424,7 +422,7 @@
                 </p>
                 
                 <div style="margin-top: 60px; max-width: 600px; margin-left: auto; margin-right: auto;">
-                    <img src="./images/purpose-ink-scene.jpg" alt="Simple ink painting of a mountain or quiet landscape" style="width: 100%; border: 1px solid var(--border-soft);">
+                    <img src="./images/purpose-ink-scene.png" alt="Simple ink painting of a mountain or quiet landscape" style="width: 100%;">
                      </div>
             </div>
         </section>
