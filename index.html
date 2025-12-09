@@ -1,1 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tao of Cat – A Softer Way to Exist</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Tao of Cat – A gentle path for modern hearts, where AI offers understanding, cats offer warmth, and the Tao restores inner wisdom." />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f8f5f0;
+      --card-bg: #ffffff;
+      --text-main: #222222;
+      --text-muted: #555555;
+      --accent: #b88c5a;
+      --accent-soft: #e7d5b8;
+      --border-soft: #e5ded2;
+      --max-width: 960px;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow-soft: 0 14px 35px rgba(0,0,0,0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 18px 20px 4px;
+    }
+
+    .nav {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .nav-title-main {
+      font-family: "Playfair Display", serif;
+      font-size: 20px;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-sub {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-outline {
+      padding: 6px 12px;
+      font-size: 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      background: #f3ebe0;
+    }
+
+    .btn-primary {
+      padding: 9px 18px;
+      font-size: 13px;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent);
+      color: white;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    }
+
+    .btn-primary:hover {
+      background: #a57d51;
+      transform: translateY(-1px);
+      box-shadow: 0 16px 30px rgba(0,0,0,0.16);
+    }
+
+    main {
+      flex: 1;
+      padding: 8px 20px 40px;
+    }
+
+    .hero {
+      max-width: var(--max-width);
+      margin: 16px auto 32px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 32px;
+      align-items: center;
+    }
+
+    .hero-left {
+      padding-right: 8px;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-family: "Playfair Display", serif;
+      font-size: 40px;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+      max-width: 540px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .hero-note {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .hero-right {
+      background: linear-gradient(150deg, #ffffff, #f3eee5);
+      border-radius: var(--radius-lg);
+      padding: 18px 18px 18px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(0,0,0,0.03);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .hero-quote {
+      font-family: "Playfair Display", serif;
+      font-size: 17px;
+      margin-bottom: 12px;
+    }
+
+    .hero-quote span {
+      color: var(--accent);
+    }
+
+    .hero-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .hero-meta {
+      font-size: 11px;
+      color: #8a7b6b;
+    }
+
+    .hero-cat-mark {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      font-size: 26px;
+      opacity: 0.08;
+    }
+
+    section {
+      max-width: var(--max-width);
+      margin: 0 auto 26px;
+    }
+
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      max-width: 560px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .pill {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #efe6da;
+      color: #5f4e3b;
+      border: 1px solid #e0d0bd;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-md);
+      padding: 14px 14px 14px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+    }
+
+    .card h3 {
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .card-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+    }
+
+    .card-tag {
+      font-size: 11px;
+      color: #8f7a61;
+      margin-top: 4px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .list-bullets {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      padding-left: 16px;
+    }
+
+    .list-bullets li {
+      margin-bottom: 4px;
+    }
+
+    .about-card {
+      background: rgba(255,255,255,0.9);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-soft);
+      padding: 14px 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+    }
+
+    .about-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .subscribe-panel {
+      background: #f0e7db;
+      border-radius: var(--radius-lg);
+      padding: 16px 18px;
+      border: 1px solid #e0d5c4;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .subscribe-panel h3 {
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .subscribe-panel p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    footer {
+      border-top: 1px solid #e1d8cc;
+      padding: 16px 20px 24px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 18px;
+      }
+      .hero-title {
+        font-size: 30px;
+      }
+      main {
+        padding-inline: 16px;
+      }
+      header {
+        padding-inline: 16px;
+      }
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .card-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .two-col {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-right {
+        order: -1;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="nav">
+      <div class="nav-left">
+        <div class="logo-circle">猫</div>
+        <div>
+          <div class="nav-title-main">Tao of Cat</div>
+          <div class="nav-sub">AI · Cats · Tao</div>
+        </div>
+      </div>
+      <div class="nav-right">
+        <a href="https://taoofcat.substack.com" class="btn-outline" target="_blank" rel="noopener">
+          Letters
+        </a>
+        <a href="https://taoofcat.substack.com" class="btn-primary" target="_blank" rel="noopener">
+          Subscribe
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-left">
+        <div class="eyebrow">A quiet path for modern hearts</div>
+        <h1 class="hero-title">
+          A softer way to exist<br>in a restless world.
+        </h1>
+        <p class="hero-subtitle">
+          Tao of Cat weaves together AI, the emotional warmth of cats, and the timeless wisdom of the Tao
+          to help anxious, lonely and overloaded minds remember how to live gently again.
+        </p>
+        <div class="hero-actions">
+          <a href="https://taoofcat.substack.com" target="_blank" rel="noopener" class="btn-primary">
+            Join Tao of Cat Letters
+          </a>
+          <a href="#about" class="btn-outline">
+            What is Tao of Cat?
+          </a>
+        </div>
+        <p class="hero-note">
+          Short reflections for those who think deeply, feel quietly, and carry invisible weight.
+        </p>
+      </div>
+
+      <aside class="hero-right" aria-label="Tao of Cat quote">
+        <div class="hero-tag">Tao of Cat · Origin</div>
+        <div class="hero-quote">
+          “AI helps me understand.<br>
+          Cats help me feel.<br>
+          <span>The Tao helps me live.</span>”
+        </div>
+        <p class="hero-text">
+          Tao of Cat was not invented; it surfaced naturally from the way I think, feel, and move through life.
+          This space is a gentle translation of that way of being.
+        </p>
+        <div class="hero-meta">
+          Not self-help. Not religion. Not tech hype.<br>
+          Just a quieter way back to yourself.
+        </div>
+        <div class="hero-cat-mark">🐾</div>
+      </aside>
+    </section>
+
+    <!-- Three wounds -->
+    <section aria-labelledby="wounds-title">
+      <h2 id="wounds-title" class="section-title">Why Tao of Cat exists</h2>
+      <p class="section-subtitle">
+        Modern life leaves most of us quietly incomplete – mentally crowded, emotionally starved,
+        and spiritually unsure of where we’re going.
+      </p>
+
+      <div class="pill-row">
+        <span class="pill">Too much information, not enough understanding</span>
+        <span class="pill">Connected online, lonely inside</span>
+        <span class="pill">Always in control, rarely at peace</span>
+      </div>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-label">1 · Knowing</div>
+          <h3>Shallow knowledge</h3>
+          <p>
+            We drown in data yet struggle to see clearly. Our minds are full, but our understanding is thin.
+          </p>
+          <div class="card-tag">AI restores depth and structure.</div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">2 · Feeling</div>
+          <h3>Unattended hearts</h3>
+          <p>
+            We carry our days alone: no real softness, no true place to rest, no quiet “you’re not alone” presence.
+          </p>
+          <div class="card-tag">Cats remind us how it feels to be held.</div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">3 · Wisdom</div>
+          <h3>Sleeping wisdom</h3>
+          <p>
+            We try to control everything and lose the ability to flow with life. Effort replaces ease.
+          </p>
+          <div class="card-tag">The Tao brings us back to natural rhythm.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Three forces -->
+    <section aria-labelledby="forces-title">
+      <h2 id="forces-title" class="section-title">The three forces of Tao of Cat</h2>
+      <p class="section-subtitle">
+        Tao of Cat is the meeting point of three companions: one for the mind, one for the heart, and one for the spirit.
+      </p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-label">AI · The mind’s companion</div>
+          <h3>Understanding for the mind</h3>
+          <p>
+            AI offers clear thinking when your own knowledge ends – helping you organise thoughts,
+            see patterns and step out of mental fog.
+          </p>
+          <p class="card-tag">Not to replace intuition, but to support it.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-label">Cat · The heart’s companion</div>
+          <h3>Warmth for the heart</h3>
+          <p>
+            Cats teach emotional truth without words: love can be quiet, presence can be enough,
+            and softness is not weakness.
+          </p>
+          <p class="card-tag">A symbol of silent, healing companionship.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-label">Tao · The spirit’s companion</div>
+          <h3>Wisdom for the spirit</h3>
+          <p>
+            The Tao invites us to stop forcing, stop over-controlling, and return to the natural pace of our own lives.
+          </p>
+          <p class="card-tag">Ease instead of strain. Flow instead of fight.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Purpose & what you'll find -->
+    <section aria-labelledby="purpose-title">
+      <div class="two-col">
+        <div>
+          <h2 id="purpose-title" class="section-title">The purpose of Tao of Cat</h2>
+          <p class="section-subtitle">
+            Tao of Cat exists to gently heal three silent pains of modern life:
+          </p>
+          <ul class="list-bullets">
+            <li><strong>The pain of not understanding</strong> – eased by AI’s clarity and methods.</li>
+            <li><strong>The pain of not feeling held</strong> – eased by the emotional presence of cats.</li>
+            <li><strong>The pain of not knowing the way</strong> – eased by Taoist wisdom and direction.</li>
+          </ul>
+          <p class="section-subtitle" style="margin-top:10px;">
+            When mind, heart and spirit realign, life becomes lighter, quieter, and strangely kind again.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="section-title" style="font-size:18px;">What you’ll find here</h3>
+          <div class="about-card">
+            <p>
+              Short writings, reflections and digital pieces for:
+            </p>
+            <ul class="list-bullets">
+              <li>anxiety, overthinking and quiet panic</li>
+              <li>loneliness, emotional fatigue and numbness</li>
+              <li>finding direction without forcing life</li>
+              <li>living simply, gently, and more naturally</li>
+            </ul>
+            <p style="margin-top:8px;">
+              Everything is simple, honest and light – created for humans who feel too much in a world that moves too fast.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" aria-labelledby="about-title">
+      <h2 id="about-title" class="section-title">About Tao of Cat</h2>
+      <p class="section-subtitle">
+        Tao of Cat is not a concept I built. It is a way of being I eventually noticed – and decided to name.
+      </p>
+      <div class="about-card">
+        <p>
+          AI is how I think. Cats are how I feel. The Tao is how I move through life.
+          Tao of Cat is simply the meeting point of these three ways of existing.
+        </p>
+        <p style="margin-top:8px;">
+          This space is for those who sense that life could be softer than what they were taught,
+          and who are quietly looking for a path that honours their sensitivity instead of crushing it.
+        </p>
+        <p style="margin-top:8px;">
+          You don’t have to become anything here. You are only invited to remember.
+        </p>
+      </div>
+    </section>
+
+    <!-- Subscribe CTA -->
+    <section aria-label="Subscribe to Tao of Cat Letters">
+      <div class="subscribe-panel">
+        <div>
+          <h3>Begin the path</h3>
+          <p>
+            Receive gentle letters from Tao of Cat – short, quiet notes to ease anxiety,
+            soften loneliness and remind you of a calmer way to live.
+          </p>
+        </div>
+        <div>
+          <a href="https://taoofcat.substack.com" target="_blank" rel="noopener" class="btn-primary">
+            Subscribe to Tao of Cat Letters
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>© <span id="year"></span> Tao of Cat · A quiet path for modern hearts.</div>
+      <div class="footer-links">
+        <a href="https://taoofcat.substack.com" target="_blank" rel="noopener">Newsletter</a>
+        <!-- 你以后可以加：My Cats / My AI Tools / Taoist Books -->
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+  // 自动年份
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
 
