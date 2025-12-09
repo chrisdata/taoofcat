@@ -33,7 +33,7 @@
             font-family: var(--font-sans);
             background: var(--bg);
             color: var(--text-main);
-            line-height: 1.7; /* Increased line-height for visual space (留白) */
+            line-height: 1.7; 
             -webkit-font-smoothing: antialiased;
         }
 
@@ -51,7 +51,17 @@
         }
         .nav { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 50px; }
         .nav-left { display: flex; align-items: center; gap: 10px; }
-        .logo-circle { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border-soft); display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--accent); }
+        
+        /* New Logo Image Style */
+        .logo-img { 
+            width: 32px; 
+            height: 32px; 
+            /* 确保 SVG 保持清晰的圆角或边界 */
+            border-radius: 8px; /* Optional: Slight corner rounding for modern look */
+            border: 1px solid var(--border-soft); 
+            object-fit: contain;
+        }
+        
         .nav-title-main { font-family: var(--font-serif); font-size: 20px; letter-spacing: 0.05em; }
         .nav-sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); }
         .nav-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
@@ -62,7 +72,7 @@
 
         /* Zen Style: Section Layout */
         section {
-            padding: 120px 20px; /* Max vertical whitespace */
+            padding: 120px 20px; 
             min-height: 80vh; 
             display: flex;
             align-items: center;
@@ -70,7 +80,7 @@
             position: relative;
             overflow: hidden;
             text-align: center;
-            border-bottom: 1px solid var(--border-soft); /* Subtle separator line */
+            border-bottom: 1px solid var(--border-soft); 
             background: var(--bg);
         }
 
@@ -148,7 +158,7 @@
             height: auto;
             border-radius: 0; 
             box-shadow: none; 
-            border: none; /* <-- No border */
+            border: none; 
             min-height: 200px; 
             display: block;
         }
@@ -262,7 +272,7 @@
     <header>
         <div class="nav">
             <div class="nav-left">
-                <div class="logo-circle">猫</div>
+                <img src="./images/logo-ink.svg" alt="Tao of Cat Logo" class="logo-img">
                 <div>
                     <div class="nav-title-main">Tao of Cat</div>
                     <div class="nav-sub">AI · Cats · Tao</div>
