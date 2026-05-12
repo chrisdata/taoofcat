@@ -4,345 +4,415 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>玄猫之道 · 傻猪占卜</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', sans-serif;
-    background: #0e0e0f;
-    color: #e8e6e0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem 1rem;
-  }
+body {
+  font-family: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+  background: #f5f0e8;
+  color: #2c2416;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5rem 1.25rem 4rem;
+}
 
-  .container { width: 100%; max-width: 480px; }
+.container { width: 100%; max-width: 520px; }
 
-  .header { text-align: center; margin-bottom: 2rem; }
+.nav-back {
+  display: inline-block;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 13px;
+  color: #9c8c6c;
+  text-decoration: none;
+  margin-bottom: 2rem;
+  letter-spacing: 0.05em;
+}
+.nav-back:hover { color: #5c4c2c; }
 
-  .brand {
-    font-size: 28px;
-    font-weight: 400;
-    letter-spacing: 0.2em;
-    color: #e8e6e0;
-    margin-bottom: 6px;
-  }
+.header { text-align: center; margin-bottom: 2.5rem; }
 
-  .brand-en {
-    font-size: 11px;
-    letter-spacing: 0.3em;
-    color: #888780;
-    text-transform: uppercase;
-  }
+.brand-cat {
+  font-size: 12px;
+  letter-spacing: 0.4em;
+  color: #9c8c6c;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  margin-bottom: 10px;
+}
 
-  .can-bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background: #1a1a1b;
-    border: 0.5px solid #2c2c2a;
-    border-radius: 10px;
-    padding: 10px 18px;
-    margin-bottom: 1.5rem;
-    font-size: 14px;
-    color: #888780;
-  }
+.brand {
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: #2c2416;
+  line-height: 1;
+  margin-bottom: 8px;
+}
 
-  .can-count { font-size: 16px; font-weight: 500; color: #e8e6e0; }
+.brand-divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #9c8c6c, transparent);
+  margin: 12px auto;
+}
 
-  .buy-btn {
-    font-size: 12px;
-    background: #1d2a1a;
-    color: #7ab56e;
-    border: 0.5px solid #3b6d11;
-    border-radius: 6px;
-    padding: 4px 10px;
-    cursor: pointer;
-    margin-left: 4px;
-  }
+.brand-sub {
+  font-size: 13px;
+  color: #9c8c6c;
+  letter-spacing: 0.12em;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+}
 
-  .buy-btn:hover { background: #253321; }
+.can-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.6);
+  border: 1px solid #d4c8a8;
+  border-radius: 50px;
+  padding: 9px 20px;
+  margin-bottom: 2rem;
+  font-size: 14px;
+  color: #9c8c6c;
+  font-family: 'Noto Sans SC', sans-serif;
+}
 
-  .card {
-    background: #1a1a1b;
-    border: 0.5px solid #2c2c2a;
-    border-radius: 14px;
-    padding: 1.5rem;
-    margin-bottom: 1rem;
-  }
+.can-count { font-size: 16px; font-weight: 500; color: #2c2416; }
 
-  label {
-    display: block;
-    font-size: 12px;
-    color: #888780;
-    letter-spacing: 0.05em;
-    margin-bottom: 8px;
-    margin-top: 16px;
-  }
+.buy-btn {
+  font-size: 12px;
+  font-family: 'Noto Sans SC', sans-serif;
+  background: transparent;
+  color: #7a6040;
+  border: 1px solid #c4b48a;
+  border-radius: 20px;
+  padding: 3px 12px;
+  cursor: pointer;
+  margin-left: 4px;
+  transition: all 0.2s;
+}
+.buy-btn:hover { background: #ede4d0; }
 
-  label:first-child { margin-top: 0; }
+.card {
+  background: rgba(255,255,255,0.7);
+  border: 1px solid #d4c8a8;
+  border-radius: 16px;
+  padding: 1.75rem;
+  margin-bottom: 1.25rem;
+}
 
-  input[type=text], textarea {
-    width: 100%;
-    background: #111112;
-    border: 0.5px solid #2c2c2a;
-    border-radius: 8px;
-    padding: 12px 14px;
-    font-size: 15px;
-    color: #e8e6e0;
-    font-family: inherit;
-    outline: none;
-    resize: none;
-    transition: border-color 0.2s;
-  }
+label {
+  display: block;
+  font-size: 13px;
+  color: #9c8c6c;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+  margin-top: 18px;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+}
+label:first-child { margin-top: 0; }
 
-  input[type=text]:focus, textarea:focus { border-color: #5f5e5a; }
-  textarea { height: 90px; }
+input[type=text], textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid #d4c8a8;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 16px;
+  color: #2c2416;
+  font-family: 'Noto Serif SC', serif;
+  outline: none;
+  resize: none;
+  transition: border-color 0.2s;
+}
+input[type=text]:focus, textarea:focus { border-color: #9c8c6c; }
+textarea { height: 100px; line-height: 1.7; }
 
-  .div-btn {
-    width: 100%;
-    margin-top: 1.25rem;
-    padding: 14px;
-    font-size: 15px;
-    font-weight: 500;
-    background: #1a1a1b;
-    border: 0.5px solid #5f5e5a;
-    border-radius: 10px;
-    color: #e8e6e0;
-    cursor: pointer;
-    letter-spacing: 0.05em;
-    transition: background 0.2s;
-  }
+.div-btn {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 16px;
+  font-size: 17px;
+  font-weight: 500;
+  font-family: 'Noto Serif SC', serif;
+  letter-spacing: 0.15em;
+  background: #2c2416;
+  border: none;
+  border-radius: 12px;
+  color: #f5f0e8;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.div-btn:hover { background: #3d3220; }
+.div-btn:disabled { opacity: 0.35; cursor: not-allowed; }
 
-  .div-btn:hover { background: #242424; }
-  .div-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.cost-note {
+  font-size: 12px;
+  color: #b4a880;
+  text-align: center;
+  margin-top: 10px;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
 
-  .cost-note {
-    font-size: 11px;
-    color: #444441;
-    text-align: center;
-    margin-top: 8px;
-    letter-spacing: 0.03em;
-  }
+.cat-stage {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  display: none;
+}
 
-  .cat-stage {
-    text-align: center;
-    padding: 2rem 1rem;
-    display: none;
-  }
+.cat-name-label {
+  font-size: 22px;
+  font-weight: 500;
+  color: #2c2416;
+  letter-spacing: 0.3em;
+  margin-bottom: 1.5rem;
+}
 
-  .cat-name-label {
-    font-size: 16px;
-    font-weight: 500;
-    color: #e8e6e0;
-    letter-spacing: 0.1em;
-    margin-bottom: 1rem;
-  }
+.eye-row {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin: 1rem 0 1.5rem;
+}
 
-  .eye-row {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    margin: 1rem 0;
-  }
+.eye {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  border: 2px solid #d4c8a8;
+  transition: transform 0.7s cubic-bezier(0.34,1.56,0.64,1), opacity 0.5s;
+}
+.eye.closed { transform: scaleY(0.08); opacity: 0.25; }
+.eye.open { transform: scaleY(1); opacity: 1; }
+.eye-amber { background: #fdf3dc; }
+.eye-blue { background: #e8f0fa; }
 
-  .eye {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    transition: transform 0.6s cubic-bezier(0.34,1.56,0.64,1), opacity 0.5s;
-  }
+.thinking {
+  font-size: 15px;
+  color: #9c8c6c;
+  min-height: 24px;
+  letter-spacing: 0.1em;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+}
 
-  .eye.closed { transform: scaleY(0.1); opacity: 0.3; }
-  .eye.open { transform: scaleY(1); opacity: 1; }
-  .eye-amber { background: #2a1f08; }
-  .eye-blue { background: #071828; }
+.result-wrap { display: none; }
 
-  .thinking {
-    font-size: 13px;
-    color: #5f5e5a;
-    min-height: 22px;
-    letter-spacing: 0.05em;
-  }
+.result-card {
+  background: rgba(255,255,255,0.75);
+  border: 1px solid #d4c8a8;
+  border-radius: 16px;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
 
-  .result-wrap { display: none; }
+.result-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(to right, transparent, #9c8c6c, transparent);
+}
 
-  .result-card {
-    background: #1a1a1b;
-    border: 0.5px solid #2c2c2a;
-    border-radius: 14px;
-    padding: 1.5rem;
-  }
+.gua-header {
+  text-align: center;
+  padding: 0.5rem 0 1.25rem;
+}
 
-  .gua-header { text-align: center; margin-bottom: 1rem; }
+.gua-sym {
+  font-size: 72px;
+  line-height: 1;
+  margin-bottom: 12px;
+  color: #2c2416;
+}
 
-  .gua-sym {
-    font-size: 52px;
-    line-height: 1;
-    margin-bottom: 8px;
-    color: #e8e6e0;
-  }
+.gua-name {
+  font-size: 22px;
+  font-weight: 500;
+  color: #2c2416;
+  letter-spacing: 0.15em;
+}
 
-  .gua-name {
-    font-size: 18px;
-    font-weight: 500;
-    color: #e8e6e0;
-    letter-spacing: 0.08em;
-  }
+.gua-nature {
+  font-size: 13px;
+  color: #9c8c6c;
+  margin-top: 6px;
+  letter-spacing: 0.1em;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+}
 
-  .divider {
-    height: 0.5px;
-    background: #2c2c2a;
-    margin: 1rem 0;
-  }
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 1.25rem 0;
+}
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+}
+.divider::before { background: linear-gradient(to right, transparent, #d4c8a8); }
+.divider::after { background: linear-gradient(to left, transparent, #d4c8a8); }
+.divider-dot { width: 5px; height: 5px; border-radius: 50%; background: #b4a880; flex-shrink: 0; }
 
-  .quote-text {
-    font-size: 16px;
-    color: #d3d1c7;
-    line-height: 1.8;
-    text-align: center;
-    font-style: italic;
-    letter-spacing: 0.05em;
-  }
+.quote-text {
+  font-size: 20px;
+  color: #2c2416;
+  line-height: 1.8;
+  text-align: center;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+}
 
-  .quote-src {
-    font-size: 11px;
-    color: #5f5e5a;
-    text-align: center;
-    margin-top: 6px;
-    letter-spacing: 0.08em;
-  }
+.quote-src {
+  font-size: 13px;
+  color: #9c8c6c;
+  text-align: center;
+  margin-top: 8px;
+  letter-spacing: 0.12em;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+}
 
-  .ai-loading {
-    font-size: 13px;
-    color: #5f5e5a;
-    text-align: center;
-    padding: 12px 0;
-    letter-spacing: 0.05em;
-    display: none;
-  }
+.ai-loading {
+  font-size: 14px;
+  color: #9c8c6c;
+  text-align: center;
+  padding: 16px 0;
+  letter-spacing: 0.1em;
+  font-family: 'Noto Sans SC', sans-serif;
+  display: none;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
 
-  .ai-resp {
-    font-size: 15px;
-    color: #d3d1c7;
-    line-height: 1.85;
-    white-space: pre-wrap;
-    min-height: 20px;
-  }
+.ai-resp {
+  font-size: 17px;
+  color: #3d3220;
+  line-height: 2.1;
+  white-space: pre-wrap;
+  letter-spacing: 0.05em;
+}
 
-  .share-row {
-    display: flex;
-    gap: 10px;
-    margin-top: 1.25rem;
-  }
+.share-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 1.5rem;
+}
 
-  .share-btn {
-    flex: 1;
-    padding: 10px;
-    font-size: 13px;
-    background: #111112;
-    border: 0.5px solid #2c2c2a;
-    border-radius: 8px;
-    color: #888780;
-    cursor: pointer;
-    letter-spacing: 0.03em;
-    transition: background 0.2s, color 0.2s;
-  }
+.share-btn {
+  flex: 1;
+  padding: 13px;
+  font-size: 14px;
+  font-family: 'Noto Sans SC', sans-serif;
+  background: rgba(255,255,255,0.6);
+  border: 1px solid #d4c8a8;
+  border-radius: 10px;
+  color: #7a6040;
+  cursor: pointer;
+  letter-spacing: 0.08em;
+  transition: all 0.2s;
+}
+.share-btn:hover { background: rgba(255,255,255,0.95); color: #2c2416; }
 
-  .share-btn:hover { background: #1a1a1b; color: #e8e6e0; }
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(44,36,22,0.6);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.modal-overlay.show { display: flex; }
 
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.7);
-    z-index: 100;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-  }
+.modal {
+  background: #f5f0e8;
+  border: 1px solid #d4c8a8;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 380px;
+}
 
-  .modal-overlay.show { display: flex; }
+.modal-title {
+  font-size: 20px;
+  font-weight: 500;
+  color: #2c2416;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.1em;
+}
 
-  .modal {
-    background: #1a1a1b;
-    border: 0.5px solid #2c2c2a;
-    border-radius: 14px;
-    padding: 1.75rem;
-    width: 100%;
-    max-width: 360px;
-  }
+.pack {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid #e8e0cc;
+}
+.pack:last-of-type { border-bottom: none; }
+.pack-name { font-size: 15px; color: #3d3220; }
+.pack-badge {
+  font-size: 11px;
+  color: #7a6040;
+  background: #ede4d0;
+  border-radius: 4px;
+  padding: 1px 6px;
+  margin-left: 6px;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+.pack-price { font-size: 15px; font-weight: 500; color: #5c7a3c; }
+.pack-buy {
+  font-size: 13px;
+  font-family: 'Noto Sans SC', sans-serif;
+  padding: 6px 16px;
+  background: transparent;
+  border: 1px solid #c4b48a;
+  border-radius: 20px;
+  color: #7a6040;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.pack-buy:hover { background: #ede4d0; }
 
-  .modal-title {
-    font-size: 18px;
-    font-weight: 500;
-    color: #e8e6e0;
-    text-align: center;
-    margin-bottom: 1.25rem;
-    letter-spacing: 0.05em;
-  }
+.modal-close {
+  width: 100%;
+  margin-top: 1.25rem;
+  padding: 12px;
+  background: transparent;
+  border: 1px solid #d4c8a8;
+  border-radius: 10px;
+  color: #9c8c6c;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: 'Noto Sans SC', sans-serif;
+  letter-spacing: 0.05em;
+}
+.modal-close:hover { color: #3d3220; }
 
-  .pack {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 0;
-    border-bottom: 0.5px solid #2c2c2a;
-  }
-
-  .pack:last-of-type { border-bottom: none; }
-  .pack-name { font-size: 14px; color: #d3d1c7; }
-  .pack-badge { font-size: 10px; color: #7ab56e; margin-left: 6px; }
-  .pack-price { font-size: 14px; font-weight: 500; color: #7ab56e; }
-
-  .pack-buy {
-    font-size: 12px;
-    padding: 5px 14px;
-    background: #111112;
-    border: 0.5px solid #2c2c2a;
-    border-radius: 6px;
-    color: #888780;
-    cursor: pointer;
-  }
-
-  .pack-buy:hover { color: #e8e6e0; border-color: #5f5e5a; }
-
-  .modal-close {
-    width: 100%;
-    margin-top: 1.25rem;
-    padding: 10px;
-    background: transparent;
-    border: 0.5px solid #2c2c2a;
-    border-radius: 8px;
-    color: #5f5e5a;
-    cursor: pointer;
-    font-size: 13px;
-  }
-
-  .modal-close:hover { color: #888780; }
-
-  .nav-back {
-    display: inline-block;
-    font-size: 12px;
-    color: #5f5e5a;
-    text-decoration: none;
-    letter-spacing: 0.05em;
-    margin-bottom: 1.5rem;
-  }
-
-  .nav-back:hover { color: #888780; }
-
-  @media (max-width: 480px) {
-    body { padding: 1.5rem 0.75rem; }
-    .brand { font-size: 24px; }
-  }
+@media (max-width: 480px) {
+  body { padding: 1.5rem 1rem 3rem; }
+  .brand { font-size: 30px; }
+  .gua-sym { font-size: 60px; }
+  .ai-resp { font-size: 16px; }
+}
 </style>
 </head>
 <body>
@@ -351,24 +421,26 @@
   <a href="/" class="nav-back">← 返回玄猫之道</a>
 
   <div class="header">
-    <div class="brand">玄 猫 之 道</div>
-    <div class="brand-en">Tao of Your Cat · Divination</div>
+    <div class="brand-cat">TAO OF YOUR CAT</div>
+    <div class="brand">玄猫之道</div>
+    <div class="brand-divider"></div>
+    <div class="brand-sub">傻猪为你观天问卦 · 易经AI解读</div>
   </div>
 
   <div class="can-bar">
     <span style="font-size:18px;">🥫</span>
-    <span style="color:#5f5e5a;">剩余罐头</span>
+    <span>剩余罐头</span>
     <span class="can-count" id="can-count">3</span>
-    <span style="color:#5f5e5a;">罐</span>
-    <button class="buy-btn" onclick="document.getElementById('shop').classList.add('show')">+ 补货</button>
+    <span>罐</span>
+    <button class="buy-btn" onclick="document.getElementById('shop').classList.add('show')">＋ 补货</button>
   </div>
 
   <div class="card">
     <label for="cat-name">你的猫咪叫什么名字？</label>
     <input type="text" id="cat-name" placeholder="例如：傻猪、橘墩、小黑..." maxlength="10">
-    <label for="question">你想问什么？</label>
+    <label for="question">你想请教傻猪什么？</label>
     <textarea id="question" placeholder="例如：我现在的方向对吗？要不要放弃现在的工作？这段感情值得继续吗？"></textarea>
-    <button class="div-btn" id="div-btn" onclick="startDiv()">✦ 开始占卜（消耗1罐罐头）</button>
+    <button class="div-btn" id="div-btn" onclick="startDiv()">✦ 请傻猪占卜（消耗1罐罐头）</button>
     <div class="cost-note">新用户免费获得3罐 · 用完需补货才能继续</div>
   </div>
 
@@ -386,11 +458,12 @@
       <div class="gua-header">
         <div class="gua-sym" id="gua-sym"></div>
         <div class="gua-name" id="gua-name"></div>
+        <div class="gua-nature" id="gua-nature"></div>
       </div>
-      <div class="divider"></div>
+      <div class="divider"><div class="divider-dot"></div></div>
       <div class="quote-text" id="quote-text"></div>
       <div class="quote-src" id="quote-src"></div>
-      <div class="divider"></div>
+      <div class="divider"><div class="divider-dot"></div></div>
       <div class="ai-loading" id="ai-loading">本猫正在细读天机...</div>
       <div class="ai-resp" id="ai-resp"></div>
     </div>
@@ -425,7 +498,6 @@
 
 <script>
 const API = 'https://web-production-907c5.up.railway.app';
-
 const guas = [
   { name:"乾卦 · 天", sym:"☰", quote:"天行健，君子以自强不息", src:"《易经·乾》", nature:"刚健进取" },
   { name:"坤卦 · 地", sym:"☷", quote:"地势坤，君子以厚德载物", src:"《易经·坤》", nature:"包容承载" },
@@ -442,10 +514,7 @@ const guas = [
 ];
 
 let cans = parseInt(localStorage.getItem('taoofcat_cans') || '3');
-let currentGua = null;
-let currentCat = '';
-let aiText = '';
-
+let currentGua = null, currentCat = '', aiText = '';
 function saveCans() { localStorage.setItem('taoofcat_cans', cans); }
 document.getElementById('can-count').textContent = cans;
 
@@ -454,8 +523,7 @@ function startDiv() {
   const cat = document.getElementById('cat-name').value.trim() || '傻猪';
   if (!q) { document.getElementById('question').focus(); return; }
   if (cans <= 0) { document.getElementById('shop').classList.add('show'); return; }
-  cans--;
-  saveCans();
+  cans--; saveCans();
   document.getElementById('can-count').textContent = cans;
   currentCat = cat;
   document.getElementById('div-btn').disabled = true;
@@ -465,14 +533,11 @@ function startDiv() {
   document.getElementById('eye-l').className = 'eye eye-amber closed';
   document.getElementById('eye-r').className = 'eye eye-blue closed';
   document.getElementById('thinking').textContent = cat + ' 正在感应天机...';
-
   setTimeout(() => {
     document.getElementById('thinking').textContent = '异瞳缓缓睁开...';
     document.getElementById('eye-l').className = 'eye eye-amber open';
   }, 900);
-  setTimeout(() => {
-    document.getElementById('eye-r').className = 'eye eye-blue open';
-  }, 1400);
+  setTimeout(() => { document.getElementById('eye-r').className = 'eye eye-blue open'; }, 1400);
   setTimeout(() => {
     document.getElementById('thinking').textContent = '天机已现';
     const gua = guas[Math.floor(Math.random() * guas.length)];
@@ -484,6 +549,7 @@ function startDiv() {
 function showResult(gua, q, cat) {
   document.getElementById('gua-sym').textContent = gua.sym;
   document.getElementById('gua-name').textContent = gua.name;
+  document.getElementById('gua-nature').textContent = gua.nature;
   document.getElementById('quote-text').textContent = '「' + gua.quote + '」';
   document.getElementById('quote-src').textContent = gua.src;
   document.getElementById('ai-loading').style.display = 'block';
@@ -491,6 +557,7 @@ function showResult(gua, q, cat) {
   document.getElementById('result-wrap').style.display = 'block';
   aiText = '';
   callAPI(gua, q, cat);
+  setTimeout(() => { document.getElementById('result-wrap').scrollIntoView({behavior:'smooth', block:'start'}); }, 300);
 }
 
 async function callAPI(gua, q, cat) {
@@ -498,11 +565,7 @@ async function callAPI(gua, q, cat) {
     const res = await fetch(API + '/divination', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        question: q, cat_name: cat,
-        gua_name: gua.name, gua_nature: gua.nature,
-        quote: gua.quote, quote_src: gua.src
-      })
+      body: JSON.stringify({ question:q, cat_name:cat, gua_name:gua.name, gua_nature:gua.nature, quote:gua.quote, quote_src:gua.src })
     });
     document.getElementById('ai-loading').style.display = 'none';
     const reader = res.body.getReader();
@@ -527,12 +590,11 @@ async function callAPI(gua, q, cat) {
   } catch(e) {
     document.getElementById('ai-loading').style.display = 'none';
     document.getElementById('ai-resp').textContent = '本猫今日天机受阻，请稍后再试。';
-    aiText = '';
   }
 }
 
 function copyRes() {
-  const text = '【玄猫之道 · ' + currentCat + '占卜结果】\n' + currentGua.name + '\n「' + currentGua.quote + '」' + currentGua.src + '\n\n' + aiText + '\n\ntaoofcat.com/divination';
+  const text = '【玄猫之道 · ' + currentCat + '占卜结果】\n' + currentGua.name + ' · ' + currentGua.nature + '\n\n「' + currentGua.quote + '」\n' + currentGua.src + '\n\n' + aiText + '\n\n— taoofcat.com/divination.html';
   navigator.clipboard.writeText(text).then(() => {
     const btn = event.target.closest('button');
     const orig = btn.textContent;
@@ -546,11 +608,11 @@ function resetAll() {
   document.getElementById('cat-stage').style.display = 'none';
   document.getElementById('div-btn').disabled = false;
   document.getElementById('question').value = '';
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 function buyPack(n, btn) {
-  cans += n;
-  saveCans();
+  cans += n; saveCans();
   document.getElementById('can-count').textContent = cans;
   btn.textContent = '已加入 ✓';
   btn.disabled = true;
