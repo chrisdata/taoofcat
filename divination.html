@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>玄猫之道 · 傻猪占卜</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+    background: #0e0e0f;
+    color: #e8e6e0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+  }
+
+  .container { width: 100%; max-width: 480px; }
+
+  .header { text-align: center; margin-bottom: 2rem; }
+
+  .brand {
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    color: #e8e6e0;
+    margin-bottom: 6px;
+  }
+
+  .brand-en {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: #888780;
+    text-transform: uppercase;
+  }
+
+  .can-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #1a1a1b;
+    border: 0.5px solid #2c2c2a;
+    border-radius: 10px;
+    padding: 10px 18px;
+    margin-bottom: 1.5rem;
+    font-size: 14px;
+    color: #888780;
+  }
+
+  .can-count { font-size: 16px; font-weight: 500; color: #e8e6e0; }
+
+  .buy-btn {
+    font-size: 12px;
+    background: #1d2a1a;
+    color: #7ab56e;
+    border: 0.5px solid #3b6d11;
+    border-radius: 6px;
+    padding: 4px 10px;
+    cursor: pointer;
+    margin-left: 4px;
+  }
+
+  .buy-btn:hover { background: #253321; }
+
+  .card {
+    background: #1a1a1b;
+    border: 0.5px solid #2c2c2a;
+    border-radius: 14px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  label {
+    display: block;
+    font-size: 12px;
+    color: #888780;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+    margin-top: 16px;
+  }
+
+  label:first-child { margin-top: 0; }
+
+  input[type=text], textarea {
+    width: 100%;
+    background: #111112;
+    border: 0.5px solid #2c2c2a;
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 15px;
+    color: #e8e6e0;
+    font-family: inherit;
+    outline: none;
+    resize: none;
+    transition: border-color 0.2s;
+  }
+
+  input[type=text]:focus, textarea:focus { border-color: #5f5e5a; }
+  textarea { height: 90px; }
+
+  .div-btn {
+    width: 100%;
+    margin-top: 1.25rem;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 500;
+    background: #1a1a1b;
+    border: 0.5px solid #5f5e5a;
+    border-radius: 10px;
+    color: #e8e6e0;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: background 0.2s;
+  }
+
+  .div-btn:hover { background: #242424; }
+  .div-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  .cost-note {
+    font-size: 11px;
+    color: #444441;
+    text-align: center;
+    margin-top: 8px;
+    letter-spacing: 0.03em;
+  }
+
+  .cat-stage {
+    text-align: center;
+    padding: 2rem 1rem;
+    display: none;
+  }
+
+  .cat-name-label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #e8e6e0;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .eye-row {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin: 1rem 0;
+  }
+
+  .eye {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    transition: transform 0.6s cubic-bezier(0.34,1.56,0.64,1), opacity 0.5s;
+  }
+
+  .eye.closed { transform: scaleY(0.1); opacity: 0.3; }
+  .eye.open { transform: scaleY(1); opacity: 1; }
+  .eye-amber { background: #2a1f08; }
+  .eye-blue { background: #071828; }
+
+  .thinking {
+    font-size: 13px;
+    color: #5f5e5a;
+    min-height: 22px;
+    letter-spacing: 0.05em;
+  }
+
+  .result-wrap { display: none; }
+
+  .result-card {
+    background: #1a1a1b;
+    border: 0.5px solid #2c2c2a;
+    border-radius: 14px;
+    padding: 1.5rem;
+  }
+
+  .gua-header { text-align: center; margin-bottom: 1rem; }
+
+  .gua-sym {
+    font-size: 52px;
+    line-height: 1;
+    margin-bottom: 8px;
+    color: #e8e6e0;
+  }
+
+  .gua-name {
+    font-size: 18px;
+    font-weight: 500;
+    color: #e8e6e0;
+    letter-spacing: 0.08em;
+  }
+
+  .divider {
+    height: 0.5px;
+    background: #2c2c2a;
+    margin: 1rem 0;
+  }
+
+  .quote-text {
+    font-size: 16px;
+    color: #d3d1c7;
+    line-height: 1.8;
+    text-align: center;
+    font-style: italic;
+    letter-spacing: 0.05em;
+  }
+
+  .quote-src {
+    font-size: 11px;
+    color: #5f5e5a;
+    text-align: center;
+    margin-top: 6px;
+    letter-spacing: 0.08em;
+  }
+
+  .ai-loading {
+    font-size: 13px;
+    color: #5f5e5a;
+    text-align: center;
+    padding: 12px 0;
+    letter-spacing: 0.05em;
+    display: none;
+  }
+
+  .ai-resp {
+    font-size: 15px;
+    color: #d3d1c7;
+    line-height: 1.85;
+    white-space: pre-wrap;
+    min-height: 20px;
+  }
+
+  .share-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 1.25rem;
+  }
+
+  .share-btn {
+    flex: 1;
+    padding: 10px;
+    font-size: 13px;
+    background: #111112;
+    border: 0.5px solid #2c2c2a;
+    border-radius: 8px;
+    color: #888780;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .share-btn:hover { background: #1a1a1b; color: #e8e6e0; }
+
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .modal-overlay.show { display: flex; }
+
+  .modal {
+    background: #1a1a1b;
+    border: 0.5px solid #2c2c2a;
+    border-radius: 14px;
+    padding: 1.75rem;
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .modal-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #e8e6e0;
+    text-align: center;
+    margin-bottom: 1.25rem;
+    letter-spacing: 0.05em;
+  }
+
+  .pack {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 0.5px solid #2c2c2a;
+  }
+
+  .pack:last-of-type { border-bottom: none; }
+  .pack-name { font-size: 14px; color: #d3d1c7; }
+  .pack-badge { font-size: 10px; color: #7ab56e; margin-left: 6px; }
+  .pack-price { font-size: 14px; font-weight: 500; color: #7ab56e; }
+
+  .pack-buy {
+    font-size: 12px;
+    padding: 5px 14px;
+    background: #111112;
+    border: 0.5px solid #2c2c2a;
+    border-radius: 6px;
+    color: #888780;
+    cursor: pointer;
+  }
+
+  .pack-buy:hover { color: #e8e6e0; border-color: #5f5e5a; }
+
+  .modal-close {
+    width: 100%;
+    margin-top: 1.25rem;
+    padding: 10px;
+    background: transparent;
+    border: 0.5px solid #2c2c2a;
+    border-radius: 8px;
+    color: #5f5e5a;
+    cursor: pointer;
+    font-size: 13px;
+  }
+
+  .modal-close:hover { color: #888780; }
+
+  .nav-back {
+    display: inline-block;
+    font-size: 12px;
+    color: #5f5e5a;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    margin-bottom: 1.5rem;
+  }
+
+  .nav-back:hover { color: #888780; }
+
+  @media (max-width: 480px) {
+    body { padding: 1.5rem 0.75rem; }
+    .brand { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <a href="/" class="nav-back">← 返回玄猫之道</a>
+
+  <div class="header">
+    <div class="brand">玄 猫 之 道</div>
+    <div class="brand-en">Tao of Your Cat · Divination</div>
+  </div>
+
+  <div class="can-bar">
+    <span style="font-size:18px;">🥫</span>
+    <span style="color:#5f5e5a;">剩余罐头</span>
+    <span class="can-count" id="can-count">3</span>
+    <span style="color:#5f5e5a;">罐</span>
+    <button class="buy-btn" onclick="document.getElementById('shop').classList.add('show')">+ 补货</button>
+  </div>
+
+  <div class="card">
+    <label for="cat-name">你的猫咪叫什么名字？</label>
+    <input type="text" id="cat-name" placeholder="例如：傻猪、橘墩、小黑..." maxlength="10">
+    <label for="question">你想问什么？</label>
+    <textarea id="question" placeholder="例如：我现在的方向对吗？要不要放弃现在的工作？这段感情值得继续吗？"></textarea>
+    <button class="div-btn" id="div-btn" onclick="startDiv()">✦ 开始占卜（消耗1罐罐头）</button>
+    <div class="cost-note">新用户免费获得3罐 · 用完需补货才能继续</div>
+  </div>
+
+  <div class="cat-stage" id="cat-stage">
+    <div class="cat-name-label" id="cat-name-label">傻 猪</div>
+    <div class="eye-row">
+      <div class="eye eye-amber closed" id="eye-l">🟤</div>
+      <div class="eye eye-blue closed" id="eye-r">🔵</div>
+    </div>
+    <div class="thinking" id="thinking"></div>
+  </div>
+
+  <div class="result-wrap" id="result-wrap">
+    <div class="result-card">
+      <div class="gua-header">
+        <div class="gua-sym" id="gua-sym"></div>
+        <div class="gua-name" id="gua-name"></div>
+      </div>
+      <div class="divider"></div>
+      <div class="quote-text" id="quote-text"></div>
+      <div class="quote-src" id="quote-src"></div>
+      <div class="divider"></div>
+      <div class="ai-loading" id="ai-loading">本猫正在细读天机...</div>
+      <div class="ai-resp" id="ai-resp"></div>
+    </div>
+    <div class="share-row">
+      <button class="share-btn" onclick="copyRes()">复制分享</button>
+      <button class="share-btn" onclick="resetAll()">再问一次</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="shop">
+  <div class="modal">
+    <div class="modal-title">🥫 补充罐头</div>
+    <div class="pack">
+      <span class="pack-name">5罐 吞拿鱼</span>
+      <span class="pack-price">$2.90</span>
+      <button class="pack-buy" onclick="buyPack(5,this)">购买</button>
+    </div>
+    <div class="pack">
+      <span class="pack-name">20罐 三文鱼<span class="pack-badge">热门</span></span>
+      <span class="pack-price">$7.90</span>
+      <button class="pack-buy" onclick="buyPack(20,this)">购买</button>
+    </div>
+    <div class="pack">
+      <span class="pack-name">99罐 鲍鱼尊享</span>
+      <span class="pack-price">$19.90</span>
+      <button class="pack-buy" onclick="buyPack(99,this)">购买</button>
+    </div>
+    <button class="modal-close" onclick="document.getElementById('shop').classList.remove('show')">关闭</button>
+  </div>
+</div>
+
+<script>
+const API = 'https://web-production-907c5.up.railway.app';
+
+const guas = [
+  { name:"乾卦 · 天", sym:"☰", quote:"天行健，君子以自强不息", src:"《易经·乾》", nature:"刚健进取" },
+  { name:"坤卦 · 地", sym:"☷", quote:"地势坤，君子以厚德载物", src:"《易经·坤》", nature:"包容承载" },
+  { name:"屯卦 · 初生", sym:"䷂", quote:"信言不美，美言不信", src:"《道德经·八十一章》", nature:"艰难起步" },
+  { name:"蒙卦 · 启蒙", sym:"䷃", quote:"为学日益，为道日损", src:"《道德经·四十八章》", nature:"去执求道" },
+  { name:"需卦 · 等待", sym:"䷄", quote:"致虚极，守静笃", src:"《道德经·十六章》", nature:"守候时机" },
+  { name:"讼卦 · 争", sym:"䷅", quote:"曲则全，枉则直", src:"《道德经·二十二章》", nature:"以柔克刚" },
+  { name:"离卦 · 火", sym:"☲", quote:"应无所住，而生其心", src:"《金刚经》", nature:"放下执念" },
+  { name:"艮卦 · 山", sym:"☶", quote:"知足者富", src:"《道德经·三十三章》", nature:"知足常乐" },
+  { name:"巽卦 · 风", sym:"☴", quote:"上善若水，水善利万物而不争", src:"《道德经·八章》", nature:"顺势而为" },
+  { name:"兑卦 · 泽", sym:"☱", quote:"信心清净，则生实相", src:"《金刚经》", nature:"喜悦开朗" },
+  { name:"坎卦 · 水", sym:"☵", quote:"胜人者有力，自胜者强", src:"《道德经·三十三章》", nature:"险中求生" },
+  { name:"震卦 · 雷", sym:"☳", quote:"为而不争，故天下莫能与之争", src:"《道德经·八十一章》", nature:"动而有节" },
+];
+
+let cans = parseInt(localStorage.getItem('taoofcat_cans') || '3');
+let currentGua = null;
+let currentCat = '';
+let aiText = '';
+
+function saveCans() { localStorage.setItem('taoofcat_cans', cans); }
+document.getElementById('can-count').textContent = cans;
+
+function startDiv() {
+  const q = document.getElementById('question').value.trim();
+  const cat = document.getElementById('cat-name').value.trim() || '傻猪';
+  if (!q) { document.getElementById('question').focus(); return; }
+  if (cans <= 0) { document.getElementById('shop').classList.add('show'); return; }
+  cans--;
+  saveCans();
+  document.getElementById('can-count').textContent = cans;
+  currentCat = cat;
+  document.getElementById('div-btn').disabled = true;
+  document.getElementById('result-wrap').style.display = 'none';
+  document.getElementById('cat-stage').style.display = 'block';
+  document.getElementById('cat-name-label').textContent = cat.split('').join(' ');
+  document.getElementById('eye-l').className = 'eye eye-amber closed';
+  document.getElementById('eye-r').className = 'eye eye-blue closed';
+  document.getElementById('thinking').textContent = cat + ' 正在感应天机...';
+
+  setTimeout(() => {
+    document.getElementById('thinking').textContent = '异瞳缓缓睁开...';
+    document.getElementById('eye-l').className = 'eye eye-amber open';
+  }, 900);
+  setTimeout(() => {
+    document.getElementById('eye-r').className = 'eye eye-blue open';
+  }, 1400);
+  setTimeout(() => {
+    document.getElementById('thinking').textContent = '天机已现';
+    const gua = guas[Math.floor(Math.random() * guas.length)];
+    currentGua = gua;
+    showResult(gua, q, cat);
+  }, 2200);
+}
+
+function showResult(gua, q, cat) {
+  document.getElementById('gua-sym').textContent = gua.sym;
+  document.getElementById('gua-name').textContent = gua.name;
+  document.getElementById('quote-text').textContent = '「' + gua.quote + '」';
+  document.getElementById('quote-src').textContent = gua.src;
+  document.getElementById('ai-loading').style.display = 'block';
+  document.getElementById('ai-resp').textContent = '';
+  document.getElementById('result-wrap').style.display = 'block';
+  aiText = '';
+  callAPI(gua, q, cat);
+}
+
+async function callAPI(gua, q, cat) {
+  try {
+    const res = await fetch(API + '/divination', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        question: q, cat_name: cat,
+        gua_name: gua.name, gua_nature: gua.nature,
+        quote: gua.quote, quote_src: gua.src
+      })
+    });
+    document.getElementById('ai-loading').style.display = 'none';
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buf = '';
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += decoder.decode(value, { stream: true });
+      const lines = buf.split('\n');
+      buf = lines.pop();
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        const data = line.slice(6).trim();
+        if (data === '[DONE]') break;
+        try {
+          const j = JSON.parse(data);
+          if (j.text) { aiText += j.text; document.getElementById('ai-resp').textContent = aiText; }
+        } catch(e) {}
+      }
+    }
+  } catch(e) {
+    document.getElementById('ai-loading').style.display = 'none';
+    document.getElementById('ai-resp').textContent = '本猫今日天机受阻，请稍后再试。';
+    aiText = '';
+  }
+}
+
+function copyRes() {
+  const text = '【玄猫之道 · ' + currentCat + '占卜结果】\n' + currentGua.name + '\n「' + currentGua.quote + '」' + currentGua.src + '\n\n' + aiText + '\n\ntaoofcat.com/divination';
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = event.target.closest('button');
+    const orig = btn.textContent;
+    btn.textContent = '已复制 ✓';
+    setTimeout(() => { btn.textContent = orig; }, 1500);
+  });
+}
+
+function resetAll() {
+  document.getElementById('result-wrap').style.display = 'none';
+  document.getElementById('cat-stage').style.display = 'none';
+  document.getElementById('div-btn').disabled = false;
+  document.getElementById('question').value = '';
+}
+
+function buyPack(n, btn) {
+  cans += n;
+  saveCans();
+  document.getElementById('can-count').textContent = cans;
+  btn.textContent = '已加入 ✓';
+  btn.disabled = true;
+  setTimeout(() => { document.getElementById('shop').classList.remove('show'); }, 800);
+}
+</script>
+</body>
+</html>
