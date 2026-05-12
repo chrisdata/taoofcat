@@ -7,9 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
 body {
-  font-family: 'Noto Serif SC', 'STSong', 'SimSun', serif;
+  font-family: 'Noto Serif SC', 'STSong', serif;
   background: #f5f0e8;
   color: #2c2416;
   min-height: 100vh;
@@ -18,401 +17,125 @@ body {
   align-items: center;
   padding: 2.5rem 1.25rem 4rem;
 }
-
 .container { width: 100%; max-width: 520px; }
+.nav-back { display:inline-block; font-family:'Noto Sans SC',sans-serif; font-size:13px; color:#9c8c6c; text-decoration:none; margin-bottom:2rem; letter-spacing:0.05em; }
+.nav-back:hover { color:#5c4c2c; }
+.header { text-align:center; margin-bottom:2.5rem; }
+.brand-cat { font-size:12px; letter-spacing:0.4em; color:#9c8c6c; font-family:'Noto Sans SC',sans-serif; font-weight:300; margin-bottom:10px; }
+.brand { font-size:36px; font-weight:700; letter-spacing:0.25em; color:#2c2416; line-height:1; margin-bottom:8px; }
+.brand-divider { width:60px; height:1px; background:linear-gradient(to right,transparent,#9c8c6c,transparent); margin:12px auto; }
+.brand-sub { font-size:13px; color:#9c8c6c; letter-spacing:0.12em; font-family:'Noto Sans SC',sans-serif; font-weight:300; }
 
-.nav-back {
-  display: inline-block;
-  font-family: 'Noto Sans SC', sans-serif;
-  font-size: 13px;
-  color: #9c8c6c;
-  text-decoration: none;
-  margin-bottom: 2rem;
-  letter-spacing: 0.05em;
+.login-section { text-align:center; padding:2rem 1rem; }
+.login-card { background:rgba(255,255,255,0.7); border:1px solid #d4c8a8; border-radius:16px; padding:2rem 1.5rem; }
+.login-title { font-size:18px; font-weight:500; color:#2c2416; letter-spacing:0.1em; margin-bottom:8px; }
+.login-sub { font-size:13px; color:#9c8c6c; font-family:'Noto Sans SC',sans-serif; margin-bottom:1.5rem; letter-spacing:0.05em; }
+.google-btn {
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  width:100%; padding:14px; font-size:15px;
+  font-family:'Noto Sans SC',sans-serif; font-weight:500;
+  background:#fff; border:1px solid #d4c8a8; border-radius:12px;
+  color:#2c2416; cursor:pointer; transition:background 0.2s;
+  letter-spacing:0.05em;
 }
-.nav-back:hover { color: #5c4c2c; }
+.google-btn:hover { background:#f8f4ec; }
+.google-btn svg { width:20px; height:20px; flex-shrink:0; }
 
-.header { text-align: center; margin-bottom: 2.5rem; }
-
-.brand-cat {
-  font-size: 12px;
-  letter-spacing: 0.4em;
-  color: #9c8c6c;
-  font-family: 'Noto Sans SC', sans-serif;
-  font-weight: 300;
-  margin-bottom: 10px;
+.user-bar {
+  display:flex; align-items:center; justify-content:space-between;
+  background:rgba(255,255,255,0.6); border:1px solid #d4c8a8;
+  border-radius:12px; padding:10px 16px; margin-bottom:1.25rem;
+  font-family:'Noto Sans SC',sans-serif;
 }
-
-.brand {
-  font-size: 36px;
-  font-weight: 700;
-  letter-spacing: 0.25em;
-  color: #2c2416;
-  line-height: 1;
-  margin-bottom: 8px;
-}
-
-.brand-divider {
-  width: 60px;
-  height: 1px;
-  background: linear-gradient(to right, transparent, #9c8c6c, transparent);
-  margin: 12px auto;
-}
-
-.brand-sub {
-  font-size: 13px;
-  color: #9c8c6c;
-  letter-spacing: 0.12em;
-  font-family: 'Noto Sans SC', sans-serif;
-  font-weight: 300;
-}
+.user-info { display:flex; align-items:center; gap:8px; }
+.user-avatar { width:28px; height:28px; border-radius:50%; border:1px solid #d4c8a8; }
+.user-name { font-size:13px; color:#3d3220; }
+.logout-btn { font-size:12px; color:#9c8c6c; background:transparent; border:none; cursor:pointer; }
+.logout-btn:hover { color:#5c4c2c; }
 
 .can-bar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: rgba(255,255,255,0.6);
-  border: 1px solid #d4c8a8;
-  border-radius: 50px;
-  padding: 9px 20px;
-  margin-bottom: 2rem;
-  font-size: 14px;
-  color: #9c8c6c;
-  font-family: 'Noto Sans SC', sans-serif;
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  background:rgba(255,255,255,0.6); border:1px solid #d4c8a8;
+  border-radius:50px; padding:9px 20px; margin-bottom:2rem;
+  font-size:14px; color:#9c8c6c; font-family:'Noto Sans SC',sans-serif;
 }
-
-.can-count { font-size: 16px; font-weight: 500; color: #2c2416; }
-
+.can-count { font-size:16px; font-weight:500; color:#2c2416; }
 .buy-btn {
-  font-size: 12px;
-  font-family: 'Noto Sans SC', sans-serif;
-  background: transparent;
-  color: #7a6040;
-  border: 1px solid #c4b48a;
-  border-radius: 20px;
-  padding: 3px 12px;
-  cursor: pointer;
-  margin-left: 4px;
-  transition: all 0.2s;
+  font-size:12px; font-family:'Noto Sans SC',sans-serif;
+  background:transparent; color:#7a6040; border:1px solid #c4b48a;
+  border-radius:20px; padding:3px 12px; cursor:pointer; margin-left:4px; transition:all 0.2s;
 }
-.buy-btn:hover { background: #ede4d0; }
+.buy-btn:hover { background:#ede4d0; }
 
-.card {
-  background: rgba(255,255,255,0.7);
-  border: 1px solid #d4c8a8;
-  border-radius: 16px;
-  padding: 1.75rem;
-  margin-bottom: 1.25rem;
-}
-
-label {
-  display: block;
-  font-size: 13px;
-  color: #9c8c6c;
-  letter-spacing: 0.1em;
-  margin-bottom: 8px;
-  margin-top: 18px;
-  font-family: 'Noto Sans SC', sans-serif;
-  font-weight: 300;
-}
-label:first-child { margin-top: 0; }
-
+.card { background:rgba(255,255,255,0.7); border:1px solid #d4c8a8; border-radius:16px; padding:1.75rem; margin-bottom:1.25rem; }
+label { display:block; font-size:13px; color:#9c8c6c; letter-spacing:0.1em; margin-bottom:8px; margin-top:18px; font-family:'Noto Sans SC',sans-serif; font-weight:300; }
+label:first-child { margin-top:0; }
 input[type=text], textarea {
-  width: 100%;
-  background: rgba(255,255,255,0.9);
-  border: 1px solid #d4c8a8;
-  border-radius: 10px;
-  padding: 12px 16px;
-  font-size: 16px;
-  color: #2c2416;
-  font-family: 'Noto Serif SC', serif;
-  outline: none;
-  resize: none;
-  transition: border-color 0.2s;
+  width:100%; background:rgba(255,255,255,0.9); border:1px solid #d4c8a8;
+  border-radius:10px; padding:12px 16px; font-size:16px; color:#2c2416;
+  font-family:'Noto Serif SC',serif; outline:none; resize:none; transition:border-color 0.2s;
 }
-input[type=text]:focus, textarea:focus { border-color: #9c8c6c; }
-textarea { height: 100px; line-height: 1.7; }
-
+input[type=text]:focus, textarea:focus { border-color:#9c8c6c; }
+textarea { height:100px; line-height:1.7; }
 .div-btn {
-  width: 100%;
-  margin-top: 1.5rem;
-  padding: 16px;
-  font-size: 17px;
-  font-weight: 500;
-  font-family: 'Noto Serif SC', serif;
-  letter-spacing: 0.15em;
-  background: #2c2416;
-  border: none;
-  border-radius: 12px;
-  color: #f5f0e8;
-  cursor: pointer;
-  transition: background 0.2s;
+  width:100%; margin-top:1.5rem; padding:16px; font-size:17px; font-weight:500;
+  font-family:'Noto Serif SC',serif; letter-spacing:0.15em;
+  background:#2c2416; border:none; border-radius:12px; color:#f5f0e8;
+  cursor:pointer; transition:background 0.2s;
 }
-.div-btn:hover { background: #3d3220; }
-.div-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.div-btn:hover { background:#3d3220; }
+.div-btn:disabled { opacity:0.35; cursor:not-allowed; }
+.cost-note { font-size:12px; color:#b4a880; text-align:center; margin-top:10px; font-family:'Noto Sans SC',sans-serif; font-weight:300; letter-spacing:0.05em; }
 
-.cost-note {
-  font-size: 12px;
-  color: #b4a880;
-  text-align: center;
-  margin-top: 10px;
-  font-family: 'Noto Sans SC', sans-serif;
-  font-weight: 300;
-  letter-spacing: 0.05em;
-}
+.cat-stage { text-align:center; padding:2.5rem 1rem; display:none; }
+.cat-name-label { font-size:22px; font-weight:500; color:#2c2416; letter-spacing:0.3em; margin-bottom:1.5rem; }
+.eye-row { display:flex; justify-content:center; gap:28px; margin:1rem 0 1.5rem; }
+.eye { width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:32px; border:2px solid #d4c8a8; transition:transform 0.7s cubic-bezier(0.34,1.56,0.64,1),opacity 0.5s; }
+.eye.closed { transform:scaleY(0.08); opacity:0.25; }
+.eye.open { transform:scaleY(1); opacity:1; }
+.eye-amber { background:#fdf3dc; }
+.eye-blue { background:#e8f0fa; }
+.thinking { font-size:15px; color:#9c8c6c; min-height:24px; letter-spacing:0.1em; font-family:'Noto Sans SC',sans-serif; font-weight:300; }
 
-.cat-stage {
-  text-align: center;
-  padding: 2.5rem 1rem;
-  display: none;
-}
-
-.cat-name-label {
-  font-size: 22px;
-  font-weight: 500;
-  color: #2c2416;
-  letter-spacing: 0.3em;
-  margin-bottom: 1.5rem;
-}
-
-.eye-row {
-  display: flex;
-  justify-content: center;
-  gap: 28px;
-  margin: 1rem 0 1.5rem;
-}
-
-.eye {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 32px;
-  border: 2px solid #d4c8a8;
-  transition: transform 0.7s cubic-bezier(0.34,1.56,0.64,1), opacity 0.5s;
-}
-.eye.closed { transform: scaleY(0.08); opacity: 0.25; }
-.eye.open { transform: scaleY(1); opacity: 1; }
-.eye-amber { background: #fdf3dc; }
-.eye-blue { background: #e8f0fa; }
-
-.thinking {
-  font-size: 15px;
-  color: #9c8c6c;
-  min-height: 24px;
-  letter-spacing: 0.1em;
-  font-family: 'Noto Sans SC', sans-serif;
-  font-weight: 300;
-}
-
-.result-wrap { display: none; }
-
-.result-card {
-  background: rgba(255,255,255,0.75);
-  border: 1px solid #d4c8a8;
-  border-radius: 16px;
-  padding: 2rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.result-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(to right, transparent, #9c8c6c, transparent);
-}
-
-.gua-header {
-  text-align: center;
-  padding: 0.5rem 0 1.25rem;
-}
-
-.gua-sym {
-  font-size: 72px;
-  line-height: 1;
-  margin-bottom: 12px;
-  color: #2c2416;
-}
-
-.gua-name {
-  font-size: 22px;
-  font-weight: 500;
-  color: #2c2416;
-  letter-spacing: 0.15em;
-}
-
-.gua-nature {
-  font-size: 13px;
-  color: #9c8c6c;
-  margin-top: 6px;
-  letter-spacing: 0.1em;
-  font-family: 'Noto Sans SC', sans-serif;
-  font-weight: 300;
-}
-
-.divider {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 1.25rem 0;
-}
-.divider::before, .divider::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-}
-.divider::before { background: linear-gradient(to right, transparent, #d4c8a8); }
-.divider::after { background: linear-gradient(to left, transparent, #d4c8a8); }
-.divider-dot { width: 5px; height: 5px; border-radius: 50%; background: #b4a880; flex-shrink: 0; }
-
-.quote-text {
-  font-size: 20px;
-  color: #2c2416;
-  line-height: 1.8;
-  text-align: center;
-  letter-spacing: 0.12em;
-  font-weight: 500;
-}
-
-.quote-src {
-  font-size: 13px;
-  color: #9c8c6c;
-  text-align: center;
-  margin-top: 8px;
-  letter-spacing: 0.12em;
-  font-family: 'Noto Sans SC', sans-serif;
-  font-weight: 300;
-}
-
-.ai-loading {
-  font-size: 14px;
-  color: #9c8c6c;
-  text-align: center;
-  padding: 16px 0;
-  letter-spacing: 0.1em;
-  font-family: 'Noto Sans SC', sans-serif;
-  display: none;
-  animation: pulse 1.5s ease-in-out infinite;
-}
+.result-wrap { display:none; }
+.result-card { background:rgba(255,255,255,0.75); border:1px solid #d4c8a8; border-radius:16px; padding:2rem; position:relative; overflow:hidden; }
+.result-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(to right,transparent,#9c8c6c,transparent); }
+.gua-header { text-align:center; padding:0.5rem 0 1.25rem; }
+.gua-sym { font-size:72px; line-height:1; margin-bottom:12px; color:#2c2416; }
+.gua-name { font-size:22px; font-weight:500; color:#2c2416; letter-spacing:0.15em; }
+.gua-nature { font-size:13px; color:#9c8c6c; margin-top:6px; letter-spacing:0.1em; font-family:'Noto Sans SC',sans-serif; font-weight:300; }
+.divider { display:flex; align-items:center; gap:12px; margin:1.25rem 0; }
+.divider::before { content:''; flex:1; height:1px; background:linear-gradient(to right,transparent,#d4c8a8); }
+.divider::after { content:''; flex:1; height:1px; background:linear-gradient(to left,transparent,#d4c8a8); }
+.divider-dot { width:5px; height:5px; border-radius:50%; background:#b4a880; flex-shrink:0; }
+.quote-text { font-size:20px; color:#2c2416; line-height:1.8; text-align:center; letter-spacing:0.12em; font-weight:500; }
+.quote-src { font-size:13px; color:#9c8c6c; text-align:center; margin-top:8px; letter-spacing:0.12em; font-family:'Noto Sans SC',sans-serif; font-weight:300; }
+.ai-loading { font-size:14px; color:#9c8c6c; text-align:center; padding:16px 0; letter-spacing:0.1em; font-family:'Noto Sans SC',sans-serif; display:none; animation:pulse 1.5s ease-in-out infinite; }
 @keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+.ai-resp { font-size:17px; color:#3d3220; line-height:2.1; white-space:pre-wrap; letter-spacing:0.05em; }
+.share-row { display:flex; gap:12px; margin-top:1.5rem; }
+.share-btn { flex:1; padding:13px; font-size:14px; font-family:'Noto Sans SC',sans-serif; background:rgba(255,255,255,0.6); border:1px solid #d4c8a8; border-radius:10px; color:#7a6040; cursor:pointer; letter-spacing:0.08em; transition:all 0.2s; }
+.share-btn:hover { background:rgba(255,255,255,0.95); color:#2c2416; }
 
-.ai-resp {
-  font-size: 17px;
-  color: #3d3220;
-  line-height: 2.1;
-  white-space: pre-wrap;
-  letter-spacing: 0.05em;
-}
+.modal-overlay { display:none; position:fixed; inset:0; background:rgba(44,36,22,0.6); z-index:100; align-items:center; justify-content:center; padding:1rem; }
+.modal-overlay.show { display:flex; }
+.modal { background:#f5f0e8; border:1px solid #d4c8a8; border-radius:16px; padding:2rem; width:100%; max-width:380px; }
+.modal-title { font-size:20px; font-weight:500; color:#2c2416; text-align:center; margin-bottom:0.5rem; letter-spacing:0.1em; }
+.modal-sub { font-size:13px; color:#9c8c6c; text-align:center; margin-bottom:1.5rem; font-family:'Noto Sans SC',sans-serif; }
 
-.share-row {
-  display: flex;
-  gap: 12px;
-  margin-top: 1.5rem;
-}
+.qty-row { display:flex; align-items:center; justify-content:center; gap:16px; margin:1.25rem 0; }
+.qty-btn { width:40px; height:40px; border-radius:50%; background:transparent; border:1px solid #c4b48a; color:#2c2416; font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s; }
+.qty-btn:hover { background:#ede4d0; }
+.qty-display { font-size:28px; font-weight:500; color:#2c2416; min-width:60px; text-align:center; }
+.qty-price { font-size:14px; color:#5c7a3c; text-align:center; margin-bottom:1.25rem; font-family:'Noto Sans SC',sans-serif; }
 
-.share-btn {
-  flex: 1;
-  padding: 13px;
-  font-size: 14px;
-  font-family: 'Noto Sans SC', sans-serif;
-  background: rgba(255,255,255,0.6);
-  border: 1px solid #d4c8a8;
-  border-radius: 10px;
-  color: #7a6040;
-  cursor: pointer;
-  letter-spacing: 0.08em;
-  transition: all 0.2s;
-}
-.share-btn:hover { background: rgba(255,255,255,0.95); color: #2c2416; }
+.pay-btn { width:100%; padding:14px; font-size:16px; font-family:'Noto Serif SC',serif; font-weight:500; letter-spacing:0.1em; background:#2c2416; border:none; border-radius:12px; color:#f5f0e8; cursor:pointer; transition:background 0.2s; }
+.pay-btn:hover { background:#3d3220; }
+.modal-close { width:100%; margin-top:10px; padding:12px; background:transparent; border:1px solid #d4c8a8; border-radius:10px; color:#9c8c6c; cursor:pointer; font-size:14px; font-family:'Noto Sans SC',sans-serif; }
+.modal-close:hover { color:#3d3220; }
 
-.modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(44,36,22,0.6);
-  z-index: 100;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-}
-.modal-overlay.show { display: flex; }
-
-.modal {
-  background: #f5f0e8;
-  border: 1px solid #d4c8a8;
-  border-radius: 16px;
-  padding: 2rem;
-  width: 100%;
-  max-width: 380px;
-}
-
-.modal-title {
-  font-size: 20px;
-  font-weight: 500;
-  color: #2c2416;
-  text-align: center;
-  margin-bottom: 1.5rem;
-  letter-spacing: 0.1em;
-}
-
-.pack {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 0;
-  border-bottom: 1px solid #e8e0cc;
-}
-.pack:last-of-type { border-bottom: none; }
-.pack-name { font-size: 15px; color: #3d3220; }
-.pack-badge {
-  font-size: 11px;
-  color: #7a6040;
-  background: #ede4d0;
-  border-radius: 4px;
-  padding: 1px 6px;
-  margin-left: 6px;
-  font-family: 'Noto Sans SC', sans-serif;
-}
-.pack-price { font-size: 15px; font-weight: 500; color: #5c7a3c; }
-.pack-buy {
-  font-size: 13px;
-  font-family: 'Noto Sans SC', sans-serif;
-  padding: 6px 16px;
-  background: transparent;
-  border: 1px solid #c4b48a;
-  border-radius: 20px;
-  color: #7a6040;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.pack-buy:hover { background: #ede4d0; }
-
-.modal-close {
-  width: 100%;
-  margin-top: 1.25rem;
-  padding: 12px;
-  background: transparent;
-  border: 1px solid #d4c8a8;
-  border-radius: 10px;
-  color: #9c8c6c;
-  cursor: pointer;
-  font-size: 14px;
-  font-family: 'Noto Sans SC', sans-serif;
-  letter-spacing: 0.05em;
-}
-.modal-close:hover { color: #3d3220; }
-
-@media (max-width: 480px) {
-  body { padding: 1.5rem 1rem 3rem; }
-  .brand { font-size: 30px; }
-  .gua-sym { font-size: 60px; }
-  .ai-resp { font-size: 16px; }
-}
+.toast { position:fixed; bottom:2rem; left:50%; transform:translateX(-50%); background:#2c2416; color:#f5f0e8; padding:10px 20px; border-radius:20px; font-size:14px; font-family:'Noto Sans SC',sans-serif; opacity:0; transition:opacity 0.3s; pointer-events:none; z-index:200; }
+.toast.show { opacity:1; }
 </style>
 </head>
 <body>
@@ -427,49 +150,75 @@ textarea { height: 100px; line-height: 1.7; }
     <div class="brand-sub">傻猪为你观天问卦 · 易经AI解读</div>
   </div>
 
-  <div class="can-bar">
-    <span style="font-size:18px;">🥫</span>
-    <span>剩余罐头</span>
-    <span class="can-count" id="can-count">3</span>
-    <span>罐</span>
-    <button class="buy-btn" onclick="document.getElementById('shop').classList.add('show')">＋ 补货</button>
-  </div>
-
-  <div class="card">
-    <label for="cat-name">你的猫咪叫什么名字？</label>
-    <input type="text" id="cat-name" placeholder="例如：傻猪、橘墩、小黑..." maxlength="10">
-    <label for="question">你想请教傻猪什么？</label>
-    <textarea id="question" placeholder="例如：我现在的方向对吗？要不要放弃现在的工作？这段感情值得继续吗？"></textarea>
-    <button class="div-btn" id="div-btn" onclick="startDiv()">✦ 请傻猪占卜（消耗1罐罐头）</button>
-    <div class="cost-note">新用户免费获得3罐 · 用完需补货才能继续</div>
-  </div>
-
-  <div class="cat-stage" id="cat-stage">
-    <div class="cat-name-label" id="cat-name-label">傻 猪</div>
-    <div class="eye-row">
-      <div class="eye eye-amber closed" id="eye-l">🟤</div>
-      <div class="eye eye-blue closed" id="eye-r">🔵</div>
+  <div id="login-section">
+    <div class="login-card">
+      <div class="login-title">请先登录</div>
+      <div class="login-sub">登录后罐头数量永久保存，换设备也不会丢失</div>
+      <button class="google-btn" onclick="signInWithGoogle()">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+        用 Google 账号登录
+      </button>
     </div>
-    <div class="thinking" id="thinking"></div>
   </div>
 
-  <div class="result-wrap" id="result-wrap">
-    <div class="result-card">
-      <div class="gua-header">
-        <div class="gua-sym" id="gua-sym"></div>
-        <div class="gua-name" id="gua-name"></div>
-        <div class="gua-nature" id="gua-nature"></div>
+  <div id="main-section" style="display:none; width:100%;">
+    <div class="user-bar">
+      <div class="user-info">
+        <img class="user-avatar" id="user-avatar" src="" alt="">
+        <span class="user-name" id="user-name"></span>
       </div>
-      <div class="divider"><div class="divider-dot"></div></div>
-      <div class="quote-text" id="quote-text"></div>
-      <div class="quote-src" id="quote-src"></div>
-      <div class="divider"><div class="divider-dot"></div></div>
-      <div class="ai-loading" id="ai-loading">本猫正在细读天机...</div>
-      <div class="ai-resp" id="ai-resp"></div>
+      <button class="logout-btn" onclick="signOut()">退出</button>
     </div>
-    <div class="share-row">
-      <button class="share-btn" onclick="copyRes()">复制分享</button>
-      <button class="share-btn" onclick="resetAll()">再问一次</button>
+
+    <div class="can-bar">
+      <span style="font-size:18px;">🥫</span>
+      <span>剩余罐头</span>
+      <span class="can-count" id="can-count">…</span>
+      <span>罐</span>
+      <button class="buy-btn" onclick="document.getElementById('shop').classList.add('show')">＋ 补货</button>
+    </div>
+
+    <div class="card">
+      <label for="cat-name">你的猫咪叫什么名字？</label>
+      <input type="text" id="cat-name" placeholder="例如：傻猪、橘墩、小黑..." maxlength="10">
+      <label for="question">你想请教傻猪什么？</label>
+      <textarea id="question" placeholder="例如：我现在的方向对吗？要不要放弃现在的工作？这段感情值得继续吗？"></textarea>
+      <button class="div-btn" id="div-btn" onclick="startDiv()">✦ 请傻猪占卜（消耗1罐罐头）</button>
+      <div class="cost-note">$0.99 / 罐 · 罐头永久保存不过期</div>
+    </div>
+
+    <div class="cat-stage" id="cat-stage">
+      <div class="cat-name-label" id="cat-name-label">傻 猪</div>
+      <div class="eye-row">
+        <div class="eye eye-amber closed" id="eye-l">🟤</div>
+        <div class="eye eye-blue closed" id="eye-r">🔵</div>
+      </div>
+      <div class="thinking" id="thinking"></div>
+    </div>
+
+    <div class="result-wrap" id="result-wrap">
+      <div class="result-card">
+        <div class="gua-header">
+          <div class="gua-sym" id="gua-sym"></div>
+          <div class="gua-name" id="gua-name"></div>
+          <div class="gua-nature" id="gua-nature"></div>
+        </div>
+        <div class="divider"><div class="divider-dot"></div></div>
+        <div class="quote-text" id="quote-text"></div>
+        <div class="quote-src" id="quote-src"></div>
+        <div class="divider"><div class="divider-dot"></div></div>
+        <div class="ai-loading" id="ai-loading">本猫正在细读天机...</div>
+        <div class="ai-resp" id="ai-resp"></div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" onclick="copyRes()">复制分享</button>
+        <button class="share-btn" onclick="resetAll()">再问一次</button>
+      </div>
     </div>
   </div>
 </div>
@@ -477,27 +226,41 @@ textarea { height: 100px; line-height: 1.7; }
 <div class="modal-overlay" id="shop">
   <div class="modal">
     <div class="modal-title">🥫 补充罐头</div>
-    <div class="pack">
-      <span class="pack-name">5罐 吞拿鱼</span>
-      <span class="pack-price">$2.90</span>
-      <button class="pack-buy" onclick="buyPack(5,this)">购买</button>
+    <div class="modal-sub">$0.99 / 罐 · 最多50罐</div>
+    <div class="qty-row">
+      <button class="qty-btn" onclick="changeQty(-1)">−</button>
+      <div class="qty-display" id="qty-display">5</div>
+      <button class="qty-btn" onclick="changeQty(1)">＋</button>
     </div>
-    <div class="pack">
-      <span class="pack-name">20罐 三文鱼<span class="pack-badge">热门</span></span>
-      <span class="pack-price">$7.90</span>
-      <button class="pack-buy" onclick="buyPack(20,this)">购买</button>
-    </div>
-    <div class="pack">
-      <span class="pack-name">99罐 鲍鱼尊享</span>
-      <span class="pack-price">$19.90</span>
-      <button class="pack-buy" onclick="buyPack(99,this)">购买</button>
-    </div>
+    <div class="qty-price" id="qty-price">合计 $4.95</div>
+    <button class="pay-btn" onclick="goPay()">前往付款</button>
     <button class="modal-close" onclick="document.getElementById('shop').classList.remove('show')">关闭</button>
   </div>
 </div>
 
-<script>
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut as fbSignOut } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAqu9pHaAEjFqPvPz3TuoYc60Lpb4DLZrs",
+  authDomain: "taoofcat-6cf6e.firebaseapp.com",
+  projectId: "taoofcat-6cf6e",
+  storageBucket: "taoofcat-6cf6e.firebasestorage.app",
+  messagingSenderId: "1088808296707",
+  appId: "1:1088808296707:web:ce9b54ba34d395681bc936"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const provider = new GoogleAuthProvider();
+
 const API = 'https://web-production-907c5.up.railway.app';
+
 const guas = [
   { name:"乾卦 · 天", sym:"☰", quote:"天行健，君子以自强不息", src:"《易经·乾》", nature:"刚健进取" },
   { name:"坤卦 · 地", sym:"☷", quote:"地势坤，君子以厚德载物", src:"《易经·坤》", nature:"包容承载" },
@@ -513,18 +276,91 @@ const guas = [
   { name:"震卦 · 雷", sym:"☳", quote:"为而不争，故天下莫能与之争", src:"《道德经·八十一章》", nature:"动而有节" },
 ];
 
-let cans = parseInt(localStorage.getItem('taoofcat_cans') || '3');
-let currentGua = null, currentCat = '', aiText = '';
-function saveCans() { localStorage.setItem('taoofcat_cans', cans); }
-document.getElementById('can-count').textContent = cans;
+let currentUser = null;
+let currentGua = null;
+let currentCat = '';
+let aiText = '';
+let qty = 5;
 
-function startDiv() {
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+async function getUserCans(uid) {
+  const ref = doc(db, 'users', uid);
+  const snap = await getDoc(ref);
+  if (snap.exists()) return snap.data().cans || 0;
+  await setDoc(ref, { cans: 3, created: new Date().toISOString() });
+  return 3;
+}
+
+async function updateCans(uid, delta) {
+  const ref = doc(db, 'users', uid);
+  await updateDoc(ref, { cans: increment(delta) });
+  const snap = await getDoc(ref);
+  return snap.data().cans;
+}
+
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    currentUser = user;
+    document.getElementById('login-section').style.display = 'none';
+    document.getElementById('main-section').style.display = 'block';
+    document.getElementById('user-avatar').src = user.photoURL || '';
+    document.getElementById('user-name').textContent = user.displayName || user.email;
+    const cans = await getUserCans(user.uid);
+    document.getElementById('can-count').textContent = cans;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const paid = parseInt(urlParams.get('paid') || '0');
+    if (paid > 0) {
+      const newCans = await updateCans(user.uid, paid);
+      document.getElementById('can-count').textContent = newCans;
+      showToast('✓ 已补充 ' + paid + ' 罐罐头！');
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+  } else {
+    currentUser = null;
+    document.getElementById('login-section').style.display = 'block';
+    document.getElementById('main-section').style.display = 'none';
+  }
+});
+
+window.signInWithGoogle = async () => {
+  try { await signInWithPopup(auth, provider); }
+  catch(e) { showToast('登录失败，请重试'); }
+};
+
+window.signOut = async () => {
+  await fbSignOut(auth);
+  showToast('已退出登录');
+};
+
+window.changeQty = (delta) => {
+  qty = Math.max(1, Math.min(50, qty + delta));
+  document.getElementById('qty-display').textContent = qty;
+  document.getElementById('qty-price').textContent = '合计 $' + (qty * 0.99).toFixed(2);
+};
+
+window.goPay = () => {
+  const url = 'https://buy.stripe.com/3cI5kCbnccNUfh1bbY28800?quantity=' + qty + '&client_reference_id=' + (currentUser ? currentUser.uid : 'guest');
+  window.location.href = url;
+};
+
+window.startDiv = async () => {
+  if (!currentUser) { showToast('请先登录'); return; }
   const q = document.getElementById('question').value.trim();
   const cat = document.getElementById('cat-name').value.trim() || '傻猪';
   if (!q) { document.getElementById('question').focus(); return; }
-  if (cans <= 0) { document.getElementById('shop').classList.add('show'); return; }
-  cans--; saveCans();
-  document.getElementById('can-count').textContent = cans;
+
+  const cansNow = parseInt(document.getElementById('can-count').textContent);
+  if (cansNow <= 0) { document.getElementById('shop').classList.add('show'); return; }
+
+  const newCans = await updateCans(currentUser.uid, -1);
+  document.getElementById('can-count').textContent = newCans;
   currentCat = cat;
   document.getElementById('div-btn').disabled = true;
   document.getElementById('result-wrap').style.display = 'none';
@@ -533,6 +369,7 @@ function startDiv() {
   document.getElementById('eye-l').className = 'eye eye-amber closed';
   document.getElementById('eye-r').className = 'eye eye-blue closed';
   document.getElementById('thinking').textContent = cat + ' 正在感应天机...';
+
   setTimeout(() => {
     document.getElementById('thinking').textContent = '异瞳缓缓睁开...';
     document.getElementById('eye-l').className = 'eye eye-amber open';
@@ -544,7 +381,7 @@ function startDiv() {
     currentGua = gua;
     showResult(gua, q, cat);
   }, 2200);
-}
+};
 
 function showResult(gua, q, cat) {
   document.getElementById('gua-sym').textContent = gua.sym;
@@ -593,31 +430,34 @@ async function callAPI(gua, q, cat) {
   }
 }
 
-function copyRes() {
+window.copyRes = () => {
   const text = '【玄猫之道 · ' + currentCat + '占卜结果】\n' + currentGua.name + ' · ' + currentGua.nature + '\n\n「' + currentGua.quote + '」\n' + currentGua.src + '\n\n' + aiText + '\n\n— taoofcat.com/divination.html';
-  navigator.clipboard.writeText(text).then(() => {
-    const btn = event.target.closest('button');
-    const orig = btn.textContent;
-    btn.textContent = '已复制 ✓';
-    setTimeout(() => { btn.textContent = orig; }, 1500);
-  });
+  const btn = event.target.closest('button');
+  const orig = btn.textContent;
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '已复制 ✓'; setTimeout(() => { btn.textContent = orig; }, 1500);
+    }).catch(() => fallbackCopy(text, btn, orig));
+  } else { fallbackCopy(text, btn, orig); }
+};
+
+function fallbackCopy(text, btn, orig) {
+  const ta = document.createElement('textarea');
+  ta.value = text; ta.style.cssText = 'position:fixed;opacity:0;';
+  document.body.appendChild(ta); ta.focus(); ta.select();
+  document.execCommand('copy'); document.body.removeChild(ta);
+  btn.textContent = '已复制 ✓'; setTimeout(() => { btn.textContent = orig; }, 1500);
 }
 
-function resetAll() {
+window.resetAll = () => {
   document.getElementById('result-wrap').style.display = 'none';
   document.getElementById('cat-stage').style.display = 'none';
   document.getElementById('div-btn').disabled = false;
   document.getElementById('question').value = '';
   window.scrollTo({top:0, behavior:'smooth'});
-}
+};
 
-function buyPack(n, btn) {
-  cans += n; saveCans();
-  document.getElementById('can-count').textContent = cans;
-  btn.textContent = '已加入 ✓';
-  btn.disabled = true;
-  setTimeout(() => { document.getElementById('shop').classList.remove('show'); }, 800);
-}
+document.getElementById('qty-price').textContent = '合计 $' + (qty * 0.99).toFixed(2);
 </script>
 </body>
 </html>
