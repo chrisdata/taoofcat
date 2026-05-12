@@ -390,7 +390,11 @@ section {
 
 .memorial-cat {
   text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s;
+  display: block;
 }
+.memorial-cat:hover { transform: translateY(-4px); }
 
 .memorial-cat-img {
   width: 100px;
@@ -775,16 +779,16 @@ nav.scrolled {
   <div class="memorial reveal">
     <div class="memorial-title">✦ &nbsp; 已归道的朋友 &nbsp; ✦</div>
     <div class="memorial-cats">
-      <div class="memorial-cat">
+      <a href="cat-xiaobai.html" class="memorial-cat" style="text-decoration:none;color:inherit;">
         <img src="cat-xiaobai.jpg" alt="小白" class="memorial-cat-img" style="object-position:center 20%;">
         <div class="memorial-cat-name">小 白</div>
         <div class="memorial-cat-note">傻猪之子 · 异瞳白猫<br>短暂而完整的一生</div>
-      </div>
-      <div class="memorial-cat">
+      </a>
+      <a href="cat-xiaohei.html" class="memorial-cat" style="text-decoration:none;color:inherit;">
         <img src="cat-xiaohei.jpg" alt="小黑" class="memorial-cat-img">
         <div class="memorial-cat-name">小 黑</div>
         <div class="memorial-cat-note">流浪来客 · 半年信任<br>来去皆是缘</div>
-      </div>
+      </a>
     </div>
   </div>
 </section>
