@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小黑 · 玄猫之道</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root { --paper:#f4ede0; --ink:#1e1608; --ink-light:#5c4c2c; --ink-faint:#9c8c6c; --ink-ghost:#d4c8a8; --gold:#b8860b; --gold-light:#d4a843; }
+* { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body { font-family:'Noto Serif SC',serif; background:var(--paper); color:var(--ink); overflow-x:hidden; }
+body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events:none; z-index:100; opacity:0.4; }
+nav { position:fixed; top:0; left:0; right:0; z-index:50; padding:1.25rem 2rem; display:flex; align-items:center; justify-content:space-between; transition:background 0.3s; }
+nav.scrolled { background:rgba(244,237,224,0.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--ink-ghost); }
+.nav-brand { font-size:16px; font-weight:700; letter-spacing:0.2em; color:var(--ink); text-decoration:none; }
+.nav-back { font-size:13px; color:var(--ink-faint); text-decoration:none; font-family:'Noto Sans SC',sans-serif; font-weight:300; letter-spacing:0.05em; transition:color 0.2s; }
+.nav-back:hover { color:var(--ink); }
+
+.hero { min-height:100vh; position:relative; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:4rem; overflow:hidden; }
+.hero-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 40%; filter:brightness(0.55); }
+.hero-gradient { position:absolute; inset:0; background:linear-gradient(to bottom,rgba(10,8,4,0.2) 0%,rgba(10,8,4,0.82) 100%); }
+.hero-content { position:relative; z-index:1; text-align:center; padding:0 2rem; animation:fadeUp 1s ease both; }
+.hero-label { font-size:11px; letter-spacing:0.4em; color:rgba(212,168,67,0.8); font-family:'Noto Sans SC',sans-serif; font-weight:300; margin-bottom:12px; text-transform:uppercase; }
+.hero-name { font-size:clamp(72px,16vw,130px); font-weight:900; color:#f4ede0; letter-spacing:0.25em; line-height:1; margin-bottom:12px; text-shadow:0 4px 30px rgba(0,0,0,0.6); }
+.hero-en { font-family:'IM Fell English',serif; font-style:italic; font-size:clamp(14px,3vw,18px); color:rgba(244,237,224,0.6); letter-spacing:0.1em; margin-bottom:1rem; }
+.hero-divider { width:60px; height:1px; background:linear-gradient(to right,transparent,rgba(212,168,67,0.6),transparent); margin:0 auto 1rem; }
+.hero-tagline { font-size:14px; color:rgba(244,237,224,0.7); letter-spacing:0.12em; font-family:'Noto Sans SC',sans-serif; font-weight:300; }
+
+.story { max-width:720px; margin:0 auto; padding:5rem 2rem; }
+.chapter { margin-bottom:5rem; }
+.chapter-label { font-size:11px; letter-spacing:0.4em; color:var(--gold); font-family:'Noto Sans SC',sans-serif; font-weight:300; margin-bottom:1rem; text-transform:uppercase; }
+.chapter-title { font-size:clamp(24px,4vw,32px); font-weight:700; letter-spacing:0.1em; color:var(--ink); margin-bottom:1.5rem; line-height:1.3; }
+.chapter-text { font-size:17px; color:var(--ink-light); line-height:2.1; letter-spacing:0.04em; margin-bottom:1.5rem; }
+
+.story-photo { width:100%; border-radius:8px; margin:2.5rem 0; display:block; box-shadow:0 8px 40px rgba(30,22,8,0.12); }
+.story-photo-bw { width:100%; border-radius:8px; margin:2.5rem 0; display:block; box-shadow:0 8px 40px rgba(30,22,8,0.15); filter:grayscale(25%); }
+.story-photo-caption { font-size:12px; color:var(--ink-faint); text-align:center; margin-top:-1.5rem; margin-bottom:2.5rem; font-family:'Noto Sans SC',sans-serif; font-weight:300; letter-spacing:0.1em; }
+
+.photo-pair { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:2.5rem 0; }
+.photo-pair img { width:100%; border-radius:8px; object-fit:cover; aspect-ratio:3/4; box-shadow:0 4px 20px rgba(30,22,8,0.1); }
+
+.tao-quote { border-left:2px solid var(--gold); padding:1.5rem 2rem; margin:3rem 0; background:rgba(184,134,11,0.04); border-radius:0 8px 8px 0; }
+.tao-quote-text { font-size:22px; font-weight:500; color:var(--ink); letter-spacing:0.1em; line-height:1.7; margin-bottom:8px; }
+.tao-quote-source { font-size:13px; color:var(--gold); font-family:'Noto Sans SC',sans-serif; font-weight:300; letter-spacing:0.1em; }
+
+.story-divider { display:flex; align-items:center; gap:16px; margin:4rem 0; color:var(--ink-ghost); }
+.story-divider::before,.story-divider::after { content:''; flex:1; height:1px; background:var(--ink-ghost); }
+
+.highlight-box { background:rgba(30,22,8,0.04); border:1px solid var(--ink-ghost); border-radius:8px; padding:2rem; margin:2.5rem 0; }
+.highlight-box-text { font-size:16px; color:var(--ink-light); line-height:2; letter-spacing:0.05em; font-style:italic; }
+
+.closing { background:#0a0804; color:var(--paper); padding:6rem 2rem; text-align:center; position:relative; overflow:hidden; }
+.closing-bg-char { position:absolute; font-size:400px; font-weight:900; color:rgba(255,255,255,0.02); top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; line-height:1; }
+.closing-label { font-size:11px; letter-spacing:0.4em; color:rgba(212,168,67,0.7); font-family:'Noto Sans SC',sans-serif; font-weight:300; margin-bottom:1rem; }
+.closing-quote { font-size:clamp(18px,3.5vw,26px); font-weight:400; color:rgba(244,237,224,0.9); letter-spacing:0.1em; line-height:1.9; margin-bottom:1rem; max-width:600px; margin-left:auto; margin-right:auto; }
+.closing-source { font-size:13px; color:rgba(244,237,224,0.35); font-family:'Noto Sans SC',sans-serif; font-weight:300; letter-spacing:0.1em; margin-bottom:3rem; }
+.closing-note { font-size:16px; color:rgba(244,237,224,0.65); font-family:'Noto Serif SC',sans-serif; font-weight:300; line-height:2; max-width:520px; margin:0 auto 3rem; letter-spacing:0.06em; }
+.btn-gold { padding:14px 36px; font-size:15px; font-family:'Noto Serif SC',serif; font-weight:500; letter-spacing:0.15em; background:var(--gold); color:var(--paper); border:none; border-radius:4px; cursor:pointer; text-decoration:none; display:inline-block; transition:background 0.2s,transform 0.15s; margin-right:12px; }
+.btn-gold:hover { background:var(--gold-light); transform:translateY(-2px); }
+.btn-outline-light { padding:14px 36px; font-size:15px; font-family:'Noto Serif SC',serif; font-weight:400; letter-spacing:0.15em; background:transparent; color:rgba(244,237,224,0.8); border:1px solid rgba(244,237,224,0.25); border-radius:4px; cursor:pointer; text-decoration:none; display:inline-block; transition:all 0.2s; }
+.btn-outline-light:hover { border-color:rgba(244,237,224,0.6); color:#f4ede0; }
+
+footer { border-top:1px solid var(--ink-ghost); padding:2.5rem 2rem; text-align:center; }
+.footer-brand { font-size:18px; font-weight:700; letter-spacing:0.2em; color:var(--ink); margin-bottom:6px; }
+.footer-copy { font-size:11px; color:var(--ink-ghost); font-family:'Noto Sans SC',sans-serif; letter-spacing:0.08em; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+.reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s ease,transform 0.7s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+@media(max-width:600px) { .photo-pair{grid-template-columns:1fr} .story{padding:3rem 1.25rem} .tao-quote{padding:1rem 1.25rem} .btn-gold{margin-right:0;margin-bottom:12px;display:block} }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="/" class="nav-brand">玄猫之道</a>
+  <a href="/#cats" class="nav-back">← 猫咪家族</a>
+</nav>
+
+<div class="hero">
+  <img src="xiaohei-stray.jpg" alt="小黑" class="hero-img">
+  <div class="hero-gradient"></div>
+  <div class="hero-content">
+    <div class="hero-label">In Loving Memory · 已归道</div>
+    <div class="hero-name">小 黑</div>
+    <div class="hero-en">Xiao Hei · The Midnight Guest</div>
+    <div class="hero-divider"></div>
+    <div class="hero-tagline">流浪来客 · 半年信任 · 三个月后归道</div>
+  </div>
+</div>
+
+<div class="story">
+
+  <div class="chapter reveal">
+    <div class="chapter-label">Chapter One</div>
+    <div class="chapter-title">农历新年的访客</div>
+    <p class="chapter-text">
+      2025年农历新年，小黑出现在我们门口。
+    </p>
+    <p class="chapter-text">
+      我好心喂了他，没想到喂了没多久，他就在门口大呕吐。我们马上带他去看兽医。
+    </p>
+    <p class="chapter-text">
+      就是那一次兽医检查，让我们决定收养他。
+    </p>
+    <p class="chapter-text">
+      有时候，一场呕吐就是缘分的开始。
+    </p>
+  </div>
+
+  <img src="xiaohei-stray.jpg" alt="流浪时的小黑" class="story-photo reveal">
+  <div class="story-photo-caption reveal">流浪时的小黑 · 怡保街头 · 那双黄绿色的眼睛</div>
+
+  <div class="tao-quote reveal">
+    <div class="tao-quote-text">「信言不美，美言不信」</div>
+    <div class="tao-quote-source">— 道德经·第八十一章</div>
+  </div>
+
+  <div class="chapter reveal">
+    <div class="chapter-label">Chapter Two</div>
+    <div class="chapter-title">笼养半年，乖得让人心疼</div>
+    <p class="chapter-text">
+      小黑收养后，我们把他养在笼子里观察。
+    </p>
+    <p class="chapter-text">
+      不是因为他不信任我们——其实他很快就信任了。但他的肠胃一直不稳定，需要持续观察。加上那时候其他猫咪还没有全屋自由活动，需要慢慢整合。
+    </p>
+    <p class="chapter-text">
+      小黑在笼子里待了半年，从来没有抱怨。黄绿色的眼睛透过铁栏杆看着我们，安静，温顺，乖得让人心疼。
+    </p>
+  </div>
+
+  <img src="xiaohei-cage.jpg" alt="笼养中的小黑" class="story-photo reveal">
+  <div class="story-photo-caption reveal">笼养半年多 · 透过铁栏杆看世界</div>
+
+  <div class="story-divider reveal"><span>✦</span></div>
+
+  <div class="chapter reveal">
+    <div class="chapter-label">Chapter Three</div>
+    <div class="chapter-title">第一晚入屋，傻猪隔着铁栏好奇他</div>
+    <p class="chapter-text">
+      终于有一天，我们让小黑进入楼上的独立房间——和其他猫咪隔离，怕他们起冲突。
+    </p>
+    <p class="chapter-text">
+      没想到傻猪第一个跑过来，隔着铁栏杆好奇地盯着小黑看。
+    </p>
+    <p class="chapter-text">
+      隔天，我们打开门，他们已经变成了玩伴。
+    </p>
+    <p class="chapter-text">
+      我们都觉得不可思议。一黑一白，一个傲娇异瞳仙猫，一个新来的流浪黑猫——就这样，成了最好的朋友。
+    </p>
+  </div>
+
+  <div class="photo-pair reveal">
+    <img src="xiaohei-happy.jpg" alt="小黑第一晚入屋" style="object-position:center 20%;">
+    <img src="xiaohei-best.jpg" alt="小黑最美的照片" style="object-position:center 25%;">
+  </div>
+  <div class="story-photo-caption reveal">左：第一晚入屋，好高兴 · 右：最美的那张</div>
+
+  <div class="chapter reveal">
+    <div class="chapter-label">Chapter Four</div>
+    <div class="chapter-title">傻猪最爱的玩伴</div>
+    <p class="chapter-text">
+      小黑和傻猪成了最好的玩伴。
+    </p>
+    <p class="chapter-text">
+      一黑一白，整天在家里追来追去。傻猪那只平时傲娇的异瞳仙猫，遇到小黑就变成了另一只猫——活泼，好奇，充满孩子气。
+    </p>
+    <p class="chapter-text">
+      他们也最爱并排躺着，一黑一白，像太极的阴阳——你中有我，我中有你。
+    </p>
+  </div>
+
+  <img src="xiaohei-shazhu.jpg" alt="小黑和傻猪" class="story-photo reveal">
+  <div class="story-photo-caption reveal">傻猪与小黑 · 阴阳相依</div>
+
+  <div class="story-divider reveal"><span>✦</span></div>
+
+  <div class="chapter reveal">
+    <div class="chapter-label">Chapter Five</div>
+    <div class="chapter-title">小白走后一个月</div>
+    <p class="chapter-text">
+      小白离世一个月后，小黑突然不吃不喝，开始呕吐。
+    </p>
+    <p class="chapter-text">
+      我们带他去看兽医。检查发现他肠道里有一个大球状物，情况严重，需要手术才能知道里面是什么。
+    </p>
+    <p class="chapter-text">
+      我们决定做手术。但手术出现了并发症——小黑走了。
+    </p>
+    <p class="chapter-text">
+      同一年，我们失去了小白，又失去了小黑。一个月之内，两只猫。
+    </p>
+    <p class="chapter-text">
+      后来我们发现，兽医给小黑开的处方猫粮，无意中医好了困扰傻猪已久的软便问题。小黑的处方，成了傻猪的礼物。
+    </p>
+  </div>
+
+  <div class="highlight-box reveal">
+    <p class="highlight-box-text">
+      「祸兮福之所倚，福兮祸之所伏」<br><br>
+      小黑来了，带来了欢笑。<br>
+      小黑走了，留下了傻猪的健康。<br>
+      来去之间，皆是缘分，皆是礼物。
+    </p>
+  </div>
+
+  <img src="xiaobai-xiaohei.jpg" alt="小白和小黑" class="story-photo-bw reveal">
+  <div class="story-photo-caption reveal">小白与小黑 · 两个已归道的朋友 · 曾经在一起</div>
+
+</div>
+
+<div class="closing">
+  <div class="closing-bg-char">缘</div>
+  <div style="position:relative;z-index:1;">
+    <div class="closing-label reveal">道德经·第五十八章</div>
+    <div class="closing-quote reveal">「祸兮福之所倚<br>福兮祸之所伏」</div>
+    <div class="closing-source reveal">— 道德经</div>
+    <div class="closing-note reveal">
+      小黑用半年换来三个月的家。<br>
+      短暂，但真实。<br>
+      <br>
+      他走的时候，留下了傻猪的健康。<br>
+      这就是他来这里的意义。
+    </div>
+    <div class="reveal">
+      <a href="divination.html" class="btn-gold">✦ 让傻猪为你占卜</a>
+      <a href="/#cats" class="btn-outline-light">回到猫咪家族</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">玄猫之道</div>
+  <div class="footer-copy">© 2026 Tao of Your Cat · Ipoh, Malaysia · 小黑 · 永远在这里</div>
+</footer>
+
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60);});
+const reveals=document.querySelectorAll('.reveal');
+const observer=new IntersectionObserver((entries)=>{entries.forEach((entry,i)=>{if(entry.isIntersecting){setTimeout(()=>entry.target.classList.add('visible'),i*60);observer.unobserve(entry.target);}});},{threshold:0.08});
+reveals.forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
