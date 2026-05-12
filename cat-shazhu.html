@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>傻猪 · 玄猫之道</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f4ede0;
+  --ink: #1e1608;
+  --ink-light: #5c4c2c;
+  --ink-faint: #9c8c6c;
+  --ink-ghost: #d4c8a8;
+  --gold: #b8860b;
+  --gold-light: #d4a843;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Serif SC', serif;
+  background: var(--paper);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.4;
+}
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  padding: 1.25rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.3s;
+}
+nav.scrolled {
+  background: rgba(244,237,224,0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--ink-ghost);
+}
+.nav-brand {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--ink);
+  text-decoration: none;
+}
+.nav-back {
+  font-size: 13px;
+  color: var(--ink-faint);
+  text-decoration: none;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  transition: color 0.2s;
+}
+.nav-back:hover { color: var(--ink); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 4rem;
+  overflow: hidden;
+}
+
+.hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  filter: brightness(0.75);
+}
+
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(30,22,8,0.1) 0%, rgba(30,22,8,0.7) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 0 2rem;
+  animation: fadeUp 1s ease both;
+}
+
+.hero-label {
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: rgba(212,168,67,0.9);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.hero-name {
+  font-size: clamp(64px, 15vw, 120px);
+  font-weight: 900;
+  color: #f4ede0;
+  letter-spacing: 0.2em;
+  line-height: 1;
+  margin-bottom: 12px;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+}
+
+.hero-en {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: clamp(14px, 3vw, 18px);
+  color: rgba(244,237,224,0.7);
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+}
+
+.hero-divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold-light), transparent);
+  margin: 0 auto 1rem;
+}
+
+.hero-tagline {
+  font-size: 14px;
+  color: rgba(244,237,224,0.8);
+  letter-spacing: 0.12em;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+}
+
+/* STORY */
+.story {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+.chapter {
+  margin-bottom: 5rem;
+}
+
+.chapter-label {
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.chapter-title {
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+  line-height: 1.3;
+}
+
+.chapter-text {
+  font-size: 17px;
+  color: var(--ink-light);
+  line-height: 2.1;
+  letter-spacing: 0.04em;
+  margin-bottom: 1.5rem;
+}
+
+.chapter-text + .chapter-text {
+  margin-top: 0;
+}
+
+/* PHOTO */
+.story-photo {
+  width: 100%;
+  border-radius: 8px;
+  margin: 2.5rem 0;
+  display: block;
+  box-shadow: 0 8px 40px rgba(30,22,8,0.12);
+}
+
+.story-photo-caption {
+  font-size: 12px;
+  color: var(--ink-faint);
+  text-align: center;
+  margin-top: -1.5rem;
+  margin-bottom: 2.5rem;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+}
+
+.photo-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 2.5rem 0;
+}
+
+.photo-pair img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+  aspect-ratio: 3/4;
+  box-shadow: 0 4px 20px rgba(30,22,8,0.1);
+}
+
+/* QUOTE */
+.tao-quote {
+  border-left: 2px solid var(--gold);
+  padding: 1.5rem 2rem;
+  margin: 3rem 0;
+  background: rgba(184,134,11,0.04);
+  border-radius: 0 8px 8px 0;
+}
+
+.tao-quote-text {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: 0.1em;
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+
+.tao-quote-source {
+  font-size: 13px;
+  color: var(--gold);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+}
+
+/* DIVIDER */
+.story-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 4rem 0;
+  color: var(--ink-ghost);
+}
+.story-divider::before, .story-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--ink-ghost);
+}
+.story-divider-icon { font-size: 14px; }
+
+/* CLOSING */
+.closing {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 5rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.closing-bg-char {
+  position: absolute;
+  font-size: 400px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.03);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  line-height: 1;
+}
+
+.closing-label {
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: var(--gold-light);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  margin-bottom: 1rem;
+}
+
+.closing-quote {
+  font-size: clamp(20px, 4vw, 30px);
+  font-weight: 500;
+  color: var(--paper);
+  letter-spacing: 0.12em;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.closing-source {
+  font-size: 13px;
+  color: rgba(244,237,224,0.5);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  margin-bottom: 3rem;
+}
+
+.closing-note {
+  font-size: 15px;
+  color: rgba(244,237,224,0.7);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  line-height: 1.9;
+  max-width: 500px;
+  margin: 0 auto 3rem;
+  letter-spacing: 0.05em;
+}
+
+.btn-gold {
+  padding: 14px 36px;
+  font-size: 15px;
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  background: var(--gold);
+  color: var(--paper);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+.btn-outline {
+  padding: 14px 36px;
+  font-size: 15px;
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  background: transparent;
+  color: var(--paper);
+  border: 1px solid rgba(244,237,224,0.3);
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: border-color 0.2s, transform 0.15s;
+  margin-left: 12px;
+}
+.btn-outline:hover { border-color: rgba(244,237,224,0.7); transform: translateY(-2px); }
+
+footer {
+  border-top: 1px solid var(--ink-ghost);
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+.footer-brand {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.footer-copy {
+  font-size: 11px;
+  color: var(--ink-ghost);
+  font-family: 'Noto Sans SC', sans-serif;
+  letter-spacing: 0.08em;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 600px) {
+  .photo-pair { grid-template-columns: 1fr; }
+  .story { padding: 3rem 1.25rem; }
+  .tao-quote { padding: 1rem 1.25rem; }
+  .btn-outline { margin-left: 0; margin-top: 12px; display: block; }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="/" class="nav-brand">玄猫之道</a>
+  <a href="/#cats" class="nav-back">← 猫咪家族</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <img src="cat-shazhu.jpg" alt="傻猪" class="hero-img">
+  <div class="hero-gradient"></div>
+  <div class="hero-content">
+    <div class="hero-label">The Oracle · 占卜师</div>
+    <div class="hero-name">傻猪</div>
+    <div class="hero-en">Sha Zhu · The Wise Fool</div>
+    <div class="hero-divider"></div>
+    <div class="hero-tagline">异瞳白猫 · 流浪来客 · 玄猫之道占卜师</div>
+  </div>
+</div>
+
+<!-- STORY -->
+<div class="story">
+
+  <!-- Chapter 1 -->
+  <div class="chapter reveal">
+    <div class="chapter-label">Chapter One</div>
+    <div class="chapter-title">街角的流浪猫</div>
+    <p class="chapter-text">
+      我和太太从来不打算养猫。那时候我们只是在家门口偶尔喂一两只街头的流浪猫，以为这只是随手的善意，不会有什么改变。
+    </p>
+    <p class="chapter-text">
+      傻猪就是在那时候出现的。一只白色的流浪猫，毛色灰扑扑的，身上带着街头生活留下的风霜。每天来吃饭，吃完就走，不亲近，不撒娇，保持着流浪动物特有的距离感。
+    </p>
+    <p class="chapter-text">
+      我们不知道他是异瞳猫。脏兮兮的白毛、警惕的眼神，没有人会多看他一眼。他只是街角的一只流浪猫，如此而已。
+    </p>
+  </div>
+
+  <img src="shazhu-stray.jpg" alt="流浪时期的傻猪" class="story-photo reveal">
+  <div class="story-photo-caption reveal">流浪时期的傻猪 · 那双异瞳，当时还没有人发现</div>
+
+  <!-- Chapter 2 -->
+  <div class="chapter reveal">
+    <div class="chapter-label">Chapter Two</div>
+    <div class="chapter-title">受伤的那一天</div>
+    <p class="chapter-text">
+      有一天，傻猪来吃饭的时候，浑身是伤。脸上、身上都有伤口，不知道在外面经历了什么。
+    </p>
+    <p class="chapter-text">
+      我没有多想，隔天就把他送去看兽医。住院几天，治好了伤。
+    </p>
+    <p class="chapter-text">
+      回来之后，我把他关在新买的猫笼里，放在户外。那时候还没打算收养他，只是想让他安全地恢复。但怡保的中午太热了，看着傻猪在笼子里不舒服，我没忍住——把笼子搬进客厅，开了空调。
+    </p>
+    <p class="chapter-text">
+      就这样，一个脏兮兮的流浪猫，走进了我们的家。
+    </p>
+  </div>
+
+  <div class="tao-quote reveal">
+    <div class="tao-quote-text">「曲则全，枉则直，洼则盈」</div>
+    <div class="tao-quote-source">— 道德经·第二十二章</div>
+  </div>
+
+  <!-- Chapter 3 -->
+  <div class="chapter reveal">
+    <div class="chapter-label">Chapter Three</div>
+    <div class="chapter-title">不关笼子的决定</div>
+    <p class="chapter-text">
+      傻猪那时候还没绝育，不习惯室内生活，偶尔会吵着要出去。我们是养猫新手，不知道该怎么办。
+    </p>
+    <p class="chapter-text">
+      有一天我决定试试——不关笼子，让他自由走动。
+    </p>
+    <p class="chapter-text">
+      结果傻猪非常乖。没有捣蛋，没有乱跑，就这样慢慢地，把我们家当成了他的家。
+    </p>
+    <p class="chapter-text">
+      后来我亲手搭建了一个户外catio，让他可以安全地晒太阳、看鸟、接触大自然，却不会再回到危险的街头。一个曾经流浪四方的猫，有了自己的王国。
+    </p>
+  </div>
+
+  <div class="photo-pair reveal">
+    <img src="shazhu-catio.jpg" alt="傻猪在catio" style="object-position:center 30%;">
+    <img src="shazhu-sleep.jpg" alt="傻猪熟睡" style="object-position:center 20%;">
+  </div>
+  <div class="story-photo-caption reveal">左：亲手搭建的catio · 右：书房里的无为境界</div>
+
+  <div class="story-divider reveal"><span class="story-divider-icon">✦</span></div>
+
+  <!-- Chapter 4 -->
+  <div class="chapter reveal">
+    <div class="chapter-label">Chapter Four</div>
+    <div class="chapter-title">发现异瞳的那一刻</div>
+    <p class="chapter-text">
+      洗干净了，毛发蓬松了，我们才真正看清楚他的眼睛。
+    </p>
+    <p class="chapter-text">
+      一只眼睛是棕色的，一只是蓝色的。
+    </p>
+    <p class="chapter-text">
+      异瞳猫。我们一直在喂一只异瞳猫，却没有发现。
+    </p>
+    <p class="chapter-text">
+      道家说，璞玉未经雕琢，不知其美。傻猪一直都是仙猫，只是我们太迟看见。
+    </p>
+  </div>
+
+  <img src="cat-shazhu.jpg" alt="傻猪的异瞳" class="story-photo reveal" style="object-position:center 15%;">
+  <div class="story-photo-caption reveal">一眼看世界，一眼望无极</div>
+
+  <!-- Chapter 5 -->
+  <div class="chapter reveal">
+    <div class="chapter-label">Chapter Five</div>
+    <div class="chapter-title">占据书房的主人</div>
+    <p class="chapter-text">
+      傻猪现在是整个家的主人。书房里的案台是他的床，键盘是他的枕头，佛像和法器是他的邻居。
+    </p>
+    <p class="chapter-text">
+      他不在乎周围是什么，只是慵懒地躺着，偶尔睁开那双异瞳看你一眼，然后继续睡。
+    </p>
+    <p class="chapter-text">
+      我有时候看着他，想到庄子说的——至人无己，神人无功，圣人无名。傻猪什么都不做，却好像什么都做了。
+    </p>
+  </div>
+
+  <img src="shazhu-desk.jpg" alt="傻猪占据工作台" class="story-photo reveal">
+  <div class="story-photo-caption reveal">书房的真正主人 · 道在其中</div>
+
+  <!-- Chapter 6 -->
+  <div class="chapter reveal">
+    <div class="chapter-label">Chapter Six</div>
+    <div class="chapter-title">傻猪的礼物</div>
+    <p class="chapter-text">
+      后来我们才知道，傻猪在流浪的时候，已经和我们收养的玳瑁猫肥婆相遇了。
+    </p>
+    <p class="chapter-text">
+      肥婆生下了三只猫，大哥小白，是傻猪的儿子。同样的异瞳，同样的白毛，99%像傻猪。
+    </p>
+    <p class="chapter-text">
+      我们喂了一只流浪猫，最后连他的儿子都来到了我们家。万物相连，因果循环——这就是玄猫之道。
+    </p>
+  </div>
+
+</div>
+
+<!-- CLOSING -->
+<div class="closing">
+  <div class="closing-bg-char">道</div>
+  <div style="position:relative; z-index:1;">
+    <div class="closing-label reveal">道德经 · 第十六章</div>
+    <div class="closing-quote reveal">「致虚极，守静笃<br>万物并作，吾以观复」</div>
+    <div class="closing-source reveal">— 道德经</div>
+    <div class="closing-note reveal">
+      傻猪不知道自己是异瞳猫。<br>
+      他只知道，这里有饭吃，有阳光，有人陪。<br>
+      也许这就是道——<br>
+      不需要知道自己有多特别，只是好好地活着。
+    </div>
+    <div class="reveal">
+      <a href="divination.html" class="btn-gold">✦ 让傻猪为你占卜</a>
+      <a href="/#cats" class="btn-outline">认识其他猫咪</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">玄猫之道</div>
+  <div class="footer-copy">© 2026 Tao of Your Cat · Ipoh, Malaysia</div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 60);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08 });
+reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
