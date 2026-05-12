@@ -1,502 +1,849 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
-    <meta charset="UTF-8" />
-    <title>Tao of Cat – A Softer Way to Exist</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Tao of Cat – A gentle path where AI, cats and the Tao meet to ease modern anxiety, loneliness and overthinking." />
-    
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <style>
-        /* [CSS 内容与上一版本相同，确保了无边框、全英文和 logo 图片设置] */
-        /* ... 省略 CSS ... */
-    </style>
-    
-    <style>
-        /* Color and Utility Variables: Minimal Black, White, Grey */
-        :root {
-            --bg: #FFFFFF; /* Pure White Background */
-            --text-main: #222222;
-            --text-muted: #6e6e73;
-            --accent: #4a5d66; /* Deep Grey/Ink for accent */
-            --accent-soft: #f0f0f0; /* Extremely light grey for separators/background */
-            --border-soft: #e5e5e5; /* Extremely light border */
-            --max-width: 1000px;
-            --radius-lg: 12px;
-            --shadow-soft: 0 4px 15px rgba(0,0,0,0.03); 
-            --font-serif: "Playfair Display", Georgia, serif; 
-            --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", sans-serif; 
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>玄猫之道 · Tao of Your Cat</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f4ede0;
+  --ink: #1e1608;
+  --ink-light: #5c4c2c;
+  --ink-faint: #9c8c6c;
+  --ink-ghost: #d4c8a8;
+  --gold: #b8860b;
+  --gold-light: #d4a843;
+  --red: #8b1a1a;
+}
 
-        /* Base Reset and Whitespace */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-        body {
-            font-family: var(--font-sans);
-            background: var(--bg);
-            color: var(--text-main);
-            line-height: 1.7; 
-            -webkit-font-smoothing: antialiased;
-        }
+html { scroll-behavior: smooth; }
 
-        a { color: inherit; text-decoration: none; }
+body {
+  font-family: 'Noto Serif SC', serif;
+  background: var(--paper);
+  color: var(--ink);
+  overflow-x: hidden;
+}
 
-        /* NAV */
-        header {
-            padding: 16px 20px 0;
-            position: sticky;
-            top: 0;
-            z-index: 20;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
-            border-bottom: 1px solid var(--border-soft); 
-        }
-        .nav { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 50px; }
-        .nav-left { display: flex; align-items: center; gap: 10px; }
-        
-        /* New Logo Image Style */
-        .logo-img { 
-            width: 32px; 
-            height: 32px; 
-            border-radius: 8px; 
-            border: 1px solid var(--border-soft); 
-            object-fit: contain;
-        }
-        
-        .nav-title-main { font-family: var(--font-serif); font-size: 20px; letter-spacing: 0.05em; }
-        .nav-sub { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); }
-        .nav-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-        .btn-outline, .btn-primary { border-radius: 999px; padding: 7px 14px; font-size: 12px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; transition: all 0.18s ease; white-space: nowrap; font-weight: 500;}
-        .btn-outline { border: 1px solid var(--border-soft); background: var(--bg); }
-        .btn-primary { border: none; background: var(--accent); color: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .btn-primary:hover { background: #33424a; transform: translateY(-1px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+/* ── NOISE TEXTURE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.4;
+}
 
-        /* Zen Style: Section Layout */
-        section {
-            padding: 120px 20px; 
-            min-height: 80vh; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            text-align: center;
-            border-bottom: 1px solid var(--border-soft); 
-            background: var(--bg);
-        }
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 4rem 2rem;
+  overflow: hidden;
+}
 
-        .content-wrapper {
-            max-width: var(--max-width);
-            width: 100%;
-            margin: 0 auto;
-        }
+.hero-bg-char {
+  position: absolute;
+  font-size: clamp(280px, 40vw, 520px);
+  font-weight: 900;
+  color: rgba(30,22,8,0.04);
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  letter-spacing: -0.05em;
+}
 
-        /* Typography */
-        .section-title {
-            font-family: var(--font-serif);
-            font-size: 40px; 
-            font-weight: 700;
-            margin-bottom: 15px;
-            line-height: 1.2;
-        }
+.hero-top {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
 
-        .section-subtitle {
-            font-size: 16px; 
-            color: var(--text-muted);
-            margin-bottom: 30px;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .eyebrow {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.25em; 
-            color: var(--accent);
-            margin-bottom: 15px;
-            font-weight: 500;
-        }
-        
-        .hero-big {
-            font-size: 56px; 
-            line-height: 1.1;
-            font-family: var(--font-serif);
-            font-weight: 700;
-            margin-bottom: 25px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+.hero-en {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: clamp(12px, 2vw, 15px);
+  letter-spacing: 0.35em;
+  color: var(--ink-faint);
+  margin-bottom: 1rem;
+  animation: fadeUp 1s ease both;
+}
 
-        .hero-note {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-top: 25px;
-        }
+.hero-title {
+  font-size: clamp(52px, 10vw, 96px);
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  line-height: 1;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+  animation: fadeUp 1s 0.1s ease both;
+}
 
-        .section-actions {
-            margin-top: 30px;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
+.hero-divider {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  margin: 1.5rem auto;
+  animation: fadeUp 1s 0.2s ease both;
+}
 
-        /* Image and Text Block (图文交错) */
-        .image-text-block {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px; 
-            align-items: flex-start; 
-            text-align: left;
-            margin: 80px 0;
-            padding: 20px 0;
-        }
+.hero-tagline {
+  font-size: clamp(13px, 2.5vw, 16px);
+  color: var(--ink-faint);
+  letter-spacing: 0.15em;
+  font-weight: 300;
+  font-family: 'Noto Sans SC', sans-serif;
+  animation: fadeUp 1s 0.3s ease both;
+}
 
-        .image-container img {
-            width: 100%;
-            height: auto;
-            border-radius: 0; 
-            box-shadow: none; 
-            border: none; 
-            min-height: 200px; 
-            display: block;
-        }
-        
-        /* Reverse image/text order for even blocks */
-        .image-text-block:nth-child(even) {
-            direction: rtl; 
-            text-align: left;
-        }
-        .image-text-block:nth-child(even) .text-content {
-            direction: ltr;
-        }
-        
-        .image-text-block .text-content h3 {
-            font-family: var(--font-serif);
-            font-size: 28px;
-            margin-bottom: 10px;
-            color: var(--text-main);
-        }
-        .image-text-block .text-content p {
-            font-size: 15px;
-            color: var(--text-main);
-            margin-bottom: 10px;
-        }
-        
-        /* SECTION 3 - Tiles */
-        .three-cols {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0,1fr));
-            gap: 30px; 
-            margin-top: 50px;
-        }
-        
-        .tile {
-            padding: 25px;
-            border-radius: var(--radius-lg);
-            background: var(--bg);
-            border: 1px solid var(--border-soft);
-            box-shadow: none; 
-            text-align: left;
-            transition: border-color 0.2s ease;
-        }
-        .tile:hover {
-            border-color: var(--accent); 
-            transform: none;
-        }
-        .tile-label { color: var(--accent); font-weight: 600; font-size: 12px; }
-        .tile-title { font-size: 18px; font-weight: 600; margin-bottom: 10px; color: var(--text-main); }
-        .tile p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+/* ── SHAZHU HERO ── */
+.hero-cat {
+  position: relative;
+  margin: 3rem 0 2rem;
+  animation: fadeUp 1.2s 0.4s ease both;
+}
 
-        /* SECTION 4 - List */
-        .list-bullets {
-            font-size: 16px;
-            color: var(--text-muted);
-            padding-left: 20px;
-            text-align: left;
-            max-width: 700px;
-            margin: 25px auto;
-        }
-        .list-bullets li {
-            margin-bottom: 10px;
-        }
-        
-        /* SECTION 5 - CTA */
-        .sec-subscribe {
-            border-bottom: none;
-            background: var(--accent-soft); 
-        }
+.hero-cat-ring {
+  width: clamp(220px, 40vw, 320px);
+  height: clamp(220px, 40vw, 320px);
+  border-radius: 50%;
+  border: 1px solid var(--ink-ghost);
+  padding: 6px;
+  position: relative;
+}
 
-        /* FOOTER */
-        footer {
-            border-top: 1px solid var(--border-soft);
-            padding: 30px 20px;
-            font-size: 12px;
-            color: var(--text-muted);
-            background: var(--bg);
-        }
-        .footer-inner { max-width: var(--max-width); margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+.hero-cat-ring::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px solid rgba(184,134,11,0.3);
+}
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .hero-big { font-size: 48px; }
-            .section-title { font-size: 36px; }
-            .image-text-block { gap: 40px; }
-        }
+.hero-cat-ring::after {
+  content: '道';
+  position: absolute;
+  bottom: -20px;
+  right: -10px;
+  font-size: 64px;
+  font-weight: 900;
+  color: rgba(184,134,11,0.12);
+  line-height: 1;
+}
 
-        @media (max-width: 768px) {
-            section {
-                padding: 80px 16px;
-                min-height: auto;
-            }
-            .hero-big { font-size: 36px; }
-            .section-title { font-size: 28px; }
-            .image-text-block {
-                grid-template-columns: 1fr;
-                gap: 40px;
-                direction: ltr !important;
-                margin: 40px 0;
-            }
-            .image-text-block .text-content { order: 2; }
-            .image-text-block .image-container { order: 1; }
-            .three-cols {
-                grid-template-columns: minmax(0,1fr);
-                gap: 20px;
-            }
-        }
-    </style>
+.hero-cat-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 15%;
+  animation: breathe 5s ease-in-out infinite;
+}
+
+.hero-cat-name {
+  text-align: center;
+  margin-top: 1.25rem;
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  color: var(--ink-faint);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+}
+
+.hero-cat-title {
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  margin-top: 3px;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 16px;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeUp 1s 0.6s ease both;
+}
+
+.btn-primary {
+  padding: 14px 32px;
+  font-size: 15px;
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: #3d3220; transform: translateY(-1px); }
+
+.btn-secondary {
+  padding: 14px 32px;
+  font-size: 15px;
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--ink-ghost);
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: border-color 0.2s, transform 0.15s;
+}
+.btn-secondary:hover { border-color: var(--ink-faint); transform: translateY(-1px); }
+
+/* ── SCROLL HINT ── */
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--ink-ghost);
+  font-family: 'Noto Sans SC', sans-serif;
+  animation: fadeUp 1s 1s ease both, bob 2s 2s ease-in-out infinite;
+}
+
+/* ── SECTION ── */
+section {
+  padding: 6rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-label {
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.section-title {
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+.section-sub {
+  font-size: 14px;
+  color: var(--ink-faint);
+  letter-spacing: 0.08em;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+.section-divider {
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  margin: 1.25rem auto 0;
+}
+
+/* ── CAT GRID ── */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2rem;
+}
+
+.cat-card {
+  text-align: center;
+  cursor: default;
+  transition: transform 0.3s;
+}
+.cat-card:hover { transform: translateY(-6px); }
+
+.cat-card-img-wrap {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  overflow: hidden;
+  border: 1px solid var(--ink-ghost);
+  position: relative;
+}
+
+.cat-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  transition: transform 0.5s;
+}
+.cat-card:hover .cat-card-img { transform: scale(1.06); }
+
+.cat-card-name {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.cat-card-role {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+
+.cat-card-desc {
+  font-size: 13px;
+  color: var(--ink-faint);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+/* ── MEMORIAL ── */
+.memorial {
+  background: rgba(30,22,8,0.03);
+  border: 1px solid var(--ink-ghost);
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  text-align: center;
+  margin-top: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.memorial::before {
+  content: '✦';
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--ink-ghost);
+  font-size: 12px;
+  letter-spacing: 0.5em;
+}
+
+.memorial-title {
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  color: var(--ink-faint);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  margin-bottom: 2rem;
+}
+
+.memorial-cats {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.memorial-cat {
+  text-align: center;
+}
+
+.memorial-cat-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 20%;
+  filter: grayscale(30%) brightness(0.9);
+  border: 1px solid var(--ink-ghost);
+  margin-bottom: 10px;
+  transition: filter 0.3s;
+}
+.memorial-cat:hover .memorial-cat-img { filter: grayscale(0%) brightness(1); }
+
+.memorial-cat-name {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: var(--ink-light);
+  margin-bottom: 3px;
+}
+
+.memorial-cat-note {
+  font-size: 11px;
+  color: var(--ink-faint);
+  font-family: 'Noto Sans SC', sans-serif;
+  letter-spacing: 0.08em;
+}
+
+/* ── DIVINATION CTA ── */
+.div-cta {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 6rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.div-cta-bg {
+  position: absolute;
+  font-size: 400px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.03);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  line-height: 1;
+}
+
+.div-cta-label {
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: var(--gold-light);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  margin-bottom: 12px;
+}
+
+.div-cta-title {
+  font-size: clamp(32px, 6vw, 52px);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--paper);
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.div-cta-sub {
+  font-size: 14px;
+  color: rgba(244,237,224,0.6);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  margin-bottom: 2.5rem;
+  line-height: 1.8;
+}
+
+.btn-gold {
+  padding: 16px 40px;
+  font-size: 16px;
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  background: var(--gold);
+  color: var(--paper);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+/* ── PHILOSOPHY ── */
+.philosophy {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.phil-card {
+  padding: 2rem;
+  border: 1px solid var(--ink-ghost);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.phil-card:hover { border-color: var(--ink-faint); transform: translateY(-4px); }
+
+.phil-char {
+  font-size: 72px;
+  font-weight: 900;
+  color: rgba(30,22,8,0.06);
+  line-height: 1;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.phil-cat-name {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  margin-bottom: 6px;
+}
+
+.phil-concept {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.phil-quote {
+  font-size: 13px;
+  color: var(--ink-faint);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  line-height: 1.8;
+  font-style: italic;
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--ink-ghost);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.footer-brand {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  font-size: 13px;
+  color: var(--ink-faint);
+  text-decoration: none;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--ink); }
+
+.footer-copy {
+  font-size: 11px;
+  color: var(--ink-ghost);
+  font-family: 'Noto Sans SC', sans-serif;
+  letter-spacing: 0.08em;
+  margin-top: 1rem;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(6px); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  padding: 1.25rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.3s, border-bottom 0.3s;
+}
+
+nav.scrolled {
+  background: rgba(244,237,224,0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--ink-ghost);
+}
+
+.nav-brand {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 13px;
+  color: var(--ink-faint);
+  text-decoration: none;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .cat-grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+  .cat-card-img-wrap { width: 120px; height: 120px; }
+  section { padding: 4rem 1.25rem; }
+}
+</style>
 </head>
 <body>
-<div class="page">
-    <header>
-        <div class="nav">
-            <div class="nav-left">
-                <img src="./images/logo-ink.svg" alt="Tao of Cat Logo" class="logo-img">
-                <div>
-                    <div class="nav-title-main">Tao of Cat</div>
-                    <div class="nav-sub">AI · Cats · Tao</div>
-                </div>
-            </div>
-            <div class="nav-right">
-                <a href="https://taoofcat.substack.com" class="btn-outline" target="_blank" rel="noopener">
-                    Letters
-                </a>
-                <a href="https://taoofcat.substack.com" class="btn-primary" target="_blank" rel="noopener">
-                    Subscribe
-                </a>
-            </div>
-        </div>
-    </header>
-    
-    <main>
-        <section class="sec-hero" id="top">
-            <div class="content-wrapper" style="max-width: 700px;">
-                <div class="eyebrow">A quiet path for modern hearts</div>
-                <div class="hero-big">
-                    A softer way to exist<br>in a restless world.
-                </div>
-                <p class="section-subtitle">
-                    Tao of Cat is where **AI, cats and the Tao meet** – for people who think deeply, feel quietly, and are tired of carrying everything alone.
-                </p>
-                <div class="section-actions">
-                    <a href="https://taoofcat.substack.com" target="_blank" rel="noopener" class="btn-primary">
-                        Join Tao of Cat Letters
-                    </a>
-                    <a href="#forces" class="btn-outline">
-                        Why this path is gentle
-                    </a>
-                </div>
-                <p class="hero-note">
-                    Not self-help. Not productivity. Just a gentler way to be human.
-                </p>
 
-                <div style="margin-top: 80px;">
-                    <img src="./images/hero-cat-ink-large.jpg" alt="Watercolour ink painting of a calm cat, representing the Tao of Cat" style="width: 100%;">
-                    </div>
-            </div>
-        </section>
+<nav id="nav">
+  <a href="/" class="nav-brand">玄猫之道</a>
+  <ul class="nav-links">
+    <li><a href="#cats">猫咪家族</a></li>
+    <li><a href="#philosophy">玄猫哲学</a></li>
+    <li><a href="divination.html">占卜</a></li>
+  </ul>
+</nav>
 
-        <section class="sec-wounds" id="wounds">
-            <div class="content-wrapper">
-                <h2 class="section-title">What hurts inside</h2>
-                <p class="section-subtitle">
-                    Most of us live with a quiet mix of anxiety, loneliness and pressure. On the surface we are “fine”. Inside, something feels thin and tired.
-                </p>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg-char">道</div>
 
-                <div class="image-text-block">
-                    <div class="text-content">
-                        <div class="eyebrow">The pain of not understanding</div>
-                        <h3>We know a lot, but understand very little.</h3>
-                        <p>
-                            We are drowned in a flood of information, owning countless knowledge and tools, but these have not translated into inner peace or clear self-awareness.
-                        </p>
-                    </div>
-                    <div class="image-container">
-                        <img src="./images/wound-1-ink-overthink.jpg" alt="Ink painting representing confused thoughts">
-                         </div>
-                </div>
+  <div class="hero-top">
+    <div class="hero-en">Tao of Your Cat</div>
+    <div class="hero-title">玄猫之道</div>
+    <div class="hero-divider"></div>
+    <div class="hero-tagline">以猫观道 · 以道养猫 · 万物皆有缘起</div>
+  </div>
 
-                <div class="image-text-block">
-                    <div class="text-content">
-                        <div class="eyebrow">The pain of not feeling held</div>
-                        <h3>We are surrounded by people, but feel emotionally unattended.</h3>
-                        <p>
-                            Relationships become superficial and rushed. We cannot find a place to put down all our disguises and be gently accepted. Loneliness is the heaviest secret of modern hearts.
-                        </p>
-                    </div>
-                    <div class="image-container">
-                        <img src="./images/wound-2-ink-loneliness.jpg" alt="Ink painting of a lone figure or cat">
-                         </div>
-                </div>
+  <div class="hero-cat">
+    <div class="hero-cat-ring">
+      <img src="cat-shazhu.jpg" alt="傻猪" class="hero-cat-img">
+    </div>
+    <div class="hero-cat-name">傻 猪</div>
+    <div class="hero-cat-title">玄猫之道占卜师 · 异瞳通天机</div>
+  </div>
 
-                <div class="image-text-block">
-                    <div class="text-content">
-                        <div class="eyebrow">The pain of not knowing the way</div>
-                        <h3>We try to control life, but feel more and more lost.</h3>
-                        <p>
-                            Planning, scheduling, efficiency—we exhaust every effort to hold onto life, only to increase tension and anxiety. Life should flow, not be locked down.
-                        </p>
-                    </div>
-                    <div class="image-container">
-                        <img src="./images/wound-3-ink-pressure.jpg" alt="Ink painting representing flowing water or nature's rhythm">
-                         </div>
-                </div>
-                
-                <p class="hero-note">
-                    Tao of Cat begins from a simple honesty: nothing is “wrong” with you. The way we live is simply too harsh for a soft heart.
-                </p>
+  <div class="hero-cta">
+    <a href="divination.html" class="btn-primary">✦ 请傻猪占卜</a>
+    <a href="#cats" class="btn-secondary">认识猫咪家族</a>
+  </div>
 
-            </div>
-        </section>
-
-        <section class="sec-forces" id="forces">
-            <div class="content-wrapper">
-                <h2 class="section-title">Three companions on this path</h2>
-                <p class="section-subtitle">
-                    Tao of Cat is built on three companions – one for the **mind**, one for the **heart**, and one for the **spirit**.
-                </p>
-                
-                <div class="three-cols">
-                    <div class="tile">
-                        <div style="margin-bottom: 15px;">
-                             <img src="./images/force-1-ai-ink.svg" alt="AI Ink Icon" style="width: 40px; height: 40px; opacity: 0.8;"> 
-                        </div>
-                        <div class="tile-label">AI · mind</div>
-                        <div class="tile-title">Clarity for your thoughts</div>
-                        <p>
-                            AI helps you organise what you feel and think, see patterns you can’t see alone, and bring order to the noise in your head.
-                        </p>
-                    </div>
-
-                    <div class="tile">
-                        <div style="margin-bottom: 15px;">
-                            <img src="./images/force-2-cat-ink.svg" alt="Cat Ink Icon" style="width: 40px; height: 40px; opacity: 0.8;"> 
-                        </div>
-                        <div class="tile-label">Cat · heart</div>
-                        <div class="tile-title">Warmth without words</div>
-                        <p>
-                            Cats hold space without advice or judgment. They are a living reminder that quiet presence itself can be healing.
-                        </p>
-                    </div>
-
-                    <div class="tile">
-                        <div style="margin-bottom: 15px;">
-                            <img src="./images/force-3-tao-ink.svg" alt="Tao Ink Icon" style="width: 40px; height: 40px; opacity: 0.8;"> 
-                        </div>
-                        <div class="tile-label">Tao · spirit</div>
-                        <div class="tile-title">Wisdom that doesn’t force</div>
-                        <p>
-                            Taoist wisdom invites you to move with life, not against it – to exchange control, tension and panic for rhythm, ease and trust.
-                        </p>
-                    </div>
-                </div>
-                
-            </div>
-        </section>
-
-        <section class="sec-purpose" id="purpose">
-            <div class="content-wrapper">
-                <h2 class="section-title">What Tao of Cat is here to do</h2>
-                <p class="section-subtitle">
-                    This space exists to gently ease three modern pains:
-                </p>
-                <ul class="list-bullets">
-                    <li><strong>The pain of not understanding</strong> – eased by AI’s clear methods and perspective.</li>
-                    <li><strong>The pain of not feeling held</strong> – eased by the emotional presence of cats.</li>
-                    <li><strong>The pain of not knowing the way</strong> – eased by the Tao’s natural, effortless wisdom.</li>
-                </ul>
-
-                <p class="section-subtitle" style="margin-top:30px; font-weight: 500;">
-                    Everything here is simple and light. No fixing, no forcing – just slow, honest reminders that your softness is not a problem to solve.
-                </p>
-                
-                <div style="margin-top: 60px; max-width: 600px; margin-left: auto; margin-right: auto;">
-                    <img src="./images/purpose-ink-scene.jpg" alt="Simple ink painting of a mountain or quiet landscape" style="width: 100%;">
-                     </div>
-            </div>
-        </section>
-
-        <section class="sec-subscribe" id="subscribe">
-            <div class="content-wrapper" style="max-width: 700px;">
-                <h2 class="section-title">Begin walking the path</h2>
-                <p class="section-subtitle">
-                    Tao of Cat Letters is a quiet newsletter – short reflections and gentle notes for anxious, sensitive, easily overwhelmed hearts.
-                </p>
-
-                <div class="subscribe-row" style="justify-content: center; text-align: center;">
-                    <p>
-                        No spam, no shouting, no “hacks”. Just one more soft presence in your week, reminding you that you don’t have to do life the way everyone else does.
-                    </p>
-                </div>
-                <div class="section-actions" style="margin-top: 25px;">
-                    <a href="https://taoofcat.substack.com" target="_blank" rel="noopener" class="btn-primary">
-                        Subscribe to Tao of Cat Letters
-                    </a>
-                </div>
-                
-            </div>
-        </section>
-    </main>
-
-<footer>
-        <div class="footer-inner">
-            <div style="display: flex; gap: 20px; align-items: center;">
-                <div>© <span id="year"></span> Tao of Cat · A quiet path for modern hearts.</div>
-                <div class="footer-links" style="display: flex; gap: 15px;">
-                    <a href="#top">Top</a>
-                    <a href="https://taoofcat.substack.com" target="_blank" rel="noopener">Newsletter</a>
-                </div>
-            </div>
-
-            <div class="social-links">
-                <a href="https://x.com/TaoC4t" target="_blank" rel="noopener" aria-label="Visit us on X/Twitter">
-                    <img src="./images/icon-x.svg" alt="X/Twitter Icon"> 
-                </a>
-                <a href="https://www.instagram.com/taoc.4t/" target="_blank" rel="noopener" aria-label="Visit us on Instagram">
-                    <img src="./images/icon-instagram.svg" alt="Instagram Icon">
-                </a>
-                <a href="https://www.facebook.com/profile.php?id=61576421263161" target="_blank" rel="noopener" aria-label="Visit us on Facebook">
-                    <img src="./images/icon-facebook.svg" alt="Facebook Icon">
-                    </a>
-                <a href="https://www.youtube.com/@tAo.c4t" target="_blank" rel="noopener" aria-label="Visit us on YouTube">
-                    <img src="./images/icon-youtube.svg" alt="YouTube Icon">
-                    </a>
-                <a href="https://www.amazon.com/author/taocat" target="_blank" rel="noopener" aria-label="Find us on Amazon Kindle">
-                    <img src="./images/icon-kindle.svg" alt="Amazon Kindle Icon">
-                    </a>
-            </div>
-        </div>
-    </footer>
+  <div class="scroll-hint">往下探索 ↓</div>
 </div>
 
+<!-- CAT FAMILY -->
+<section id="cats">
+  <div class="section-header reveal">
+    <div class="section-label">The Family</div>
+    <div class="section-title">玄猫家族</div>
+    <div class="section-sub">每一只猫的到来，都不是偶然</div>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="cat-grid reveal">
+    <div class="cat-card">
+      <div class="cat-card-img-wrap">
+        <img src="cat-shazhu.jpg" alt="傻猪" class="cat-card-img" style="object-position:center 15%;">
+      </div>
+      <div class="cat-card-name">傻 猪</div>
+      <div class="cat-card-role">异瞳占卜师 · 道</div>
+      <div class="cat-card-desc">流浪猫出身，异瞳白狮子猫。一眼看世界，一眼望无极。</div>
+    </div>
+
+    <div class="cat-card">
+      <div class="cat-card-img-wrap">
+        <img src="cat-feimao.jpg" alt="肥猫" class="cat-card-img">
+      </div>
+      <div class="cat-card-name">肥 猫</div>
+      <div class="cat-card-role">十岁长老 · 无为</div>
+      <div class="cat-card-desc">在花园等候两年，终于入门。吃饱睡足，便是最高智慧。</div>
+    </div>
+
+    <div class="cat-card">
+      <div class="cat-card-img-wrap">
+        <img src="cat-feipo.jpg" alt="肥婆" class="cat-card-img">
+      </div>
+      <div class="cat-card-name">肥 婆</div>
+      <div class="cat-card-role">玳瑁猫妈 · 自然</div>
+      <div class="cat-card-desc">流浪中孕育生命，随心而动，喜怒无常，纯粹本性。</div>
+    </div>
+
+    <div class="cat-card">
+      <div class="cat-card-img-wrap">
+        <img src="cat-hubanzai.jpg" alt="虎斑仔" class="cat-card-img">
+      </div>
+      <div class="cat-card-name">虎斑仔</div>
+      <div class="cat-card-role">狸花二哥 · 禅</div>
+      <div class="cat-card-desc">近在眼前却不可得，追之愈远——正是禅的公案。</div>
+    </div>
+
+    <div class="cat-card">
+      <div class="cat-card-img-wrap">
+        <img src="cat-mengmengda.jpg" alt="萌萌哒" class="cat-card-img">
+      </div>
+      <div class="cat-card-name">萌萌哒</div>
+      <div class="cat-card-role">西伯利亚小公主 · 慈悲</div>
+      <div class="cat-card-desc">以娇嗔示爱，以任性撒娇，以柔软征服一切。</div>
+    </div>
+  </div>
+
+  <!-- MEMORIAL -->
+  <div class="memorial reveal">
+    <div class="memorial-title">✦ &nbsp; 已归道的朋友 &nbsp; ✦</div>
+    <div class="memorial-cats">
+      <div class="memorial-cat">
+        <img src="cat-xiaobai.jpg" alt="小白" class="memorial-cat-img" style="object-position:center 20%;">
+        <div class="memorial-cat-name">小 白</div>
+        <div class="memorial-cat-note">傻猪之子 · 异瞳白猫<br>短暂而完整的一生</div>
+      </div>
+      <div class="memorial-cat">
+        <img src="cat-xiaohei.jpg" alt="小黑" class="memorial-cat-img">
+        <div class="memorial-cat-name">小 黑</div>
+        <div class="memorial-cat-note">流浪来客 · 半年信任<br>来去皆是缘</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy" style="background: rgba(30,22,8,0.02); max-width:100%; padding: 6rem 2rem;">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="section-header reveal">
+      <div class="section-label">Philosophy</div>
+      <div class="section-title">玄猫哲学</div>
+      <div class="section-sub">五只猫，五种道——万物殊途，同归于道</div>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="philosophy reveal">
+      <div class="phil-card">
+        <div class="phil-char">道</div>
+        <div class="phil-cat-name">傻猪</div>
+        <div class="phil-concept">道</div>
+        <div class="phil-quote">「道可道，非常道」<br>两眼看尽阴阳，一心归于无极</div>
+      </div>
+      <div class="phil-card">
+        <div class="phil-char">無</div>
+        <div class="phil-cat-name">肥猫</div>
+        <div class="phil-concept">无为</div>
+        <div class="phil-quote">「为学日益，为道日损」<br>十载春秋，唯饭与眠最近道</div>
+      </div>
+      <div class="phil-card">
+        <div class="phil-char">自</div>
+        <div class="phil-cat-name">肥婆</div>
+        <div class="phil-concept">自然</div>
+        <div class="phil-quote">「道法自然」<br>喜则跳，怒则咬，此乃天真</div>
+      </div>
+      <div class="phil-card">
+        <div class="phil-char">禪</div>
+        <div class="phil-cat-name">虎斑仔</div>
+        <div class="phil-concept">禅</div>
+        <div class="phil-quote">「触之即逃」<br>近在眼前，此身即公案</div>
+      </div>
+      <div class="phil-card">
+        <div class="phil-char">慈</div>
+        <div class="phil-cat-name">萌萌哒</div>
+        <div class="phil-concept">慈悲</div>
+        <div class="phil-quote">「上善若水」<br>以软克刚，天下莫能胜</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVINATION CTA -->
+<div class="div-cta">
+  <div class="div-cta-bg">卦</div>
+  <div style="position:relative; z-index:1;">
+    <div class="div-cta-label reveal">AI · 易经 · 道德经 · 金刚经</div>
+    <div class="div-cta-title reveal">让傻猪为你<br>观天问卦</div>
+    <div class="div-cta-sub reveal">异瞳通天机 · AI解读专属卦象<br>每一次占卜，都是一次与道的对话</div>
+    <a href="divination.html" class="btn-gold reveal">✦ 开始占卜</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">玄猫之道</div>
+  <div style="font-family:'IM Fell English',serif; font-style:italic; font-size:13px; color:var(--ink-faint); margin-bottom:1rem;">Tao of Your Cat</div>
+  <div class="footer-links">
+    <a href="divination.html">傻猪占卜</a>
+    <a href="#cats">猫咪家族</a>
+    <a href="https://www.amazon.com/dp/B0CW1234" target="_blank">我的书</a>
+  </div>
+  <div class="footer-copy">© 2026 玄猫之道 · Ipoh, Malaysia · 万物皆有缘起</div>
+</footer>
+
 <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+reveals.forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
