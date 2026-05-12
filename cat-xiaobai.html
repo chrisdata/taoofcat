@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小白 · 玄猫之道</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root { --paper:#f4ede0; --ink:#1e1608; --ink-light:#5c4c2c; --ink-faint:#9c8c6c; --ink-ghost:#d4c8a8; --gold:#b8860b; --gold-light:#d4a843; }
+* { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body { font-family:'Noto Serif SC',serif; background:var(--paper); color:var(--ink); overflow-x:hidden; }
+body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events:none; z-index:100; opacity:0.4; }
+nav { position:fixed; top:0; left:0; right:0; z-index:50; padding:1.25rem 2rem; display:flex; align-items:center; justify-content:space-between; transition:background 0.3s; }
+nav.scrolled { background:rgba(244,237,224,0.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--ink-ghost); }
+.nav-brand { font-size:16px; font-weight:700; letter-spacing:0.2em; color:var(--ink); text-decoration:none; }
+.nav-back { font-size:13px; color:var(--ink-faint); text-decoration:none; font-family:'Noto Sans SC',sans-serif; font-weight:300; letter-spacing:0.05em; transition:color 0.2s; }
+.nav-back:hover { color:var(--ink); }
+
+/* HERO - dark memorial tone */
+.hero {
+  min-height:100vh; position:relative;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:flex-end;
+  padding-bottom:4rem; overflow:hidden;
+}
+.hero-img {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; object-position:center 25%;
+  filter:brightness(0.55) grayscale(20%);
+}
+.hero-gradient {
+  position:absolute; inset:0;
+  background:linear-gradient(to bottom,rgba(10,8,4,0.2) 0%,rgba(10,8,4,0.8) 100%);
+}
+.hero-content { position:relative; z-index:1; text-align:center; padding:0 2rem; animation:fadeUp 1s ease both; }
+.hero-label { font-size:11px; letter-spacing:0.4em; color:rgba(212,168,67,0.8); font-family:'Noto Sans SC',sans-serif; font-weight:300; margin-bottom:12px; text-transform:uppercase; }
+.hero-name { font-size:clamp(72px,16vw,130px); font-weight:900; color:#f4ede0; letter-spacing:0.25em; line-height:1; margin-bottom:12px; text-shadow:0 4px 30px rgba(0,0,0,0.5); }
+.hero-en { font-family:'IM Fell English',serif; font-style:italic; font-size:clamp(14px,3vw,18px); color:rgba(244,237,224,0.6); letter-spacing:0.1em; margin-bottom:1rem; }
+.hero-divider { width:60px; height:1px; background:linear-gradient(to right,transparent,rgba(212,168,67,0.6),transparent); margin:0 auto 1rem; }
+.hero-tagline { font-size:14px; color:rgba(244,237,224,0.7); letter-spacing:0.12em; font-family:'Noto Sans SC',sans-serif; font-weight:300; }
+
+.story { max-width:720px; margin:0 auto; padding:5rem 2rem; }
+.chapter { margin-bottom:5rem; }
+.chapter-label { font-size:11px; letter-spacing:0.4em; color:var(--gold); font-family:'Noto Sans SC',sans-serif; font-weight:300; margin-bottom:1rem; text-transform:uppercase; }
+.chapter-title { font-size:clamp(24px,4vw,32px); font-weight:700; letter-spacing:0.1em; color:var(--ink); margin-bottom:1.5rem; line-height:1.3; }
+.chapter-text { font-size:17px; color:var(--ink-light); line-height:2.1; letter-spacing:0.04em; margin-bottom:1.5rem; }
+
+.story-photo { width:100%; border-radius:8px; margin:2.5rem 0; display:block; box-shadow:0 8px 40px rgba(30,22,8,0.12); }
+.story-photo-bw { width:100%; border-radius:8px; margin:2.5rem 0; display:block; box-shadow:0 8px 40px rgba(30,22,8,0.15); filter:grayscale(30%); }
+.story-photo-caption { font-size:12px; color:var(--ink-faint); text-align:center; margin-top:-1.5rem; margin-bottom:2.5rem; font-family:'Noto Sans SC',sans-serif; font-weight:300; letter-spacing:0.1em; }
+
+.photo-pair { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:2.5rem 0; }
+.photo-pair img { width:100%; border-radius:8px; object-fit:cover; aspect-ratio:3/4; box-shadow:0 4px 20px rgba(30,22,8,0.1); }
+
+/* YouTube embed */
+.video-wrap {
+  position:relative; padding-bottom:56.25%;
+  height:0; overflow:hidden;
+  border-radius:10px; margin:2.5rem 0;
+  box-shadow:0 8px 40px rgba(30,22,8,0.2);
+}
+.video-wrap iframe {
+  position:absolute; top:0; left:0;
+  width:100%; height:100%; border:0;
+}
+.video-caption { font-size:12px; color:var(--ink-faint); text-align:center; margin-top:-1.5rem; margin-bottom:2.5rem; font-family:'Noto Sans SC',sans-serif; font-weight:300; letter-spacing:0.1em; }
+
+.tao-quote { border-left:2px solid var(--gold); padding:1.5rem 2rem; margin:3rem 0; background:rgba(184,134,11,0.04); border-radius:0 8px 8px 0; }
+.tao-quote-text { font-size:22px; font-weight:500; color:var(--ink); letter-spacing:0.1em; line-height:1.7; margin-bottom:8px; }
+.tao-quote-source { font-size:13px; color:var(--gold); font-family:'Noto Sans SC',sans-serif; font-weight:300; letter-spacing:0.1em; }
+
+.story-divider { display:flex; align-items:center; gap:16px; margin:4rem 0; color:var(--ink-ghost); }
+.story-divider::before,.story-divider::after { content:''; flex:1; height:1px; background:var(--ink-ghost); }
+
+/* Special memorial closing */
+.closing {
+  background:#0e0c08; color:var(--paper);
+  padding:6rem 2rem; text-align:center;
+  position:relative; overflow:hidden;
+}
+.closing-bg-char { position:absolute; font-size:400px; font-weight:900; color:rgba(255,255,255,0.02); top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; line-height:1; }
+.closing-label { font-size:11px; letter-spacing:0.4em; color:rgba(212,168,67,0.7); font-family:'Noto Sans SC',sans-serif; font-weight:300; margin-bottom:1rem; }
+.closing-quote { font-size:clamp(18px,3.5vw,26px); font-weight:400; color:rgba(244,237,224,0.9); letter-spacing:0.1em; line-height:1.9; margin-bottom:1rem; max-width:600px; margin-left:auto; margin-right:auto; font-style:italic; font-family:'IM Fell English',serif; }
+.closing-source { font-size:13px; color:rgba(244,237,224,0.35); font-family:'Noto Sans SC',sans-serif; font-weight:300; letter-spacing:0.1em; margin-bottom:3rem; }
+.closing-note { font-size:16px; color:rgba(244,237,224,0.65); font-family:'Noto Serif SC',sans-serif; font-weight:300; line-height:2; max-width:520px; margin:0 auto 3rem; letter-spacing:0.06em; }
+.btn-outline-light { padding:14px 36px; font-size:15px; font-family:'Noto Serif SC',serif; font-weight:400; letter-spacing:0.15em; background:transparent; color:rgba(244,237,224,0.8); border:1px solid rgba(244,237,224,0.25); border-radius:4px; cursor:pointer; text-decoration:none; display:inline-block; transition:all 0.2s; }
+.btn-outline-light:hover { border-color:rgba(244,237,224,0.6); color:#f4ede0; }
+.btn-gold { padding:14px 36px; font-size:15px; font-family:'Noto Serif SC',serif; font-weight:500; letter-spacing:0.15em; background:var(--gold); color:var(--paper); border:none; border-radius:4px; cursor:pointer; text-decoration:none; display:inline-block; transition:background 0.2s,transform 0.15s; margin-right:12px; }
+.btn-gold:hover { background:var(--gold-light); transform:translateY(-2px); }
+
+footer { border-top:1px solid var(--ink-ghost); padding:2.5rem 2rem; text-align:center; }
+.footer-brand { font-size:18px; font-weight:700; letter-spacing:0.2em; color:var(--ink); margin-bottom:6px; }
+.footer-copy { font-size:11px; color:var(--ink-ghost); font-family:'Noto Sans SC',sans-serif; letter-spacing:0.08em; }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+.reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s ease,transform 0.7s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+@media(max-width:600px) { .photo-pair{grid-template-columns:1fr} .story{padding:3rem 1.25rem} .tao-quote{padding:1rem 1.25rem} .btn-gold{margin-right:0;margin-bottom:12px;display:block} }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="/" class="nav-brand">玄猫之道</a>
+  <a href="/#cats" class="nav-back">← 猫咪家族</a>
+</nav>
+
+<div class="hero">
+  <img src="xiaobai-shazhu-pair.jpg" alt="小白" class="hero-img">
+  <div class="hero-gradient"></div>
+  <div class="hero-content">
+    <div class="hero-label">In Loving Memory · 已归道</div>
+    <div class="hero-name">小 白</div>
+    <div class="hero-en">Xiao Bai · Son of Sha Zhu</div>
+    <div class="hero-divider"></div>
+    <div class="hero-tagline">傻猪之子 · 异瞳白猫 · 短暂而完整的一生</div>
+  </div>
+</div>
+
+<div class="story">
+
+  <div class="chapter reveal">
+    <div class="chapter-label">Chapter One</div>
+    <div class="chapter-title">傻猪的秘密</div>
+    <p class="chapter-text">
+      肥婆进屋之后不久，生下了三只猫。大哥出生的那一刻，我们呆住了。
+    </p>
+    <p class="chapter-text">
+      雪白的毛，异瞳——一蓝一绿，和傻猪99%像。
+    </p>
+    <p class="chapter-text">
+      原来傻猪在街头流浪的时候，已经和肥婆相遇了。他没有告诉我们，但血脉不说谎。小白就这样出生了——傻猪的儿子，在我们客厅来到这个世界。
+    </p>
+  </div>
+
+  <img src="xiaobai-shazhu-stand.jpg" alt="小白和傻猪" class="story-photo reveal">
+  <div class="story-photo-caption reveal">父子第一次并排 · 两双异瞳，一个秘密</div>
+
+  <div class="tao-quote reveal">
+    <div class="tao-quote-text">「万物并作，吾以观复」</div>
+    <div class="tao-quote-source">— 道德经·第十六章</div>
+  </div>
+
+  <div class="chapter reveal">
+    <div class="chapter-label">Chapter Two</div>
+    <div class="chapter-title">傻猪的儿子</div>
+    <p class="chapter-text">
+      小白长大后，越来越像傻猪。同样的白毛，同样的异瞳，同样的慵懒。
+    </p>
+    <p class="chapter-text">
+      但他比傻猪更亲人。傻猪有时候傲娇，小白却总是温柔地靠近你，把头埋进你手心里。
+    </p>
+    <p class="chapter-text">
+      他和小黑也最要好——那只后来才来的黑猫，和小白形影不离，一黑一白，像太极的阴阳。
+    </p>
+  </div>
+
+  <div class="photo-pair reveal">
+    <img src="xiaobai-portrait.jpg" alt="小白" style="object-position:center 20%;">
+    <img src="xiaobai-xiaohei.jpg" alt="小白和小黑" style="object-position:center 30%;">
+  </div>
+  <div class="story-photo-caption reveal">左：小白的异瞳 · 右：小白和小黑，阴阳相依</div>
+
+  <div class="story-divider reveal"><span>✦</span></div>
+
+  <div class="chapter reveal">
+    <div class="chapter-label">Chapter Three</div>
+    <div class="chapter-title">SLE</div>
+    <p class="chapter-text">
+      小白病了。
+    </p>
+    <p class="chapter-text">
+      SLE——系统性红斑狼疮，是免疫系统攻击自己身体的病。在猫咪里极为罕见，没有人知道为什么会发生，也没有人能预防。
+    </p>
+    <p class="chapter-text">
+      我们带他看了很多医生，做了很多治疗。但这种病，不是努力就能战胜的。
+    </p>
+    <p class="chapter-text">
+      在他最后的日子里，傻猪和肥婆轮流守在他身边，轻轻舔他——就像猫咪世界里最古老的安慰仪式。
+    </p>
+  </div>
+
+  <div class="video-wrap reveal">
+    <iframe src="https://www.youtube.com/embed/Qq_Y5nNidI0" title="傻猪和肥婆陪伴小白" allowfullscreen></iframe>
+  </div>
+  <div class="video-caption reveal">傻猪和肥婆守在小白身边 · 无声的陪伴</div>
+
+  <div class="chapter reveal">
+    <div class="chapter-label">Chapter Four</div>
+    <div class="chapter-title">最后一晚</div>
+    <p class="chapter-text">
+      小白离世的前一晚，我们把他抱出来。
+    </p>
+    <p class="chapter-text">
+      虎斑仔靠了过来——那只平时不让人摸的猫，静静窝在小白身边，一夜没走。
+    </p>
+    <p class="chapter-text">
+      没有人叫他来。他自己知道。
+    </p>
+  </div>
+
+  <img src="hubanzai-xiaobai.jpg" alt="虎斑仔陪伴小白最后一晚" class="story-photo-bw reveal">
+  <div class="story-photo-caption reveal">离世前一晚 · 虎斑仔无声守候</div>
+
+  <div class="chapter reveal">
+    <div class="chapter-label">Chapter Five</div>
+    <div class="chapter-title">他留下的东西</div>
+    <p class="chapter-text">
+      小白走后，我们发现一件事——傻猪的软便问题，不知道什么时候好了。
+    </p>
+    <p class="chapter-text">
+      兽医说，可能是小黑生病期间用的某种治疗，间接帮助了傻猪。
+    </p>
+    <p class="chapter-text">
+      生命的缘分就是这样——来的时候带来惊喜，走的时候留下礼物。
+    </p>
+    <p class="chapter-text">
+      小白在我们家出生，在我们怀里长大，在我们陪伴下离开。他这一生，是被爱着的。
+    </p>
+  </div>
+
+  <img src="xiaobai-shazhu-lie.jpg" alt="傻猪和小白" class="story-photo-bw reveal">
+  <div class="story-photo-caption reveal">父与子 · 并排躺着的那些日子</div>
+
+</div>
+
+<div class="closing">
+  <div class="closing-bg-char">缘</div>
+  <div style="position:relative;z-index:1;">
+    <div class="closing-label reveal">金刚经</div>
+    <div class="closing-quote reveal">"一切有为法，如梦幻泡影<br>如露亦如电，应作如是观"</div>
+    <div class="closing-source reveal">— 金刚经·第三十二品</div>
+    <div class="closing-note reveal">
+      小白来了，带着傻猪的眼睛。<br>
+      小白走了，留下了傻猪的健康。<br>
+      <br>
+      缘起缘灭，皆是道。<br>
+      他短暂的一生，是完整的。
+    </div>
+    <div class="reveal">
+      <a href="cat-xiaohei.html" class="btn-gold">小黑的故事 →</a>
+      <a href="/#cats" class="btn-outline-light">回到猫咪家族</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">玄猫之道</div>
+  <div class="footer-copy">© 2026 Tao of Your Cat · Ipoh, Malaysia · 小白 · 永远在这里</div>
+</footer>
+
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60);});
+const reveals=document.querySelectorAll('.reveal');
+const observer=new IntersectionObserver((entries)=>{entries.forEach((entry,i)=>{if(entry.isIntersecting){setTimeout(()=>entry.target.classList.add('visible'),i*60);observer.unobserve(entry.target);}});},{threshold:0.08});
+reveals.forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
