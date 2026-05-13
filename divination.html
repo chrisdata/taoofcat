@@ -144,6 +144,25 @@ nav.scrolled { background:rgba(244,237,224,0.95); backdrop-filter:blur(8px); bor
 .pay-btn:hover { background:#3d3220; }
 .modal-close { width:100%; margin-top:10px; padding:12px; background:transparent; border:1px solid var(--ink-ghost); border-radius:10px; color:var(--ink-faint); cursor:pointer; font-size:14px; font-family:'Noto Sans SC',sans-serif; }
 
+/* LIVE COUNTER */
+.live-counter { text-align:center; padding:0.75rem 0; margin-bottom:1.5rem; }
+.live-counter-number { font-size:32px; font-weight:900; color:var(--ink); line-height:1; }
+.live-counter-label { font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; letter-spacing:0.1em; margin-top:4px; }
+.live-dot { display:inline-block; width:7px; height:7px; background:#4caf50; border-radius:50%; margin-right:5px; animation:blink 1.5s ease-in-out infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+/* LEVEL */
+.level-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(184,134,11,0.1); border:1px solid rgba(184,134,11,0.3); border-radius:20px; padding:4px 12px; margin-top:8px; }
+.level-name { font-size:13px; font-weight:500; color:var(--gold); font-family:'Noto Sans SC',sans-serif; letter-spacing:0.08em; }
+.level-count { font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; }
+.level-progress { width:100%; max-width:200px; height:4px; background:var(--ink-ghost); border-radius:2px; margin:8px auto 0; overflow:hidden; }
+.level-progress-bar { height:100%; background:linear-gradient(to right,var(--gold),var(--gold-light)); border-radius:2px; transition:width 0.5s ease; }
+
+/* TODAY CHECK-IN */
+.checkin-btn { display:inline-flex; align-items:center; gap:6px; background:transparent; border:1px solid var(--ink-ghost); border-radius:20px; padding:5px 14px; font-size:12px; font-family:'Noto Sans SC',sans-serif; color:var(--ink-faint); cursor:pointer; margin-top:8px; transition:all 0.2s; }
+.checkin-btn:hover { border-color:var(--gold); color:var(--gold); }
+.checkin-btn.done { background:rgba(184,134,11,0.1); border-color:rgba(184,134,11,0.3); color:var(--gold); cursor:default; }
+
 /* TOAST */
 .toast { position:fixed; bottom:2rem; left:50%; transform:translateX(-50%); background:var(--ink); color:var(--paper); padding:10px 20px; border-radius:20px; font-size:14px; font-family:'Noto Sans SC',sans-serif; opacity:0; transition:opacity 0.3s; pointer-events:none; z-index:300; }
 .toast.show { opacity:1; }
@@ -222,12 +241,35 @@ nav.scrolled { background:rgba(244,237,224,0.95); backdrop-filter:blur(8px); bor
   <!-- MAIN ORACLE SECTION -->
   <div id="main-section" style="display:none;">
 
+    <!-- LIVE COUNTER -->
+    <div class="live-counter" id="live-counter" style="display:none;">
+      <div class="live-counter-number" id="counter-number">—</div>
+      <div class="live-counter-label"><span class="live-dot"></span>猫奴已加入</div>
+    </div>
+
     <!-- CANS -->
     <div class="cans-display">
       <img src="can-icon.png" class="cans-icon" alt="猫罐头" style="width:80px;height:80px;object-fit:contain;">
       <div class="cans-number" id="can-count">…</div>
       <div class="cans-label">罐 剩余罐头</div>
+      <div class="level-badge" id="level-badge">
+        <span id="level-icon">🐾</span>
+        <span class="level-name" id="level-name">新手</span>
+        <span class="level-count" id="level-count">0 次占卜</span>
+      </div>
+      <div class="level-progress" id="level-progress-wrap">
+        <div class="level-progress-bar" id="level-progress-bar" style="width:0%"></div>
+      </div>
       <button class="cans-buy-link" id="buy-link" onclick="document.getElementById('shop').classList.add('show')">＋ 补充罐头</button>
+    </div>
+
+    <!-- INVITE -->
+    <div id="invite-section" style="text-align:center; margin-bottom:2rem; display:none;">
+      <div style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-bottom:8px; letter-spacing:0.05em;">邀请朋友注册，双方各得2罐罐头</div>
+      <div style="display:flex; gap:8px; max-width:400px; margin:0 auto;">
+        <input type="text" id="invite-link" readonly style="flex:1; padding:8px 12px; border:1px solid var(--ink-ghost); border-radius:8px; font-size:12px; background:rgba(255,255,255,0.8); color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif;">
+        <button onclick="copyInviteLink()" style="padding:8px 16px; background:var(--ink); color:var(--paper); border:none; border-radius:8px; font-size:12px; cursor:pointer; font-family:'Noto Sans SC',sans-serif; white-space:nowrap;">复制链接</button>
+      </div>
     </div>
 
     <!-- ORACLE INPUT -->
@@ -335,7 +377,7 @@ nav.scrolled { background:rgba(244,237,224,0.95); backdrop-filter:blur(8px); bor
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut as fbSignOut } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, onSnapshot, collection, getCountFromServer } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAqu9pHaAEjFqPvPz3TuoYc60Lpb4DLZrs",
@@ -352,6 +394,20 @@ const db = getFirestore(app);
 const provider = new GoogleAuthProvider();
 
 const API = 'https://web-production-907c5.up.railway.app';
+
+// Live user counter
+async function loadUserCount() {
+  try {
+    const coll = collection(db, 'users');
+    const snapshot = await getCountFromServer(coll);
+    const count = snapshot.data().count;
+    document.getElementById('counter-number').textContent = count.toLocaleString();
+    document.getElementById('live-counter').style.display = 'block';
+  } catch(e) {
+    console.log('Counter error:', e);
+  }
+}
+loadUserCount();
 
 const guas = [
   { name:"乾卦 · 天", sym:"☰", quote:"天行健，君子以自强不息", src:"《易经·乾》", nature:"刚健进取" },
@@ -389,7 +445,7 @@ async function getUserCans(uid) {
     if (data.isAdmin) return 9999;
     return data.cans || 0;
   }
-  await setDoc(ref, { cans: 3, created: new Date().toISOString() });
+  await setDoc(ref, { cans: 1, created: new Date().toISOString() });
   return 3;
 }
 
@@ -416,14 +472,48 @@ onAuthStateChanged(auth, async (user) => {
     document.getElementById('nav-login-btn').style.display = 'none';
     document.getElementById('user-avatar').src = user.photoURL || '';
     document.getElementById('user-name').textContent = user.displayName ? user.displayName.split(' ')[0] : user.email;
+    document.getElementById('invite-section').style.display = 'block';
+    document.getElementById('invite-link').value = 'https://TaoOfCat.com/divination.html?ref=' + user.uid;
+    // Load level
+    const userSnapLv = await getDoc(doc(db, 'users', user.uid));
+    const divCount = userSnapLv.exists() ? (userSnapLv.data().divCount || 0) : 0;
+    updateLevelDisplay(divCount);
     const userData = await getUserCans(user.uid);
     const cans = userData;
     const adminCheck = await isAdmin(user.uid);
     if (adminCheck) {
       document.getElementById('can-count').textContent = '∞';
-      document.querySelector('.buy-btn').style.display = 'none';
+      document.querySelector('.cans-buy-link').style.display = 'none';
+      document.getElementById('level-badge').style.background = 'rgba(30,22,8,0.9)';
+      document.getElementById('level-badge').style.border = '1px solid rgba(212,168,67,0.8)';
+      document.getElementById('level-icon').textContent = '😺';
+      document.getElementById('level-name').textContent = '玄猫主人';
+      document.getElementById('level-name').style.color = '#d4a843';
+      document.getElementById('level-count').textContent = '傻猪的铲屎官';
+      document.getElementById('level-progress-wrap').style.display = 'none';
     } else {
       document.getElementById('can-count').textContent = cans;
+    }
+
+    // Handle referral
+    const urlParams = new URLSearchParams(window.location.search);
+    const refUid = urlParams.get('ref');
+    if (refUid && refUid !== user.uid) {
+      const userRef = doc(db, 'users', user.uid);
+      const snap = await getDoc(userRef);
+      if (snap.exists() && !snap.data().referredBy) {
+        // New user via referral - give bonus cans
+        await updateDoc(userRef, { cans: increment(2), referredBy: refUid });
+        document.getElementById('can-count').textContent = cans + 2;
+        showToast('🎉 好友邀请奖励！获得额外2罐罐头');
+        // Give referrer 2 cans
+        const refRef = doc(db, 'users', refUid);
+        const refSnap = await getDoc(refRef);
+        if (refSnap.exists()) {
+          await updateDoc(refRef, { cans: increment(2) });
+        }
+        window.history.replaceState({}, '', window.location.pathname);
+      }
     }
 
     const urlParams = new URLSearchParams(window.location.search);
@@ -487,6 +577,29 @@ window.goPay = async () => {
   }
 };
 
+window.copyInviteLink = () => {
+  const link = document.getElementById('invite-link').value;
+  navigator.clipboard.writeText(link).then(() => showToast('邀请链接已复制 ✓'));
+};
+
+function getLevel(count) {
+  if (count >= 100) return { icon:'✨', name:'猫道', next:null, progress:100 };
+  if (count >= 30) return { icon:'🦁', name:'猫痴', next:100, progress:Math.round((count-30)/70*100) };
+  if (count >= 10) return { icon:'🐱', name:'猫奴', next:30, progress:Math.round((count-10)/20*100) };
+  return { icon:'🐾', name:'新手', next:10, progress:Math.round(count/10*100) };
+}
+
+function updateLevelDisplay(divCount) {
+  const lv = getLevel(divCount);
+  document.getElementById('level-icon').textContent = lv.icon;
+  document.getElementById('level-name').textContent = lv.name;
+  document.getElementById('level-count').textContent = divCount + ' 次占卜';
+  document.getElementById('level-progress-bar').style.width = lv.progress + '%';
+  if (lv.next === null) {
+    document.getElementById('level-progress-wrap').style.display = 'none';
+  }
+}
+
 window.updateCount = () => {
   const q = document.getElementById('question').value;
   const count = q.length;
@@ -509,6 +622,17 @@ window.startDiv = async () => {
   if (!admin) {
     const newCans = await updateCans(currentUser.uid, -1);
     document.getElementById('can-count').textContent = newCans;
+  }
+  // Increment divination count
+  const userRef2 = doc(db, 'users', currentUser.uid);
+  await updateDoc(userRef2, { divCount: increment(1) });
+  const snap2 = await getDoc(userRef2);
+  const newCount = snap2.data().divCount || 1;
+  const oldLv = getLevel(newCount - 1);
+  const newLv = getLevel(newCount);
+  updateLevelDisplay(newCount);
+  if (oldLv.name !== newLv.name) {
+    showToast('🎉 升级了！你现在是「' + newLv.name + '」' + newLv.icon);
   }
   currentCat = cat;
   document.getElementById('div-btn').disabled = true;
