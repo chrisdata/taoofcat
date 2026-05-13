@@ -191,20 +191,17 @@ nav.scrolled { background:rgba(244,237,224,0.95); backdrop-filter:blur(8px); bor
 .coin-toss-btn:disabled { opacity:0.3; cursor:not-allowed; }
 
 /* RESULT SCROLL MODAL */
-.scroll-modal-overlay { display:none; position:fixed; inset:0; background:rgba(10,8,4,0.85); z-index:150; align-items:center; justify-content:center; padding:1rem; backdrop-filter:blur(6px); }
+.scroll-modal-overlay { display:none; position:fixed; inset:0; background:rgba(10,8,4,0.85); z-index:150; align-items:center; justify-content:center; padding:1.5rem; backdrop-filter:blur(6px); }
 .scroll-modal-overlay.show { display:flex; }
 .scroll-paper {
-  background: #fdf6e3;
-  background-image: 
-    repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(180,160,100,0.15) 31px, rgba(180,160,100,0.15) 32px),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background: #fdf8f0;
   border-radius:4px;
-  width:100%; max-width:520px;
-  max-height:88vh;
+  width:100%; max-width:680px;
+  max-height:92vh;
   overflow-y:auto;
   position:relative;
-  box-shadow:0 20px 80px rgba(0,0,0,0.6), inset 0 0 60px rgba(180,140,60,0.05);
-  border:1px solid rgba(180,140,60,0.2);
+  box-shadow:0 20px 80px rgba(0,0,0,0.6), inset 0 0 80px rgba(180,140,60,0.03);
+  border:1px solid rgba(180,140,60,0.15);
 }
 .scroll-paper::before, .scroll-paper::after {
   content:'';
@@ -214,16 +211,30 @@ nav.scrolled { background:rgba(244,237,224,0.95); backdrop-filter:blur(8px); bor
   border-radius:4px 4px 0 0;
 }
 .scroll-paper::after { border-radius:0 0 4px 4px; }
-.scroll-content { padding:2rem 2.5rem; }
-.scroll-gua-sym { font-size:64px; text-align:center; color:#2c1f0a; margin-bottom:6px; }
-.scroll-gua-name { font-size:20px; font-weight:700; color:#2c1f0a; text-align:center; letter-spacing:0.15em; margin-bottom:4px; }
-.scroll-gua-nature { font-size:12px; color:#9c8c6c; text-align:center; letter-spacing:0.15em; font-family:'Noto Sans SC',sans-serif; margin-bottom:1.25rem; }
-.scroll-divider { height:1px; background:linear-gradient(to right,transparent,rgba(180,140,60,0.4),transparent); margin:1rem 0; }
-.scroll-quote { font-size:18px; color:#2c1f0a; line-height:1.8; text-align:center; letter-spacing:0.1em; font-weight:500; }
+.scroll-content { padding:2.5rem 3.5rem; }
+.scroll-gua-sym { font-size:80px; text-align:center; color:#2c1f0a; margin-bottom:8px; }
+.scroll-gua-name { font-size:26px; font-weight:700; color:#2c1f0a; text-align:center; letter-spacing:0.2em; margin-bottom:6px; }
+.scroll-gua-nature { font-size:14px; color:#9c8c6c; text-align:center; letter-spacing:0.2em; font-family:'Noto Sans SC',sans-serif; margin-bottom:1.75rem; }
+.scroll-divider { height:1px; background:linear-gradient(to right,transparent,rgba(180,140,60,0.3),transparent); margin:1.75rem 0; }
+.scroll-quote { font-size:22px; color:#2c1f0a; line-height:1.9; text-align:center; letter-spacing:0.12em; font-weight:500; }
 .scroll-quote-src { font-size:11px; color:#9c8c6c; text-align:center; margin-top:6px; letter-spacing:0.1em; font-family:'Noto Sans SC',sans-serif; }
 .scroll-ai-loading { font-size:13px; color:#9c8c6c; text-align:center; padding:1rem 0; font-family:'Noto Sans SC',sans-serif; display:none; animation:breathe 1.5s ease-in-out infinite; }
-.scroll-ai { font-size:17px; color:#3d2c0a; line-height:2.2; letter-spacing:0.05em; white-space:pre-wrap; margin-top:1rem; font-family:'Noto Serif SC',serif; }
-.scroll-question { font-size:13px; color:#9c8c6c; font-style:italic; text-align:center; margin-bottom:1rem; font-family:'Noto Sans SC',sans-serif; border-bottom:1px solid rgba(180,140,60,0.2); padding-bottom:1rem; }
+.scroll-ai { font-size:19px; color:#2c1f0a; line-height:2.4; letter-spacing:0.06em; white-space:pre-wrap; margin-top:1.5rem; font-family:'Noto Serif SC',serif; }
+.scroll-question { font-size:14px; color:#9c8c6c; font-style:italic; text-align:center; margin-bottom:1.5rem; font-family:'Noto Serif SC',serif; border-bottom:1px solid rgba(180,140,60,0.15); padding-bottom:1.25rem; }
+.shazhu-quote { 
+  background:#1e1608; 
+  color:#d4a843; 
+  font-size:18px; 
+  font-weight:500;
+  letter-spacing:0.12em; 
+  line-height:1.8;
+  text-align:center; 
+  padding:1.25rem 1.5rem; 
+  border-radius:8px; 
+  margin-top:1.5rem;
+  font-family:'Noto Serif SC',serif;
+  border:1px solid rgba(212,168,67,0.3);
+}
 .scroll-disclaimer { font-size:10px; color:#b4a880; text-align:center; margin-top:1.5rem; font-family:'Noto Sans SC',sans-serif; }
 .scroll-actions { display:flex; gap:10px; margin-top:1.5rem; padding-top:1rem; border-top:1px solid rgba(180,140,60,0.2); }
 .scroll-btn { flex:1; padding:11px; font-size:13px; font-family:'Noto Sans SC',sans-serif; background:rgba(44,31,10,0.08); border:1px solid rgba(180,140,60,0.3); border-radius:8px; color:#5c4c2c; cursor:pointer; transition:all 0.2s; }
@@ -801,6 +812,27 @@ window.openShareFromScroll = () => {
   openShareModal();
 };
 
+function renderScrollAI(text) {
+  const el = document.getElementById('scroll-ai');
+  // Check for 【傻猪金句】
+  const match = text.match(/【([^】]+)】/);
+  if (match) {
+    const before = text.replace(/【[^】]+】/, '').trim();
+    el.innerHTML = '';
+    if (before) {
+      const p = document.createElement('div');
+      p.textContent = before;
+      el.appendChild(p);
+    }
+    const q = document.createElement('div');
+    q.className = 'shazhu-quote';
+    q.textContent = '✦ ' + match[1];
+    el.appendChild(q);
+  } else {
+    el.textContent = text;
+  }
+}
+
 window.closeCoinModal = () => {
   document.getElementById('coin-modal').classList.remove('show');
   document.getElementById('div-btn').disabled = false;
@@ -976,13 +1008,16 @@ async function callAPI(gua, q, cat) {
         if (data === '[DONE]') break;
         try {
           const j = JSON.parse(data);
-          if (j.text) { aiText += j.text; document.getElementById('scroll-ai').textContent = aiText; }
+          if (j.text) { 
+              aiText += j.text; 
+              renderScrollAI(aiText);
+            }
         } catch(e) {}
       }
     }
   } catch(e) {
     document.getElementById('scroll-loading').style.display = 'none';
-    document.getElementById('scroll-ai').textContent = '本猫今日天机受阻，请稍后再试。';
+    renderScrollAI('本猫今日天机受阻，请稍后再试。');
   }
 }
 
