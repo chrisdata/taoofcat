@@ -397,6 +397,9 @@ nav.scrolled { background:rgba(244,237,224,0.95); backdrop-filter:blur(8px); bor
 <!-- COIN TOSS MODAL -->
 <div class="coin-modal-overlay" id="coin-modal">
   <div class="coin-modal">
+    <div style="text-align:right; margin-bottom:-1rem;">
+      <button onclick="closeCoinModal()" style="background:none;border:none;font-size:18px;color:var(--ink-faint);cursor:pointer;padding:0;">✕</button>
+    </div>
     <div class="coin-modal-title">投掷铜钱 · 天机感应</div>
     <div class="coin-modal-sub" id="coin-sub">请专注你的问题，然后投掷</div>
     <div class="coin-area">
@@ -749,7 +752,25 @@ function getGuaFromYaos(yaos) {
 async function revealResult() {
   const gua = getGuaFromYaos(yaoResults);
   currentGua = gua;
-  
+
+  // Deduct can NOW - user has committed to seeing result
+  const adminCheck = await isAdmin(currentUser.uid);
+  if (!adminCheck) {
+    const newCans = await updateCans(currentUser.uid, -1);
+    document.getElementById('can-count').textContent = newCans;
+  }
+  // Increment divination count
+  const userRef2 = doc(db, 'users', currentUser.uid);
+  await updateDoc(userRef2, { divCount: increment(1) });
+  const snap2 = await getDoc(userRef2);
+  const newCount = snap2.data().divCount || 1;
+  const oldLv = getLevel(newCount - 1);
+  const newLv = getLevel(newCount);
+  updateLevelDisplay(newCount);
+  if (oldLv.name !== newLv.name) {
+    showToast('🎉 升级了！你现在是「' + newLv.name + '」' + newLv.icon);
+  }
+
   // Hide coin modal, show scroll modal
   document.getElementById('coin-modal').classList.remove('show');
   document.getElementById('scroll-modal').classList.add('show');
@@ -778,6 +799,13 @@ window.closeScroll = () => {
 
 window.openShareFromScroll = () => {
   openShareModal();
+};
+
+window.closeCoinModal = () => {
+  document.getElementById('coin-modal').classList.remove('show');
+  document.getElementById('div-btn').disabled = false;
+  tossCount = 0;
+  yaoResults = [];
 };
 
 window.copyInviteLink = () => {
@@ -868,22 +896,7 @@ window.startDiv = async () => {
   const cansNow = cansText === '∞' ? 999 : parseInt(cansText);
   if (cansNow <= 0) { document.getElementById('shop').classList.add('show'); return; }
 
-  const admin = await isAdmin(currentUser.uid);
-  if (!admin) {
-    const newCans = await updateCans(currentUser.uid, -1);
-    document.getElementById('can-count').textContent = newCans;
-  }
-  // Increment divination count
-  const userRef2 = doc(db, 'users', currentUser.uid);
-  await updateDoc(userRef2, { divCount: increment(1) });
-  const snap2 = await getDoc(userRef2);
-  const newCount = snap2.data().divCount || 1;
-  const oldLv = getLevel(newCount - 1);
-  const newLv = getLevel(newCount);
-  updateLevelDisplay(newCount);
-  if (oldLv.name !== newLv.name) {
-    showToast('🎉 升级了！你现在是「' + newLv.name + '」' + newLv.icon);
-  }
+  // Cans deducted only when user confirms result (revealResult)
   currentCat = cat;
   document.getElementById('div-btn').disabled = true;
   if (!weatherContext) {
