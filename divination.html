@@ -172,13 +172,24 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
 .coin-modal-title { font-size:13px; letter-spacing:0.3em; color:var(--gold); font-family:'Noto Sans SC',sans-serif; font-weight:300; margin-bottom:0.5rem; }
 .coin-modal-sub { font-size:15px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-bottom:2rem; letter-spacing:0.05em; }
 .coin-area { margin:1.5rem 0; }
-.coin { width:120px; height:120px; margin:0 auto 1.5rem; cursor:pointer; position:relative; filter:drop-shadow(0 6px 20px rgba(0,0,0,0.3)); transition:transform 0.2s; }
-.coin:hover { transform:scale(1.05); }
-.coin.spinning { animation:coinSpin 0.8s ease; }
+.coin-wrap { width:120px; height:120px; margin:0 auto 0.5rem; cursor:pointer; perspective:600px; }
+.coin { width:100%; height:100%; position:relative; transform-style:preserve-3d; animation:coinIdle 3s ease-in-out infinite; filter:drop-shadow(0 6px 20px rgba(184,134,11,0.3)); transition:filter 0.2s; }
+.coin-wrap:hover .coin { filter:drop-shadow(0 8px 28px rgba(184,134,11,0.5)); }
+.coin.spinning { animation:coinFlip 0.9s ease forwards; }
 .coin-face { display:none; }
 .coin-yang { display:none; }
 .coin-yin { display:none; }
-@keyframes coinSpin { 0%{transform:rotate(0deg) scale(1)} 30%{transform:rotate(180deg) scale(1.1)} 60%{transform:rotate(340deg) scale(0.95)} 100%{transform:rotate(360deg) scale(1)} }
+@keyframes coinIdle {
+  0%,100% { transform:rotateY(0deg) rotateX(0deg); }
+  25% { transform:rotateY(15deg) rotateX(5deg); }
+  75% { transform:rotateY(-15deg) rotateX(-5deg); }
+}
+@keyframes coinFlip {
+  0% { transform:rotateY(0deg) scale(1); }
+  30% { transform:rotateY(540deg) scale(1.15); }
+  70% { transform:rotateY(900deg) scale(1.05); }
+  100% { transform:rotateY(1080deg) scale(1); }
+}
 .coin-result { font-size:18px; font-weight:500; color:var(--ink); letter-spacing:0.1em; margin-bottom:0.5rem; min-height:28px; }
 .coin-instruction { font-size:13px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; letter-spacing:0.08em; }
 .yao-track { display:flex; gap:8px; justify-content:center; margin:1.5rem 0; align-items:flex-end; }
@@ -241,6 +252,19 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
 .scroll-actions { display:flex; gap:10px; margin-top:1.5rem; padding-top:1rem; border-top:1px solid rgba(180,140,60,0.2); }
 .scroll-btn { flex:1; padding:11px; font-size:13px; font-family:'Noto Sans SC',sans-serif; background:rgba(44,31,10,0.08); border:1px solid rgba(180,140,60,0.3); border-radius:8px; color:#5c4c2c; cursor:pointer; transition:all 0.2s; }
 .scroll-btn:hover { background:rgba(44,31,10,0.15); }
+
+/* COIN PROGRESS */
+.coin-progress { display:flex; gap:6px; justify-content:center; margin:1.25rem 0 0.5rem; }
+.coin-progress-dot { width:36px; height:6px; border-radius:3px; background:var(--ink-ghost); transition:background 0.4s ease, transform 0.2s; }
+.coin-progress-dot.done { background:var(--ink); transform:scaleY(1.2); }
+
+/* FINGER HINT */
+.finger-hint { font-size:28px; animation:fingerTap 1.2s ease-in-out infinite; display:inline-block; margin-top:0.5rem; }
+@keyframes fingerTap {
+  0%,100% { transform:translateY(0) scale(1); opacity:0.8; }
+  40% { transform:translateY(-8px) scale(1.1); opacity:1; }
+  60% { transform:translateY(2px) scale(0.95); opacity:0.9; }
+}
 
 /* TOAST */
 .toast { position:fixed; bottom:2rem; left:50%; transform:translateX(-50%); background:var(--ink); color:var(--paper); padding:10px 20px; border-radius:20px; font-size:14px; font-family:'Noto Sans SC',sans-serif; opacity:0; transition:opacity 0.3s; pointer-events:none; z-index:300; }
@@ -378,8 +402,8 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
           <div style="width:100%; height:1px; background:var(--ink-ghost);"></div>
         </div>
         <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
-          <div style="width:36px; height:36px; border-radius:50%; background:var(--gold); color:var(--paper); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; font-family:'Noto Sans SC',sans-serif;">4</div>
-          <div style="font-size:11px; color:var(--gold); font-family:'Noto Sans SC',sans-serif; margin-top:6px; text-align:center; letter-spacing:0.03em; font-weight:500;">傻猪解卦</div>
+          <div style="width:36px; height:36px; border-radius:50%; background:var(--ink); color:var(--paper); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; font-family:'Noto Sans SC',sans-serif;">4</div>
+          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:6px; text-align:center; letter-spacing:0.03em;">傻猪解卦</div>
         </div>
       </div>
       <div style="font-size:22px; font-weight:700; color:var(--ink); letter-spacing:0.1em; text-align:center; margin-bottom:0.5rem;">你想问什么？</div>
@@ -400,7 +424,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
           我确认问题已清楚填写，了解每次占卜消耗1罐罐头，结果仅供参考
         </span>
       </label>
-      <button class="oracle-btn" id="div-btn" onclick="startDiv()">✦ 请傻猪占卜（消耗1罐罐头）</button>
+      <button class="oracle-btn" id="div-btn" onclick="startDiv()">✦ 投币问卦（消耗1罐罐头）</button>
       <div class="oracle-note">$0.99 / 罐 · 罐头永久保存不过期</div>
     </div>
 
@@ -444,11 +468,13 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
     <div class="coin-modal-sub" id="coin-sub">请专注你的问题，然后投掷</div>
     <div style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:-1rem; margin-bottom:1.5rem; letter-spacing:0.05em;">共需投掷 <strong style="color:var(--gold);">6次</strong>，每次一爻，六爻成卦</div>
     <div class="coin-area">
-      <div class="coin" id="coin" onclick="tossCoin()">
-        <img src="coin.png" style="width:100%;height:100%;object-fit:contain;border-radius:50%;">
+      <div class="coin-wrap" onclick="tossCoin()">
+        <div class="coin" id="coin">
+          <img src="coin.png" style="width:100%;height:100%;object-fit:contain;border-radius:50%;">
+        </div>
       </div>
+      <div class="finger-hint" id="finger-hint">👆</div>
       <div class="coin-result" id="coin-result"></div>
-      <div class="coin-instruction" id="coin-instruction">点击铜钱投掷</div>
     </div>
     <div class="yao-track" id="yao-track">
       <div class="yao" id="yao-0"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label">初</div></div>
@@ -458,7 +484,18 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
       <div class="yao" id="yao-4"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label">五</div></div>
       <div class="yao" id="yao-5"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label">上</div></div>
     </div>
-    <button class="coin-toss-btn" id="coin-btn" onclick="tossCoin()">✦ 投掷（第1次）</button>
+    <div class="coin-progress" id="coin-progress">
+      <div class="coin-progress-dot" id="cp-0"></div>
+      <div class="coin-progress-dot" id="cp-1"></div>
+      <div class="coin-progress-dot" id="cp-2"></div>
+      <div class="coin-progress-dot" id="cp-3"></div>
+      <div class="coin-progress-dot" id="cp-4"></div>
+      <div class="coin-progress-dot" id="cp-5"></div>
+    </div>
+    <div id="coin-instruction" style="font-size:13px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; letter-spacing:0.08em; margin-top:0.5rem; min-height:20px;"></div>
+    <div id="coin-reveal-btn" style="display:none; margin-top:1.25rem;">
+      <button class="coin-toss-btn" onclick="revealResult()">✦ 观看天机</button>
+    </div>
   </div>
 </div>
 
@@ -507,11 +544,11 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
     <div class="share-actions">
       <div class="share-actions-title">分享到</div>
       <div class="share-icons">
-        <button class="share-icon-btn" onclick="shareToThreads()">Threads</button>
-        <button class="share-icon-btn" onclick="shareToIG()">IG</button>
-        <button class="share-icon-btn" onclick="shareToWA()">WA</button>
-        <button class="share-icon-btn" onclick="copyShareText()">Copy</button>
-        <button class="share-icon-btn" onclick="saveCard()">Save</button>
+        <button class="share-icon-btn" onclick="shareToThreads.call(this)">Threads</button>
+        <button class="share-icon-btn" onclick="shareToIG.call(this)">IG</button>
+        <button class="share-icon-btn" onclick="shareToWA.call(this)">WA</button>
+        <button class="share-icon-btn" onclick="copyShareText.call(this)">Copy</button>
+        <button class="share-icon-btn" onclick="saveCard.call(this)">Save</button>
       </div>
       <button class="share-close-btn" onclick="document.getElementById('share-modal').classList.remove('show')">关闭</button>
     </div>
@@ -801,6 +838,7 @@ const YAO_NAMES = ['初爻','二爻','三爻','四爻','五爻','上爻'];
 window.tossCoin = () => {
   if (tossBusy || tossCount >= 6) return;
   tossBusy = true;
+  playCoinSound();
   const coin = document.getElementById('coin');
   coin.classList.add('spinning');
   document.getElementById('coin-btn').disabled = true;
@@ -815,23 +853,25 @@ window.tossCoin = () => {
     yao.className = 'yao ' + (isYang ? 'yang' : 'yin');
     
     coin.classList.remove('spinning');
+    void coin.offsetWidth; // force reflow for re-trigger
     document.getElementById('coin-result').textContent = isYang ? '☀ 阳爻' : '☽ 阴爻';
     
+    // Update progress dot
+    document.getElementById('cp-' + (tossCount-1)).classList.add('done');
     tossCount++;
     tossBusy = false;
 
+    // Hide finger after first toss
+    document.getElementById('finger-hint').style.display = 'none';
+
     if (tossCount < 6) {
       document.getElementById('coin-sub').textContent = `第${tossCount}爻已定，继续投掷`;
-      document.getElementById('coin-btn').textContent = `✦ 投掷（第${tossCount+1}次）`;
-      document.getElementById('coin-btn').disabled = false;
-      document.getElementById('coin-instruction').textContent = '点击铜钱投掷';
+      document.getElementById('coin-instruction').textContent = '';
     } else {
-      // All 6 yaos done - determine gua
+      document.getElementById('cp-5').classList.add('done');
       document.getElementById('coin-sub').textContent = '六爻已定，卦象成！';
-      document.getElementById('coin-btn').textContent = '✦ 观看天机';
-      document.getElementById('coin-btn').onclick = revealResult;
-      document.getElementById('coin-btn').disabled = false;
-      document.getElementById('coin-instruction').textContent = '你的卦象已成，点击揭示';
+      document.getElementById('coin-instruction').textContent = '';
+      document.getElementById('coin-reveal-btn').style.display = 'block';
     }
   }, 900);
 };
@@ -932,6 +972,42 @@ window.copyInviteLink = () => {
   const link = document.getElementById('invite-link').value;
   navigator.clipboard.writeText(link).then(() => showToast('邀请链接已复制 ✓'));
 };
+
+function playCoinSound() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    
+    // Metal clink sound
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    const osc2 = ctx.createOscillator();
+    const gain2 = ctx.createGain();
+    
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc2.connect(gain2);
+    gain2.connect(ctx.destination);
+    
+    // High metallic ping
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(800, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.3);
+    gain.gain.setValueAtTime(0.3, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+    
+    // Harmonics
+    osc2.type = 'sine';
+    osc2.frequency.setValueAtTime(1600, ctx.currentTime);
+    osc2.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.2);
+    gain2.gain.setValueAtTime(0.15, ctx.currentTime);
+    gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+    
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + 0.4);
+    osc2.start(ctx.currentTime);
+    osc2.stop(ctx.currentTime + 0.3);
+  } catch(e) {}
+}
 
 function getLevel(count) {
   if (count >= 100) return { icon:'✨', name:'猫道', next:null, progress:100 };
@@ -1043,13 +1119,14 @@ window.startDiv = async () => {
   for(let i=0;i<6;i++) {
     const yao = document.getElementById('yao-'+i);
     if(yao) { yao.className = 'yao'; }
+    const dot = document.getElementById('cp-'+i);
+    if(dot) { dot.classList.remove('done'); }
   }
   document.getElementById('coin-sub').textContent = '请专注你的问题，然后投掷';
-  document.getElementById('coin-btn').textContent = '✦ 投掷（第1次）';
-  document.getElementById('coin-btn').onclick = tossCoin;
-  document.getElementById('coin-btn').disabled = false;
   document.getElementById('coin-result').textContent = '';
-  document.getElementById('coin-instruction').textContent = '点击铜钱投掷';
+  document.getElementById('coin-instruction').textContent = '';
+  document.getElementById('finger-hint').style.display = 'inline-block';
+  document.getElementById('coin-reveal-btn').style.display = 'none';
   document.getElementById('coin-modal').classList.add('show');
   return; // Stop here - rest handled by coin flow
   document.getElementById('result-wrap').style.display = 'none';
@@ -1210,30 +1287,51 @@ window.copyShareText = () => {
   }
 };
 
-window.saveCard = async () => {
-  const btn = event.target.closest('button');
-  const orig = btn.textContent;
-  btn.textContent = '生成中...';
-  btn.disabled = true;
+async function generatePNG() {
+  const card = document.getElementById('postcard');
+  const canvas = await html2canvas(card, {
+    scale: 2, useCORS: true, backgroundColor: '#1e1608', logging: false
+  });
+  return canvas;
+}
+
+async function sharePNG(btnEl) {
+  const orig = btnEl.textContent;
+  btnEl.textContent = '生成中...';
+  btnEl.disabled = true;
   try {
-    const card = document.getElementById('postcard');
-    const canvas = await html2canvas(card, {
-      scale: 2,
-      useCORS: true,
-      backgroundColor: null,
-      logging: false
-    });
-    const link = document.createElement('a');
-    link.download = '玄猫之道占卜_' + new Date().toLocaleDateString('zh') + '.png';
-    link.href = canvas.toDataURL('image/png');
-    link.click();
-    showToast('卡片已保存 ✓');
+    const canvas = await generatePNG();
+    const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+    const file = new File([blob], '玄猫之道占卜.png', { type: 'image/png' });
+    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({
+        files: [file],
+        title: '玄猫之道占卜结果',
+        text: currentGua ? currentGua.name + ' · TaoOfCat.com' : 'TaoOfCat.com'
+      });
+      showToast('分享成功 ✓');
+    } else {
+      // Desktop fallback - download
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.download = '玄猫之道占卜_' + new Date().toLocaleDateString('zh') + '.png';
+      link.href = url;
+      link.click();
+      URL.revokeObjectURL(url);
+      showToast('图片已下载，请手动分享 ✓');
+    }
   } catch(e) {
-    showToast('保存失败，请截图保存');
+    if (e.name !== 'AbortError') showToast('请截图保存卡片');
   }
-  btn.textContent = orig;
-  btn.disabled = false;
-};
+  btnEl.textContent = orig;
+  btnEl.disabled = false;
+}
+
+window.shareToThreads = function() { sharePNG(this); };
+window.shareToIG = function() { sharePNG(this); };
+window.shareToWA = function() { sharePNG(this); };
+window.copyShareText = function() { sharePNG(this); };
+window.saveCard = function() { sharePNG(this); };
 </script>
 <footer style="background:rgba(30,22,8,0.04); border-top:1px solid var(--ink-ghost); padding:2rem 1.5rem; text-align:center; margin-top:2rem;">
   <div style="max-width:680px; margin:0 auto;">
