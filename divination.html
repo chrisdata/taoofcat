@@ -85,6 +85,50 @@ textarea { height:100px; line-height:1.7; }
 }
 .div-btn:hover { background:#3d3220; }
 .div-btn:disabled { opacity:0.35; cursor:not-allowed; }
+.philosophy-section {
+  width: 100%;
+  background: rgba(255,255,255,0.5);
+  border: 1px solid #d4c8a8;
+  border-radius: 16px;
+  padding: 2rem 1.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.phil-block {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.phil-icon {
+  font-size: 28px;
+  margin-bottom: 0.5rem;
+}
+
+.phil-quote {
+  font-size: 18px;
+  font-weight: 500;
+  color: #2c2416;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+}
+
+.phil-text {
+  font-size: 15px;
+  color: #5c4c2c;
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+}
+
+.phil-divider {
+  text-align: center;
+  color: #b4a880;
+  font-size: 12px;
+  letter-spacing: 0.5em;
+  padding: 0.75rem 0;
+}
+
 .cost-note { font-size:12px; color:#b4a880; text-align:center; margin-top:10px; font-family:'Noto Sans SC',sans-serif; font-weight:300; letter-spacing:0.05em; }
 
 .cat-hero { text-align:center; margin-bottom:1.5rem; }
@@ -158,6 +202,26 @@ textarea { height:100px; line-height:1.7; }
     <div class="brand-sub">傻猪为你观天问卦 · 易经AI解读</div>
   </div>
 
+  <div class="philosophy-section">
+    <div class="phil-block">
+      <div class="phil-icon">🐱</div>
+      <div class="phil-quote">「狗来富，猫来起大厝」</div>
+      <div class="phil-text">老一辈的智慧从来不是迷信。猫咪的到来，自古便是吉兆。科学也验证了——猫能感应人类看不见的能量，拥有先天的预知能力与直觉感应。</div>
+    </div>
+    <div class="phil-divider">✦</div>
+    <div class="phil-block">
+      <div class="phil-icon">☯</div>
+      <div class="phil-quote">「万经之首 · 易经」</div>
+      <div class="phil-text">易经，中国古典文献之首，以阴阳符号构成的卦象，描述世间万物的运行状态。古代巫师以此推演未来吉凶，求得卦象，趋吉避凶。然而易经向来难以入门，深奥难懂。</div>
+    </div>
+    <div class="phil-divider">✦</div>
+    <div class="phil-block">
+      <div class="phil-icon">✦</div>
+      <div class="phil-quote">「以猫观道，化繁为简」</div>
+      <div class="phil-text">玄猫之道将易经的玄学与AI的算法整合，透过猫咪的生活态度与直觉智慧，把深奥难懂的古典学问，化为你能理解的人生指引——帮你解答疑惑，趋吉避凶。</div>
+    </div>
+  </div>
+
   <div id="login-section">
     <div class="login-card">
       <div class="login-title">请先登录</div>
@@ -192,9 +256,9 @@ textarea { height:100px; line-height:1.7; }
     </div>
 
     <div class="card">
-      <label for="cat-name">你的猫咪叫什么名字？</label>
-      <input type="text" id="cat-name" placeholder="例如：傻猪、橘墩、小黑..." maxlength="10">
-      <label for="question">你想请教傻猪什么？</label>
+      <label for="cat-name">喵~ 问卦者何人？</label>
+      <input type="text" id="cat-name" placeholder="例如：Chris、小明、阿花..." maxlength="10">
+      <label for="question">喵~ 欲问何事？</label>
       <textarea id="question" placeholder="例如：我现在的方向对吗？要不要放弃现在的工作？这段感情值得继续吗？"></textarea>
       <button class="div-btn" id="div-btn" onclick="startDiv()">✦ 请傻猪占卜（消耗1罐罐头）</button>
       <div class="cost-note">$0.99 / 罐 · 罐头永久保存不过期</div>
