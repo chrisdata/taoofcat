@@ -319,15 +319,6 @@ textarea { height:100px; line-height:1.7; }
       <div class="cost-note">$0.99 / 罐 · 罐头永久保存不过期</div>
     </div>
 
-    <div class="cat-hero" id="cat-hero">
-      <div class="cat-hero-img-wrap">
-        <img src="shazhu-study.png" alt="傻猪" class="cat-hero-img" id="cat-hero-img">
-        <div class="cat-hero-veil" id="cat-hero-veil"></div>
-      </div>
-      <div class="cat-hero-name">傻 猪</div>
-      <div class="cat-hero-sub">玄猫之道占卜师 · 异瞳通天机</div>
-    </div>
-
     <div class="cat-stage" id="cat-stage">
       <div class="thinking" id="thinking"></div>
     </div>
@@ -549,14 +540,14 @@ window.startDiv = async () => {
   document.getElementById('div-btn').disabled = true;
   document.getElementById('result-wrap').style.display = 'none';
   document.getElementById('cat-stage').style.display = 'block';
-  document.getElementById('cat-hero-veil').classList.add('dimmed');
+  
   document.getElementById('thinking').textContent = cat + ' 正在感应天机...';
 
   setTimeout(() => {
     document.getElementById('thinking').textContent = '异瞳缓缓睁开...';
-    document.getElementById('cat-hero-veil').classList.remove('dimmed');
+    
   }, 900);
-  setTimeout(() => { document.getElementById('cat-hero-img').style.filter = 'brightness(1.1)'; }, 1400);
+  setTimeout(() => {  }, 1400);
   setTimeout(() => {
     document.getElementById('thinking').textContent = '天机已现';
     const gua = guas[Math.floor(Math.random() * guas.length)];
@@ -634,8 +625,8 @@ function fallbackCopy(text, btn, orig) {
 window.resetAll = () => {
   document.getElementById('result-wrap').style.display = 'none';
   document.getElementById('cat-stage').style.display = 'none';
-  document.getElementById('cat-hero-veil').classList.remove('dimmed');
-  document.getElementById('cat-hero-img').style.filter = '';
+  
+  
   document.getElementById('div-btn').disabled = false;
   document.getElementById('question').value = '';
   window.scrollTo({top:0, behavior:'smooth'});
