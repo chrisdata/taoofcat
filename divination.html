@@ -759,21 +759,20 @@ function updateLevelDisplay(divCount) {
 let weatherContext = null;
 
 async function getWeatherContext() {
-  return new Promise((resolve) => {
-    if (!navigator.geolocation) { resolve(null); return; }
-    navigator.geolocation.getCurrentPosition(async (pos) => {
-      try {
-        const res = await fetch(API + '/weather', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ lat: pos.coords.latitude, lon: pos.coords.longitude })
-        });
-        const w = await res.json();
-        if (!w.error) resolve(w);
-        else resolve(null);
-      } catch(e) { resolve(null); }
-    }, () => resolve(null), { timeout: 5000 });
-  });
+  try {
+    // Get location from IP - no permission needed
+    const ipRes = await fetch('https://ipapi.co/json/');
+    const ipData = await ipRes.json();
+    if (!ipData.latitude || !ipData.longitude) return null;
+    const res = await fetch(API + '/weather', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ lat: ipData.latitude, lon: ipData.longitude })
+    });
+    const w = await res.json();
+    if (!w.error) return w;
+    return null;
+  } catch(e) { return null; }
 }
 
 function getTimeContext() {
