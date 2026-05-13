@@ -211,7 +211,7 @@ textarea { height:100px; line-height:1.7; }
   line-height:1; pointer-events:none;
 }
 .postcard-brand { font-size:11px; letter-spacing:0.4em; color:rgba(212,168,67,0.8); font-family:'Noto Sans SC',sans-serif; margin-bottom:1rem; }
-.postcard-gua { font-size:48px; text-align:center; margin-bottom:4px; }
+.postcard-gua { font-size:48px; text-align:center; margin-bottom:4px; color:#ffffff; }
 .postcard-gua-name { font-size:18px; font-weight:500; color:#f4ede0; letter-spacing:0.15em; text-align:center; margin-bottom:1rem; }
 .postcard-divider { height:1px; background:linear-gradient(to right,transparent,rgba(212,168,67,0.5),transparent); margin:1rem 0; }
 .postcard-quote { font-size:15px; color:rgba(244,237,224,0.9); line-height:1.8; letter-spacing:0.08em; text-align:center; font-style:italic; }
@@ -232,10 +232,10 @@ textarea { height:100px; line-height:1.7; }
   transition:transform 0.2s, opacity 0.2s;
 }
 .share-icon-btn:hover { transform:scale(1.1); }
-.share-icon-btn.threads { background:#000; color:#fff; font-size:16px; font-weight:700; font-family:sans-serif; }
-.share-icon-btn.ig { background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color:#fff; }
-.share-icon-btn.wa { background:#25d366; color:#fff; }
-.share-icon-btn.copy { background:#f4ede0; border:1px solid #d4c8a8; color:#2c2416; }
+.share-icon-btn.threads { background:#2c2416; color:#f4ede0; font-size:16px; font-weight:700; font-family:sans-serif; }
+.share-icon-btn.ig { background:#2c2416; color:#f4ede0; }
+.share-icon-btn.wa { background:#2c2416; color:#f4ede0; }
+.share-icon-btn.copy { background:#2c2416; color:#f4ede0; }
 .share-icon-btn.save { background:#2c2416; color:#f4ede0; }
 .share-actions-row { display:flex; gap:8px; }
 .share-close-btn { flex:1; padding:11px; font-size:13px; font-family:'Noto Sans SC',sans-serif; background:transparent; border:1px solid #d4c8a8; border-radius:10px; color:#9c8c6c; cursor:pointer; }
@@ -251,7 +251,7 @@ textarea { height:100px; line-height:1.7; }
   <a href="/" class="nav-back">← 返回玄猫之道</a>
 
   <div class="header">
-    <div class="brand-cat">TAO OF YOUR CAT</div>
+    <div class="brand-cat">TAO OF CAT</div>
     <div class="brand">玄猫之道</div>
     <div class="brand-divider"></div>
     <div class="brand-sub">傻猪为你观天问卦 · 易经AI解读</div>
@@ -358,7 +358,7 @@ textarea { height:100px; line-height:1.7; }
 <div class="share-modal-overlay" id="share-modal">
   <div class="share-modal">
     <div class="postcard" id="postcard">
-      <div class="postcard-brand">玄 猫 之 道 · TAO OF YOUR CAT</div>
+      <div class="postcard-brand">玄 猫 之 道 · TAO OF CAT</div>
       <div class="postcard-gua" id="pc-sym"></div>
       <div class="postcard-gua-name" id="pc-name"></div>
       <div class="postcard-divider"></div>
@@ -367,7 +367,7 @@ textarea { height:100px; line-height:1.7; }
       <div class="postcard-ai" id="pc-ai"></div>
       <div class="postcard-footer">
         <div class="postcard-logo">玄猫之道</div>
-        <div class="postcard-url">taoofcat.com/divination.html</div>
+        <div class="postcard-url">TaoOfCat.com/divination.html</div>
       </div>
     </div>
     <div class="share-actions">
@@ -613,7 +613,7 @@ async function callAPI(gua, q, cat) {
 }
 
 window.copyRes = () => {
-  const text = '【玄猫之道 · ' + currentCat + '占卜结果】\n' + currentGua.name + ' · ' + currentGua.nature + '\n\n「' + currentGua.quote + '」\n' + currentGua.src + '\n\n' + aiText + '\n\n— taoofcat.com/divination.html';
+  const text = '【玄猫之道 · ' + currentCat + '占卜结果】\n' + currentGua.name + ' · ' + currentGua.nature + '\n\n「' + currentGua.quote + '」\n' + currentGua.src + '\n\n' + aiText + '\n\n— TaoOfCat.com/divination.html';
   const btn = event.target.closest('button');
   const orig = btn.textContent;
   if (navigator.clipboard && window.isSecureContext) {
@@ -656,24 +656,24 @@ window.openShareModal = () => {
 };
 
 window.shareToThreads = () => {
-  const text = encodeURIComponent('【玄猫之道占卜】' + currentGua.name + '\n「' + currentGua.quote + '」\n\n' + aiText.substring(0,100) + '...\n\ntaoofcat.com/divination.html');
+  const text = encodeURIComponent('【玄猫之道占卜】' + currentGua.name + '\n「' + currentGua.quote + '」\n\n' + aiText.substring(0,100) + '...\n\nTaoOfCat.com/divination.html');
   window.open('https://www.threads.net/intent/post?text=' + text, '_blank');
 };
 
 window.shareToIG = () => {
-  const text = '【玄猫之道 · ' + currentCat + '占卜结果】\n' + currentGua.name + '\n「' + currentGua.quote + '」\n\n' + aiText.substring(0,150) + '\ntaoofcat.com/divination.html';
+  const text = '【玄猫之道 · ' + currentCat + '占卜结果】\n' + currentGua.name + '\n「' + currentGua.quote + '」\n\n' + aiText.substring(0,150) + '\nTaoOfCat.com/divination.html';
   if (navigator.clipboard && window.isSecureContext) {
     navigator.clipboard.writeText(text).then(() => showToast('文字已复制，请前往Instagram贴上'));
   }
 };
 
 window.shareToWA = () => {
-  const text = encodeURIComponent('【玄猫之道 · ' + currentCat + '占卜结果】\n' + currentGua.name + '\n「' + currentGua.quote + '」\n\n' + aiText.substring(0,150) + '\ntaoofcat.com/divination.html');
+  const text = encodeURIComponent('【玄猫之道 · ' + currentCat + '占卜结果】\n' + currentGua.name + '\n「' + currentGua.quote + '」\n\n' + aiText.substring(0,150) + '\nTaoOfCat.com/divination.html');
   window.open('https://wa.me/?text=' + text, '_blank');
 };
 
 window.copyShareText = () => {
-  const text = '【玄猫之道 · ' + currentCat + '占卜结果】\n' + currentGua.name + ' · ' + currentGua.nature + '\n\n「' + currentGua.quote + '」\n' + currentGua.src + '\n\n' + aiText + '\n\n— taoofcat.com/divination.html';
+  const text = '【玄猫之道 · ' + currentCat + '占卜结果】\n' + currentGua.name + ' · ' + currentGua.nature + '\n\n「' + currentGua.quote + '」\n' + currentGua.src + '\n\n' + aiText + '\n\n— TaoOfCat.com/divination.html';
   if (navigator.clipboard && window.isSecureContext) {
     navigator.clipboard.writeText(text).then(() => showToast('已复制 ✓'));
   } else {
