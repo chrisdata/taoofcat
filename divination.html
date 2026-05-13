@@ -58,9 +58,9 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
 .oracle-section { background:rgba(255,255,255,0.85); border:1px solid var(--ink-ghost); border-radius:20px; padding:2.5rem; margin-bottom:1.5rem; position:relative; overflow:hidden; box-shadow:0 8px 40px rgba(30,22,8,0.08); }
 .oracle-section::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(to right,transparent,var(--gold),transparent); }
 .oracle-label { font-size:13px; letter-spacing:0.4em; color:var(--gold); font-family:'Noto Sans SC',sans-serif; font-weight:500; text-transform:uppercase; margin-bottom:0.75rem; text-align:center; }
-.oracle-question { width:100%; background:#ffffff; border:2px solid var(--ink-ghost); border-radius:14px; padding:16px 20px; font-size:28px; color:var(--ink); font-family:'Noto Serif SC',serif; outline:none; resize:none; transition:border-color 0.3s, box-shadow 0.3s; line-height:1.8; min-height:80px; }
+.oracle-question { width:100%; background:#ffffff; border:2px solid var(--ink-ghost); border-radius:14px; padding:16px 20px; font-size:28px; color:var(--ink); font-family:'Noto Serif SC',serif; outline:none; resize:none; transition:border-color 0.3s, box-shadow 0.3s; line-height:1.8; min-height:52px; }
 .oracle-question:focus { border-color:var(--gold); box-shadow:0 0 0 4px rgba(184,134,11,0.15); position:relative; z-index:60; }
-.oracle-focus-overlay { display:none; position:fixed; inset:0; background:rgba(10,8,4,0.5); z-index:55; backdrop-filter:blur(2px); }
+.oracle-focus-overlay { display:none; position:fixed; inset:0; background:rgba(10,8,4,0.82); z-index:55; backdrop-filter:blur(3px); }
 .oracle-focus-overlay.show { display:block; }
 .oracle-section.focused { position:relative; z-index:60; }
 .oracle-question::placeholder { color:var(--ink-faint); font-size:16px; line-height:2; }
@@ -481,7 +481,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
       <div style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-bottom:12px; line-height:1.7; letter-spacing:0.03em; text-align:left;">
         💡 好问题让傻猪给出更准确的解读。建议说明<strong>具体情境</strong>，例如：「我在考虑换工作，对方薪水更高但需要搬家，我该怎么决定？」
       </div>
-      <textarea class="oracle-question" id="question" rows="5" maxlength="200" placeholder="例如：我在考虑换工作，对方薪水更高但需要搬家，我该怎么决定？" oninput="updateCount()" onfocus="document.getElementById('oracle-overlay').classList.add('show'); document.querySelector('.oracle-section').classList.add('focused')" onblur="document.getElementById('oracle-overlay').classList.remove('show'); document.querySelector('.oracle-section').classList.remove('focused')"></textarea>
+      <textarea class="oracle-question" id="question" rows="5" maxlength="200" placeholder="" oninput="updateCount()" onfocus="document.getElementById('oracle-overlay').classList.add('show'); document.querySelector('.oracle-section').classList.add('focused')" onblur="document.getElementById('oracle-overlay').classList.remove('show'); document.querySelector('.oracle-section').classList.remove('focused')"></textarea>
       <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px; margin-bottom:8px;">
         <span style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif;">最少10字，最多200字</span>
         <span id="char-count" style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif;">0 / 200</span>
@@ -665,6 +665,12 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
 </div>
 
 <div class="toast" id="toast"></div>
+
+<!-- LIVE COUNTER - fixed bottom right -->
+<div id="live-counter" style="display:none; position:fixed; bottom:1.5rem; right:1.5rem; background:rgba(30,22,8,0.85); color:#f4ede0; border-radius:20px; padding:6px 14px; font-family:'Noto Sans SC',sans-serif; font-size:12px; letter-spacing:0.05em; backdrop-filter:blur(8px); z-index:40; pointer-events:none;">
+  <span class="live-dot" style="background:#4caf50;"></span>
+  <span id="counter-number">—</span> 猫奴已加入
+</div>
 
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
