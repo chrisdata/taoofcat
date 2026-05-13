@@ -223,7 +223,7 @@ nav.scrolled { background:rgba(244,237,224,0.95); backdrop-filter:blur(8px); bor
 
     <!-- CANS -->
     <div class="cans-display">
-      <span class="cans-icon">🥫</span>
+      <img src="can-icon.png" class="cans-icon" alt="猫罐头" style="width:80px;height:80px;object-fit:contain;">
       <div class="cans-number" id="can-count">…</div>
       <div class="cans-label">罐 剩余罐头</div>
       <button class="cans-buy-link" id="buy-link" onclick="document.getElementById('shop').classList.add('show')">＋ 补充罐头</button>
@@ -301,7 +301,7 @@ nav.scrolled { background:rgba(244,237,224,0.95); backdrop-filter:blur(8px); bor
 <!-- SHOP MODAL -->
 <div class="modal-overlay" id="shop">
   <div class="modal">
-    <div class="modal-title">🥫 补充罐头</div>
+    <div class="modal-title"><img src="can-icon.png" style="width:32px;height:32px;object-fit:contain;vertical-align:middle;margin-right:8px;">补充罐头</div>
     <div class="modal-sub">$0.99 / 罐 · 最多50罐</div>
     <div class="qty-row">
       <button class="qty-btn" onclick="changeQty(-1)">−</button>
