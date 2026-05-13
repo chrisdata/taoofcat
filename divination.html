@@ -186,6 +186,55 @@ textarea { height:100px; line-height:1.7; }
 .modal-close { width:100%; margin-top:10px; padding:12px; background:transparent; border:1px solid #d4c8a8; border-radius:10px; color:#9c8c6c; cursor:pointer; font-size:14px; font-family:'Noto Sans SC',sans-serif; }
 .modal-close:hover { color:#3d3220; }
 
+/* Share Modal */
+.share-modal-overlay { display:none; position:fixed; inset:0; background:rgba(44,36,22,0.7); z-index:200; align-items:center; justify-content:center; padding:1rem; }
+.share-modal-overlay.show { display:flex; }
+.share-modal { background:#f5f0e8; border-radius:20px; padding:0; width:100%; max-width:380px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.3); }
+
+/* Postcard */
+.postcard {
+  background: linear-gradient(135deg, #1e1608 0%, #2c1f0a 100%);
+  padding: 1.75rem;
+  position: relative;
+  overflow: hidden;
+}
+.postcard::before {
+  content: '道';
+  position:absolute; font-size:120px; font-weight:900;
+  color:rgba(255,255,255,0.04); top:-20px; right:-10px;
+  line-height:1; pointer-events:none;
+}
+.postcard-brand { font-size:11px; letter-spacing:0.4em; color:rgba(212,168,67,0.8); font-family:'Noto Sans SC',sans-serif; margin-bottom:1rem; }
+.postcard-gua { font-size:48px; text-align:center; margin-bottom:4px; }
+.postcard-gua-name { font-size:18px; font-weight:500; color:#f4ede0; letter-spacing:0.15em; text-align:center; margin-bottom:1rem; }
+.postcard-divider { height:1px; background:linear-gradient(to right,transparent,rgba(212,168,67,0.5),transparent); margin:1rem 0; }
+.postcard-quote { font-size:15px; color:rgba(244,237,224,0.9); line-height:1.8; letter-spacing:0.08em; text-align:center; font-style:italic; }
+.postcard-quote-src { font-size:11px; color:rgba(212,168,67,0.7); text-align:center; margin-top:6px; letter-spacing:0.1em; }
+.postcard-ai { font-size:13px; color:rgba(244,237,224,0.75); line-height:1.8; letter-spacing:0.04em; margin-top:1rem; }
+.postcard-footer { display:flex; align-items:center; justify-content:space-between; margin-top:1.25rem; }
+.postcard-logo { font-size:13px; font-weight:700; color:rgba(244,237,224,0.6); letter-spacing:0.15em; }
+.postcard-url { font-size:11px; color:rgba(212,168,67,0.6); letter-spacing:0.05em; }
+
+/* Share actions */
+.share-actions { padding:1.25rem 1.5rem; }
+.share-actions-title { font-size:12px; color:#9c8c6c; letter-spacing:0.1em; font-family:'Noto Sans SC',sans-serif; margin-bottom:0.75rem; text-align:center; }
+.share-icons { display:flex; gap:10px; justify-content:center; margin-bottom:1rem; }
+.share-icon-btn {
+  width:48px; height:48px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:20px; cursor:pointer; border:none;
+  transition:transform 0.2s, opacity 0.2s;
+}
+.share-icon-btn:hover { transform:scale(1.1); }
+.share-icon-btn.threads { background:#000; color:#fff; font-size:16px; font-weight:700; font-family:sans-serif; }
+.share-icon-btn.ig { background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color:#fff; }
+.share-icon-btn.wa { background:#25d366; color:#fff; }
+.share-icon-btn.copy { background:#f4ede0; border:1px solid #d4c8a8; color:#2c2416; }
+.share-icon-btn.save { background:#2c2416; color:#f4ede0; }
+.share-actions-row { display:flex; gap:8px; }
+.share-close-btn { flex:1; padding:11px; font-size:13px; font-family:'Noto Sans SC',sans-serif; background:transparent; border:1px solid #d4c8a8; border-radius:10px; color:#9c8c6c; cursor:pointer; }
+.share-close-btn:hover { color:#2c2416; }
+
 .toast { position:fixed; bottom:2rem; left:50%; transform:translateX(-50%); background:#2c2416; color:#f5f0e8; padding:10px 20px; border-radius:20px; font-size:14px; font-family:'Noto Sans SC',sans-serif; opacity:0; transition:opacity 0.3s; pointer-events:none; z-index:200; }
 .toast.show { opacity:1; }
 </style>
@@ -292,8 +341,40 @@ textarea { height:100px; line-height:1.7; }
         <div class="ai-resp" id="ai-resp"></div>
       </div>
       <div class="share-row">
-        <button class="share-btn" onclick="copyRes()">复制分享</button>
+        <button class="share-btn" onclick="openShareModal()">✦ 分享占卜</button>
         <button class="share-btn" onclick="resetAll()">再问一次</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Share Modal -->
+<div class="share-modal-overlay" id="share-modal">
+  <div class="share-modal">
+    <div class="postcard" id="postcard">
+      <div class="postcard-brand">玄 猫 之 道 · TAO OF YOUR CAT</div>
+      <div class="postcard-gua" id="pc-sym"></div>
+      <div class="postcard-gua-name" id="pc-name"></div>
+      <div class="postcard-divider"></div>
+      <div class="postcard-quote" id="pc-quote"></div>
+      <div class="postcard-quote-src" id="pc-src"></div>
+      <div class="postcard-ai" id="pc-ai"></div>
+      <div class="postcard-footer">
+        <div class="postcard-logo">玄猫之道</div>
+        <div class="postcard-url">taoofcat.com/divination.html</div>
+      </div>
+    </div>
+    <div class="share-actions">
+      <div class="share-actions-title">分享到</div>
+      <div class="share-icons">
+        <button class="share-icon-btn threads" onclick="shareToThreads()" title="Threads">T</button>
+        <button class="share-icon-btn ig" onclick="shareToIG()" title="Instagram">📷</button>
+        <button class="share-icon-btn wa" onclick="shareToWA()" title="WhatsApp">💬</button>
+        <button class="share-icon-btn copy" onclick="copyShareText()" title="复制文字">📋</button>
+        <button class="share-icon-btn save" onclick="saveCard()" title="保存图片">💾</button>
+      </div>
+      <div class="share-actions-row">
+        <button class="share-close-btn" onclick="document.getElementById('share-modal').classList.remove('show')">关闭</button>
       </div>
     </div>
   </div>
