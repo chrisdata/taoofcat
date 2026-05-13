@@ -280,9 +280,12 @@ nav.scrolled { background:rgba(244,237,224,0.95); backdrop-filter:blur(8px); bor
         💡 好问题让傻猪给出更准确的解读。建议说明<strong>具体情境</strong>，例如：「我在考虑换工作，对方薪水更高但需要搬家，我该怎么决定？」
       </div>
       <textarea class="oracle-question" id="question" rows="5" maxlength="200" placeholder="喵~ 欲问何事？&#10;&#10;例如：我现在的方向对吗？要不要放弃现在的工作？这段感情值得继续吗？" oninput="updateCount()"></textarea>
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px; margin-bottom:1.25rem;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px; margin-bottom:8px;">
         <span style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif;">最少10字，最多200字</span>
         <span id="char-count" style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif;">0 / 200</span>
+      </div>
+      <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-bottom:1.25rem; letter-spacing:0.03em;">
+        🔒 你的问题不会被储存，仅用于本次占卜
       </div>
       <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; margin-bottom:1.25rem; padding:12px 16px; background:rgba(184,134,11,0.06); border:1px solid rgba(184,134,11,0.2); border-radius:10px;">
         <input type="checkbox" id="confirm-check" style="width:18px; height:18px; margin-top:2px; accent-color:var(--gold); flex-shrink:0; cursor:pointer;">
@@ -787,5 +790,17 @@ window.saveCard = () => {
   showToast('请截图保存卡片 📱');
 };
 </script>
+<footer style="background:rgba(30,22,8,0.04); border-top:1px solid var(--ink-ghost); padding:2rem 1.5rem; text-align:center; margin-top:2rem;">
+  <div style="max-width:680px; margin:0 auto;">
+    <div style="font-size:13px; font-weight:500; color:var(--ink); letter-spacing:0.1em; margin-bottom:8px; font-family:'Noto Sans SC',sans-serif;">🔒 隐私声明</div>
+    <div style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; line-height:1.8; letter-spacing:0.03em;">
+      本站只储存你的账号基本资料（名字、头像）及游戏数据（罐头、等级、占卜次数）。<br>
+      你的占卜问题及解卦内容不会被记录或储存，不会用于任何商业用途。
+    </div>
+    <div style="font-size:11px; color:var(--ink-ghost); font-family:'Noto Sans SC',sans-serif; margin-top:1rem; letter-spacing:0.05em;">
+      © 2026 玄猫之道 · TaoOfCat.com · Ipoh, Malaysia
+    </div>
+  </div>
+</footer>
 </body>
 </html>
