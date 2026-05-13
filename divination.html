@@ -921,6 +921,20 @@ window.startDiv = async () => {
   if (!currentUser) { showToast('请先登录'); return; }
   const q = document.getElementById('question').value.trim();
   const cat = currentUser.displayName ? currentUser.displayName.split(' ')[0] : '朋友';
+  // Profanity filter
+  const badWords = ['fuck','shit','damn','ass','bitch','bastard','cunt','dick','pussy','cock',
+    '操','妈的','他妈','草','艹','cnm','nmsl','滚','死','傻逼','sb','废物','贱','臭','烂','狗','猪杂','白痴',
+    'bodoh','gila','celaka','sial','babi','lancau','puki','pundek','kepala bhotak','anjing',
+    '屌','撚','㞗','𨳍','閪','𨳊','on9','戆鸠','戆九','仆街','扑街','餐厅','賤人','臭閪','老母','your mother','丢你','屌你','屌佢','废鸠','废撚','冚家铲','冚家','鸠噏','噏鸠','咸湿','屌毛','老屌',
+    'くそ','ちくしょう','バカ','馬鹿','死ね','殺す','うざい','きもい','ムカつく','ファック','クソ','アホ','まじきもい','てめえ','コノヤロウ','ぶっ殺す','氏ね'];
+  const qLower = q.toLowerCase();
+  const hasBad = badWords.some(w => qLower.includes(w));
+  if (hasBad) { 
+    showToast('🐾 本猫只接受诚心问卦，请调整问题');
+    document.getElementById('question').focus(); 
+    return; 
+  }
+
   if (!q || q.length < 10) { showToast('请至少输入10个字再问卦'); document.getElementById('question').focus(); return; }
   if (!document.getElementById('confirm-check').checked) { showToast('请先勾选确认框'); return; }
 
