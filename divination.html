@@ -165,6 +165,20 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
 .checkin-btn:hover { border-color:var(--gold); color:var(--gold); }
 .checkin-btn.done { background:rgba(184,134,11,0.1); border-color:rgba(184,134,11,0.3); color:var(--gold); cursor:default; }
 
+/* PREP MODAL */
+.prep-modal-overlay { display:none; position:fixed; inset:0; background:rgba(10,8,4,0.88); z-index:150; align-items:center; justify-content:center; padding:1rem; backdrop-filter:blur(4px); }
+.prep-modal-overlay.show { display:flex; }
+.prep-modal { background:var(--paper); border-radius:24px; padding:2rem 2rem 1.75rem; width:100%; max-width:420px; position:relative; box-shadow:0 30px 80px rgba(0,0,0,0.5); }
+.prep-title { font-size:13px; letter-spacing:0.3em; color:var(--gold); font-family:'Noto Sans SC',sans-serif; font-weight:300; text-align:center; margin-bottom:1.25rem; }
+.prep-item { display:flex; gap:12px; align-items:flex-start; margin-bottom:1rem; }
+.prep-char { font-size:22px; font-weight:900; color:var(--ink); letter-spacing:0.05em; min-width:28px; line-height:1.4; }
+.prep-text { font-size:14px; color:var(--ink-light); line-height:1.8; letter-spacing:0.04em; font-family:'Noto Sans SC',sans-serif; }
+.prep-text strong { color:var(--ink); font-weight:500; }
+.prep-divider { height:1px; background:var(--ink-ghost); margin:1.25rem 0; }
+.prep-note { font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; line-height:1.7; text-align:center; letter-spacing:0.03em; margin-bottom:1.25rem; }
+.prep-btn { width:100%; padding:14px; font-size:15px; font-family:'Noto Serif SC',serif; font-weight:500; letter-spacing:0.15em; background:var(--ink); border:none; border-radius:12px; color:var(--paper); cursor:pointer; transition:background 0.2s; }
+.prep-btn:hover { background:#3d3220; }
+
 /* COIN TOSS MODAL */
 .coin-modal-overlay { display:none; position:fixed; inset:0; background:rgba(10,8,4,0.88); z-index:150; align-items:center; justify-content:center; padding:1rem; backdrop-filter:blur(4px); }
 .coin-modal-overlay.show { display:flex; }
@@ -458,6 +472,28 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
 </div>
 
 <!-- SHARE MODAL -->
+<!-- PREP MODAL -->
+<div class="prep-modal-overlay" id="prep-modal">
+  <div class="prep-modal">
+    <div class="prep-title">✦ 问卦前，傻猪有话说 ✦</div>
+    <div class="prep-item">
+      <div class="prep-char">诚</div>
+      <div class="prep-text"><strong>心不诚，卦不灵。</strong><br>把你真正在意的事带来，傻猪才能感应到。</div>
+    </div>
+    <div class="prep-item">
+      <div class="prep-char">静</div>
+      <div class="prep-text"><strong>先让心静下来。</strong><br>深呼吸一次，把杂念放下。不用焚香，只需要一分钟的安静。</div>
+    </div>
+    <div class="prep-item">
+      <div class="prep-char">清</div>
+      <div class="prep-text"><strong>问题要说清楚。</strong><br>不要问「我最近怎样」——太宽了，天机无从落脚。一件事，一个问题。</div>
+    </div>
+    <div class="prep-divider"></div>
+    <div class="prep-note">一事一占，问完这件事再问下一件。<br>问了就信，信了就放下。</div>
+    <button class="prep-btn" onclick="startCoinToss()">✦ 我已准备好，开始投币</button>
+  </div>
+</div>
+
 <!-- COIN TOSS MODAL -->
 <div class="coin-modal-overlay" id="coin-modal">
   <div class="coin-modal">
@@ -963,6 +999,7 @@ function renderScrollAI(text) {
 
 window.closeCoinModal = () => {
   document.getElementById('coin-modal').classList.remove('show');
+  document.getElementById('prep-modal').classList.remove('show');
   document.getElementById('div-btn').disabled = false;
   tossCount = 0;
   yaoResults = [];
@@ -1113,6 +1150,13 @@ window.startDiv = async () => {
     weatherContext = await getWeatherContext();
   }
   
+  // Show prep modal first
+  document.getElementById('prep-modal').classList.add('show');
+  return;
+}
+
+window.startCoinToss = () => {
+  document.getElementById('prep-modal').classList.remove('show');
   // Reset coin toss and show coin modal
   tossCount = 0;
   yaoResults = [];
