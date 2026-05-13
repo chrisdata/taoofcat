@@ -505,8 +505,8 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
         </div>
       </div>
       <div style="font-size:18px; font-weight:700; color:var(--ink); letter-spacing:0.08em; text-align:left; margin-bottom:0.5rem;" id="oracle-ask-title">喵~ 欲问何事？</div>
-      <div style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-bottom:12px; line-height:1.7; letter-spacing:0.03em; text-align:left;">
-        ※ 好问题让傻猪给出更准确的解读。建议说明<strong>具体情境</strong>，例如：「我在考虑换工作，对方薪水更高但需要搬家，我该怎么决定？」
+      <div style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-bottom:12px; line-height:1.7; letter-spacing:0.03em; text-align:left;" id="oracle-hint">
+        ※ 好问题让占卜师给出更准确的解读。建议说明<strong>具体情境</strong>，例如：「我在考虑换工作，对方薪水更高但需要搬家，我该怎么决定？」
       </div>
       <textarea class="oracle-question" id="question" rows="5" maxlength="200" placeholder="" oninput="updateCount()" onfocus="document.getElementById('oracle-overlay').classList.add('show'); document.querySelector('.oracle-section').classList.add('focused')" onblur="document.getElementById('oracle-overlay').classList.remove('show'); document.querySelector('.oracle-section').classList.remove('focused')"></textarea>
       <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px; margin-bottom:8px;">
@@ -529,7 +529,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
     <!-- THINKING -->
     <div class="thinking-section" id="cat-stage">
       <div class="thinking-gua" id="thinking-gua">☯</div>
-      <div class="thinking-text" id="thinking">傻猪正在感应天机...</div>
+      <div class="thinking-text" id="thinking">正在感应天机...</div>
     </div>
 
     <!-- RESULT -->
@@ -562,7 +562,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
     <div class="prep-title" id="prep-modal-title">✦ 问卦前，傻猪有话说 ✦</div>
     <div class="prep-item">
       <div class="prep-char">诚</div>
-      <div class="prep-text"><strong>心不诚，卦不灵。</strong><br>把你真正在意的事带来，傻猪才能感应到。</div>
+      <div class="prep-text"><strong>心不诚，卦不灵。</strong><br>把你真正在意的事带来，占卜师才能感应到。</div>
     </div>
     <div class="prep-item">
       <div class="prep-char">静</div>
@@ -1455,6 +1455,8 @@ window.confirmCatSelection = () => {
   document.getElementById('oracle-ask-title').textContent = cat.askTitle;
   document.getElementById('scroll-cat-label').textContent = cat.name + ' 解 读';
   document.getElementById('prep-modal-title').textContent = '✦ 问卦前，' + cat.name + '有话说 ✦';
+  document.getElementById('oracle-hint').innerHTML = '※ 好问题让' + cat.name + '给出更准确的解读。建议说明<strong>具体情境</strong>，例如：「我在考虑换工作，对方薪水更高但需要搬家，我该怎么决定？」';
+  document.getElementById('thinking').textContent = cat.name + ' 正在感应天机...';
   document.getElementById('oracle-input-section').scrollIntoView({behavior:'smooth', block:'start'});
 };
 // ── END CAT SELECTOR ──
