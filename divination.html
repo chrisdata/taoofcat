@@ -534,7 +534,7 @@ window.goPay = () => {
 window.startDiv = async () => {
   if (!currentUser) { showToast('请先登录'); return; }
   const q = document.getElementById('question').value.trim();
-  const cat = document.getElementById('cat-name').value.trim() || '傻猪';
+  const cat = currentUser.displayName ? currentUser.displayName.split(' ')[0] : '朋友';
   if (!q) { document.getElementById('question').focus(); return; }
 
   const cansNow = parseInt(document.getElementById('can-count').textContent);
