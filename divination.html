@@ -163,6 +163,71 @@ nav.scrolled { background:rgba(244,237,224,0.95); backdrop-filter:blur(8px); bor
 .checkin-btn:hover { border-color:var(--gold); color:var(--gold); }
 .checkin-btn.done { background:rgba(184,134,11,0.1); border-color:rgba(184,134,11,0.3); color:var(--gold); cursor:default; }
 
+/* COIN TOSS MODAL */
+.coin-modal-overlay { display:none; position:fixed; inset:0; background:rgba(10,8,4,0.88); z-index:150; align-items:center; justify-content:center; padding:1rem; backdrop-filter:blur(4px); }
+.coin-modal-overlay.show { display:flex; }
+.coin-modal { background:var(--paper); border-radius:24px; padding:2.5rem 2rem; width:100%; max-width:420px; text-align:center; position:relative; box-shadow:0 30px 80px rgba(0,0,0,0.5); }
+.coin-modal-title { font-size:13px; letter-spacing:0.3em; color:var(--gold); font-family:'Noto Sans SC',sans-serif; font-weight:300; margin-bottom:0.5rem; }
+.coin-modal-sub { font-size:15px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-bottom:2rem; letter-spacing:0.05em; }
+.coin-area { margin:1.5rem 0; }
+.coin { width:100px; height:100px; margin:0 auto 1.5rem; cursor:pointer; position:relative; transform-style:preserve-3d; transition:transform 0.6s ease; }
+.coin.spinning { animation:coinSpin 0.8s ease; }
+.coin-face { width:100%; height:100%; border-radius:50%; position:absolute; display:flex; align-items:center; justify-content:center; font-size:36px; backface-visibility:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.15); }
+.coin-yang { background:linear-gradient(135deg,#d4a843,#b8860b); color:var(--paper); }
+.coin-yin { background:linear-gradient(135deg,#8c7a5a,#6b5d43); color:var(--paper); transform:rotateY(180deg); }
+@keyframes coinSpin { 0%{transform:rotateY(0)} 100%{transform:rotateY(720deg)} }
+.coin-result { font-size:18px; font-weight:500; color:var(--ink); letter-spacing:0.1em; margin-bottom:0.5rem; min-height:28px; }
+.coin-instruction { font-size:13px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; letter-spacing:0.08em; }
+.yao-track { display:flex; gap:8px; justify-content:center; margin:1.5rem 0; align-items:flex-end; }
+.yao { display:flex; flex-direction:column; gap:3px; align-items:center; }
+.yao-line { width:28px; height:5px; border-radius:2px; background:var(--ink-ghost); transition:background 0.3s; }
+.yao.yang .yao-line { background:var(--ink); }
+.yao.yin .yao-line:first-child { background:var(--ink); }
+.yao.yin .yao-line:last-child { background:var(--ink); }
+.yao-label { font-size:9px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:3px; }
+.coin-toss-btn { width:100%; padding:14px; font-size:16px; font-family:'Noto Serif SC',serif; font-weight:500; letter-spacing:0.15em; background:var(--ink); border:none; border-radius:12px; color:var(--paper); cursor:pointer; margin-top:0.5rem; transition:background 0.2s; }
+.coin-toss-btn:hover { background:#3d3220; }
+.coin-toss-btn:disabled { opacity:0.3; cursor:not-allowed; }
+
+/* RESULT SCROLL MODAL */
+.scroll-modal-overlay { display:none; position:fixed; inset:0; background:rgba(10,8,4,0.85); z-index:150; align-items:center; justify-content:center; padding:1rem; backdrop-filter:blur(6px); }
+.scroll-modal-overlay.show { display:flex; }
+.scroll-paper {
+  background: #fdf6e3;
+  background-image: 
+    repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(180,160,100,0.15) 31px, rgba(180,160,100,0.15) 32px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  border-radius:4px;
+  width:100%; max-width:520px;
+  max-height:88vh;
+  overflow-y:auto;
+  position:relative;
+  box-shadow:0 20px 80px rgba(0,0,0,0.6), inset 0 0 60px rgba(180,140,60,0.05);
+  border:1px solid rgba(180,140,60,0.2);
+}
+.scroll-paper::before, .scroll-paper::after {
+  content:'';
+  display:block;
+  height:20px;
+  background:linear-gradient(135deg,#c8a96e,#a07840,#c8a96e);
+  border-radius:4px 4px 0 0;
+}
+.scroll-paper::after { border-radius:0 0 4px 4px; }
+.scroll-content { padding:2rem 2.5rem; }
+.scroll-gua-sym { font-size:64px; text-align:center; color:#2c1f0a; margin-bottom:6px; }
+.scroll-gua-name { font-size:20px; font-weight:700; color:#2c1f0a; text-align:center; letter-spacing:0.15em; margin-bottom:4px; }
+.scroll-gua-nature { font-size:12px; color:#9c8c6c; text-align:center; letter-spacing:0.15em; font-family:'Noto Sans SC',sans-serif; margin-bottom:1.25rem; }
+.scroll-divider { height:1px; background:linear-gradient(to right,transparent,rgba(180,140,60,0.4),transparent); margin:1rem 0; }
+.scroll-quote { font-size:18px; color:#2c1f0a; line-height:1.8; text-align:center; letter-spacing:0.1em; font-weight:500; }
+.scroll-quote-src { font-size:11px; color:#9c8c6c; text-align:center; margin-top:6px; letter-spacing:0.1em; font-family:'Noto Sans SC',sans-serif; }
+.scroll-ai-loading { font-size:13px; color:#9c8c6c; text-align:center; padding:1rem 0; font-family:'Noto Sans SC',sans-serif; display:none; animation:breathe 1.5s ease-in-out infinite; }
+.scroll-ai { font-size:17px; color:#3d2c0a; line-height:2.2; letter-spacing:0.05em; white-space:pre-wrap; margin-top:1rem; font-family:'Noto Serif SC',serif; }
+.scroll-question { font-size:13px; color:#9c8c6c; font-style:italic; text-align:center; margin-bottom:1rem; font-family:'Noto Sans SC',sans-serif; border-bottom:1px solid rgba(180,140,60,0.2); padding-bottom:1rem; }
+.scroll-disclaimer { font-size:10px; color:#b4a880; text-align:center; margin-top:1.5rem; font-family:'Noto Sans SC',sans-serif; }
+.scroll-actions { display:flex; gap:10px; margin-top:1.5rem; padding-top:1rem; border-top:1px solid rgba(180,140,60,0.2); }
+.scroll-btn { flex:1; padding:11px; font-size:13px; font-family:'Noto Sans SC',sans-serif; background:rgba(44,31,10,0.08); border:1px solid rgba(180,140,60,0.3); border-radius:8px; color:#5c4c2c; cursor:pointer; transition:all 0.2s; }
+.scroll-btn:hover { background:rgba(44,31,10,0.15); }
+
 /* TOAST */
 .toast { position:fixed; bottom:2rem; left:50%; transform:translateX(-50%); background:var(--ink); color:var(--paper); padding:10px 20px; border-radius:20px; font-size:14px; font-family:'Noto Sans SC',sans-serif; opacity:0; transition:opacity 0.3s; pointer-events:none; z-index:300; }
 .toast.show { opacity:1; }
@@ -581,6 +646,92 @@ window.goPay = async () => {
   }
 };
 
+// Coin toss state
+let tossCount = 0;
+let yaoResults = [];
+let tossBusy = false;
+
+const YAO_NAMES = ['初爻','二爻','三爻','四爻','五爻','上爻'];
+
+window.tossCoin = () => {
+  if (tossBusy || tossCount >= 6) return;
+  tossBusy = true;
+  const coin = document.getElementById('coin');
+  coin.classList.add('spinning');
+  document.getElementById('coin-btn').disabled = true;
+  document.getElementById('coin-result').textContent = '';
+
+  setTimeout(() => {
+    const isYang = Math.random() > 0.5;
+    yaoResults.push(isYang ? 1 : 0);
+    
+    // Update yao display
+    const yao = document.getElementById('yao-' + (tossCount));
+    yao.className = 'yao ' + (isYang ? 'yang' : 'yin');
+    
+    coin.classList.remove('spinning');
+    document.getElementById('coin-result').textContent = isYang ? '☀ 阳爻' : '☽ 阴爻';
+    
+    tossCount++;
+    tossBusy = false;
+
+    if (tossCount < 6) {
+      document.getElementById('coin-sub').textContent = `第${tossCount}爻已定，继续投掷`;
+      document.getElementById('coin-btn').textContent = `✦ 投掷（第${tossCount+1}次）`;
+      document.getElementById('coin-btn').disabled = false;
+      document.getElementById('coin-instruction').textContent = '点击铜钱投掷';
+    } else {
+      // All 6 yaos done - determine gua
+      document.getElementById('coin-sub').textContent = '六爻已定，卦象成！';
+      document.getElementById('coin-btn').textContent = '✦ 观看天机';
+      document.getElementById('coin-btn').onclick = revealResult;
+      document.getElementById('coin-btn').disabled = false;
+      document.getElementById('coin-instruction').textContent = '你的卦象已成，点击揭示';
+    }
+  }, 900);
+};
+
+function getGuaFromYaos(yaos) {
+  // Map yao pattern to one of our guas
+  const yangCount = yaos.filter(y => y === 1).length;
+  const idx = yangCount % guas.length;
+  return guas[idx];
+}
+
+async function revealResult() {
+  const gua = getGuaFromYaos(yaoResults);
+  currentGua = gua;
+  
+  // Hide coin modal, show scroll modal
+  document.getElementById('coin-modal').classList.remove('show');
+  document.getElementById('scroll-modal').classList.add('show');
+  
+  const q = document.getElementById('question').value.trim();
+  const cat = currentUser.displayName ? currentUser.displayName.split(' ')[0] : '朋友';
+  
+  // Fill scroll content
+  document.getElementById('scroll-question').textContent = '「' + q + '」';
+  document.getElementById('scroll-sym').textContent = gua.sym;
+  document.getElementById('scroll-name').textContent = gua.name;
+  document.getElementById('scroll-nature').textContent = gua.nature;
+  document.getElementById('scroll-quote').textContent = '「' + gua.quote + '」';
+  document.getElementById('scroll-src').textContent = gua.src;
+  document.getElementById('scroll-loading').style.display = 'block';
+  document.getElementById('scroll-ai').textContent = '';
+  aiText = '';
+
+  await callAPI(gua, q, cat);
+}
+
+window.closeScroll = () => {
+  document.getElementById('scroll-modal').classList.remove('show');
+  resetAll();
+};
+
+window.openShareFromScroll = () => {
+  openShareModal();
+};
+
 window.copyInviteLink = () => {
   const link = document.getElementById('invite-link').value;
   navigator.clipboard.writeText(link).then(() => showToast('邀请链接已复制 ✓'));
@@ -690,6 +841,22 @@ window.startDiv = async () => {
   if (!weatherContext) {
     weatherContext = await getWeatherContext();
   }
+  
+  // Reset coin toss and show coin modal
+  tossCount = 0;
+  yaoResults = [];
+  for(let i=0;i<6;i++) {
+    const yao = document.getElementById('yao-'+i);
+    if(yao) { yao.className = 'yao'; }
+  }
+  document.getElementById('coin-sub').textContent = '请专注你的问题，然后投掷';
+  document.getElementById('coin-btn').textContent = '✦ 投掷（第1次）';
+  document.getElementById('coin-btn').onclick = tossCoin;
+  document.getElementById('coin-btn').disabled = false;
+  document.getElementById('coin-result').textContent = '';
+  document.getElementById('coin-instruction').textContent = '点击铜钱投掷';
+  document.getElementById('coin-modal').classList.add('show');
+  return; // Stop here - rest handled by coin flow
   document.getElementById('result-wrap').style.display = 'none';
   document.getElementById('cat-stage').style.display = 'block';
   
@@ -732,7 +899,7 @@ async function callAPI(gua, q, cat) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ question:q, cat_name:cat, gua_name:gua.name, gua_nature:gua.nature, quote:gua.quote, quote_src:gua.src, weather_context: weather_prompt })
     });
-    document.getElementById('ai-loading').style.display = 'none';
+    document.getElementById('scroll-loading').style.display = 'none';
     const reader = res.body.getReader();
     const decoder = new TextDecoder();
     let buf = '';
@@ -753,7 +920,7 @@ async function callAPI(gua, q, cat) {
       }
     }
   } catch(e) {
-    document.getElementById('ai-loading').style.display = 'none';
+    document.getElementById('scroll-loading').style.display = 'none';
     document.getElementById('ai-resp').textContent = '本猫今日天机受阻，请稍后再试。';
   }
 }
@@ -778,6 +945,8 @@ function fallbackCopy(text, btn, orig) {
 }
 
 window.resetAll = () => {
+  document.getElementById('scroll-modal').classList.remove('show');
+  document.getElementById('coin-modal').classList.remove('show');
   document.getElementById('result-wrap').style.display = 'none';
   document.getElementById('cat-stage').style.display = 'none';
   
@@ -873,7 +1042,7 @@ window.saveCard = async () => {
       你的占卜问题及解卦内容不会被记录或储存，不会用于任何商业用途。
     </div>
     <div style="font-size:11px; color:var(--ink-ghost); font-family:'Noto Sans SC',sans-serif; margin-top:1rem; letter-spacing:0.05em;">
-      © 2026 玄猫之道 · TaoOfCat.com · Ipoh, Malaysia
+      © 2026 玄猫之道 · TaoOfCat.com
     </div>
   </div>
 </footer>
