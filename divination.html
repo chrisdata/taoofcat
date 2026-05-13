@@ -603,6 +603,53 @@ function updateLevelDisplay(divCount) {
   }
 }
 
+// Weather + time context
+let weatherContext = null;
+
+async function getWeatherContext() {
+  return new Promise((resolve) => {
+    if (!navigator.geolocation) { resolve(null); return; }
+    navigator.geolocation.getCurrentPosition(async (pos) => {
+      try {
+        const res = await fetch(API + '/weather', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ lat: pos.coords.latitude, lon: pos.coords.longitude })
+        });
+        const w = await res.json();
+        if (!w.error) resolve(w);
+        else resolve(null);
+      } catch(e) { resolve(null); }
+    }, () => resolve(null), { timeout: 5000 });
+  });
+}
+
+function getTimeContext() {
+  const h = new Date().getHours();
+  if (h >= 6 && h < 12) return { period: '早上', mood: '刚睡醒，慵懒但清醒' };
+  if (h >= 12 && h < 15) return { period: '午后', mood: '吃饱了有点懒，但洞察力强' };
+  if (h >= 15 && h < 18) return { period: '下午', mood: '精神奕奕，直接犀利' };
+  if (h >= 18 && h < 22) return { period: '傍晚', mood: '心情好，解读温柔有诗意' };
+  return { period: '深夜', mood: '神秘玄学感满满，禅意留白' };
+}
+
+function buildWeatherPrompt(weather, time) {
+  let ctx = `现在是${time.period}，本猫心情：${time.mood}。`;
+  if (weather) {
+    ctx += `用户所在地：${weather.city}${weather.country ? '，' + weather.country : ''}。`;
+    ctx += `当地天气：${weather.desc}，气温${weather.temp}°C，体感${weather.feels_like}°C。`;
+    // Add mood based on weather
+    const main = weather.main.toLowerCase();
+    if (main.includes('rain') || main.includes('drizzle')) ctx += '本猫感应到雨水的气息，解读偏向内敛沉思。';
+    else if (main.includes('thunder')) ctx += '雷雨天气，本猫警觉，解读直接有力。';
+    else if (main.includes('clear')) ctx += '晴天阳光，本猫心情舒畅，解读积极向上。';
+    else if (main.includes('cloud')) ctx += '多云天气，本猫若有所思，解读深邃。';
+    else if (main.includes('snow')) ctx += '飘雪天气，本猫神秘，解读带禅意。';
+    else if (main.includes('fog') || main.includes('mist')) ctx += '雾气弥漫，本猫神秘感倍增，解读玄妙。';
+  }
+  return ctx;
+}
+
 window.updateCount = () => {
   const q = document.getElementById('question').value;
   const count = q.length;
@@ -639,6 +686,9 @@ window.startDiv = async () => {
   }
   currentCat = cat;
   document.getElementById('div-btn').disabled = true;
+  if (!weatherContext) {
+    weatherContext = await getWeatherContext();
+  }
   document.getElementById('result-wrap').style.display = 'none';
   document.getElementById('cat-stage').style.display = 'block';
   
@@ -673,10 +723,13 @@ function showResult(gua, q, cat) {
 
 async function callAPI(gua, q, cat) {
   try {
+    const time = getTimeContext();
+    const weather = weatherContext;
+    const weather_prompt = buildWeatherPrompt(weather, time);
     const res = await fetch(API + '/divination', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ question:q, cat_name:cat, gua_name:gua.name, gua_nature:gua.nature, quote:gua.quote, quote_src:gua.src })
+      body: JSON.stringify({ question:q, cat_name:cat, gua_name:gua.name, gua_nature:gua.nature, quote:gua.quote, quote_src:gua.src, weather_context: weather_prompt })
     });
     document.getElementById('ai-loading').style.display = 'none';
     const reader = res.body.getReader();
