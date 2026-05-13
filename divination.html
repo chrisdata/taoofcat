@@ -877,7 +877,6 @@ window.tossCoin = () => {
   playCoinSound();
   const coin = document.getElementById('coin');
   coin.classList.add('spinning');
-  document.getElementById('coin-btn').disabled = true;
   document.getElementById('coin-result').textContent = '';
 
   setTimeout(() => {
@@ -889,7 +888,10 @@ window.tossCoin = () => {
     yao.className = 'yao ' + (isYang ? 'yang' : 'yin');
     
     coin.classList.remove('spinning');
+    // Restart idle animation
+    coin.style.animation = 'none';
     void coin.offsetWidth;
+    coin.style.animation = '';
     document.getElementById('coin-result').textContent = isYang ? '☀ 阳爻' : '☽ 阴爻';
     
     // Update progress dot
