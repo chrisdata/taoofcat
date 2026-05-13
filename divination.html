@@ -817,7 +817,8 @@ window.startDiv = async () => {
   if (!q || q.length < 10) { showToast('请至少输入10个字再问卦'); document.getElementById('question').focus(); return; }
   if (!document.getElementById('confirm-check').checked) { showToast('请先勾选确认框'); return; }
 
-  const cansNow = parseInt(document.getElementById('can-count').textContent);
+  const cansText = document.getElementById('can-count').textContent;
+  const cansNow = cansText === '∞' ? 999 : parseInt(cansText);
   if (cansNow <= 0) { document.getElementById('shop').classList.add('show'); return; }
 
   const admin = await isAdmin(currentUser.uid);
