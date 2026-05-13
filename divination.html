@@ -299,12 +299,12 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
 .cat-selector-title { font-size:22px; font-weight:700; color:var(--ink); letter-spacing:0.15em; text-align:center; margin-bottom:6px; }
 .cat-selector-sub { font-size:14px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; text-align:center; letter-spacing:0.05em; margin-bottom:1.5rem; line-height:1.8; }
 .cat-selector-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-bottom:1.25rem; }
-.cat-sel-card { background:rgba(255,255,255,0.7); border:1px solid var(--ink-ghost); border-radius:14px; padding:0.75rem 0.4rem; text-align:center; cursor:pointer; transition:all 0.2s; position:relative; overflow:hidden; }
-.cat-sel-card:hover { border-color:var(--ink-faint); transform:translateY(-2px); box-shadow:0 4px 16px rgba(30,22,8,0.08); }
+.cat-sel-card { background:rgba(255,255,255,0.7); border:1px solid var(--ink-ghost); border-radius:14px; padding:1rem 0.5rem; text-align:center; cursor:pointer; transition:border-color 0.2s, background 0.2s, box-shadow 0.2s; position:relative; overflow:hidden; }
+.cat-sel-card:hover { border-color:var(--ink-faint); box-shadow:0 4px 16px rgba(30,22,8,0.08); }
 .cat-sel-card.active { border-color:var(--gold); background:rgba(184,134,11,0.06); box-shadow:0 4px 20px rgba(184,134,11,0.15); }
 .cat-sel-card::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--gold); opacity:0; transition:opacity 0.2s; }
 .cat-sel-card.active::after { opacity:1; }
-.cat-sel-photo { width:60px; height:60px; border-radius:50%; object-fit:cover; display:block; margin:0 auto 8px; border:2px solid var(--ink-ghost); transition:border-color 0.2s; }
+.cat-sel-photo { width:80px; height:80px; border-radius:50%; object-fit:cover; display:block; margin:0 auto 10px; border:2px solid var(--ink-ghost); transition:border-color 0.2s; }
 .cat-sel-card.active .cat-sel-photo { border-color:var(--gold); }
 .cat-sel-element { font-size:11px; letter-spacing:0.2em; color:var(--gold); font-family:'Noto Sans SC',sans-serif; margin-bottom:2px; }
 .cat-sel-name { font-size:14px; font-weight:700; color:var(--ink); letter-spacing:0.08em; margin-bottom:2px; }
@@ -317,7 +317,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
 .cat-sel-detail-badge { display:inline-block; font-size:11px; font-family:'Noto Sans SC',sans-serif; background:rgba(184,134,11,0.1); color:var(--gold); border:1px solid rgba(184,134,11,0.3); border-radius:20px; padding:1px 8px; letter-spacing:0.08em; margin-top:2px; }
 .cat-sel-detail-text { font-size:14px; color:var(--ink-light); font-family:'Noto Sans SC',sans-serif; line-height:1.9; letter-spacing:0.03em; }
 .cat-sel-detail-quote { font-size:14px; color:var(--ink); letter-spacing:0.06em; margin-top:8px; padding-left:8px; border-left:2px solid var(--gold); font-style:italic; }
-@media(max-width:600px) { .cat-selector-grid { grid-template-columns:repeat(5,1fr); gap:6px; } .cat-sel-photo { width:44px; height:44px; } .cat-sel-name { font-size:11px; } .cat-sel-domain { display:none; } }
+@media(max-width:600px) { .cat-selector-grid { grid-template-columns:repeat(5,1fr); gap:6px; } .cat-sel-photo { width:52px; height:52px; } .cat-sel-name { font-size:11px; } .cat-sel-domain { display:none; } }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
