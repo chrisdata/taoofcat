@@ -394,35 +394,14 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
   <!-- MAIN ORACLE SECTION -->
   <div id="main-section" style="display:none;">
 
-    <!-- LIVE COUNTER -->
-    <div class="live-counter" id="live-counter" style="display:none;">
-      <div class="live-counter-number" id="counter-number">—</div>
-      <div class="live-counter-label"><span class="live-dot"></span>猫奴已加入</div>
-    </div>
-
-    <!-- CANS -->
-    <div class="cans-display">
-      <img src="can-icon.png" class="cans-icon" alt="猫罐头" style="width:80px;height:80px;object-fit:contain;">
-      <div class="cans-number" id="can-count">…</div>
-      <div class="cans-label">罐 剩余罐头</div>
-      <div class="level-badge" id="level-badge">
-        <span id="level-icon">🐾</span>
-        <span class="level-name" id="level-name">新手</span>
-        <span class="level-count" id="level-count">0 次占卜</span>
-      </div>
-      <div class="level-progress" id="level-progress-wrap">
-        <div class="level-progress-bar" id="level-progress-bar" style="width:0%"></div>
-      </div>
-      <button class="cans-buy-link" id="buy-link" onclick="document.getElementById('shop').classList.add('show')">＋ 补充罐头</button>
-    </div>
-
-    <!-- INVITE -->
-    <div id="invite-section" style="text-align:center; margin-bottom:2rem; display:none;">
-      <div style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-bottom:8px; letter-spacing:0.05em;">邀请朋友注册，双方各得2罐罐头</div>
-      <div style="display:flex; gap:8px; max-width:400px; margin:0 auto;">
-        <input type="text" id="invite-link" readonly style="flex:1; padding:8px 12px; border:1px solid var(--ink-ghost); border-radius:8px; font-size:12px; background:rgba(255,255,255,0.8); color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif;">
-        <button onclick="copyInviteLink()" style="padding:8px 16px; background:var(--ink); color:var(--paper); border:none; border-radius:8px; font-size:12px; cursor:pointer; font-family:'Noto Sans SC',sans-serif; white-space:nowrap;">复制链接</button>
-      </div>
+    <!-- Hidden elements for JS compatibility -->
+    <div style="display:none;">
+      <div id="can-count">…</div>
+      <div id="level-badge"><span id="level-icon">🐾</span><span id="level-name">新手</span><span id="level-count">0</span></div>
+      <div id="level-progress-wrap"><div id="level-progress-bar"></div></div>
+      <button id="buy-link"></button>
+      <input id="invite-link">
+      <div id="invite-section"></div>
     </div>
 
     <div class="oracle-focus-overlay" id="oracle-overlay" onclick="document.getElementById('question').blur()"></div>
