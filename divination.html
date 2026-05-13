@@ -90,43 +90,49 @@ textarea { height:100px; line-height:1.7; }
   background: rgba(255,255,255,0.5);
   border: 1px solid #d4c8a8;
   border-radius: 16px;
-  padding: 2rem 1.75rem;
+  padding: 1.25rem;
   margin-bottom: 1.5rem;
+  display: flex;
+  gap: 0;
+  align-items: stretch;
 }
 
 .phil-block {
+  flex: 1;
   text-align: center;
-  padding: 1rem 0;
+  padding: 0.75rem 1rem;
+  border-right: 1px solid #d4c8a8;
+}
+
+.phil-block:last-child {
+  border-right: none;
 }
 
 .phil-icon {
-  font-size: 28px;
-  margin-bottom: 0.5rem;
+  font-size: 22px;
+  margin-bottom: 0.4rem;
 }
 
 .phil-quote {
-  font-size: 18px;
+  font-size: 13px;
   font-weight: 500;
   color: #2c2416;
-  letter-spacing: 0.1em;
-  margin-bottom: 0.75rem;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
 }
 
 .phil-text {
-  font-size: 15px;
-  color: #5c4c2c;
-  line-height: 1.9;
-  letter-spacing: 0.04em;
+  font-size: 12px;
+  color: #7a6040;
+  line-height: 1.7;
+  letter-spacing: 0.02em;
   font-family: 'Noto Sans SC', sans-serif;
   font-weight: 300;
 }
 
 .phil-divider {
-  text-align: center;
-  color: #b4a880;
-  font-size: 12px;
-  letter-spacing: 0.5em;
-  padding: 0.75rem 0;
+  display: none;
 }
 
 .cost-note { font-size:12px; color:#b4a880; text-align:center; margin-top:10px; font-family:'Noto Sans SC',sans-serif; font-weight:300; letter-spacing:0.05em; }
@@ -636,6 +642,77 @@ window.resetAll = () => {
 };
 
 document.getElementById('qty-price').textContent = '合计 $' + (qty * 0.99).toFixed(2);
+
+// Share functions
+window.openShareModal = () => {
+  if (!currentGua || !aiText) { showToast('请先完成占卜'); return; }
+  document.getElementById('pc-sym').textContent = currentGua.sym;
+  document.getElementById('pc-name').textContent = currentGua.name + ' · ' + currentGua.nature;
+  document.getElementById('pc-quote').textContent = '「' + currentGua.quote + '」';
+  document.getElementById('pc-src').textContent = currentGua.src;
+  const aiShort = aiText.length > 120 ? aiText.substring(0, 120) + '…' : aiText;
+  document.getElementById('pc-ai').textContent = aiShort;
+  document.getElementById('share-modal').classList.add('show');
+};
+
+window.shareToThreads = () => {
+  const text = encodeURIComponent('【玄猫之道占卜】' + currentGua.name + '
+「' + currentGua.quote + '」
+
+' + aiText.substring(0,100) + '…
+
+taoofcat.com/divination.html');
+  window.open('https://www.threads.net/intent/post?text=' + text, '_blank');
+};
+
+window.shareToIG = () => {
+  const text = '【玄猫之道 · ' + currentCat + '占卜结果】
+' + currentGua.name + '
+「' + currentGua.quote + '」
+
+' + aiText.substring(0,150) + '
+
+taoofcat.com/divination.html';
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(() => showToast('文字已复制，请前往Instagram贴上'));
+  }
+};
+
+window.shareToWA = () => {
+  const text = encodeURIComponent('【玄猫之道 · ' + currentCat + '占卜结果】
+' + currentGua.name + '
+「' + currentGua.quote + '」
+
+' + aiText.substring(0,150) + '
+
+taoofcat.com/divination.html');
+  window.open('https://wa.me/?text=' + text, '_blank');
+};
+
+window.copyShareText = () => {
+  const text = '【玄猫之道 · ' + currentCat + '占卜结果】
+' + currentGua.name + ' · ' + currentGua.nature + '
+
+「' + currentGua.quote + '」
+' + currentGua.src + '
+
+' + aiText + '
+
+— taoofcat.com/divination.html';
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(() => showToast('已复制 ✓'));
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.cssText = 'position:fixed;opacity:0;';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    showToast('已复制 ✓');
+  }
+};
+
+window.saveCard = () => {
+  showToast('请截图保存卡片 📱');
+};
 </script>
 </body>
 </html>
