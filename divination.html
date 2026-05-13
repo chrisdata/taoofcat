@@ -353,20 +353,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
       不是迷信，是智慧。<br>
       不是预测命运，是看清此刻的方向。
     </p>
-    <div style="display:flex; gap:2rem; justify-content:center; margin-top:1.5rem; flex-wrap:wrap;">
-      <div style="text-align:center;">
-        <div style="font-size:24px; margin-bottom:4px;">☯</div>
-        <div style="font-size:11px; color:rgba(212,168,67,0.8); font-family:'Noto Sans SC',sans-serif; letter-spacing:0.1em;">阴阳平衡</div>
-      </div>
-      <div style="text-align:center;">
-        <div style="font-size:24px; margin-bottom:4px;">䷿</div>
-        <div style="font-size:11px; color:rgba(212,168,67,0.8); font-family:'Noto Sans SC',sans-serif; letter-spacing:0.1em;">六十四卦</div>
-      </div>
-      <div style="text-align:center;">
-        <div style="font-size:24px; margin-bottom:4px;">🐱</div>
-        <div style="font-size:11px; color:rgba(212,168,67,0.8); font-family:'Noto Sans SC',sans-serif; letter-spacing:0.1em;">猫咪解读</div>
-      </div>
-    </div>
+
   </div>
 </div>
 
@@ -948,7 +935,7 @@ function getGuaFromYaos(yaos) {
   return guas[idx];
 }
 
-async function revealResult() {
+window.revealResult = async function() {
   const gua = getGuaFromYaos(yaoResults);
   currentGua = gua;
 
@@ -1055,39 +1042,27 @@ window.copyInviteLink = () => {
   navigator.clipboard.writeText(link).then(() => showToast('邀请链接已复制 ✓'));
 };
 
+let audioCtx = null;
 function playCoinSound() {
   try {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const ctx = audioCtx;
+    const t = ctx.currentTime;
     
-    // Metal clink sound
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    const osc2 = ctx.createOscillator();
-    const gain2 = ctx.createGain();
-    
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    osc2.connect(gain2);
-    gain2.connect(ctx.destination);
-    
-    // High metallic ping
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(800, ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.3);
-    gain.gain.setValueAtTime(0.3, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
-    
-    // Harmonics
-    osc2.type = 'sine';
-    osc2.frequency.setValueAtTime(1600, ctx.currentTime);
-    osc2.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.2);
-    gain2.gain.setValueAtTime(0.15, ctx.currentTime);
-    gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
-    
-    osc.start(ctx.currentTime);
-    osc.stop(ctx.currentTime + 0.4);
-    osc2.start(ctx.currentTime);
-    osc2.stop(ctx.currentTime + 0.3);
+    // Consistent metallic clink - same every time
+    [800, 1200, 1800].forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, t);
+      osc.frequency.exponentialRampToValueAtTime(freq * 0.5, t + 0.25);
+      gain.gain.setValueAtTime(0.2 - i * 0.05, t);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
+      osc.start(t);
+      osc.stop(t + 0.3);
+    });
   } catch(e) {}
 }
 
