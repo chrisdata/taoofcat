@@ -393,6 +393,54 @@ nav.scrolled { background:rgba(244,237,224,0.95); backdrop-filter:blur(8px); bor
 </div>
 
 <!-- SHARE MODAL -->
+<!-- COIN TOSS MODAL -->
+<div class="coin-modal-overlay" id="coin-modal">
+  <div class="coin-modal">
+    <div class="coin-modal-title">投掷铜钱 · 天机感应</div>
+    <div class="coin-modal-sub" id="coin-sub">请专注你的问题，然后投掷</div>
+    <div class="coin-area">
+      <div class="coin" id="coin" onclick="tossCoin()">
+        <div class="coin-face coin-yang">☰</div>
+        <div class="coin-face coin-yin">☷</div>
+      </div>
+      <div class="coin-result" id="coin-result"></div>
+      <div class="coin-instruction" id="coin-instruction">点击铜钱投掷</div>
+    </div>
+    <div class="yao-track" id="yao-track">
+      <div class="yao" id="yao-0"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label">初</div></div>
+      <div class="yao" id="yao-1"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label">二</div></div>
+      <div class="yao" id="yao-2"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label">三</div></div>
+      <div class="yao" id="yao-3"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label">四</div></div>
+      <div class="yao" id="yao-4"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label">五</div></div>
+      <div class="yao" id="yao-5"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label">上</div></div>
+    </div>
+    <button class="coin-toss-btn" id="coin-btn" onclick="tossCoin()">✦ 投掷（第1次）</button>
+  </div>
+</div>
+
+<!-- SCROLL RESULT MODAL -->
+<div class="scroll-modal-overlay" id="scroll-modal">
+  <div class="scroll-paper">
+    <div class="scroll-content">
+      <div class="scroll-question" id="scroll-question"></div>
+      <div class="scroll-gua-sym" id="scroll-sym"></div>
+      <div class="scroll-gua-name" id="scroll-name"></div>
+      <div class="scroll-gua-nature" id="scroll-nature"></div>
+      <div class="scroll-divider"></div>
+      <div class="scroll-quote" id="scroll-quote"></div>
+      <div class="scroll-quote-src" id="scroll-src"></div>
+      <div class="scroll-divider"></div>
+      <div class="scroll-ai-loading" id="scroll-loading">本猫正在细读天机...</div>
+      <div class="scroll-ai" id="scroll-ai"></div>
+      <div class="scroll-disclaimer">⚠ 本卦象仅供参考，不构成任何建议</div>
+      <div class="scroll-actions">
+        <button class="scroll-btn" onclick="openShareFromScroll()">✦ 分享</button>
+        <button class="scroll-btn" onclick="closeScroll()">再问一次</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="share-modal-overlay" id="share-modal">
   <div class="share-modal">
     <div class="postcard" id="postcard">
