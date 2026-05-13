@@ -53,12 +53,12 @@ nav.scrolled { background:rgba(244,237,224,0.95); backdrop-filter:blur(8px); bor
 .cans-buy-link:hover { color:var(--gold-light); }
 
 /* ORACLE SECTION */
-.oracle-section { background:rgba(255,255,255,0.6); border:1px solid var(--ink-ghost); border-radius:20px; padding:2.5rem; margin-bottom:1.5rem; position:relative; overflow:hidden; }
+.oracle-section { background:rgba(255,255,255,0.85); border:1px solid var(--ink-ghost); border-radius:20px; padding:2.5rem; margin-bottom:1.5rem; position:relative; overflow:hidden; box-shadow:0 8px 40px rgba(30,22,8,0.08); }
 .oracle-section::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(to right,transparent,var(--gold),transparent); }
-.oracle-label { font-size:11px; letter-spacing:0.4em; color:var(--gold); font-family:'Noto Sans SC',sans-serif; font-weight:300; text-transform:uppercase; margin-bottom:1.5rem; text-align:center; }
-.oracle-question { width:100%; background:rgba(255,255,255,0.8); border:1px solid var(--ink-ghost); border-radius:12px; padding:16px 20px; font-size:17px; color:var(--ink); font-family:'Noto Serif SC',serif; outline:none; resize:none; transition:border-color 0.3s; line-height:1.8; }
-.oracle-question:focus { border-color:var(--gold); background:#fff; }
-.oracle-question::placeholder { color:var(--ink-faint); font-size:15px; }
+.oracle-label { font-size:13px; letter-spacing:0.4em; color:var(--gold); font-family:'Noto Sans SC',sans-serif; font-weight:500; text-transform:uppercase; margin-bottom:0.75rem; text-align:center; }
+.oracle-question { width:100%; background:#ffffff; border:2px solid var(--ink-ghost); border-radius:14px; padding:20px 24px; font-size:19px; color:var(--ink); font-family:'Noto Serif SC',serif; outline:none; resize:none; transition:border-color 0.3s, box-shadow 0.3s; line-height:2; min-height:160px; }
+.oracle-question:focus { border-color:var(--gold); box-shadow:0 0 0 4px rgba(184,134,11,0.1); }
+.oracle-question::placeholder { color:var(--ink-faint); font-size:16px; line-height:2; }
 .oracle-btn { width:100%; margin-top:1.75rem; padding:18px; font-size:18px; font-weight:700; font-family:'Noto Serif SC',serif; letter-spacing:0.2em; background:var(--ink); border:none; border-radius:14px; color:var(--paper); cursor:pointer; transition:background 0.2s, transform 0.1s; }
 .oracle-btn:hover { background:#3d3220; transform:translateY(-1px); }
 .oracle-btn:active { transform:translateY(0); }
@@ -232,7 +232,21 @@ nav.scrolled { background:rgba(244,237,224,0.95); backdrop-filter:blur(8px); bor
     <!-- ORACLE INPUT -->
     <div class="oracle-section">
       <div class="oracle-label">问卦 · Ask the Oracle</div>
-      <textarea class="oracle-question" id="question" rows="5" placeholder="喵~ 欲问何事？&#10;&#10;例如：我现在的方向对吗？要不要放弃现在的工作？这段感情值得继续吗？"></textarea>
+      <div style="font-size:22px; font-weight:700; color:var(--ink); letter-spacing:0.1em; text-align:center; margin-bottom:0.5rem;">你想问什么？</div>
+      <div style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-bottom:12px; line-height:1.7; letter-spacing:0.03em; text-align:center;">
+        💡 好问题让傻猪给出更准确的解读。建议说明<strong>具体情境</strong>，例如：「我在考虑换工作，对方薪水更高但需要搬家，我该怎么决定？」
+      </div>
+      <textarea class="oracle-question" id="question" rows="5" maxlength="200" placeholder="喵~ 欲问何事？&#10;&#10;例如：我现在的方向对吗？要不要放弃现在的工作？这段感情值得继续吗？" oninput="updateCount()"></textarea>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px; margin-bottom:1.25rem;">
+        <span style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif;">最少10字，最多200字</span>
+        <span id="char-count" style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif;">0 / 200</span>
+      </div>
+      <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; margin-bottom:1.25rem; padding:12px 16px; background:rgba(184,134,11,0.06); border:1px solid rgba(184,134,11,0.2); border-radius:10px;">
+        <input type="checkbox" id="confirm-check" style="width:18px; height:18px; margin-top:2px; accent-color:var(--gold); flex-shrink:0; cursor:pointer;">
+        <span style="font-size:13px; color:var(--ink-light); font-family:'Noto Sans SC',sans-serif; line-height:1.7; letter-spacing:0.03em;">
+          我确认问题已清楚填写，了解每次占卜消耗1罐罐头，结果仅供参考
+        </span>
+      </label>
       <button class="oracle-btn" id="div-btn" onclick="startDiv()">✦ 请傻猪占卜（消耗1罐罐头）</button>
       <div class="oracle-note">$0.99 / 罐 · 罐头永久保存不过期</div>
     </div>
@@ -471,11 +485,20 @@ window.goPay = async () => {
   }
 };
 
+window.updateCount = () => {
+  const q = document.getElementById('question').value;
+  const count = q.length;
+  const el = document.getElementById('char-count');
+  el.textContent = count + ' / 200';
+  el.style.color = count < 10 ? '#c0392b' : count > 180 ? '#e67e22' : 'var(--ink-faint)';
+};
+
 window.startDiv = async () => {
   if (!currentUser) { showToast('请先登录'); return; }
   const q = document.getElementById('question').value.trim();
   const cat = currentUser.displayName ? currentUser.displayName.split(' ')[0] : '朋友';
-  if (!q) { document.getElementById('question').focus(); return; }
+  if (!q || q.length < 10) { showToast('请至少输入10个字再问卦'); document.getElementById('question').focus(); return; }
+  if (!document.getElementById('confirm-check').checked) { showToast('请先勾选确认框'); return; }
 
   const cansNow = parseInt(document.getElementById('can-count').textContent);
   if (cansNow <= 0) { document.getElementById('shop').classList.add('show'); return; }
@@ -578,6 +601,8 @@ window.resetAll = () => {
   
   document.getElementById('div-btn').disabled = false;
   document.getElementById('question').value = '';
+  document.getElementById('confirm-check').checked = false;
+  document.getElementById('char-count').textContent = '0 / 200';
   window.scrollTo({top:0, behavior:'smooth'});
 };
 
