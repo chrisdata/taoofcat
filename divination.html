@@ -889,7 +889,7 @@ window.tossCoin = () => {
     yao.className = 'yao ' + (isYang ? 'yang' : 'yin');
     
     coin.classList.remove('spinning');
-    void coin.offsetWidth; // force reflow for re-trigger
+    void coin.offsetWidth;
     document.getElementById('coin-result').textContent = isYang ? '☀ 阳爻' : '☽ 阴爻';
     
     // Update progress dot
