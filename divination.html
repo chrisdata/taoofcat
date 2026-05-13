@@ -328,7 +328,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
   <a href="/" class="nav-brand">玄猫之道</a>
   <div class="nav-right">
     <div id="nav-user" style="display:none; position:relative;">
-      <div class="user-chip" onclick="toggleProfile()" style="cursor:pointer;">
+      <div class="user-chip" onclick="window.toggleProfile()" style="cursor:pointer;">
         <img class="user-avatar" id="user-avatar" src="" alt="">
         <span class="user-name" id="user-name"></span>
         <span style="font-size:10px; color:var(--ink-faint); margin-left:2px;">▾</span>
@@ -358,7 +358,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
           <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-bottom:6px; text-align:center; letter-spacing:0.05em;">邀请朋友，双方各得2罐</div>
           <div style="display:flex; gap:6px; margin-bottom:8px;">
             <input type="text" id="invite-link-p" readonly style="flex:1; padding:6px 10px; border:1px solid var(--ink-ghost); border-radius:8px; font-size:11px; background:rgba(255,255,255,0.8); color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif;">
-            <button onclick="copyInviteLinkP()" style="padding:6px 10px; background:var(--ink); color:var(--paper); border:none; border-radius:8px; font-size:11px; cursor:pointer; font-family:'Noto Sans SC',sans-serif; white-space:nowrap;">复制</button>
+            <button onclick="window.copyInviteLinkP()" style="padding:6px 10px; background:var(--ink); color:var(--paper); border:none; border-radius:8px; font-size:11px; cursor:pointer; font-family:'Noto Sans SC',sans-serif; white-space:nowrap;">复制</button>
           </div>
           <!-- Social share icons -->
           <div style="display:flex; gap:8px; justify-content:center;">
@@ -384,7 +384,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
         <button onclick="signOut(); toggleProfile();" style="width:100%; padding:8px; background:transparent; border:1px solid var(--ink-ghost); border-radius:8px; font-size:12px; color:var(--ink-faint); cursor:pointer; font-family:'Noto Sans SC',sans-serif;">退出登录</button>
       </div>
     </div>
-    <button id="nav-login-btn" class="nav-login-btn" onclick="signInWithGoogle()">登录</button>
+    <button id="nav-login-btn" class="nav-login-btn" onclick="window.signInWithGoogle()">登录</button>
   </div>
 </nav>
 
@@ -417,7 +417,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
       <div class="login-wall-sym">☯</div>
       <div class="login-wall-title">请先登录</div>
       <div class="login-wall-sub">登录后罐头永久保存<br>换设备也不会丢失</div>
-      <button class="google-btn" onclick="signInWithGoogle()">
+      <button class="google-btn" onclick="window.signInWithGoogle()">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
           <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
@@ -492,7 +492,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
           <div class="cat-sel-detail-text" id="cat-detail-text"></div>
           <div class="cat-sel-detail-quote" id="cat-detail-quote"></div>
         </div>
-        <button class="oracle-btn" id="cat-confirm-btn" onclick="confirmCatSelection()" style="opacity:0.3; pointer-events:none;">请选择你的占卜师</button>
+        <button class="oracle-btn" id="cat-confirm-btn" onclick="window.confirmCatSelection()" style="opacity:0.3; pointer-events:none;">请选择你的占卜师</button>
       </div>
     </div>
 
@@ -544,7 +544,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
           我确认问题已清楚填写，了解每次占卜消耗1罐罐头，结果仅供参考
         </span>
       </label>
-      <button class="oracle-btn" id="div-btn" onclick="startDiv()">✦ 投币问卦（消耗1罐罐头）</button>
+      <button class="oracle-btn" id="div-btn" onclick="window.startDiv()">✦ 投币问卦（消耗1罐罐头）</button>
       <div class="oracle-note">$0.99 / 罐 · 罐头永久保存不过期</div>
     </div>
 
@@ -569,8 +569,8 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
         <div class="disclaimer">⚠ 本卦象仅供参考，不构成任何建议。一切决定请以自身判断为准。</div>
       </div>
       <div class="result-actions">
-        <button class="result-btn" onclick="openShareModal()">✦ 分享占卜</button>
-        <button class="result-btn" onclick="resetAll()">再问一次</button>
+        <button class="result-btn" onclick="window.openShareModal()">✦ 分享占卜</button>
+        <button class="result-btn" onclick="window.resetAll()">再问一次</button>
       </div>
     </div>
 
@@ -596,7 +596,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
     </div>
     <div class="prep-divider"></div>
     <div class="prep-note">一事一占，问完这件事再问下一件。<br>问了就信，信了就放下。</div>
-    <button class="prep-btn" onclick="startCoinToss()">✦ 我已准备好，开始投币</button>
+    <button class="prep-btn" onclick="window.startCoinToss()">✦ 我已准备好，开始投币</button>
   </div>
 </div>
 
@@ -604,13 +604,13 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
 <div class="coin-modal-overlay" id="coin-modal">
   <div class="coin-modal">
     <div style="text-align:right; margin-bottom:-1rem;">
-      <button onclick="closeCoinModal()" style="background:none;border:none;font-size:18px;color:var(--ink-faint);cursor:pointer;padding:0;">✕</button>
+      <button onclick="window.closeCoinModal()" style="background:none;border:none;font-size:18px;color:var(--ink-faint);cursor:pointer;padding:0;">✕</button>
     </div>
     <div class="coin-modal-title">投掷铜钱 · 天机感应</div>
     <div class="coin-modal-sub" id="coin-sub">请专注你的问题，然后投掷</div>
     <div style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:-1rem; margin-bottom:1.5rem; letter-spacing:0.05em;">共需投掷 <strong style="color:var(--gold);">6次</strong>，每次一爻，六爻成卦</div>
     <div class="coin-area">
-      <div class="coin-wrap" onclick="tossCoin()">
+      <div class="coin-wrap" onclick="window.tossCoin()">
         <div class="coin" id="coin">
           <img src="coin.png" style="width:100%;height:100%;object-fit:contain;border-radius:50%;">
         </div>
@@ -636,7 +636,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
     </div>
     <div id="coin-instruction" style="font-size:13px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; letter-spacing:0.08em; margin-top:0.5rem; min-height:20px;"></div>
     <div id="coin-reveal-btn" style="display:none; margin-top:1.25rem;">
-      <button class="coin-toss-btn" onclick="revealResult()">✦ 观看天机</button>
+      <button class="coin-toss-btn" onclick="window.revealResult()">✦ 观看天机</button>
     </div>
   </div>
 </div>
@@ -658,8 +658,8 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
       <div class="scroll-ai" id="scroll-ai"></div>
       <div class="scroll-disclaimer">⚠ 本卦象仅供参考，不构成任何建议</div>
       <div class="scroll-actions">
-        <button class="scroll-btn" onclick="openShareFromScroll()">✦ 分享 / 保存</button>
-        <button class="scroll-btn" onclick="closeScroll()">再问一次（关闭）</button>
+        <button class="scroll-btn" onclick="window.openShareFromScroll()">✦ 分享 / 保存</button>
+        <button class="scroll-btn" onclick="window.closeScroll()">再问一次（关闭）</button>
       </div>
     </div>
   </div>
@@ -752,7 +752,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
       <button class="qty-btn" onclick="changeQty(1)">＋</button>
     </div>
     <div class="qty-price" id="qty-price">合计 $4.95</div>
-    <button class="pay-btn" onclick="goPay()">前往付款</button>
+    <button class="pay-btn" onclick="window.goPay()">前往付款</button>
     <button class="modal-close" onclick="document.getElementById('shop').classList.remove('show')">关闭</button>
   </div>
 </div>
@@ -810,6 +810,7 @@ async function loadUserCount() {
 }
 
 
+const guas = [
   { name:"乾卦·天", sym:"䷀", quote:"天行健，君子以自强不息", src:"《易经·乾》", nature:"刚健进取" },
   { name:"坤卦·地", sym:"䷁", quote:"地势坤，君子以厚德载物", src:"《易经·坤》", nature:"包容承载" },
   { name:"屯卦·初生", sym:"䷂", quote:"信言不美，美言不信", src:"《道德经·八十一章》", nature:"艰难起步" },
