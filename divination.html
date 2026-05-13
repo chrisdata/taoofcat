@@ -292,9 +292,9 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
 
 /* CAT SELECTOR */
 .cat-selector-section { margin-bottom:2rem; }
-.cat-selector-label { font-size:11px; letter-spacing:0.4em; color:var(--gold); font-family:'Noto Sans SC',sans-serif; font-weight:500; text-transform:uppercase; margin-bottom:1rem; text-align:center; }
-.cat-selector-title { font-size:18px; font-weight:700; color:var(--ink); letter-spacing:0.15em; text-align:center; margin-bottom:6px; }
-.cat-selector-sub { font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; text-align:center; letter-spacing:0.05em; margin-bottom:1.5rem; line-height:1.7; }
+.cat-selector-label { font-size:12px; letter-spacing:0.4em; color:var(--gold); font-family:'Noto Sans SC',sans-serif; font-weight:500; text-transform:uppercase; margin-bottom:1rem; text-align:center; }
+.cat-selector-title { font-size:22px; font-weight:700; color:var(--ink); letter-spacing:0.15em; text-align:center; margin-bottom:6px; }
+.cat-selector-sub { font-size:14px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; text-align:center; letter-spacing:0.05em; margin-bottom:1.5rem; line-height:1.8; }
 .cat-selector-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-bottom:1.25rem; }
 .cat-sel-card { background:rgba(255,255,255,0.7); border:1px solid var(--ink-ghost); border-radius:14px; padding:0.75rem 0.4rem; text-align:center; cursor:pointer; transition:all 0.2s; position:relative; overflow:hidden; }
 .cat-sel-card:hover { border-color:var(--ink-faint); transform:translateY(-2px); box-shadow:0 4px 16px rgba(30,22,8,0.08); }
@@ -303,18 +303,18 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
 .cat-sel-card.active::after { opacity:1; }
 .cat-sel-photo { width:60px; height:60px; border-radius:50%; object-fit:cover; display:block; margin:0 auto 8px; border:2px solid var(--ink-ghost); transition:border-color 0.2s; }
 .cat-sel-card.active .cat-sel-photo { border-color:var(--gold); }
-.cat-sel-element { font-size:9px; letter-spacing:0.2em; color:var(--gold); font-family:'Noto Sans SC',sans-serif; margin-bottom:2px; }
-.cat-sel-name { font-size:12px; font-weight:700; color:var(--ink); letter-spacing:0.08em; margin-bottom:2px; }
-.cat-sel-domain { font-size:9px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; line-height:1.4; letter-spacing:0.02em; }
+.cat-sel-element { font-size:11px; letter-spacing:0.2em; color:var(--gold); font-family:'Noto Sans SC',sans-serif; margin-bottom:2px; }
+.cat-sel-name { font-size:14px; font-weight:700; color:var(--ink); letter-spacing:0.08em; margin-bottom:2px; }
+.cat-sel-domain { font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; line-height:1.5; letter-spacing:0.02em; }
 .cat-sel-detail { background:rgba(255,255,255,0.6); border:1px solid var(--ink-ghost); border-radius:12px; padding:1rem 1.25rem; margin-bottom:1.25rem; min-height:80px; transition:all 0.3s; display:none; }
 .cat-sel-detail.show { display:block; }
 .cat-sel-detail-top { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
 .cat-sel-detail-photo { width:44px; height:44px; border-radius:50%; object-fit:cover; border:1.5px solid var(--gold); flex-shrink:0; }
-.cat-sel-detail-name { font-size:15px; font-weight:700; color:var(--ink); letter-spacing:0.1em; }
-.cat-sel-detail-badge { display:inline-block; font-size:10px; font-family:'Noto Sans SC',sans-serif; background:rgba(184,134,11,0.1); color:var(--gold); border:1px solid rgba(184,134,11,0.3); border-radius:20px; padding:1px 8px; letter-spacing:0.08em; margin-top:2px; }
-.cat-sel-detail-text { font-size:12px; color:var(--ink-light); font-family:'Noto Sans SC',sans-serif; line-height:1.8; letter-spacing:0.03em; }
-.cat-sel-detail-quote { font-size:13px; color:var(--ink); letter-spacing:0.06em; margin-top:8px; padding-left:8px; border-left:2px solid var(--gold); font-style:italic; }
-@media(max-width:600px) { .cat-selector-grid { grid-template-columns:repeat(5,1fr); gap:6px; } .cat-sel-photo { width:44px; height:44px; } .cat-sel-name { font-size:10px; } .cat-sel-domain { display:none; } }
+.cat-sel-detail-name { font-size:17px; font-weight:700; color:var(--ink); letter-spacing:0.1em; }
+.cat-sel-detail-badge { display:inline-block; font-size:11px; font-family:'Noto Sans SC',sans-serif; background:rgba(184,134,11,0.1); color:var(--gold); border:1px solid rgba(184,134,11,0.3); border-radius:20px; padding:1px 8px; letter-spacing:0.08em; margin-top:2px; }
+.cat-sel-detail-text { font-size:14px; color:var(--ink-light); font-family:'Noto Sans SC',sans-serif; line-height:1.9; letter-spacing:0.03em; }
+.cat-sel-detail-quote { font-size:14px; color:var(--ink); letter-spacing:0.06em; margin-top:8px; padding-left:8px; border-left:2px solid var(--gold); font-style:italic; }
+@media(max-width:600px) { .cat-selector-grid { grid-template-columns:repeat(5,1fr); gap:6px; } .cat-sel-photo { width:44px; height:44px; } .cat-sel-name { font-size:11px; } .cat-sel-domain { display:none; } }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
@@ -506,7 +506,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
       </div>
       <div style="font-size:18px; font-weight:700; color:var(--ink); letter-spacing:0.08em; text-align:left; margin-bottom:0.5rem;" id="oracle-ask-title">喵~ 欲问何事？</div>
       <div style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-bottom:12px; line-height:1.7; letter-spacing:0.03em; text-align:left;">
-        💡 好问题让傻猪给出更准确的解读。建议说明<strong>具体情境</strong>，例如：「我在考虑换工作，对方薪水更高但需要搬家，我该怎么决定？」
+        ※ 好问题让傻猪给出更准确的解读。建议说明<strong>具体情境</strong>，例如：「我在考虑换工作，对方薪水更高但需要搬家，我该怎么决定？」
       </div>
       <textarea class="oracle-question" id="question" rows="5" maxlength="200" placeholder="" oninput="updateCount()" onfocus="document.getElementById('oracle-overlay').classList.add('show'); document.querySelector('.oracle-section').classList.add('focused')" onblur="document.getElementById('oracle-overlay').classList.remove('show'); document.querySelector('.oracle-section').classList.remove('focused')"></textarea>
       <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px; margin-bottom:8px;">
@@ -514,7 +514,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
         <span id="char-count" style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif;">0 / 200</span>
       </div>
       <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-bottom:1.25rem; letter-spacing:0.03em;">
-        🔒 你的问题不会被储存，仅用于本次占卜
+        ✦ 你的问题不会被储存，仅用于本次占卜
       </div>
       <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; margin-bottom:1.25rem; padding:12px 16px; background:rgba(184,134,11,0.06); border:1px solid rgba(184,134,11,0.2); border-radius:10px;">
         <input type="checkbox" id="confirm-check" style="width:18px; height:18px; margin-top:2px; accent-color:var(--gold); flex-shrink:0; cursor:pointer;">
@@ -694,10 +694,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
 <div class="toast" id="toast"></div>
 
 <!-- LIVE COUNTER - fixed bottom right -->
-<div id="live-counter" style="display:none; position:fixed; bottom:1.5rem; right:1.5rem; background:rgba(30,22,8,0.85); color:#f4ede0; border-radius:20px; padding:6px 14px; font-family:'Noto Sans SC',sans-serif; font-size:12px; letter-spacing:0.05em; backdrop-filter:blur(8px); z-index:40; pointer-events:none;">
-  <span class="live-dot" style="background:#4caf50;"></span>
-  <span id="counter-number">—</span> 猫奴已加入
-</div>
+<!-- live counter removed -->
 
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
@@ -720,19 +717,7 @@ const provider = new GoogleAuthProvider();
 
 const API = 'https://web-production-907c5.up.railway.app';
 
-// Live user counter
-async function loadUserCount() {
-  try {
-    const coll = collection(db, 'users');
-    const snapshot = await getCountFromServer(coll);
-    const count = snapshot.data().count;
-    document.getElementById('counter-number').textContent = count.toLocaleString();
-    document.getElementById('live-counter').style.display = 'block';
-  } catch(e) {
-    console.log('Counter error:', e);
-  }
-}
-loadUserCount();
+
 
 const guas = [
   { name:"乾卦·天", sym:"䷀", quote:"天行健，君子以自强不息", src:"《易经·乾》", nature:"刚健进取" },
@@ -1139,27 +1124,12 @@ window.copyInviteLink = () => {
   navigator.clipboard.writeText(link).then(() => showToast('邀请链接已复制 ✓'));
 };
 
-let audioCtx = null;
+let coinAudio = null;
 function playCoinSound() {
   try {
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const ctx = audioCtx;
-    const t = ctx.currentTime;
-    
-    // Consistent metallic clink - same every time
-    [800, 1200, 1800].forEach((freq, i) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(freq, t);
-      osc.frequency.exponentialRampToValueAtTime(freq * 0.5, t + 0.25);
-      gain.gain.setValueAtTime(0.2 - i * 0.05, t);
-      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
-      osc.start(t);
-      osc.stop(t + 0.3);
-    });
+    if (!coinAudio) coinAudio = new Audio('coin-sound.mp3');
+    coinAudio.currentTime = 0;
+    coinAudio.play();
   } catch(e) {}
 }
 
@@ -1270,9 +1240,6 @@ window.startDiv = async () => {
   // Cans deducted only when user confirms result (revealResult)
   currentCat = cat;
   document.getElementById('div-btn').disabled = true;
-  if (!weatherContext) {
-    weatherContext = await getWeatherContext();
-  }
   
   // Show prep modal first
   document.getElementById('prep-modal').classList.add('show');
@@ -1332,13 +1299,10 @@ function showResult(gua, q, cat) {
 
 async function callAPI(gua, q, cat) {
   try {
-    const time = getTimeContext();
-    const weather = weatherContext;
-    const weather_prompt = buildWeatherPrompt(weather, time);
     const res = await fetch(API + '/divination', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ question:q, cat_name: selectedCatKey && CAT_DATA[selectedCatKey] ? CAT_DATA[selectedCatKey].name : cat, gua_name:gua.name, gua_nature:gua.nature, quote:gua.quote, quote_src:gua.src, weather_context: weather_prompt })
+      body: JSON.stringify({ question:q, cat_name: selectedCatKey && CAT_DATA[selectedCatKey] ? CAT_DATA[selectedCatKey].name : cat, gua_name:gua.name, gua_nature:gua.nature, quote:gua.quote, quote_src:gua.src })
     });
     document.getElementById('scroll-loading').style.display = 'none';
     const reader = res.body.getReader();
@@ -1589,7 +1553,7 @@ window.saveCard = function() { sharePNG(this); };
 </script>
 <footer style="background:rgba(30,22,8,0.04); border-top:1px solid var(--ink-ghost); padding:2rem 1.5rem; text-align:center; margin-top:2rem;">
   <div style="max-width:680px; margin:0 auto;">
-    <div style="font-size:13px; font-weight:500; color:var(--ink); letter-spacing:0.1em; margin-bottom:8px; font-family:'Noto Sans SC',sans-serif;">🔒 隐私声明</div>
+    <div style="font-size:13px; font-weight:500; color:var(--ink); letter-spacing:0.1em; margin-bottom:8px; font-family:'Noto Sans SC',sans-serif;">✦ 隐私声明</div>
     <div style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; line-height:1.8; letter-spacing:0.03em;">
       本站只储存你的账号基本资料（名字、头像）及游戏数据（罐头、等级、占卜次数）。<br>
       你的占卜问题及解卦内容不会被记录或储存，不会用于任何商业用途。
