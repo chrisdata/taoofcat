@@ -297,11 +297,42 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
 <nav id="nav">
   <a href="/" class="nav-brand">玄猫之道</a>
   <div class="nav-right">
-    <div id="nav-user" style="display:none;">
-      <div class="user-chip">
+    <div id="nav-user" style="display:none; position:relative;">
+      <div class="user-chip" onclick="toggleProfile()" style="cursor:pointer;">
         <img class="user-avatar" id="user-avatar" src="" alt="">
         <span class="user-name" id="user-name"></span>
-        <button class="logout-btn" onclick="signOut()">退出</button>
+        <span style="font-size:10px; color:var(--ink-faint); margin-left:2px;">▾</span>
+      </div>
+      <!-- PROFILE DROPDOWN -->
+      <div id="profile-panel" style="display:none; position:absolute; right:0; top:calc(100% + 8px); background:rgba(244,237,224,0.98); border:1px solid var(--ink-ghost); border-radius:16px; padding:1.25rem; width:240px; box-shadow:0 8px 32px rgba(30,22,8,0.15); z-index:100; backdrop-filter:blur(8px);">
+        <!-- Cans -->
+        <div style="text-align:center; padding-bottom:1rem; border-bottom:1px solid var(--ink-ghost); margin-bottom:1rem;">
+          <img src="can-icon.png" style="width:48px;height:48px;object-fit:contain;display:block;margin:0 auto 4px;">
+          <div style="font-size:28px; font-weight:900; color:var(--ink); line-height:1;" id="can-count-p">…</div>
+          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; letter-spacing:0.1em; margin-top:2px;">罐 剩余罐头</div>
+          <button class="cans-buy-link" id="buy-link-p" onclick="document.getElementById('shop').classList.add('show'); toggleProfile();" style="margin-top:8px;">＋ 补充罐头</button>
+        </div>
+        <!-- Level -->
+        <div style="text-align:center; padding-bottom:1rem; border-bottom:1px solid var(--ink-ghost); margin-bottom:1rem;">
+          <div class="level-badge" id="level-badge-p" style="display:inline-flex; margin:0 auto;">
+            <span id="level-icon-p">🐾</span>
+            <span class="level-name" id="level-name-p">新手</span>
+            <span class="level-count" id="level-count-p">0 次占卜</span>
+          </div>
+          <div class="level-progress" id="level-progress-wrap-p" style="margin:8px auto 0;">
+            <div class="level-progress-bar" id="level-progress-bar-p" style="width:0%"></div>
+          </div>
+        </div>
+        <!-- Invite -->
+        <div style="margin-bottom:1rem;">
+          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-bottom:6px; text-align:center; letter-spacing:0.05em;">邀请朋友，双方各得2罐</div>
+          <div style="display:flex; gap:6px;">
+            <input type="text" id="invite-link-p" readonly style="flex:1; padding:6px 10px; border:1px solid var(--ink-ghost); border-radius:8px; font-size:11px; background:rgba(255,255,255,0.8); color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif;">
+            <button onclick="copyInviteLinkP()" style="padding:6px 10px; background:var(--ink); color:var(--paper); border:none; border-radius:8px; font-size:11px; cursor:pointer; font-family:'Noto Sans SC',sans-serif; white-space:nowrap;">复制</button>
+          </div>
+        </div>
+        <!-- Logout -->
+        <button onclick="signOut(); toggleProfile();" style="width:100%; padding:8px; background:transparent; border:1px solid var(--ink-ghost); border-radius:8px; font-size:12px; color:var(--ink-faint); cursor:pointer; font-family:'Noto Sans SC',sans-serif;">退出登录</button>
       </div>
     </div>
     <button id="nav-login-btn" class="nav-login-btn" onclick="signInWithGoogle()">登录</button>
@@ -309,12 +340,34 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
 </nav>
 
 <!-- HERO -->
-<div class="hero">
+<div class="hero" style="min-height:auto; padding:5rem 2rem 3rem;">
   <div class="hero-label">Oracle · 易经占卜</div>
   <div class="hero-title">傻猪占卜</div>
   <div class="hero-en">The Oracle of Sha Zhu</div>
   <div class="hero-divider"></div>
-  <div class="hero-sub">异瞳通天机 · AI解读专属卦象</div>
+  <div style="max-width:560px; margin:0 auto;">
+    <p style="font-size:15px; color:rgba(244,237,224,0.75); line-height:2; letter-spacing:0.06em; font-family:'Noto Sans SC',sans-serif; font-weight:300; text-align:center;">
+      三千年前，古人仰观天文，俯察地理<br>
+      以阴阳符号描述万物运行——这就是《易经》<br>
+      <br>
+      不是迷信，是智慧。<br>
+      不是预测命运，是看清此刻的方向。
+    </p>
+    <div style="display:flex; gap:2rem; justify-content:center; margin-top:1.5rem; flex-wrap:wrap;">
+      <div style="text-align:center;">
+        <div style="font-size:24px; margin-bottom:4px;">☯</div>
+        <div style="font-size:11px; color:rgba(212,168,67,0.8); font-family:'Noto Sans SC',sans-serif; letter-spacing:0.1em;">阴阳平衡</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:24px; margin-bottom:4px;">䷿</div>
+        <div style="font-size:11px; color:rgba(212,168,67,0.8); font-family:'Noto Sans SC',sans-serif; letter-spacing:0.1em;">六十四卦</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:24px; margin-bottom:4px;">🐱</div>
+        <div style="font-size:11px; color:rgba(212,168,67,0.8); font-family:'Noto Sans SC',sans-serif; letter-spacing:0.1em;">猫咪解读</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- PHILOSOPHY STRIP -->
@@ -763,8 +816,8 @@ onAuthStateChanged(auth, async (user) => {
     document.getElementById('nav-login-btn').style.display = 'none';
     document.getElementById('user-avatar').src = user.photoURL || '';
     document.getElementById('user-name').textContent = user.displayName ? user.displayName.split(' ')[0] : user.email;
-    document.getElementById('invite-section').style.display = 'block';
     document.getElementById('invite-link').value = 'https://TaoOfCat.com/divination.html?ref=' + user.uid;
+    document.getElementById('invite-link-p').value = 'https://TaoOfCat.com/divination.html?ref=' + user.uid;
     // Load level
     const userSnapLv = await getDoc(doc(db, 'users', user.uid));
     const divCount = userSnapLv.exists() ? (userSnapLv.data().divCount || 0) : 0;
@@ -774,16 +827,19 @@ onAuthStateChanged(auth, async (user) => {
     const adminCheck = await isAdmin(user.uid);
     if (adminCheck) {
       document.getElementById('can-count').textContent = '∞';
-      document.querySelector('.cans-buy-link').style.display = 'none';
-      document.getElementById('level-badge').style.background = 'rgba(30,22,8,0.9)';
-      document.getElementById('level-badge').style.border = '1px solid rgba(212,168,67,0.8)';
+      document.getElementById('can-count-p').textContent = '∞';
+      document.getElementById('buy-link-p').style.display = 'none';
       document.getElementById('level-icon').textContent = '😺';
       document.getElementById('level-name').textContent = '玄猫主人';
-      document.getElementById('level-name').style.color = '#d4a843';
       document.getElementById('level-count').textContent = '傻猪的铲屎官';
-      document.getElementById('level-progress-wrap').style.display = 'none';
+      document.getElementById('level-icon-p').textContent = '😺';
+      document.getElementById('level-name-p').textContent = '玄猫主人';
+      document.getElementById('level-name-p').style.color = '#d4a843';
+      document.getElementById('level-count-p').textContent = '傻猪的铲屎官';
+      document.getElementById('level-progress-wrap-p').style.display = 'none';
     } else {
       document.getElementById('can-count').textContent = cans;
+      document.getElementById('can-count-p').textContent = cans;
     }
 
     // Handle referral
@@ -937,6 +993,7 @@ async function revealResult() {
   if (!adminCheck) {
     const newCans = await updateCans(currentUser.uid, -1);
     document.getElementById('can-count').textContent = newCans;
+    document.getElementById('can-count-p').textContent = newCans;
   }
   // Increment divination count
   const userRef2 = doc(db, 'users', currentUser.uid);
@@ -1010,6 +1067,25 @@ window.closeCoinModal = () => {
   yaoResults = [];
 };
 
+window.toggleProfile = () => {
+  const panel = document.getElementById('profile-panel');
+  panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+};
+
+// Close profile when clicking outside
+document.addEventListener('click', (e) => {
+  const navUser = document.getElementById('nav-user');
+  if (navUser && !navUser.contains(e.target)) {
+    const panel = document.getElementById('profile-panel');
+    if (panel) panel.style.display = 'none';
+  }
+});
+
+window.copyInviteLinkP = () => {
+  const link = document.getElementById('invite-link-p').value;
+  navigator.clipboard.writeText(link).then(() => showToast('邀请链接已复制 ✓'));
+};
+
 window.copyInviteLink = () => {
   const link = document.getElementById('invite-link').value;
   navigator.clipboard.writeText(link).then(() => showToast('邀请链接已复制 ✓'));
@@ -1060,12 +1136,19 @@ function getLevel(count) {
 
 function updateLevelDisplay(divCount) {
   const lv = getLevel(divCount);
+  // Update hidden elements (JS compat)
   document.getElementById('level-icon').textContent = lv.icon;
   document.getElementById('level-name').textContent = lv.name;
   document.getElementById('level-count').textContent = divCount + ' 次占卜';
   document.getElementById('level-progress-bar').style.width = lv.progress + '%';
+  // Update profile panel
+  document.getElementById('level-icon-p').textContent = lv.icon;
+  document.getElementById('level-name-p').textContent = lv.name;
+  document.getElementById('level-count-p').textContent = divCount + ' 次占卜';
+  document.getElementById('level-progress-bar-p').style.width = lv.progress + '%';
   if (lv.next === null) {
     document.getElementById('level-progress-wrap').style.display = 'none';
+    document.getElementById('level-progress-wrap-p').style.display = 'none';
   }
 }
 
