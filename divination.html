@@ -446,9 +446,29 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60);});
 };
 
-window.goPay = () => {
-  const url = 'https://buy.stripe.com/3cI5kCbnccNUfh1bbY28800?quantity=' + qty + '&client_reference_id=' + (currentUser ? currentUser.uid : 'guest');
-  window.location.href = url;
+window.goPay = async () => {
+  const btn = document.querySelector('.pay-btn');
+  btn.textContent = '处理中...';
+  btn.disabled = true;
+  try {
+    const res = await fetch('https://web-production-907c5.up.railway.app/create-checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ qty: qty, uid: currentUser ? currentUser.uid : '' })
+    });
+    const data = await res.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      showToast('付款出错，请稍后再试');
+      btn.textContent = '前往付款';
+      btn.disabled = false;
+    }
+  } catch(e) {
+    showToast('付款出错，请稍后再试');
+    btn.textContent = '前往付款';
+    btn.disabled = false;
+  }
 };
 
 window.startDiv = async () => {
