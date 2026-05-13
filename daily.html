@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>猫咪日常 · 玄猫之道</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400;500&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root { --paper:#f4ede0; --ink:#1e1608; --ink-light:#5c4c2c; --ink-faint:#9c8c6c; --ink-ghost:#d4c8a8; --gold:#b8860b; --gold-light:#d4a843; }
+* { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body { font-family:'Noto Serif SC',serif; background:var(--paper); color:var(--ink); }
+
+nav { position:fixed; top:0; left:0; right:0; z-index:50; padding:1rem 2rem; display:flex; align-items:center; justify-content:space-between; background:rgba(244,237,224,0.95); backdrop-filter:blur(8px); border-bottom:1px solid var(--ink-ghost); }
+.nav-brand { font-size:15px; font-weight:700; letter-spacing:0.2em; color:var(--ink); text-decoration:none; }
+.nav-back { font-size:13px; color:var(--ink-faint); text-decoration:none; font-family:'Noto Sans SC',sans-serif; }
+.nav-back:hover { color:var(--ink); }
+
+.hero { padding:6rem 2rem 3rem; text-align:center; border-bottom:1px solid var(--ink-ghost); }
+.hero-label { font-size:11px; letter-spacing:0.4em; color:var(--gold); font-family:'Noto Sans SC',sans-serif; font-weight:300; margin-bottom:10px; text-transform:uppercase; }
+.hero-title { font-size:clamp(32px,6vw,52px); font-weight:900; color:var(--ink); letter-spacing:0.15em; margin-bottom:8px; }
+.hero-sub { font-size:14px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; font-weight:300; letter-spacing:0.08em; }
+
+/* FILTER */
+.filter-bar { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; padding:1.5rem 2rem; border-bottom:1px solid var(--ink-ghost); }
+.filter-btn { padding:6px 16px; font-size:12px; font-family:'Noto Sans SC',sans-serif; border:1px solid var(--ink-ghost); border-radius:20px; background:transparent; color:var(--ink-faint); cursor:pointer; transition:all 0.2s; letter-spacing:0.05em; }
+.filter-btn:hover { border-color:var(--gold); color:var(--gold); }
+.filter-btn.active { background:var(--ink); color:var(--paper); border-color:var(--ink); }
+
+/* FEED */
+.feed { max-width:680px; margin:0 auto; padding:2.5rem 1.5rem 5rem; }
+
+.post { margin-bottom:3.5rem; border-bottom:1px solid var(--ink-ghost); padding-bottom:3.5rem; }
+.post:last-child { border-bottom:none; }
+
+.post-header { display:flex; align-items:center; gap:10px; margin-bottom:1rem; }
+.post-cat-tag { font-size:11px; font-family:'Noto Sans SC',sans-serif; font-weight:500; color:var(--gold); letter-spacing:0.1em; background:rgba(184,134,11,0.08); border:1px solid rgba(184,134,11,0.2); border-radius:20px; padding:3px 10px; }
+.post-date { font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; font-weight:300; letter-spacing:0.05em; margin-left:auto; }
+
+.post-photo { width:100%; border-radius:12px; display:block; box-shadow:0 4px 24px rgba(30,22,8,0.1); margin-bottom:1.25rem; object-fit:cover; max-height:600px; }
+.post-caption { font-size:17px; color:var(--ink-light); line-height:2; letter-spacing:0.04em; }
+
+/* EMPTY */
+.empty { text-align:center; padding:4rem 2rem; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; }
+
+/* REVEAL */
+.post { opacity:0; transform:translateY(20px); transition:opacity 0.6s ease, transform 0.6s ease; }
+.post.visible { opacity:1; transform:translateY(0); }
+
+footer { border-top:1px solid var(--ink-ghost); padding:2rem; text-align:center; }
+.footer-brand { font-size:16px; font-weight:700; letter-spacing:0.2em; color:var(--ink); margin-bottom:4px; }
+.footer-copy { font-size:11px; color:var(--ink-ghost); font-family:'Noto Sans SC',sans-serif; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-brand">玄猫之道</a>
+  <a href="/" class="nav-back">← 返回主页</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">Daily Life · 猫咪日常</div>
+  <div class="hero-title">猫咪日常</div>
+  <div class="hero-sub">他们每天都在发生的事，值得被记录</div>
+</div>
+
+<div style="max-width:1200px; margin:0 auto; padding:2rem 1.5rem 5rem;">
+  <behold-widget feed-id="a4pG3UyNqW4slt0pfxbK"></behold-widget>
+  <script>
+    (() => {
+      const d=document,s=d.createElement("script");s.type="module";
+      s.src="https://w.behold.so/widget.js";d.head.append(s);
+    })();
+  </script>
+  <div style="text-align:center; margin-top:2rem;">
+    <a href="https://www.instagram.com/taoc.4t" target="_blank" style="font-size:13px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; text-decoration:none; letter-spacing:0.05em;">在 Instagram 关注 @taoc.4t</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">玄猫之道</div>
+  <div class="footer-copy">© 2026 Tao of Cat</div>
+</footer>
+
+
+</body>
+</html>
