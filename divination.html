@@ -289,6 +289,32 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
 .toast.show { opacity:1; }
 
 @media(max-width:600px) { .main { padding:2rem 1rem 4rem; } .oracle-section { padding:1.75rem 1.25rem; } .phil-strip { flex-direction:column; } .phil-item { border-right:none; border-bottom:1px solid rgba(255,255,255,0.08); padding:0.75rem 0; } .phil-item:last-child { border-bottom:none; } }
+
+/* CAT SELECTOR */
+.cat-selector-section { margin-bottom:2rem; }
+.cat-selector-label { font-size:11px; letter-spacing:0.4em; color:var(--gold); font-family:'Noto Sans SC',sans-serif; font-weight:500; text-transform:uppercase; margin-bottom:1rem; text-align:center; }
+.cat-selector-title { font-size:18px; font-weight:700; color:var(--ink); letter-spacing:0.15em; text-align:center; margin-bottom:6px; }
+.cat-selector-sub { font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; text-align:center; letter-spacing:0.05em; margin-bottom:1.5rem; line-height:1.7; }
+.cat-selector-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-bottom:1.25rem; }
+.cat-sel-card { background:rgba(255,255,255,0.7); border:1px solid var(--ink-ghost); border-radius:14px; padding:0.75rem 0.4rem; text-align:center; cursor:pointer; transition:all 0.2s; position:relative; overflow:hidden; }
+.cat-sel-card:hover { border-color:var(--ink-faint); transform:translateY(-2px); box-shadow:0 4px 16px rgba(30,22,8,0.08); }
+.cat-sel-card.active { border-color:var(--gold); background:rgba(184,134,11,0.06); box-shadow:0 4px 20px rgba(184,134,11,0.15); }
+.cat-sel-card::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--gold); opacity:0; transition:opacity 0.2s; }
+.cat-sel-card.active::after { opacity:1; }
+.cat-sel-photo { width:60px; height:60px; border-radius:50%; object-fit:cover; display:block; margin:0 auto 8px; border:2px solid var(--ink-ghost); transition:border-color 0.2s; }
+.cat-sel-card.active .cat-sel-photo { border-color:var(--gold); }
+.cat-sel-element { font-size:9px; letter-spacing:0.2em; color:var(--gold); font-family:'Noto Sans SC',sans-serif; margin-bottom:2px; }
+.cat-sel-name { font-size:12px; font-weight:700; color:var(--ink); letter-spacing:0.08em; margin-bottom:2px; }
+.cat-sel-domain { font-size:9px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; line-height:1.4; letter-spacing:0.02em; }
+.cat-sel-detail { background:rgba(255,255,255,0.6); border:1px solid var(--ink-ghost); border-radius:12px; padding:1rem 1.25rem; margin-bottom:1.25rem; min-height:80px; transition:all 0.3s; display:none; }
+.cat-sel-detail.show { display:block; }
+.cat-sel-detail-top { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+.cat-sel-detail-photo { width:44px; height:44px; border-radius:50%; object-fit:cover; border:1.5px solid var(--gold); flex-shrink:0; }
+.cat-sel-detail-name { font-size:15px; font-weight:700; color:var(--ink); letter-spacing:0.1em; }
+.cat-sel-detail-badge { display:inline-block; font-size:10px; font-family:'Noto Sans SC',sans-serif; background:rgba(184,134,11,0.1); color:var(--gold); border:1px solid rgba(184,134,11,0.3); border-radius:20px; padding:1px 8px; letter-spacing:0.08em; margin-top:2px; }
+.cat-sel-detail-text { font-size:12px; color:var(--ink-light); font-family:'Noto Sans SC',sans-serif; line-height:1.8; letter-spacing:0.03em; }
+.cat-sel-detail-quote { font-size:13px; color:var(--ink); letter-spacing:0.06em; margin-top:8px; padding-left:8px; border-left:2px solid var(--gold); font-style:italic; }
+@media(max-width:600px) { .cat-selector-grid { grid-template-columns:repeat(5,1fr); gap:6px; } .cat-sel-photo { width:44px; height:44px; } .cat-sel-name { font-size:10px; } .cat-sel-domain { display:none; } }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
@@ -359,7 +385,6 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
 
   </div>
 </div>
-</div>
 
 <!-- MAIN CONTENT -->
 <div class="main">
@@ -396,9 +421,62 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
     </div>
 
     <div class="oracle-focus-overlay" id="oracle-overlay" onclick="document.getElementById('question').blur()"></div>
+    <!-- CAT SELECTOR -->
+    <div class="cat-selector-section" id="cat-selector-section">
+      <div class="oracle-section">
+        <div class="cat-selector-label">选择占卜师 · Choose Your Oracle</div>
+        <div class="cat-selector-title">五行归位</div>
+        <div class="cat-selector-sub">每只猫守护不同的人生面向<br>选择与你此刻问题最契合的那一只</div>
+        <div class="cat-selector-grid">
+          <div class="cat-sel-card" onclick="selectCatOracle('shazhu',this)">
+            <img src="cat-shazhu.jpg" alt="傻猪" class="cat-sel-photo">
+            <div class="cat-sel-element">土</div>
+            <div class="cat-sel-name">傻 猪</div>
+            <div class="cat-sel-domain">人生方向<br>重大决策</div>
+          </div>
+          <div class="cat-sel-card" onclick="selectCatOracle('feimao',this)">
+            <img src="cat-feimao.jpg" alt="肥猫" class="cat-sel-photo">
+            <div class="cat-sel-element">金</div>
+            <div class="cat-sel-name">肥 猫</div>
+            <div class="cat-sel-domain">放下执念<br>长远眼光</div>
+          </div>
+          <div class="cat-sel-card" onclick="selectCatOracle('chashi',this)">
+            <img src="cat-feipo.jpg" alt="茶室猫" class="cat-sel-photo">
+            <div class="cat-sel-element">火</div>
+            <div class="cat-sel-name">茶室猫</div>
+            <div class="cat-sel-domain">感情家庭<br>关系边界</div>
+          </div>
+          <div class="cat-sel-card" onclick="selectCatOracle('huba',this)">
+            <img src="hubanzai-cattree.jpg" alt="虎斑仔" class="cat-sel-photo">
+            <div class="cat-sel-element">木</div>
+            <div class="cat-sel-name">虎斑仔</div>
+            <div class="cat-sel-domain">突破困境<br>竞争决策</div>
+          </div>
+          <div class="cat-sel-card" onclick="selectCatOracle('mengmeng',this)">
+            <img src="cat-mengmengda.jpg" alt="萌萌哒" class="cat-sel-photo">
+            <div class="cat-sel-element">水</div>
+            <div class="cat-sel-name">萌萌哒</div>
+            <div class="cat-sel-domain">创意灵感<br>未知可能</div>
+          </div>
+        </div>
+        <div class="cat-sel-detail" id="cat-sel-detail">
+          <div class="cat-sel-detail-top">
+            <img src="" alt="" class="cat-sel-detail-photo" id="cat-detail-photo">
+            <div>
+              <div class="cat-sel-detail-name" id="cat-detail-name"></div>
+              <div class="cat-sel-detail-badge" id="cat-detail-badge"></div>
+            </div>
+          </div>
+          <div class="cat-sel-detail-text" id="cat-detail-text"></div>
+          <div class="cat-sel-detail-quote" id="cat-detail-quote"></div>
+        </div>
+        <button class="oracle-btn" id="cat-confirm-btn" onclick="confirmCatSelection()" style="opacity:0.3; pointer-events:none;">请选择你的占卜师</button>
+      </div>
+    </div>
+
     <!-- ORACLE INPUT -->
-    <div class="oracle-section">
-      <div class="oracle-label">问卦 · Ask the Oracle</div>
+    <div class="oracle-section" id="oracle-input-section" style="display:none;">
+      <div class="oracle-label" id="oracle-label">问卦 · Ask the Oracle</div>
       <div style="display:flex; justify-content:center; gap:0; margin-bottom:2rem;">
         <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
           <div style="width:36px; height:36px; border-radius:50%; background:var(--ink); color:var(--paper); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; font-family:'Noto Sans SC',sans-serif;">1</div>
@@ -423,10 +501,10 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
         </div>
         <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
           <div style="width:36px; height:36px; border-radius:50%; background:var(--ink); color:var(--paper); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; font-family:'Noto Sans SC',sans-serif;">4</div>
-          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:6px; text-align:center; letter-spacing:0.03em;">傻猪解卦</div>
+          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:6px; text-align:center; letter-spacing:0.03em;" id="step4-label">傻猪解卦</div>
         </div>
       </div>
-      <div style="font-size:18px; font-weight:700; color:var(--ink); letter-spacing:0.08em; text-align:left; margin-bottom:0.5rem;">喵~ 欲问何事？</div>
+      <div style="font-size:18px; font-weight:700; color:var(--ink); letter-spacing:0.08em; text-align:left; margin-bottom:0.5rem;" id="oracle-ask-title">喵~ 欲问何事？</div>
       <div style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-bottom:12px; line-height:1.7; letter-spacing:0.03em; text-align:left;">
         💡 好问题让傻猪给出更准确的解读。建议说明<strong>具体情境</strong>，例如：「我在考虑换工作，对方薪水更高但需要搬家，我该怎么决定？」
       </div>
@@ -554,7 +632,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
       <div class="scroll-quote-src" id="scroll-src"></div>
       <div class="scroll-divider"></div>
       <div class="scroll-ai-loading" id="scroll-loading">本猫正在细读天机...</div>
-      <div id="scroll-ai-label" style="display:none; text-align:center; margin-bottom:1.25rem;"><span style="display:inline-block; font-size:11px; letter-spacing:0.3em; color:#b8860b; font-family:'Noto Sans SC',sans-serif; font-weight:500; border:1.5px solid rgba(184,134,11,0.5); border-radius:20px; padding:5px 16px; background:rgba(184,134,11,0.06);">傻 猪 解 读</span></div>
+      <div id="scroll-ai-label" style="display:none; text-align:center; margin-bottom:1.25rem;"><span id="scroll-cat-label" style="display:inline-block; font-size:11px; letter-spacing:0.3em; color:#b8860b; font-family:'Noto Sans SC',sans-serif; font-weight:500; border:1.5px solid rgba(184,134,11,0.5); border-radius:20px; padding:5px 16px; background:rgba(184,134,11,0.06);">傻 猪 解 读</span></div>
       <div class="scroll-ai" id="scroll-ai"></div>
       <div class="scroll-disclaimer">⚠ 本卦象仅供参考，不构成任何建议</div>
       <div class="scroll-actions">
@@ -767,6 +845,8 @@ onAuthStateChanged(auth, async (user) => {
     currentUser = user;
     document.getElementById('login-section').style.display = 'none';
     document.getElementById('main-section').style.display = 'block';
+    document.getElementById('cat-selector-section').style.display = 'block';
+    document.getElementById('oracle-input-section').style.display = 'none';
     document.getElementById('nav-user').style.display = 'block';
     document.getElementById('profile-panel').style.display = 'block';
     document.getElementById('nav-login-btn').style.display = 'none';
@@ -1220,7 +1300,7 @@ window.startCoinToss = () => {
   document.getElementById('result-wrap').style.display = 'none';
   document.getElementById('cat-stage').style.display = 'block';
   
-  document.getElementById('thinking').textContent = cat + ' 正在感应天机...';
+  document.getElementById('thinking').textContent = (selectedCatKey && CAT_DATA[selectedCatKey] ? CAT_DATA[selectedCatKey].thinkingText || CAT_DATA[selectedCatKey].name + ' 正在感应天机...' : '正在感应天机...');
 
   setTimeout(() => {
     document.getElementById('thinking').textContent = '异瞳缓缓睁开...';
@@ -1258,7 +1338,7 @@ async function callAPI(gua, q, cat) {
     const res = await fetch(API + '/divination', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ question:q, cat_name:cat, gua_name:gua.name, gua_nature:gua.nature, quote:gua.quote, quote_src:gua.src, weather_context: weather_prompt })
+      body: JSON.stringify({ question:q, cat_name: selectedCatKey && CAT_DATA[selectedCatKey] ? CAT_DATA[selectedCatKey].name : cat, gua_name:gua.name, gua_nature:gua.nature, quote:gua.quote, quote_src:gua.src, weather_context: weather_prompt })
     });
     document.getElementById('scroll-loading').style.display = 'none';
     const reader = res.body.getReader();
@@ -1315,12 +1395,19 @@ window.resetAll = () => {
   document.getElementById('coin-modal').classList.remove('show');
   document.getElementById('result-wrap').style.display = 'none';
   document.getElementById('cat-stage').style.display = 'none';
-  
-  
   document.getElementById('div-btn').disabled = false;
   document.getElementById('question').value = '';
   document.getElementById('confirm-check').checked = false;
   document.getElementById('char-count').textContent = '0 / 200';
+  // Return to cat selector
+  document.getElementById('oracle-input-section').style.display = 'none';
+  document.getElementById('cat-selector-section').style.display = 'block';
+  document.querySelectorAll('.cat-sel-card').forEach(c => c.classList.remove('active'));
+  document.getElementById('cat-sel-detail').classList.remove('show');
+  document.getElementById('cat-confirm-btn').textContent = '请选择你的占卜师';
+  document.getElementById('cat-confirm-btn').style.opacity = '0.3';
+  document.getElementById('cat-confirm-btn').style.pointerEvents = 'none';
+  selectedCatKey = null;
   window.scrollTo({top:0, behavior:'smooth'});
 };
 
@@ -1328,6 +1415,84 @@ document.getElementById('qty-price').textContent = '合计 $' + (qty * 0.99).toF
 
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60);});
+
+// ── CAT ORACLE SELECTOR ──
+const CAT_DATA = {
+  shazhu: {
+    name:'傻猪', element:'土', elementDesc:'忠诚陪伴',
+    photo:'cat-shazhu.jpg',
+    domain:'人生方向 · 重大决策 · 灵性困惑',
+    personality:'家里最黏人的猫，你到哪里它跟到哪里。表面是猫群大哥，实际上是最温柔的那一只。挑食、任性，但对你忠诚到底。',
+    quote:'本猫跟了你这么久，你那点小心思还用问？',
+    askTitle:'喵~ 欲问何事？'
+  },
+  feimao: {
+    name:'肥猫', element:'金', elementDesc:'超脱智慧',
+    photo:'cat-feimao.jpg',
+    domain:'放下执念 · 长远眼光 · 人生智慧',
+    personality:'十岁的老猫，见过太多风景。不和任何猫社交，爱晒太阳，慵懒自在。有一种跨越时空的长辈气质，说话字字有重量。',
+    quote:'老猫见过的风景，比你焦虑的事多多了。',
+    askTitle:'老猫在此，欲问何事？'
+  },
+  chashi: {
+    name:'茶室猫', element:'火', elementDesc:'热烈母性',
+    photo:'cat-feipo.jpg',
+    domain:'感情家庭 · 关系边界 · 爱与伤',
+    personality:'神经质、情绪化，爱憎分明。出爪不是故意但就是会伤人——热情过头。但骨子里是极好的妈妈，虎斑仔两岁了还找她撒娇。',
+    quote:'爱一个人有时候会不小心出爪，但那不代表不爱。',
+    askTitle:'烈猫在此，欲问何事？'
+  },
+  huba: {
+    name:'虎斑仔', element:'木', elementDesc:'野性行动',
+    photo:'hubanzai-cattree.jpg',
+    domain:'突破困境 · 竞争对抗 · 独立决策',
+    personality:'不爱被摸，不撒娇，保持距离——但不是冷漠，是自有边界。家里运动健将，跑跳第一名。他不等人来找他，他自己选择跟谁玩。',
+    quote:'别等人来邀请你，自己跳出去。',
+    askTitle:'虎将在此，欲问何事？'
+  },
+  mengmeng: {
+    name:'萌萌哒', element:'水', elementDesc:'流动探索',
+    photo:'cat-mengmengda.jpg',
+    domain:'创意灵感 · 好奇探索 · 未知可能',
+    personality:'外表极度可爱，奶声奶气，但骨子里有森林猫的野性。随时会消失，随时会出现。对食物不感兴趣，对世界充满好奇。',
+    quote:'躲起来不是消失，是在找更好玩的角落。',
+    askTitle:'小公主在此，欲问何事？'
+  }
+};
+
+let selectedCatKey = null;
+
+window.selectCatOracle = (key, el) => {
+  selectedCatKey = key;
+  document.querySelectorAll('.cat-sel-card').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  const cat = CAT_DATA[key];
+  document.getElementById('cat-detail-photo').src = cat.photo;
+  document.getElementById('cat-detail-photo').alt = cat.name;
+  document.getElementById('cat-detail-name').textContent = cat.name;
+  document.getElementById('cat-detail-badge').textContent = cat.element + ' · ' + cat.elementDesc;
+  document.getElementById('cat-detail-text').textContent = cat.personality;
+  document.getElementById('cat-detail-quote').textContent = '「' + cat.quote + '」';
+  document.getElementById('cat-sel-detail').classList.add('show');
+  const btn = document.getElementById('cat-confirm-btn');
+  btn.textContent = '✦ 请' + cat.name + '开始占卜';
+  btn.style.opacity = '1';
+  btn.style.pointerEvents = 'all';
+};
+
+window.confirmCatSelection = () => {
+  if (!selectedCatKey) return;
+  const cat = CAT_DATA[selectedCatKey];
+  currentCat = cat.name;
+  document.getElementById('cat-selector-section').style.display = 'none';
+  document.getElementById('oracle-input-section').style.display = 'block';
+  document.getElementById('oracle-label').textContent = cat.name + ' 问卦 · ' + cat.element + ' · ' + cat.domain.split('·')[0].trim();
+  document.getElementById('step4-label').textContent = cat.name + '解卦';
+  document.getElementById('oracle-ask-title').textContent = cat.askTitle;
+  document.getElementById('scroll-cat-label').textContent = cat.name + ' 解 读';
+  document.getElementById('oracle-input-section').scrollIntoView({behavior:'smooth', block:'start'});
+};
+// ── END CAT SELECTOR ──
 
 // Share functions
 window.openShareModal = () => {
