@@ -894,8 +894,8 @@ window.tossCoin = () => {
     coin.style.animation = '';
     document.getElementById('coin-result').textContent = isYang ? '☀ 阳爻' : '☽ 阴爻';
     
-    // Update progress dot
-    document.getElementById('cp-' + (tossCount-1)).classList.add('done');
+    // Update progress dot BEFORE increment
+    document.getElementById('cp-' + tossCount).classList.add('done');
     tossCount++;
     tossBusy = false;
 
@@ -906,7 +906,6 @@ window.tossCoin = () => {
       document.getElementById('coin-sub').textContent = `第${tossCount}爻已定，继续投掷`;
       document.getElementById('coin-instruction').textContent = '';
     } else {
-      document.getElementById('cp-5').classList.add('done');
       document.getElementById('coin-sub').textContent = '六爻已定，卦象成！';
       document.getElementById('coin-instruction').textContent = '';
       document.getElementById('coin-reveal-btn').style.display = 'block';
