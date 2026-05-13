@@ -449,9 +449,20 @@ function showToast(msg) {
 async function getUserCans(uid) {
   const ref = doc(db, 'users', uid);
   const snap = await getDoc(ref);
-  if (snap.exists()) return snap.data().cans || 0;
+  if (snap.exists()) {
+    const data = snap.data();
+    if (data.isAdmin) return 9999;
+    return data.cans || 0;
+  }
   await setDoc(ref, { cans: 3, created: new Date().toISOString() });
   return 3;
+}
+
+async function isAdmin(uid) {
+  const ref = doc(db, 'users', uid);
+  const snap = await getDoc(ref);
+  if (snap.exists()) return snap.data().isAdmin === true;
+  return false;
 }
 
 async function updateCans(uid, delta) {
@@ -468,8 +479,15 @@ onAuthStateChanged(auth, async (user) => {
     document.getElementById('main-section').style.display = 'block';
     document.getElementById('user-avatar').src = user.photoURL || '';
     document.getElementById('user-name').textContent = user.displayName || user.email;
-    const cans = await getUserCans(user.uid);
-    document.getElementById('can-count').textContent = cans;
+    const userData = await getUserCans(user.uid);
+    const cans = userData;
+    const adminCheck = await isAdmin(user.uid);
+    if (adminCheck) {
+      document.getElementById('can-count').textContent = '∞';
+      document.querySelector('.buy-btn').style.display = 'none';
+    } else {
+      document.getElementById('can-count').textContent = cans;
+    }
 
     const urlParams = new URLSearchParams(window.location.search);
     const paid = parseInt(urlParams.get('paid') || '0');
@@ -516,8 +534,11 @@ window.startDiv = async () => {
   const cansNow = parseInt(document.getElementById('can-count').textContent);
   if (cansNow <= 0) { document.getElementById('shop').classList.add('show'); return; }
 
-  const newCans = await updateCans(currentUser.uid, -1);
-  document.getElementById('can-count').textContent = newCans;
+  const admin = await isAdmin(currentUser.uid);
+  if (!admin) {
+    const newCans = await updateCans(currentUser.uid, -1);
+    document.getElementById('can-count').textContent = newCans;
+  }
   currentCat = cat;
   document.getElementById('div-btn').disabled = true;
   document.getElementById('result-wrap').style.display = 'none';
