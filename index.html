@@ -347,77 +347,67 @@ section {
 
 /* ── MEMORIAL ── */
 .memorial {
-  background: rgba(30,22,8,0.03);
-  border: 1px solid var(--ink-ghost);
-  border-radius: 12px;
-  padding: 3rem 2rem;
-  text-align: center;
-  margin-top: 3rem;
-  position: relative;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 2.5rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--ink-ghost);
+  flex-wrap: wrap;
 }
 
-.memorial::before {
-  content: '✦';
-  position: absolute;
-  top: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  color: var(--ink-ghost);
-  font-size: 12px;
-  letter-spacing: 0.5em;
-}
+.memorial::before { display:none; }
 
 .memorial-title {
-  font-size: 15px;
-  letter-spacing: 0.3em;
+  font-size: 11px;
+  letter-spacing: 0.25em;
   color: var(--ink-faint);
   font-family: 'Noto Sans SC', sans-serif;
   font-weight: 300;
-  margin-bottom: 2rem;
+  margin-bottom: 0;
+  white-space: nowrap;
 }
 
 .memorial-cats {
   display: flex;
-  gap: 3rem;
-  justify-content: center;
-  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
 }
 
 .memorial-cat {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   cursor: pointer;
-  transition: transform 0.3s;
-  display: block;
+  transition: opacity 0.2s;
+  text-decoration: none;
+  color: inherit;
 }
-.memorial-cat:hover { transform: translateY(-4px); }
+.memorial-cat:hover { opacity: 0.7; }
 
 .memorial-cat-img {
-  width: 100px;
-  height: 100px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   object-fit: cover;
   object-position: center 20%;
-  filter: grayscale(30%) brightness(0.9);
+  filter: grayscale(40%) brightness(0.9);
   border: 1px solid var(--ink-ghost);
-  margin-bottom: 10px;
   transition: filter 0.3s;
 }
 .memorial-cat:hover .memorial-cat-img { filter: grayscale(0%) brightness(1); }
 
 .memorial-cat-name {
-  font-size: 17px;
+  font-size: 13px;
   font-weight: 500;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.1em;
   color: var(--ink-light);
-  margin-bottom: 3px;
+  margin-bottom: 0;
 }
 
 .memorial-cat-note {
-  font-size: 13px;
-  color: var(--ink-faint);
-  font-family: 'Noto Sans SC', sans-serif;
-  letter-spacing: 0.08em;
+  display: none;
 }
 
 /* ── DIVINATION CTA ── */
