@@ -516,8 +516,8 @@ onAuthStateChanged(auth, async (user) => {
       }
     }
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const paid = parseInt(urlParams.get('paid') || '0');
+    const urlParams2 = new URLSearchParams(window.location.search);
+    const paid = parseInt(urlParams2.get('paid') || '0');
     if (paid > 0) {
       const newCans = await updateCans(user.uid, paid);
       document.getElementById('can-count').textContent = newCans;
