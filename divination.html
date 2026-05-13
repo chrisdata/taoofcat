@@ -355,6 +355,33 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
     <!-- ORACLE INPUT -->
     <div class="oracle-section">
       <div class="oracle-label">问卦 · Ask the Oracle</div>
+      <div style="display:flex; justify-content:center; gap:0; margin-bottom:2rem;">
+        <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
+          <div style="width:36px; height:36px; border-radius:50%; background:var(--ink); color:var(--paper); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; font-family:'Noto Sans SC',sans-serif;">1</div>
+          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:6px; text-align:center; letter-spacing:0.03em;">写下问题</div>
+        </div>
+        <div style="flex:1; display:flex; align-items:center; padding-bottom:18px;">
+          <div style="width:100%; height:1px; background:var(--ink-ghost);"></div>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
+          <div style="width:36px; height:36px; border-radius:50%; background:var(--ink); color:var(--paper); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; font-family:'Noto Sans SC',sans-serif;">2</div>
+          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:6px; text-align:center; letter-spacing:0.03em;">投掷铜钱×6</div>
+        </div>
+        <div style="flex:1; display:flex; align-items:center; padding-bottom:18px;">
+          <div style="width:100%; height:1px; background:var(--ink-ghost);"></div>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
+          <div style="width:36px; height:36px; border-radius:50%; background:var(--ink); color:var(--paper); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; font-family:'Noto Sans SC',sans-serif;">3</div>
+          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:6px; text-align:center; letter-spacing:0.03em;">六爻成卦</div>
+        </div>
+        <div style="flex:1; display:flex; align-items:center; padding-bottom:18px;">
+          <div style="width:100%; height:1px; background:var(--ink-ghost);"></div>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
+          <div style="width:36px; height:36px; border-radius:50%; background:var(--gold); color:var(--paper); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; font-family:'Noto Sans SC',sans-serif;">4</div>
+          <div style="font-size:11px; color:var(--gold); font-family:'Noto Sans SC',sans-serif; margin-top:6px; text-align:center; letter-spacing:0.03em; font-weight:500;">傻猪解卦</div>
+        </div>
+      </div>
       <div style="font-size:22px; font-weight:700; color:var(--ink); letter-spacing:0.1em; text-align:center; margin-bottom:0.5rem;">你想问什么？</div>
       <div style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-bottom:12px; line-height:1.7; letter-spacing:0.03em; text-align:center;">
         💡 好问题让傻猪给出更准确的解读。建议说明<strong>具体情境</strong>，例如：「我在考虑换工作，对方薪水更高但需要搬家，我该怎么决定？」
@@ -415,6 +442,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
     </div>
     <div class="coin-modal-title">投掷铜钱 · 天机感应</div>
     <div class="coin-modal-sub" id="coin-sub">请专注你的问题，然后投掷</div>
+    <div style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:-1rem; margin-bottom:1.5rem; letter-spacing:0.05em;">共需投掷 <strong style="color:var(--gold);">6次</strong>，每次一爻，六爻成卦</div>
     <div class="coin-area">
       <div class="coin" id="coin" onclick="tossCoin()">
         <img src="coin.png" style="width:100%;height:100%;object-fit:contain;border-radius:50%;">
