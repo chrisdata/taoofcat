@@ -475,6 +475,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
       <div class="scroll-quote-src" id="scroll-src"></div>
       <div class="scroll-divider"></div>
       <div class="scroll-ai-loading" id="scroll-loading">本猫正在细读天机...</div>
+      <div id="scroll-ai-label" style="display:none; font-size:11px; letter-spacing:0.4em; color:#9c8c6c; font-family:'Noto Sans SC',sans-serif; font-weight:300; text-transform:uppercase; margin-bottom:0.75rem; text-align:center;">傻 猪 解 读</div>
       <div class="scroll-ai" id="scroll-ai"></div>
       <div class="scroll-disclaimer">⚠ 本卦象仅供参考，不构成任何建议</div>
       <div class="scroll-actions">
@@ -571,18 +572,70 @@ async function loadUserCount() {
 loadUserCount();
 
 const guas = [
-  { name:"乾卦 · 天", sym:"☰", quote:"天行健，君子以自强不息", src:"《易经·乾》", nature:"刚健进取" },
-  { name:"坤卦 · 地", sym:"☷", quote:"地势坤，君子以厚德载物", src:"《易经·坤》", nature:"包容承载" },
-  { name:"屯卦 · 初生", sym:"䷂", quote:"信言不美，美言不信", src:"《道德经·八十一章》", nature:"艰难起步" },
-  { name:"蒙卦 · 启蒙", sym:"䷃", quote:"为学日益，为道日损", src:"《道德经·四十八章》", nature:"去执求道" },
-  { name:"需卦 · 等待", sym:"䷄", quote:"致虚极，守静笃", src:"《道德经·十六章》", nature:"守候时机" },
-  { name:"讼卦 · 争", sym:"䷅", quote:"曲则全，枉则直", src:"《道德经·二十二章》", nature:"以柔克刚" },
-  { name:"离卦 · 火", sym:"☲", quote:"应无所住，而生其心", src:"《金刚经》", nature:"放下执念" },
-  { name:"艮卦 · 山", sym:"☶", quote:"知足者富", src:"《道德经·三十三章》", nature:"知足常乐" },
-  { name:"巽卦 · 风", sym:"☴", quote:"上善若水，水善利万物而不争", src:"《道德经·八章》", nature:"顺势而为" },
-  { name:"兑卦 · 泽", sym:"☱", quote:"信心清净，则生实相", src:"《金刚经》", nature:"喜悦开朗" },
-  { name:"坎卦 · 水", sym:"☵", quote:"胜人者有力，自胜者强", src:"《道德经·三十三章》", nature:"险中求生" },
-  { name:"震卦 · 雷", sym:"☳", quote:"为而不争，故天下莫能与之争", src:"《道德经·八十一章》", nature:"动而有节" },
+  { name:"乾卦·天", sym:"䷀", quote:"天行健，君子以自强不息", src:"《易经·乾》", nature:"刚健进取" },
+  { name:"坤卦·地", sym:"䷁", quote:"地势坤，君子以厚德载物", src:"《易经·坤》", nature:"包容承载" },
+  { name:"屯卦·初生", sym:"䷂", quote:"信言不美，美言不信", src:"《道德经·八十一章》", nature:"艰难起步" },
+  { name:"蒙卦·启蒙", sym:"䷃", quote:"知人者智，自知者明", src:"《道德经·三十三章》", nature:"求教启智" },
+  { name:"需卦·等待", sym:"䷄", quote:"致虚极，守静笃", src:"《道德经·十六章》", nature:"耐心等待" },
+  { name:"讼卦·争讼", sym:"䷅", quote:"曲则全，枉则直", src:"《道德经·二十二章》", nature:"慎重处争" },
+  { name:"师卦·统御", sym:"䷆", quote:"善为士者不武，善战者不怒", src:"《道德经·六十八章》", nature:"统领众人" },
+  { name:"比卦·亲比", sym:"䷇", quote:"上善若水，水善利万物而不争", src:"《道德经·八章》", nature:"亲近团结" },
+  { name:"小畜卦·积聚", sym:"䷈", quote:"为学日益，为道日损", src:"《道德经·四十八章》", nature:"小积大成" },
+  { name:"履卦·谨行", sym:"䷉", quote:"慎终如始，则无败事", src:"《道德经·六十四章》", nature:"谨慎而行" },
+  { name:"泰卦·通泰", sym:"䷊", quote:"万物负阴而抱阳，冲气以为和", src:"《道德经·四十二章》", nature:"天地交泰" },
+  { name:"否卦·阻塞", sym:"䷋", quote:"祸兮福之所倚，福兮祸之所伏", src:"《道德经·五十八章》", nature:"暂时受阻" },
+  { name:"同人卦·同心", sym:"䷌", quote:"信言不美，美言不信", src:"《道德经·八十一章》", nature:"志同道合" },
+  { name:"大有卦·丰收", sym:"䷍", quote:"知足者富", src:"《道德经·三十三章》", nature:"丰盛有余" },
+  { name:"谦卦·谦逊", sym:"䷎", quote:"夫唯不争，故天下莫能与之争", src:"《道德经·六十六章》", nature:"谦虚受益" },
+  { name:"豫卦·喜悦", sym:"䷏", quote:"乐与饵，过客止", src:"《道德经·三十五章》", nature:"顺势而乐" },
+  { name:"随卦·随顺", sym:"䷐", quote:"善行无辙迹", src:"《道德经·二十七章》", nature:"随机应变" },
+  { name:"蛊卦·整治", sym:"䷑", quote:"为之于未有，治之于未乱", src:"《道德经·六十四章》", nature:"革故鼎新" },
+  { name:"临卦·临近", sym:"䷒", quote:"知常容，容乃公", src:"《道德经·十六章》", nature:"君临在上" },
+  { name:"观卦·观察", sym:"䷓", quote:"致虚极，守静笃，万物并作，吾以观复", src:"《道德经·十六章》", nature:"静观其变" },
+  { name:"噬嗑卦·决断", sym:"䷔", quote:"信言不美，美言不信", src:"《道德经·八十一章》", nature:"果断决策" },
+  { name:"贲卦·文饰", sym:"䷕", quote:"知其白，守其黑", src:"《道德经·二十八章》", nature:"文质相辉" },
+  { name:"剥卦·剥落", sym:"䷖", quote:"曲则全，枉则直，洼则盈", src:"《道德经·二十二章》", nature:"顺势而退" },
+  { name:"复卦·回归", sym:"䷗", quote:"归根曰静，是谓复命", src:"《道德经·十六章》", nature:"回归本源" },
+  { name:"无妄卦·自然", sym:"䷘", quote:"道法自然", src:"《道德经·二十五章》", nature:"顺其自然" },
+  { name:"大畜卦·积蓄", sym:"䷙", quote:"为学日益，为道日损", src:"《道德经·四十八章》", nature:"厚积薄发" },
+  { name:"颐卦·养育", sym:"䷚", quote:"自知者明，自胜者强", src:"《道德经·三十三章》", nature:"颐养正道" },
+  { name:"大过卦·过重", sym:"䷛", quote:"物壮则老，是谓不道", src:"《道德经·三十章》", nature:"独立担当" },
+  { name:"坎卦·险陷", sym:"䷜", quote:"上善若水，水善利万物而不争", src:"《道德经·八章》", nature:"处险而安" },
+  { name:"离卦·光明", sym:"䷝", quote:"知人者智，自知者明", src:"《道德经·三十三章》", nature:"附丽光明" },
+  { name:"咸卦·感应", sym:"䷞", quote:"天下皆知美之为美，斯恶已", src:"《道德经·二章》", nature:"感而遂通" },
+  { name:"恒卦·持久", sym:"䷟", quote:"胜人者有力，自胜者强", src:"《道德经·三十三章》", nature:"恒心持久" },
+  { name:"遯卦·退隐", sym:"䷠", quote:"知足者富，强行者有志", src:"《道德经·三十三章》", nature:"适时退隐" },
+  { name:"大壮卦·强壮", sym:"䷡", quote:"天下莫柔弱于水，而攻坚强者莫之能胜", src:"《道德经·七十八章》", nature:"刚壮有力" },
+  { name:"晋卦·晋升", sym:"䷢", quote:"为而不争", src:"《道德经·八十一章》", nature:"进步上升" },
+  { name:"明夷卦·受伤", sym:"䷣", quote:"知其荣，守其辱", src:"《道德经·二十八章》", nature:"韬光养晦" },
+  { name:"家人卦·家道", sym:"䷤", quote:"修之于身，其德乃真", src:"《道德经·五十四章》", nature:"家道和睦" },
+  { name:"睽卦·乖违", sym:"䷥", quote:"信言不美，美言不信", src:"《道德经·八十一章》", nature:"异中求同" },
+  { name:"蹇卦·困难", sym:"䷦", quote:"曲则全，枉则直", src:"《道德经·二十二章》", nature:"迎难而上" },
+  { name:"解卦·解除", sym:"䷧", quote:"为学日益，为道日损，损之又损", src:"《道德经·四十八章》", nature:"化解困境" },
+  { name:"损卦·减损", sym:"䷨", quote:"损之又损，以至于无为", src:"《道德经·四十八章》", nature:"减损求益" },
+  { name:"益卦·增益", sym:"䷩", quote:"圣人不积，既以为人己愈有", src:"《道德经·八十一章》", nature:"利人利己" },
+  { name:"夬卦·决断", sym:"䷪", quote:"勇于敢则杀，勇于不敢则活", src:"《道德经·七十三章》", nature:"果断决行" },
+  { name:"姤卦·相遇", sym:"䷫", quote:"道可道，非常道", src:"《道德经·一章》", nature:"意外相遇" },
+  { name:"萃卦·聚集", sym:"䷬", quote:"同道者相聚", src:"《易经·萃》", nature:"汇聚力量" },
+  { name:"升卦·上升", sym:"䷭", quote:"为而不争，天下莫能与之争", src:"《道德经·六十六章》", nature:"积累上升" },
+  { name:"困卦·困境", sym:"䷮", quote:"祸兮福之所倚", src:"《道德经·五十八章》", nature:"困而后通" },
+  { name:"井卦·源泉", sym:"䷯", quote:"上善若水", src:"《道德经·八章》", nature:"取之不竭" },
+  { name:"革卦·变革", sym:"䷰", quote:"为学日益，为道日损", src:"《道德经·四十八章》", nature:"革故创新" },
+  { name:"鼎卦·鼎新", sym:"䷱", quote:"治大国若烹小鲜", src:"《道德经·六十章》", nature:"鼎故革新" },
+  { name:"震卦·震动", sym:"䷲", quote:"重为轻根，静为躁君", src:"《道德经·二十六章》", nature:"警醒振作" },
+  { name:"艮卦·止静", sym:"䷳", quote:"致虚极，守静笃", src:"《道德经·十六章》", nature:"适时而止" },
+  { name:"渐卦·渐进", sym:"䷴", quote:"为之于未有，治之于未乱", src:"《道德经·六十四章》", nature:"循序渐进" },
+  { name:"归妹卦·归宿", sym:"䷵", quote:"知常容，容乃公", src:"《道德经·十六章》", nature:"寻找归宿" },
+  { name:"丰卦·丰盛", sym:"䷶", quote:"知足者富", src:"《道德经·三十三章》", nature:"丰盛鼎盛" },
+  { name:"旅卦·旅行", sym:"䷷", quote:"善行无辙迹", src:"《道德经·二十七章》", nature:"旅途谨慎" },
+  { name:"巽卦·顺入", sym:"䷸", quote:"天下莫柔弱于水", src:"《道德经·七十八章》", nature:"柔顺渗入" },
+  { name:"兑卦·喜悦", sym:"䷹", quote:"信言不美，美言不信", src:"《道德经·八十一章》", nature:"喜悦和悦" },
+  { name:"涣卦·涣散", sym:"䷺", quote:"曲则全", src:"《道德经·二十二章》", nature:"化解涣散" },
+  { name:"节卦·节制", sym:"䷻", quote:"知足者富", src:"《道德经·三十三章》", nature:"适度节制" },
+  { name:"中孚卦·诚信", sym:"䷼", quote:"信言不美，美言不信", src:"《道德经·八十一章》", nature:"诚信感人" },
+  { name:"小过卦·小过", sym:"䷽", quote:"为之于未有", src:"《道德经·六十四章》", nature:"小心谨慎" },
+  { name:"既济卦·完成", sym:"䷾", quote:"知足者富，强行者有志", src:"《道德经·三十三章》", nature:"功成圆满" },
+  { name:"未济卦·未完", sym:"䷿", quote:"为学日益，为道日损", src:"《道德经·四十八章》", nature:"继续前行" },
 ];
 
 let currentUser = null;
@@ -784,9 +837,13 @@ window.tossCoin = () => {
 };
 
 function getGuaFromYaos(yaos) {
-  // Map yao pattern to one of our guas
-  const yangCount = yaos.filter(y => y === 1).length;
-  const idx = yangCount % guas.length;
+  // Convert 6 yaos to binary number (yang=1, yin=0), bottom to top
+  // This gives us 0-63 mapping to 64 guas
+  let idx = 0;
+  for (let i = 0; i < 6; i++) {
+    if (yaos[i] === 1) idx += Math.pow(2, i);
+  }
+  idx = idx % guas.length;
   return guas[idx];
 }
 
@@ -827,6 +884,7 @@ async function revealResult() {
   document.getElementById('scroll-quote').textContent = '「' + gua.quote + '」';
   document.getElementById('scroll-src').textContent = gua.src;
   document.getElementById('scroll-loading').style.display = 'block';
+  document.getElementById('scroll-ai-label').style.display = 'none';
   document.getElementById('scroll-ai').textContent = '';
   aiText = '';
 
@@ -1019,6 +1077,7 @@ function showResult(gua, q, cat) {
   document.getElementById('quote-text').textContent = '「' + gua.quote + '」';
   document.getElementById('quote-src').textContent = gua.src;
   document.getElementById('scroll-loading').style.display = 'block';
+  document.getElementById('scroll-ai-label').style.display = 'none';
   document.getElementById('scroll-ai').textContent = '';
   document.getElementById('result-wrap').style.display = 'block';
   aiText = '';
@@ -1053,7 +1112,9 @@ async function callAPI(gua, q, cat) {
         try {
           const j = JSON.parse(data);
           if (j.text) { 
-              aiText += j.text; 
+              aiText += j.text;
+              document.getElementById('scroll-loading').style.display = 'none';
+              document.getElementById('scroll-ai-label').style.display = 'block';
               renderScrollAI(aiText);
             }
         } catch(e) {}
