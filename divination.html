@@ -108,6 +108,7 @@ nav.scrolled { background:rgba(244,237,224,0.95); backdrop-filter:blur(8px); bor
 .share-modal { background:var(--paper); border-radius:20px; padding:0; width:100%; max-width:400px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.3); max-height:90vh; overflow-y:auto; }
 .postcard { background:linear-gradient(135deg,#1e1608 0%,#2c1f0a 100%); padding:1.75rem; position:relative; overflow:hidden; }
 .postcard::before { content:"\9053"; position:absolute; font-size:120px; font-weight:900; color:rgba(255,255,255,0.04); top:-20px; right:-10px; line-height:1; pointer-events:none; }
+.postcard-question { font-size:13px; color:rgba(244,237,224,0.6); font-family:'Noto Sans SC',sans-serif; font-style:italic; margin-bottom:1rem; line-height:1.6; letter-spacing:0.04em; border-left:2px solid rgba(212,168,67,0.4); padding-left:10px; }
 .postcard-brand { font-size:11px; letter-spacing:0.4em; color:rgba(212,168,67,0.8); font-family:'Noto Sans SC',sans-serif; margin-bottom:1rem; }
 .postcard-gua { font-size:48px; text-align:center; margin-bottom:4px; color:#ffffff; }
 .postcard-gua-name { font-size:18px; font-weight:500; color:#f4ede0; letter-spacing:0.15em; text-align:center; margin-bottom:1rem; }
@@ -285,6 +286,7 @@ nav.scrolled { background:rgba(244,237,224,0.95); backdrop-filter:blur(8px); bor
   <div class="share-modal">
     <div class="postcard" id="postcard">
       <div class="postcard-brand">玄 猫 之 道 · TAO OF CAT</div>
+      <div class="postcard-question" id="pc-question"></div>
       <div class="postcard-gua" id="pc-sym"></div>
       <div class="postcard-gua-name" id="pc-name"></div>
       <div class="postcard-divider"></div>
@@ -614,6 +616,8 @@ window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scr
 // Share functions
 window.openShareModal = () => {
   if (!currentGua || !aiText) { showToast('请先完成占卜'); return; }
+  const q = document.getElementById('question').value.trim();
+  document.getElementById('pc-question').textContent = q ? '「' + q + '」' : '';
   document.getElementById('pc-sym').textContent = currentGua.sym;
   document.getElementById('pc-name').textContent = currentGua.name + ' · ' + currentGua.nature;
   document.getElementById('pc-quote').textContent = '「' + currentGua.quote + '」';
