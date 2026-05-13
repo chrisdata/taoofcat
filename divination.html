@@ -169,6 +169,7 @@ nav.scrolled { background:rgba(244,237,224,0.95); backdrop-filter:blur(8px); bor
 
 @media(max-width:600px) { .main { padding:2rem 1rem 4rem; } .oracle-section { padding:1.75rem 1.25rem; } .phil-strip { flex-direction:column; } .phil-item { border-right:none; border-bottom:1px solid rgba(255,255,255,0.08); padding:0.75rem 0; } .phil-item:last-child { border-bottom:none; } }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 
@@ -839,8 +840,29 @@ window.copyShareText = () => {
   }
 };
 
-window.saveCard = () => {
-  showToast('请截图保存卡片 📱');
+window.saveCard = async () => {
+  const btn = event.target.closest('button');
+  const orig = btn.textContent;
+  btn.textContent = '生成中...';
+  btn.disabled = true;
+  try {
+    const card = document.getElementById('postcard');
+    const canvas = await html2canvas(card, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: null,
+      logging: false
+    });
+    const link = document.createElement('a');
+    link.download = '玄猫之道占卜_' + new Date().toLocaleDateString('zh') + '.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    showToast('卡片已保存 ✓');
+  } catch(e) {
+    showToast('保存失败，请截图保存');
+  }
+  btn.textContent = orig;
+  btn.disabled = false;
 };
 </script>
 <footer style="background:rgba(30,22,8,0.04); border-top:1px solid var(--ink-ghost); padding:2rem 1.5rem; text-align:center; margin-top:2rem;">
