@@ -242,28 +242,29 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
 }
 .scroll-paper::after { border-radius:0 0 4px 4px; }
 .scroll-content { padding:2.5rem 3.5rem; }
-.scroll-gua-sym { font-size:80px; text-align:center; color:#2c1f0a; margin-bottom:8px; }
-.scroll-gua-name { font-size:26px; font-weight:700; color:#2c1f0a; text-align:center; letter-spacing:0.2em; margin-bottom:6px; }
+.scroll-gua-sym { font-size:96px; text-align:center; color:#2c1f0a; margin-bottom:8px; }
+.scroll-gua-name { font-size:32px; font-weight:700; color:#2c1f0a; text-align:center; letter-spacing:0.2em; margin-bottom:6px; }
 .scroll-gua-nature { font-size:14px; color:#9c8c6c; text-align:center; letter-spacing:0.2em; font-family:'Noto Sans SC',sans-serif; margin-bottom:1.75rem; }
 .scroll-divider { height:1px; background:linear-gradient(to right,transparent,rgba(180,140,60,0.3),transparent); margin:1.75rem 0; }
-.scroll-quote { font-size:22px; color:#2c1f0a; line-height:1.9; text-align:center; letter-spacing:0.12em; font-weight:500; }
+.scroll-quote { font-size:26px; color:#2c1f0a; line-height:1.9; text-align:center; letter-spacing:0.12em; font-weight:500; }
 .scroll-quote-src { font-size:11px; color:#9c8c6c; text-align:center; margin-top:6px; letter-spacing:0.1em; font-family:'Noto Sans SC',sans-serif; }
 .scroll-ai-loading { font-size:13px; color:#9c8c6c; text-align:center; padding:1rem 0; font-family:'Noto Sans SC',sans-serif; display:none; animation:breathe 1.5s ease-in-out infinite; }
-.scroll-ai { font-size:19px; color:#2c1f0a; line-height:2.4; letter-spacing:0.06em; white-space:pre-wrap; margin-top:1.5rem; font-family:'Noto Serif SC',serif; }
+.scroll-ai { font-size:19px; color:#2c1f0a; line-height:2.4; letter-spacing:0.06em; margin-top:1.5rem; font-family:'Noto Serif SC',serif; }
 .scroll-question { font-size:14px; color:#9c8c6c; font-style:italic; text-align:center; margin-bottom:1.5rem; font-family:'Noto Serif SC',serif; border-bottom:1px solid rgba(180,140,60,0.15); padding-bottom:1.25rem; }
 .shazhu-quote { 
   background:#1e1608; 
   color:#d4a843; 
-  font-size:18px; 
-  font-weight:500;
-  letter-spacing:0.12em; 
-  line-height:1.8;
+  font-size:22px; 
+  font-weight:700;
+  letter-spacing:0.1em; 
+  line-height:1.9;
   text-align:center; 
-  padding:1.25rem 1.5rem; 
-  border-radius:8px; 
-  margin-top:1.5rem;
+  padding:1.75rem 2rem; 
+  border-radius:12px; 
+  margin-top:2rem;
   font-family:'Noto Serif SC',serif;
-  border:1px solid rgba(212,168,67,0.3);
+  border:1px solid rgba(212,168,67,0.4);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
 }
 .scroll-disclaimer { font-size:10px; color:#b4a880; text-align:center; margin-top:1.5rem; font-family:'Noto Sans SC',sans-serif; }
 .scroll-actions { display:flex; gap:10px; margin-top:1.5rem; padding-top:1rem; border-top:1px solid rgba(180,140,60,0.2); }
@@ -992,22 +993,34 @@ window.openShareFromScroll = () => {
 
 function renderScrollAI(text) {
   const el = document.getElementById('scroll-ai');
-  // Check for 【傻猪金句】
   const match = text.match(/【([^】]+)】/);
   if (match) {
     const before = text.replace(/【[^】]+】/, '').trim();
     el.innerHTML = '';
     if (before) {
-      const p = document.createElement('div');
-      p.textContent = before;
-      el.appendChild(p);
+      // Split into paragraphs
+      const paras = before.split(/\n+/).filter(p => p.trim());
+      paras.forEach(para => {
+        const p = document.createElement('p');
+        p.textContent = para.trim();
+        p.style.cssText = 'margin-bottom:1.25rem; font-size:19px; line-height:2.2; color:#2c1f0a; font-family:"Noto Serif SC",serif; letter-spacing:0.05em;';
+        el.appendChild(p);
+      });
     }
     const q = document.createElement('div');
     q.className = 'shazhu-quote';
     q.textContent = '✦ ' + match[1];
     el.appendChild(q);
   } else {
-    el.textContent = text;
+    // Split streaming text into paragraphs too
+    const paras = text.split(/\n+/).filter(p => p.trim());
+    el.innerHTML = '';
+    paras.forEach(para => {
+      const p = document.createElement('p');
+      p.textContent = para.trim();
+      p.style.cssText = 'margin-bottom:1.25rem; font-size:19px; line-height:2.2; color:#2c1f0a; font-family:"Noto Serif SC",serif; letter-spacing:0.05em;';
+      el.appendChild(p);
+    });
   }
 }
 
