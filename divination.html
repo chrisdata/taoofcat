@@ -217,7 +217,8 @@ textarea { height:100px; line-height:1.7; }
 .postcard-quote { font-size:15px; color:rgba(244,237,224,0.9); line-height:1.8; letter-spacing:0.08em; text-align:center; font-style:italic; }
 .postcard-quote-src { font-size:11px; color:rgba(212,168,67,0.7); text-align:center; margin-top:6px; letter-spacing:0.1em; }
 .postcard-ai { font-size:13px; color:rgba(244,237,224,0.75); line-height:1.8; letter-spacing:0.04em; margin-top:1rem; }
-.postcard-footer { display:flex; align-items:center; justify-content:space-between; margin-top:1.25rem; }
+.postcard-datetime { font-size:10px; color:rgba(212,168,67,0.5); letter-spacing:0.1em; font-family:'Noto Sans SC',sans-serif; margin-top:1rem; margin-bottom:0.5rem; }
+.postcard-footer { display:flex; align-items:center; justify-content:space-between; margin-top:0.5rem; }
 .postcard-logo { font-size:13px; font-weight:700; color:rgba(244,237,224,0.6); letter-spacing:0.15em; }
 .postcard-url { font-size:11px; color:rgba(212,168,67,0.6); letter-spacing:0.05em; }
 
@@ -338,7 +339,8 @@ textarea { height:100px; line-height:1.7; }
         <div class="ai-loading" id="ai-loading">本猫正在细读天机...</div>
         <div class="ai-resp" id="ai-resp"></div>
       </div>
-      <div class="share-row">
+      <div class="disclaimer">⚠ 本卦象仅供参考，不构成任何建议。一切决定请以自身判断为准。</div>
+    <div class="share-row">
         <button class="share-btn" onclick="openShareModal()">✦ 分享占卜</button>
         <button class="share-btn" onclick="resetAll()">再问一次</button>
       </div>
@@ -357,6 +359,8 @@ textarea { height:100px; line-height:1.7; }
       <div class="postcard-quote" id="pc-quote"></div>
       <div class="postcard-quote-src" id="pc-src"></div>
       <div class="postcard-ai" id="pc-ai"></div>
+      <div class="postcard-datetime" id="pc-datetime"></div>
+      <div style="font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:0.05em;margin-top:0.5rem;font-family:'Noto Sans SC',sans-serif;">本卦象仅供参考，不构成任何建议</div>
       <div class="postcard-footer">
         <div class="postcard-logo">玄猫之道</div>
         <div class="postcard-url">TaoOfCat.com</div>
@@ -642,8 +646,10 @@ window.openShareModal = () => {
   document.getElementById('pc-name').textContent = currentGua.name + ' · ' + currentGua.nature;
   document.getElementById('pc-quote').textContent = '「' + currentGua.quote + '」';
   document.getElementById('pc-src').textContent = currentGua.src;
-  const aiShort = aiText.length > 120 ? aiText.substring(0, 120) + '…' : aiText;
-  document.getElementById('pc-ai').textContent = aiShort;
+  document.getElementById('pc-ai').textContent = aiText;
+  const now = new Date();
+  const dtStr = now.getFullYear() + '年' + (now.getMonth()+1) + '月' + now.getDate() + '日 ' + now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+  document.getElementById('pc-datetime').textContent = dtStr;
   document.getElementById('share-modal').classList.add('show');
 };
 
