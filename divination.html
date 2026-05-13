@@ -760,12 +760,16 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
 <div class="toast" id="toast"></div>
 
 <!-- LIVE COUNTER - fixed bottom right -->
-<!-- live counter removed -->
+<!-- live counter - admin only -->
+<div id="live-counter" style="display:none; position:fixed; bottom:1.5rem; right:1.5rem; background:rgba(30,22,8,0.85); color:#f4ede0; border-radius:20px; padding:6px 14px; font-family:'Noto Sans SC',sans-serif; font-size:12px; letter-spacing:0.05em; backdrop-filter:blur(8px); z-index:40; pointer-events:none;">
+  <span class="live-dot" style="background:#4caf50; display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:5px; animation:blink 1.5s ease-in-out infinite;"></span>
+  <span id="counter-number">—</span> 猫奴已入道
+</div>
 
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut as fbSignOut } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, onSnapshot, collection, getCountFromServer } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, onSnapshot, collection, getCountFromServer, query, where, getDocs } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAqu9pHaAEjFqPvPz3TuoYc60Lpb4DLZrs",
@@ -785,7 +789,27 @@ const API = 'https://web-production-907c5.up.railway.app';
 
 
 
-const guas = [
+async function loadUserCount() {
+  try {
+    const coll = collection(db, 'users');
+    const snapshot = await getCountFromServer(coll);
+    const total = snapshot.data().count;
+
+    // 今日新增：查 created >= 今天 00:00
+    const todayStart = new Date();
+    todayStart.setHours(0,0,0,0);
+    const todayQ = query(coll, where('created', '>=', todayStart.toISOString()));
+    const todaySnap = await getDocs(todayQ);
+    const todayCount = todaySnap.size;
+
+    document.getElementById('counter-number').textContent = `总 ${total.toLocaleString()}　今日 +${todayCount}`;
+    document.getElementById('live-counter').style.display = 'block';
+  } catch(e) {
+    console.log('Counter error:', e);
+  }
+}
+
+
   { name:"乾卦·天", sym:"䷀", quote:"天行健，君子以自强不息", src:"《易经·乾》", nature:"刚健进取" },
   { name:"坤卦·地", sym:"䷁", quote:"地势坤，君子以厚德载物", src:"《易经·坤》", nature:"包容承载" },
   { name:"屯卦·初生", sym:"䷂", quote:"信言不美，美言不信", src:"《道德经·八十一章》", nature:"艰难起步" },
@@ -924,6 +948,8 @@ onAuthStateChanged(auth, async (user) => {
       document.getElementById('level-name-p').style.color = '#d4a843';
       document.getElementById('level-count-p').textContent = '傻猪的铲屎官';
       document.getElementById('level-progress-wrap-p').style.display = 'none';
+      // 只有 admin 看到用户计数器
+      loadUserCount();
     } else {
       document.getElementById('can-count').textContent = cans;
       document.getElementById('can-count-p').textContent = cans;
