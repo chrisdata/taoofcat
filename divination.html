@@ -1418,7 +1418,7 @@ async function callAPI(gua, q, cat) {
     const res = await fetch(API + '/divination', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ question:q, cat_name: selectedCatKey && CAT_DATA[selectedCatKey] ? CAT_DATA[selectedCatKey].name : cat, gua_name:gua.name, gua_nature:gua.nature, quote:gua.quote, quote_src:gua.src })
+      body: JSON.stringify({ question:q, cat_name: selectedCatKey && CAT_DATA[selectedCatKey] ? (currentLang === 'en' ? CAT_DATA[selectedCatKey].nameEn : CAT_DATA[selectedCatKey].name) : cat, gua_name:gua.name, gua_nature:gua.nature, quote:gua.quote, quote_src:gua.src })
     });
     document.getElementById('scroll-loading').style.display = 'none';
     const reader = res.body.getReader();
@@ -1809,7 +1809,7 @@ window.toggleLang = () => {
 
 const CAT_DATA = {
   shazhu: {
-    name:'傻猪', element:'土', elementDesc:'忠诚陪伴',
+    name:'傻猪', nameEn:'Sha Zhu', element:'土', elementDesc:'忠诚陪伴',
     photo:'cat-shazhu.jpg',
     domain:'人生方向 · 重大决策 · 灵性困惑',
     personality:'家里最黏人的猫，你到哪里它跟到哪里。表面是猫群大哥，实际上是最温柔的那一只。挑食、任性，但对你忠诚到底。',
@@ -1817,7 +1817,7 @@ const CAT_DATA = {
     askTitle:'喵~ 欲问何事？'
   },
   feimao: {
-    name:'肥猫', element:'金', elementDesc:'超脱智慧',
+    name:'肥猫', nameEn:'Fei Mao', element:'金', elementDesc:'超脱智慧',
     photo:'cat-feimao.jpg',
     domain:'放下执念 · 长远眼光 · 人生智慧',
     personality:'十岁的老猫，见过太多风景。不和任何猫社交，爱晒太阳，慵懒自在。有一种跨越时空的长辈气质，说话字字有重量。',
@@ -1825,7 +1825,7 @@ const CAT_DATA = {
     askTitle:'老猫在此，欲问何事？'
   },
   chashi: {
-    name:'茶室猫', element:'火', elementDesc:'热烈母性',
+    name:'茶室猫', nameEn:'Cha Shi', element:'火', elementDesc:'热烈母性',
     photo:'cat-feipo.jpg',
     domain:'感情家庭 · 关系边界 · 爱与伤',
     personality:'神经质、情绪化，爱憎分明。出爪不是故意但就是会伤人——热情过头。但骨子里是极好的妈妈，虎斑仔两岁了还找她撒娇。',
@@ -1833,7 +1833,7 @@ const CAT_DATA = {
     askTitle:'烈猫在此，欲问何事？'
   },
   huba: {
-    name:'虎斑仔', element:'木', elementDesc:'野性行动',
+    name:'虎斑仔', nameEn:'Hu Ban Zai', element:'木', elementDesc:'野性行动',
     photo:'hubanzai-cattree.jpg',
     domain:'突破困境 · 竞争对抗 · 独立决策',
     personality:'不爱被摸，不撒娇，保持距离——但不是冷漠，是自有边界。家里运动健将，跑跳第一名。他不等人来找他，他自己选择跟谁玩。',
@@ -1841,7 +1841,7 @@ const CAT_DATA = {
     askTitle:'虎将在此，欲问何事？'
   },
   mengmeng: {
-    name:'萌萌哒', element:'水', elementDesc:'流动探索',
+    name:'萌萌哒', nameEn:'Meng Meng Da', element:'水', elementDesc:'流动探索',
     photo:'cat-mengmengda.jpg',
     domain:'创意灵感 · 好奇探索 · 未知可能',
     personality:'外表极度可爱，奶声奶气，但骨子里有森林猫的野性。随时会消失，随时会出现。对食物不感兴趣，对世界充满好奇。',
