@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support · 玄猫之道</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7Q71WCDFF0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7Q71WCDFF0');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400&family=IM+Fell+English:ital@0;1&family=Lora:ital,wght@0,400;0,500;1,400&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root { --paper:#f4ede0; --ink:#1e1608; --ink-light:#5c4c2c; --ink-faint:#9c8c6c; --ink-ghost:#d4c8a8; --gold:#b8860b; --gold-light:#d4a843; }
+* { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body { font-family:'Noto Serif SC',serif; background:var(--paper); color:var(--ink); }
+body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events:none; z-index:100; opacity:0.4; }
+
+nav { position:fixed; top:0; left:0; right:0; z-index:50; padding:1.25rem 2rem; display:flex; align-items:center; justify-content:space-between; background:rgba(244,237,224,0.95); backdrop-filter:blur(8px); border-bottom:1px solid var(--ink-ghost); }
+.nav-brand { font-size:16px; font-weight:700; letter-spacing:0.2em; color:var(--ink); text-decoration:none; }
+.nav-right { display:flex; align-items:center; gap:16px; }
+.nav-back { font-size:13px; color:var(--ink-faint); text-decoration:none; font-family:'Noto Sans SC',sans-serif; font-weight:300; letter-spacing:0.05em; transition:color 0.2s; }
+.nav-back:hover { color:var(--ink); }
+.lang-btn { font-size:12px; font-family:'Noto Sans SC',sans-serif; background:transparent; color:var(--ink-faint); border:1px solid var(--ink-ghost); border-radius:20px; padding:5px 14px; cursor:pointer; transition:all 0.2s; letter-spacing:0.05em; }
+.lang-btn:hover { border-color:var(--gold); color:var(--gold); }
+
+.hero { padding:7rem 2rem 4rem; text-align:center; border-bottom:1px solid var(--ink-ghost); }
+.hero-label { font-size:11px; letter-spacing:0.4em; color:var(--gold); font-family:'Noto Sans SC',sans-serif; font-weight:300; margin-bottom:12px; text-transform:uppercase; }
+.hero-title { font-size:clamp(32px,5vw,48px); font-weight:700; letter-spacing:0.15em; color:var(--ink); margin-bottom:8px; }
+.hero-sub { font-size:15px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; font-weight:300; letter-spacing:0.08em; line-height:1.8; }
+.hero-divider { width:40px; height:1px; background:linear-gradient(to right,transparent,var(--gold),transparent); margin:1.25rem auto 0; }
+
+.main { max-width:760px; margin:0 auto; padding:4rem 2rem 6rem; }
+
+/* FAQ */
+.section-label { font-size:11px; letter-spacing:0.4em; color:var(--gold); font-family:'Noto Sans SC',sans-serif; font-weight:300; margin-bottom:1rem; text-transform:uppercase; }
+.section-title { font-size:clamp(22px,3vw,28px); font-weight:700; letter-spacing:0.1em; color:var(--ink); margin-bottom:2.5rem; }
+
+.faq-item { border-bottom:1px solid var(--ink-ghost); padding:1.5rem 0; }
+.faq-item:last-child { border-bottom:none; }
+.faq-q { font-size:17px; font-weight:500; color:var(--ink); letter-spacing:0.06em; margin-bottom:0.75rem; cursor:pointer; display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; }
+.faq-q::after { content:'＋'; color:var(--gold); font-size:20px; font-weight:300; flex-shrink:0; transition:transform 0.2s; }
+.faq-item.open .faq-q::after { transform:rotate(45deg); }
+.faq-a { font-size:15px; color:var(--ink-light); font-family:'Noto Sans SC',sans-serif; font-weight:300; line-height:2; letter-spacing:0.03em; display:none; }
+.faq-item.open .faq-a { display:block; }
+
+/* CONTACT */
+.contact-card { background:var(--ink); color:var(--paper); border-radius:16px; padding:3rem; text-align:center; margin:3rem 0; position:relative; overflow:hidden; }
+.contact-card::before { content:'喵'; position:absolute; font-size:200px; font-weight:900; color:rgba(255,255,255,0.03); top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; line-height:1; }
+.contact-title { font-size:22px; font-weight:500; letter-spacing:0.15em; color:var(--paper); margin-bottom:8px; position:relative; }
+.contact-sub { font-size:14px; color:rgba(244,237,224,0.6); font-family:'Noto Sans SC',sans-serif; font-weight:300; line-height:1.8; margin-bottom:2rem; position:relative; }
+.contact-email { display:inline-block; font-family:'IM Fell English',serif; font-style:italic; font-size:22px; color:var(--gold-light); letter-spacing:0.05em; text-decoration:none; border-bottom:1px solid rgba(212,168,67,0.3); padding-bottom:2px; transition:border-color 0.2s; position:relative; }
+.contact-email:hover { border-color:var(--gold-light); }
+.contact-note { font-size:12px; color:rgba(244,237,224,0.4); font-family:'Noto Sans SC',sans-serif; margin-top:1rem; position:relative; }
+
+/* SOCIAL */
+.social-row { display:flex; gap:12px; justify-content:center; margin-top:1.5rem; position:relative; flex-wrap:wrap; }
+.social-btn { display:inline-flex; align-items:center; gap:8px; padding:10px 20px; border:1px solid rgba(244,237,224,0.2); border-radius:20px; color:rgba(244,237,224,0.7); font-family:'Noto Sans SC',sans-serif; font-size:13px; text-decoration:none; transition:all 0.2s; letter-spacing:0.05em; }
+.social-btn:hover { border-color:rgba(212,168,67,0.5); color:var(--gold-light); }
+
+/* RESPONSE TIME */
+.info-strip { display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap; margin-top:3rem; padding-top:3rem; border-top:1px solid var(--ink-ghost); }
+.info-item { text-align:center; }
+.info-icon { font-size:24px; margin-bottom:6px; }
+.info-label { font-size:13px; font-weight:500; color:var(--ink); letter-spacing:0.05em; margin-bottom:2px; font-family:'Noto Sans SC',sans-serif; }
+.info-sub { font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; font-weight:300; }
+
+footer { border-top:1px solid var(--ink-ghost); padding:2.5rem 2rem; text-align:center; }
+.footer-brand { font-size:18px; font-weight:700; letter-spacing:0.2em; color:var(--ink); margin-bottom:6px; }
+.footer-copy { font-size:11px; color:var(--ink-ghost); font-family:'Noto Sans SC',sans-serif; letter-spacing:0.08em; }
+
+.reveal { opacity:0; transform:translateY(20px); transition:opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* EN fonts */
+html[lang="en"] body { font-family:'Lora','Noto Serif SC',serif; }
+html[lang="en"] .faq-q, html[lang="en"] .section-title, html[lang="en"] .contact-title { font-family:'Playfair Display',serif; }
+html[lang="en"] .faq-a, html[lang="en"] .contact-sub, html[lang="en"] .hero-sub { font-family:'Lora',serif; }
+
+/* Lang btn CSS */
+.lang-btn{font-size:12px;font-family:'Noto Sans SC',sans-serif;background:transparent;color:var(--ink-faint);border:1px solid var(--ink-ghost);border-radius:20px;padding:5px 14px;cursor:pointer;transition:all 0.2s;letter-spacing:0.05em;}
+.lang-btn:hover{border-color:var(--gold);color:var(--gold);}
+
+@media(max-width:600px) { .main{padding:3rem 1.25rem 5rem;} .contact-card{padding:2rem 1.5rem;} .info-strip{gap:1rem;} }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="/" class="nav-brand">玄猫之道</a>
+  <div class="nav-right">
+    <a href="/" class="nav-back" data-zh="← 返回主页" data-en="← Home">← 返回主页</a>
+    <button id="lang-btn" class="lang-btn">EN</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-label" data-zh="Help · 帮助中心" data-en="Help · Support">Help · 帮助中心</div>
+  <div class="hero-title" data-zh="有什么可以帮你？" data-en="How can we help?">有什么可以帮你？</div>
+  <div class="hero-sub" data-zh="找不到答案？直接写信给我们" data-en="Can't find your answer? Write to us directly">找不到答案？直接写信给我们</div>
+  <div class="hero-divider"></div>
+</div>
+
+<div class="main">
+
+  <!-- FAQ -->
+  <div class="reveal">
+    <div class="section-label" data-zh="常见问题" data-en="FAQ">常见问题</div>
+    <div class="section-title" data-zh="你可能想知道的" data-en="You might be wondering">你可能想知道的</div>
+  </div>
+
+  <div class="faq-item reveal">
+    <div class="faq-q" data-zh="罐头是什么？" data-en="What are cans?" onclick="toggleFaq(this)">罐头是什么？</div>
+    <div class="faq-a" data-zh="罐头是玄猫之道的虚拟积分，每次易经占卜消耗1罐。新注册用户获赠1罐，邀请朋友双方各得2罐。" data-en="Cans are virtual credits used in Tao of Cat. Each I Ching reading costs 1 can. New users receive 1 free can, and both you and your friend get 2 cans when you invite someone.">罐头是玄猫之道的虚拟积分，每次易经占卜消耗1罐。新注册用户获赠1罐，邀请朋友双方各得2罐。</div>
+  </div>
+
+  <div class="faq-item reveal">
+    <div class="faq-q" data-zh="罐头可以退款吗？" data-en="Are cans refundable?" onclick="toggleFaq(this)">罐头可以退款吗？</div>
+    <div class="faq-a" data-zh="罐头为不可退款的虚拟积分，购买即确认，不支持退款或转让。罐头永久有效，与账号绑定，不会过期。如有特殊情况请联系我们。" data-en="Cans are non-refundable digital credits. All purchases are final and cannot be transferred. Cans never expire and are permanently tied to your account. For exceptional circumstances, please contact us.">罐头为不可退款的虚拟积分，购买即确认，不支持退款或转让。罐头永久有效，与账号绑定，不会过期。如有特殊情况请联系我们。</div>
+  </div>
+
+  <div class="faq-item reveal">
+    <div class="faq-q" data-zh="我换了设备，罐头还在吗？" data-en="Will my cans be there if I switch devices?" onclick="toggleFaq(this)">我换了设备，罐头还在吗？</div>
+    <div class="faq-a" data-zh="在！罐头绑定你的 Google 账号，任何设备登录都能看到。" data-en="Yes! Cans are tied to your Google account, so they follow you across all devices.">在！罐头绑定你的 Google 账号，任何设备登录都能看到。</div>
+  </div>
+
+  <div class="faq-item reveal">
+    <div class="faq-q" data-zh="付款后罐头没有增加怎么办？" data-en="I paid but my cans didn't increase. What should I do?" onclick="toggleFaq(this)">付款后罐头没有增加怎么办？</div>
+    <div class="faq-a" data-zh="请稍等几分钟并刷新页面。如果仍未到账，请截图付款凭证发送至 miao@taoofcat.com，我们会在24小时内处理。" data-en="Please wait a few minutes and refresh the page. If cans still haven't arrived, please send a screenshot of your payment receipt to miao@taoofcat.com and we will resolve it within 24 hours.">请稍等几分钟并刷新页面。如果仍未到账，请截图付款凭证发送至 miao@taoofcat.com，我们会在24小时内处理。</div>
+  </div>
+
+  <div class="faq-item reveal">
+    <div class="faq-q" data-zh="付款支持哪些方式？" data-en="What payment methods do you accept?" onclick="toggleFaq(this)">付款支持哪些方式？</div>
+    <div class="faq-a" data-zh="支持信用卡、Apple Pay、Google Pay，通过 Stripe 安全处理。我们不储存任何付款信息。" data-en="We accept credit cards, Apple Pay, and Google Pay, all processed securely through Stripe. We do not store any payment information.">支持信用卡、Apple Pay、Google Pay，通过 Stripe 安全处理。我们不储存任何付款信息。</div>
+  </div>
+
+  <div class="faq-item reveal">
+    <div class="faq-q" data-zh="占卜结果准确吗？" data-en="How accurate are the readings?" onclick="toggleFaq(this)">占卜结果准确吗？</div>
+    <div class="faq-a" data-zh="易经占卜是基于三千年智慧的参考工具，结合 AI 解读你的卦象。结果仅供参考，不构成任何专业建议。一切决定请以自身判断为准。" data-en="I Ching readings are a reference tool based on three thousand years of wisdom, combined with AI interpretation of your hexagram. Results are for reference only and do not constitute professional advice of any kind. Always trust your own judgment.">易经占卜是基于三千年智慧的参考工具，结合 AI 解读你的卦象。结果仅供参考，不构成任何专业建议。一切决定请以自身判断为准。</div>
+  </div>
+
+  <div class="faq-item reveal">
+    <div class="faq-q" data-zh="我的隐私有保障吗？" data-en="Is my privacy protected?" onclick="toggleFaq(this)">我的隐私有保障吗？</div>
+    <div class="faq-a" data-zh="我们只储存你的账号基本资料（名字、头像）及游戏数据（罐头、等级、占卜次数）。你的占卜问题及解卦内容不会被记录或储存，不会用于任何商业用途。" data-en="We only store your basic profile (name, avatar) and game data (cans, level, reading count). Your questions and readings are never recorded, stored, or used for any commercial purpose.">我们只储存你的账号基本资料（名字、头像）及游戏数据（罐头、等级、占卜次数）。你的占卜问题及解卦内容不会被记录或储存，不会用于任何商业用途。</div>
+  </div>
+
+  <div class="faq-item reveal">
+    <div class="faq-q" data-zh="如何邀请朋友获得罐头？" data-en="How do I invite friends to get cans?" onclick="toggleFaq(this)">如何邀请朋友获得罐头？</div>
+    <div class="faq-a" data-zh="登录后点击右上角头像，在个人面板中找到邀请链接，分享给朋友。朋友注册后双方各得2罐罐头。" data-en="After signing in, click your avatar in the top right corner. Find your invite link in the profile panel and share it with friends. Once they sign up, both of you will receive 2 cans.">登录后点击右上角头像，在个人面板中找到邀请链接，分享给朋友。朋友注册后双方各得2罐罐头。</div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="contact-card reveal" style="margin-top:4rem;">
+    <div class="contact-title" data-zh="还有问题？" data-en="Still have questions?">还有问题？</div>
+    <div class="contact-sub" data-zh="猫咪会看邮件的（也许）<br>我们尽量在 24–48 小时内回复" data-en="The cats check their email (sometimes)<br>We aim to reply within 24–48 hours">猫咪会看邮件的（也许）<br>我们尽量在 24–48 小时内回复</div>
+    <a href="mailto:miao@taoofcat.com" class="contact-email">miao@taoofcat.com</a>
+    <div class="contact-note" data-zh="付款问题请附上付款截图，方便我们更快处理" data-en="For payment issues, please include a screenshot of your receipt so we can help faster">付款问题请附上付款截图，方便我们更快处理</div>
+    <div class="social-row">
+      <a href="https://www.instagram.com/taoc.4t" target="_blank" class="social-btn">📷 Instagram @taoc.4t</a>
+      <a href="https://www.threads.net/@taoc.4t" target="_blank" class="social-btn">🧵 Threads @taoc.4t</a>
+    </div>
+  </div>
+
+  <!-- INFO STRIP -->
+  <div class="info-strip reveal">
+    <div class="info-item">
+      <div class="info-icon">⏱</div>
+      <div class="info-label" data-zh="回复时间" data-en="Response Time">回复时间</div>
+      <div class="info-sub" data-zh="24–48 小时" data-en="24–48 hours">24–48 小时</div>
+    </div>
+    <div class="info-item">
+      <div class="info-icon">🔒</div>
+      <div class="info-label" data-zh="付款安全" data-en="Secure Payment">付款安全</div>
+      <div class="info-sub" data-zh="Stripe 加密处理" data-en="Encrypted via Stripe">Stripe 加密处理</div>
+    </div>
+    <div class="info-item">
+      <div class="info-icon">🐾</div>
+      <div class="info-label" data-zh="罐头有效期" data-en="Can Expiry">罐头有效期</div>
+      <div class="info-sub" data-zh="永久有效" data-en="Never expire">永久有效</div>
+    </div>
+    <div class="info-item">
+      <div class="info-icon">📍</div>
+      <div class="info-label" data-zh="我们在" data-en="Based in">我们在</div>
+      <div class="info-sub" data-zh="怡保，马来西亚" data-en="Ipoh, Malaysia">怡保，马来西亚</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-brand">玄猫之道</div>
+  <div class="footer-copy" data-zh="© 2026 玄猫之道 · TaoOfCat.com" data-en="© 2026 Tao of Your Cat · TaoOfCat.com">© 2026 玄猫之道 · TaoOfCat.com</div>
+</footer>
+
+<script>
+function toggleFaq(el) {
+  const item = el.parentElement;
+  item.classList.toggle('open');
+}
+
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 60);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08 });
+reveals.forEach(el => observer.observe(el));
+
+// Language switch
+(function(){
+  var btn = document.getElementById('lang-btn');
+  var lang = localStorage.getItem('lang') || 'zh';
+  function apply(l) {
+    lang = l;
+    localStorage.setItem('lang', l);
+    document.documentElement.lang = l === 'zh' ? 'zh' : 'en';
+    btn.textContent = l === 'zh' ? 'EN' : '中文';
+    document.querySelectorAll('[data-zh]').forEach(function(el) {
+      var v = el.getAttribute('data-' + l);
+      if (v !== null) el.innerHTML = v;
+    });
+  }
+  btn.addEventListener('click', function() { apply(lang === 'zh' ? 'en' : 'zh'); });
+  apply(lang);
+})();
+</script>
+</body>
+</html>
