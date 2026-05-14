@@ -409,6 +409,12 @@ html[lang="en"] .scroll-disclaimer {
   font-style: italic;
   letter-spacing: 0.06em;
 }
+
+/* ── CAT RANDOM PHOTO ── */
+.result-cat-photo { width:100%; max-width:420px; margin:0 auto 1rem; display:block; object-fit:contain; max-height:320px; opacity:0; transition:opacity 0.6s ease; filter:drop-shadow(0 8px 24px rgba(30,22,8,0.18)); }
+.result-cat-photo.loaded { opacity:1; }
+.scroll-cat-photo { width:100%; max-width:300px; margin:1rem auto; display:block; object-fit:contain; max-height:260px; opacity:0; transition:opacity 0.6s ease; filter:drop-shadow(0 6px 20px rgba(30,22,8,0.2)); }
+.scroll-cat-photo.loaded { opacity:1; }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
@@ -688,6 +694,7 @@ html[lang="en"] .scroll-disclaimer {
         <div class="result-quote" id="quote-text"></div>
         <div class="result-quote-src" id="quote-src"></div>
         <div class="result-divider"><div class="result-divider-dot"></div></div>
+        <img id="result-cat-photo" class="result-cat-photo" src="" alt="" style="display:none;">
         <div class="result-ai-loading" id="ai-loading" data-zh="本猫正在细读天机..." data-en="The cat reads the signs...">本猫正在细读天机...</div>
         <div class="result-ai" id="ai-resp"></div>
         <div class="disclaimer" data-zh="⚠ 本卦象仅供参考，不构成任何建议。一切决定请以自身判断为准。" data-en="⚠ This reading is for reference only and does not constitute advice. Trust your own judgment.">⚠ 本卦象仅供参考，不构成任何建议。一切决定请以自身判断为准。</div>
@@ -780,6 +787,7 @@ html[lang="en"] .scroll-disclaimer {
       <div class="scroll-ai-loading" id="scroll-loading" data-zh="本猫正在细读天机..." data-en="The cat reads the signs...">本猫正在细读天机...</div>
       <div id="scroll-ai-label" style="display:none; text-align:center; margin-bottom:1.25rem;"><span id="scroll-cat-label" style="display:inline-block; font-size:11px; letter-spacing:0.3em; color:#b8860b; font-family:'Noto Sans SC',sans-serif; font-weight:500; border:1.5px solid rgba(184,134,11,0.5); border-radius:20px; padding:5px 16px; background:rgba(184,134,11,0.06);">傻 猪 解 读</span></div>
       <div class="scroll-ai" id="scroll-ai"></div>
+      <img id="scroll-cat-photo" class="scroll-cat-photo" src="" alt="" style="display:none;">
       <div class="scroll-disclaimer" data-zh="⚠ 本卦象仅供参考，不构成任何建议" data-en="⚠ For reference only — not professional advice">⚠ 本卦象仅供参考，不构成任何建议</div>
       <div class="scroll-actions">
         <button class="scroll-btn" onclick="window.openShareFromScroll()" data-zh="✦ 分享 / 保存" data-en="✦ Share / Save">✦ 分享 / 保存</button>
@@ -1489,6 +1497,7 @@ window.revealResult = async function() {
   // Hide coin modal, show scroll modal
   document.getElementById('coin-modal').classList.remove('show');
   document.getElementById('scroll-modal').classList.add('show');
+  showCatPhoto(document.getElementById('scroll-cat-photo'), selectedCatKey);
   
   const q = document.getElementById('question').value.trim();
   const cat = currentUser.displayName ? currentUser.displayName.split(' ')[0] : '朋友';
@@ -1772,6 +1781,7 @@ function showResult(gua, q, cat) {
   document.getElementById('scroll-ai').textContent = '';
   document.getElementById('result-wrap').style.display = 'block';
   aiText = '';
+  showCatPhoto(document.getElementById('result-cat-photo'), selectedCatKey);
   callAPI(gua, q, cat);
   setTimeout(() => { document.getElementById('result-wrap').scrollIntoView({behavior:'smooth', block:'start'}); }, 300);
 }
