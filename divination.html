@@ -1115,7 +1115,7 @@ function applyLang(lang) {
   const buyLinkP = document.getElementById('buy-link-p');
   if (buyLinkP) buyLinkP.textContent = t('buyMore');
   const qtyPrice = document.getElementById('qty-price');
-  if (qtyPrice) qtyPrice.textContent = t('shopTotal', qty);
+  if (qtyPrice) { const _qty = (typeof qty !== "undefined") ? qty : 1; qtyPrice.textContent = t('shopTotal', _qty); }
   // Cat confirm btn
   const confirmBtn = document.getElementById('cat-confirm-btn');
   if (confirmBtn && !window._selectedCatKey) {
@@ -1136,6 +1136,44 @@ document.addEventListener('DOMContentLoaded', function() {
   if (btn) btn.addEventListener('click', window.toggleLang);
   applyLang(window._lang);
 });
+
+// ── CAT RANDOM PHOTOS ─────────────────────────────────────
+const CLOUDINARY = 'https://res.cloudinary.com/dlm2iyc5i/image/upload/w_600,f_png,q_auto/';
+
+const CAT_PHOTO_COUNTS = {
+  shazhu:   3,   // update as you upload more
+  feimao:   3,
+  chashi:   3,
+  huba:     3,
+  mengmeng: 3,
+};
+
+// Map selectedCatKey → folder prefix
+const CAT_KEY_MAP = {
+  shazhu:   'shazhu',
+  feimao:   'feimao',
+  chashi:   'chashi',
+  huba:     'huba',
+  mengmeng: 'mengmeng',
+};
+
+function getRandomCatPhoto(catKey) {
+  const prefix = CAT_KEY_MAP[catKey] || 'shazhu';
+  const count = CAT_PHOTO_COUNTS[prefix] || 3;
+  const n = Math.floor(Math.random() * count) + 1;
+  return CLOUDINARY + prefix + '-' + n + '.png';
+}
+
+window.showCatPhoto = function(imgEl, catKey) {
+  if (!imgEl || !catKey) return;
+  const url = getRandomCatPhoto(catKey);
+  imgEl.style.display = 'block';
+  imgEl.classList.remove('loaded');
+  imgEl.onload = () => imgEl.classList.add('loaded');
+  imgEl.onerror = () => { imgEl.style.display = 'none'; };
+  imgEl.src = url;
+  imgEl.alt = catKey;
+};
 
 </script>
 
