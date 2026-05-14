@@ -4,7 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>茶室猫 · 玄猫之道</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7Q71WCDFF0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7Q71WCDFF0');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400&family=IM+Fell+English:ital@0;1&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&display=swap" rel="stylesheet">
 <style>
 :root { --paper:#f4ede0; --ink:#1e1608; --ink-light:#5c4c2c; --ink-faint:#9c8c6c; --ink-ghost:#d4c8a8; --gold:#b8860b; --gold-light:#d4a843; }
 * { box-sizing:border-box; margin:0; padding:0; }
@@ -56,24 +64,108 @@ footer { border-top:1px solid var(--ink-ghost); padding:2.5rem 2rem; text-align:
 .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s ease,transform 0.7s ease; }
 .reveal.visible { opacity:1; transform:translateY(0); }
 @media(max-width:600px) { .photo-pair{grid-template-columns:1fr} .story{padding:3rem 1.25rem} .tao-quote{padding:1rem 1.25rem} .btn-outline{margin-left:0;margin-top:12px;display:block} }
+
+.lang-btn{font-size:12px;font-family:'Noto Sans SC',sans-serif;background:transparent;color:rgba(244,237,224,0.85);border:1px solid rgba(244,237,224,0.35);border-radius:20px;padding:5px 14px;cursor:pointer;transition:all 0.2s;letter-spacing:0.05em;white-space:nowrap;}
+nav.scrolled .lang-btn{color:var(--ink-faint);border-color:var(--ink-ghost);}
+nav.scrolled .lang-btn:hover{color:var(--ink);border-color:var(--gold);}
+.lang-btn:hover{border-color:rgba(244,237,224,0.7);}
+
+/* ── EN TYPOGRAPHY ── */
+html[lang="en"] body {
+  font-family: 'Lora', 'Noto Serif SC', serif;
+}
+html[lang="en"] .chapter-title,
+html[lang="en"] .section-title,
+html[lang="en"] .div-cta-title,
+html[lang="en"] .hero-title,
+html[lang="en"] .closing-quote,
+html[lang="en"] .scroll-gua-name,
+html[lang="en"] .result-gua-name,
+html[lang="en"] .scroll-quote,
+html[lang="en"] .cat-card-name,
+html[lang="en"] .cat-sel-detail-name,
+html[lang="en"] .modal-title {
+  font-family: 'Playfair Display', 'Noto Serif SC', serif;
+  letter-spacing: 0.02em;
+}
+html[lang="en"] .chapter-text,
+html[lang="en"] .closing-note,
+html[lang="en"] .highlight-box-text,
+html[lang="en"] .scroll-ai,
+html[lang="en"] .result-ai,
+html[lang="en"] .login-wall-sub,
+html[lang="en"] .phil-quote,
+html[lang="en"] .cat-card-desc,
+html[lang="en"] .cat-sel-detail-text,
+html[lang="en"] .section-sub,
+html[lang="en"] .div-cta-sub,
+html[lang="en"] .hero-sub {
+  font-family: 'Lora', serif;
+  font-size: 16px;
+  line-height: 2;
+  letter-spacing: 0.01em;
+}
+html[lang="en"] .tao-quote-text,
+html[lang="en"] .scroll-quote,
+html[lang="en"] .closing-quote {
+  font-family: 'IM Fell English', 'Lora', serif;
+  font-style: italic;
+  letter-spacing: 0.04em;
+}
+html[lang="en"] .hero-name,
+html[lang="en"] .hero-title {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.05em;
+}
+html[lang="en"] .oracle-btn,
+html[lang="en"] .btn-primary,
+html[lang="en"] .btn-secondary,
+html[lang="en"] .btn-gold,
+html[lang="en"] .btn-outline,
+html[lang="en"] .scroll-btn,
+html[lang="en"] .prep-btn,
+html[lang="en"] .coin-toss-btn {
+  font-family: 'Lora', serif;
+  letter-spacing: 0.08em;
+}
+html[lang="en"] .nav-brand {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.15em;
+}
+html[lang="en"] .story-photo-caption,
+html[lang="en"] .video-caption,
+html[lang="en"] .tao-quote-source,
+html[lang="en"] .closing-source,
+html[lang="en"] .closing-label,
+html[lang="en"] .chapter-label,
+html[lang="en"] .hero-label,
+html[lang="en"] .oracle-note,
+html[lang="en"] .disclaimer,
+html[lang="en"] .scroll-disclaimer {
+  font-family: 'Lora', serif;
+  font-size: 12px;
+  font-style: italic;
+  letter-spacing: 0.06em;
+}
 </style>
 </head>
 <body>
 
 <nav id="nav">
   <a href="/" class="nav-brand">玄猫之道</a>
-  <a href="/#cats" class="nav-back">← 猫咪家族</a>
+  <a href="/#cats" class="nav-back" data-zh="← 猫咪家族" data-en="← Cat Family">← 猫咪家族</a>
+  <button id="lang-btn" class="lang-btn">EN</button>
 </nav>
 
 <div class="hero">
   <img src="feipo-hubanzai.jpg" alt="肥婆" class="hero-img" style="object-position:center 30%;">
   <div class="hero-gradient"></div>
   <div class="hero-content">
-    <div class="hero-label">The Street Foodie · 自然</div>
+    <div class="hero-label" data-zh="The Street Foodie · 自然" data-en="The Street Foodie · Natural">The Street Foodie · 自然</div>
     <div class="hero-name">茶室猫</div>
     <div class="hero-en">Cha Shi Mao · The Teahouse Cat</div>
     <div class="hero-divider"></div>
-    <div class="hero-tagline">玳瑁猫妈 · 茶室常客 · 外卖克星 · 自然之道</div>
+    <div class="hero-tagline" data-zh="玳瑁猫妈 · 茶室常客 · 外卖克星 · 自然之道" data-en="Tortoiseshell Mama · Teahouse Regular · Food Detective · Way of Nature">玳瑁猫妈 · 茶室常客 · 外卖克星 · 自然之道</div>
   </div>
 </div>
 
@@ -81,64 +173,64 @@ footer { border-top:1px solid var(--ink-ghost); padding:2.5rem 2rem; text-align:
 
   <div class="chapter reveal">
     <div class="chapter-label">Chapter One</div>
-    <div class="chapter-title">怀孕的流浪猫</div>
-    <p class="chapter-text">
+    <div class="chapter-title" data-zh="怀孕的流浪猫" data-en="The Pregnant Stray">怀孕的流浪猫</div>
+    <p class="chapter-text" data-zh="我们开始喂街上的流浪猫群，有一天发现其中一只玳瑁猫怀孕了。" data-en="We had started feeding a group of strays on the street. One day we noticed a tortoiseshell among them was pregnant.">
       我们开始喂街上的流浪猫群，有一天发现其中一只玳瑁猫怀孕了。
     </p>
-    <p class="chapter-text">
+    <p class="chapter-text" data-zh="看到她挺着大肚子在街头流浪，心里不忍。就这样，把她带回了家。" data-en="Watching her wander the streets with a swollen belly — we couldn't leave her. So we brought her home.">
       看到她挺着大肚子在街头流浪，心里不忍。就这样，把她带回了家。
     </p>
-    <p class="chapter-text">
+    <p class="chapter-text" data-zh="她有过很多名字。先叫猫妈，因为她是妈妈。后来叫肥婆，因为她爱吃、圆滚滚。现在我们叫她茶室猫——怀疑她以前常在附近茶室流浪讨食，什么都吃，外卖一打开她第一个冲过来，闻香识食物，雷打不动。" data-en="She's had many names. First Cat Mum, because she was a mother. Then Fei Po — Fat Lady — because she loved food and was gloriously round. Now we call her Cha Shi Mao, the Teahouse Cat — we suspect she used to beg at nearby kopitiam, because she eats everything and always charges at the takeaway bags first.">
       她有过很多名字。先叫猫妈，因为她是妈妈。后来叫肥婆，因为她爱吃、圆滚滚。现在我们叫她茶室猫——怀疑她以前常在附近茶室流浪讨食，什么都吃，外卖一打开她第一个冲过来，闻香识食物，雷打不动。
     </p>
-    <p class="chapter-text">
+    <p class="chapter-text" data-zh="猫妈 → 肥婆 → 茶室猫。每个名字都是她的一面，哪个都是真的她。" data-en="Cat Mum → Fei Po → Cha Shi Mao. Each name is one side of her, and every one of them is real.">
       猫妈 → 肥婆 → 茶室猫。每个名字都是她的一面，哪个都是真的她。
     </p>
   </div>
 
   <img src="feipo-vet.jpg" alt="肥婆在兽医检查" class="story-photo reveal">
-  <div class="story-photo-caption reveal">肥婆大肚子检查 · 流浪中的新生命</div>
+  <div class="story-photo-caption reveal" data-zh="肥婆大肚子检查 · 流浪中的新生命" data-en="Fei Po's check-up · New life in the middle of wandering">肥婆大肚子检查 · 流浪中的新生命</div>
 
   <div class="tao-quote reveal">
-    <div class="tao-quote-text">「道法自然」</div>
-    <div class="tao-quote-source">— 道德经·第二十五章</div>
+    <div class="tao-quote-text" data-zh="「道法自然」" data-en="「The Tao follows what is natural」">「道法自然」</div>
+    <div class="tao-quote-source" data-zh="— 道德经·第二十五章" data-en="— Tao Te Ching · Chapter 25">— 道德经·第二十五章</div>
   </div>
 
   <div class="chapter reveal">
     <div class="chapter-label">Chapter Two</div>
-    <div class="chapter-title">三只完全不同的孩子</div>
-    <p class="chapter-text">
+    <div class="chapter-title" data-zh="三只完全不同的孩子" data-en="Three Completely Different Kittens">三只完全不同的孩子</div>
+    <p class="chapter-text" data-zh="肥婆生了三只猫。" data-en="Fei Po gave birth to three kittens.">
       肥婆生了三只猫。
     </p>
-    <p class="chapter-text">
+    <p class="chapter-text" data-zh="大哥小白——雪白异瞳，和傻猪99%像，后来我们才知道，原来傻猪流浪时已经和肥婆相遇了。小白就是傻猪的儿子。" data-en="Big brother Xiao Bai — snow white with odd eyes, 99% identical to Sha Zhu. We only found out later that Sha Zhu had met Fei Po while both were strays. Xiao Bai was Sha Zhu's son.">
       大哥小白——雪白异瞳，和傻猪99%像，后来我们才知道，原来傻猪流浪时已经和肥婆相遇了。小白就是傻猪的儿子。
     </p>
-    <p class="chapter-text">
+    <p class="chapter-text" data-zh="二哥虎斑仔——狸花猫，活泼不给摸，完全是另一个父亲的基因。" data-en="Second brother Hu Ban Zai — a tabby, lively but untouchable, clearly another father's genes entirely.">
       二哥虎斑仔——狸花猫，活泼不给摸，完全是另一个父亲的基因。
     </p>
-    <p class="chapter-text">
+    <p class="chapter-text" data-zh="妹妹萌萌哒——西伯利亚森林猫样貌，蓬松长毛，是邻居散养猫的女儿。" data-en="Little sister Meng Meng Da — Siberian Forest Cat looks, fluffy long fur, daughter of the neighbour's free-roaming cat.">
       妹妹萌萌哒——西伯利亚森林猫样貌，蓬松长毛，是邻居散养猫的女儿。
     </p>
-    <p class="chapter-text">
+    <p class="chapter-text" data-zh="同一个妈，三只完全不同的孩子——这就是肥婆，随心而动，不受拘束，道法自然。" data-en="One mother, three completely different children — this is Fei Po, following her instincts, bound by nothing, the Way of Nature in action.">
       同一个妈，三只完全不同的孩子——这就是肥婆，随心而动，不受拘束，道法自然。
     </p>
   </div>
 
   <img src="feipo-kittens.jpg" alt="肥婆和三只小猫" class="story-photo reveal">
-  <div class="story-photo-caption reveal">肥婆和她的三只孩子 · 小白、虎斑仔、萌萌哒</div>
+  <div class="story-photo-caption reveal" data-zh="肥婆和她的三只孩子 · 小白、虎斑仔、萌萌哒" data-en="Fei Po and her three kittens · Xiao Bai, Hu Ban Zai, Meng Meng Da">肥婆和她的三只孩子 · 小白、虎斑仔、萌萌哒</div>
 
   <div class="story-divider reveal"><span>✦</span></div>
 
   <div class="chapter reveal">
     <div class="chapter-label">Chapter Three</div>
-    <div class="chapter-title">神经质的可爱</div>
-    <p class="chapter-text">
+    <div class="chapter-title" data-zh="神经质的可爱" data-en="Beautifully Unpredictable">神经质的可爱</div>
+    <p class="chapter-text" data-zh="肥婆性格神经质——喜则跳，怒则咬，完全不按常理出牌。" data-en="Fei Po is unpredictable — leaping when delighted, biting when annoyed, never playing by the rules.">
       肥婆性格神经质——喜则跳，怒则咬，完全不按常理出牌。
     </p>
-    <p class="chapter-text">
+    <p class="chapter-text" data-zh="但这就是她的真实。她不装，不伪善，高兴了就黏着你，不高兴了就走开。没有任何理由，不需要任何解释。" data-en="But this is her truth. She doesn't pretend, doesn't perform — happy, she clings to you; unhappy, she walks away. No reason needed. No explanation required.">
       但这就是她的真实。她不装，不伪善，高兴了就黏着你，不高兴了就走开。没有任何理由，不需要任何解释。
     </p>
-    <p class="chapter-text">
+    <p class="chapter-text" data-zh="庄子说，天地有大美而不言。肥婆就是这样——她的喜怒哀乐都是真的，从不掩饰，这就是她的大美。" data-en="Zhuangzi said: heaven and earth hold great beauty, and say nothing. Fei Po is exactly that — her joy, her fury, her grief are all real, never hidden. This is her great beauty.">
       庄子说，天地有大美而不言。肥婆就是这样——她的喜怒哀乐都是真的，从不掩饰，这就是她的大美。
     </p>
   </div>
@@ -147,17 +239,17 @@ footer { border-top:1px solid var(--ink-ghost); padding:2.5rem 2rem; text-align:
     <img src="feipo-hubanzai.jpg" alt="肥婆和虎斑仔" style="object-position:center 25%;">
     <img src="cat-feipo.jpg" alt="肥婆" style="object-position:center 20%;">
   </div>
-  <div class="story-photo-caption reveal">左：肥婆和虎斑仔最亲 · 右：神经质的眼神，真实的灵魂</div>
+  <div class="story-photo-caption reveal" data-zh="左：肥婆和虎斑仔最亲 · 右：神经质的眼神，真实的灵魂" data-en="Left: Fei Po and Hu Ban Zai, her closest · Right: That unpredictable gaze — a real soul">左：肥婆和虎斑仔最亲 · 右：神经质的眼神，真实的灵魂</div>
 
 </div>
 
 <div class="closing">
   <div class="closing-bg-char">自</div>
   <div style="position:relative;z-index:1;">
-    <div class="closing-label reveal">道德经·第十七章</div>
-    <div class="closing-quote reveal">「道法自然」</div>
-    <div class="closing-source reveal">— 道德经</div>
-    <div class="closing-note reveal">
+    <div class="closing-label reveal" data-zh="道德经·第十七章" data-en="Tao Te Ching · Chapter 17">道德经·第十七章</div>
+    <div class="closing-quote reveal" data-zh="「道法自然」" data-en="「The Tao follows what is natural」">「道法自然」</div>
+    <div class="closing-source reveal" data-zh="— 道德经" data-en="— Tao Te Ching">— 道德经</div>
+    <div class="closing-note reveal" data-zh="肥婆流浪中孕育了三条生命。<br>      她不知道这有多伟大。<br>      她只是顺着自己的本性活着——<br>      爱吃，爱玩，随心而动。<br>      这就是自然之道。" data-en="While homeless, Fei Po carried three lives.<br>      She had no idea how remarkable that was.<br>      She simply followed her nature —<br>      eat well, play freely, go wherever the moment leads.<br>      That is the Way of Nature.">
       肥婆流浪中孕育了三条生命。<br>
       她不知道这有多伟大。<br>
       她只是顺着自己的本性活着——<br>
@@ -165,15 +257,15 @@ footer { border-top:1px solid var(--ink-ghost); padding:2.5rem 2rem; text-align:
       这就是自然之道。
     </div>
     <div class="reveal">
-      <a href="divination.html" class="btn-gold">✦ 让傻猪为你占卜</a>
-      <a href="/#cats" class="btn-outline">认识其他猫咪</a>
+      <a href="divination.html" class="btn-gold" data-zh="✦ 让茶室猫为你占卜" data-en="✦ Let Cha Shi Mao Read for You">✦ 让茶室猫为你占卜</a>
+      <a href="/#cats" class="btn-outline" data-zh="认识其他猫咪" data-en="Meet the Cats">认识其他猫咪</a>
     </div>
   </div>
 </div>
 
 <footer>
   <div class="footer-brand">玄猫之道</div>
-  <div class="footer-copy">© 2026 Tao of Your Cat · Ipoh, Malaysia</div>
+  <div class="footer-copy" data-zh="© 2026 Tao of Your Cat · Ipoh, Malaysia" data-en="© 2026 Tao of Your Cat · Ipoh, Malaysia">© 2026 Tao of Your Cat · Ipoh, Malaysia</div>
 </footer>
 
 <script>
@@ -182,6 +274,24 @@ window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scr
 const reveals=document.querySelectorAll('.reveal');
 const observer=new IntersectionObserver((entries)=>{entries.forEach((entry,i)=>{if(entry.isIntersecting){setTimeout(()=>entry.target.classList.add('visible'),i*60);observer.unobserve(entry.target);}});},{threshold:0.08});
 reveals.forEach(el=>observer.observe(el));
+
+// ── LANGUAGE SWITCH ─────────────────────────────────────
+(function(){
+  var btn=document.getElementById('lang-btn');
+  if(!btn)return;
+  var lang=localStorage.getItem('lang')||'zh';
+  function apply(l){
+    lang=l;localStorage.setItem('lang',l);
+    document.documentElement.lang=l==='zh'?'zh':'en';
+    btn.textContent=l==='zh'?'EN':'中文';
+    document.querySelectorAll('[data-zh]').forEach(function(el){
+      var v=el.getAttribute('data-'+l);
+      if(v!==null)el.innerHTML=v;
+    });
+  }
+  btn.addEventListener('click',function(){apply(lang==='zh'?'en':'zh');});
+  apply(lang);
+})();
 </script>
 </body>
 </html>

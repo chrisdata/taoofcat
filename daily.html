@@ -4,7 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>猫咪日常 · 玄猫之道</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400;500&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7Q71WCDFF0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7Q71WCDFF0');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400;500&family=IM+Fell+English:ital@0;1&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&display=swap" rel="stylesheet">
 <style>
 :root { --paper:#f4ede0; --ink:#1e1608; --ink-light:#5c4c2c; --ink-faint:#9c8c6c; --ink-ghost:#d4c8a8; --gold:#b8860b; --gold-light:#d4a843; }
 * { box-sizing:border-box; margin:0; padding:0; }
@@ -50,19 +58,103 @@ nav { position:fixed; top:0; left:0; right:0; z-index:50; padding:1rem 2rem; dis
 footer { border-top:1px solid var(--ink-ghost); padding:2rem; text-align:center; }
 .footer-brand { font-size:16px; font-weight:700; letter-spacing:0.2em; color:var(--ink); margin-bottom:4px; }
 .footer-copy { font-size:11px; color:var(--ink-ghost); font-family:'Noto Sans SC',sans-serif; }
+
+.lang-btn{font-size:12px;font-family:'Noto Sans SC',sans-serif;background:transparent;color:rgba(244,237,224,0.85);border:1px solid rgba(244,237,224,0.35);border-radius:20px;padding:5px 14px;cursor:pointer;transition:all 0.2s;letter-spacing:0.05em;white-space:nowrap;}
+nav.scrolled .lang-btn{color:var(--ink-faint);border-color:var(--ink-ghost);}
+nav.scrolled .lang-btn:hover{color:var(--ink);border-color:var(--gold);}
+.lang-btn:hover{border-color:rgba(244,237,224,0.7);}
+
+/* ── EN TYPOGRAPHY ── */
+html[lang="en"] body {
+  font-family: 'Lora', 'Noto Serif SC', serif;
+}
+html[lang="en"] .chapter-title,
+html[lang="en"] .section-title,
+html[lang="en"] .div-cta-title,
+html[lang="en"] .hero-title,
+html[lang="en"] .closing-quote,
+html[lang="en"] .scroll-gua-name,
+html[lang="en"] .result-gua-name,
+html[lang="en"] .scroll-quote,
+html[lang="en"] .cat-card-name,
+html[lang="en"] .cat-sel-detail-name,
+html[lang="en"] .modal-title {
+  font-family: 'Playfair Display', 'Noto Serif SC', serif;
+  letter-spacing: 0.02em;
+}
+html[lang="en"] .chapter-text,
+html[lang="en"] .closing-note,
+html[lang="en"] .highlight-box-text,
+html[lang="en"] .scroll-ai,
+html[lang="en"] .result-ai,
+html[lang="en"] .login-wall-sub,
+html[lang="en"] .phil-quote,
+html[lang="en"] .cat-card-desc,
+html[lang="en"] .cat-sel-detail-text,
+html[lang="en"] .section-sub,
+html[lang="en"] .div-cta-sub,
+html[lang="en"] .hero-sub {
+  font-family: 'Lora', serif;
+  font-size: 16px;
+  line-height: 2;
+  letter-spacing: 0.01em;
+}
+html[lang="en"] .tao-quote-text,
+html[lang="en"] .scroll-quote,
+html[lang="en"] .closing-quote {
+  font-family: 'IM Fell English', 'Lora', serif;
+  font-style: italic;
+  letter-spacing: 0.04em;
+}
+html[lang="en"] .hero-name,
+html[lang="en"] .hero-title {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.05em;
+}
+html[lang="en"] .oracle-btn,
+html[lang="en"] .btn-primary,
+html[lang="en"] .btn-secondary,
+html[lang="en"] .btn-gold,
+html[lang="en"] .btn-outline,
+html[lang="en"] .scroll-btn,
+html[lang="en"] .prep-btn,
+html[lang="en"] .coin-toss-btn {
+  font-family: 'Lora', serif;
+  letter-spacing: 0.08em;
+}
+html[lang="en"] .nav-brand {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.15em;
+}
+html[lang="en"] .story-photo-caption,
+html[lang="en"] .video-caption,
+html[lang="en"] .tao-quote-source,
+html[lang="en"] .closing-source,
+html[lang="en"] .closing-label,
+html[lang="en"] .chapter-label,
+html[lang="en"] .hero-label,
+html[lang="en"] .oracle-note,
+html[lang="en"] .disclaimer,
+html[lang="en"] .scroll-disclaimer {
+  font-family: 'Lora', serif;
+  font-size: 12px;
+  font-style: italic;
+  letter-spacing: 0.06em;
+}
 </style>
 </head>
 <body>
 
 <nav>
   <a href="/" class="nav-brand">玄猫之道</a>
-  <a href="/" class="nav-back">← 返回主页</a>
+  <a href="/" class="nav-back" data-zh="← 返回主页" data-en="← Home">← 返回主页</a>
+  <button id="lang-btn" class="lang-btn" style="color:var(--ink-faint);border-color:var(--ink-ghost);">EN</button>
 </nav>
 
 <div class="hero">
-  <div class="hero-label">Daily Life · 猫咪日常</div>
-  <div class="hero-title">猫咪日常</div>
-  <div class="hero-sub">他们每天都在发生的事，值得被记录</div>
+  <div class="hero-label" data-zh="Daily Life · 猫咪日常" data-en="Daily Life · 猫咪日常">Daily Life · 猫咪日常</div>
+  <div class="hero-title" data-zh="猫咪日常" data-en="Cat Daily Life">猫咪日常</div>
+  <div class="hero-sub" data-zh="他们每天都在发生的事，值得被记录" data-en="Their everyday moments — worth remembering">他们每天都在发生的事，值得被记录</div>
 </div>
 
 <div style="max-width:1200px; margin:0 auto; padding:2rem 1.5rem 5rem;">
@@ -72,15 +164,33 @@ footer { border-top:1px solid var(--ink-ghost); padding:2rem; text-align:center;
       const d=document,s=d.createElement("script");s.type="module";
       s.src="https://w.behold.so/widget.js";d.head.append(s);
     })();
-  </script>
+  
+// ── LANGUAGE SWITCH ─────────────────────────────────────
+(function(){
+  var btn=document.getElementById('lang-btn');
+  if(!btn)return;
+  var lang=localStorage.getItem('lang')||'zh';
+  function apply(l){
+    lang=l;localStorage.setItem('lang',l);
+    document.documentElement.lang=l==='zh'?'zh':'en';
+    btn.textContent=l==='zh'?'EN':'中文';
+    document.querySelectorAll('[data-zh]').forEach(function(el){
+      var v=el.getAttribute('data-'+l);
+      if(v!==null)el.innerHTML=v;
+    });
+  }
+  btn.addEventListener('click',function(){apply(lang==='zh'?'en':'zh');});
+  apply(lang);
+})();
+</script>
   <div style="text-align:center; margin-top:2rem;">
-    <a href="https://www.instagram.com/taoc.4t" target="_blank" style="font-size:13px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; text-decoration:none; letter-spacing:0.05em;">在 Instagram 关注 @taoc.4t</a>
+    <a href="https://www.instagram.com/taoc.4t" target="_blank" style="font-size:13px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; text-decoration:none; letter-spacing:0.05em;" data-zh="在 Instagram 关注 @taoc.4t" data-en="Follow on Instagram @taoc.4t">在 Instagram 关注 @taoc.4t</a>
   </div>
 </div>
 
 <footer>
   <div class="footer-brand">玄猫之道</div>
-  <div class="footer-copy">© 2026 Tao of Cat</div>
+  <div class="footer-copy" data-zh="© 2026 Tao of Cat" data-en="© 2026 Tao of Cat">© 2026 Tao of Cat</div>
 </footer>
 
 

@@ -4,7 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>虎斑仔 · 玄猫之道</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7Q71WCDFF0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7Q71WCDFF0');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400&family=IM+Fell+English:ital@0;1&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&display=swap" rel="stylesheet">
 <style>
 :root { --paper:#f4ede0; --ink:#1e1608; --ink-light:#5c4c2c; --ink-faint:#9c8c6c; --ink-ghost:#d4c8a8; --gold:#b8860b; --gold-light:#d4a843; }
 * { box-sizing:border-box; margin:0; padding:0; }
@@ -57,24 +65,108 @@ footer { border-top:1px solid var(--ink-ghost); padding:2.5rem 2rem; text-align:
 .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.7s ease,transform 0.7s ease; }
 .reveal.visible { opacity:1; transform:translateY(0); }
 @media(max-width:600px) { .photo-pair{grid-template-columns:1fr} .story{padding:3rem 1.25rem} .tao-quote{padding:1rem 1.25rem} .btn-outline{margin-left:0;margin-top:12px;display:block} }
+
+.lang-btn{font-size:12px;font-family:'Noto Sans SC',sans-serif;background:transparent;color:rgba(244,237,224,0.85);border:1px solid rgba(244,237,224,0.35);border-radius:20px;padding:5px 14px;cursor:pointer;transition:all 0.2s;letter-spacing:0.05em;white-space:nowrap;}
+nav.scrolled .lang-btn{color:var(--ink-faint);border-color:var(--ink-ghost);}
+nav.scrolled .lang-btn:hover{color:var(--ink);border-color:var(--gold);}
+.lang-btn:hover{border-color:rgba(244,237,224,0.7);}
+
+/* ── EN TYPOGRAPHY ── */
+html[lang="en"] body {
+  font-family: 'Lora', 'Noto Serif SC', serif;
+}
+html[lang="en"] .chapter-title,
+html[lang="en"] .section-title,
+html[lang="en"] .div-cta-title,
+html[lang="en"] .hero-title,
+html[lang="en"] .closing-quote,
+html[lang="en"] .scroll-gua-name,
+html[lang="en"] .result-gua-name,
+html[lang="en"] .scroll-quote,
+html[lang="en"] .cat-card-name,
+html[lang="en"] .cat-sel-detail-name,
+html[lang="en"] .modal-title {
+  font-family: 'Playfair Display', 'Noto Serif SC', serif;
+  letter-spacing: 0.02em;
+}
+html[lang="en"] .chapter-text,
+html[lang="en"] .closing-note,
+html[lang="en"] .highlight-box-text,
+html[lang="en"] .scroll-ai,
+html[lang="en"] .result-ai,
+html[lang="en"] .login-wall-sub,
+html[lang="en"] .phil-quote,
+html[lang="en"] .cat-card-desc,
+html[lang="en"] .cat-sel-detail-text,
+html[lang="en"] .section-sub,
+html[lang="en"] .div-cta-sub,
+html[lang="en"] .hero-sub {
+  font-family: 'Lora', serif;
+  font-size: 16px;
+  line-height: 2;
+  letter-spacing: 0.01em;
+}
+html[lang="en"] .tao-quote-text,
+html[lang="en"] .scroll-quote,
+html[lang="en"] .closing-quote {
+  font-family: 'IM Fell English', 'Lora', serif;
+  font-style: italic;
+  letter-spacing: 0.04em;
+}
+html[lang="en"] .hero-name,
+html[lang="en"] .hero-title {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.05em;
+}
+html[lang="en"] .oracle-btn,
+html[lang="en"] .btn-primary,
+html[lang="en"] .btn-secondary,
+html[lang="en"] .btn-gold,
+html[lang="en"] .btn-outline,
+html[lang="en"] .scroll-btn,
+html[lang="en"] .prep-btn,
+html[lang="en"] .coin-toss-btn {
+  font-family: 'Lora', serif;
+  letter-spacing: 0.08em;
+}
+html[lang="en"] .nav-brand {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.15em;
+}
+html[lang="en"] .story-photo-caption,
+html[lang="en"] .video-caption,
+html[lang="en"] .tao-quote-source,
+html[lang="en"] .closing-source,
+html[lang="en"] .closing-label,
+html[lang="en"] .chapter-label,
+html[lang="en"] .hero-label,
+html[lang="en"] .oracle-note,
+html[lang="en"] .disclaimer,
+html[lang="en"] .scroll-disclaimer {
+  font-family: 'Lora', serif;
+  font-size: 12px;
+  font-style: italic;
+  letter-spacing: 0.06em;
+}
 </style>
 </head>
 <body>
 
 <nav id="nav">
   <a href="/" class="nav-brand">玄猫之道</a>
-  <a href="/#cats" class="nav-back">← 猫咪家族</a>
+  <a href="/#cats" class="nav-back" data-zh="← 猫咪家族" data-en="← Cat Family">← 猫咪家族</a>
+  <button id="lang-btn" class="lang-btn">EN</button>
 </nav>
 
 <div class="hero">
   <img src="hubanzai-cattree.jpg" alt="虎斑仔" class="hero-img">
   <div class="hero-gradient"></div>
   <div class="hero-content">
-    <div class="hero-label">The Untouchable · 禅</div>
+    <div class="hero-label" data-zh="The Untouchable · 禅" data-en="The Untouchable · Zen">The Untouchable · 禅</div>
     <div class="hero-name">虎斑仔</div>
     <div class="hero-en">Hu Ban Zai · The Zen Paradox</div>
     <div class="hero-divider"></div>
-    <div class="hero-tagline">狸花二哥 · 近在眼前却不可得 · 禅的公案</div>
+    <div class="hero-tagline" data-zh="狸花二哥 · 近在眼前却不可得 · 禅的公案" data-en="Tabby Brother · So Close Yet Unreachable · A Zen Koan">狸花二哥 · 近在眼前却不可得 · 禅的公案</div>
   </div>
 </div>
 
@@ -82,39 +174,39 @@ footer { border-top:1px solid var(--ink-ghost); padding:2.5rem 2rem; text-align:
 
   <div class="chapter reveal">
     <div class="chapter-label">Chapter One</div>
-    <div class="chapter-title">肥婆的二儿子</div>
-    <p class="chapter-text">
+    <div class="chapter-title" data-zh="肥婆的二儿子" data-en="Fei Po's Second Son">肥婆的二儿子</div>
+    <p class="chapter-text" data-zh="虎斑仔是肥婆的孩子，在我们家出生，从小在我们眼皮底下长大。" data-en="Hu Ban Zai was born in our home — Fei Po's son, raised right under our eyes from day one.">
       虎斑仔是肥婆的孩子，在我们家出生，从小在我们眼皮底下长大。
     </p>
-    <p class="chapter-text">
+    <p class="chapter-text" data-zh="按理说，从小看着你长大的猫，应该是最亲近的。但虎斑仔偏偏不是这样。" data-en="By rights, a cat raised from birth in your home should be the closest to you. But Hu Ban Zai is not that cat.">
       按理说，从小看着你长大的猫，应该是最亲近的。但虎斑仔偏偏不是这样。
     </p>
-    <p class="chapter-text">
+    <p class="chapter-text" data-zh="他活泼，爱玩，爱吃，整天在家里跑来跑去，存在感极强。但你想摸他？他立刻走开。你靠近？他保持距离。他就是这样的猫——可以在你旁边，但不让你碰。" data-en="He's lively, playful, food-obsessed, always charging around the house. Hard to miss. But try to pet him? He walks away. Step closer? He keeps his distance. That's just who he is — he can be beside you, but he won't let you touch him.">
       他活泼，爱玩，爱吃，整天在家里跑来跑去，存在感极强。但你想摸他？他立刻走开。你靠近？他保持距离。他就是这样的猫——可以在你旁边，但不让你碰。
     </p>
   </div>
 
   <img src="hubanzai-cattree.jpg" alt="虎斑仔" class="story-photo reveal">
-  <div class="story-photo-caption reveal">虎斑仔在猫树上 · 高高在上，俯视一切</div>
+  <div class="story-photo-caption reveal" data-zh="虎斑仔在猫树上 · 高高在上，俯视一切" data-en="Hu Ban Zai on the cat tree · High above, surveying everything">虎斑仔在猫树上 · 高高在上，俯视一切</div>
 
   <div class="tao-quote reveal">
-    <div class="tao-quote-text">「为学日益，为道日损」</div>
-    <div class="tao-quote-source">— 道德经·第四十八章</div>
+    <div class="tao-quote-text" data-zh="「为学日益，为道日损」" data-en="「In pursuit of learning, every day something is added.<br>In pursuit of the Tao, every day something is dropped」">「为学日益，为道日损」</div>
+    <div class="tao-quote-source" data-zh="— 道德经·第四十八章" data-en="— Tao Te Ching · Chapter 48">— 道德经·第四十八章</div>
   </div>
 
   <div class="chapter reveal">
     <div class="chapter-label">Chapter Two</div>
-    <div class="chapter-title">触之即逃的禅公案</div>
-    <p class="chapter-text">
+    <div class="chapter-title" data-zh="触之即逃的禅公案" data-en="The Zen Koan of the Untouchable">触之即逃的禅公案</div>
+    <p class="chapter-text" data-zh="养了虎斑仔这么多年，我慢慢明白一件事——" data-en="After all these years with Hu Ban Zai, I've slowly come to understand one thing —">
       养了虎斑仔这么多年，我慢慢明白一件事——
     </p>
-    <p class="chapter-text">
+    <p class="chapter-text" data-zh="他不是不爱你。他只是有他自己的方式。" data-en="He doesn't not love you. He just loves in his own way.">
       他不是不爱你。他只是有他自己的方式。
     </p>
-    <p class="chapter-text">
+    <p class="chapter-text" data-zh="禅宗有个公案：本来面目。意思是一个人最真实的样子，不被外界定义，不被期望改变。虎斑仔就是这样——他是他自己，不是你期待的那只&quot;应该让人摸的猫&quot;。" data-en="Zen has a koan: Original Face. It means the truest form of a being — not defined by the world, not changed by expectation. Hu Ban Zai is exactly that — he is himself, not the cat you expect him to be.">
       禅宗有个公案：本来面目。意思是一个人最真实的样子，不被外界定义，不被期望改变。虎斑仔就是这样——他是他自己，不是你期待的那只"应该让人摸的猫"。
     </p>
-    <p class="chapter-text">
+    <p class="chapter-text" data-zh="你越追，他越走。你放下，他反而靠近。这就是禅，也是虎斑仔教我的道。" data-en="The more you chase, the further he goes. Let go, and he comes closer. This is Zen — and this is the Tao Hu Ban Zai taught me.">
       你越追，他越走。你放下，他反而靠近。这就是禅，也是虎斑仔教我的道。
     </p>
   </div>
@@ -123,43 +215,43 @@ footer { border-top:1px solid var(--ink-ghost); padding:2.5rem 2rem; text-align:
     <img src="hubanzai-mengmengda.jpg" alt="虎斑仔和萌萌哒" style="object-position:center 20%;">
     <img src="hubanzai-cattree.jpg" alt="虎斑仔" style="object-position:center 30%;">
   </div>
-  <div class="story-photo-caption reveal">左：虎斑仔和萌萌哒，家里最好的兄妹 · 右：高处不胜寒</div>
+  <div class="story-photo-caption reveal" data-zh="左：虎斑仔和萌萌哒，家里最好的兄妹 · 右：高处不胜寒" data-en="Left: Hu Ban Zai and Meng Meng Da, the best siblings · Right: Lonely at the top">左：虎斑仔和萌萌哒，家里最好的兄妹 · 右：高处不胜寒</div>
 
   <div class="story-divider reveal"><span>✦</span></div>
 
   <div class="chapter reveal">
     <div class="chapter-label">Chapter Three</div>
-    <div class="chapter-title">小白离世前的那一晚</div>
-    <p class="chapter-text">
+    <div class="chapter-title" data-zh="小白离世前的那一晚" data-en="The Night Before Xiao Bai Left">小白离世前的那一晚</div>
+    <p class="chapter-text" data-zh="小白病重的最后一晚，我们把他抱出来。" data-en="On the last night of Xiao Bai's illness, we brought him out.">
       小白病重的最后一晚，我们把他抱出来。
     </p>
-    <p class="chapter-text">
+    <p class="chapter-text" data-zh="虎斑仔靠了过来。" data-en="Hu Ban Zai came over.">
       虎斑仔靠了过来。
     </p>
-    <p class="chapter-text">
+    <p class="chapter-text" data-zh="那只平时不让人摸、不让猫靠近的虎斑仔，那一晚静静地窝在小白身边，陪着他。没有人叫他来，没有人知道他懂不懂发生了什么。" data-en="The cat who never let anyone touch him, who always kept his distance — that night he quietly settled beside Xiao Bai and stayed. No one called him. No one knew if he understood what was happening.">
       那只平时不让人摸、不让猫靠近的虎斑仔，那一晚静静地窝在小白身边，陪着他。没有人叫他来，没有人知道他懂不懂发生了什么。
     </p>
-    <p class="chapter-text">
+    <p class="chapter-text" data-zh="但他来了。" data-en="But he came.">
       但他来了。
     </p>
   </div>
 
   <img src="hubanzai-xiaobai.jpg" alt="虎斑仔和小白最后一晚" class="memorial-photo reveal">
-  <div class="story-photo-caption reveal">小白离世前一晚 · 虎斑仔静静陪伴 · 无言的告别</div>
+  <div class="story-photo-caption reveal" data-zh="小白离世前一晚 · 虎斑仔静静陪伴 · 无言的告别" data-en="The night before Xiao Bai left · Hu Ban Zai's silent vigil · A farewell without words">小白离世前一晚 · 虎斑仔静静陪伴 · 无言的告别</div>
 
   <div class="chapter reveal">
     <div class="chapter-label">Chapter Four</div>
-    <div class="chapter-title">原来他一直都懂</div>
-    <p class="chapter-text">
+    <div class="chapter-title" data-zh="原来他一直都懂" data-en="He Understood All Along">原来他一直都懂</div>
+    <p class="chapter-text" data-zh="那一晚之后，我对虎斑仔的理解变了。" data-en="After that night, I understood Hu Ban Zai differently.">
       那一晚之后，我对虎斑仔的理解变了。
     </p>
-    <p class="chapter-text">
+    <p class="chapter-text" data-zh="他不是冷漠。他只是不擅长表达。但在最重要的时刻，他选择出现了。" data-en="He wasn't cold. He just didn't know how to show it. But when it mattered most, he chose to be there.">
       他不是冷漠。他只是不擅长表达。但在最重要的时刻，他选择出现了。
     </p>
-    <p class="chapter-text">
+    <p class="chapter-text" data-zh="道家说，上善若水，水善利万物而不争。虎斑仔平时不争不抢，不要求被摸被抱。但那一晚，他用自己的方式，给了小白最后的陪伴。" data-en="The Taoists say: the highest good is like water — it benefits all things without striving. Hu Ban Zai never pushes, never demands affection. But that night, in his own way, he gave Xiao Bai one last companion.">
       道家说，上善若水，水善利万物而不争。虎斑仔平时不争不抢，不要求被摸被抱。但那一晚，他用自己的方式，给了小白最后的陪伴。
     </p>
-    <p class="chapter-text">
+    <p class="chapter-text" data-zh="这才是他真实的样子。" data-en="That is who he really is.">
       这才是他真实的样子。
     </p>
   </div>
@@ -169,25 +261,25 @@ footer { border-top:1px solid var(--ink-ghost); padding:2.5rem 2rem; text-align:
 <div class="closing">
   <div class="closing-bg-char">禪</div>
   <div style="position:relative;z-index:1;">
-    <div class="closing-label reveal">禅·公案</div>
-    <div class="closing-quote reveal">「触之即逃<br>此身即公案」</div>
-    <div class="closing-source reveal">— 玄猫之道</div>
-    <div class="closing-note reveal">
+    <div class="closing-label reveal" data-zh="禅·公案" data-en="Zen · Koan">禅·公案</div>
+    <div class="closing-quote reveal" data-zh="「触之即逃<br>此身即公案」" data-en="「Touch, and he flees —<br>This very body is the koan」">「触之即逃<br>此身即公案」</div>
+    <div class="closing-source reveal" data-zh="— 玄猫之道" data-en="— Tao of Your Cat">— 玄猫之道</div>
+    <div class="closing-note reveal" data-zh="虎斑仔教会我——<br>      不是所有的爱都需要触碰。<br>      不是所有的存在都需要被理解。<br>      他在那里，就够了。" data-en="Hu Ban Zai taught me —<br>      not all love needs to be felt.<br>      Not all presence needs to be understood.<br>      That he was there — was enough.">
       虎斑仔教会我——<br>
       不是所有的爱都需要触碰。<br>
       不是所有的存在都需要被理解。<br>
       他在那里，就够了。
     </div>
     <div class="reveal">
-      <a href="divination.html" class="btn-gold">✦ 让傻猪为你占卜</a>
-      <a href="/#cats" class="btn-outline">认识其他猫咪</a>
+      <a href="divination.html" class="btn-gold" data-zh="✦ 让虎斑仔为你占卜" data-en="✦ Let Hu Ban Zai Read for You">✦ 让虎斑仔为你占卜</a>
+      <a href="/#cats" class="btn-outline" data-zh="认识其他猫咪" data-en="Meet the Cats">认识其他猫咪</a>
     </div>
   </div>
 </div>
 
 <footer>
   <div class="footer-brand">玄猫之道</div>
-  <div class="footer-copy">© 2026 Tao of Your Cat · Ipoh, Malaysia</div>
+  <div class="footer-copy" data-zh="© 2026 Tao of Your Cat · Ipoh, Malaysia" data-en="© 2026 Tao of Your Cat · Ipoh, Malaysia">© 2026 Tao of Your Cat · Ipoh, Malaysia</div>
 </footer>
 
 <script>
@@ -196,6 +288,24 @@ window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scr
 const reveals=document.querySelectorAll('.reveal');
 const observer=new IntersectionObserver((entries)=>{entries.forEach((entry,i)=>{if(entry.isIntersecting){setTimeout(()=>entry.target.classList.add('visible'),i*60);observer.unobserve(entry.target);}});},{threshold:0.08});
 reveals.forEach(el=>observer.observe(el));
+
+// ── LANGUAGE SWITCH ─────────────────────────────────────
+(function(){
+  var btn=document.getElementById('lang-btn');
+  if(!btn)return;
+  var lang=localStorage.getItem('lang')||'zh';
+  function apply(l){
+    lang=l;localStorage.setItem('lang',l);
+    document.documentElement.lang=l==='zh'?'zh':'en';
+    btn.textContent=l==='zh'?'EN':'中文';
+    document.querySelectorAll('[data-zh]').forEach(function(el){
+      var v=el.getAttribute('data-'+l);
+      if(v!==null)el.innerHTML=v;
+    });
+  }
+  btn.addEventListener('click',function(){apply(lang==='zh'?'en':'zh');});
+  apply(lang);
+})();
 </script>
 </body>
 </html>
