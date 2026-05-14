@@ -339,7 +339,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
         <div style="text-align:center; padding-bottom:1rem; border-bottom:1px solid var(--ink-ghost); margin-bottom:1rem;">
           <img src="can-icon.png" style="width:48px;height:48px;object-fit:contain;display:block;margin:0 auto 4px;">
           <div style="font-size:28px; font-weight:900; color:var(--ink); line-height:1;" id="can-count-p">…</div>
-          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; letter-spacing:0.1em; margin-top:2px;">罐 剩余罐头</div>
+          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; letter-spacing:0.1em; margin-top:2px;" data-i18n="cansRemain">罐 剩余罐头</div>
           <button class="cans-buy-link" id="buy-link-p" onclick="document.getElementById('shop').classList.add('show'); toggleProfile();" style="margin-top:8px;">＋ 补充罐头</button>
         </div>
         <!-- Level -->
@@ -355,7 +355,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
         </div>
         <!-- Invite -->
         <div style="margin-bottom:1rem;">
-          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-bottom:6px; text-align:center; letter-spacing:0.05em;">邀请朋友，双方各得2罐</div>
+          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-bottom:6px; text-align:center; letter-spacing:0.05em;" data-i18n="inviteText">邀请朋友，双方各得2罐</div>
           <div style="display:flex; gap:6px; margin-bottom:8px;">
             <input type="text" id="invite-link-p" readonly style="flex:1; padding:6px 10px; border:1px solid var(--ink-ghost); border-radius:8px; font-size:11px; background:rgba(255,255,255,0.8); color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif;">
             <button onclick="window.copyInviteLinkP()" style="padding:6px 10px; background:var(--ink); color:var(--paper); border:none; border-radius:8px; font-size:11px; cursor:pointer; font-family:'Noto Sans SC',sans-serif; white-space:nowrap;">复制</button>
@@ -381,10 +381,11 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
           </div>
         </div>
         <!-- Logout -->
-        <button onclick="signOut(); toggleProfile();" style="width:100%; padding:8px; background:transparent; border:1px solid var(--ink-ghost); border-radius:8px; font-size:12px; color:var(--ink-faint); cursor:pointer; font-family:'Noto Sans SC',sans-serif;">退出登录</button>
+        <button onclick="signOut(); toggleProfile();" style="width:100%; padding:8px; background:transparent; border:1px solid var(--ink-ghost); border-radius:8px; font-size:12px; color:var(--ink-faint); cursor:pointer; font-family:'Noto Sans SC',sans-serif;" data-i18n="navLogout">退出登录</button>
       </div>
     </div>
     <button id="nav-login-btn" class="nav-login-btn" onclick="window.signInWithGoogle()">登录</button>
+    <button id="lang-btn" onclick="window.toggleLang()" style="font-size:12px; font-family:'Noto Sans SC',sans-serif; background:rgba(244,237,224,0.15); color:#f4ede0; border:1px solid rgba(244,237,224,0.3); border-radius:20px; padding:6px 14px; cursor:pointer; transition:all 0.2s; letter-spacing:0.05em;">EN</button>
   </div>
 </nav>
 
@@ -397,7 +398,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
   <div class="hero-en">The I Ching Oracle</div>
   <div class="hero-divider"></div>
   <div style="max-width:560px; margin:0 auto;">
-    <p style="font-size:15px; color:rgba(244,237,224,0.75); line-height:2; letter-spacing:0.06em; font-family:'Noto Sans SC',sans-serif; font-weight:300; text-align:center;">
+    <p class="hero-desc" style="font-size:15px; color:rgba(244,237,224,0.75); line-height:2; letter-spacing:0.06em; font-family:'Noto Sans SC',sans-serif; font-weight:300; text-align:center;">
       三千年前，古人仰观天文，俯察地理<br>
       以阴阳符号描述万物运行——这就是《易经》<br>
       <br>
@@ -450,31 +451,31 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
         <div class="cat-selector-title">五行归位</div>
         <div class="cat-selector-sub">每只猫守护不同的人生面向<br>选择与你此刻问题最契合的那一只</div>
         <div class="cat-selector-grid">
-          <div class="cat-sel-card" onclick="selectCatOracle('shazhu',this)">
+          <div class="cat-sel-card" data-cat="shazhu" onclick="selectCatOracle('shazhu',this)">
             <img src="cat-shazhu.jpg" alt="傻猪" class="cat-sel-photo">
             <div class="cat-sel-element">土</div>
             <div class="cat-sel-name">傻 猪</div>
             <div class="cat-sel-domain">人生方向<br>重大决策</div>
           </div>
-          <div class="cat-sel-card" onclick="selectCatOracle('feimao',this)">
+          <div class="cat-sel-card" data-cat="feimao" onclick="selectCatOracle('feimao',this)">
             <img src="cat-feimao.jpg" alt="肥猫" class="cat-sel-photo">
             <div class="cat-sel-element">金</div>
             <div class="cat-sel-name">肥 猫</div>
             <div class="cat-sel-domain">放下执念<br>长远眼光</div>
           </div>
-          <div class="cat-sel-card" onclick="selectCatOracle('chashi',this)">
+          <div class="cat-sel-card" data-cat="chashi" onclick="selectCatOracle('chashi',this)">
             <img src="cat-feipo.jpg" alt="茶室猫" class="cat-sel-photo">
             <div class="cat-sel-element">火</div>
             <div class="cat-sel-name">茶室猫</div>
             <div class="cat-sel-domain">感情家庭<br>关系边界</div>
           </div>
-          <div class="cat-sel-card" onclick="selectCatOracle('huba',this)">
+          <div class="cat-sel-card" data-cat="huba" onclick="selectCatOracle('huba',this)">
             <img src="hubanzai-cattree.jpg" alt="虎斑仔" class="cat-sel-photo">
             <div class="cat-sel-element">木</div>
             <div class="cat-sel-name">虎斑仔</div>
             <div class="cat-sel-domain">突破困境<br>竞争决策</div>
           </div>
-          <div class="cat-sel-card" onclick="selectCatOracle('mengmeng',this)">
+          <div class="cat-sel-card" data-cat="mengmeng" onclick="selectCatOracle('mengmeng',this)">
             <img src="cat-mengmengda.jpg" alt="萌萌哒" class="cat-sel-photo">
             <div class="cat-sel-element">水</div>
             <div class="cat-sel-name">萌萌哒</div>
@@ -502,21 +503,21 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
       <div style="display:flex; justify-content:center; gap:0; margin-bottom:2rem;">
         <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
           <div style="width:36px; height:36px; border-radius:50%; background:var(--ink); color:var(--paper); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; font-family:'Noto Sans SC',sans-serif;">1</div>
-          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:6px; text-align:center; letter-spacing:0.03em;">写下问题</div>
+          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:6px; text-align:center; letter-spacing:0.03em;" class="step-label">写下问题</div>
         </div>
         <div style="flex:1; display:flex; align-items:center; padding-bottom:18px;">
           <div style="width:100%; height:1px; background:var(--ink-ghost);"></div>
         </div>
         <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
           <div style="width:36px; height:36px; border-radius:50%; background:var(--ink); color:var(--paper); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; font-family:'Noto Sans SC',sans-serif;">2</div>
-          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:6px; text-align:center; letter-spacing:0.03em;">投掷铜钱×6</div>
+          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:6px; text-align:center; letter-spacing:0.03em;" class="step-label">投掷铜钱×6</div>
         </div>
         <div style="flex:1; display:flex; align-items:center; padding-bottom:18px;">
           <div style="width:100%; height:1px; background:var(--ink-ghost);"></div>
         </div>
         <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
           <div style="width:36px; height:36px; border-radius:50%; background:var(--ink); color:var(--paper); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; font-family:'Noto Sans SC',sans-serif;">3</div>
-          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:6px; text-align:center; letter-spacing:0.03em;">六爻成卦</div>
+          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:6px; text-align:center; letter-spacing:0.03em;" class="step-label">六爻成卦</div>
         </div>
         <div style="flex:1; display:flex; align-items:center; padding-bottom:18px;">
           <div style="width:100%; height:1px; background:var(--ink-ghost);"></div>
@@ -532,7 +533,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
       </div>
       <textarea class="oracle-question" id="question" rows="5" maxlength="200" placeholder="" oninput="updateCount()" onfocus="document.getElementById('oracle-overlay').classList.add('show'); document.querySelector('.oracle-section').classList.add('focused')" onblur="document.getElementById('oracle-overlay').classList.remove('show'); document.querySelector('.oracle-section').classList.remove('focused')"></textarea>
       <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px; margin-bottom:8px;">
-        <span style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif;">最少10字，最多200字</span>
+        <span style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif;" data-i18n="charLimit">最少10字，最多200字</span>
         <span id="char-count" style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif;">0 / 200</span>
       </div>
       <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-bottom:1.25rem; letter-spacing:0.03em;">
@@ -540,7 +541,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
       </div>
       <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; margin-bottom:1.25rem; padding:12px 16px; background:rgba(184,134,11,0.06); border:1px solid rgba(184,134,11,0.2); border-radius:10px;">
         <input type="checkbox" id="confirm-check" style="width:18px; height:18px; margin-top:2px; accent-color:var(--gold); flex-shrink:0; cursor:pointer;">
-        <span style="font-size:13px; color:var(--ink-light); font-family:'Noto Sans SC',sans-serif; line-height:1.7; letter-spacing:0.03em;">
+        <span style="font-size:13px; color:var(--ink-light); font-family:'Noto Sans SC',sans-serif; line-height:1.7; letter-spacing:0.03em;" data-i18n="confirmCheck">
           我确认问题已清楚填写，了解每次占卜消耗1罐罐头，结果仅供参考
         </span>
       </label>
@@ -569,8 +570,8 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
         <div class="disclaimer">⚠ 本卦象仅供参考，不构成任何建议。一切决定请以自身判断为准。</div>
       </div>
       <div class="result-actions">
-        <button class="result-btn" onclick="window.openShareModal()">✦ 分享占卜</button>
-        <button class="result-btn" onclick="window.resetAll()">再问一次</button>
+        <button class="result-btn" onclick="window.openShareModal()" data-i18n="shareBtn">✦ 分享占卜</button>
+        <button class="result-btn" onclick="window.resetAll()" data-i18n="askAgain">再问一次（关闭）</button>
       </div>
     </div>
 
@@ -684,7 +685,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
       </div>
     </div>
     <div class="share-actions">
-      <div class="share-actions-title">分享到</div>
+      <div class="share-actions-title" data-i18n="shareTitle">分享到</div>
       <div class="share-icons">
 
         <!-- Threads -->
@@ -736,7 +737,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
         </div>
 
       </div>
-      <button class="share-close-btn" onclick="document.getElementById('share-modal').classList.remove('show')">关闭</button>
+      <button class="share-close-btn" onclick="document.getElementById('share-modal').classList.remove('show')" data-i18n="shareClose">关闭</button>
     </div>
   </div>
 </div>
@@ -1144,7 +1145,10 @@ window.revealResult = async function() {
 }
 
 window.closeScroll = () => {
-  if (!confirm('⚠️ 关闭后此次解卦将无法找回。\n\n如需保存，请先按「分享」→「保存」。\n\n确定关闭？')) return;
+  const msg = currentLang === 'en'
+    ? '⚠️ This reading cannot be recovered after closing.\n\nTo save it, tap "Share" → "Save" first.\n\nClose anyway?'
+    : '⚠️ 关闭后此次解卦将无法找回。\n\n如需保存，请先按「分享」→「保存」。\n\n确定关闭？';
+  if (!confirm(msg)) return;
   document.getElementById('scroll-modal').classList.remove('show');
   resetAll();
 };
@@ -1492,7 +1496,317 @@ document.getElementById('qty-price').textContent = '合计 $' + (qty * 0.99).toF
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60);});
 
-// ── CAT ORACLE SELECTOR ──
+// ── LANGUAGE SYSTEM ──────────────────────────────────────────
+let currentLang = localStorage.getItem('lang') || 'zh';
+
+const i18n = {
+  zh: {
+    // NAV
+    navLogin: '登录',
+    navLogout: '退出登录',
+    // HERO
+    heroLabel: 'Oracle · 易经占卜',
+    heroTitle: '易经占卜',
+    heroEn: 'The I Ching Oracle',
+    heroDesc: '三千年前，古人仰观天文，俯察地理<br>以阴阳符号描述万物运行——这就是《易经》<br><br>不是迷信，是智慧。<br>不是预测命运，是看清此刻的方向。',
+    // PHIL
+    phil1Title: '诚', phil1Text: '带着真实的困惑而来',
+    phil2Title: '静', phil2Text: '放下期待，让卦象说话',
+    phil3Title: '清', phil3Text: '天机无从落脚，心不清则卦不准',
+    // LOGIN
+    loginTitle: '请先登录',
+    loginSub: '登录后罐头永久保存<br>换设备也不会丢失',
+    loginBtn: '用 Google 账号登录',
+    // CANS
+    cansRemain: '罐 剩余罐头',
+    cansAdd: '＋ 补充罐头',
+    // INVITE
+    inviteText: '邀请朋友，双方各得2罐',
+    inviteCopy: '复制',
+    // CAT SELECTOR
+    catSelectorLabel: '选择占卜师 · Choose Your Oracle',
+    catSelectorTitle: '五行归位',
+    catSelectorSub: '每只猫守护不同的人生面向<br>选择与你此刻问题最契合的那一只',
+    catConfirmBtn: '请选择你的占卜师',
+    // CAT ELEMENTS
+    cats: {
+      shazhu: { element:'土', name:'傻 猪', domain:'人生方向<br>重大决策', personality:'家里最黏人的猫，你到哪里它跟到哪里。表面是猫群大哥，实际上是最温柔的那一只。挑食、任性，但对你忠诚到底。', quote:'本猫跟了你这么久，你那点小心思还用问？', askTitle:'喵~ 欲问何事？' },
+      feimao: { element:'金', name:'肥 猫', domain:'放下执念<br>长远眼光', personality:'十岁的老猫，见过太多风景。不和任何猫社交，爱晒太阳，慵懒自在。有一种跨越时空的长辈气质，说话字字有重量。', quote:'老猫见过的风景，比你焦虑的事多多了。', askTitle:'老猫在此，欲问何事？' },
+      chashi: { element:'火', name:'茶室猫', domain:'感情家庭<br>关系边界', personality:'神经质、情绪化，爱憎分明。出爪不是故意但就是会伤人——热情过头。但骨子里是极好的妈妈，虎斑仔两岁了还找她撒娇。', quote:'爱一个人有时候会不小心出爪，但那不代表不爱。', askTitle:'烈猫在此，欲问何事？' },
+      huba: { element:'木', name:'虎斑仔', domain:'突破困境<br>竞争决策', personality:'不爱被摸，不撒娇，保持距离——但不是冷漠，是自有边界。家里运动健将，跑跳第一名。他不等人来找他，他自己选择跟谁玩。', quote:'别等人来邀请你，自己跳出去。', askTitle:'虎将在此，欲问何事？' },
+      mengmeng: { element:'水', name:'萌萌哒', domain:'创意灵感<br>未知可能', personality:'外表极度可爱，奶声奶气，但骨子里有森林猫的野性。随时会消失，随时会出现。对食物不感兴趣，对世界充满好奇。', quote:'躲起来不是消失，是在找更好玩的角落。', askTitle:'小公主在此，欲问何事？' },
+    },
+    // ORACLE INPUT
+    step1: '写下问题', step2: '投掷铜钱×6', step3: '六爻成卦',
+    oracleHintPrefix: '※ 好问题让',
+    oracleHintSuffix: '给出更准确的解读。建议说明<strong>具体情境</strong>，例如：「我在考虑换工作，对方薪水更高但需要搬家，我该怎么决定？」',
+    charLimit: '最少10字，最多200字',
+    charMax: '/ 200',
+    privacyNote: '✦ 你的问题不会被储存，仅用于本次占卜',
+    confirmCheck: '我确认问题已清楚填写，了解每次占卜消耗1罐罐头，结果仅供参考',
+    divBtn: '✦ 投币问卦（消耗1罐罐头）',
+    divNote: '$0.99 / 罐 · 罐头永久保存不过期',
+    // THINKING
+    thinkingDefault: '正在感应天机...',
+    // RESULT
+    aiLoading: '本猫正在细读天机...',
+    disclaimer: '⚠ 本卦象仅供参考，不构成任何建议。一切决定请以自身判断为准。',
+    shareBtn: '✦ 分享占卜',
+    askAgain: '再问一次（关闭）',
+    shareDiv: '分享 / 保存',
+    // PREP MODAL
+    prepContent: '<div class="prep-item"><div class="prep-icon">诚</div><div class="prep-text"><strong>心不诚，卦不灵。</strong><br>把你真正在意的事带来，占卜师才能感应到。</div></div><div class="prep-item"><div class="prep-icon">静</div><div class="prep-text"><strong>静下来，再开始。</strong><br>深呼吸三次，放空杂念，专注于你的问题。</div></div><div class="prep-item"><div class="prep-icon">清</div><div class="prep-text"><strong>问题要清晰。</strong><br>天机无从落脚——问题模糊，卦象也会模糊。</div></div>',
+    prepStart: '✦ 我已准备好，开始投币',
+    // SCROLL MODAL
+    scrollShareBtn: '✦ 分享 / 保存',
+    scrollCloseBtn: '再问一次（关闭）',
+    scrollCloseConfirm: '⚠️ 关闭后此次解卦将无法找回。\n\n如需保存，请先按「分享」→「保存」。\n\n确定关闭？',
+    // SHARE
+    shareTitle: '分享到',
+    shareClose: '关闭',
+    // FOOTER
+    footerPrivacyTitle: '✦ 隐私声明',
+    footerPrivacy: '本站只储存你的账号基本资料（名字、头像）及游戏数据（罐头、等级、占卜次数）。你的占卜问题及解卦内容不会被记录或储存，不会用于任何商业用途。',
+    // SHOP
+    shopTitle: '补充罐头',
+    shopSub: '罐头永久保存，用完再买',
+    shopPrice: '$0.99 / 罐头',
+    shopNote: '支持信用卡、Apple Pay、Google Pay',
+    shopBtn: '前往结账',
+    shopClose: '关闭',
+  },
+  en: {
+    // NAV
+    navLogin: 'Login',
+    navLogout: 'Sign Out',
+    // HERO
+    heroLabel: 'Oracle · I Ching Divination',
+    heroTitle: 'I Ching Oracle',
+    heroEn: 'The Tao of Your Cat',
+    heroDesc: '3,000 years ago, the ancients observed the heavens and the earth<br>and described all things through yin and yang — this is the I Ching.<br><br>Not superstition. Wisdom.<br>Not predicting fate. Seeing the direction of this moment.',
+    // PHIL
+    phil1Title: 'Sincerity', phil1Text: 'Come with genuine questions',
+    phil2Title: 'Stillness', phil2Text: 'Let go of expectations, let the hexagram speak',
+    phil3Title: 'Clarity', phil3Text: 'An unclear mind gives an unclear reading',
+    // LOGIN
+    loginTitle: 'Please Sign In',
+    loginSub: 'Your cans are saved permanently<br>across all your devices',
+    loginBtn: 'Sign in with Google',
+    // CANS
+    cansRemain: 'cans remaining',
+    cansAdd: '＋ Get More Cans',
+    // INVITE
+    inviteText: 'Invite a friend — both get 2 cans',
+    inviteCopy: 'Copy',
+    // CAT SELECTOR
+    catSelectorLabel: 'Choose Your Oracle · 五行归位',
+    catSelectorTitle: 'Five Elements, Five Oracles',
+    catSelectorSub: 'Each cat guards a different aspect of life.<br>Choose the one that matches your question right now.',
+    catConfirmBtn: 'Please choose your oracle',
+    // CAT DATA
+    cats: {
+      shazhu: { element:'Earth', name:'Sha Zhu', domain:'Life Direction<br>Major Decisions', personality:'The most loyal cat in the house — follows you everywhere. Acts tough as the group leader, but is the gentlest at heart. Picky and headstrong, but loyal to you till the end.', quote:'I\'ve followed you this long. Did you really need to ask?', askTitle:'Meow~ What weighs on your mind?' },
+      feimao: { element:'Metal', name:'Fei Mao', domain:'Letting Go<br>Long-term Vision', personality:'A 10-year-old elder cat who has seen it all. Doesn\'t socialize with other cats. Loves sunbathing and watching the world. Every word carries the weight of lived wisdom.', quote:'The scenery this old cat has seen outweighs all your worries.', askTitle:'The elder is here. What is your question?' },
+      chashi: { element:'Fire', name:'Cha Shi', domain:'Love & Family<br>Relationship Boundaries', personality:'Intense, emotional, and unfiltered. Her claws come out by accident — she loves too hard. But deep down, she\'s a remarkable mother. Her kittens still seek her at age two.', quote:'Sometimes love accidentally leaves scratches. That doesn\'t mean it isn\'t love.', askTitle:'The fierce one is here. What troubles you?' },
+      huba: { element:'Wood', name:'Hu Ban Zai', domain:'Breaking Through<br>Competition & Decisions', personality:'Doesn\'t like being touched. No clinginess. Fiercely independent. The house athlete — fastest, highest jumper. Doesn\'t wait for anyone. He chooses who he plays with.', quote:'Don\'t wait for an invitation. Jump in yourself.', askTitle:'The warrior is here. What must be done?' },
+      mengmeng: { element:'Water', name:'Meng Meng Da', domain:'Creative Inspiration<br>The Unknown', personality:'Impossibly cute with a baby-soft voice, but with the wild soul of a forest cat. Disappears and reappears at will. Not motivated by food — driven by pure curiosity.', quote:'Hiding isn\'t disappearing. It\'s finding a better corner to play in.', askTitle:'Little princess is here. What are you curious about?' },
+    },
+    // ORACLE INPUT
+    step1: 'Write your question', step2: 'Toss coins ×6', step3: 'Form hexagram',
+    oracleHintPrefix: '※ A clear question helps ',
+    oracleHintSuffix: ' give a more accurate reading. Describe your <strong>specific situation</strong>, e.g. "I\'m considering a job change — higher pay but requires relocation. What should I do?"',
+    charLimit: 'Min 10, max 200 characters',
+    charMax: '/ 200',
+    privacyNote: '✦ Your question is not stored and is only used for this reading',
+    confirmCheck: 'I confirm my question is clearly written and understand each reading uses 1 can. Results are for reference only.',
+    divBtn: '✦ Toss Coins to Divine (1 can)',
+    divNote: '$0.99 / can · Cans never expire',
+    // THINKING
+    thinkingDefault: 'Reading the signs...',
+    // RESULT
+    aiLoading: 'Reading the cosmic signs...',
+    disclaimer: '⚠ This reading is for reference only and does not constitute advice. All decisions are yours to make.',
+    shareBtn: '✦ Share Reading',
+    askAgain: 'Ask Again (Close)',
+    shareDiv: 'Share / Save',
+    // PREP MODAL
+    prepContent: '<div class="prep-item"><div class="prep-icon">誠</div><div class="prep-text"><strong>Be sincere.</strong><br>Bring what truly matters to you. The oracle senses what you carry.</div></div><div class="prep-item"><div class="prep-icon">靜</div><div class="prep-text"><strong>Be still.</strong><br>Take three deep breaths. Empty your mind. Focus on your question.</div></div><div class="prep-item"><div class="prep-icon">清</div><div class="prep-text"><strong>Be clear.</strong><br>A vague question gives a vague answer. The universe needs a place to land.</div></div>',
+    prepStart: '✦ I am ready. Begin the ritual.',
+    // SCROLL MODAL
+    scrollShareBtn: '✦ Share / Save',
+    scrollCloseBtn: 'Ask Again (Close)',
+    scrollCloseConfirm: '⚠️ This reading cannot be recovered after closing.\n\nTo save it, tap "Share" → "Save" first.\n\nClose anyway?',
+    // SHARE
+    shareTitle: 'Share to',
+    shareClose: 'Close',
+    // FOOTER
+    footerPrivacyTitle: '✦ Privacy Notice',
+    footerPrivacy: 'We only store your basic account info (name, avatar) and game data (cans, level, reading count). Your questions and readings are never recorded, stored, or used for any commercial purpose.',
+    // SHOP
+    shopTitle: 'Get More Cans',
+    shopSub: 'Cans never expire — buy when you need',
+    shopPrice: '$0.99 / can',
+    shopNote: 'Credit card, Apple Pay, Google Pay accepted',
+    shopBtn: 'Proceed to Checkout',
+    shopClose: 'Close',
+  }
+};
+
+function applyLang(lang) {
+  const t = i18n[lang];
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  document.documentElement.lang = lang === 'zh' ? 'zh' : 'en';
+
+  // Lang button
+  document.getElementById('lang-btn').textContent = lang === 'zh' ? 'EN' : '中文';
+
+  // Nav
+  document.getElementById('nav-login-btn').textContent = t.navLogin;
+
+  // Hero
+  const heroLabel = document.querySelector('.hero-label');
+  const heroTitle = document.querySelector('.hero-title');
+  const heroEn = document.querySelector('.hero-en');
+  const heroDesc = document.querySelector('.hero-desc');
+  if (heroLabel) heroLabel.textContent = t.heroLabel;
+  if (heroTitle) heroTitle.textContent = t.heroTitle;
+  if (heroEn) heroEn.textContent = t.heroEn;
+  if (heroDesc) heroDesc.innerHTML = t.heroDesc;
+
+  // Phil strip
+  const philTitles = document.querySelectorAll('.phil-item-title');
+  const philTexts = document.querySelectorAll('.phil-item-text');
+  const philKeys = ['phil1','phil2','phil3'];
+  philKeys.forEach((k,i) => {
+    if (philTitles[i]) philTitles[i].textContent = t[k+'Title'];
+    if (philTexts[i]) philTexts[i].textContent = t[k+'Text'];
+  });
+
+  // Login wall
+  const loginTitle = document.querySelector('.login-wall-title');
+  const loginSub = document.querySelector('.login-wall-sub');
+  const loginBtn = document.querySelector('.google-btn');
+  if (loginTitle) loginTitle.textContent = t.loginTitle;
+  if (loginSub) loginSub.innerHTML = t.loginSub;
+  if (loginBtn) loginBtn.innerHTML = loginBtn.innerHTML.replace(/(?<=>)[^<]+$/, ' ' + t.loginBtn);
+
+  // Cans panel
+  const cansRemain = document.querySelector('[data-i18n="cansRemain"]');
+  if (cansRemain) cansRemain.textContent = t.cansRemain;
+  const cansAdd = document.getElementById('buy-link-p');
+  if (cansAdd) cansAdd.textContent = t.cansAdd;
+  const inviteText = document.querySelector('[data-i18n="inviteText"]');
+  if (inviteText) inviteText.textContent = t.inviteText;
+  const inviteCopy = document.querySelector('[data-i18n="inviteCopy"]');
+  if (inviteCopy) inviteCopy.textContent = t.inviteCopy;
+  const navLogout = document.querySelector('[data-i18n="navLogout"]');
+  if (navLogout) navLogout.textContent = t.navLogout;
+
+  // Cat selector
+  const catLabel = document.querySelector('.cat-selector-label');
+  const catTitle = document.querySelector('.cat-selector-title');
+  const catSub = document.querySelector('.cat-selector-sub');
+  if (catLabel) catLabel.textContent = t.catSelectorLabel;
+  if (catTitle) catTitle.textContent = t.catSelectorTitle;
+  if (catSub) catSub.innerHTML = t.catSelectorSub;
+
+  // Cat cards
+  const catKeys = ['shazhu','feimao','chashi','huba','mengmeng'];
+  catKeys.forEach(key => {
+    const card = document.querySelector(`[data-cat="${key}"]`);
+    if (!card) return;
+    const el = card.querySelector('.cat-sel-element');
+    const nm = card.querySelector('.cat-sel-name');
+    const dm = card.querySelector('.cat-sel-domain');
+    if (el) el.textContent = t.cats[key].element;
+    if (nm) nm.textContent = t.cats[key].name;
+    if (dm) dm.innerHTML = t.cats[key].domain;
+  });
+
+  // Cat confirm button
+  const catConfirmBtn = document.getElementById('cat-confirm-btn');
+  if (catConfirmBtn && catConfirmBtn.textContent.includes('请选择') || catConfirmBtn && catConfirmBtn.textContent.includes('Please choose')) {
+    catConfirmBtn.textContent = t.catConfirmBtn;
+  }
+
+  // Oracle steps
+  const stepLabels = document.querySelectorAll('.step-label');
+  if (stepLabels.length >= 3) {
+    stepLabels[0].textContent = t.step1;
+    stepLabels[1].textContent = t.step2;
+    stepLabels[2].textContent = t.step3;
+  }
+
+  // Oracle input
+  const oracleHint = document.getElementById('oracle-hint');
+  if (oracleHint && selectedCatKey) {
+    oracleHint.innerHTML = t.oracleHintPrefix + (t.cats[selectedCatKey]?.name || '') + t.oracleHintSuffix;
+  }
+  const charLimit = document.querySelector('[data-i18n="charLimit"]');
+  if (charLimit) charLimit.textContent = t.charLimit;
+  const privacyNote = document.querySelector('[data-i18n="privacyNote"]');
+  if (privacyNote) privacyNote.textContent = t.privacyNote;
+  const confirmCheckLabel = document.querySelector('[data-i18n="confirmCheck"]');
+  if (confirmCheckLabel) confirmCheckLabel.textContent = t.confirmCheck;
+  const divBtn = document.getElementById('div-btn');
+  if (divBtn) divBtn.textContent = t.divBtn;
+  const divNote = document.querySelector('.oracle-note');
+  if (divNote) divNote.textContent = t.divNote;
+
+  // Result
+  const disclaimer = document.querySelector('.disclaimer');
+  if (disclaimer) disclaimer.textContent = t.disclaimer;
+  const aiLoading = document.getElementById('ai-loading');
+  if (aiLoading) aiLoading.textContent = t.aiLoading;
+
+  // Buttons
+  const shareBtn = document.querySelector('[data-i18n="shareBtn"]');
+  if (shareBtn) shareBtn.textContent = t.shareBtn;
+  const askAgainBtn = document.querySelector('[data-i18n="askAgain"]');
+  if (askAgainBtn) askAgainBtn.textContent = t.askAgain;
+
+  // Share modal
+  const shareTitle = document.querySelector('[data-i18n="shareTitle"]');
+  if (shareTitle) shareTitle.textContent = t.shareTitle;
+  const shareClose = document.querySelector('[data-i18n="shareClose"]');
+  if (shareClose) shareClose.textContent = t.shareClose;
+
+  // Footer
+  const footerPrivacyTitle = document.querySelector('[data-i18n="footerPrivacyTitle"]');
+  if (footerPrivacyTitle) footerPrivacyTitle.textContent = t.footerPrivacyTitle;
+  const footerPrivacy = document.querySelector('[data-i18n="footerPrivacy"]');
+  if (footerPrivacy) footerPrivacy.textContent = t.footerPrivacy;
+
+  // Shop
+  const shopTitle = document.querySelector('[data-i18n="shopTitle"]');
+  if (shopTitle) shopTitle.textContent = t.shopTitle;
+  const shopSub = document.querySelector('[data-i18n="shopSub"]');
+  if (shopSub) shopSub.textContent = t.shopSub;
+  const shopClose = document.querySelector('[data-i18n="shopClose"]');
+  if (shopClose) shopClose.textContent = t.shopClose;
+
+  // Update CAT_DATA with translated content
+  if (typeof CAT_DATA !== 'undefined') {
+    Object.keys(CAT_DATA).forEach(key => {
+      const catKey = key;
+      const tCat = t.cats[catKey];
+      if (tCat) {
+        CAT_DATA[key].personality = tCat.personality;
+        CAT_DATA[key].quote = tCat.quote;
+        CAT_DATA[key].askTitle = tCat.askTitle;
+      }
+    });
+  }
+}
+
+window.toggleLang = () => {
+  applyLang(currentLang === 'zh' ? 'en' : 'zh');
+};
+
+// ── END LANGUAGE SYSTEM ──────────────────────────────────────
+
+
 const CAT_DATA = {
   shazhu: {
     name:'傻猪', element:'土', elementDesc:'忠诚陪伴',
@@ -1666,11 +1980,14 @@ window.shareToIG = function() { sharePNG(this); };
 window.shareToWA = function() { sharePNG(this); };
 window.copyShareText = function() { sharePNG(this); };
 window.saveCard = function() { sharePNG(this); };
+
+// Apply saved language on load
+applyLang(currentLang);
 </script>
 <footer style="background:rgba(30,22,8,0.04); border-top:1px solid var(--ink-ghost); padding:2rem 1.5rem; text-align:center; margin-top:2rem;">
   <div style="max-width:680px; margin:0 auto;">
-    <div style="font-size:13px; font-weight:500; color:var(--ink); letter-spacing:0.1em; margin-bottom:8px; font-family:'Noto Sans SC',sans-serif;">✦ 隐私声明</div>
-    <div style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; line-height:1.8; letter-spacing:0.03em;">
+    <div style="font-size:13px; font-weight:500; color:var(--ink); letter-spacing:0.1em; margin-bottom:8px; font-family:'Noto Sans SC',sans-serif;" data-i18n="footerPrivacyTitle">✦ 隐私声明</div>
+    <div style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; line-height:1.8; letter-spacing:0.03em;" data-i18n="footerPrivacy">
       本站只储存你的账号基本资料（名字、头像）及游戏数据（罐头、等级、占卜次数）。<br>
       你的占卜问题及解卦内容不会被记录或储存，不会用于任何商业用途。
     </div>
