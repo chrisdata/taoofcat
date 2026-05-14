@@ -78,12 +78,18 @@
 - **EN 模式传英文 cat_name 给后端**（走英文 prompt）
 - **64卦引言全部英文化**（quote_en）
 - 分享按钮修复（opacity 替代 textContent，图标不消失）
+- **分享各平台独立逻辑**（Threads 发帖 / IG 复制文字 / WA 文字链接 / TG / FB 分享链接 / Save 下载图片）
+- **分享自动附带邀请链接**（双方各得2罐，中英双语）
 - **Postcard 左下角书法 logo**（32px，金色）
 - Postcard 免责声明中英切换
 - 猫咪名字双语（选猫界面）
 - 大按钮「投币问卦」双语
 - 非退款声明（商店弹窗 + 占卜输入页）
 - 全站书法 logo 嵌入 nav
+- **随机猫咪照片系统**（解卦结果 + 宣纸弹窗，每次随机不同，去背 PNG）
+  - Cloudinary 命名：`shazhu-1.png` ~ `shazhu-N.png`（五猫各自）
+  - 上传照片后更新 `CAT_PHOTO_COUNTS` 数字即可
+  - 照片用 remove.bg 去背，猫咪浮在宣纸上
 - **中英双语切换**（全页面，含 JS 动态内容）
 - Google Analytics
 
@@ -135,8 +141,8 @@
 ## 待完成 📋
 
 ### 紧急
-- [ ] hero-bg.mp4 确认已上传 GitHub repo（视频背景）
-- [ ] Behold.so 换成太太 @cjluckycats 的 feed（拿到新 feed ID 即可）
+- [x] hero-bg.mp4 已上传 GitHub ✓
+- [ ] Behold.so 换成太太 @cjluckycats 的 feed（算了，@taoc.4t 慢慢发）
 
 ### 功能
 - [ ] 每日打卡系统（来了送积分，兑换罐头）
@@ -181,8 +187,8 @@
 
 ## 下一个聊天继续
 
-1. 确认 hero-bg.mp4 上传 GitHub
-2. 太太 @cjluckycats Behold.so feed ID → 换进 daily.html
-3. 开始推广内容策略
+1. **博山炉焚香动画** — 明天用 Sony 拍 MP4，上传 Cloudinary，加进准备弹窗
+2. **猫咪去背照片上传** — remove.bg 处理后上传 Cloudinary（shazhu-1.png 等），更新 CAT_PHOTO_COUNTS
+3. **开始发帖推广** — 玄猫来访那篇已发，下一篇傻猪 x 小白父子照片
 
 *最后更新：2026年5月15日*
