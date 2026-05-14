@@ -1750,7 +1750,17 @@ async function callAPI(gua, q, cat) {
     const res = await fetch(API + '/divination', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ question:q, cat_name: selectedCatKey && CAT_DATA[selectedCatKey] ? CAT_DATA[selectedCatKey].name : cat, gua_name:gua.name, gua_nature:gua.nature, quote:gua.quote, quote_src:gua.src })
+      body: JSON.stringify({
+        question: q,
+        cat_name: window._lang === 'en'
+          ? (selectedCatKey && CAT_DATA_EN[selectedCatKey] ? CAT_DATA_EN[selectedCatKey].name : cat)
+          : (selectedCatKey && CAT_DATA[selectedCatKey] ? CAT_DATA[selectedCatKey].name : cat),
+        gua_name: window._lang === 'en' ? (gua.name_en || gua.name) : gua.name,
+        gua_nature: window._lang === 'en' ? (gua.nature_en || gua.nature) : gua.nature,
+        quote: gua.quote,
+        quote_src: window._lang === 'en' ? (gua.src_en || gua.src) : gua.src,
+        lang: window._lang
+      })
     });
     document.getElementById('scroll-loading').style.display = 'none';
     const reader = res.body.getReader();
