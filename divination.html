@@ -506,7 +506,7 @@ nav.scrolled .lang-btn:hover{color:var(--ink);border-color:var(--gold);}
           <div class="cat-sel-detail-text" id="cat-detail-text"></div>
           <div class="cat-sel-detail-quote" id="cat-detail-quote"></div>
         </div>
-        <button class="oracle-btn" id="cat-confirm-btn" onclick="window.confirmCatSelection()" style="opacity:0.3; pointer-events:none;">请选择你的占卜师</button>
+        <button class="oracle-btn" id="cat-confirm-btn" onclick="window.confirmCatSelection()" style="opacity:0.3; pointer-events:none;" data-zh="请选择你的占卜师" data-en="Choose your oracle">请选择你的占卜师</button>
       </div>
     </div>
 
@@ -558,7 +558,7 @@ nav.scrolled .lang-btn:hover{color:var(--ink);border-color:var(--gold);}
           <span data-zh="我确认问题已清楚填写，了解每次占卜消耗1罐罐头，结果仅供参考" data-en="I confirm my question is clear. I understand each reading costs 1 can, and results are for reference only.">我确认问题已清楚填写，了解每次占卜消耗1罐罐头，结果仅供参考</span>
         </span>
       </label>
-      <button class="oracle-btn" id="div-btn" onclick="window.startDiv()">✦ 投币问卦（消耗1罐罐头）</button>
+      <button class="oracle-btn" id="div-btn" onclick="window.startDiv()" data-zh="✦ 投币问卦（消耗1罐罐头）" data-en="✦ Toss Coins &amp; Ask (costs 1 can)">✦ 投币问卦（消耗1罐罐头）</button>
       <div class="oracle-note" data-zh="$0.99 / 罐 · 罐头永久保存不过期" data-en="$0.99 / can · Cans never expire">$0.99 / 罐 · 罐头永久保存不过期</div>
     </div>
 
@@ -777,7 +777,7 @@ nav.scrolled .lang-btn:hover{color:var(--ink);border-color:var(--gold);}
 <!-- live counter - admin only -->
 <div id="live-counter" style="display:none; position:fixed; bottom:1.5rem; right:1.5rem; background:rgba(30,22,8,0.85); color:#f4ede0; border-radius:20px; padding:6px 14px; font-family:'Noto Sans SC',sans-serif; font-size:12px; letter-spacing:0.05em; backdrop-filter:blur(8px); z-index:40; pointer-events:none;">
   <span class="live-dot" style="background:#4caf50; display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:5px; animation:blink 1.5s ease-in-out infinite;"></span>
-  <span id="counter-number">—</span> 猫奴已入道
+  <span id="counter-number">—</span> <span id="counter-suffix" data-zh="猫奴已入道" data-en="cat devotees on the path">猫奴已入道</span>
 </div>
 
 <script>
@@ -809,7 +809,7 @@ const T = {
     hintTpl: (name) => '※ 好问题让' + name + '给出更准确的解读。建议说明<strong>具体情境</strong>，例如：「我在考虑换工作，对方薪水更高但需要搬家，我该怎么决定？」',
     thinkingTpl: (name) => name + ' 正在感应天机...',
     prepTitleTpl: (name) => '✦ 问卦前，' + name + '有话说 ✦',
-    divBtn: '✦ 投币问卦（消耗1罐罐头）',
+    divBtn: '✦ 投币问卦（消耗1罐罐头）',  // also in data-zh attr
     // Coin
     coinSub: '请专注你的问题，然后投掷',
     coinSubProgress: (n) => `第${n}爻已定，继续投掷`,
@@ -1034,70 +1034,70 @@ async function loadUserCount() {
 
 
 const guas = [
-  { name:"乾卦·天", sym:"䷀", quote:"天行健，君子以自强不息", src:"《易经·乾》", nature:"刚健进取" },
-  { name:"坤卦·地", sym:"䷁", quote:"地势坤，君子以厚德载物", src:"《易经·坤》", nature:"包容承载" },
-  { name:"屯卦·初生", sym:"䷂", quote:"信言不美，美言不信", src:"《道德经·八十一章》", nature:"艰难起步" },
-  { name:"蒙卦·启蒙", sym:"䷃", quote:"知人者智，自知者明", src:"《道德经·三十三章》", nature:"求教启智" },
-  { name:"需卦·等待", sym:"䷄", quote:"致虚极，守静笃", src:"《道德经·十六章》", nature:"耐心等待" },
-  { name:"讼卦·争讼", sym:"䷅", quote:"曲则全，枉则直", src:"《道德经·二十二章》", nature:"慎重处争" },
-  { name:"师卦·统御", sym:"䷆", quote:"善为士者不武，善战者不怒", src:"《道德经·六十八章》", nature:"统领众人" },
-  { name:"比卦·亲比", sym:"䷇", quote:"上善若水，水善利万物而不争", src:"《道德经·八章》", nature:"亲近团结" },
-  { name:"小畜卦·积聚", sym:"䷈", quote:"为学日益，为道日损", src:"《道德经·四十八章》", nature:"小积大成" },
-  { name:"履卦·谨行", sym:"䷉", quote:"慎终如始，则无败事", src:"《道德经·六十四章》", nature:"谨慎而行" },
-  { name:"泰卦·通泰", sym:"䷊", quote:"万物负阴而抱阳，冲气以为和", src:"《道德经·四十二章》", nature:"天地交泰" },
-  { name:"否卦·阻塞", sym:"䷋", quote:"祸兮福之所倚，福兮祸之所伏", src:"《道德经·五十八章》", nature:"暂时受阻" },
-  { name:"同人卦·同心", sym:"䷌", quote:"信言不美，美言不信", src:"《道德经·八十一章》", nature:"志同道合" },
-  { name:"大有卦·丰收", sym:"䷍", quote:"知足者富", src:"《道德经·三十三章》", nature:"丰盛有余" },
-  { name:"谦卦·谦逊", sym:"䷎", quote:"夫唯不争，故天下莫能与之争", src:"《道德经·六十六章》", nature:"谦虚受益" },
-  { name:"豫卦·喜悦", sym:"䷏", quote:"乐与饵，过客止", src:"《道德经·三十五章》", nature:"顺势而乐" },
-  { name:"随卦·随顺", sym:"䷐", quote:"善行无辙迹", src:"《道德经·二十七章》", nature:"随机应变" },
-  { name:"蛊卦·整治", sym:"䷑", quote:"为之于未有，治之于未乱", src:"《道德经·六十四章》", nature:"革故鼎新" },
-  { name:"临卦·临近", sym:"䷒", quote:"知常容，容乃公", src:"《道德经·十六章》", nature:"君临在上" },
-  { name:"观卦·观察", sym:"䷓", quote:"致虚极，守静笃，万物并作，吾以观复", src:"《道德经·十六章》", nature:"静观其变" },
-  { name:"噬嗑卦·决断", sym:"䷔", quote:"信言不美，美言不信", src:"《道德经·八十一章》", nature:"果断决策" },
-  { name:"贲卦·文饰", sym:"䷕", quote:"知其白，守其黑", src:"《道德经·二十八章》", nature:"文质相辉" },
-  { name:"剥卦·剥落", sym:"䷖", quote:"曲则全，枉则直，洼则盈", src:"《道德经·二十二章》", nature:"顺势而退" },
-  { name:"复卦·回归", sym:"䷗", quote:"归根曰静，是谓复命", src:"《道德经·十六章》", nature:"回归本源" },
-  { name:"无妄卦·自然", sym:"䷘", quote:"道法自然", src:"《道德经·二十五章》", nature:"顺其自然" },
-  { name:"大畜卦·积蓄", sym:"䷙", quote:"为学日益，为道日损", src:"《道德经·四十八章》", nature:"厚积薄发" },
-  { name:"颐卦·养育", sym:"䷚", quote:"自知者明，自胜者强", src:"《道德经·三十三章》", nature:"颐养正道" },
-  { name:"大过卦·过重", sym:"䷛", quote:"物壮则老，是谓不道", src:"《道德经·三十章》", nature:"独立担当" },
-  { name:"坎卦·险陷", sym:"䷜", quote:"上善若水，水善利万物而不争", src:"《道德经·八章》", nature:"处险而安" },
-  { name:"离卦·光明", sym:"䷝", quote:"知人者智，自知者明", src:"《道德经·三十三章》", nature:"附丽光明" },
-  { name:"咸卦·感应", sym:"䷞", quote:"天下皆知美之为美，斯恶已", src:"《道德经·二章》", nature:"感而遂通" },
-  { name:"恒卦·持久", sym:"䷟", quote:"胜人者有力，自胜者强", src:"《道德经·三十三章》", nature:"恒心持久" },
-  { name:"遯卦·退隐", sym:"䷠", quote:"知足者富，强行者有志", src:"《道德经·三十三章》", nature:"适时退隐" },
-  { name:"大壮卦·强壮", sym:"䷡", quote:"天下莫柔弱于水，而攻坚强者莫之能胜", src:"《道德经·七十八章》", nature:"刚壮有力" },
-  { name:"晋卦·晋升", sym:"䷢", quote:"为而不争", src:"《道德经·八十一章》", nature:"进步上升" },
-  { name:"明夷卦·受伤", sym:"䷣", quote:"知其荣，守其辱", src:"《道德经·二十八章》", nature:"韬光养晦" },
-  { name:"家人卦·家道", sym:"䷤", quote:"修之于身，其德乃真", src:"《道德经·五十四章》", nature:"家道和睦" },
-  { name:"睽卦·乖违", sym:"䷥", quote:"信言不美，美言不信", src:"《道德经·八十一章》", nature:"异中求同" },
-  { name:"蹇卦·困难", sym:"䷦", quote:"曲则全，枉则直", src:"《道德经·二十二章》", nature:"迎难而上" },
-  { name:"解卦·解除", sym:"䷧", quote:"为学日益，为道日损，损之又损", src:"《道德经·四十八章》", nature:"化解困境" },
-  { name:"损卦·减损", sym:"䷨", quote:"损之又损，以至于无为", src:"《道德经·四十八章》", nature:"减损求益" },
-  { name:"益卦·增益", sym:"䷩", quote:"圣人不积，既以为人己愈有", src:"《道德经·八十一章》", nature:"利人利己" },
-  { name:"夬卦·决断", sym:"䷪", quote:"勇于敢则杀，勇于不敢则活", src:"《道德经·七十三章》", nature:"果断决行" },
-  { name:"姤卦·相遇", sym:"䷫", quote:"道可道，非常道", src:"《道德经·一章》", nature:"意外相遇" },
-  { name:"萃卦·聚集", sym:"䷬", quote:"同道者相聚", src:"《易经·萃》", nature:"汇聚力量" },
-  { name:"升卦·上升", sym:"䷭", quote:"为而不争，天下莫能与之争", src:"《道德经·六十六章》", nature:"积累上升" },
-  { name:"困卦·困境", sym:"䷮", quote:"祸兮福之所倚", src:"《道德经·五十八章》", nature:"困而后通" },
-  { name:"井卦·源泉", sym:"䷯", quote:"上善若水", src:"《道德经·八章》", nature:"取之不竭" },
-  { name:"革卦·变革", sym:"䷰", quote:"为学日益，为道日损", src:"《道德经·四十八章》", nature:"革故创新" },
-  { name:"鼎卦·鼎新", sym:"䷱", quote:"治大国若烹小鲜", src:"《道德经·六十章》", nature:"鼎故革新" },
-  { name:"震卦·震动", sym:"䷲", quote:"重为轻根，静为躁君", src:"《道德经·二十六章》", nature:"警醒振作" },
-  { name:"艮卦·止静", sym:"䷳", quote:"致虚极，守静笃", src:"《道德经·十六章》", nature:"适时而止" },
-  { name:"渐卦·渐进", sym:"䷴", quote:"为之于未有，治之于未乱", src:"《道德经·六十四章》", nature:"循序渐进" },
-  { name:"归妹卦·归宿", sym:"䷵", quote:"知常容，容乃公", src:"《道德经·十六章》", nature:"寻找归宿" },
-  { name:"丰卦·丰盛", sym:"䷶", quote:"知足者富", src:"《道德经·三十三章》", nature:"丰盛鼎盛" },
-  { name:"旅卦·旅行", sym:"䷷", quote:"善行无辙迹", src:"《道德经·二十七章》", nature:"旅途谨慎" },
-  { name:"巽卦·顺入", sym:"䷸", quote:"天下莫柔弱于水", src:"《道德经·七十八章》", nature:"柔顺渗入" },
-  { name:"兑卦·喜悦", sym:"䷹", quote:"信言不美，美言不信", src:"《道德经·八十一章》", nature:"喜悦和悦" },
-  { name:"涣卦·涣散", sym:"䷺", quote:"曲则全", src:"《道德经·二十二章》", nature:"化解涣散" },
-  { name:"节卦·节制", sym:"䷻", quote:"知足者富", src:"《道德经·三十三章》", nature:"适度节制" },
-  { name:"中孚卦·诚信", sym:"䷼", quote:"信言不美，美言不信", src:"《道德经·八十一章》", nature:"诚信感人" },
-  { name:"小过卦·小过", sym:"䷽", quote:"为之于未有", src:"《道德经·六十四章》", nature:"小心谨慎" },
-  { name:"既济卦·完成", sym:"䷾", quote:"知足者富，强行者有志", src:"《道德经·三十三章》", nature:"功成圆满" },
-  { name:"未济卦·未完", sym:"䷿", quote:"为学日益，为道日损", src:"《道德经·四十八章》", nature:"继续前行" },
+  { name:"乾卦·天", sym:"䷀", quote:"天行健，君子以自强不息", src:"《易经·乾》", nature:"刚健进取", name_en:"Qian · Heaven", nature_en:"Creative Force", src_en:"I Ching · Qian" },
+  { name:"坤卦·地", sym:"䷁", quote:"地势坤，君子以厚德载物", src:"《易经·坤》", nature:"包容承载", name_en:"Kun · Earth", nature_en:"Receptive Strength", src_en:"I Ching · Kun" },
+  { name:"屯卦·初生", sym:"䷂", quote:"信言不美，美言不信", src:"《道德经·八十一章》", nature:"艰难起步", name_en:"Zhun · Sprouting", nature_en:"Difficult Beginning", src_en:"Tao Te Ching · Ch.81" },
+  { name:"蒙卦·启蒙", sym:"䷃", quote:"知人者智，自知者明", src:"《道德经·三十三章》", nature:"求教启智", name_en:"Meng · Ignorance", nature_en:"Seeking Wisdom", src_en:"Tao Te Ching · Ch.33" },
+  { name:"需卦·等待", sym:"䷄", quote:"致虚极，守静笃", src:"《道德经·十六章》", nature:"耐心等待", name_en:"Xu · Waiting", nature_en:"Patient Waiting", src_en:"Tao Te Ching · Ch.16" },
+  { name:"讼卦·争讼", sym:"䷅", quote:"曲则全，枉则直", src:"《道德经·二十二章》", nature:"慎重处争", name_en:"Song · Conflict", nature_en:"Careful Dispute", src_en:"Tao Te Ching · Ch.22" },
+  { name:"师卦·统御", sym:"䷆", quote:"善为士者不武，善战者不怒", src:"《道德经·六十八章》", nature:"统领众人", name_en:"Shi · Army", nature_en:"Leading Others", src_en:"Tao Te Ching · Ch.68" },
+  { name:"比卦·亲比", sym:"䷇", quote:"上善若水，水善利万物而不争", src:"《道德经·八章》", nature:"亲近团结", name_en:"Bi · Union", nature_en:"Unity & Closeness", src_en:"Tao Te Ching · Ch.8" },
+  { name:"小畜卦·积聚", sym:"䷈", quote:"为学日益，为道日损", src:"《道德经·四十八章》", nature:"小积大成", name_en:"Xiao Xu · Taming", nature_en:"Small Steps, Big Gain", src_en:"Tao Te Ching · Ch.48" },
+  { name:"履卦·谨行", sym:"䷉", quote:"慎终如始，则无败事", src:"《道德经·六十四章》", nature:"谨慎而行", name_en:"Lü · Treading", nature_en:"Careful Steps", src_en:"Tao Te Ching · Ch.64" },
+  { name:"泰卦·通泰", sym:"䷊", quote:"万物负阴而抱阳，冲气以为和", src:"《道德经·四十二章》", nature:"天地交泰", name_en:"Tai · Peace", nature_en:"Heaven & Earth in Harmony", src_en:"Tao Te Ching · Ch.42" },
+  { name:"否卦·阻塞", sym:"䷋", quote:"祸兮福之所倚，福兮祸之所伏", src:"《道德经·五十八章》", nature:"暂时受阻", name_en:"Pi · Standstill", nature_en:"Temporary Blockage", src_en:"Tao Te Ching · Ch.58" },
+  { name:"同人卦·同心", sym:"䷌", quote:"信言不美，美言不信", src:"《道德经·八十一章》", nature:"志同道合", name_en:"Tong Ren · Fellowship", nature_en:"Shared Purpose", src_en:"Tao Te Ching · Ch.81" },
+  { name:"大有卦·丰收", sym:"䷍", quote:"知足者富", src:"《道德经·三十三章》", nature:"丰盛有余", name_en:"Da You · Abundance", nature_en:"Great Harvest", src_en:"Tao Te Ching · Ch.33" },
+  { name:"谦卦·谦逊", sym:"䷎", quote:"夫唯不争，故天下莫能与之争", src:"《道德经·六十六章》", nature:"谦虚受益", name_en:"Qian · Humility", nature_en:"Humble & Rewarded", src_en:"Tao Te Ching · Ch.66" },
+  { name:"豫卦·喜悦", sym:"䷏", quote:"乐与饵，过客止", src:"《道德经·三十五章》", nature:"顺势而乐", name_en:"Yu · Enthusiasm", nature_en:"Flowing with the Tide", src_en:"Tao Te Ching · Ch.35" },
+  { name:"随卦·随顺", sym:"䷐", quote:"善行无辙迹", src:"《道德经·二十七章》", nature:"随机应变", name_en:"Sui · Following", nature_en:"Adapt & Follow", src_en:"Tao Te Ching · Ch.27" },
+  { name:"蛊卦·整治", sym:"䷑", quote:"为之于未有，治之于未乱", src:"《道德经·六十四章》", nature:"革故鼎新", name_en:"Gu · Decay", nature_en:"Restore & Renew", src_en:"Tao Te Ching · Ch.64" },
+  { name:"临卦·临近", sym:"䷒", quote:"知常容，容乃公", src:"《道德经·十六章》", nature:"君临在上", name_en:"Lin · Approach", nature_en:"Oversee with Care", src_en:"Tao Te Ching · Ch.16" },
+  { name:"观卦·观察", sym:"䷓", quote:"致虚极，守静笃，万物并作，吾以观复", src:"《道德经·十六章》", nature:"静观其变", name_en:"Guan · Contemplation", nature_en:"Still Observation", src_en:"Tao Te Ching · Ch.16" },
+  { name:"噬嗑卦·决断", sym:"䷔", quote:"信言不美，美言不信", src:"《道德经·八十一章》", nature:"果断决策", name_en:"Shi He · Biting", nature_en:"Decisive Action", src_en:"Tao Te Ching · Ch.81" },
+  { name:"贲卦·文饰", sym:"䷕", quote:"知其白，守其黑", src:"《道德经·二十八章》", nature:"文质相辉", name_en:"Bi · Grace", nature_en:"Form & Substance", src_en:"Tao Te Ching · Ch.28" },
+  { name:"剥卦·剥落", sym:"䷖", quote:"曲则全，枉则直，洼则盈", src:"《道德经·二十二章》", nature:"顺势而退", name_en:"Bo · Splitting", nature_en:"Yield & Retreat", src_en:"Tao Te Ching · Ch.22" },
+  { name:"复卦·回归", sym:"䷗", quote:"归根曰静，是谓复命", src:"《道德经·十六章》", nature:"回归本源", name_en:"Fu · Return", nature_en:"Return to the Source", src_en:"Tao Te Ching · Ch.16" },
+  { name:"无妄卦·自然", sym:"䷘", quote:"道法自然", src:"《道德经·二十五章》", nature:"顺其自然", name_en:"Wu Wang · Innocence", nature_en:"Follow Nature", src_en:"Tao Te Ching · Ch.25" },
+  { name:"大畜卦·积蓄", sym:"䷙", quote:"为学日益，为道日损", src:"《道德经·四十八章》", nature:"厚积薄发", name_en:"Da Xu · Taming Power", nature_en:"Build Before Release", src_en:"Tao Te Ching · Ch.48" },
+  { name:"颐卦·养育", sym:"䷚", quote:"自知者明，自胜者强", src:"《道德经·三十三章》", nature:"颐养正道", name_en:"Yi · Nourishment", nature_en:"Nourish What Matters", src_en:"Tao Te Ching · Ch.33" },
+  { name:"大过卦·过重", sym:"䷛", quote:"物壮则老，是谓不道", src:"《道德经·三十章》", nature:"独立担当", name_en:"Da Guo · Excess", nature_en:"Stand Alone & Endure", src_en:"Tao Te Ching · Ch.30" },
+  { name:"坎卦·险陷", sym:"䷜", quote:"上善若水，水善利万物而不争", src:"《道德经·八章》", nature:"处险而安", name_en:"Kan · Abyss", nature_en:"Steady in Danger", src_en:"Tao Te Ching · Ch.8" },
+  { name:"离卦·光明", sym:"䷝", quote:"知人者智，自知者明", src:"《道德经·三十三章》", nature:"附丽光明", name_en:"Li · Fire", nature_en:"Cling to the Light", src_en:"Tao Te Ching · Ch.33" },
+  { name:"咸卦·感应", sym:"䷞", quote:"天下皆知美之为美，斯恶已", src:"《道德经·二章》", nature:"感而遂通", name_en:"Xian · Influence", nature_en:"Mutual Resonance", src_en:"Tao Te Ching · Ch.2" },
+  { name:"恒卦·持久", sym:"䷟", quote:"胜人者有力，自胜者强", src:"《道德经·三十三章》", nature:"恒心持久", name_en:"Heng · Duration", nature_en:"Enduring Persistence", src_en:"Tao Te Ching · Ch.33" },
+  { name:"遯卦·退隐", sym:"䷠", quote:"知足者富，强行者有志", src:"《道德经·三十三章》", nature:"适时退隐", name_en:"Dun · Retreat", nature_en:"Timely Withdrawal", src_en:"Tao Te Ching · Ch.33" },
+  { name:"大壮卦·强壮", sym:"䷡", quote:"天下莫柔弱于水，而攻坚强者莫之能胜", src:"《道德经·七十八章》", nature:"刚壮有力", name_en:"Da Zhuang · Power", nature_en:"Strength & Force", src_en:"Tao Te Ching · Ch.78" },
+  { name:"晋卦·晋升", sym:"䷢", quote:"为而不争", src:"《道德经·八十一章》", nature:"进步上升", name_en:"Jin · Progress", nature_en:"Advancing Forward", src_en:"Tao Te Ching · Ch.81" },
+  { name:"明夷卦·受伤", sym:"䷣", quote:"知其荣，守其辱", src:"《道德经·二十八章》", nature:"韬光养晦", name_en:"Ming Yi · Darkening", nature_en:"Hide Your Light", src_en:"Tao Te Ching · Ch.28" },
+  { name:"家人卦·家道", sym:"䷤", quote:"修之于身，其德乃真", src:"《道德经·五十四章》", nature:"家道和睦", name_en:"Jia Ren · Family", nature_en:"Family Harmony", src_en:"Tao Te Ching · Ch.54" },
+  { name:"睽卦·乖违", sym:"䷥", quote:"信言不美，美言不信", src:"《道德经·八十一章》", nature:"异中求同", name_en:"Kui · Opposition", nature_en:"Find Unity in Difference", src_en:"Tao Te Ching · Ch.81" },
+  { name:"蹇卦·困难", sym:"䷦", quote:"曲则全，枉则直", src:"《道德经·二十二章》", nature:"迎难而上", name_en:"Jian · Obstruction", nature_en:"Persist Through Difficulty", src_en:"Tao Te Ching · Ch.22" },
+  { name:"解卦·解除", sym:"䷧", quote:"为学日益，为道日损，损之又损", src:"《道德经·四十八章》", nature:"化解困境", name_en:"Xie · Deliverance", nature_en:"Release the Tension", src_en:"Tao Te Ching · Ch.48" },
+  { name:"损卦·减损", sym:"䷨", quote:"损之又损，以至于无为", src:"《道德经·四十八章》", nature:"减损求益", name_en:"Sun · Decrease", nature_en:"Less Becomes More", src_en:"Tao Te Ching · Ch.48" },
+  { name:"益卦·增益", sym:"䷩", quote:"圣人不积，既以为人己愈有", src:"《道德经·八十一章》", nature:"利人利己", name_en:"Yi · Increase", nature_en:"Giving Multiplies", src_en:"Tao Te Ching · Ch.81" },
+  { name:"夬卦·决断", sym:"䷪", quote:"勇于敢则杀，勇于不敢则活", src:"《道德经·七十三章》", nature:"果断决行", name_en:"Guai · Breakthrough", nature_en:"Bold Decision", src_en:"Tao Te Ching · Ch.73" },
+  { name:"姤卦·相遇", sym:"䷫", quote:"道可道，非常道", src:"《道德经·一章》", nature:"意外相遇", name_en:"Gou · Coming On", nature_en:"Unexpected Encounter", src_en:"Tao Te Ching · Ch.1" },
+  { name:"萃卦·聚集", sym:"䷬", quote:"同道者相聚", src:"《易经·萃》", nature:"汇聚力量", name_en:"Cui · Gathering", nature_en:"Gathering of Kindred", src_en:"I Ching · Cui" },
+  { name:"升卦·上升", sym:"䷭", quote:"为而不争，天下莫能与之争", src:"《道德经·六十六章》", nature:"积累上升", name_en:"Sheng · Pushing Up", nature_en:"Rising Steadily", src_en:"Tao Te Ching · Ch.66" },
+  { name:"困卦·困境", sym:"䷮", quote:"祸兮福之所倚", src:"《道德经·五十八章》", nature:"困而后通", name_en:"Kun · Exhaustion", nature_en:"Darkness Before Dawn", src_en:"Tao Te Ching · Ch.58" },
+  { name:"井卦·源泉", sym:"䷯", quote:"上善若水", src:"《道德经·八章》", nature:"取之不竭", name_en:"Jing · The Well", nature_en:"Inexhaustible Source", src_en:"Tao Te Ching · Ch.8" },
+  { name:"革卦·变革", sym:"䷰", quote:"为学日益，为道日损", src:"《道德经·四十八章》", nature:"革故创新", name_en:"Ge · Revolution", nature_en:"Transform & Renew", src_en:"Tao Te Ching · Ch.48" },
+  { name:"鼎卦·鼎新", sym:"䷱", quote:"治大国若烹小鲜", src:"《道德经·六十章》", nature:"鼎故革新", name_en:"Ding · The Cauldron", nature_en:"Renew from Within", src_en:"Tao Te Ching · Ch.60" },
+  { name:"震卦·震动", sym:"䷲", quote:"重为轻根，静为躁君", src:"《道德经·二十六章》", nature:"警醒振作", name_en:"Zhen · Thunder", nature_en:"Awaken & Mobilize", src_en:"Tao Te Ching · Ch.26" },
+  { name:"艮卦·止静", sym:"䷳", quote:"致虚极，守静笃", src:"《道德经·十六章》", nature:"适时而止", name_en:"Gen · Stillness", nature_en:"Know When to Stop", src_en:"Tao Te Ching · Ch.16" },
+  { name:"渐卦·渐进", sym:"䷴", quote:"为之于未有，治之于未乱", src:"《道德经·六十四章》", nature:"循序渐进", name_en:"Jian · Development", nature_en:"Gradual Progress", src_en:"Tao Te Ching · Ch.64" },
+  { name:"归妹卦·归宿", sym:"䷵", quote:"知常容，容乃公", src:"《道德经·十六章》", nature:"寻找归宿", name_en:"Gui Mei · Marriage", nature_en:"Finding Your Place", src_en:"Tao Te Ching · Ch.16" },
+  { name:"丰卦·丰盛", sym:"䷶", quote:"知足者富", src:"《道德经·三十三章》", nature:"丰盛鼎盛", name_en:"Feng · Abundance", nature_en:"Peak & Fullness", src_en:"Tao Te Ching · Ch.33" },
+  { name:"旅卦·旅行", sym:"䷷", quote:"善行无辙迹", src:"《道德经·二十七章》", nature:"旅途谨慎", name_en:"Lü · Wanderer", nature_en:"Travel Light", src_en:"Tao Te Ching · Ch.27" },
+  { name:"巽卦·顺入", sym:"䷸", quote:"天下莫柔弱于水", src:"《道德经·七十八章》", nature:"柔顺渗入", name_en:"Xun · Wind", nature_en:"Gentle Persistence", src_en:"Tao Te Ching · Ch.78" },
+  { name:"兑卦·喜悦", sym:"䷹", quote:"信言不美，美言不信", src:"《道德经·八十一章》", nature:"喜悦和悦", name_en:"Dui · Joy", nature_en:"Joyful Exchange", src_en:"Tao Te Ching · Ch.81" },
+  { name:"涣卦·涣散", sym:"䷺", quote:"曲则全", src:"《道德经·二十二章》", nature:"化解涣散", name_en:"Huan · Dispersion", nature_en:"Dissolve & Reconnect", src_en:"Tao Te Ching · Ch.22" },
+  { name:"节卦·节制", sym:"䷻", quote:"知足者富", src:"《道德经·三十三章》", nature:"适度节制", name_en:"Jie · Limitation", nature_en:"Mindful Restraint", src_en:"Tao Te Ching · Ch.33" },
+  { name:"中孚卦·诚信", sym:"䷼", quote:"信言不美，美言不信", src:"《道德经·八十一章》", nature:"诚信感人", name_en:"Zhong Fu · Sincerity", nature_en:"Sincere to the Core", src_en:"Tao Te Ching · Ch.81" },
+  { name:"小过卦·小过", sym:"䷽", quote:"为之于未有", src:"《道德经·六十四章》", nature:"小心谨慎", name_en:"Xiao Guo · Caution", nature_en:"Small Steps, Stay Safe", src_en:"Tao Te Ching · Ch.64" },
+  { name:"既济卦·完成", sym:"䷾", quote:"知足者富，强行者有志", src:"《道德经·三十三章》", nature:"功成圆满", name_en:"Ji Ji · Completion", nature_en:"Mission Accomplished", src_en:"Tao Te Ching · Ch.33" },
+  { name:"未济卦·未完", sym:"䷿", quote:"为学日益，为道日损", src:"《道德经·四十八章》", nature:"继续前行", name_en:"Wei Ji · Incompletion", nature_en:"Keep Moving Forward", src_en:"Tao Te Ching · Ch.48" },
 ];
 
 let currentUser = null;
@@ -1354,10 +1354,11 @@ window.revealResult = async function() {
   // Fill scroll content
   document.getElementById('scroll-question').textContent = '「' + q + '」';
   document.getElementById('scroll-sym').textContent = gua.sym;
-  document.getElementById('scroll-name').textContent = gua.name;
-  document.getElementById('scroll-nature').textContent = gua.nature;
+  const _en = window._lang==='en';
+  document.getElementById('scroll-name').textContent = _en ? (gua.name_en||gua.name) : gua.name;
+  document.getElementById('scroll-nature').textContent = _en ? (gua.nature_en||gua.nature) : gua.nature;
   document.getElementById('scroll-quote').textContent = '「' + gua.quote + '」';
-  document.getElementById('scroll-src').textContent = gua.src;
+  document.getElementById('scroll-src').textContent = _en ? (gua.src_en||gua.src) : gua.src;
   document.getElementById('scroll-loading').style.display = 'block';
   document.getElementById('scroll-ai-label').style.display = 'none';
   document.getElementById('scroll-ai').textContent = '';
@@ -1592,7 +1593,7 @@ window.startCoinToss = () => {
     const dot = document.getElementById('cp-'+i);
     if(dot) { dot.classList.remove('done'); }
   }
-  document.getElementById('coin-sub').textContent = '请专注你的问题，然后投掷';
+  document.getElementById('coin-sub').textContent = t('coinSub');
   document.getElementById('coin-result').textContent = '';
   document.getElementById('coin-instruction').textContent = '';
   document.getElementById('finger-hint').style.display = 'inline-block';
@@ -1619,10 +1620,11 @@ window.startCoinToss = () => {
 
 function showResult(gua, q, cat) {
   document.getElementById('gua-sym').textContent = gua.sym;
-  document.getElementById('gua-name').textContent = gua.name;
-  document.getElementById('gua-nature').textContent = gua.nature;
+  const _enR = window._lang==='en';
+  document.getElementById('gua-name').textContent = _enR ? (gua.name_en||gua.name) : gua.name;
+  document.getElementById('gua-nature').textContent = _enR ? (gua.nature_en||gua.nature) : gua.nature;
   document.getElementById('quote-text').textContent = '「' + gua.quote + '」';
-  document.getElementById('quote-src').textContent = gua.src;
+  document.getElementById('quote-src').textContent = _enR ? (gua.src_en||gua.src) : gua.src;
   document.getElementById('scroll-loading').style.display = 'block';
   document.getElementById('scroll-ai-label').style.display = 'none';
   document.getElementById('scroll-ai').textContent = '';
@@ -1802,9 +1804,9 @@ window.openShareModal = () => {
   const q = document.getElementById('question').value.trim();
   document.getElementById('pc-question').textContent = q ? '「' + q + '」' : '';
   document.getElementById('pc-sym').textContent = currentGua.sym;
-  document.getElementById('pc-name').textContent = currentGua.name + ' · ' + currentGua.nature;
+  const _enPC = window._lang==='en'; document.getElementById('pc-name').textContent = (_enPC ? (currentGua.name_en||currentGua.name) : currentGua.name) + ' · ' + (_enPC ? (currentGua.nature_en||currentGua.nature) : currentGua.nature);
   document.getElementById('pc-quote').textContent = '「' + currentGua.quote + '」';
-  document.getElementById('pc-src').textContent = currentGua.src;
+  document.getElementById('pc-src').textContent = window._lang==='en' ? (currentGua.src_en||currentGua.src) : currentGua.src;
   document.getElementById('pc-ai').textContent = aiText;
   const now = new Date();
   const dtStr = t('pcDatetime', now);
