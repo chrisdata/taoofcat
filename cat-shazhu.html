@@ -411,13 +411,19 @@ footer {
   .tao-quote { padding: 1rem 1.25rem; }
   .btn-outline { margin-left: 0; margin-top: 12px; display: block; }
 }
+
+.lang-btn{font-size:12px;font-family:'Noto Sans SC',sans-serif;background:transparent;color:rgba(244,237,224,0.85);border:1px solid rgba(244,237,224,0.35);border-radius:20px;padding:5px 14px;cursor:pointer;transition:all 0.2s;letter-spacing:0.05em;white-space:nowrap;}
+nav.scrolled .lang-btn{color:var(--ink-faint);border-color:var(--ink-ghost);}
+nav.scrolled .lang-btn:hover{color:var(--ink);border-color:var(--gold);}
+.lang-btn:hover{border-color:rgba(244,237,224,0.7);}
 </style>
 </head>
 <body>
 
 <nav id="nav">
   <a href="/" class="nav-brand">玄猫之道</a>
-  <a href="/#cats" class="nav-back">← 猫咪家族</a>
+  <a href="/#cats" class="nav-back" data-zh="← 猫咪家族" data-en="← Cat Family">← 猫咪家族</a>
+  <button id="lang-btn" class="lang-btn">EN</button>
 </nav>
 
 <!-- HERO -->
@@ -425,11 +431,11 @@ footer {
   <img src="cat-shazhu.jpg" alt="傻猪" class="hero-img">
   <div class="hero-gradient"></div>
   <div class="hero-content">
-    <div class="hero-label">The Oracle · 占卜师</div>
+    <div class="hero-label" data-zh="The Oracle · 占卜师" data-en="The Oracle · Diviner">The Oracle · 占卜师</div>
     <div class="hero-name">傻猪</div>
     <div class="hero-en">Sha Zhu · The Wise Fool</div>
     <div class="hero-divider"></div>
-    <div class="hero-tagline">异瞳白猫 · 流浪来客 · 玄猫之道占卜师</div>
+    <div class="hero-tagline" data-zh="异瞳白猫 · 流浪来客 · 玄猫之道占卜师" data-en="Odd-eyed White Cat · Stray Guest · Oracle of the Tao">异瞳白猫 · 流浪来客 · 玄猫之道占卜师</div>
   </div>
 </div>
 
@@ -439,7 +445,7 @@ footer {
   <!-- Chapter 1 -->
   <div class="chapter reveal">
     <div class="chapter-label">Chapter One</div>
-    <div class="chapter-title">街角的流浪猫</div>
+    <div class="chapter-title" data-zh="街角的流浪猫" data-en="The Stray on the Corner">街角的流浪猫</div>
     <p class="chapter-text">
       我和太太从来不打算养猫。那时候我们只是在家门口偶尔喂一两只街头的流浪猫，以为这只是随手的善意，不会有什么改变。
     </p>
@@ -457,7 +463,7 @@ footer {
   <!-- Chapter 2 -->
   <div class="chapter reveal">
     <div class="chapter-label">Chapter Two</div>
-    <div class="chapter-title">受伤的那一天</div>
+    <div class="chapter-title" data-zh="受伤的那一天" data-en="The Day He Was Hurt">受伤的那一天</div>
     <p class="chapter-text">
       有一天，傻猪来吃饭的时候，浑身是伤。脸上、身上都有伤口，不知道在外面经历了什么。
     </p>
@@ -480,7 +486,7 @@ footer {
   <!-- Chapter 3 -->
   <div class="chapter reveal">
     <div class="chapter-label">Chapter Three</div>
-    <div class="chapter-title">不关笼子的决定</div>
+    <div class="chapter-title" data-zh="不关笼子的决定" data-en="The Decision to Leave the Door Open">不关笼子的决定</div>
     <p class="chapter-text">
       傻猪那时候还没绝育，不习惯室内生活，偶尔会吵着要出去。我们是养猫新手，不知道该怎么办。
     </p>
@@ -506,7 +512,7 @@ footer {
   <!-- Chapter 4 -->
   <div class="chapter reveal">
     <div class="chapter-label">Chapter Four</div>
-    <div class="chapter-title">发现异瞳的那一刻</div>
+    <div class="chapter-title" data-zh="发现异瞳的那一刻" data-en="The Moment We Saw His Eyes">发现异瞳的那一刻</div>
     <p class="chapter-text">
       洗干净了，毛发蓬松了，我们才真正看清楚他的眼睛。
     </p>
@@ -527,7 +533,7 @@ footer {
   <!-- Chapter 5 -->
   <div class="chapter reveal">
     <div class="chapter-label">Chapter Five</div>
-    <div class="chapter-title">占据书房的主人</div>
+    <div class="chapter-title" data-zh="占据书房的主人" data-en="Master of the Study">占据书房的主人</div>
     <p class="chapter-text">
       傻猪现在是整个家的主人。书房里的案台是他的床，键盘是他的枕头，佛像和法器是他的邻居。
     </p>
@@ -545,7 +551,7 @@ footer {
   <!-- Chapter 6 -->
   <div class="chapter reveal">
     <div class="chapter-label">Chapter Six</div>
-    <div class="chapter-title">傻猪的礼物</div>
+    <div class="chapter-title" data-zh="傻猪的礼物" data-en="Sha Zhu's Gift">傻猪的礼物</div>
     <p class="chapter-text">
       后来我们才知道，傻猪在流浪的时候，已经和我们收养的玳瑁猫肥婆相遇了。
     </p>
@@ -566,22 +572,22 @@ footer {
     <div class="closing-label reveal">道德经 · 第十六章</div>
     <div class="closing-quote reveal">「致虚极，守静笃<br>万物并作，吾以观复」</div>
     <div class="closing-source reveal">— 道德经</div>
-    <div class="closing-note reveal">
+    <div class="closing-note reveal" data-zh="傻猪不知道自己是异瞳猫。<br>      他只知道，这里有饭吃，有阳光，有人陪。<br>      也许这就是道——<br>      不需要知道自己有多特别，只是好好地活着。" data-en="Sha Zhu never knew he was an odd-eyed cat.<br>      He only knew: food, sunlight, and company.<br>      Perhaps that is the Tao —<br>      You need not know how special you are. Just live well.">
       傻猪不知道自己是异瞳猫。<br>
       他只知道，这里有饭吃，有阳光，有人陪。<br>
       也许这就是道——<br>
       不需要知道自己有多特别，只是好好地活着。
     </div>
     <div class="reveal">
-      <a href="divination.html" class="btn-gold">✦ 让傻猪为你占卜</a>
-      <a href="/#cats" class="btn-outline">认识其他猫咪</a>
+      <a href="divination.html" class="btn-gold" data-zh="✦ 让傻猪为你占卜" data-en="✦ Let Sha Zhu Read for You">✦ 让傻猪为你占卜</a>
+      <a href="/#cats" class="btn-outline" data-zh="认识其他猫咪" data-en="Meet the Cats">认识其他猫咪</a>
     </div>
   </div>
 </div>
 
 <footer>
   <div class="footer-brand">玄猫之道</div>
-  <div class="footer-copy">© 2026 Tao of Your Cat · Ipoh, Malaysia</div>
+  <div class="footer-copy" data-zh="© 2026 Tao of Your Cat · Ipoh, Malaysia" data-en="© 2026 Tao of Your Cat · Ipoh, Malaysia">© 2026 Tao of Your Cat · Ipoh, Malaysia</div>
 </footer>
 
 <script>
@@ -600,6 +606,24 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.08 });
 reveals.forEach(el => observer.observe(el));
+
+// ── LANGUAGE SWITCH ─────────────────────────────────────
+(function(){
+  var btn=document.getElementById('lang-btn');
+  if(!btn)return;
+  var lang=localStorage.getItem('lang')||'zh';
+  function apply(l){
+    lang=l;localStorage.setItem('lang',l);
+    document.documentElement.lang=l==='zh'?'zh':'en';
+    btn.textContent=l==='zh'?'EN':'中文';
+    document.querySelectorAll('[data-zh]').forEach(function(el){
+      var v=el.getAttribute('data-'+l);
+      if(v!==null)el.innerHTML=v;
+    });
+  }
+  btn.addEventListener('click',function(){apply(lang==='zh'?'en':'zh');});
+  apply(lang);
+})();
 </script>
 </body>
 </html>

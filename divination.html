@@ -326,6 +326,11 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
 .cat-sel-detail-text { font-size:14px; color:var(--ink-light); font-family:'Noto Sans SC',sans-serif; line-height:1.9; letter-spacing:0.03em; }
 .cat-sel-detail-quote { font-size:14px; color:var(--ink); letter-spacing:0.06em; margin-top:8px; padding-left:8px; border-left:2px solid var(--gold); font-style:italic; }
 @media(max-width:600px) { .cat-selector-grid { grid-template-columns:repeat(5,1fr); gap:6px; } .cat-sel-photo { width:52px; height:52px; } .cat-sel-name { font-size:11px; } .cat-sel-domain { display:none; } }
+
+.lang-btn{font-size:12px;font-family:'Noto Sans SC',sans-serif;background:rgba(244,237,224,0.12);color:rgba(244,237,224,0.85);border:1px solid rgba(244,237,224,0.3);border-radius:20px;padding:6px 14px;cursor:pointer;transition:all 0.2s;letter-spacing:0.05em;white-space:nowrap;}
+nav.scrolled .lang-btn{background:transparent;color:var(--ink-faint);border-color:var(--ink-ghost);}
+nav.scrolled .lang-btn:hover{color:var(--ink);border-color:var(--gold);}
+.lang-btn:hover{border-color:rgba(244,237,224,0.7);}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
@@ -347,8 +352,8 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
         <div style="text-align:center; padding-bottom:1rem; border-bottom:1px solid var(--ink-ghost); margin-bottom:1rem;">
           <img src="can-icon.png" style="width:48px;height:48px;object-fit:contain;display:block;margin:0 auto 4px;">
           <div style="font-size:28px; font-weight:900; color:var(--ink); line-height:1;" id="can-count-p">…</div>
-          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; letter-spacing:0.1em; margin-top:2px;">罐 剩余罐头</div>
-          <button class="cans-buy-link" id="buy-link-p" onclick="document.getElementById('shop').classList.add('show'); toggleProfile();" style="margin-top:8px;">＋ 补充罐头</button>
+          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; letter-spacing:0.1em; margin-top:2px;" data-zh="罐 剩余罐头" data-en="cans remaining">罐 剩余罐头</div>
+          <button class="cans-buy-link" id="buy-link-p" onclick="document.getElementById('shop').classList.add('show'); toggleProfile();" style="margin-top:8px;" data-zh="＋ 补充罐头" data-en="＋ Buy More Cans">＋ 补充罐头</button>
         </div>
         <!-- Level -->
         <div style="text-align:center; padding-bottom:1rem; border-bottom:1px solid var(--ink-ghost); margin-bottom:1rem;">
@@ -363,10 +368,10 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
         </div>
         <!-- Invite -->
         <div style="margin-bottom:1rem;">
-          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-bottom:6px; text-align:center; letter-spacing:0.05em;">邀请朋友，双方各得2罐</div>
+          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-bottom:6px; text-align:center; letter-spacing:0.05em;" data-zh="邀请朋友，双方各得2罐" data-en="Invite a friend — both get 2 cans">邀请朋友，双方各得2罐</div>
           <div style="display:flex; gap:6px; margin-bottom:8px;">
             <input type="text" id="invite-link-p" readonly style="flex:1; padding:6px 10px; border:1px solid var(--ink-ghost); border-radius:8px; font-size:11px; background:rgba(255,255,255,0.8); color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif;">
-            <button onclick="window.copyInviteLinkP()" style="padding:6px 10px; background:var(--ink); color:var(--paper); border:none; border-radius:8px; font-size:11px; cursor:pointer; font-family:'Noto Sans SC',sans-serif; white-space:nowrap;">复制</button>
+            <button onclick="window.copyInviteLinkP()" style="padding:6px 10px; background:var(--ink); color:var(--paper); border:none; border-radius:8px; font-size:11px; cursor:pointer; font-family:'Noto Sans SC',sans-serif; white-space:nowrap;" data-zh="复制" data-en="Copy">复制</button>
           </div>
           <!-- Social share icons -->
           <div style="display:flex; gap:8px; justify-content:center;">
@@ -389,10 +394,11 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
           </div>
         </div>
         <!-- Logout -->
-        <button onclick="signOut(); toggleProfile();" style="width:100%; padding:8px; background:transparent; border:1px solid var(--ink-ghost); border-radius:8px; font-size:12px; color:var(--ink-faint); cursor:pointer; font-family:'Noto Sans SC',sans-serif;">退出登录</button>
+        <button onclick="signOut(); toggleProfile();" style="width:100%; padding:8px; background:transparent; border:1px solid var(--ink-ghost); border-radius:8px; font-size:12px; color:var(--ink-faint); cursor:pointer; font-family:'Noto Sans SC',sans-serif;" data-zh="退出登录" data-en="Sign Out">退出登录</button>
       </div>
     </div>
-    <button id="nav-login-btn" class="nav-login-btn" onclick="window.signInWithGoogle()">登录</button>
+    <button id="nav-login-btn" class="nav-login-btn" onclick="window.signInWithGoogle()" data-zh="登录" data-en="Login">登录</button>
+    <button id="lang-btn" class="lang-btn">EN</button>
   </div>
 </nav>
 
@@ -400,17 +406,17 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
 <div class="hero" style="min-height:auto; padding:5rem 2rem 3rem; overflow:hidden; position:relative;">
   <img src="bamboo-bg.jpg" alt="" style="position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:cover;opacity:0.25;filter:sepia(30%) brightness(0.6);z-index:0;pointer-events:none;">
   <div style="position:relative;z-index:1;width:100%;">
-  <div class="hero-label">Oracle · 易经占卜</div>
-  <div class="hero-title">易经占卜</div>
-  <div class="hero-en">The I Ching Oracle</div>
+  <div class="hero-label" data-zh="Oracle · 易经占卜" data-en="Oracle · I Ching">Oracle · 易经占卜</div>
+  <div class="hero-title" data-zh="易经占卜" data-en="I Ching Oracle">易经占卜</div>
+  <div class="hero-en" data-zh="The I Ching Oracle" data-en="The I Ching Oracle">The I Ching Oracle</div>
   <div class="hero-divider"></div>
   <div style="max-width:560px; margin:0 auto;">
     <p style="font-size:15px; color:rgba(244,237,224,0.75); line-height:2; letter-spacing:0.06em; font-family:'Noto Sans SC',sans-serif; font-weight:300; text-align:center;">
-      三千年前，古人仰观天文，俯察地理<br>
+      <span data-zh="三千年前，古人仰观天文，俯察地理<br>以阴阳符号描述万物运行——这就是《易经》<br><br>不是迷信，是智慧。<br>不是预测命运，是看清此刻的方向。" data-en="Three thousand years ago, the ancients observed the heavens and the earth —<br>using symbols of yin and yang to describe all things. This is the I Ching.<br><br>Not superstition. Wisdom.<br>Not fortune-telling. Clarity for this moment.">三千年前，古人仰观天文，俯察地理<br>
       以阴阳符号描述万物运行——这就是《易经》<br>
       <br>
       不是迷信，是智慧。<br>
-      不是预测命运，是看清此刻的方向。
+      不是预测命运，是看清此刻的方向。</span>
     </p>
 
   </div>
@@ -423,8 +429,8 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
   <div id="login-section">
     <div class="login-wall">
       <div class="login-wall-sym">☯</div>
-      <div class="login-wall-title">请先登录</div>
-      <div class="login-wall-sub">登录后罐头永久保存<br>换设备也不会丢失</div>
+      <div class="login-wall-title" data-zh="请先登录" data-en="Please Sign In">请先登录</div>
+      <div class="login-wall-sub" data-zh="登录后罐头永久保存<br>换设备也不会丢失" data-en="Your cans are saved forever after signing in.<br>Access from any device, anytime.">登录后罐头永久保存<br>换设备也不会丢失</div>
       <button class="google-btn" onclick="window.signInWithGoogle()">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -454,39 +460,39 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
     <!-- CAT SELECTOR -->
     <div class="cat-selector-section" id="cat-selector-section">
       <div class="oracle-section">
-        <div class="cat-selector-label">选择占卜师 · Choose Your Oracle</div>
-        <div class="cat-selector-title">五行归位</div>
-        <div class="cat-selector-sub">每只猫守护不同的人生面向<br>选择与你此刻问题最契合的那一只</div>
+        <div class="cat-selector-label" data-zh="选择占卜师 · Choose Your Oracle" data-en="Choose Your Oracle · 选择占卜师">选择占卜师 · Choose Your Oracle</div>
+        <div class="cat-selector-title" data-zh="五行归位" data-en="Five Elements · Five Guardians">五行归位</div>
+        <div class="cat-selector-sub" data-zh="每只猫守护不同的人生面向<br>选择与你此刻问题最契合的那一只" data-en="Each cat guards a different aspect of life.<br>Choose the one that resonates with your question.">每只猫守护不同的人生面向<br>选择与你此刻问题最契合的那一只</div>
         <div class="cat-selector-grid">
           <div class="cat-sel-card" onclick="selectCatOracle('shazhu',this)">
             <img src="cat-shazhu.jpg" alt="傻猪" class="cat-sel-photo">
-            <div class="cat-sel-element">土</div>
+            <div class="cat-sel-element" data-zh="土" data-en="Earth">土</div>
             <div class="cat-sel-name">傻 猪</div>
-            <div class="cat-sel-domain">人生方向<br>重大决策</div>
+            <div class="cat-sel-domain" data-zh="人生方向<br>重大决策" data-en="Life Direction<br>Major Decisions">人生方向<br>重大决策</div>
           </div>
           <div class="cat-sel-card" onclick="selectCatOracle('feimao',this)">
             <img src="cat-feimao.jpg" alt="肥猫" class="cat-sel-photo">
-            <div class="cat-sel-element">金</div>
+            <div class="cat-sel-element" data-zh="金" data-en="Metal">金</div>
             <div class="cat-sel-name">肥 猫</div>
-            <div class="cat-sel-domain">放下执念<br>长远眼光</div>
+            <div class="cat-sel-domain" data-zh="放下执念<br>长远眼光" data-en="Release Attachments<br>Long-term Vision">放下执念<br>长远眼光</div>
           </div>
           <div class="cat-sel-card" onclick="selectCatOracle('chashi',this)">
             <img src="cat-feipo.jpg" alt="茶室猫" class="cat-sel-photo">
-            <div class="cat-sel-element">火</div>
+            <div class="cat-sel-element" data-zh="火" data-en="Fire">火</div>
             <div class="cat-sel-name">茶室猫</div>
-            <div class="cat-sel-domain">感情家庭<br>关系边界</div>
+            <div class="cat-sel-domain" data-zh="感情家庭<br>关系边界" data-en="Relationships &amp; Family<br>Emotional Boundaries">感情家庭<br>关系边界</div>
           </div>
           <div class="cat-sel-card" onclick="selectCatOracle('huba',this)">
             <img src="hubanzai-cattree.jpg" alt="虎斑仔" class="cat-sel-photo">
-            <div class="cat-sel-element">木</div>
+            <div class="cat-sel-element" data-zh="木" data-en="Wood">木</div>
             <div class="cat-sel-name">虎斑仔</div>
-            <div class="cat-sel-domain">突破困境<br>竞争决策</div>
+            <div class="cat-sel-domain" data-zh="突破困境<br>竞争决策" data-en="Breaking Through<br>Competitive Decisions">突破困境<br>竞争决策</div>
           </div>
           <div class="cat-sel-card" onclick="selectCatOracle('mengmeng',this)">
             <img src="cat-mengmengda.jpg" alt="萌萌哒" class="cat-sel-photo">
-            <div class="cat-sel-element">水</div>
+            <div class="cat-sel-element" data-zh="水" data-en="Water">水</div>
             <div class="cat-sel-name">萌萌哒</div>
-            <div class="cat-sel-domain">创意灵感<br>未知可能</div>
+            <div class="cat-sel-domain" data-zh="创意灵感<br>未知可能" data-en="Creative Inspiration<br>Unexplored Possibilities">创意灵感<br>未知可能</div>
           </div>
         </div>
         <div class="cat-sel-detail" id="cat-sel-detail">
@@ -510,21 +516,21 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
       <div style="display:flex; justify-content:center; gap:0; margin-bottom:2rem;">
         <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
           <div style="width:36px; height:36px; border-radius:50%; background:var(--ink); color:var(--paper); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; font-family:'Noto Sans SC',sans-serif;">1</div>
-          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:6px; text-align:center; letter-spacing:0.03em;">写下问题</div>
+          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:6px; text-align:center; letter-spacing:0.03em;" data-zh="写下问题" data-en="Write Question">写下问题</div>
         </div>
         <div style="flex:1; display:flex; align-items:center; padding-bottom:18px;">
           <div style="width:100%; height:1px; background:var(--ink-ghost);"></div>
         </div>
         <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
           <div style="width:36px; height:36px; border-radius:50%; background:var(--ink); color:var(--paper); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; font-family:'Noto Sans SC',sans-serif;">2</div>
-          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:6px; text-align:center; letter-spacing:0.03em;">投掷铜钱×6</div>
+          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:6px; text-align:center; letter-spacing:0.03em;" data-zh="投掷铜钱×6" data-en="Toss Coins ×6">投掷铜钱×6</div>
         </div>
         <div style="flex:1; display:flex; align-items:center; padding-bottom:18px;">
           <div style="width:100%; height:1px; background:var(--ink-ghost);"></div>
         </div>
         <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
           <div style="width:36px; height:36px; border-radius:50%; background:var(--ink); color:var(--paper); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; font-family:'Noto Sans SC',sans-serif;">3</div>
-          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:6px; text-align:center; letter-spacing:0.03em;">六爻成卦</div>
+          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:6px; text-align:center; letter-spacing:0.03em;" data-zh="六爻成卦" data-en="Six Lines Form">六爻成卦</div>
         </div>
         <div style="flex:1; display:flex; align-items:center; padding-bottom:18px;">
           <div style="width:100%; height:1px; background:var(--ink-ghost);"></div>
@@ -540,20 +546,20 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
       </div>
       <textarea class="oracle-question" id="question" rows="5" maxlength="200" placeholder="" oninput="updateCount()" onfocus="document.getElementById('oracle-overlay').classList.add('show'); document.querySelector('.oracle-section').classList.add('focused')" onblur="document.getElementById('oracle-overlay').classList.remove('show'); document.querySelector('.oracle-section').classList.remove('focused')"></textarea>
       <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px; margin-bottom:8px;">
-        <span style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif;">最少10字，最多200字</span>
+        <span style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif;" data-zh="最少10字，最多200字" data-en="10–200 characters">最少10字，最多200字</span>
         <span id="char-count" style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif;">0 / 200</span>
       </div>
       <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-bottom:1.25rem; letter-spacing:0.03em;">
-        ✦ 你的问题不会被储存，仅用于本次占卜
+        <span data-zh="✦ 你的问题不会被储存，仅用于本次占卜" data-en="✦ Your question is not stored — used for this reading only">✦ 你的问题不会被储存，仅用于本次占卜</span>
       </div>
       <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; margin-bottom:1.25rem; padding:12px 16px; background:rgba(184,134,11,0.06); border:1px solid rgba(184,134,11,0.2); border-radius:10px;">
         <input type="checkbox" id="confirm-check" style="width:18px; height:18px; margin-top:2px; accent-color:var(--gold); flex-shrink:0; cursor:pointer;">
         <span style="font-size:13px; color:var(--ink-light); font-family:'Noto Sans SC',sans-serif; line-height:1.7; letter-spacing:0.03em;">
-          我确认问题已清楚填写，了解每次占卜消耗1罐罐头，结果仅供参考
+          <span data-zh="我确认问题已清楚填写，了解每次占卜消耗1罐罐头，结果仅供参考" data-en="I confirm my question is clear. I understand each reading costs 1 can, and results are for reference only.">我确认问题已清楚填写，了解每次占卜消耗1罐罐头，结果仅供参考</span>
         </span>
       </label>
       <button class="oracle-btn" id="div-btn" onclick="window.startDiv()">✦ 投币问卦（消耗1罐罐头）</button>
-      <div class="oracle-note">$0.99 / 罐 · 罐头永久保存不过期</div>
+      <div class="oracle-note" data-zh="$0.99 / 罐 · 罐头永久保存不过期" data-en="$0.99 / can · Cans never expire">$0.99 / 罐 · 罐头永久保存不过期</div>
     </div>
 
     <!-- THINKING -->
@@ -572,13 +578,13 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
         <div class="result-quote" id="quote-text"></div>
         <div class="result-quote-src" id="quote-src"></div>
         <div class="result-divider"><div class="result-divider-dot"></div></div>
-        <div class="result-ai-loading" id="ai-loading">本猫正在细读天机...</div>
+        <div class="result-ai-loading" id="ai-loading" data-zh="本猫正在细读天机..." data-en="The cat reads the signs...">本猫正在细读天机...</div>
         <div class="result-ai" id="ai-resp"></div>
-        <div class="disclaimer">⚠ 本卦象仅供参考，不构成任何建议。一切决定请以自身判断为准。</div>
+        <div class="disclaimer" data-zh="⚠ 本卦象仅供参考，不构成任何建议。一切决定请以自身判断为准。" data-en="⚠ This reading is for reference only and does not constitute advice. Trust your own judgment.">⚠ 本卦象仅供参考，不构成任何建议。一切决定请以自身判断为准。</div>
       </div>
       <div class="result-actions">
-        <button class="result-btn" onclick="window.openShareModal()">✦ 分享占卜</button>
-        <button class="result-btn" onclick="window.resetAll()">再问一次</button>
+        <button class="result-btn" onclick="window.openShareModal()" data-zh="✦ 分享占卜" data-en="✦ Share Reading">✦ 分享占卜</button>
+        <button class="result-btn" onclick="window.resetAll()" data-zh="再问一次" data-en="Ask Again">再问一次</button>
       </div>
     </div>
 
@@ -591,20 +597,20 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
   <div class="prep-modal">
     <div class="prep-title" id="prep-modal-title">✦ 问卦前，傻猪有话说 ✦</div>
     <div class="prep-item">
-      <div class="prep-char">诚</div>
-      <div class="prep-text"><strong>心不诚，卦不灵。</strong><br>把你真正在意的事带来，占卜师才能感应到。</div>
+      <div class="prep-char" data-zh="诚" data-en="诚">诚</div>
+      <div class="prep-text" data-zh="&lt;strong&gt;心不诚，卦不灵。&lt;/strong&gt;&lt;br&gt;把你真正在意的事带来，占卜师才能感应到。" data-en="&lt;strong&gt;Sincerity unlocks the oracle.&lt;/strong&gt;&lt;br&gt;Bring what truly matters to you — the oracle feels it."><strong>心不诚，卦不灵。</strong><br>把你真正在意的事带来，占卜师才能感应到。</div>
     </div>
     <div class="prep-item">
-      <div class="prep-char">静</div>
-      <div class="prep-text"><strong>先让心静下来。</strong><br>深呼吸一次，把杂念放下。不用焚香，只需要一分钟的安静。</div>
+      <div class="prep-char" data-zh="静" data-en="静">静</div>
+      <div class="prep-text" data-zh="&lt;strong&gt;先让心静下来。&lt;/strong&gt;&lt;br&gt;深呼吸一次，把杂念放下。不用焚香，只需要一分钟的安静。" data-en="&lt;strong&gt;Still your mind first.&lt;/strong&gt;&lt;br&gt;Take one deep breath. Let the noise go. No incense needed — just one quiet minute."><strong>先让心静下来。</strong><br>深呼吸一次，把杂念放下。不用焚香，只需要一分钟的安静。</div>
     </div>
     <div class="prep-item">
-      <div class="prep-char">清</div>
-      <div class="prep-text"><strong>问题要说清楚。</strong><br>不要问「我最近怎样」——太宽了，天机无从落脚。一件事，一个问题。</div>
+      <div class="prep-char" data-zh="清" data-en="清">清</div>
+      <div class="prep-text" data-zh="&lt;strong&gt;问题要说清楚。&lt;/strong&gt;&lt;br&gt;不要问「我最近怎样」——太宽了，天机无从落脚。一件事，一个问题。" data-en="&lt;strong&gt;Be specific.&lt;/strong&gt;&lt;br&gt;Don't ask 'How is my life lately?' — too broad. One situation, one question."><strong>问题要说清楚。</strong><br>不要问「我最近怎样」——太宽了，天机无从落脚。一件事，一个问题。</div>
     </div>
     <div class="prep-divider"></div>
-    <div class="prep-note">一事一占，问完这件事再问下一件。<br>问了就信，信了就放下。</div>
-    <button class="prep-btn" onclick="window.startCoinToss()">✦ 我已准备好，开始投币</button>
+    <div class="prep-note" data-zh="一事一占，问完这件事再问下一件。<br>问了就信，信了就放下。" data-en="One question per reading. Ask, then trust. Trust, then let go.">一事一占，问完这件事再问下一件。<br>问了就信，信了就放下。</div>
+    <button class="prep-btn" onclick="window.startCoinToss()" data-zh="✦ 我已准备好，开始投币" data-en="✦ I am ready — Toss the Coins">✦ 我已准备好，开始投币</button>
   </div>
 </div>
 
@@ -614,9 +620,9 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
     <div style="text-align:right; margin-bottom:-1rem;">
       <button onclick="window.closeCoinModal()" style="background:none;border:none;font-size:18px;color:var(--ink-faint);cursor:pointer;padding:0;">✕</button>
     </div>
-    <div class="coin-modal-title">投掷铜钱 · 天机感应</div>
-    <div class="coin-modal-sub" id="coin-sub">请专注你的问题，然后投掷</div>
-    <div style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:-1rem; margin-bottom:1.5rem; letter-spacing:0.05em;">共需投掷 <strong style="color:var(--gold);">6次</strong>，每次一爻，六爻成卦</div>
+    <div class="coin-modal-title" data-zh="投掷铜钱 · 天机感应" data-en="Cast the Coins · Reading the Signs">投掷铜钱 · 天机感应</div>
+    <div class="coin-modal-sub" id="coin-sub" data-zh="请专注你的问题，然后投掷" data-en="Focus on your question, then toss">请专注你的问题，然后投掷</div>
+    <div style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:-1rem; margin-bottom:1.5rem; letter-spacing:0.05em;" data-zh="共需投掷 &lt;strong style=&quot;color:var(--gold);&quot;&gt;6次&lt;/strong&gt;，每次一爻，六爻成卦" data-en="Toss &lt;strong style=&quot;color:var(--gold);&quot;&gt;6 times&lt;/strong&gt; — one line each, six lines form the hexagram">共需投掷 <strong style="color:var(--gold);">6次</strong>，每次一爻，六爻成卦</div>
     <div class="coin-area">
       <div class="coin-wrap" onclick="window.tossCoin()">
         <div class="coin" id="coin">
@@ -627,12 +633,12 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
       <div class="coin-result" id="coin-result"></div>
     </div>
     <div class="yao-track" id="yao-track">
-      <div class="yao" id="yao-0"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label">初</div></div>
-      <div class="yao" id="yao-1"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label">二</div></div>
-      <div class="yao" id="yao-2"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label">三</div></div>
-      <div class="yao" id="yao-3"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label">四</div></div>
-      <div class="yao" id="yao-4"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label">五</div></div>
-      <div class="yao" id="yao-5"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label">上</div></div>
+      <div class="yao" id="yao-0"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label" data-zh="初" data-en="1st">初</div></div>
+      <div class="yao" id="yao-1"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label" data-zh="二" data-en="2nd">二</div></div>
+      <div class="yao" id="yao-2"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label" data-zh="三" data-en="3rd">三</div></div>
+      <div class="yao" id="yao-3"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label" data-zh="四" data-en="4th">四</div></div>
+      <div class="yao" id="yao-4"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label" data-zh="五" data-en="5th">五</div></div>
+      <div class="yao" id="yao-5"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label" data-zh="上" data-en="6th">上</div></div>
     </div>
     <div class="coin-progress" id="coin-progress">
       <div class="coin-progress-dot" id="cp-0"></div>
@@ -644,7 +650,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
     </div>
     <div id="coin-instruction" style="font-size:13px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; letter-spacing:0.08em; margin-top:0.5rem; min-height:20px;"></div>
     <div id="coin-reveal-btn" style="display:none; margin-top:1.25rem;">
-      <button class="coin-toss-btn" onclick="window.revealResult()">✦ 观看天机</button>
+      <button class="coin-toss-btn" onclick="window.revealResult()" data-zh="✦ 观看天机" data-en="✦ Reveal the Reading">✦ 观看天机</button>
     </div>
   </div>
 </div>
@@ -661,13 +667,13 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
       <div class="scroll-quote" id="scroll-quote"></div>
       <div class="scroll-quote-src" id="scroll-src"></div>
       <div class="scroll-divider"></div>
-      <div class="scroll-ai-loading" id="scroll-loading">本猫正在细读天机...</div>
+      <div class="scroll-ai-loading" id="scroll-loading" data-zh="本猫正在细读天机..." data-en="The cat reads the signs...">本猫正在细读天机...</div>
       <div id="scroll-ai-label" style="display:none; text-align:center; margin-bottom:1.25rem;"><span id="scroll-cat-label" style="display:inline-block; font-size:11px; letter-spacing:0.3em; color:#b8860b; font-family:'Noto Sans SC',sans-serif; font-weight:500; border:1.5px solid rgba(184,134,11,0.5); border-radius:20px; padding:5px 16px; background:rgba(184,134,11,0.06);">傻 猪 解 读</span></div>
       <div class="scroll-ai" id="scroll-ai"></div>
-      <div class="scroll-disclaimer">⚠ 本卦象仅供参考，不构成任何建议</div>
+      <div class="scroll-disclaimer" data-zh="⚠ 本卦象仅供参考，不构成任何建议" data-en="⚠ For reference only — not professional advice">⚠ 本卦象仅供参考，不构成任何建议</div>
       <div class="scroll-actions">
-        <button class="scroll-btn" onclick="window.openShareFromScroll()">✦ 分享 / 保存</button>
-        <button class="scroll-btn" onclick="window.closeScroll()">再问一次（关闭）</button>
+        <button class="scroll-btn" onclick="window.openShareFromScroll()" data-zh="✦ 分享 / 保存" data-en="✦ Share / Save">✦ 分享 / 保存</button>
+        <button class="scroll-btn" onclick="window.closeScroll()" data-zh="再问一次（关闭）" data-en="Ask Again (Close)">再问一次（关闭）</button>
       </div>
     </div>
   </div>
@@ -692,7 +698,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
       </div>
     </div>
     <div class="share-actions">
-      <div class="share-actions-title">分享到</div>
+      <div class="share-actions-title" data-zh="分享到" data-en="Share to">分享到</div>
       <div class="share-icons">
 
         <!-- Threads -->
@@ -740,11 +746,11 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
           <button class="share-icon-btn" onclick="saveCard.call(this)" title="保存图片">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path  d="M12 16l-6-6h4V4h4v6h4l-6 6z"/><path  d="M20 18H4v2h16v-2z"/></svg>
           </button>
-          <div class="share-icon-label">保存</div>
+          <div class="share-icon-label" data-zh="保存" data-en="Save">保存</div>
         </div>
 
       </div>
-      <button class="share-close-btn" onclick="document.getElementById('share-modal').classList.remove('show')">关闭</button>
+      <button class="share-close-btn" onclick="document.getElementById('share-modal').classList.remove('show')" data-zh="关闭" data-en="Close">关闭</button>
     </div>
   </div>
 </div>
@@ -753,15 +759,15 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
 <div class="modal-overlay" id="shop">
   <div class="modal">
     <div class="modal-title"><img src="can-icon.png" style="width:32px;height:32px;object-fit:contain;vertical-align:middle;margin-right:8px;">补充罐头</div>
-    <div class="modal-sub">$0.99 / 罐 · 最多50罐</div>
+    <div class="modal-sub" data-zh="$0.99 / 罐 · 最多50罐" data-en="$0.99 / can · Up to 50 cans">$0.99 / 罐 · 最多50罐</div>
     <div class="qty-row">
       <button class="qty-btn" onclick="changeQty(-1)">−</button>
       <div class="qty-display" id="qty-display">5</div>
       <button class="qty-btn" onclick="changeQty(1)">＋</button>
     </div>
     <div class="qty-price" id="qty-price">合计 $4.95</div>
-    <button class="pay-btn" onclick="window.goPay()">前往付款</button>
-    <button class="modal-close" onclick="document.getElementById('shop').classList.remove('show')">关闭</button>
+    <button class="pay-btn" onclick="window.goPay()" data-zh="前往付款" data-en="Proceed to Checkout">前往付款</button>
+    <button class="modal-close" onclick="document.getElementById('shop').classList.remove('show')" data-zh="关闭" data-en="Close">关闭</button>
   </div>
 </div>
 
@@ -773,6 +779,215 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
   <span class="live-dot" style="background:#4caf50; display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:5px; animation:blink 1.5s ease-in-out infinite;"></span>
   <span id="counter-number">—</span> 猫奴已入道
 </div>
+
+<script>
+
+// ══════════════════════════════════════════════════════════════
+// LANGUAGE SYSTEM
+// ══════════════════════════════════════════════════════════════
+window._lang = localStorage.getItem('lang') || 'zh';
+
+const T = {
+  zh: {
+    navLogin: '登录',
+    navLogout: '退出登录',
+    cansRemain: '罐 剩余罐头',
+    buyMore: '＋ 补充罐头',
+    inviteFriend: '邀请朋友，双方各得2罐',
+    copyBtn: '复制',
+    signOut: '退出登录',
+    // Level names
+    lvl0: '新手', lvl1: '猫奴', lvl2: '猫痴', lvl3: '猫道',
+    lvlOwner: '玄猫主人', lvlOwnerSub: '傻猪的铲屎官',
+    divCount: (n) => n + ' 次占卜',
+    // Cat confirm btn
+    catConfirmDefault: '请选择你的占卜师',
+    catConfirmTpl: (name) => '✦ 请' + name + '开始占卜',
+    // Oracle section
+    oracleLabelTpl: (name, el, domain) => name + ' 问卦 · ' + el + ' · ' + domain,
+    step4Tpl: (name) => name + '解卦',
+    hintTpl: (name) => '※ 好问题让' + name + '给出更准确的解读。建议说明<strong>具体情境</strong>，例如：「我在考虑换工作，对方薪水更高但需要搬家，我该怎么决定？」',
+    thinkingTpl: (name) => name + ' 正在感应天机...',
+    prepTitleTpl: (name) => '✦ 问卦前，' + name + '有话说 ✦',
+    divBtn: '✦ 投币问卦（消耗1罐罐头）',
+    // Coin
+    coinSub: '请专注你的问题，然后投掷',
+    coinSubProgress: (n) => `第${n}爻已定，继续投掷`,
+    coinSubDone: '六爻已定，卦象成！',
+    coinResultYang: '☀ 阳爻',
+    coinResultYin: '☽ 阴爻',
+    revealBtn: '✦ 观看天机',
+    // Scroll
+    aiLoading: '本猫正在细读天机...',
+    catLabelTpl: (name) => name + ' 解 读',
+    closeConfirm: '⚠️ 关闭后此次解卦将无法找回。\n\n如需保存，请先按「分享」→「保存」。\n\n确定关闭？',
+    // Toasts
+    loginFail: '登录失败，请重试',
+    loggedOut: '已退出登录',
+    referralBonus: '🎉 好友邀请奖励！获得额外2罐罐头',
+    canRestored: (n) => '✓ 已补充 ' + n + ' 罐罐头！',
+    levelUp: (name, icon) => '🎉 升级了！你现在是「' + name + '」' + icon,
+    inviteCopied: '邀请链接已复制 ✓',
+    igCopied: '文字已复制，请前往Instagram贴上',
+    copied: '已复制 ✓',
+    shareFail: '请截图保存卡片',
+    shareOk: '分享成功 ✓',
+    imgDownloaded: '图片已下载，请手动分享 ✓',
+    shareNoResult: '请先完成占卜',
+    needLogin: '请先登录',
+    minChars: '请至少输入10个字再问卦',
+    checkConfirm: '请先勾选确认框',
+    profanity: '🐾 本猫只接受诚心问卦，请调整问题',
+    generating: '生成中...',
+    // Shop
+    shopSub: '$0.99 / 罐 · 最多50罐',
+    shopTotal: (n) => '合计 $' + (n * 0.99).toFixed(2),
+    payBtn: '前往付款',
+    paying: '处理中...',
+    payFail: '付款出错，请稍后再试',
+    // Postcard
+    pcDatetime: (dt) => dt.getFullYear() + '年' + (dt.getMonth()+1) + '月' + dt.getDate() + '日 ' + dt.getHours().toString().padStart(2,'0') + ':' + dt.getMinutes().toString().padStart(2,'0'),
+  },
+  en: {
+    navLogin: 'Login',
+    navLogout: 'Sign Out',
+    cansRemain: 'cans remaining',
+    buyMore: '＋ Buy More Cans',
+    inviteFriend: 'Invite a friend — both get 2 cans',
+    copyBtn: 'Copy',
+    signOut: 'Sign Out',
+    lvl0: 'Novice', lvl1: 'Cat Servant', lvl2: 'Cat Devotee', lvl3: 'Cat Sage',
+    lvlOwner: 'Grand Oracle', lvlOwnerSub: 'Sha Zhu\'s chosen one',
+    divCount: (n) => n + ' readings',
+    catConfirmDefault: 'Choose your oracle',
+    catConfirmTpl: (name) => '✦ Let ' + name + ' read for you',
+    oracleLabelTpl: (name, el, domain) => name + ' · ' + el + ' · ' + domain,
+    step4Tpl: (name) => name + '\'s Reading',
+    hintTpl: (name) => '※ A clear question gets a sharper reading from ' + name + '. Describe the <strong>specific situation</strong>, e.g. "I\'m considering a job change — higher pay but requires relocation. What should I do?"',
+    thinkingTpl: (name) => name + ' is reading the signs...',
+    prepTitleTpl: (name) => '✦ Before you ask — ' + name + ' speaks ✦',
+    divBtn: '✦ Toss Coins & Ask (costs 1 can)',
+    coinSub: 'Focus on your question, then toss',
+    coinSubProgress: (n) => `Line ${n} set — keep tossing`,
+    coinSubDone: 'Six lines cast — hexagram complete!',
+    coinResultYang: '☀ Yang Line',
+    coinResultYin: '☽ Yin Line',
+    revealBtn: '✦ Reveal the Reading',
+    aiLoading: 'The cat reads the signs...',
+    catLabelTpl: (name) => name + '\'s Reading',
+    closeConfirm: '⚠️ Closing will lose this reading.\n\nTo save it, tap Share → Save first.\n\nClose anyway?',
+    loginFail: 'Sign-in failed, please try again',
+    loggedOut: 'Signed out',
+    referralBonus: '🎉 Referral bonus! You received 2 extra cans',
+    canRestored: (n) => '✓ ' + n + ' cans added!',
+    levelUp: (name, icon) => '🎉 Level up! You are now "' + name + '" ' + icon,
+    inviteCopied: 'Invite link copied ✓',
+    igCopied: 'Text copied — paste it on Instagram',
+    copied: 'Copied ✓',
+    shareFail: 'Please screenshot to save',
+    shareOk: 'Shared ✓',
+    imgDownloaded: 'Image downloaded — share manually ✓',
+    shareNoResult: 'Please complete a reading first',
+    needLogin: 'Please sign in first',
+    minChars: 'Please enter at least 10 characters',
+    checkConfirm: 'Please check the confirmation box',
+    profanity: '🐾 The oracle only accepts sincere questions',
+    generating: 'Generating...',
+    shopSub: '$0.99 / can · Up to 50 cans',
+    shopTotal: (n) => 'Total $' + (n * 0.99).toFixed(2),
+    payBtn: 'Proceed to Checkout',
+    paying: 'Processing...',
+    payFail: 'Payment error, please try again',
+    pcDatetime: (dt) => dt.toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'}) + ' ' + dt.getHours().toString().padStart(2,'0') + ':' + dt.getMinutes().toString().padStart(2,'0'),
+  }
+};
+
+// CAT_DATA bilingual
+const CAT_DATA_EN = {
+  shazhu: {
+    name:'Sha Zhu', element:'Earth', elementDesc:'Loyal Presence',
+    domain:'Life Direction · Major Decisions · Spiritual Questions',
+    personality:'The most clingy cat in the house — follows you everywhere. Appears to be the alpha, but is actually the most tender. Picky, headstrong, but loyal to the bone.',
+    quote:'I\'ve been by your side this whole time. You think I don\'t know what\'s on your mind?',
+    askTitle:'Meow~ What do you wish to ask?'
+  },
+  feimao: {
+    name:'Fei Mao', element:'Metal', elementDesc:'Transcendent Wisdom',
+    domain:'Releasing Attachments · Long-term Vision · Life Wisdom',
+    personality:'A ten-year-old elder cat who has seen too much to rush. No social drama, just sunbathing and serenity. Every word she speaks carries the weight of lived experience.',
+    quote:'Old cat has seen more sunsets than you\'ve had anxious thoughts.',
+    askTitle:'The elder cat is here. What do you seek?'
+  },
+  chashi: {
+    name:'Cha Shi', element:'Fire', elementDesc:'Fierce Maternal Love',
+    domain:'Relationships & Family · Emotional Boundaries · Love & Hurt',
+    personality:'Unpredictable, emotional, loves fiercely and scratches accidentally. Too much heat. But beneath it all — a fiercely devoted mother. Her two-year-old still comes running to her.',
+    quote:'Sometimes love comes with claws. That doesn\'t make it less real.',
+    askTitle:'The fire cat is here. What burns in you?'
+  },
+  huba: {
+    name:'Hu Ban Zai', element:'Wood', elementDesc:'Wild Action',
+    domain:'Breaking Through · Competition · Independent Decisions',
+    personality:'Doesn\'t like being touched. No clinginess. Keeps his distance — not coldness, just sovereignty. The acrobat of the house. He doesn\'t wait to be invited. He chooses.',
+    quote:'Stop waiting to be invited. Jump out on your own.',
+    askTitle:'The warrior cat is here. What challenge do you face?'
+  },
+  mengmeng: {
+    name:'Meng Meng Da', element:'Water', elementDesc:'Flowing Exploration',
+    domain:'Creative Inspiration · Curious Exploration · Unexplored Paths',
+    personality:'Deceptively adorable with a Siberian forest cat\'s wild spirit inside. Disappears and reappears at will. Not interested in food — fascinated by everything else.',
+    quote:'Hiding isn\'t disappearing. It\'s finding a better corner to play in.',
+    askTitle:'The little princess is here. What mysteries call you?'
+  }
+};
+
+function t(key, ...args) {
+  const lang = window._lang;
+  const val = T[lang][key];
+  if (typeof val === 'function') return val(...args);
+  return val || T.zh[key] || key;
+}
+
+function applyLang(lang) {
+  window._lang = lang;
+  localStorage.setItem('lang', lang);
+  document.documentElement.lang = lang === 'zh' ? 'zh' : 'en';
+  const btn = document.getElementById('lang-btn');
+  if (btn) btn.textContent = lang === 'zh' ? 'EN' : '中文';
+  // Apply data-zh / data-en attributes
+  document.querySelectorAll('[data-zh]').forEach(function(el){
+    var val = el.getAttribute('data-' + lang);
+    if (val !== null) el.innerHTML = val;
+  });
+  // Dynamic JS-injected elements
+  const loginBtn = document.getElementById('nav-login-btn');
+  if (loginBtn) loginBtn.textContent = t('navLogin');
+  const buyLinkP = document.getElementById('buy-link-p');
+  if (buyLinkP) buyLinkP.textContent = t('buyMore');
+  const qtyPrice = document.getElementById('qty-price');
+  if (qtyPrice) qtyPrice.textContent = t('shopTotal', qty);
+  // Cat confirm btn
+  const confirmBtn = document.getElementById('cat-confirm-btn');
+  if (confirmBtn && !window._selectedCatKey) {
+    confirmBtn.textContent = t('catConfirmDefault');
+  } else if (confirmBtn && window._selectedCatKey) {
+    const catName = lang === 'en' ? CAT_DATA_EN[window._selectedCatKey].name : CAT_DATA[window._selectedCatKey].name;
+    confirmBtn.textContent = t('catConfirmTpl', catName);
+  }
+}
+
+window.toggleLang = function() {
+  applyLang(window._lang === 'zh' ? 'en' : 'zh');
+};
+
+// Wire up the lang-btn
+document.addEventListener('DOMContentLoaded', function() {
+  const btn = document.getElementById('lang-btn');
+  if (btn) btn.addEventListener('click', window.toggleLang);
+  applyLang(window._lang);
+});
+
+</script>
 
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
@@ -953,9 +1168,9 @@ onAuthStateChanged(auth, async (user) => {
       document.getElementById('level-name').textContent = '玄猫主人';
       document.getElementById('level-count').textContent = '傻猪的铲屎官';
       document.getElementById('level-icon-p').textContent = '😺';
-      document.getElementById('level-name-p').textContent = '玄猫主人';
+      document.getElementById('level-name-p').textContent = window._lang==='en'?'Grand Oracle':'玄猫主人';
       document.getElementById('level-name-p').style.color = '#d4a843';
-      document.getElementById('level-count-p').textContent = '傻猪的铲屎官';
+      document.getElementById('level-count-p').textContent = window._lang==='en'?"Sha Zhu's chosen one":'傻猪的铲屎官';
       document.getElementById('level-progress-wrap-p').style.display = 'none';
       // 只有 admin 看到用户计数器
       loadUserCount();
@@ -974,7 +1189,7 @@ onAuthStateChanged(auth, async (user) => {
         // New user via referral - give bonus cans
         await updateDoc(userRef, { cans: increment(2), referredBy: refUid });
         document.getElementById('can-count').textContent = cans + 2;
-        showToast('🎉 好友邀请奖励！获得额外2罐罐头');
+        showToast(t('referralBonus'));
         // Give referrer 2 cans
         const refRef = doc(db, 'users', refUid);
         const refSnap = await getDoc(refRef);
@@ -990,7 +1205,7 @@ onAuthStateChanged(auth, async (user) => {
     if (paid > 0) {
       const newCans = await updateCans(user.uid, paid);
       document.getElementById('can-count').textContent = newCans;
-      showToast('✓ 已补充 ' + paid + ' 罐罐头！');
+      showToast(t('canRestored', paid));
       window.history.replaceState({}, '', window.location.pathname);
     }
   } else {
@@ -1004,18 +1219,18 @@ onAuthStateChanged(auth, async (user) => {
 
 window.signInWithGoogle = async () => {
   try { await signInWithPopup(auth, provider); }
-  catch(e) { showToast('登录失败，请重试'); }
+  catch(e) { showToast(t('loginFail')); }
 };
 
 window.signOut = async () => {
   await fbSignOut(auth);
-  showToast('已退出登录');
+  showToast(t('loggedOut'));
 };
 
 window.changeQty = (delta) => {
   qty = Math.max(1, Math.min(50, qty + delta));
   document.getElementById('qty-display').textContent = qty;
-  document.getElementById('qty-price').textContent = '合计 $' + (qty * 0.99).toFixed(2);
+  document.getElementById('qty-price').textContent = t('shopTotal', qty);
 
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60);});
@@ -1023,7 +1238,7 @@ window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scr
 
 window.goPay = async () => {
   const btn = document.querySelector('.pay-btn');
-  btn.textContent = '处理中...';
+  btn.textContent = t('paying');
   btn.disabled = true;
   try {
     const res = await fetch('https://web-production-907c5.up.railway.app/create-checkout', {
@@ -1035,8 +1250,8 @@ window.goPay = async () => {
     if (data.url) {
       window.location.href = data.url;
     } else {
-      showToast('付款出错，请稍后再试');
-      btn.textContent = '前往付款';
+      showToast(t('payFail'));
+      btn.textContent = t('payBtn');
       btn.disabled = false;
     }
   } catch(e) {
@@ -1074,7 +1289,7 @@ window.tossCoin = () => {
     coin.style.animation = 'none';
     void coin.offsetWidth;
     coin.style.animation = '';
-    document.getElementById('coin-result').textContent = isYang ? '☀ 阳爻' : '☽ 阴爻';
+    document.getElementById('coin-result').textContent = isYang ? t('coinResultYang') : t('coinResultYin');
     
     // Update progress dot BEFORE increment
     document.getElementById('cp-' + tossCount).classList.add('done');
@@ -1085,10 +1300,10 @@ window.tossCoin = () => {
     document.getElementById('finger-hint').style.display = 'none';
 
     if (tossCount < 6) {
-      document.getElementById('coin-sub').textContent = `第${tossCount}爻已定，继续投掷`;
+      document.getElementById('coin-sub').textContent = t('coinSubProgress', tossCount);
       document.getElementById('coin-instruction').textContent = '';
     } else {
-      document.getElementById('coin-sub').textContent = '六爻已定，卦象成！';
+      document.getElementById('coin-sub').textContent = t('coinSubDone');
       document.getElementById('coin-instruction').textContent = '';
       document.getElementById('coin-reveal-btn').style.display = 'block';
     }
@@ -1126,7 +1341,7 @@ window.revealResult = async function() {
   const newLv = getLevel(newCount);
   updateLevelDisplay(newCount);
   if (oldLv.name !== newLv.name) {
-    showToast('🎉 升级了！你现在是「' + newLv.name + '」' + newLv.icon);
+    showToast(window._lang==='en' ? t('levelUp', (CAT_DATA_EN[window._selectedCatKey]||{name:newLv.name}).name||newLv.name, newLv.icon) : t('levelUp', newLv.name, newLv.icon));
   }
 
   // Hide coin modal, show scroll modal
@@ -1152,7 +1367,7 @@ window.revealResult = async function() {
 }
 
 window.closeScroll = () => {
-  if (!confirm('⚠️ 关闭后此次解卦将无法找回。\n\n如需保存，请先按「分享」→「保存」。\n\n确定关闭？')) return;
+  if (!confirm(t('closeConfirm'))) return;
   document.getElementById('scroll-modal').classList.remove('show');
   resetAll();
 };
@@ -1254,10 +1469,10 @@ function playCoinSound() {
 }
 
 function getLevel(count) {
-  if (count >= 100) return { icon:'✨', name:'猫道', next:null, progress:100 };
-  if (count >= 30) return { icon:'🦁', name:'猫痴', next:100, progress:Math.round((count-30)/70*100) };
-  if (count >= 10) return { icon:'🐱', name:'猫奴', next:30, progress:Math.round((count-10)/20*100) };
-  return { icon:'🐾', name:'新手', next:10, progress:Math.round(count/10*100) };
+  if (count >= 100) return { icon:'✨', name:window._lang==='en'?'Cat Sage':'猫道', next:null, progress:100 };
+  if (count >= 30) return { icon:'🦁', name:window._lang==='en'?'Cat Devotee':'猫痴', next:100, progress:Math.round((count-30)/70*100) };
+  if (count >= 10) return { icon:'🐱', name:window._lang==='en'?'Cat Servant':'猫奴', next:30, progress:Math.round((count-10)/20*100) };
+  return { icon:'🐾', name:window._lang==='en'?'Novice':'新手', next:10, progress:Math.round(count/10*100) };
 }
 
 function updateLevelDisplay(divCount) {
@@ -1265,12 +1480,12 @@ function updateLevelDisplay(divCount) {
   // Update hidden elements (JS compat)
   document.getElementById('level-icon').textContent = lv.icon;
   document.getElementById('level-name').textContent = lv.name;
-  document.getElementById('level-count').textContent = divCount + ' 次占卜';
+  document.getElementById('level-count').textContent = t('divCount', divCount);
   document.getElementById('level-progress-bar').style.width = lv.progress + '%';
   // Update profile panel
   document.getElementById('level-icon-p').textContent = lv.icon;
   document.getElementById('level-name-p').textContent = lv.name;
-  document.getElementById('level-count-p').textContent = divCount + ' 次占卜';
+  document.getElementById('level-count-p').textContent = t('divCount', divCount);
   document.getElementById('level-progress-bar-p').style.width = lv.progress + '%';
   if (lv.next === null) {
     document.getElementById('level-progress-wrap').style.display = 'none';
@@ -1333,7 +1548,7 @@ window.updateCount = () => {
 };
 
 window.startDiv = async () => {
-  if (!currentUser) { showToast('请先登录'); return; }
+  if (!currentUser) { showToast(t('needLogin')); return; }
   const q = document.getElementById('question').value.trim();
   const cat = currentUser.displayName ? currentUser.displayName.split(' ')[0] : '朋友';
   // Profanity filter
@@ -1345,13 +1560,13 @@ window.startDiv = async () => {
   const qLower = q.toLowerCase();
   const hasBad = badWords.some(w => qLower.includes(w));
   if (hasBad) { 
-    showToast('🐾 本猫只接受诚心问卦，请调整问题');
+    showToast(t('profanity'));
     document.getElementById('question').focus(); 
     return; 
   }
 
-  if (!q || q.length < 10) { showToast('请至少输入10个字再问卦'); document.getElementById('question').focus(); return; }
-  if (!document.getElementById('confirm-check').checked) { showToast('请先勾选确认框'); return; }
+  if (!q || q.length < 10) { showToast(t('minChars')); document.getElementById('question').focus(); return; }
+  if (!document.getElementById('confirm-check').checked) { showToast(t('checkConfirm')); return; }
 
   const cansText = document.getElementById('can-count').textContent;
   const cansNow = cansText === '∞' ? 999 : parseInt(cansText);
@@ -1488,10 +1703,10 @@ window.resetAll = () => {
   document.getElementById('cat-selector-section').style.display = 'block';
   document.querySelectorAll('.cat-sel-card').forEach(c => c.classList.remove('active'));
   document.getElementById('cat-sel-detail').classList.remove('show');
-  document.getElementById('cat-confirm-btn').textContent = '请选择你的占卜师';
+  document.getElementById('cat-confirm-btn').textContent = t('catConfirmDefault');
   document.getElementById('cat-confirm-btn').style.opacity = '0.3';
   document.getElementById('cat-confirm-btn').style.pointerEvents = 'none';
-  selectedCatKey = null;
+  selectedCatKey = null; window._selectedCatKey = null;
   window.scrollTo({top:0, behavior:'smooth'});
 };
 
@@ -1544,22 +1759,22 @@ const CAT_DATA = {
   }
 };
 
-let selectedCatKey = null;
+let selectedCatKey = null; window._selectedCatKey = null;
 
 window.selectCatOracle = (key, el) => {
-  selectedCatKey = key;
+  selectedCatKey = key; window._selectedCatKey = key;
   document.querySelectorAll('.cat-sel-card').forEach(c => c.classList.remove('active'));
   el.classList.add('active');
   const cat = CAT_DATA[key];
   document.getElementById('cat-detail-photo').src = cat.photo;
   document.getElementById('cat-detail-photo').alt = cat.name;
-  document.getElementById('cat-detail-name').textContent = cat.name;
-  document.getElementById('cat-detail-badge').textContent = cat.element + ' · ' + cat.elementDesc;
-  document.getElementById('cat-detail-text').textContent = cat.personality;
-  document.getElementById('cat-detail-quote').textContent = '「' + cat.quote + '」';
+  document.getElementById('cat-detail-name').textContent = window._lang==='en' ? CAT_DATA_EN[key].name : cat.name;
+  document.getElementById('cat-detail-badge').textContent = (window._lang==='en' ? CAT_DATA_EN[key].element : cat.element) + ' · ' + (window._lang==='en' ? CAT_DATA_EN[key].elementDesc : cat.elementDesc);
+  document.getElementById('cat-detail-text').textContent = window._lang==='en' ? CAT_DATA_EN[key].personality : cat.personality;
+  document.getElementById('cat-detail-quote').textContent = '「' + (window._lang==='en' ? CAT_DATA_EN[key].quote : cat.quote) + '」';
   document.getElementById('cat-sel-detail').classList.add('show');
   const btn = document.getElementById('cat-confirm-btn');
-  btn.textContent = '✦ 请' + cat.name + '开始占卜';
+  const _catName = window._lang === 'en' ? CAT_DATA_EN[key].name : cat.name; btn.textContent = t('catConfirmTpl', _catName);
   btn.style.opacity = '1';
   btn.style.pointerEvents = 'all';
 };
@@ -1570,20 +1785,20 @@ window.confirmCatSelection = () => {
   currentCat = cat.name;
   document.getElementById('cat-selector-section').style.display = 'none';
   document.getElementById('oracle-input-section').style.display = 'block';
-  document.getElementById('oracle-label').textContent = cat.name + ' 问卦 · ' + cat.element + ' · ' + cat.domain.split('·')[0].trim();
-  document.getElementById('step4-label').textContent = cat.name + '解卦';
-  document.getElementById('oracle-ask-title').textContent = cat.askTitle;
-  document.getElementById('scroll-cat-label').textContent = cat.name + ' 解 读';
-  document.getElementById('prep-modal-title').textContent = '✦ 问卦前，' + cat.name + '有话说 ✦';
-  document.getElementById('oracle-hint').innerHTML = '※ 好问题让' + cat.name + '给出更准确的解读。建议说明<strong>具体情境</strong>，例如：「我在考虑换工作，对方薪水更高但需要搬家，我该怎么决定？」';
-  document.getElementById('thinking').textContent = cat.name + ' 正在感应天机...';
+  const _en = window._lang==='en'; const _cd = _en ? CAT_DATA_EN[selectedCatKey] : cat; document.getElementById('oracle-label').textContent = _cd.name + (_en ? ' · ' + _cd.element + ' · ' + _cd.domain.split('·')[0].trim() : ' 问卦 · ' + cat.element + ' · ' + cat.domain.split('·')[0].trim());
+  document.getElementById('step4-label').textContent = t('step4Tpl', _cd.name);
+  document.getElementById('oracle-ask-title').textContent = _en ? CAT_DATA_EN[selectedCatKey].askTitle : cat.askTitle;
+  document.getElementById('scroll-cat-label').textContent = t('catLabelTpl', _cd.name);
+  document.getElementById('prep-modal-title').textContent = t('prepTitleTpl', _cd.name);
+  document.getElementById('oracle-hint').innerHTML = t('hintTpl', _cd.name);
+  document.getElementById('thinking').textContent = t('thinkingTpl', _cd.name);
   document.getElementById('oracle-input-section').scrollIntoView({behavior:'smooth', block:'start'});
 };
 // ── END CAT SELECTOR ──
 
 // Share functions
 window.openShareModal = () => {
-  if (!currentGua || !aiText) { showToast('请先完成占卜'); return; }
+  if (!currentGua || !aiText) { showToast(t('shareNoResult')); return; }
   const q = document.getElementById('question').value.trim();
   document.getElementById('pc-question').textContent = q ? '「' + q + '」' : '';
   document.getElementById('pc-sym').textContent = currentGua.sym;
@@ -1592,7 +1807,7 @@ window.openShareModal = () => {
   document.getElementById('pc-src').textContent = currentGua.src;
   document.getElementById('pc-ai').textContent = aiText;
   const now = new Date();
-  const dtStr = now.getFullYear() + '年' + (now.getMonth()+1) + '月' + now.getDate() + '日 ' + now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+  const dtStr = t('pcDatetime', now);
   document.getElementById('pc-datetime').textContent = dtStr;
   document.getElementById('share-modal').classList.add('show');
 };
@@ -1623,7 +1838,7 @@ window.copyShareText = () => {
     ta.value = text; ta.style.cssText = 'position:fixed;opacity:0;';
     document.body.appendChild(ta); ta.focus(); ta.select();
     document.execCommand('copy'); document.body.removeChild(ta);
-    showToast('已复制 ✓');
+    showToast(t('copied'));
   }
 };
 
@@ -1649,7 +1864,7 @@ async function sharePNG(btnEl) {
         title: '玄猫之道占卜结果',
         text: currentGua ? currentGua.name + ' · TaoOfCat.com' : 'TaoOfCat.com'
       });
-      showToast('分享成功 ✓');
+      showToast(t('shareOk'));
     } else {
       // Desktop fallback - download
       const url = URL.createObjectURL(blob);
@@ -1658,10 +1873,10 @@ async function sharePNG(btnEl) {
       link.href = url;
       link.click();
       URL.revokeObjectURL(url);
-      showToast('图片已下载，请手动分享 ✓');
+      showToast(t('imgDownloaded'));
     }
   } catch(e) {
-    if (e.name !== 'AbortError') showToast('请截图保存卡片');
+    if (e.name !== 'AbortError') showToast(t('shareFail'));
   }
   btnEl.textContent = orig;
   btnEl.disabled = false;
@@ -1677,13 +1892,13 @@ window.saveCard = function() { sharePNG(this); };
 </script>
 <footer style="background:rgba(30,22,8,0.04); border-top:1px solid var(--ink-ghost); padding:2rem 1.5rem; text-align:center; margin-top:2rem;">
   <div style="max-width:680px; margin:0 auto;">
-    <div style="font-size:13px; font-weight:500; color:var(--ink); letter-spacing:0.1em; margin-bottom:8px; font-family:'Noto Sans SC',sans-serif;">✦ 隐私声明</div>
+    <div style="font-size:13px; font-weight:500; color:var(--ink); letter-spacing:0.1em; margin-bottom:8px; font-family:'Noto Sans SC',sans-serif;" data-zh="✦ 隐私声明" data-en="✦ Privacy Policy">✦ 隐私声明</div>
     <div style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; line-height:1.8; letter-spacing:0.03em;">
-      本站只储存你的账号基本资料（名字、头像）及游戏数据（罐头、等级、占卜次数）。<br>
-      你的占卜问题及解卦内容不会被记录或储存，不会用于任何商业用途。
+      <span data-zh="本站只储存你的账号基本资料（名字、头像）及游戏数据（罐头、等级、占卜次数）。<br>你的占卜问题及解卦内容不会被记录或储存，不会用于任何商业用途。" data-en="We only store your basic profile (name, avatar) and game data (cans, level, reading count).<br>Your questions and readings are never recorded or used for any commercial purpose.">本站只储存你的账号基本资料（名字、头像）及游戏数据（罐头、等级、占卜次数）。<br>
+      你的占卜问题及解卦内容不会被记录或储存，不会用于任何商业用途。</span>
     </div>
     <div style="font-size:11px; color:var(--ink-ghost); font-family:'Noto Sans SC',sans-serif; margin-top:1rem; letter-spacing:0.05em;">
-      © 2026 玄猫之道 · TaoOfCat.com
+      <span data-zh="© 2026 玄猫之道 · TaoOfCat.com" data-en="© 2026 Tao of Your Cat · TaoOfCat.com">© 2026 玄猫之道 · TaoOfCat.com</span>
     </div>
   </div>
 </footer>

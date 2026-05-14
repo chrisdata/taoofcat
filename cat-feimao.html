@@ -75,24 +75,30 @@ footer { border-top: 1px solid var(--ink-ghost); padding: 2.5rem 2rem; text-alig
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 @media (max-width: 600px) { .photo-pair { grid-template-columns: 1fr; } .story { padding: 3rem 1.25rem; } .tao-quote { padding: 1rem 1.25rem; } .btn-outline { margin-left: 0; margin-top: 12px; display: block; } }
+
+.lang-btn{font-size:12px;font-family:'Noto Sans SC',sans-serif;background:transparent;color:rgba(244,237,224,0.85);border:1px solid rgba(244,237,224,0.35);border-radius:20px;padding:5px 14px;cursor:pointer;transition:all 0.2s;letter-spacing:0.05em;white-space:nowrap;}
+nav.scrolled .lang-btn{color:var(--ink-faint);border-color:var(--ink-ghost);}
+nav.scrolled .lang-btn:hover{color:var(--ink);border-color:var(--gold);}
+.lang-btn:hover{border-color:rgba(244,237,224,0.7);}
 </style>
 </head>
 <body>
 
 <nav id="nav">
   <a href="/" class="nav-brand">玄猫之道</a>
-  <a href="/#cats" class="nav-back">← 猫咪家族</a>
+  <a href="/#cats" class="nav-back" data-zh="← 猫咪家族" data-en="← Cat Family">← 猫咪家族</a>
+  <button id="lang-btn" class="lang-btn">EN</button>
 </nav>
 
 <div class="hero">
   <img src="feimao-stray.jpg" alt="肥猫" class="hero-img">
   <div class="hero-gradient"></div>
   <div class="hero-content">
-    <div class="hero-label">The Elder · 长老</div>
+    <div class="hero-label" data-zh="The Elder · 长老" data-en="The Elder · The Patient One">The Elder · 长老</div>
     <div class="hero-name">肥猫</div>
     <div class="hero-en">Fei Mao · The Patient One</div>
     <div class="hero-divider"></div>
-    <div class="hero-tagline">十岁雀猫 · 等待两年的始祖 · 无为长老</div>
+    <div class="hero-tagline" data-zh="十岁雀猫 · 等待两年的始祖 · 无为长老" data-en="10-Year-Old Tabby · Waited 2 Years · The Wu Wei Elder">十岁雀猫 · 等待两年的始祖 · 无为长老</div>
   </div>
 </div>
 
@@ -100,7 +106,7 @@ footer { border-top: 1px solid var(--ink-ghost); padding: 2.5rem 2rem; text-alig
 
   <div class="chapter reveal">
     <div class="chapter-label">Chapter One</div>
-    <div class="chapter-title">花园里的等待</div>
+    <div class="chapter-title" data-zh="花园里的等待" data-en="The Garden Vigil">花园里的等待</div>
     <p class="chapter-text">
       我和太太从来没打算养猫。那时候我们只是偶尔在门外看到流浪猫，顶多给点食物，仅此而已。
     </p>
@@ -119,13 +125,13 @@ footer { border-top: 1px solid var(--ink-ghost); padding: 2.5rem 2rem; text-alig
   <div class="story-photo-caption reveal">怡保街头的夕阳 · 等待的那些年</div>
 
   <div class="tao-quote reveal">
-    <div class="tao-quote-text">「为学日益，为道日损<br>损之又损，以至於無為」</div>
-    <div class="tao-quote-source">— 道德经·第四十八章</div>
+    <div class="tao-quote-text" data-zh="「为学日益，为道日损<br>损之又损，以至於無為」" data-en="「为学日益，为道日损<br>损之又损，以至於無為」">「为学日益，为道日损<br>损之又损，以至於無為」</div>
+    <div class="tao-quote-source" data-zh="— 道德经·第四十八章" data-en="— Tao Te Ching · Chapter 48">— 道德经·第四十八章</div>
   </div>
 
   <div class="chapter reveal">
     <div class="chapter-label">Chapter Two</div>
-    <div class="chapter-title">心软的那一刻</div>
+    <div class="chapter-title" data-zh="心软的那一刻" data-en="The Moment We Gave In">心软的那一刻</div>
     <p class="chapter-text">
       两年后的某一天，我没忍住——把她带进了屋。
     </p>
@@ -147,7 +153,7 @@ footer { border-top: 1px solid var(--ink-ghost); padding: 2.5rem 2rem; text-alig
 
   <div class="chapter reveal">
     <div class="chapter-label">Chapter Three</div>
-    <div class="chapter-title">Facebook上的惊喜</div>
+    <div class="chapter-title" data-zh="Facebook上的惊喜" data-en="The Surprise on Facebook">Facebook上的惊喜</div>
     <p class="chapter-text">
       收养肥猫一段时间后，有一天我在Facebook偶然看到一篇帖子。
     </p>
@@ -172,7 +178,7 @@ footer { border-top: 1px solid var(--ink-ghost); padding: 2.5rem 2rem; text-alig
 
   <div class="chapter reveal">
     <div class="chapter-label">Chapter Four</div>
-    <div class="chapter-title">归处不是出发点</div>
+    <div class="chapter-title" data-zh="归处不是出发点" data-en="Home Is Not Where You Started">归处不是出发点</div>
     <p class="chapter-text">
       肥猫失踪了四年，流浪了四年，在我们花园等了两年。
     </p>
@@ -192,7 +198,7 @@ footer { border-top: 1px solid var(--ink-ghost); padding: 2.5rem 2rem; text-alig
 
   <div class="chapter reveal">
     <div class="chapter-label">Chapter Five</div>
-    <div class="chapter-title">十岁的智慧</div>
+    <div class="chapter-title" data-zh="十岁的智慧" data-en="The Wisdom of Ten Years">十岁的智慧</div>
     <p class="chapter-text">
       肥猫现在十岁了。是家里年纪最大的猫，也是最淡定的一只。
     </p>
@@ -215,22 +221,22 @@ footer { border-top: 1px solid var(--ink-ghost); padding: 2.5rem 2rem; text-alig
     <div class="closing-label reveal">道德经 · 第十六章</div>
     <div class="closing-quote reveal">「知足者富<br>强行者有志」</div>
     <div class="closing-source reveal">— 道德经·第三十三章</div>
-    <div class="closing-note reveal">
+    <div class="closing-note reveal" data-zh="肥猫等了两年，流浪了四年。<br>      她不急，不慌，不怨。<br>      最后，心安之处，便是家。<br>      这就是她教会我们的道。" data-en="Fei Mao waited two years. Wandered for four.<br>      No urgency, no panic, no resentment.<br>      In the end, where the heart rests — that is home.<br>      This is the Tao she taught us.">
       肥猫等了两年，流浪了四年。<br>
       她不急，不慌，不怨。<br>
       最后，心安之处，便是家。<br>
       这就是她教会我们的道。
     </div>
     <div class="reveal">
-      <a href="divination.html" class="btn-gold">✦ 让傻猪为你占卜</a>
-      <a href="/#cats" class="btn-outline">认识其他猫咪</a>
+      <a href="divination.html" class="btn-gold" data-zh="✦ 让傻猪为你占卜" data-en="✦ Let Sha Zhu Read for You">✦ 让傻猪为你占卜</a>
+      <a href="/#cats" class="btn-outline" data-zh="认识其他猫咪" data-en="Meet the Cats">认识其他猫咪</a>
     </div>
   </div>
 </div>
 
 <footer>
   <div class="footer-brand">玄猫之道</div>
-  <div class="footer-copy">© 2026 Tao of Your Cat · Ipoh, Malaysia</div>
+  <div class="footer-copy" data-zh="© 2026 Tao of Your Cat · Ipoh, Malaysia" data-en="© 2026 Tao of Your Cat · Ipoh, Malaysia">© 2026 Tao of Your Cat · Ipoh, Malaysia</div>
 </footer>
 
 <script>
@@ -246,6 +252,24 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.08 });
 reveals.forEach(el => observer.observe(el));
+
+// ── LANGUAGE SWITCH ─────────────────────────────────────
+(function(){
+  var btn=document.getElementById('lang-btn');
+  if(!btn)return;
+  var lang=localStorage.getItem('lang')||'zh';
+  function apply(l){
+    lang=l;localStorage.setItem('lang',l);
+    document.documentElement.lang=l==='zh'?'zh':'en';
+    btn.textContent=l==='zh'?'EN':'中文';
+    document.querySelectorAll('[data-zh]').forEach(function(el){
+      var v=el.getAttribute('data-'+l);
+      if(v!==null)el.innerHTML=v;
+    });
+  }
+  btn.addEventListener('click',function(){apply(lang==='zh'?'en':'zh');});
+  apply(lang);
+})();
 </script>
 </body>
 </html>
