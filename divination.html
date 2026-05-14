@@ -2016,20 +2016,54 @@ window.openShareModal = () => {
   document.getElementById('share-modal').classList.add('show');
 };
 
+
+function getInviteUrl() {
+  const el = document.getElementById('invite-link-p');
+  return (el && el.value) ? el.value : 'https://TaoOfCat.com/divination.html';
+}
+
+function getShareSuffix() {
+  const url = getInviteUrl();
+  const _en = window._lang === 'en';
+  return _en
+    ? '\n\n🐾 Try it free → ' + url + '\n(Sign up & we both get 2 free cans!)'
+    : '\n\n🐾 免费试试 → ' + url + '\n（注册后双方各得2罐罐头！）';
+}
 window.shareToThreads = () => {
-  const text = encodeURIComponent('【玄猫之道占卜】' + currentGua.name + '\n「' + currentGua.quote + '」\n\n' + aiText.substring(0,100) + '...\n\nTaoOfCat.com');
+  if (!currentGua) return;
+  const _en = window._lang === 'en';
+  const name = _en ? (currentGua.name_en||currentGua.name) : currentGua.name;
+  const quote = _en ? (currentGua.quote_en||currentGua.quote) : currentGua.quote;
+  const header = _en ? '[Tao of Cat Oracle] ' : '【玄猫之道占卜】';
+  const text = encodeURIComponent(header + name + '\n「' + quote + '」\n\n' + aiText.substring(0,100) + '...' + getShareSuffix());
   window.open('https://www.threads.net/intent/post?text=' + text, '_blank');
 };
 
 window.shareToIG = () => {
-  const text = '【玄猫之道 · ' + currentCat + '占卜结果】\n' + currentGua.name + '\n「' + currentGua.quote + '」\n\n' + aiText.substring(0,150) + '\nTaoOfCat.com';
+  if (!currentGua) return;
+  const _en = window._lang === 'en';
+  const name = _en ? (currentGua.name_en||currentGua.name) : currentGua.name;
+  const quote = _en ? (currentGua.quote_en||currentGua.quote) : currentGua.quote;
+  const header = _en ? '[Tao of Cat · ' + name + ']' : '【玄猫之道 · ' + currentCat + '占卜结果】';
+  const text = header + '\n「' + quote + '」\n\n' + aiText.substring(0,150) + getShareSuffix();
   if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(text).then(() => showToast('文字已复制，请前往Instagram贴上'));
+    navigator.clipboard.writeText(text).then(() => showToast(t('igCopied')));
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.cssText = 'position:fixed;opacity:0;';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    showToast(t('igCopied'));
   }
 };
 
 window.shareToWA = () => {
-  const text = encodeURIComponent('【玄猫之道 · ' + currentCat + '占卜结果】\n' + currentGua.name + '\n「' + currentGua.quote + '」\n\n' + aiText.substring(0,150) + '\nTaoOfCat.com');
+  if (!currentGua) return;
+  const _en = window._lang === 'en';
+  const name = _en ? (currentGua.name_en||currentGua.name) : currentGua.name;
+  const quote = _en ? (currentGua.quote_en||currentGua.quote) : currentGua.quote;
+  const header = _en ? '[Tao of Cat · ' + name + '] ' : '【玄猫之道 · ' + currentCat + '占卜结果】\n' + currentGua.name + '\n';
+  const text = encodeURIComponent(header + '「' + quote + '」\n\n' + aiText.substring(0,150) + getShareSuffix());
   window.open('https://wa.me/?text=' + text, '_blank');
 };
 
@@ -2085,13 +2119,37 @@ async function sharePNG(btnEl) {
   btnEl.disabled = false;
 }
 
-window.shareToTelegram = function() { sharePNG(this); };
-window.shareToFacebook = function() { sharePNG(this); };
-window.shareToThreads = function() { sharePNG(this); };
-window.shareToIG = function() { sharePNG(this); };
-window.shareToWA = function() { sharePNG(this); };
-window.copyShareText = function() { sharePNG(this); };
-window.saveCard = function() { sharePNG(this); };
+// Save card = download PNG
+window.saveCard = async function() {
+  const btn = this;
+  btn.style.opacity = '0.4'; btn.disabled = true;
+  try {
+    const canvas = await generatePNG();
+    const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.download = 'taoofcat-oracle.png';
+    link.href = url; link.click();
+    URL.revokeObjectURL(url);
+    showToast(t('imgDownloaded'));
+  } catch(e) { showToast(t('shareFail')); }
+  btn.style.opacity = ''; btn.disabled = false;
+};
+
+// Telegram = text link
+window.shareToTelegram = function() {
+  if (!currentGua) return;
+  const _en = window._lang === 'en';
+  const name = _en ? (currentGua.name_en||currentGua.name) : currentGua.name;
+  const quote = _en ? (currentGua.quote_en||currentGua.quote) : currentGua.quote;
+  const text = encodeURIComponent((_en ? '[Tao of Cat Oracle] ' : '【玄猫之道占卜】') + name + '\n「' + quote + '」\n\n' + aiText.substring(0,150) + getShareSuffix());
+  window.open('https://t.me/share/url?url=https://taoofcat.com&text=' + text, '_blank');
+};
+
+// Facebook = share link
+window.shareToFacebook = function() {
+  window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(getInviteUrl()), '_blank');
+};
 </script>
 <footer style="background:rgba(30,22,8,0.04); border-top:1px solid var(--ink-ghost); padding:2rem 1.5rem; text-align:center; margin-top:2rem;">
   <div style="max-width:680px; margin:0 auto;">
