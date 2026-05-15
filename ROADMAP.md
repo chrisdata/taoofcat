@@ -21,6 +21,7 @@
 | 社媒排程 | Buffer (@taoc.4t) |
 | 自动化 | n8n (本地 Windows PC, PM2 24/7, port 5678) |
 | 邮件 | Cloudflare Email Routing → miao@taoofcat.com → chrischua83@gmail.com |
+| **AI 指挥中心** | **AI Boardroom (本地 Flask, port 7070)** |
 
 **Railway 环境变量：**
 - ANTHROPIC_API_KEY
@@ -109,19 +110,19 @@
 - 动态 Stripe Checkout（$0.99/罐）
 - **非退款声明**（Cans are non-refundable digital credits）
 
-### Support 页面 (support.html) ← 新增
+### Support 页面 (support.html)
 - FAQ 8条（罐头、退款、账号、付款、隐私、邀请等）
 - 联系邮箱：miao@taoofcat.com
 - Instagram + Threads 社媒链接
 - 回复时间 / Stripe 安全 / 罐头永久 / 怡保马来西亚
 - 中英双语
 
-### 邮件系统 ← 新增
+### 邮件系统
 - Cloudflare Email Routing 已启用
 - miao@taoofcat.com → chrischua83@gmail.com
 - DNS MX + TXT + SPF + DKIM 全部配置完成
 
-### 书法 Logo ← 新增
+### 书法 Logo
 - Illustrator 设计，王羲之书法风格
 - 金色版（#d4a843）— hero + nav + postcard
 - 深色版（#231f20）— 浅色背景备用
@@ -136,25 +137,106 @@
 - 五猫性格定义 + 五行对应
 - 各猫金句、擅长领域、占卜语气完整设定（中英双语）
 
+### AI Boardroom ← 新增（2026年5月）
+本地 AI 指挥中心，运行在 Windows PC，port 7070。
+
+**文件结构：**
+```
+AI_Boardroom/
+├── app.py                  ← Flask 后端（中转 Claude/GPT/Gemini API）
+├── 启动Boardroom.bat       ← 双击启动
+├── requirements.txt
+├── meetings/               ← 会议记录自动存档（JSON）
+├── docs/                   ← 上传的参考文件（.md/.txt）
+├── data/                   ← 每日话题简报（research_YYYYMMDD.json）
+├── outputs/                ← AI 执行模式产出的文件
+│   ├── 项目名_日期/
+│   └── cats/               ← gpt-image-2 生成的猫图
+└── static/
+    ├── index.html          ← 主界面（开会/执行/链式对话）
+    ├── history.html        ← 历史会议记录
+    ├── research.html       ← 每日话题简报（内容版 ForexFactory）
+    └── cat.html            ← 猫图编辑器（gpt-image-2）
+```
+
+**四种模式：**
+- **开会模式** — 三方讨论，Phase 1 独立分析 → Phase 2 互相点评 → 综合汇报
+- **执行模式** — Claude 自动拆解任务，三方独立执行，输出真实文件
+- **链式对话** — 5轮真实 AI 互动（Claude 拆解 → GPT+Gemini 回应 → Claude 深化 → 各方立场 → Gemini 结论）
+- **批准→直接执行** — 链式对话结论一键转执行模式，省 API
+
+**AI 分工：**
+- Claude — 系统架构师（常驻，负责逻辑/技术/框架）
+- GPT-4o — 创意总监（负责创意/内容方向）
+- Gemini 2.0 Flash — 文案创作（最懂 Chris 风格，注入 Persona 档案）
+
+**Persona 注入：**
+- GPT 和 Gemini 永久注入「玄猫·平衡口语版」人格档案
+- Claude 本身已了解 Chris（无需注入）
+
+**AI 参与开关：**
+- 每个 AI 可独立 toggle on/off
+- 关掉的 AI 不调用 API，省费用
+- 纯技术讨论只开 Claude
+
+**猫图编辑器 (`/cat`)：**
+- 上传猫照片 → gpt-image-2 编辑
+- 8个快速操作：去背景/换背景/吉卜力风/卡通风/换姿势/加配件/写真风/油画风
+- 生成历史记录，点击复用
+- OpenAI Key 与 Boardroom 共用 localStorage
+
+**话题简报 (`/research`)：**
+- 内容版 ForexFactory——每天早上扫一眼，决定今天做什么
+- 影响力评分：🔴高影响 / 🟠中影响 / 🟡低影响 / ⚪弱信号
+- Toggle ON 才执行，省 API，顺势而为
+- 每个话题含：搜索关键词（点击复制）+ 回复范本（点击复制）
+- 今日建议帖子：中文 + 英文草稿 + hashtag（全部点击复制）
+- 批量选中话题 → 一键「开会讨论」或「生成内容」
+
+**n8n 每日作战计划 workflow：**
+- 每天 8am 自动运行
+- Claude (haiku) 根据日期/节气/星期生成今日互动计划
+- 存入 `data/research_YYYYMMDD.json`
+- 费用约 $0.003/天，一个月 $0.09
+
+**会议记录系统：**
+- 每场会议自动存档为 JSON
+- `/history` 页面可回顾所有历史会议
+- 可手动下载 .txt 格式
+
+**API Keys（本地 localStorage 保存）：**
+- Claude: Anthropic API Key (sk-ant-...)
+- GPT: OpenAI API Key (sk-...)
+- Gemini: Google AI Studio Key (AIza...)
+
 ---
 
 ## 待完成 📋
 
 ### 紧急
-- [x] hero-bg.mp4 已上传 GitHub ✓
 - [ ] Behold.so 换成太太 @cjluckycats 的 feed（算了，@taoc.4t 慢慢发）
+- [ ] Threads Access Token 续期（约2026年7月到期）
 
-### 功能
+### 玄猫之道网站功能
 - [ ] 每日打卡系统（来了送积分，兑换罐头）
 - [ ] 好奇感——解读前几行模糊，付费解锁
 
+### AI Boardroom 下一步
+- [ ] **Step 2：Threads 发布接口** — 执行模式生成文案后，一键发到 Threads（用现有 Token）
+- [ ] **Step 3：猫图 → Gemini 写文案 → 发布一条龙** — cat.html 生图后传 Gemini，预览满意一键发 Threads（带图）
+- [ ] gpt-image-2 图片上传 Cloudinary（供 Threads 发图用，需公开 URL）
+- [ ] Threads Access Token 自动续期提醒
+
 ### 营销
-- [ ] Threads Access Token 续期（约2026年7月到期）
+- [ ] **现阶段涨粉策略：真实互动为主**
+  - 每天用 /research 页面的回复范本去 Threads 手动互动
+  - 搜「失去猫」「猫咪走了」「rainbow bridge」找共鸣帖子回复
+  - 顺势关注对方，建立真实受众
 - [ ] IG 全自动发布（Meta API 太复杂，暂缓，用 Buffer 手动）
 - [ ] n8n 内容栏目优化（多样化主题）
 - [ ] **开始发帖推广**——从傻猪 x 小白父子照片开始，讲故事不推销
 - [ ] **Threads bio 定稿**（以猫观道 · See the Tao through the cat 🐾）
-- [ ] 目标受众：爱猫人 + 对东方哲学感兴趣的英语用户
+- [ ] **目标受众更新**：猫奴为主（失去猫的人 / 日常猫奴 / 人生迷茫的猫奴），不强调老庄哲学
 
 ### 产品
 - [ ] 猫式金刚功 PDF（$9.99，Gumroad）
@@ -182,13 +264,16 @@
 - **理念：** 以猫观道，以道养猫，万物皆有缘起
 - **主IP：** 傻猪（异瞳白猫，占卜师·土）
 - **变现路线：** 罐头占卜 → 数字产品 → 猫粮品牌
+- **受众定位（更新）：** 猫奴为核心——失去猫的人、日常猫奴、人生迷茫的猫奴
 
 ---
 
 ## 下一个聊天继续
 
-1. **博山炉焚香动画** — 明天用 Sony 拍 MP4，上传 Cloudinary，加进准备弹窗
-2. **猫咪去背照片上传** — remove.bg 处理后上传 Cloudinary（shazhu-1.png 等），更新 CAT_PHOTO_COUNTS
-3. **开始发帖推广** — 玄猫来访那篇已发，下一篇傻猪 x 小白父子照片
+1. **Boardroom Step 2** — 执行模式文案生成后一键发 Threads（接现有 Token）
+2. **Boardroom Step 3** — cat.html 猫图生成后 Gemini 写文案，一键发 Threads 带图
+3. **博山炉焚香动画** — Sony 拍 MP4，上传 Cloudinary，加进准备弹窗
+4. **猫咪去背照片上传** — remove.bg 处理后上传 Cloudinary（shazhu-1.png 等），更新 CAT_PHOTO_COUNTS
+5. **开始发帖推广** — 玄猫来访那篇已发，下一篇傻猪 x 小白父子照片
 
 *最后更新：2026年5月15日*
