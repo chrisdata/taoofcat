@@ -513,7 +513,11 @@ html[lang="en"] .scroll-disclaimer {
       </div>
     </div>
     <button id="nav-login-btn" class="nav-login-btn" onclick="window.signInWithGoogle()" data-zh="登录" data-en="Login">登录</button>
-    <button id="lang-btn" class="lang-btn">EN</button>
+    <div class="lang-switcher" style="display:flex;gap:4px;align-items:center;">
+      <button class="lang-btn lang-opt" data-lang="zh" style="padding:5px 9px;font-size:11px;">中</button>
+      <button class="lang-btn lang-opt" data-lang="en" style="padding:5px 9px;font-size:11px;">EN</button>
+      <button class="lang-btn lang-opt" data-lang="ja" style="padding:5px 9px;font-size:11px;">JP</button>
+    </div>
   </div>
 </nav>
 
@@ -1173,19 +1177,20 @@ function applyLang(lang) {
   if (confirmBtn && !window._selectedCatKey) {
     confirmBtn.textContent = t('catConfirmDefault');
   } else if (confirmBtn && window._selectedCatKey) {
-    const catName = lang === 'en' ? CAT_DATA_EN[window._selectedCatKey].name : CAT_DATA[window._selectedCatKey].name;
+    const catName = lang === 'ja' ? CAT_DATA_JA[window._selectedCatKey].name : lang === 'en' ? CAT_DATA_EN[window._selectedCatKey].name : CAT_DATA[window._selectedCatKey].name;
     confirmBtn.textContent = t('catConfirmTpl', catName);
   }
 }
 
 window.toggleLang = function() {
-  applyLang(window._lang === 'zh' ? 'en' : 'zh');
+  applyLang(window._lang === 'zh' ? 'en' : window._lang === 'en' ? 'ja' : 'zh');
 };
 
-// Wire up the lang-btn
+// Wire up lang-opt buttons
 document.addEventListener('DOMContentLoaded', function() {
-  const btn = document.getElementById('lang-btn');
-  if (btn) btn.addEventListener('click', window.toggleLang);
+  document.querySelectorAll('.lang-opt').forEach(function(btn) {
+    btn.addEventListener('click', function() { applyLang(btn.dataset.lang); });
+  });
   applyLang(window._lang);
 });
 
@@ -1408,9 +1413,9 @@ onAuthStateChanged(auth, async (user) => {
       document.getElementById('level-name').textContent = '玄猫主人';
       document.getElementById('level-count').textContent = '傻猪的铲屎官';
       document.getElementById('level-icon-p').textContent = '😺';
-      document.getElementById('level-name-p').textContent = window._lang==='en'?'Grand Oracle':'玄猫主人';
+      document.getElementById('level-name-p').textContent = window._lang==='ja'?'猫の導き手':window._lang==='en'?'Grand Oracle':'玄猫主人';
       document.getElementById('level-name-p').style.color = '#d4a843';
-      document.getElementById('level-count-p').textContent = window._lang==='en'?"Sha Zhu's chosen one":'傻猪的铲屎官';
+      document.getElementById('level-count-p').textContent = window._lang==='ja'?'シャージューに選ばれた者':window._lang==='en'?"Sha Zhu's chosen one":'傻猪的铲屎官';
       document.getElementById('level-progress-wrap-p').style.display = 'none';
       // 只有 admin 看到用户计数器
       loadUserCount();
@@ -1581,7 +1586,7 @@ window.revealResult = async function() {
   const newLv = getLevel(newCount);
   updateLevelDisplay(newCount);
   if (oldLv.name !== newLv.name) {
-    showToast(window._lang==='en' ? t('levelUp', (CAT_DATA_EN[window._selectedCatKey]||{name:newLv.name}).name||newLv.name, newLv.icon) : t('levelUp', newLv.name, newLv.icon));
+    showToast(window._lang==='ja' ? t('levelUp', (CAT_DATA_JA[window._selectedCatKey]||{name:newLv.name}).name||newLv.name, newLv.icon) : window._lang==='en' ? t('levelUp', (CAT_DATA_EN[window._selectedCatKey]||{name:newLv.name}).name||newLv.name, newLv.icon) : t('levelUp', newLv.name, newLv.icon));
   }
 
   // Hide coin modal, show scroll modal
@@ -1711,10 +1716,10 @@ function playCoinSound() {
 }
 
 function getLevel(count) {
-  if (count >= 100) return { icon:'✨', name:window._lang==='en'?'Cat Sage':'猫道', next:null, progress:100 };
-  if (count >= 30) return { icon:'🦁', name:window._lang==='en'?'Cat Devotee':'猫痴', next:100, progress:Math.round((count-30)/70*100) };
-  if (count >= 10) return { icon:'🐱', name:window._lang==='en'?'Cat Servant':'猫奴', next:30, progress:Math.round((count-10)/20*100) };
-  return { icon:'🐾', name:window._lang==='en'?'Novice':'新手', next:10, progress:Math.round(count/10*100) };
+  if (count >= 100) return { icon:'✨', name:window._lang==='ja'?'猫の賢者':window._lang==='en'?'Cat Sage':'猫道', next:null, progress:100 };
+  if (count >= 30) return { icon:'🦁', name:window._lang==='ja'?'猫の信者':window._lang==='en'?'Cat Devotee':'猫痴', next:100, progress:Math.round((count-30)/70*100) };
+  if (count >= 10) return { icon:'🐱', name:window._lang==='ja'?'猫の下僕':window._lang==='en'?'Cat Servant':'猫奴', next:30, progress:Math.round((count-10)/20*100) };
+  return { icon:'🐾', name:window._lang==='ja'?'入門者':window._lang==='en'?'Novice':'新手', next:10, progress:Math.round(count/10*100) };
 }
 
 function updateLevelDisplay(divCount) {
@@ -1889,9 +1894,9 @@ async function callAPI(gua, q, cat) {
           ? (selectedCatKey && CAT_DATA_EN[selectedCatKey] ? CAT_DATA_EN[selectedCatKey].name : cat)
           : (selectedCatKey && CAT_DATA[selectedCatKey] ? CAT_DATA[selectedCatKey].name : cat),
         gua_name: window._lang === 'en' ? (gua.name_en || gua.name) : gua.name,
-        gua_nature: window._lang === 'en' ? (gua.nature_en || gua.nature) : gua.nature,
-        quote: window._lang === 'en' ? (gua.quote_en || gua.quote) : gua.quote,
-        quote_src: window._lang === 'en' ? (gua.src_en || gua.src) : gua.src,
+        gua_nature: window._lang === 'en' ? (gua.nature_en || gua.nature) : window._lang === 'ja' ? (gua.nature_en || gua.nature) : gua.nature,
+        quote: window._lang === 'en' || window._lang === 'ja' ? (gua.quote_en || gua.quote) : gua.quote,
+        quote_src: window._lang === 'en' || window._lang === 'ja' ? (gua.src_en || gua.src) : gua.src,
         lang: window._lang
       })
     });
