@@ -431,23 +431,7 @@ const reveals=document.querySelectorAll('.reveal');
 const observer=new IntersectionObserver((entries)=>{entries.forEach((entry,i)=>{if(entry.isIntersecting){setTimeout(()=>entry.target.classList.add('visible'),i*60);observer.unobserve(entry.target);}});},{threshold:0.08});
 reveals.forEach(el=>observer.observe(el));
 
-// ── LANGUAGE SWITCH ─────────────────────────────────────
-(function(){
-  var btn=document.getElementById('lang-btn');
-  if(!btn)return;
-  var lang=localStorage.getItem('lang')||'zh';
-  function apply(l){
-    lang=l;localStorage.setItem('lang',l);
-    document.documentElement.lang=l==='zh'?'zh':'en';
-    btn.textContent=l==='zh'?'EN':'中文';
-    document.querySelectorAll('[data-zh]').forEach(function(el){
-      var v=el.getAttribute('data-'+l);
-      if(v!==null)el.innerHTML=v;
-    });
-  }
-  btn.addEventListener('click',function(){apply(lang==='zh'?'en':'zh');});
-  apply(lang);
-})();
+// lang switch handled above
 </script>
 </body>
 </html>

@@ -233,23 +233,7 @@ html[lang="en"] .scroll-disclaimer {
       s.src="https://w.behold.so/widget.js";d.head.append(s);
     })();
   
-// ── LANGUAGE SWITCH ─────────────────────────────────────
-(function(){
-  var btn=document.getElementById('lang-btn');
-  if(!btn)return;
-  var lang=localStorage.getItem('lang')||'zh';
-  function apply(l){
-    lang=l;localStorage.setItem('lang',l);
-    document.documentElement.lang=l==='zh'?'zh':'en';
-    btn.textContent=l==='zh'?'EN':'中文';
-    document.querySelectorAll('[data-zh]').forEach(function(el){
-      var v=el.getAttribute('data-'+l);
-      if(v!==null)el.innerHTML=v;
-    });
-  }
-  btn.addEventListener('click',function(){apply(lang==='zh'?'en':'zh');});
-  apply(lang);
-})();
+// lang switch handled above
 </script>
   <div style="text-align:center; margin-top:2rem;">
     <a href="https://www.instagram.com/taoc.4t" target="_blank" style="font-size:13px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; text-decoration:none; letter-spacing:0.05em;" data-zh="在 Instagram 关注 @taoc.4t" data-en="Follow on Instagram @taoc.4t" data-ja="Instagram @taoc.4t をフォロー">在 Instagram 关注 @taoc.4t</a>
