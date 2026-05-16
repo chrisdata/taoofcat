@@ -415,19 +415,7 @@ html[lang="en"] .scroll-disclaimer {
 .result-cat-photo.loaded { opacity:1; }
 .scroll-cat-photo { width:100%; max-width:300px; margin:1rem auto; display:block; object-fit:contain; max-height:260px; opacity:0; transition:opacity 0.6s ease; filter:drop-shadow(0 6px 20px rgba(30,22,8,0.2)); }
 .scroll-cat-photo.loaded { opacity:1; }
-
-  .lang-switcher { display:flex; gap:4px; align-items:center; }
-  .lang-opt {
-    font-size:11px; font-family:'Noto Sans SC',sans-serif;
-    background:transparent; border:1px solid rgba(244,237,224,0.25);
-    border-radius:20px; padding:4px 10px; cursor:pointer;
-    color:rgba(244,237,224,0.7); transition:all 0.2s; letter-spacing:0.05em;
-  }
-  .lang-opt:hover, .lang-opt.active { color:var(--gold,#d4a843); border-color:var(--gold,#d4a843); }
-  nav.scrolled .lang-opt { color:rgba(44,36,22,0.6); border-color:rgba(44,36,22,0.25); }
-  nav.scrolled .lang-opt:hover, nav.scrolled .lang-opt.active { color:#1e1608; border-color:#1e1608; }
-
-  </style>
+</style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
@@ -479,8 +467,8 @@ html[lang="en"] .scroll-disclaimer {
         <div style="text-align:center; padding-bottom:1rem; border-bottom:1px solid var(--ink-ghost); margin-bottom:1rem;">
           <img src="can-icon.png" style="width:48px;height:48px;object-fit:contain;display:block;margin:0 auto 4px;">
           <div style="font-size:28px; font-weight:900; color:var(--ink); line-height:1;" id="can-count-p">…</div>
-          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; letter-spacing:0.1em; margin-top:2px;" data-zh="罐 剩余罐头" data-en="cans remaining" data-ja="缶 残り缶詰">罐 剩余罐头</div>
-          <button class="cans-buy-link" id="buy-link-p" onclick="document.getElementById('shop').classList.add('show'); toggleProfile();" style="margin-top:8px;" data-zh="＋ 补充罐头" data-en="＋ Buy More Cans" data-ja="＋ 缶詰を補充">＋ 补充罐头</button>
+          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; letter-spacing:0.1em; margin-top:2px;" data-zh="罐 剩余罐头" data-en="cans remaining">罐 剩余罐头</div>
+          <button class="cans-buy-link" id="buy-link-p" onclick="document.getElementById('shop').classList.add('show'); toggleProfile();" style="margin-top:8px;" data-zh="＋ 补充罐头" data-en="＋ Buy More Cans">＋ 补充罐头</button>
         </div>
         <!-- Level -->
         <div style="text-align:center; padding-bottom:1rem; border-bottom:1px solid var(--ink-ghost); margin-bottom:1rem;">
@@ -495,10 +483,10 @@ html[lang="en"] .scroll-disclaimer {
         </div>
         <!-- Invite -->
         <div style="margin-bottom:1rem;">
-          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-bottom:6px; text-align:center; letter-spacing:0.05em;" data-zh="邀请朋友，双方各得2罐" data-en="Invite a friend — both get 2 cans" data-ja="友達を招待、お互い2缶もらえる">邀请朋友，双方各得2罐</div>
+          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-bottom:6px; text-align:center; letter-spacing:0.05em;" data-zh="邀请朋友，双方各得2罐" data-en="Invite a friend — both get 2 cans">邀请朋友，双方各得2罐</div>
           <div style="display:flex; gap:6px; margin-bottom:8px;">
             <input type="text" id="invite-link-p" readonly style="flex:1; padding:6px 10px; border:1px solid var(--ink-ghost); border-radius:8px; font-size:11px; background:rgba(255,255,255,0.8); color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif;">
-            <button onclick="window.copyInviteLinkP()" style="padding:6px 10px; background:var(--ink); color:var(--paper); border:none; border-radius:8px; font-size:11px; cursor:pointer; font-family:'Noto Sans SC',sans-serif; white-space:nowrap;" data-zh="复制" data-en="Copy" data-ja="コピー">复制</button>
+            <button onclick="window.copyInviteLinkP()" style="padding:6px 10px; background:var(--ink); color:var(--paper); border:none; border-radius:8px; font-size:11px; cursor:pointer; font-family:'Noto Sans SC',sans-serif; white-space:nowrap;" data-zh="复制" data-en="Copy">复制</button>
           </div>
           <!-- Social share icons -->
           <div style="display:flex; gap:8px; justify-content:center;">
@@ -521,15 +509,11 @@ html[lang="en"] .scroll-disclaimer {
           </div>
         </div>
         <!-- Logout -->
-        <button onclick="signOut(); toggleProfile();" style="width:100%; padding:8px; background:transparent; border:1px solid var(--ink-ghost); border-radius:8px; font-size:12px; color:var(--ink-faint); cursor:pointer; font-family:'Noto Sans SC',sans-serif;" data-zh="退出登录" data-en="Sign Out" data-ja="ログアウト">退出登录</button>
+        <button onclick="signOut(); toggleProfile();" style="width:100%; padding:8px; background:transparent; border:1px solid var(--ink-ghost); border-radius:8px; font-size:12px; color:var(--ink-faint); cursor:pointer; font-family:'Noto Sans SC',sans-serif;" data-zh="退出登录" data-en="Sign Out">退出登录</button>
       </div>
     </div>
-    <button id="nav-login-btn" class="nav-login-btn" onclick="window.signInWithGoogle()" data-zh="登录" data-en="Login" data-ja="ログイン">登录</button>
-    <div class="lang-switcher">
-  <button class="lang-opt" data-lang="zh">中</button>
-  <button class="lang-opt" data-lang="en">EN</button>
-  <button class="lang-opt" data-lang="ja">JP</button>
-</div>
+    <button id="nav-login-btn" class="nav-login-btn" onclick="window.signInWithGoogle()" data-zh="登录" data-en="Login">登录</button>
+    <button id="lang-btn" class="lang-btn">EN</button>
   </div>
 </nav>
 
@@ -537,13 +521,13 @@ html[lang="en"] .scroll-disclaimer {
 <div class="hero" style="min-height:auto; padding:5rem 2rem 3rem; overflow:hidden; position:relative;">
   <img src="bamboo-bg.jpg" alt="" style="position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:cover;opacity:0.25;filter:sepia(30%) brightness(0.6);z-index:0;pointer-events:none;">
   <div style="position:relative;z-index:1;width:100%;">
-  <div class="hero-label" data-zh="与猫说说话 · A Quiet Conversation" data-en="A Quiet Conversation · 与猫说说话" data-ja="猫と話そう · A Quiet Conversation">与猫说说话 · A Quiet Conversation</div>
-  <div class="hero-title" data-zh="猫咪问事" data-en="Ask the Cat" data-ja="猫に聞く">猫咪问事</div>
-  <div class="hero-en" data-zh="Ask the Cat" data-en="Ask the Cat" data-ja="Ask the Cat">Ask the Cat</div>
+  <div class="hero-label" data-zh="与猫说说话 · A Quiet Conversation" data-en="A Quiet Conversation · 与猫说说话">与猫说说话 · A Quiet Conversation</div>
+  <div class="hero-title" data-zh="猫咪问事" data-en="Ask the Cat">猫咪问事</div>
+  <div class="hero-en" data-zh="Ask the Cat" data-en="Ask the Cat">Ask the Cat</div>
   <div class="hero-divider"></div>
   <div style="max-width:560px; margin:0 auto;">
     <p style="font-size:15px; color:rgba(244,237,224,0.75); line-height:2; letter-spacing:0.06em; font-family:'Noto Sans SC',sans-serif; font-weight:300; text-align:center;">
-      <span data-zh="此刻心里有什么放不下的？<br><br>让猫替你想一想。<br><br>不是预言，不是命运。<br>只是一个停下来听自己的机会。" data-en="Something weighing on you right now?<br><br>Let the cat sit with it a while.<br><br>Not prophecy. Not fate.<br>Just a quiet moment to listen to yourself." data-ja="今、心に引っかかることはある？<br><br>猫に考えてもらおう。<br><br>予言でも運命でもない。<br>ただ、立ち止まって自分の声を聴く時間。">此刻心里有什么放不下的？<br><br>让猫替你想一想。<br><br>不是预言，不是命运。<br>只是一个停下来听自己的机会。
+      <span data-zh="此刻心里有什么放不下的？<br><br>让猫替你想一想。<br><br>不是预言，不是命运。<br>只是一个停下来听自己的机会。" data-en="Something weighing on you right now?<br><br>Let the cat sit with it a while.<br><br>Not prophecy. Not fate.<br>Just a quiet moment to listen to yourself.">此刻心里有什么放不下的？<br><br>让猫替你想一想。<br><br>不是预言，不是命运。<br>只是一个停下来听自己的机会。
       <br>
       不是迷信，是智慧。<br>
       不是预测命运，是看清此刻的方向。</span>
@@ -559,8 +543,8 @@ html[lang="en"] .scroll-disclaimer {
   <div id="login-section">
     <div class="login-wall">
       <div class="login-wall-sym">☯</div>
-      <div class="login-wall-title" data-zh="请先登录" data-en="Please Sign In" data-ja="まずログインしてください">请先登录</div>
-      <div class="login-wall-sub" data-zh="登录后罐头永久保存<br>换设备也不会丢失" data-en="Your cans are saved forever after signing in.<br>Access from any device, anytime." data-ja="ログイン後、缶詰は永久保存<br>デバイスを変えても消えない">登录后罐头永久保存<br>换设备也不会丢失</div>
+      <div class="login-wall-title" data-zh="请先登录" data-en="Please Sign In">请先登录</div>
+      <div class="login-wall-sub" data-zh="登录后罐头永久保存<br>换设备也不会丢失" data-en="Your cans are saved forever after signing in.<br>Access from any device, anytime.">登录后罐头永久保存<br>换设备也不会丢失</div>
       <button class="google-btn" onclick="window.signInWithGoogle()">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -590,39 +574,39 @@ html[lang="en"] .scroll-disclaimer {
     <!-- CAT SELECTOR -->
     <div class="cat-selector-section" id="cat-selector-section">
       <div class="oracle-section">
-        <div class="cat-selector-label" data-zh="此刻，你需要哪种猫陪你？" data-en="Which cat do you need right now?" data-ja="今、どの猫があなたに必要？">此刻，你需要哪种猫陪你？</div>
-        <div class="cat-selector-title" data-zh="" data-en="" data-ja=""></div>
-        <div class="cat-selector-sub" data-zh="每只猫性格不同<br>选一只跟你此刻最对味的" data-en="Each cat has its own way.<br>Pick the one that feels right for now." data-ja="猫それぞれ個性が違う<br>今の気分に合う一匹を選んで">每只猫守护不同的人生面向<br>选择与你此刻问题最契合的那一只</div>
+        <div class="cat-selector-label" data-zh="此刻，你需要哪种猫陪你？" data-en="Which cat do you need right now?">此刻，你需要哪种猫陪你？</div>
+        <div class="cat-selector-title" data-zh="" data-en=""></div>
+        <div class="cat-selector-sub" data-zh="每只猫性格不同<br>选一只跟你此刻最对味的" data-en="Each cat has its own way.<br>Pick the one that feels right for now.">每只猫守护不同的人生面向<br>选择与你此刻问题最契合的那一只</div>
         <div class="cat-selector-grid">
           <div class="cat-sel-card" onclick="selectCatOracle('shazhu',this)">
             <img src="cat-shazhu.jpg" alt="傻猪" class="cat-sel-photo">
-            <div class="cat-sel-element" data-zh="看透一切" data-en="Sees Through Everything" data-ja="すべてを見通す">看透一切</div>
-            <div class="cat-sel-name" data-zh="傻 猪" data-en="Sha Zhu" data-ja="シャージュー">傻 猪</div>
-            <div class="cat-sel-domain" data-zh="人生方向<br>重大决策" data-en="Life Direction<br>Major Decisions" data-ja="人生の方向<br>重大な決断">人生方向<br>重大决策</div>
+            <div class="cat-sel-element" data-zh="看透一切" data-en="Sees Through Everything">看透一切</div>
+            <div class="cat-sel-name" data-zh="傻 猪" data-en="Sha Zhu">傻 猪</div>
+            <div class="cat-sel-domain" data-zh="人生方向<br>重大决策" data-en="Life Direction<br>Major Decisions">人生方向<br>重大决策</div>
           </div>
           <div class="cat-sel-card" onclick="selectCatOracle('feimao',this)">
             <img src="cat-feimao.jpg" alt="肥猫" class="cat-sel-photo">
-            <div class="cat-sel-element" data-zh="老僧入定" data-en="Still Waters" data-ja="静かな悟り">老僧入定</div>
-            <div class="cat-sel-name" data-zh="肥 猫" data-en="Fei Mao" data-ja="フェイマオ">肥 猫</div>
-            <div class="cat-sel-domain" data-zh="放下执念<br>长远眼光" data-en="Release Attachments<br>Long-term Vision" data-ja="執着を手放す<br>長い目で見る">放下执念<br>长远眼光</div>
+            <div class="cat-sel-element" data-zh="老僧入定" data-en="Still Waters">老僧入定</div>
+            <div class="cat-sel-name" data-zh="肥 猫" data-en="Fei Mao">肥 猫</div>
+            <div class="cat-sel-domain" data-zh="放下执念<br>长远眼光" data-en="Release Attachments<br>Long-term Vision">放下执念<br>长远眼光</div>
           </div>
           <div class="cat-sel-card" onclick="selectCatOracle('chashi',this)">
             <img src="cat-feipo.jpg" alt="茶室猫" class="cat-sel-photo">
-            <div class="cat-sel-element" data-zh="热烈直接" data-en="Fierce & Warm" data-ja="情熱的で直接">热烈直接</div>
-            <div class="cat-sel-name" data-zh="茶室猫" data-en="Cha Shi" data-ja="チャシマオ">茶室猫</div>
-            <div class="cat-sel-domain" data-zh="感情家庭<br>关系边界" data-en="Relationships &amp; Family<br>Emotional Boundaries" data-ja="恋愛・家族<br>関係の境界線">感情家庭<br>关系边界</div>
+            <div class="cat-sel-element" data-zh="热烈直接" data-en="Fierce & Warm">热烈直接</div>
+            <div class="cat-sel-name" data-zh="茶室猫" data-en="Cha Shi">茶室猫</div>
+            <div class="cat-sel-domain" data-zh="感情家庭<br>关系边界" data-en="Relationships &amp; Family<br>Emotional Boundaries">感情家庭<br>关系边界</div>
           </div>
           <div class="cat-sel-card" onclick="selectCatOracle('huba',this)">
             <img src="hubanzai-cattree.jpg" alt="虎斑仔" class="cat-sel-photo">
-            <div class="cat-sel-element" data-zh="简短有力" data-en="Cut to the Point" data-ja="短く力強く">简短有力</div>
-            <div class="cat-sel-name" data-zh="虎斑仔" data-en="Hu Ban Zai" data-ja="フーバンザイ">虎斑仔</div>
-            <div class="cat-sel-domain" data-zh="突破困境<br>竞争决策" data-en="Breaking Through<br>Competitive Decisions" data-ja="困難を突破<br>競争の決断">突破困境<br>竞争决策</div>
+            <div class="cat-sel-element" data-zh="简短有力" data-en="Cut to the Point">简短有力</div>
+            <div class="cat-sel-name" data-zh="虎斑仔" data-en="Hu Ban Zai">虎斑仔</div>
+            <div class="cat-sel-domain" data-zh="突破困境<br>竞争决策" data-en="Breaking Through<br>Competitive Decisions">突破困境<br>竞争决策</div>
           </div>
           <div class="cat-sel-card" onclick="selectCatOracle('mengmeng',this)">
             <img src="cat-mengmengda.jpg" alt="萌萌哒" class="cat-sel-photo">
-            <div class="cat-sel-element" data-zh="轻盈好奇" data-en="Light & Curious" data-ja="軽やかで好奇心旺盛">轻盈好奇</div>
-            <div class="cat-sel-name" data-zh="萌萌哒" data-en="Meng Meng Da" data-ja="モンモンダー">萌萌哒</div>
-            <div class="cat-sel-domain" data-zh="创意灵感<br>未知可能" data-en="Creative Inspiration<br>Unexplored Possibilities" data-ja="創造のひらめき<br>未知の可能性">创意灵感<br>未知可能</div>
+            <div class="cat-sel-element" data-zh="轻盈好奇" data-en="Light & Curious">轻盈好奇</div>
+            <div class="cat-sel-name" data-zh="萌萌哒" data-en="Meng Meng Da">萌萌哒</div>
+            <div class="cat-sel-domain" data-zh="创意灵感<br>未知可能" data-en="Creative Inspiration<br>Unexplored Possibilities">创意灵感<br>未知可能</div>
           </div>
         </div>
         <div class="cat-sel-detail" id="cat-sel-detail">
@@ -636,7 +620,7 @@ html[lang="en"] .scroll-disclaimer {
           <div class="cat-sel-detail-text" id="cat-detail-text"></div>
           <div class="cat-sel-detail-quote" id="cat-detail-quote"></div>
         </div>
-        <button class="oracle-btn" id="cat-confirm-btn" onclick="window.confirmCatSelection()" style="opacity:0.3; pointer-events:none;" data-zh="请选择一只猫" data-en="Choose a cat" data-ja="猫を選んでください">请选择一只猫</button>
+        <button class="oracle-btn" id="cat-confirm-btn" onclick="window.confirmCatSelection()" style="opacity:0.3; pointer-events:none;" data-zh="请选择一只猫" data-en="Choose a cat">请选择一只猫</button>
       </div>
     </div>
 
@@ -646,21 +630,21 @@ html[lang="en"] .scroll-disclaimer {
       <div style="display:flex; justify-content:center; gap:0; margin-bottom:2rem;">
         <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
           <div style="width:36px; height:36px; border-radius:50%; background:var(--ink); color:var(--paper); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; font-family:'Noto Sans SC',sans-serif;">1</div>
-          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:6px; text-align:center; letter-spacing:0.03em;" data-zh="写下问题" data-en="Write Question" data-ja="問いを書く">写下问题</div>
+          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:6px; text-align:center; letter-spacing:0.03em;" data-zh="写下问题" data-en="Write Question">写下问题</div>
         </div>
         <div style="flex:1; display:flex; align-items:center; padding-bottom:18px;">
           <div style="width:100%; height:1px; background:var(--ink-ghost);"></div>
         </div>
         <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
           <div style="width:36px; height:36px; border-radius:50%; background:var(--ink); color:var(--paper); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; font-family:'Noto Sans SC',sans-serif;">2</div>
-          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:6px; text-align:center; letter-spacing:0.03em;" data-zh="投掷铜钱×6" data-en="Toss Coins ×6" data-ja="銅銭を6回投げる">投掷铜钱×6</div>
+          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:6px; text-align:center; letter-spacing:0.03em;" data-zh="投掷铜钱×6" data-en="Toss Coins ×6">投掷铜钱×6</div>
         </div>
         <div style="flex:1; display:flex; align-items:center; padding-bottom:18px;">
           <div style="width:100%; height:1px; background:var(--ink-ghost);"></div>
         </div>
         <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
           <div style="width:36px; height:36px; border-radius:50%; background:var(--ink); color:var(--paper); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; font-family:'Noto Sans SC',sans-serif;">3</div>
-          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:6px; text-align:center; letter-spacing:0.03em;" data-zh="六爻成卦" data-en="Six Lines Form" data-ja="六爻で卦をつくる">六爻成卦</div>
+          <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:6px; text-align:center; letter-spacing:0.03em;" data-zh="六爻成卦" data-en="Six Lines Form">六爻成卦</div>
         </div>
         <div style="flex:1; display:flex; align-items:center; padding-bottom:18px;">
           <div style="width:100%; height:1px; background:var(--ink-ghost);"></div>
@@ -676,21 +660,21 @@ html[lang="en"] .scroll-disclaimer {
       </div>
       <textarea class="oracle-question" id="question" rows="5" maxlength="200" placeholder="" oninput="updateCount()" onfocus="document.getElementById('oracle-overlay').classList.add('show'); document.querySelector('.oracle-section').classList.add('focused')" onblur="document.getElementById('oracle-overlay').classList.remove('show'); document.querySelector('.oracle-section').classList.remove('focused')"></textarea>
       <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px; margin-bottom:8px;">
-        <span style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif;" data-zh="最少10字，最多200字" data-en="10–200 characters" data-ja="最低10文字、最大200文字">最少10字，最多200字</span>
+        <span style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif;" data-zh="最少10字，最多200字" data-en="10–200 characters">最少10字，最多200字</span>
         <span id="char-count" style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif;">0 / 200</span>
       </div>
       <div style="font-size:11px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-bottom:1.25rem; letter-spacing:0.03em;">
-        <span data-zh="✦ 你说的话不会被储存，仅用于这次对话" data-en="✦ What you share is not stored — for this conversation only" data-ja="✦ あなたの言葉は保存されない。この対話のみに使用。">✦ 你说的话不会被储存，仅用于这次对话</span>
+        <span data-zh="✦ 你说的话不会被储存，仅用于这次对话" data-en="✦ What you share is not stored — for this conversation only">✦ 你说的话不会被储存，仅用于这次对话</span>
       </div>
       <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; margin-bottom:1.25rem; padding:12px 16px; background:rgba(184,134,11,0.06); border:1px solid rgba(184,134,11,0.2); border-radius:10px;">
         <input type="checkbox" id="confirm-check" style="width:18px; height:18px; margin-top:2px; accent-color:var(--gold); flex-shrink:0; cursor:pointer;">
         <span style="font-size:13px; color:var(--ink-light); font-family:'Noto Sans SC',sans-serif; line-height:1.7; letter-spacing:0.03em;">
-          <span data-zh="我确认已清楚填写，了解每次对话消耗1罐罐头，结果仅供参考" data-en="I confirm my question is clear. I understand each conversation costs 1 can, and is for reference only." data-ja="内容を確認しました。対話ごとに缶詰1個消費、結果は参考のみ。">我确认已清楚填写，了解每次对话消耗1罐罐头，结果仅供参考</span>
+          <span data-zh="我确认已清楚填写，了解每次对话消耗1罐罐头，结果仅供参考" data-en="I confirm my question is clear. I understand each conversation costs 1 can, and is for reference only.">我确认已清楚填写，了解每次对话消耗1罐罐头，结果仅供参考</span>
         </span>
       </label>
-      <button class="oracle-btn" id="div-btn" onclick="window.startDiv()" data-zh="✦ 投币问卦（消耗1罐罐头）" data-en="✦ Toss Coins &amp; Ask (costs 1 can)" data-ja="✦ 銅銭を投げる（缶詰1個消費）">✦ 投币问卦（消耗1罐罐头）</button>
-      <div class="oracle-note" data-zh="$0.99 / 罐 · 罐头永久保存不过期" data-en="$0.99 / can · Cans never expire" data-ja="$0.99 / 缶 · 永久保存、有効期限なし">$0.99 / 罐 · 罐头永久保存不过期</div>
-      <div style="font-size:11px;color:var(--ink-faint);text-align:center;font-family:'Noto Sans SC',sans-serif;line-height:1.7;margin-top:4px;" data-zh="罐头为不可退款的虚拟积分，购买即确认" data-en="Cans are non-refundable digital credits · All purchases are final" data-ja="缶詰は返金不可のバーチャルポイント、購入で確認とみなします">罐头为不可退款的虚拟积分，购买即确认</div>
+      <button class="oracle-btn" id="div-btn" onclick="window.startDiv()" data-zh="✦ 投币问卦（消耗1罐罐头）" data-en="✦ Toss Coins &amp; Ask (costs 1 can)">✦ 投币问卦（消耗1罐罐头）</button>
+      <div class="oracle-note" data-zh="$0.99 / 罐 · 罐头永久保存不过期" data-en="$0.99 / can · Cans never expire">$0.99 / 罐 · 罐头永久保存不过期</div>
+      <div style="font-size:11px;color:var(--ink-faint);text-align:center;font-family:'Noto Sans SC',sans-serif;line-height:1.7;margin-top:4px;" data-zh="罐头为不可退款的虚拟积分，购买即确认" data-en="Cans are non-refundable digital credits · All purchases are final">罐头为不可退款的虚拟积分，购买即确认</div>
     </div>
 
     <!-- THINKING -->
@@ -710,13 +694,13 @@ html[lang="en"] .scroll-disclaimer {
         <div class="result-quote-src" id="quote-src"></div>
         <div class="result-divider"><div class="result-divider-dot"></div></div>
         <img id="result-cat-photo" class="result-cat-photo" src="" alt="" style="display:none;">
-        <div class="result-ai-loading" id="ai-loading" data-zh="猫咪正在想..." data-en="The cat is thinking..." data-ja="猫が考え中...">猫咪正在想...</div>
+        <div class="result-ai-loading" id="ai-loading" data-zh="猫咪正在想..." data-en="The cat is thinking...">猫咪正在想...</div>
         <div class="result-ai" id="ai-resp"></div>
-        <div class="disclaimer" data-zh="⚠ 本卦象仅供参考，不构成任何建议。一切决定请以自身判断为准。" data-en="⚠ This reading is for reference only and does not constitute advice. Trust your own judgment." data-ja="⚠ この結果は参考のみ。いかなる助言も構成しません。すべての判断はご自身で。">⚠ 本卦象仅供参考，不构成任何建议。一切决定请以自身判断为准。</div>
+        <div class="disclaimer" data-zh="⚠ 本卦象仅供参考，不构成任何建议。一切决定请以自身判断为准。" data-en="⚠ This reading is for reference only and does not constitute advice. Trust your own judgment.">⚠ 本卦象仅供参考，不构成任何建议。一切决定请以自身判断为准。</div>
       </div>
       <div class="result-actions">
-        <button class="result-btn" onclick="window.openShareModal()" data-zh="✦ 分享这次对话" data-en="✦ Share This" data-ja="✦ この対話をシェア">✦ 分享这次对话</button>
-        <button class="result-btn" onclick="window.resetAll()" data-zh="再问一次" data-en="Ask Again" data-ja="もう一度聞く">再问一次</button>
+        <button class="result-btn" onclick="window.openShareModal()" data-zh="✦ 分享这次对话" data-en="✦ Share This">✦ 分享这次对话</button>
+        <button class="result-btn" onclick="window.resetAll()" data-zh="再问一次" data-en="Ask Again">再问一次</button>
       </div>
     </div>
 
@@ -729,20 +713,20 @@ html[lang="en"] .scroll-disclaimer {
   <div class="prep-modal">
     <div class="prep-title" id="prep-modal-title">✦ 问卦前，傻猪有话说 ✦</div>
     <div class="prep-item">
-      <div class="prep-char" data-zh="诚" data-en="诚" data-ja="誠">诚</div>
-      <div class="prep-text" data-zh="&lt;strong&gt;说真话。&lt;/strong&gt;&lt;br&gt;把你真正在意的事带来，猫只回应真实的重量。" data-en="&lt;strong&gt;Be honest.&lt;/strong&gt;&lt;br&gt;Bring what truly matters — the cat only responds to what is real." data-ja="&lt;strong&gt;说真话。&lt;/strong&gt;&lt;br&gt;把你真正在意的事带来，猫只回应真实的重量。"><strong>说真话。</strong><br>把你真正在意的事带来，猫只回应真实的重量。</div>
+      <div class="prep-char" data-zh="诚" data-en="诚">诚</div>
+      <div class="prep-text" data-zh="&lt;strong&gt;说真话。&lt;/strong&gt;&lt;br&gt;把你真正在意的事带来，猫只回应真实的重量。" data-en="&lt;strong&gt;Be honest.&lt;/strong&gt;&lt;br&gt;Bring what truly matters — the cat only responds to what is real."><strong>说真话。</strong><br>把你真正在意的事带来，猫只回应真实的重量。</div>
     </div>
     <div class="prep-item">
-      <div class="prep-char" data-zh="静" data-en="静" data-ja="静">静</div>
-      <div class="prep-text" data-zh="&lt;strong&gt;先让心静下来。&lt;/strong&gt;&lt;br&gt;深呼吸一次，把杂念放下。不用焚香，只需要一分钟的安静。" data-en="&lt;strong&gt;Still your mind first.&lt;/strong&gt;&lt;br&gt;Take one deep breath. Let the noise go. No incense needed — just one quiet minute." data-ja="&lt;strong&gt;先让心静下来。&lt;/strong&gt;&lt;br&gt;深呼吸一次，把杂念放下。不用焚香，只需要一分钟的安静。"><strong>先让心静下来。</strong><br>深呼吸一次，把杂念放下。不用焚香，只需要一分钟的安静。</div>
+      <div class="prep-char" data-zh="静" data-en="静">静</div>
+      <div class="prep-text" data-zh="&lt;strong&gt;先让心静下来。&lt;/strong&gt;&lt;br&gt;深呼吸一次，把杂念放下。不用焚香，只需要一分钟的安静。" data-en="&lt;strong&gt;Still your mind first.&lt;/strong&gt;&lt;br&gt;Take one deep breath. Let the noise go. No incense needed — just one quiet minute."><strong>先让心静下来。</strong><br>深呼吸一次，把杂念放下。不用焚香，只需要一分钟的安静。</div>
     </div>
     <div class="prep-item">
-      <div class="prep-char" data-zh="清" data-en="清" data-ja="清">清</div>
-      <div class="prep-text" data-zh="&lt;strong&gt;说具体一点。&lt;/strong&gt;&lt;br&gt;不要问「我最近怎样」——太宽了，猫也不知道从哪里开始。一件事，一个问题。" data-en="&lt;strong&gt;Be specific.&lt;/strong&gt;&lt;br&gt;Don't ask 'How is my life lately?' — too broad. One situation, one question." data-ja="&lt;strong&gt;说具体一点。&lt;/strong&gt;&lt;br&gt;不要问「我最近怎样」——太宽了，猫也不知道从哪里开始。一件事，一个问题。"><strong>说具体一点。</strong><br>不要问「我最近怎样」——太宽了，猫也不知道从哪里开始。一件事，一个问题。</div>
+      <div class="prep-char" data-zh="清" data-en="清">清</div>
+      <div class="prep-text" data-zh="&lt;strong&gt;说具体一点。&lt;/strong&gt;&lt;br&gt;不要问「我最近怎样」——太宽了，猫也不知道从哪里开始。一件事，一个问题。" data-en="&lt;strong&gt;Be specific.&lt;/strong&gt;&lt;br&gt;Don't ask 'How is my life lately?' — too broad. One situation, one question."><strong>说具体一点。</strong><br>不要问「我最近怎样」——太宽了，猫也不知道从哪里开始。一件事，一个问题。</div>
     </div>
     <div class="prep-divider"></div>
-    <div class="prep-note" data-zh="一事一占，问完这件事再问下一件。<br>问了就信，信了就放下。" data-en="One question per reading. Ask, then trust. Trust, then let go." data-ja="一度に一つ。この問いが終わったら次へ。<br>聞いたら信じて、信じたら手放して。">一事一占，问完这件事再问下一件。<br>问了就信，信了就放下。</div>
-    <button class="prep-btn" onclick="window.startCoinToss()" data-zh="✦ 我已准备好，开始投币" data-en="✦ I am ready — Toss the Coins" data-ja="✦ 準備できた、銅銭を投げよう">✦ 我已准备好，开始投币</button>
+    <div class="prep-note" data-zh="一事一占，问完这件事再问下一件。<br>问了就信，信了就放下。" data-en="One question per reading. Ask, then trust. Trust, then let go.">一事一占，问完这件事再问下一件。<br>问了就信，信了就放下。</div>
+    <button class="prep-btn" onclick="window.startCoinToss()" data-zh="✦ 我已准备好，开始投币" data-en="✦ I am ready — Toss the Coins">✦ 我已准备好，开始投币</button>
   </div>
 </div>
 
@@ -752,9 +736,9 @@ html[lang="en"] .scroll-disclaimer {
     <div style="text-align:right; margin-bottom:-1rem;">
       <button onclick="window.closeCoinModal()" style="background:none;border:none;font-size:18px;color:var(--ink-faint);cursor:pointer;padding:0;">✕</button>
     </div>
-    <div class="coin-modal-title" data-zh="投掷铜钱 · 静心一刻" data-en="Cast the Coins · A Quiet Moment" data-ja="銅銭を投げる · 静かな一瞬">投掷铜钱 · 静心一刻</div>
-    <div class="coin-modal-sub" id="coin-sub" data-zh="请专注你的问题，然后投掷" data-en="Focus on your question, then toss" data-ja="問いに集中して、投げて">请专注你的问题，然后投掷</div>
-    <div style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:-1rem; margin-bottom:1.5rem; letter-spacing:0.05em;" data-zh="共需投掷 &lt;strong style=&quot;color:var(--gold);&quot;&gt;6次&lt;/strong&gt;，每次一爻，六爻成卦" data-en="Toss &lt;strong style=&quot;color:var(--gold);&quot;&gt;6 times&lt;/strong&gt; — one line each, six lines form the hexagram" data-ja="共需投掷 &lt;strong style=&quot;color:var(--gold);&quot;&gt;6次&lt;/strong&gt;，每次一爻，六爻成卦">共需投掷 <strong style="color:var(--gold);">6次</strong>，每次一爻，六爻成卦</div>
+    <div class="coin-modal-title" data-zh="投掷铜钱 · 静心一刻" data-en="Cast the Coins · A Quiet Moment">投掷铜钱 · 静心一刻</div>
+    <div class="coin-modal-sub" id="coin-sub" data-zh="请专注你的问题，然后投掷" data-en="Focus on your question, then toss">请专注你的问题，然后投掷</div>
+    <div style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; margin-top:-1rem; margin-bottom:1.5rem; letter-spacing:0.05em;" data-zh="共需投掷 &lt;strong style=&quot;color:var(--gold);&quot;&gt;6次&lt;/strong&gt;，每次一爻，六爻成卦" data-en="Toss &lt;strong style=&quot;color:var(--gold);&quot;&gt;6 times&lt;/strong&gt; — one line each, six lines form the hexagram">共需投掷 <strong style="color:var(--gold);">6次</strong>，每次一爻，六爻成卦</div>
     <div class="coin-area">
       <div class="coin-wrap" onclick="window.tossCoin()">
         <div class="coin" id="coin">
@@ -765,12 +749,12 @@ html[lang="en"] .scroll-disclaimer {
       <div class="coin-result" id="coin-result"></div>
     </div>
     <div class="yao-track" id="yao-track">
-      <div class="yao" id="yao-0"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label" data-zh="初" data-en="1st" data-ja="初">初</div></div>
-      <div class="yao" id="yao-1"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label" data-zh="二" data-en="2nd" data-ja="二">二</div></div>
-      <div class="yao" id="yao-2"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label" data-zh="三" data-en="3rd" data-ja="三">三</div></div>
-      <div class="yao" id="yao-3"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label" data-zh="四" data-en="4th" data-ja="四">四</div></div>
-      <div class="yao" id="yao-4"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label" data-zh="五" data-en="5th" data-ja="五">五</div></div>
-      <div class="yao" id="yao-5"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label" data-zh="上" data-en="6th" data-ja="上">上</div></div>
+      <div class="yao" id="yao-0"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label" data-zh="初" data-en="1st">初</div></div>
+      <div class="yao" id="yao-1"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label" data-zh="二" data-en="2nd">二</div></div>
+      <div class="yao" id="yao-2"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label" data-zh="三" data-en="3rd">三</div></div>
+      <div class="yao" id="yao-3"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label" data-zh="四" data-en="4th">四</div></div>
+      <div class="yao" id="yao-4"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label" data-zh="五" data-en="5th">五</div></div>
+      <div class="yao" id="yao-5"><div class="yao-line"></div><div class="yao-line"></div><div class="yao-label" data-zh="上" data-en="6th">上</div></div>
     </div>
     <div class="coin-progress" id="coin-progress">
       <div class="coin-progress-dot" id="cp-0"></div>
@@ -782,7 +766,7 @@ html[lang="en"] .scroll-disclaimer {
     </div>
     <div id="coin-instruction" style="font-size:13px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; letter-spacing:0.08em; margin-top:0.5rem; min-height:20px;"></div>
     <div id="coin-reveal-btn" style="display:none; margin-top:1.25rem;">
-      <button class="coin-toss-btn" onclick="window.revealResult()" data-zh="✦ 看看猫怎么说" data-en="✦ See What the Cat Says" data-ja="✦ 看看猫怎么说">✦ 看看猫怎么说</button>
+      <button class="coin-toss-btn" onclick="window.revealResult()" data-zh="✦ 看看猫怎么说" data-en="✦ See What the Cat Says">✦ 看看猫怎么说</button>
     </div>
   </div>
 </div>
@@ -799,14 +783,14 @@ html[lang="en"] .scroll-disclaimer {
       <div class="scroll-quote" id="scroll-quote"></div>
       <div class="scroll-quote-src" id="scroll-src"></div>
       <div class="scroll-divider"></div>
-      <div class="scroll-ai-loading" id="scroll-loading" data-zh="猫咪正在想..." data-en="The cat is thinking..." data-ja="猫が考え中...">猫咪正在想...</div>
+      <div class="scroll-ai-loading" id="scroll-loading" data-zh="猫咪正在想..." data-en="The cat is thinking...">猫咪正在想...</div>
       <div id="scroll-ai-label" style="display:none; text-align:center; margin-bottom:1.25rem;"><span id="scroll-cat-label" style="display:inline-block; font-size:11px; letter-spacing:0.3em; color:#b8860b; font-family:'Noto Sans SC',sans-serif; font-weight:500; border:1.5px solid rgba(184,134,11,0.5); border-radius:20px; padding:5px 16px; background:rgba(184,134,11,0.06);">傻 猪 解 读</span></div>
       <div class="scroll-ai" id="scroll-ai"></div>
       <img id="scroll-cat-photo" class="scroll-cat-photo" src="" alt="" style="display:none;">
-      <div class="scroll-disclaimer" data-zh="⚠ 本卦象仅供参考，不构成任何建议" data-en="⚠ For reference only — not professional advice" data-ja="⚠ 本卦象仅供参考，不构成任何建议">⚠ 本卦象仅供参考，不构成任何建议</div>
+      <div class="scroll-disclaimer" data-zh="⚠ 本卦象仅供参考，不构成任何建议" data-en="⚠ For reference only — not professional advice">⚠ 本卦象仅供参考，不构成任何建议</div>
       <div class="scroll-actions">
-        <button class="scroll-btn" onclick="window.openShareFromScroll()" data-zh="✦ 分享 / 保存" data-en="✦ Share / Save" data-ja="✦ 分享 / 保存">✦ 分享 / 保存</button>
-        <button class="scroll-btn" onclick="window.closeScroll()" data-zh="再问一次（关闭）" data-en="Ask Again (Close)" data-ja="再问一次（关闭）">再问一次（关闭）</button>
+        <button class="scroll-btn" onclick="window.openShareFromScroll()" data-zh="✦ 分享 / 保存" data-en="✦ Share / Save">✦ 分享 / 保存</button>
+        <button class="scroll-btn" onclick="window.closeScroll()" data-zh="再问一次（关闭）" data-en="Ask Again (Close)">再问一次（关闭）</button>
       </div>
     </div>
   </div>
@@ -815,7 +799,7 @@ html[lang="en"] .scroll-disclaimer {
 <div class="share-modal-overlay" id="share-modal">
   <div class="share-modal">
     <div class="postcard" id="postcard">
-      <div class="postcard-brand" data-zh="玄 猫 之 道 · TAO OF CAT" data-en="TAO OF CAT · 玄猫之道" data-ja="玄 猫 之 道 · TAO OF CAT">玄 猫 之 道 · TAO OF CAT</div>
+      <div class="postcard-brand" data-zh="玄 猫 之 道 · TAO OF CAT" data-en="TAO OF CAT · 玄猫之道">玄 猫 之 道 · TAO OF CAT</div>
       <div class="postcard-question" id="pc-question"></div>
       <div class="postcard-gua" id="pc-sym"></div>
       <div class="postcard-gua-name" id="pc-name"></div>
@@ -824,7 +808,7 @@ html[lang="en"] .scroll-disclaimer {
       <div class="postcard-quote-src" id="pc-src"></div>
       <div class="postcard-ai" id="pc-ai"></div>
       <div class="postcard-datetime" id="pc-datetime"></div>
-      <div class="postcard-disclaimer" id="pc-disclaimer" data-zh="本卦象仅供参考，不构成任何建议" data-en="For reference only · Not professional advice" data-ja="本卦象仅供参考，不构成任何建议">本卦象仅供参考，不构成任何建议</div>
+      <div class="postcard-disclaimer" id="pc-disclaimer" data-zh="本卦象仅供参考，不构成任何建议" data-en="For reference only · Not professional advice">本卦象仅供参考，不构成任何建议</div>
       <div class="postcard-footer">
         <div class="postcard-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1925.17 646.68" style="height:32px;width:auto;display:block;">
   <!-- Generator: Adobe Illustrator 30.4.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 226)  -->
@@ -862,7 +846,7 @@ html[lang="en"] .scroll-disclaimer {
       </div>
     </div>
     <div class="share-actions">
-      <div class="share-actions-title" data-zh="分享到" data-en="Share to" data-ja="分享到">分享到</div>
+      <div class="share-actions-title" data-zh="分享到" data-en="Share to">分享到</div>
       <div class="share-icons">
 
         <!-- Threads -->
@@ -910,11 +894,11 @@ html[lang="en"] .scroll-disclaimer {
           <button class="share-icon-btn" onclick="saveCard.call(this)" title="保存图片">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path  d="M12 16l-6-6h4V4h4v6h4l-6 6z"/><path  d="M20 18H4v2h16v-2z"/></svg>
           </button>
-          <div class="share-icon-label" data-zh="保存" data-en="Save" data-ja="保存">保存</div>
+          <div class="share-icon-label" data-zh="保存" data-en="Save">保存</div>
         </div>
 
       </div>
-      <button class="share-close-btn" onclick="document.getElementById('share-modal').classList.remove('show')" data-zh="关闭" data-en="Close" data-ja="关闭">关闭</button>
+      <button class="share-close-btn" onclick="document.getElementById('share-modal').classList.remove('show')" data-zh="关闭" data-en="Close">关闭</button>
     </div>
   </div>
 </div>
@@ -923,16 +907,16 @@ html[lang="en"] .scroll-disclaimer {
 <div class="modal-overlay" id="shop">
   <div class="modal">
     <div class="modal-title"><img src="can-icon.png" style="width:32px;height:32px;object-fit:contain;vertical-align:middle;margin-right:8px;">补充罐头</div>
-    <div class="modal-sub" data-zh="$0.99 / 罐 · 最多50罐" data-en="$0.99 / can · Up to 50 cans" data-ja="$0.99 / 罐 · 最多50罐">$0.99 / 罐 · 最多50罐</div>
-    <div style="font-size:11px;color:var(--ink-faint);text-align:center;font-family:'Noto Sans SC',sans-serif;line-height:1.7;margin-bottom:0.5rem;padding:0 0.5rem;" data-zh="罐头为不可退款的虚拟积分，购买即确认。罐头永久有效，与账号绑定。" data-en="Cans are non-refundable digital credits. All purchases are final. Cans never expire and are tied to your account." data-ja="罐头为不可退款的虚拟积分，购买即确认。罐头永久有效，与账号绑定。">罐头为不可退款的虚拟积分，购买即确认。罐头永久有效，与账号绑定。</div>
+    <div class="modal-sub" data-zh="$0.99 / 罐 · 最多50罐" data-en="$0.99 / can · Up to 50 cans">$0.99 / 罐 · 最多50罐</div>
+    <div style="font-size:11px;color:var(--ink-faint);text-align:center;font-family:'Noto Sans SC',sans-serif;line-height:1.7;margin-bottom:0.5rem;padding:0 0.5rem;" data-zh="罐头为不可退款的虚拟积分，购买即确认。罐头永久有效，与账号绑定。" data-en="Cans are non-refundable digital credits. All purchases are final. Cans never expire and are tied to your account.">罐头为不可退款的虚拟积分，购买即确认。罐头永久有效，与账号绑定。</div>
     <div class="qty-row">
       <button class="qty-btn" onclick="changeQty(-1)">−</button>
       <div class="qty-display" id="qty-display">5</div>
       <button class="qty-btn" onclick="changeQty(1)">＋</button>
     </div>
     <div class="qty-price" id="qty-price">合计 $4.95</div>
-    <button class="pay-btn" onclick="window.goPay()" data-zh="前往付款" data-en="Proceed to Checkout" data-ja="前往付款">前往付款</button>
-    <button class="modal-close" onclick="document.getElementById('shop').classList.remove('show')" data-zh="关闭" data-en="Close" data-ja="关闭">关闭</button>
+    <button class="pay-btn" onclick="window.goPay()" data-zh="前往付款" data-en="Proceed to Checkout">前往付款</button>
+    <button class="modal-close" onclick="document.getElementById('shop').classList.remove('show')" data-zh="关闭" data-en="Close">关闭</button>
   </div>
 </div>
 
@@ -942,7 +926,7 @@ html[lang="en"] .scroll-disclaimer {
 <!-- live counter - admin only -->
 <div id="live-counter" style="display:none; position:fixed; bottom:1.5rem; right:1.5rem; background:rgba(30,22,8,0.85); color:#f4ede0; border-radius:20px; padding:6px 14px; font-family:'Noto Sans SC',sans-serif; font-size:12px; letter-spacing:0.05em; backdrop-filter:blur(8px); z-index:40; pointer-events:none;">
   <span class="live-dot" style="background:#4caf50; display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:5px; animation:blink 1.5s ease-in-out infinite;"></span>
-  <span id="counter-number">—</span> <span id="counter-suffix" data-zh="猫奴已入道" data-en="cat devotees on the path" data-ja="猫奴已入道">猫奴已入道</span>
+  <span id="counter-number">—</span> <span id="counter-suffix" data-zh="猫奴已入道" data-en="cat devotees on the path">猫奴已入道</span>
 </div>
 
 <script>
@@ -953,6 +937,18 @@ html[lang="en"] .scroll-disclaimer {
 window._lang = localStorage.getItem('lang') || 'zh';
 
 const T = {
+  ja: {
+    divCount: (n) => n + ' 回の対話',
+    catConfirmDefault: '猫を選んでください',
+    catConfirmTpl: (name) => '✦ ' + name + 'に聞く',
+    thinkingTpl: (name) => name + ' が考え中...',
+    coinSubDone: '銅銭が落ちた、静かな一瞬。',
+    revealBtn: '✦ 猫の答えを見る',
+    aiLoading: '猫が考え中...',
+    shareNoResult: '先に猫と話してみて',
+    levelUp: (name, icon) => icon + ' ' + name + ' に昇格！',
+    lvlOwner: 'Cat Whisperer',
+  },
   zh: {
     navLogin: '登录',
     navLogout: '退出登录',
@@ -1067,6 +1063,45 @@ const T = {
   }
 };
 
+
+const CAT_DATA_JA = {
+  shazhu: {
+    name:'シャージュー', element:'土', elementDesc:'すべてを見通す',
+    domain:'人生の方向 · 重大な決断 · 魂の問い',
+    personality:'家で一番甘えん坊。どこへ行っても後をついてくる。表向きはボス猫だが、実は一番優しい。わがままで頑固、でもあなたへの忠誠心は本物。',
+    quote:'ずっと隣にいたよ。あなたの気持ち、とっくに分かってる。',
+    askTitle:'にゃあ〜 何を聞きたい？'
+  },
+  feimao: {
+    name:'フェイマオ', element:'金', elementDesc:'超然とした知恵',
+    domain:'執着を手放す · 長い目で見る · 人生の知恵',
+    personality:'十歳の老猫、見てきた景色は数知れない。他の猫と関わらず、日向ぼっこと静けさだけを愛する。一言一言に生きた重みがある。',
+    quote:'老猫が見てきた景色は、あなたの不安より多い。',
+    askTitle:'長老がここにいる。何を求めて？'
+  },
+  chashi: {
+    name:'チャシマオ', element:'火', elementDesc:'激しい母性',
+    domain:'恋愛・家族 · 関係の境界線 · 愛と傷',
+    personality:'神経質で感情的、好き嫌いがはっきり。爪が出るのは故意ではないが刺さってしまう——熱すぎるから。でも根っこは最高のお母さん。虎斑仔は二歳になっても甘えにくる。',
+    quote:'愛するとき、ついつい爪が出てしまう。それでも、愛は本物。',
+    askTitle:'炎の猫がここにいる。何が燃えてる？'
+  },
+  huba: {
+    name:'フーバンザイ', element:'木', elementDesc:'野性のアクション',
+    domain:'困難を突破 · 競争の決断 · 自立した選択',
+    personality:'触られるのが嫌い、甘えない、距離を保つ——冷たさではなく、自分の領域がある。家の運動選手。招待を待たず、自分で選ぶ。',
+    quote:'招待を待つな。自分で飛び込め。',
+    askTitle:'戦士の猫がここにいる。何に立ち向かう？'
+  },
+  mengmeng: {
+    name:'モンモンダー', element:'水', elementDesc:'流れるような探索',
+    domain:'創造のひらめき · 好奇心旺盛な探索 · 未知の可能性',
+    personality:'見た目は極めてかわいく、声は赤ちゃんみたい。でも中にはシベリアンフォレストキャットの野性がある。気ままに消えて現れる。食べ物より世界に興味がある。',
+    quote:'隠れるのは消えることじゃない。もっと楽しいコーナーを探してるだけ。',
+    askTitle:'小さなプリンセスがここにいる。どんな謎を求めて？'
+  }
+};
+
 // CAT_DATA bilingual
 const CAT_DATA_EN = {
   shazhu: {
@@ -1116,12 +1151,14 @@ function t(key, ...args) {
 function applyLang(lang) {
   window._lang = lang;
   localStorage.setItem('lang', lang);
-  document.documentElement.lang = lang === 'zh' ? 'zh' : 'en';
-  const btn = document.getElementById('lang-btn');
-  if (btn) btn.textContent = lang === 'zh' ? 'EN' : '中文';
-  // Apply data-zh / data-en attributes
+  document.documentElement.lang = lang === 'zh' ? 'zh' : lang === 'ja' ? 'ja' : 'en';
+  // Update active lang button
+  document.querySelectorAll('.lang-opt').forEach(btn => {
+    if (btn) btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  // Apply data-zh / data-en / data-ja attributes
   document.querySelectorAll('[data-zh]').forEach(function(el){
-    var val = el.getAttribute('data-' + lang);
+    var val = el.getAttribute('data-' + lang) || el.getAttribute('data-zh');
     if (val !== null) el.innerHTML = val;
   });
   // Dynamic JS-injected elements
@@ -1846,7 +1883,9 @@ async function callAPI(gua, q, cat) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         question: q,
-        cat_name: window._lang === 'en'
+        cat_name: window._lang === 'ja'
+          ? (selectedCatKey && CAT_DATA_JA[selectedCatKey] ? CAT_DATA_JA[selectedCatKey].name : cat)
+          : window._lang === 'en'
           ? (selectedCatKey && CAT_DATA_EN[selectedCatKey] ? CAT_DATA_EN[selectedCatKey].name : cat)
           : (selectedCatKey && CAT_DATA[selectedCatKey] ? CAT_DATA[selectedCatKey].name : cat),
         gua_name: window._lang === 'en' ? (gua.name_en || gua.name) : gua.name,
@@ -1985,13 +2024,14 @@ window.selectCatOracle = (key, el) => {
   const cat = CAT_DATA[key];
   document.getElementById('cat-detail-photo').src = cat.photo;
   document.getElementById('cat-detail-photo').alt = cat.name;
-  document.getElementById('cat-detail-name').textContent = window._lang==='en' ? CAT_DATA_EN[key].name : cat.name;
-  document.getElementById('cat-detail-badge').textContent = (window._lang==='en' ? CAT_DATA_EN[key].element : cat.element) + ' · ' + (window._lang==='en' ? CAT_DATA_EN[key].elementDesc : cat.elementDesc);
-  document.getElementById('cat-detail-text').textContent = window._lang==='en' ? CAT_DATA_EN[key].personality : cat.personality;
-  document.getElementById('cat-detail-quote').textContent = '「' + (window._lang==='en' ? CAT_DATA_EN[key].quote : cat.quote) + '」';
+  const _jd = CAT_DATA_JA[key]; const _ed = CAT_DATA_EN[key];
+  document.getElementById('cat-detail-name').textContent = window._lang==='ja' ? _jd.name : window._lang==='en' ? _ed.name : cat.name;
+  document.getElementById('cat-detail-badge').textContent = (window._lang==='ja' ? _jd.element : window._lang==='en' ? _ed.element : cat.element) + ' · ' + (window._lang==='ja' ? _jd.elementDesc : window._lang==='en' ? _ed.elementDesc : cat.elementDesc);
+  document.getElementById('cat-detail-text').textContent = window._lang==='ja' ? _jd.personality : window._lang==='en' ? _ed.personality : cat.personality;
+  document.getElementById('cat-detail-quote').textContent = '「' + (window._lang==='ja' ? _jd.quote : window._lang==='en' ? _ed.quote : cat.quote) + '」';
   document.getElementById('cat-sel-detail').classList.add('show');
   const btn = document.getElementById('cat-confirm-btn');
-  const _catName = window._lang === 'en' ? CAT_DATA_EN[key].name : cat.name; btn.textContent = t('catConfirmTpl', _catName);
+  const _catName = window._lang === 'ja' ? CAT_DATA_JA[key].name : window._lang === 'en' ? CAT_DATA_EN[key].name : cat.name; btn.textContent = t('catConfirmTpl', _catName);
   btn.style.opacity = '1';
   btn.style.pointerEvents = 'all';
 };
@@ -2002,9 +2042,9 @@ window.confirmCatSelection = () => {
   currentCat = cat.name;
   document.getElementById('cat-selector-section').style.display = 'none';
   document.getElementById('oracle-input-section').style.display = 'block';
-  const _en = window._lang==='en'; const _cd = _en ? CAT_DATA_EN[selectedCatKey] : cat; document.getElementById('oracle-label').textContent = _cd.name + (_en ? ' · ' + _cd.element + ' · ' + _cd.domain.split('·')[0].trim() : ' 问卦 · ' + cat.element + ' · ' + cat.domain.split('·')[0].trim());
+  const _en = window._lang==='en'; const _ja = window._lang==='ja'; const _cd = _ja ? CAT_DATA_JA[selectedCatKey] : _en ? CAT_DATA_EN[selectedCatKey] : cat; document.getElementById('oracle-label').textContent = _cd.name + (_ja ? ' · ' + _cd.element + ' · ' + _cd.domain.split('·')[0].trim() : _en ? ' · ' + _cd.element + ' · ' + _cd.domain.split('·')[0].trim() : ' 問卦 · ' + cat.element + ' · ' + cat.domain.split('·')[0].trim());
   document.getElementById('step4-label').textContent = t('step4Tpl', _cd.name);
-  document.getElementById('oracle-ask-title').textContent = _en ? CAT_DATA_EN[selectedCatKey].askTitle : cat.askTitle;
+  document.getElementById('oracle-ask-title').textContent = _ja ? CAT_DATA_JA[selectedCatKey].askTitle : _en ? CAT_DATA_EN[selectedCatKey].askTitle : cat.askTitle;
   document.getElementById('scroll-cat-label').textContent = t('catLabelTpl', _cd.name);
   document.getElementById('prep-modal-title').textContent = t('prepTitleTpl', _cd.name);
   document.getElementById('oracle-hint').innerHTML = t('hintTpl', _cd.name);
@@ -2168,14 +2208,14 @@ window.shareToFacebook = function() {
 </script>
 <footer style="background:rgba(30,22,8,0.04); border-top:1px solid var(--ink-ghost); padding:2rem 1.5rem; text-align:center; margin-top:2rem;">
   <div style="max-width:680px; margin:0 auto;">
-    <div style="font-size:13px; font-weight:500; color:var(--ink); letter-spacing:0.1em; margin-bottom:8px; font-family:'Noto Sans SC',sans-serif;" data-zh="✦ 隐私声明" data-en="✦ Privacy Policy" data-ja="✦ 隐私声明">✦ 隐私声明</div>
+    <div style="font-size:13px; font-weight:500; color:var(--ink); letter-spacing:0.1em; margin-bottom:8px; font-family:'Noto Sans SC',sans-serif;" data-zh="✦ 隐私声明" data-en="✦ Privacy Policy">✦ 隐私声明</div>
     <div style="font-size:12px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; line-height:1.8; letter-spacing:0.03em;">
-      <span data-zh="本站只储存你的账号基本资料（名字、头像）及游戏数据（罐头、等级、占卜次数）。<br>你的占卜问题及解卦内容不会被记录或储存，不会用于任何商业用途。" data-en="We only store your basic profile (name, avatar) and game data (cans, level, reading count).<br>Your questions and readings are never recorded or used for any commercial purpose." data-ja="本站只储存你的账号基本资料（名字、头像）及游戏数据（罐头、等级、占卜次数）。<br>你的占卜问题及解卦内容不会被记录或储存，不会用于任何商业用途。">本站只储存你的账号基本资料（名字、头像）及游戏数据（罐头、等级、占卜次数）。<br>
+      <span data-zh="本站只储存你的账号基本资料（名字、头像）及游戏数据（罐头、等级、占卜次数）。<br>你的占卜问题及解卦内容不会被记录或储存，不会用于任何商业用途。" data-en="We only store your basic profile (name, avatar) and game data (cans, level, reading count).<br>Your questions and readings are never recorded or used for any commercial purpose.">本站只储存你的账号基本资料（名字、头像）及游戏数据（罐头、等级、占卜次数）。<br>
       你的占卜问题及解卦内容不会被记录或储存，不会用于任何商业用途。</span>
     </div>
     <div style="font-size:11px; color:var(--ink-ghost); font-family:'Noto Sans SC',sans-serif; margin-top:1rem; letter-spacing:0.05em;">
-      <a href="support.html" style="font-size:12px;color:var(--ink-faint);text-decoration:none;font-family:'Noto Sans SC',sans-serif;letter-spacing:0.05em;display:block;margin-bottom:8px;" data-zh="帮助中心" data-en="Support" data-ja="ヘルプ">帮助中心</a>
-      <span data-zh="© 2026 玄猫之道 · TaoOfCat.com" data-en="© 2026 Tao of Your Cat · TaoOfCat.com" data-ja="© 2026 玄猫之道 · TaoOfCat.com">© 2026 玄猫之道 · TaoOfCat.com</span>
+      <a href="support.html" style="font-size:12px;color:var(--ink-faint);text-decoration:none;font-family:'Noto Sans SC',sans-serif;letter-spacing:0.05em;display:block;margin-bottom:8px;" data-zh="帮助中心" data-en="Support">帮助中心</a>
+      <span data-zh="© 2026 玄猫之道 · TaoOfCat.com" data-en="© 2026 Tao of Your Cat · TaoOfCat.com">© 2026 玄猫之道 · TaoOfCat.com</span>
     </div>
   </div>
 </footer>
