@@ -987,7 +987,7 @@ const T = {
     payBtn: 'お支払いへ',
     paying: '処理中...',
     payFail: '支払いエラー、もう一度試して',
-    pcDatetime: (dt) => dt.toLocaleDateString('ja-JP', {year:'numeric',month:'long',day:'numeric'}) + ' ' + dt.getHours().toString().padStart(2,'0') + ':' + dt.getMinutes().toString().padStart(2,'0'),
+    pcDatetime: (dt) => { const days=['日','月','火','水','木','金','土']; return dt.toLocaleDateString('ja-JP', {year:'numeric',month:'long',day:'numeric'}) + '（' + days[dt.getDay()] + '曜日）' + dt.getHours().toString().padStart(2,'0') + ':' + dt.getMinutes().toString().padStart(2,'0'); },
   },
   zh: {
     navLogin: '登录',
@@ -1216,7 +1216,6 @@ function applyLang(lang) {
     const catName = lang === 'ja' ? CAT_DATA_JA[window._selectedCatKey].name : lang === 'en' ? CAT_DATA_EN[window._selectedCatKey].name : CAT_DATA[window._selectedCatKey].name;
     confirmBtn.textContent = t('catConfirmTpl', catName);
   }
-  // 动态注入元素更新（猫选择后切语言）
   if (window._selectedCatKey) {
     const _jd = lang==='ja'; const _ed = lang==='en';
     const _cd = _jd ? CAT_DATA_JA[window._selectedCatKey] : _ed ? CAT_DATA_EN[window._selectedCatKey] : (typeof CAT_DATA !== 'undefined' ? CAT_DATA[window._selectedCatKey] : null);
@@ -1233,7 +1232,6 @@ function applyLang(lang) {
       if (htEl) htEl.innerHTML = t('hintTpl', _cd.name);
     }
   }
-  // coin-sub 更新
   const coinSubEl = document.getElementById('coin-sub');
   if (coinSubEl) {
     const cur = coinSubEl.getAttribute('data-' + lang) || coinSubEl.getAttribute('data-zh');
