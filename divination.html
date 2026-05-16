@@ -514,9 +514,9 @@ html[lang="en"] .scroll-disclaimer {
     </div>
     <button id="nav-login-btn" class="nav-login-btn" onclick="window.signInWithGoogle()" data-zh="登录" data-en="Login">登录</button>
     <div class="lang-switcher" style="display:flex;gap:4px;align-items:center;">
-      <button class="lang-btn lang-opt" data-lang="zh" style="padding:5px 9px;font-size:11px;">中</button>
-      <button class="lang-btn lang-opt" data-lang="en" style="padding:5px 9px;font-size:11px;">EN</button>
-      <button class="lang-btn lang-opt" data-lang="ja" style="padding:5px 9px;font-size:11px;">JP</button>
+      <button class="lang-btn lang-opt" data-lang="zh" onclick="applyLang('zh')" style="padding:5px 9px;font-size:11px;">中</button>
+      <button class="lang-btn lang-opt" data-lang="en" onclick="applyLang('en')" style="padding:5px 9px;font-size:11px;">EN</button>
+      <button class="lang-btn lang-opt" data-lang="ja" onclick="applyLang('ja')" style="padding:5px 9px;font-size:11px;">JP</button>
     </div>
   </div>
 </nav>
@@ -938,7 +938,7 @@ html[lang="en"] .scroll-disclaimer {
 // ══════════════════════════════════════════════════════════════
 // LANGUAGE SYSTEM
 // ══════════════════════════════════════════════════════════════
-window._lang = localStorage.getItem('lang') || 'zh';
+window._lang = localStorage.getItem('taoc_lang') || localStorage.getItem('lang') || 'zh';
 
 const T = {
   ja: {
@@ -1154,7 +1154,7 @@ function t(key, ...args) {
 
 function applyLang(lang) {
   window._lang = lang;
-  localStorage.setItem('lang', lang);
+  localStorage.setItem('taoc_lang', lang); localStorage.setItem('lang', lang);
   document.documentElement.lang = lang === 'zh' ? 'zh' : lang === 'ja' ? 'ja' : 'en';
   // Update active lang button
   document.querySelectorAll('.lang-opt').forEach(btn => {
@@ -1186,11 +1186,8 @@ window.toggleLang = function() {
   applyLang(window._lang === 'zh' ? 'en' : window._lang === 'en' ? 'ja' : 'zh');
 };
 
-// Wire up lang-opt buttons
+// Init lang on load
 document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.lang-opt').forEach(function(btn) {
-    btn.addEventListener('click', function() { applyLang(btn.dataset.lang); });
-  });
   applyLang(window._lang);
 });
 
