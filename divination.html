@@ -942,16 +942,55 @@ window._lang = localStorage.getItem('taoc_lang') || localStorage.getItem('lang')
 
 const T = {
   ja: {
+    navLogin: 'ログイン',
+    navLogout: 'ログアウト',
+    cansRemain: '缶 残り缶詰',
+    buyMore: '＋ 缶詰を補充',
+    inviteFriend: '友達を招待、お互い2缶もらえる',
+    copyBtn: 'コピー',
+    signOut: 'ログアウト',
+    lvl0: '入門者', lvl1: '猫の下僕', lvl2: '猫の信者', lvl3: '猫の賢者',
+    lvlOwner: 'Cat Whisperer', lvlOwnerSub: 'シャージューに選ばれた者',
     divCount: (n) => n + ' 回の対話',
     catConfirmDefault: '猫を選んでください',
     catConfirmTpl: (name) => '✦ ' + name + 'に聞く',
+    oracleLabelTpl: (name, el, domain) => name + ' · ' + el + ' · ' + domain,
+    step4Tpl: (name) => name + 'の解読',
+    hintTpl: (name) => '※ 具体的な問いが、' + name + 'のより深い答えを引き出す。<strong>具体的な状況</strong>を教えて。例：「転職を考えているが、給与は上がるが引っ越しが必要。どうすべきか？」',
     thinkingTpl: (name) => name + ' が考え中...',
+    prepTitleTpl: (name) => '✦ 問う前に、' + name + 'が伝えたいこと ✦',
+    divBtn: '✦ 銅銭を投げる（缶詰1個消費）',
+    coinSub: '問いに集中して、投げて',
+    coinSubProgress: (n) => `第${n}爻が決まった、続けて`,
     coinSubDone: '銅銭が落ちた、静かな一瞬。',
+    coinResultYang: '☀ 陽爻',
+    coinResultYin: '☽ 陰爻',
     revealBtn: '✦ 猫の答えを見る',
     aiLoading: '猫が考え中...',
-    shareNoResult: '先に猫と話してみて',
+    catLabelTpl: (name) => name + ' の 解 読',
+    closeConfirm: '⚠️ 閉じると今回の内容は消えます。\n\n保存するにはまず「シェア」→「保存」を。\n\n閉じますか？',
+    loginFail: 'ログイン失敗、もう一度試して',
+    loggedOut: 'ログアウトしました',
+    referralBonus: '🎉 招待ボーナス！2缶追加ゲット',
+    canRestored: (n) => '✓ ' + n + ' 缶追加しました！',
     levelUp: (name, icon) => icon + ' ' + name + ' に昇格！',
-    lvlOwner: 'Cat Whisperer',
+    inviteCopied: '招待リンクをコピーしました ✓',
+    copied: 'コピーしました ✓',
+    shareFail: 'スクリーンショットで保存してください',
+    shareOk: 'シェアしました ✓',
+    imgDownloaded: '画像をダウンロードしました ✓',
+    shareNoResult: '先に猫と話してみて',
+    needLogin: 'まずログインしてください',
+    minChars: '最低10文字入力してください',
+    checkConfirm: '確認チェックボックスにチェックを',
+    profanity: '🐾 猫は誠実な問いにだけ答えます',
+    generating: '生成中...',
+    shopSub: '$0.99 / 缶 · 最大50缶',
+    shopTotal: (n) => '合計 $' + (n * 0.99).toFixed(2),
+    payBtn: 'お支払いへ',
+    paying: '処理中...',
+    payFail: '支払いエラー、もう一度試して',
+    pcDatetime: (dt) => dt.toLocaleDateString('ja-JP', {year:'numeric',month:'long',day:'numeric'}) + ' ' + dt.getHours().toString().padStart(2,'0') + ':' + dt.getMinutes().toString().padStart(2,'0'),
   },
   zh: {
     navLogin: '登录',
@@ -1179,6 +1218,29 @@ function applyLang(lang) {
   } else if (confirmBtn && window._selectedCatKey) {
     const catName = lang === 'ja' ? CAT_DATA_JA[window._selectedCatKey].name : lang === 'en' ? CAT_DATA_EN[window._selectedCatKey].name : CAT_DATA[window._selectedCatKey].name;
     confirmBtn.textContent = t('catConfirmTpl', catName);
+  }
+  // 動的注入要素の更新（猫選択済みの場合）
+  if (window._selectedCatKey) {
+    const _ja = lang === 'ja'; const _en = lang === 'en';
+    const _cd = _ja ? CAT_DATA_JA[window._selectedCatKey] : _en ? CAT_DATA_EN[window._selectedCatKey] : (window.CAT_DATA||{})[window._selectedCatKey];
+    if (_cd) {
+      const olEl = document.getElementById('oracle-label');
+      if (olEl) olEl.textContent = _cd.name + ' · ' + _cd.element + ' · ' + (_cd.domain||'').split('·')[0].trim();
+      const s4El = document.getElementById('step4-label');
+      if (s4El) s4El.textContent = t('step4Tpl', _cd.name);
+      const clEl = document.getElementById('scroll-cat-label');
+      if (clEl) clEl.textContent = t('catLabelTpl', _cd.name);
+      const ptEl = document.getElementById('prep-modal-title');
+      if (ptEl) ptEl.textContent = t('prepTitleTpl', _cd.name);
+      const htEl = document.getElementById('oracle-hint');
+      if (htEl) htEl.innerHTML = t('hintTpl', _cd.name);
+    }
+  }
+  // coin-sub 更新
+  const coinSubEl = document.getElementById('coin-sub');
+  if (coinSubEl) {
+    const cur = coinSubEl.getAttribute('data-' + lang) || coinSubEl.getAttribute('data-zh');
+    if (cur) coinSubEl.textContent = cur;
   }
 }
 
