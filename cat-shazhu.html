@@ -5,31 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>傻猪 · 玄猫之道</title>
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7Q71WCDFF0">const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  });
-
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7Q71WCDFF0"></script>
+<script>
+(function() {
   // ── Three-lang switcher ──
-  let lang = localStorage.getItem('taoc_lang') || 'zh';
+  var nav = document.getElementById('nav');
+  if (nav) {
+    window.addEventListener('scroll', function() {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+  }
+  var _lang = localStorage.getItem('taoc_lang') || 'zh';
   function applyLang(l) {
-    lang = l;
+    _lang = l;
     localStorage.setItem('taoc_lang', l);
     document.documentElement.lang = l;
-    document.querySelectorAll('[data-zh]').forEach(el => {
-      const txt = l === 'en' ? (el.dataset.en||el.dataset.zh)
-                : l === 'ja' ? (el.dataset.ja||el.dataset.zh)
-                : el.dataset.zh;
+    document.querySelectorAll('[data-zh]').forEach(function(el) {
+      var txt = l === 'en' ? (el.dataset.en || el.dataset.zh)
+              : l === 'ja' ? (el.dataset.ja || el.dataset.zh)
+              : el.dataset.zh;
       if (txt !== undefined) el.innerHTML = txt;
     });
-    document.querySelectorAll('.lang-opt').forEach(btn => {
+    document.querySelectorAll('.lang-opt').forEach(function(btn) {
       btn.classList.toggle('active', btn.dataset.lang === l);
     });
   }
-  document.querySelectorAll('.lang-opt').forEach(btn => {
-    btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.lang-opt').forEach(function(btn) {
+      btn.addEventListener('click', function() { applyLang(btn.dataset.lang); });
+    });
+    applyLang(_lang);
   });
-  applyLang(lang);
+})();
 </script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -741,24 +748,6 @@ html[lang="en"] .scroll-disclaimer {
   <div class="footer-copy" data-zh="© 2026 Tao of Your Cat · Ipoh, Malaysia" data-en="© 2026 Tao of Your Cat · Ipoh, Malaysia" data-ja="© 2026 Tao of Your Cat · Ipoh, Malaysia">© 2026 Tao of Your Cat · Ipoh, Malaysia</div>
 </footer>
 
-<script>
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 60);
-});
 
-const reveals = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry, i) => {
-    if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('visible'), i * 60);
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.08 });
-reveals.forEach(el => observer.observe(el));
-
-// lang switch handled above
-</script>
 </body>
 </html>
