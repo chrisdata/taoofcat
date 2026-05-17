@@ -1327,6 +1327,7 @@ window.showCatPhoto = function(imgEl, catKey) {
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut as fbSignOut } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, onSnapshot, collection, getCountFromServer, query, where, getDocs } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+import { getDatabase, ref as rtRef, onValue, set, onDisconnect, serverTimestamp as rtServerTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAqu9pHaAEjFqPvPz3TuoYc60Lpb4DLZrs",
@@ -1334,13 +1335,29 @@ const firebaseConfig = {
   projectId: "taoofcat-6cf6e",
   storageBucket: "taoofcat-6cf6e.firebasestorage.app",
   messagingSenderId: "1088808296707",
-  appId: "1:1088808296707:web:ce9b54ba34d395681bc936"
+  appId: "1:1088808296707:web:ce9b54ba34d395681bc936",
+  databaseURL: "https://taoofcat-6cf6e-default-rtdb.asia-southeast1.firebasedatabase.app"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const rtdb = getDatabase(app);
 const provider = new GoogleAuthProvider();
+
+// ── Presence ──
+function setupPresence(uid) {
+  const sessionId = Math.random().toString(36).slice(2);
+  const presenceRef = rtRef(rtdb, 'presence/' + sessionId);
+  const connRef = rtRef(rtdb, '.info/connected');
+  onValue(connRef, (snap) => {
+    if (snap.val() === true) {
+      set(presenceRef, { uid: uid || 'guest', page: 'divination', ts: Date.now() });
+      onDisconnect(presenceRef).remove();
+    }
+  });
+}
+setupPresence(null);
 
 const API = 'https://web-production-907c5.up.railway.app';
 
@@ -1476,6 +1493,7 @@ async function updateCans(uid, delta) {
 onAuthStateChanged(auth, async (user) => {
   if (user) {
     currentUser = user;
+    setupPresence(user.uid);
     document.getElementById('login-section').style.display = 'none';
     document.getElementById('main-section').style.display = 'block';
     document.getElementById('cat-selector-section').style.display = 'block';

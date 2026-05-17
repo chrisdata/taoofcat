@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>玄猫之道 · 指挥中心</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper:#f4ede0; --ink:#1e1608; --ink-light:#5c4c2c;
+  --ink-faint:#9c8c6c; --ink-ghost:#d4c8a8;
+  --gold:#b8860b; --gold-light:#d4a843;
+  --green:#27ae60; --red:#c0392b;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:'Noto Sans SC',sans-serif; background:#1a1408; color:var(--paper); min-height:100vh; }
+
+/* ── Login Wall ── */
+#login-wall {
+  min-height:100vh; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:1.5rem;
+}
+.login-title { font-size:24px; font-family:'Noto Serif SC',serif; font-weight:700; letter-spacing:0.2em; color:var(--gold); }
+.login-sub { font-size:13px; color:var(--ink-ghost); letter-spacing:0.1em; }
+.btn-google {
+  display:flex; align-items:center; gap:10px;
+  padding:12px 28px; background:#fff; color:#333;
+  border:none; border-radius:6px; font-size:14px;
+  font-family:'Noto Sans SC',sans-serif; cursor:pointer;
+  transition:box-shadow 0.2s;
+}
+.btn-google:hover { box-shadow:0 4px 16px rgba(0,0,0,0.3); }
+.btn-google svg { width:18px; height:18px; }
+
+/* ── Dashboard ── */
+#dashboard { display:none; }
+
+.topbar {
+  background:rgba(30,22,8,0.95); border-bottom:1px solid rgba(212,200,168,0.15);
+  padding:1rem 2rem; display:flex; align-items:center; justify-content:space-between;
+  position:sticky; top:0; z-index:50;
+}
+.topbar-title { font-family:'Noto Serif SC',serif; font-weight:700; color:var(--gold); font-size:18px; letter-spacing:0.15em; }
+.topbar-user { font-size:12px; color:var(--ink-ghost); display:flex; align-items:center; gap:12px; }
+.btn-signout { font-size:11px; color:var(--ink-ghost); background:transparent; border:1px solid rgba(212,200,168,0.2); border-radius:4px; padding:4px 10px; cursor:pointer; }
+.btn-signout:hover { color:var(--paper); border-color:var(--ink-ghost); }
+
+.dash-grid {
+  max-width:1200px; margin:0 auto;
+  padding:2rem;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1rem;
+}
+
+/* ── 数字卡 ── */
+.stat-card {
+  background:rgba(244,237,224,0.05); border:1px solid rgba(212,200,168,0.12);
+  border-radius:10px; padding:1.5rem;
+}
+.stat-label { font-size:11px; letter-spacing:0.2em; color:var(--ink-ghost); text-transform:uppercase; margin-bottom:0.5rem; }
+.stat-number { font-size:40px; font-weight:900; font-family:'Noto Serif SC',serif; color:var(--paper); line-height:1; }
+.stat-number.online { color:#4caf50; }
+.stat-number.gold { color:var(--gold-light); }
+.stat-sub { font-size:11px; color:var(--ink-ghost); margin-top:4px; }
+.stat-dot { width:8px; height:8px; border-radius:50%; background:#4caf50; display:inline-block; margin-right:6px; animation:pulse-dot 2s infinite; }
+@keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+/* ── 内容区 ── */
+.section-wrap {
+  max-width:1200px; margin:0 auto;
+  padding:0 2rem 2rem;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.5rem;
+}
+
+@media(max-width:900px){
+  .dash-grid { grid-template-columns:1fr 1fr; }
+  .section-wrap { grid-template-columns:1fr; }
+}
+
+.panel {
+  background:rgba(244,237,224,0.04); border:1px solid rgba(212,200,168,0.12);
+  border-radius:10px; overflow:hidden;
+}
+.panel-header {
+  padding:1rem 1.25rem;
+  border-bottom:1px solid rgba(212,200,168,0.08);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.panel-title { font-size:13px; letter-spacing:0.1em; color:var(--gold); font-weight:500; }
+.panel-count { font-size:11px; color:var(--ink-ghost); }
+.panel-body { padding:0; max-height:420px; overflow-y:auto; }
+.panel-body::-webkit-scrollbar { width:4px; }
+.panel-body::-webkit-scrollbar-track { background:transparent; }
+.panel-body::-webkit-scrollbar-thumb { background:rgba(212,200,168,0.2); border-radius:2px; }
+
+/* ── 留言项 ── */
+.whisper-item {
+  padding:1rem 1.25rem;
+  border-bottom:1px solid rgba(212,200,168,0.06);
+  transition:background 0.2s;
+}
+.whisper-item:hover { background:rgba(244,237,224,0.03); }
+.whisper-item:last-child { border-bottom:none; }
+.wi-meta { font-size:11px; color:var(--ink-ghost); margin-bottom:4px; display:flex; align-items:center; gap:8px; }
+.wi-cat { color:var(--gold); }
+.wi-pending { background:rgba(184,134,11,0.2); color:var(--gold-light); font-size:10px; padding:1px 6px; border-radius:3px; letter-spacing:0.06em; }
+.wi-approved { background:rgba(39,174,96,0.15); color:#4caf50; font-size:10px; padding:1px 6px; border-radius:3px; letter-spacing:0.06em; }
+.wi-msg { font-size:13px; color:rgba(244,237,224,0.8); line-height:1.6; margin-bottom:6px; font-family:'Noto Serif SC',serif; }
+.wi-actions { display:flex; gap:6px; }
+.btn-approve { font-size:11px; color:#4caf50; background:rgba(39,174,96,0.1); border:1px solid rgba(39,174,96,0.3); border-radius:3px; padding:3px 10px; cursor:pointer; transition:all 0.2s; }
+.btn-approve:hover { background:rgba(39,174,96,0.25); }
+.btn-delete { font-size:11px; color:#e74c3c; background:rgba(192,57,43,0.1); border:1px solid rgba(192,57,43,0.3); border-radius:3px; padding:3px 10px; cursor:pointer; transition:all 0.2s; }
+.btn-delete:hover { background:rgba(192,57,43,0.25); }
+.wi-empty { padding:2rem; text-align:center; font-size:13px; color:var(--ink-ghost); }
+
+/* ── 用户项 ── */
+.user-item {
+  padding:0.85rem 1.25rem;
+  border-bottom:1px solid rgba(212,200,168,0.06);
+  display:flex; align-items:center; gap:10px;
+}
+.user-item:last-child { border-bottom:none; }
+.user-avatar { width:32px; height:32px; border-radius:50%; background:rgba(184,134,11,0.2); display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; overflow:hidden; }
+.user-avatar img { width:100%; height:100%; object-fit:cover; }
+.user-info { flex:1; min-width:0; }
+.user-name { font-size:13px; color:var(--paper); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.user-email { font-size:11px; color:var(--ink-ghost); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.user-cans { font-size:12px; color:var(--gold); white-space:nowrap; }
+.user-date { font-size:10px; color:var(--ink-ghost); margin-top:2px; }
+
+/* ── 在线用户 ── */
+.online-item {
+  padding:0.6rem 1.25rem;
+  border-bottom:1px solid rgba(212,200,168,0.06);
+  display:flex; align-items:center; gap:8px; font-size:12px;
+}
+.online-item:last-child { border-bottom:none; }
+.online-dot { width:6px; height:6px; border-radius:50%; background:#4caf50; flex-shrink:0; }
+.online-page { color:var(--gold); }
+.online-uid { color:var(--ink-ghost); font-size:11px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+/* ── Loading ── */
+.loading { padding:2rem; text-align:center; color:var(--ink-ghost); font-size:13px; }
+</style>
+</head>
+<body>
+
+<!-- 登录墙 -->
+<div id="login-wall">
+  <div class="login-title">🐾 玄猫指挥中心</div>
+  <div class="login-sub">仅限管理员访问</div>
+  <button class="btn-google" id="btn-login">
+    <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.47 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+    用 Google 登录
+  </button>
+</div>
+
+<!-- Dashboard -->
+<div id="dashboard">
+  <div class="topbar">
+    <div class="topbar-title">🐾 玄猫指挥中心</div>
+    <div class="topbar-user">
+      <span id="admin-name">管理员</span>
+      <button class="btn-signout" id="btn-signout">退出</button>
+    </div>
+  </div>
+
+  <!-- 数字统计 -->
+  <div class="dash-grid">
+    <div class="stat-card">
+      <div class="stat-label">实时在线</div>
+      <div class="stat-number online"><span class="stat-dot"></span><span id="stat-online">-</span></div>
+      <div class="stat-sub">当前访客</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">总猫奴</div>
+      <div class="stat-number gold" id="stat-total-users">-</div>
+      <div class="stat-sub">注册用户</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">今日新增</div>
+      <div class="stat-number" id="stat-today-users">-</div>
+      <div class="stat-sub">新猫奴</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">待审核留言</div>
+      <div class="stat-number" id="stat-pending">-</div>
+      <div class="stat-sub">所有猫咪</div>
+    </div>
+  </div>
+
+  <!-- 内容面板 -->
+  <div class="section-wrap">
+
+    <!-- 待审核留言 -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">💬 待审核留言</div>
+        <div class="panel-count" id="pending-count"></div>
+      </div>
+      <div class="panel-body" id="pending-whispers">
+        <div class="loading">加载中…</div>
+      </div>
+    </div>
+
+    <!-- 在线用户 -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">🟢 实时在线</div>
+        <div class="panel-count" id="online-count"></div>
+      </div>
+      <div class="panel-body" id="online-list">
+        <div class="loading">加载中…</div>
+      </div>
+    </div>
+
+    <!-- 最新猫奴 -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">🐾 最新猫奴</div>
+        <div class="panel-count">最近20位</div>
+      </div>
+      <div class="panel-body" id="new-users">
+        <div class="loading">加载中…</div>
+      </div>
+    </div>
+
+    <!-- 所有留言 -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">📜 所有留言</div>
+        <div class="panel-count" id="all-whispers-count"></div>
+      </div>
+      <div class="panel-body" id="all-whispers">
+        <div class="loading">加载中…</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+import { getFirestore, collection, query, orderBy, limit, getDocs, doc, updateDoc, deleteDoc, where, getCountFromServer, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+
+const ADMIN_EMAIL = 'chrischua83@gmail.com';
+const CAT_IDS = ['shazhu','feimao','feipo','hubanzai','mengmengda','xiaobai','xiaohei'];
+const CAT_NAMES = { shazhu:'傻猪', feimao:'肥猫', feipo:'茶室猫', hubanzai:'虎斑仔', mengmengda:'萌萌哒', xiaobai:'小白', xiaohei:'小黑' };
+
+const app = initializeApp({
+  apiKey: "AIzaSyAqu9pHaAEjFqPvPz3TuoYc60Lpb4DLZrs",
+  authDomain: "taoofcat-6cf6e.firebaseapp.com",
+  projectId: "taoofcat-6cf6e",
+  storageBucket: "taoofcat-6cf6e.firebasestorage.app",
+  messagingSenderId: "1088808296707",
+  appId: "1:1088808296707:web:ce9b54ba34d395681bc936",
+  databaseURL: "https://taoofcat-6cf6e-default-rtdb.asia-southeast1.firebasedatabase.app"
+});
+
+const auth = getAuth(app);
+const db   = getFirestore(app);
+const rtdb = getDatabase(app);
+const provider = new GoogleAuthProvider();
+
+// ── 登录 / 登出 ──
+document.getElementById('btn-login').onclick = () => signInWithPopup(auth, provider).catch(console.error);
+document.getElementById('btn-signout').onclick = () => signOut(auth);
+
+// ── Auth State ──
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    document.getElementById('login-wall').style.display = 'flex';
+    document.getElementById('dashboard').style.display = 'none';
+    return;
+  }
+  if (user.email !== ADMIN_EMAIL) {
+    document.getElementById('login-wall').innerHTML = '<div style="color:#e74c3c;font-size:16px;">无权限访问</div>';
+    return;
+  }
+  document.getElementById('login-wall').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+  document.getElementById('admin-name').textContent = user.displayName || user.email;
+  initDashboard();
+});
+
+function escHtml(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function formatDate(ts) {
+  if (!ts) return '';
+  const d = ts.toDate ? ts.toDate() : new Date(ts);
+  return d.getFullYear() + '.' + String(d.getMonth()+1).padStart(2,'0') + '.' + String(d.getDate()).padStart(2,'0')
+    + ' ' + String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
+}
+
+async function initDashboard() {
+  loadOnline();
+  loadUserStats();
+  loadNewUsers();
+  loadPendingWhispers();
+  loadAllWhispers();
+}
+
+// ── 实时在线 ──
+function loadOnline() {
+  const presenceRef = ref(rtdb, 'presence');
+  onValue(presenceRef, (snap) => {
+    const val = snap.val() || {};
+    const sessions = Object.values(val);
+    const count = sessions.length;
+
+    document.getElementById('stat-online').textContent = count;
+    document.getElementById('online-count').textContent = count + ' 人';
+
+    const el = document.getElementById('online-list');
+    if (!sessions.length) {
+      el.innerHTML = '<div class="wi-empty">暂无在线访客</div>';
+      return;
+    }
+
+    // 按时间排序
+    sessions.sort((a,b) => (b.ts||0)-(a.ts||0));
+    el.innerHTML = sessions.map(s => {
+      const pageLabel = s.page === 'divination' ? '🔮 占卜页' : s.page === 'index' ? '🏠 首页' : ('📄 ' + (s.page||''));
+      const uid = s.uid === 'guest' ? '访客' : ('用户 ' + s.uid.slice(0,8) + '…');
+      const time = s.ts ? new Date(s.ts).toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit'}) : '';
+      return `<div class="online-item"><div class="online-dot"></div><span class="online-page">${pageLabel}</span><span class="online-uid">${uid}</span><span style="color:var(--ink-ghost);font-size:10px;margin-left:auto;">${time}</span></div>`;
+    }).join('');
+  });
+}
+
+// ── 用户统计 ──
+async function loadUserStats() {
+  try {
+    const coll = collection(db, 'users');
+    const total = (await getCountFromServer(coll)).data().count;
+    document.getElementById('stat-total-users').textContent = total;
+
+    const today = new Date(); today.setHours(0,0,0,0);
+    const todayQ = query(coll, where('created', '>=', today.toISOString()));
+    const todaySnap = await getDocs(todayQ);
+    document.getElementById('stat-today-users').textContent = todaySnap.size;
+  } catch(e) { console.error(e); }
+}
+
+// ── 最新用户 ──
+async function loadNewUsers() {
+  try {
+    const q = query(collection(db,'users'), orderBy('created','desc'), limit(20));
+    const snap = await getDocs(q);
+    const el = document.getElementById('new-users');
+    if (snap.empty) { el.innerHTML = '<div class="wi-empty">暂无用户</div>'; return; }
+    el.innerHTML = '';
+    snap.forEach(d => {
+      const u = d.data();
+      const div = document.createElement('div');
+      div.className = 'user-item';
+      div.innerHTML = `
+        <div class="user-avatar">🐱</div>
+        <div class="user-info">
+          <div class="user-name">${escHtml(u.displayName || u.email || d.id.slice(0,12))}</div>
+          <div class="user-date">${u.created ? u.created.slice(0,10) : ''}</div>
+        </div>
+        <div class="user-cans">🥫 ${u.cans || 0}</div>`;
+      el.appendChild(div);
+    });
+  } catch(e) { console.error(e); }
+}
+
+// ── 待审核留言 ──
+async function loadPendingWhispers() {
+  const el = document.getElementById('pending-whispers');
+  let allPending = [];
+  for (const catId of CAT_IDS) {
+    try {
+      const q = query(
+        collection(db,'whispers',catId,'messages'),
+        where('status','==','pending'),
+        orderBy('timestamp','desc'),
+        limit(20)
+      );
+      const snap = await getDocs(q);
+      snap.forEach(d => allPending.push({ id: d.id, catId, ...d.data() }));
+    } catch(e) {}
+  }
+  allPending.sort((a,b) => {
+    const ta = a.timestamp?.toMillis?.() || 0;
+    const tb = b.timestamp?.toMillis?.() || 0;
+    return tb - ta;
+  });
+
+  document.getElementById('stat-pending').textContent = allPending.length;
+  document.getElementById('pending-count').textContent = allPending.length + ' 条';
+
+  if (!allPending.length) {
+    el.innerHTML = '<div class="wi-empty">🎉 没有待审核留言</div>';
+    return;
+  }
+
+  el.innerHTML = '';
+  allPending.forEach(w => renderWhisperItem(w, el, true));
+}
+
+// ── 所有留言 ──
+async function loadAllWhispers() {
+  const el = document.getElementById('all-whispers');
+  let all = [];
+  for (const catId of CAT_IDS) {
+    try {
+      const q = query(collection(db,'whispers',catId,'messages'), orderBy('timestamp','desc'), limit(15));
+      const snap = await getDocs(q);
+      snap.forEach(d => all.push({ id: d.id, catId, ...d.data() }));
+    } catch(e) {}
+  }
+  all.sort((a,b) => (b.timestamp?.toMillis?.() || 0) - (a.timestamp?.toMillis?.() || 0));
+  document.getElementById('all-whispers-count').textContent = all.length + ' 条';
+
+  if (!all.length) { el.innerHTML = '<div class="wi-empty">暂无留言</div>'; return; }
+  el.innerHTML = '';
+  all.forEach(w => renderWhisperItem(w, el, false));
+}
+
+function renderWhisperItem(w, container, isPendingView) {
+  const div = document.createElement('div');
+  div.className = 'whisper-item';
+  div.dataset.docId = w.id;
+  div.dataset.catId = w.catId;
+
+  const isPending = !w.status || w.status === 'pending';
+  const statusBadge = isPending
+    ? '<span class="wi-pending">待审核</span>'
+    : '<span class="wi-approved">已批准</span>';
+
+  const approveBtn = isPending
+    ? `<button class="btn-approve">✓ 批准</button>` : '';
+
+  div.innerHTML = `
+    <div class="wi-meta">
+      <span class="wi-cat">${CAT_NAMES[w.catId] || w.catId}</span>
+      ${statusBadge}
+      <span>${escHtml(w.name || '匿名')}</span>
+      <span style="margin-left:auto;">${formatDate(w.timestamp)}</span>
+    </div>
+    <div class="wi-msg">${escHtml(w.message)}</div>
+    <div class="wi-actions">
+      ${approveBtn}
+      <button class="btn-delete">✕ 删除</button>
+    </div>`;
+
+  // 批准
+  const approveEl = div.querySelector('.btn-approve');
+  if (approveEl) {
+    approveEl.onclick = async () => {
+      await updateDoc(doc(db,'whispers',w.catId,'messages',w.id), { status:'approved' });
+      div.style.transition = 'opacity 0.3s';
+      div.style.opacity = '0';
+      setTimeout(() => {
+        div.remove();
+        // 更新计数
+        const cnt = document.getElementById('stat-pending');
+        cnt.textContent = Math.max(0, parseInt(cnt.textContent||0) - 1);
+        const pc = document.getElementById('pending-count');
+        pc.textContent = Math.max(0, parseInt(pc.textContent||0) - 1) + ' 条';
+      }, 300);
+    };
+  }
+
+  // 删除
+  div.querySelector('.btn-delete').onclick = async () => {
+    if (!confirm('删除这条留言？')) return;
+    await deleteDoc(doc(db,'whispers',w.catId,'messages',w.id));
+    div.style.transition = 'opacity 0.3s';
+    div.style.opacity = '0';
+    setTimeout(() => div.remove(), 300);
+  };
+
+  container.appendChild(div);
+}
+</script>
+</body>
+</html>

@@ -1073,5 +1073,26 @@ const observer = new IntersectionObserver((entries) => {
 reveals.forEach(el => observer.observe(el));
 
 </script>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getDatabase, ref, set, onDisconnect, onValue } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+const app = initializeApp({
+  apiKey: "AIzaSyAqu9pHaAEjFqPvPz3TuoYc60Lpb4DLZrs",
+  authDomain: "taoofcat-6cf6e.firebaseapp.com",
+  projectId: "taoofcat-6cf6e",
+  databaseURL: "https://taoofcat-6cf6e-default-rtdb.asia-southeast1.firebasedatabase.app"
+});
+const rtdb = getDatabase(app);
+const sessionId = Math.random().toString(36).slice(2);
+const presenceRef = ref(rtdb, 'presence/' + sessionId);
+const connRef = ref(rtdb, '.info/connected');
+onValue(connRef, (snap) => {
+  if (snap.val() === true) {
+    set(presenceRef, { uid: 'guest', page: 'index', ts: Date.now() });
+    onDisconnect(presenceRef).remove();
+  }
+});
+</script>
 </body>
 </html>
