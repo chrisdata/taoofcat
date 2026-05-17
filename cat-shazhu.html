@@ -664,6 +664,12 @@ textarea.whisper-input{resize:none;min-height:100px;line-height:1.8;}
 /* ── 删除按钮（管理员） ── */
 .btn-delete-whisper{float:right;font-size:11px;color:var(--ink-ghost);background:transparent;border:none;cursor:pointer;padding:2px 6px;border-radius:3px;transition:all 0.2s;line-height:1;}
 .btn-delete-whisper:hover{color:#c0392b;background:rgba(192,57,43,0.08);}
+/* ── 管理员审核 ── */
+.btn-approve-whisper{float:right;font-size:11px;color:#27ae60;background:transparent;border:1px solid #27ae60;cursor:pointer;padding:2px 8px;border-radius:3px;transition:all 0.2s;line-height:1.6;margin-left:4px;}
+.btn-approve-whisper:hover{background:#27ae60;color:#fff;}
+.whisper-bubble.pending{opacity:0.6;border-style:dashed;}
+.whisper-pending-tag{font-size:10px;color:var(--gold);letter-spacing:0.08em;margin-left:6px;font-family:'Noto Sans SC',sans-serif;}
+
 
 html[lang="en"] .interact-section-title{font-family:'Playfair Display',serif;letter-spacing:0.02em;}
 html[lang="en"] .interact-section-sub,.html[lang="en"] .whisper-bubble-text,html[lang="en"] .cat-reply-text{font-family:'Lora',serif;font-size:14px;}
@@ -1115,8 +1121,11 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
 
   function loadWhispers(){
     var d=getDB(); if(!d) return;
-    d.collection('whispers').doc(CAT_ID).collection('messages')
-      .orderBy('timestamp','desc').limit(50).get()
+    var query = d.collection('whispers').doc(CAT_ID).collection('messages')
+      .orderBy('timestamp','desc').limit(50);
+    // 普通用户只看 approved，管理员看全部
+    if(!isAdmin()) query = query.where('status','==','approved');
+    query.get()
       .then(function(snap){
         whisperDocs=[]; whisperDocIds=[];
         snap.forEach(function(doc){ whisperDocs.push(doc.data()); whisperDocIds.push(doc.id); });
@@ -1136,19 +1145,46 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
     var ids=whisperDocIds.slice(whisperPage*whisperPageSize, (whisperPage+1)*whisperPageSize);
     slice.forEach(function(w, i){
       var div=document.createElement('div');
-      div.className='whisper-bubble';
+      var isPending = w.status === 'pending' || !w.status;
+      div.className='whisper-bubble' + (isAdmin() && isPending ? ' pending' : '');
       var l=getLang();
-      var meta=w.name||(l==='en'?'Anonymous':'匿名');
-      var deleteBtn = isAdmin()
-        ? '<button class="btn-delete-whisper" data-id="'+escHtml(ids[i])+'">✕</button>'
-        : '';
-      div.innerHTML=deleteBtn
-        +'<div class="whisper-bubble-meta">'+escHtml(meta)+' · '+formatDate(w.timestamp)+'</div>'
+      var meta=w.name||(l==="en"?"Anonymous":"匿名");
+      var adminBtns = '';
+      if(isAdmin()){
+        if(isPending){
+          adminBtns += '<button class="btn-approve-whisper" data-id="'+escHtml(ids[i])+'">✓</button>';
+        }
+        adminBtns += '<button class="btn-delete-whisper" data-id="'+escHtml(ids[i])+'">✕</button>';
+      }
+      var pendingTag = (isAdmin() && isPending)
+        ? '<span class="whisper-pending-tag">待审核</span>' : '';
+      div.innerHTML=adminBtns
+        +'<div class="whisper-bubble-meta">'+escHtml(meta)+pendingTag+' · '+formatDate(w.timestamp)+'</div>'
         +'<div class="whisper-bubble-text">'+escHtml(w.message)+'</div>';
       bubbles.appendChild(div);
     });
     whisperPage++;
     if(moreWrap) moreWrap.style.display=(whisperPage*whisperPageSize<whisperDocs.length)?'block':'none';
+
+    // 绑定批准按钮
+    bubbles.querySelectorAll('.btn-approve-whisper').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var docId = btn.dataset.id;
+        if(!docId) return;
+        var d=getDB(); if(!d) return;
+        var bubble = btn.closest('.whisper-bubble');
+        d.collection('whispers').doc(CAT_ID).collection('messages').doc(docId)
+          .update({status:'approved'})
+          .then(function(){
+            if(bubble){
+              bubble.classList.remove('pending');
+              btn.remove();
+              var tag = bubble.querySelector('.whisper-pending-tag');
+              if(tag) tag.remove();
+            }
+          }).catch(function(){});
+      });
+    });
 
     // 绑定删除按钮
     bubbles.querySelectorAll('.btn-delete-whisper').forEach(function(btn){
@@ -1197,6 +1233,14 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
           body:JSON.stringify({cat_name:getCatName(), message:msg, lang:getLang()})
         }).then(function(r){return r.json();})
         .then(function(data){
+          if(data.error === 'inappropriate'){
+            var l=getLang();
+            var msg2 = data.message || (l==="en"?"Sha Zhu only accepts kind words 🐾":"傻猪只接受善意的话 🐾");
+            alert(msg2);
+            submitBtn.disabled=false;
+            submitBtn.textContent=l==="en"?"Send":"送出";
+            return;
+          }
           if(data.reply){
             replyCard.classList.add('visible');
             replyCard.querySelectorAll('[data-zh]').forEach(function(el){
@@ -1215,6 +1259,7 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
               var nm=currentUser.displayName||currentUser.email||null;
               d.collection('whispers').doc(CAT_ID).collection('messages').add({
                 name:nm, uid:currentUser.uid, message:msg, catReply:data.reply, lang:getLang(),
+                status:'pending',
                 timestamp:firebase.firestore.FieldValue.serverTimestamp()
               }).then(function(){
                 loadWhispers();
