@@ -1058,11 +1058,11 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
         if(quota){
           var l=getLang();
           if(used){
-            quota.textContent = l==='en'?'Used today's message':'今日已留言';
+            quota.textContent = l==="en"?"Used today's message":"今日已留言";
             var btn=document.getElementById('whisper-submit');
-            if(btn){ btn.disabled=true; btn.textContent=l==='en'?'Come back tomorrow':'明天再来 🐾'; }
+            if(btn){ btn.disabled=true; btn.textContent=l==="en"?"Come back tomorrow":"明天再来 🐾"; }
           } else {
-            quota.textContent = l==='en'?'1 message per day':'每天1条留言';
+            quota.textContent = l==="en"?"1 message per day":"每天1条留言";
           }
         }
       });
@@ -1185,7 +1185,7 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
       checkTodayQuota(currentUser.uid, function(used){
         if(used){
           var l=getLang();
-          alert(l==='en'?'You've used today's message. Come back tomorrow 🐾':'今天已经留言了，明天再来 🐾');
+          alert(l==="en"?"Come back tomorrow 🐾":"今天已经留言了，明天再来 🐾");
           return;
         }
         submitBtn.disabled=true; submitBtn.textContent='…';
@@ -1218,9 +1218,9 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
                 // 刷新限额显示
                 var quota=document.getElementById('whisper-quota');
                 var l=getLang();
-                if(quota) quota.textContent=l==='en'?'Used today's message':'今日已留言';
+                if(quota) quota.textContent = l==="en"?"Used today's message":"今日已留言";
                 submitBtn.disabled=true;
-                submitBtn.textContent=l==='en'?'Come back tomorrow':'明天再来 🐾';
+                submitBtn.textContent=l==="en"?"Come back tomorrow":"明天再来 🐾";
               }).catch(function(){});
             }
           }
