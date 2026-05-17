@@ -1157,8 +1157,11 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
         if(!docId) return;
         if(!confirm('删除这条留言？')) return;
         var d=getDB(); if(!d) return;
+        var bubble = btn.closest('.whisper-bubble');
         d.collection('whispers').doc(CAT_ID).collection('messages').doc(docId).delete()
-          .then(function(){ loadWhispers(); })
+          .then(function(){
+            if(bubble){ bubble.style.transition='opacity 0.3s'; bubble.style.opacity='0'; setTimeout(function(){ bubble.remove(); },300); }
+          })
           .catch(function(){});
       });
     });
