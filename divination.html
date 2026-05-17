@@ -15,7 +15,7 @@
 <meta property="og:title" content="猫咪问事 · 问猫 · 玄猫之道">
 <meta property="og:description" content="心里有什么放不下的？选一只猫，说出来。不是预言，不是命运，只是一个停下来听自己的机会。">
 <meta property="og:url" content="https://taoofcat.com/divination.html">
-<meta property="og:image" content="https://taoofcat.com/og-image.jpg">
+<meta property="og:image" content="https://taoofcat.com/cat-shazhu.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:site_name" content="玄猫之道 · Tao of Cat">
@@ -26,7 +26,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="猫咪问事 · 问猫 · 玄猫之道">
 <meta name="twitter:description" content="Something weighing on you? Pick a cat and talk it through. Not prophecy, not fate — just a quiet moment to listen to yourself.">
-<meta name="twitter:image" content="https://taoofcat.com/og-image.jpg">
+<meta name="twitter:image" content="https://taoofcat.com/cat-shazhu.jpg">
 <!-- JSON-LD -->
 <script type="application/ld+json">
 {
@@ -580,7 +580,7 @@ html[lang="en"] .scroll-disclaimer {
     <div class="login-wall">
       <div class="login-wall-sym">☯</div>
       <div class="login-wall-title" data-zh="请先登录" data-en="Please Sign In" data-ja="まずログインしてください">请先登录</div>
-      <div class="login-wall-sub" data-zh="登录后罐头永久保存<br>换设备也不会丢失" data-en="Your cans are saved forever after signing in.<br data-ja="ログイン後、缶詰は永久保存<br>デバイスを変えても消えない">Access from any device, anytime." data-ja="ログイン後、缶詰は永久保存<br>デバイスを変えても消えない" data-ja="ログイン後、缶詰は永久保存<br>デバイスを変えても消えない">登录后罐头永久保存<br>换设备也不会丢失</div>
+      <div class="login-wall-sub" data-zh="登录后罐头永久保存<br>换设备也不会丢失" data-en="Your cans are saved forever.<br>Access from any device, anytime." data-ja="ログイン後、缶詰は永久保存<br>デバイスを変えても消えない">登录后罐头永久保存<br>换设备也不会丢失</div>
       <button class="google-btn" onclick="window.signInWithGoogle()">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -588,7 +588,7 @@ html[lang="en"] .scroll-disclaimer {
           <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
           <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
         </svg>
-        用 Google 账号登录
+        <span data-zh="用 Google 账号登录" data-en="Sign in with Google" data-ja="Googleアカウントでログイン">用 Google 账号登录</span>
       </button>
     </div>
   </div>
@@ -1242,7 +1242,7 @@ function applyLang(lang) {
   const buyLinkP = document.getElementById('buy-link-p');
   if (buyLinkP) buyLinkP.textContent = t('buyMore');
   const qtyPrice = document.getElementById('qty-price');
-  if (qtyPrice) { const _qty = (typeof qty !== "undefined") ? qty : 1; qtyPrice.textContent = t('shopTotal', _qty); }
+  if (qtyPrice) { qtyPrice.textContent = t('shopTotal', window.qty || 5); }
   // Cat confirm btn
   const confirmBtn = document.getElementById('cat-confirm-btn');
   if (confirmBtn && !window._selectedCatKey) {
@@ -1438,7 +1438,7 @@ let currentUser = null;
 let currentGua = null;
 let currentCat = '';
 let aiText = '';
-let qty = 5;
+window.qty = 5; let qty = window.qty;
 
 function showToast(msg) {
   const t = document.getElementById('toast');
@@ -1562,7 +1562,7 @@ window.signOut = async () => {
 };
 
 window.changeQty = (delta) => {
-  qty = Math.max(1, Math.min(50, qty + delta));
+  qty = Math.max(1, Math.min(50, qty + delta)); window.qty = qty;
   document.getElementById('qty-display').textContent = qty;
   document.getElementById('qty-price').textContent = t('shopTotal', qty);
 
