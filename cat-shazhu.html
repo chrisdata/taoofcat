@@ -578,6 +578,82 @@ html[lang="en"] .scroll-disclaimer {
   nav.scrolled .lang-opt { color:rgba(44,36,22,0.6); border-color:rgba(44,36,22,0.25); }
   nav.scrolled .lang-opt:hover, nav.scrolled .lang-opt.active { color:#1e1608; border-color:#1e1608; }
 
+/* ── 猫咪互动模块 ── */
+.cat-interact-wrap{max-width:720px;margin:0 auto;padding:0 2rem 5rem;}
+.interact-divider{display:flex;align-items:center;gap:16px;margin:2rem 0 3.5rem;color:var(--ink-ghost);}
+.interact-divider::before,.interact-divider::after{content:'';flex:1;height:1px;background:var(--ink-ghost);}
+.interact-divider-icon{font-size:14px;}
+.interact-section-label{font-size:11px;letter-spacing:0.4em;color:var(--gold);font-family:'Noto Sans SC',sans-serif;font-weight:300;margin-bottom:0.5rem;text-transform:uppercase;}
+.interact-section-title{font-size:clamp(22px,3.5vw,28px);font-weight:700;color:var(--ink);letter-spacing:0.08em;margin-bottom:0.6rem;line-height:1.3;}
+.interact-section-sub{font-size:14px;color:var(--ink-faint);font-family:'Noto Sans SC',sans-serif;font-weight:300;letter-spacing:0.05em;margin-bottom:2rem;line-height:1.8;}
+.whisper-box{background:rgba(184,134,11,0.04);border:1px solid var(--ink-ghost);border-radius:10px;padding:2rem;margin-bottom:1rem;}
+.whisper-name-row{display:flex;gap:0.75rem;margin-bottom:1rem;}
+.whisper-input{width:100%;padding:12px 16px;font-family:'Noto Serif SC',serif;font-size:15px;color:var(--ink);background:var(--paper);border:1px solid var(--ink-ghost);border-radius:6px;outline:none;transition:border-color 0.2s;letter-spacing:0.03em;}
+.whisper-input:focus{border-color:var(--gold);}
+.whisper-input::placeholder{color:var(--ink-ghost);}
+.whisper-name-input{flex:0 0 180px;}
+textarea.whisper-input{resize:none;min-height:100px;line-height:1.8;}
+.whisper-submit-row{display:flex;align-items:center;justify-content:space-between;margin-top:1rem;flex-wrap:wrap;gap:0.75rem;}
+.whisper-hint{font-size:12px;color:var(--ink-ghost);font-family:'Noto Sans SC',sans-serif;font-weight:300;letter-spacing:0.04em;}
+.btn-whisper{padding:12px 30px;font-size:14px;font-family:'Noto Serif SC',serif;font-weight:500;letter-spacing:0.15em;background:var(--ink);color:var(--paper);border:none;border-radius:4px;cursor:pointer;transition:background 0.2s,transform 0.15s;}
+.btn-whisper:hover{background:#3a2e18;transform:translateY(-1px);}
+.btn-whisper:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+.cat-reply-card{display:none;margin-top:1.5rem;background:var(--ink);color:var(--paper);border-radius:10px;padding:2rem 2rem 1.5rem;position:relative;overflow:hidden;animation:fadeUp 0.5s ease both;}
+.cat-reply-card.visible{display:block;}
+.cat-reply-bg{position:absolute;font-size:160px;font-weight:900;color:rgba(255,255,255,0.03);top:-10px;right:-10px;line-height:1;pointer-events:none;font-family:'Noto Serif SC',serif;}
+.cat-reply-label{font-size:11px;letter-spacing:0.3em;color:var(--gold-light);font-family:'Noto Sans SC',sans-serif;font-weight:300;margin-bottom:1rem;text-transform:uppercase;position:relative;z-index:1;}
+.cat-reply-text{font-size:15px;color:rgba(244,237,224,0.88);line-height:2;letter-spacing:0.04em;white-space:pre-wrap;position:relative;z-index:1;min-height:40px;}
+.cat-reply-text .gold-quote{color:var(--gold-light);font-weight:500;}
+.cat-reply-cta{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(244,237,224,0.1);text-align:center;position:relative;z-index:1;}
+.cat-reply-cta-hint{font-size:12px;color:rgba(244,237,224,0.4);font-family:'Noto Sans SC',sans-serif;font-weight:300;letter-spacing:0.08em;margin-bottom:0.8rem;}
+.btn-reply-divination{padding:11px 28px;font-size:13px;font-family:'Noto Serif SC',serif;font-weight:500;letter-spacing:0.15em;background:var(--gold);color:var(--paper);border:none;border-radius:4px;cursor:pointer;text-decoration:none;display:inline-block;transition:background 0.2s,transform 0.15s;}
+.btn-reply-divination:hover{background:var(--gold-light);transform:translateY(-2px);}
+.whispers-wall{margin-top:2.5rem;}
+.whispers-wall-title{font-size:12px;letter-spacing:0.25em;color:var(--ink-ghost);font-family:'Noto Sans SC',sans-serif;font-weight:300;margin-bottom:1.25rem;text-transform:uppercase;}
+.whisper-bubbles{display:flex;flex-direction:column;gap:0.85rem;}
+.whisper-bubble{background:#fff8f0;border:1px solid var(--ink-ghost);border-radius:8px;padding:1rem 1.25rem;animation:fadeUp 0.4s ease both;}
+.whisper-bubble-meta{font-size:11px;color:var(--ink-ghost);font-family:'Noto Sans SC',sans-serif;font-weight:300;letter-spacing:0.06em;margin-bottom:0.4rem;}
+.whisper-bubble-text{font-size:14px;color:var(--ink-light);line-height:1.8;letter-spacing:0.03em;}
+.whispers-load-more{text-align:center;margin-top:1rem;}
+.btn-load-more{font-size:12px;color:var(--ink-faint);font-family:'Noto Sans SC',sans-serif;background:transparent;border:1px solid var(--ink-ghost);border-radius:20px;padding:6px 20px;cursor:pointer;letter-spacing:0.06em;transition:all 0.2s;}
+.btn-load-more:hover{color:var(--ink);border-color:var(--gold);}
+.feed-box{background:#fff8f0;border:1px solid var(--ink-ghost);border-radius:10px;padding:2rem;margin-bottom:2rem;}
+.feed-cat-icon{font-size:48px;margin-bottom:0.75rem;display:block;text-align:center;}
+.feed-amount-row{display:flex;gap:0.6rem;margin-bottom:1rem;flex-wrap:wrap;}
+.feed-amount-btn{padding:8px 18px;font-size:14px;font-family:'Noto Serif SC',serif;font-weight:400;letter-spacing:0.05em;background:transparent;color:var(--ink-light);border:1px solid var(--ink-ghost);border-radius:20px;cursor:pointer;transition:all 0.2s;}
+.feed-amount-btn:hover,.feed-amount-btn.active{background:var(--gold);color:var(--paper);border-color:var(--gold);}
+.feed-custom-row{display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;flex-wrap:wrap;}
+.feed-custom-label{font-size:13px;color:var(--ink-faint);font-family:'Noto Sans SC',sans-serif;font-weight:300;white-space:nowrap;}
+.feed-custom-input{width:100px;padding:8px 12px;font-family:'Noto Serif SC',serif;font-size:15px;color:var(--ink);background:var(--paper);border:1px solid var(--ink-ghost);border-radius:6px;outline:none;transition:border-color 0.2s;text-align:center;}
+.feed-custom-input:focus{border-color:var(--gold);}
+.feed-name-row{display:flex;gap:0.75rem;margin-bottom:1.25rem;align-items:center;flex-wrap:wrap;}
+.feed-name-label{font-size:13px;color:var(--ink-faint);font-family:'Noto Sans SC',sans-serif;font-weight:300;white-space:nowrap;}
+.feed-name-input{flex:1;min-width:140px;}
+.btn-feed{width:100%;padding:14px;font-size:15px;font-family:'Noto Serif SC',serif;font-weight:500;letter-spacing:0.15em;background:var(--gold);color:var(--paper);border:none;border-radius:6px;cursor:pointer;transition:background 0.2s,transform 0.15s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-feed:hover{background:var(--gold-light);transform:translateY(-2px);}
+.btn-feed:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+.feed-disclaimer{font-size:11px;color:var(--ink-ghost);font-family:'Noto Sans SC',sans-serif;font-weight:300;text-align:center;margin-top:0.75rem;letter-spacing:0.04em;line-height:1.6;}
+.feeding-wall{margin-top:2rem;}
+.feeding-wall-title{font-size:12px;letter-spacing:0.25em;color:var(--ink-ghost);font-family:'Noto Sans SC',sans-serif;font-weight:300;margin-bottom:1.25rem;text-transform:uppercase;}
+.feeding-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.feeding-card{border:1px solid var(--ink-ghost);border-radius:8px;overflow:hidden;background:#fff8f0;animation:fadeUp 0.4s ease both;}
+.feeding-card-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+.feeding-card-img-placeholder{width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,#f4ede0,#e8dcc8);display:flex;align-items:center;justify-content:center;font-size:48px;}
+.feeding-card-info{padding:0.85rem 1rem;}
+.feeding-card-donor{font-size:13px;color:var(--ink);font-weight:500;letter-spacing:0.05em;margin-bottom:3px;}
+.feeding-card-msg{font-size:12px;color:var(--ink-faint);font-family:'Noto Sans SC',sans-serif;font-weight:300;letter-spacing:0.04em;line-height:1.5;}
+.feeding-card-date{font-size:11px;color:var(--ink-ghost);font-family:'Noto Sans SC',sans-serif;font-weight:300;margin-top:4px;}
+.feeding-empty{text-align:center;padding:2rem;color:var(--ink-ghost);font-size:14px;font-family:'Noto Sans SC',sans-serif;font-weight:300;letter-spacing:0.08em;line-height:2;}
+@media(max-width:600px){
+  .feeding-cards{grid-template-columns:1fr;}
+  .whisper-name-row{flex-direction:column;}
+  .whisper-name-input{flex:1;}
+  .cat-interact-wrap{padding:0 1.25rem 4rem;}
+}
+html[lang="en"] .interact-section-title{font-family:'Playfair Display',serif;letter-spacing:0.02em;}
+html[lang="en"] .interact-section-sub,.html[lang="en"] .whisper-bubble-text,html[lang="en"] .cat-reply-text{font-family:'Lora',serif;font-size:14px;}
+html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-reply-divination{font-family:'Lora',serif;letter-spacing:0.08em;}
+
   </style>
 </head>
 <body>
@@ -762,6 +838,92 @@ html[lang="en"] .scroll-disclaimer {
 
 </div>
 
+<!-- INTERACT MODULE -->
+<div class="cat-interact-wrap">
+
+  <div class="interact-divider reveal"><span class="interact-divider-icon">🐾</span></div>
+
+  <!-- 跟猫说话 -->
+  <div class="reveal">
+    <div class="interact-section-label" data-zh="与猫对话" data-en="Whisper to the Cat" data-ja="猫に話しかける">与猫对话</div>
+    <div class="interact-section-title" data-zh="🐱 跟傻猪说句话" data-en="🐱 Whisper to Sha Zhu" data-ja="🐱 シャージューに話しかける">🐱 跟傻猪说句话</div>
+    <div class="interact-section-sub" data-zh="有什么话想对傻猪说？或者你有一个困惑想请他点拨一下。" data-en="Got something on your mind? Whisper it to Sha Zhu. He's listening — even if he looks like he's napping." data-ja="何か言いたいことはある？シャージューに話しかけてみて。">有什么话想对傻猪说？或者你有一个困惑想请他点拨一下。</div>
+  </div>
+
+  <div class="whisper-box reveal">
+    <div class="whisper-name-row">
+      <input type="text" id="whisper-name" class="whisper-input whisper-name-input" maxlength="30"
+        data-placeholder-zh="你的名字（可匿名）" data-placeholder-en="Your name (optional)" data-placeholder-ja="お名前（匿名可）"
+        placeholder="你的名字（可匿名）" />
+    </div>
+    <textarea id="whisper-msg" class="whisper-input" maxlength="200"
+      data-placeholder-zh="写下你想说的……（最多200字）" data-placeholder-en="Write what's on your heart… (up to 200 characters)" data-placeholder-ja="心の中にあることを書いてみて…（200字まで）"
+      placeholder="写下你想说的……（最多200字）"></textarea>
+    <div class="whisper-submit-row">
+      <span class="whisper-hint" data-zh="傻猪会亲自回应 🐾" data-en="Sha Zhu will respond personally 🐾" data-ja="シャージューが直接返事するよ 🐾">傻猪会亲自回应 🐾</span>
+      <button id="whisper-submit" class="btn-whisper" data-zh="送出" data-en="Send" data-ja="送る">送出</button>
+    </div>
+  </div>
+
+  <div id="cat-reply-card" class="cat-reply-card">
+    <div class="cat-reply-bg" id="cat-reply-bg-char">猫</div>
+    <div class="cat-reply-label" data-zh="傻猪说" data-en="Sha Zhu says" data-ja="シャージューより">傻猪说</div>
+    <div id="cat-reply-text" class="cat-reply-text"></div>
+    <div class="cat-reply-cta">
+      <div class="cat-reply-cta-hint" data-zh="想让傻猪更深入地陪你想想？" data-en="Want Sha Zhu to read deeper into it?" data-ja="もっと深く読んでほしい？">想让傻猪更深入地陪你想想？</div>
+      <a href="divination.html" class="btn-reply-divination" data-zh="✦ 投币问卦" data-en="✦ Cast the Oracle" data-ja="✦ 占いに進む">✦ 投币问卦</a>
+    </div>
+  </div>
+
+  <div id="whispers-wall" class="whispers-wall" style="display:none;">
+    <div class="whispers-wall-title" data-zh="其他人也说了" data-en="Others have whispered" data-ja="みんなの声">其他人也说了</div>
+    <div id="whisper-bubbles" class="whisper-bubbles"></div>
+    <div class="whispers-load-more" id="whispers-load-more" style="display:none;">
+      <button class="btn-load-more" id="whispers-more-btn" data-zh="看更多" data-en="Load more" data-ja="もっと見る">看更多</button>
+    </div>
+  </div>
+
+  <div class="interact-divider reveal" style="margin-top:4rem;"><span class="interact-divider-icon">🥫</span></div>
+
+  <!-- 请猫吃罐头 -->
+  <div class="reveal">
+    <div class="interact-section-label" data-zh="供养" data-en="Feed the Cat" data-ja="猫を養う">供养</div>
+    <div class="interact-section-title" data-zh="🥫 请傻猪吃一罐" data-en="🥫 Buy Sha Zhu a Can" data-ja="🥫 シャージューに缶詰を">🥫 请傻猪吃一罐</div>
+    <div class="interact-section-sub" data-zh="你供养的每一罐，傻猪都会真的吃到。主人收到通知后会拍视频/照片，记录在下方。" data-en="Every can you send, Sha Zhu actually eats. The owner will photograph or video the feeding and post it below." data-ja="あなたが送った缶詰は、シャージューが本当に食べます。オーナーが写真や動画を撮って下に記録します。">你供养的每一罐，傻猪都会真的吃到。主人收到通知后会拍视频/照片，记录在下方。</div>
+  </div>
+
+  <div class="feed-box reveal">
+    <span class="feed-cat-icon">🐱</span>
+    <div class="feed-amount-row" id="feed-amount-row">
+      <button class="feed-amount-btn active" data-amount="3">$3</button>
+      <button class="feed-amount-btn" data-amount="5">$5</button>
+      <button class="feed-amount-btn" data-amount="10">$10</button>
+      <button class="feed-amount-btn" data-amount="0" data-zh="自定义" data-en="Custom" data-ja="カスタム">自定义</button>
+    </div>
+    <div class="feed-custom-row" id="feed-custom-row" style="display:none;">
+      <span class="feed-custom-label" data-zh="金额 USD $" data-en="Amount USD $" data-ja="金額 USD $">金额 USD $</span>
+      <input type="number" id="feed-custom-amount" class="feed-custom-input" min="1" max="999" value="5" placeholder="5" />
+    </div>
+    <div class="feed-name-row">
+      <span class="feed-name-label" data-zh="供养人（可匿名）" data-en="Your name (optional)" data-ja="お名前（匿名可）">供养人（可匿名）</span>
+      <input type="text" id="feed-donor-name" class="whisper-input feed-name-input" maxlength="30"
+        data-placeholder-zh="如：来自台湾的猫奴" data-placeholder-en="e.g. A cat lover from Singapore" data-placeholder-ja="例：東京の猫好き"
+        placeholder="如：来自台湾的猫奴" />
+    </div>
+    <button id="btn-feed-submit" class="btn-feed" data-zh="🥫 送出这罐罐头" data-en="🥫 Send This Can" data-ja="🥫 この缶詰を送る">🥫 送出这罐罐头</button>
+    <div class="feed-disclaimer" data-zh="通过 Stripe 安全付款 · 供养不可退款 · 主人承诺每罐必拍" data-en="Secure payment via Stripe · Non-refundable · Owner promises to photograph every can" data-ja="Stripeで安全決済 · 返金不可 · オーナーは必ず撮影を約束">通过 Stripe 安全付款 · 供养不可退款 · 主人承诺每罐必拍</div>
+  </div>
+
+  <div id="feeding-wall" class="feeding-wall reveal">
+    <div class="feeding-wall-title" data-zh="📸 已经吃掉的罐头" data-en="📸 Cans Already Eaten" data-ja="📸 食べた缶詰の記録">📸 已经吃掉的罐头</div>
+    <div id="feeding-cards" class="feeding-cards">
+      <div class="feeding-empty" data-zh="还没有供养记录<br>成为第一个请傻猪吃罐头的人 🐾" data-en="No feedings yet.<br>Be the first to feed Sha Zhu 🐾" data-ja="まだ記録がありません。<br>最初に缶詰を送ってみよう 🐾">还没有供养记录<br>成为第一个请傻猪吃罐头的人 🐾</div>
+    </div>
+  </div>
+
+</div>
+<!-- END INTERACT MODULE -->
+
 <!-- CLOSING -->
 <div class="closing">
   <div class="closing-bg-char">道</div>
@@ -788,6 +950,220 @@ html[lang="en"] .scroll-disclaimer {
   <div class="footer-copy" data-zh="© 2026 Tao of Your Cat · Ipoh, Malaysia" data-en="© 2026 Tao of Your Cat · Ipoh, Malaysia" data-ja="© 2026 Tao of Your Cat · Ipoh, Malaysia">© 2026 Tao of Your Cat · Ipoh, Malaysia</div>
 </footer>
 
+
+
+<script>
+(function() {
+  var CAT_ID  = 'shazhu';
+  var CAT_ZH  = '傻猪';
+  var CAT_EN  = 'Sha Zhu';
+  var CAT_JA  = 'シャージュー';
+  var REPLY_CHAR = '猫';
+  var BACKEND = 'https://web-production-907c5.up.railway.app';
+
+  function getLang(){ return localStorage.getItem('taoc_lang') || 'zh'; }
+  function getCatName(){ var l=getLang(); return l==='en'?CAT_EN:l==='ja'?CAT_JA:CAT_ZH; }
+
+  function updatePlaceholders(){
+    var l=getLang();
+    document.querySelectorAll('[data-placeholder-zh]').forEach(function(el){
+      el.placeholder = l==='en'?(el.dataset.placeholderEn||el.dataset.placeholderZh)
+                      :l==='ja'?(el.dataset.placeholderJa||el.dataset.placeholderZh)
+                      :el.dataset.placeholderZh;
+    });
+  }
+
+  function formatReply(text){
+    return text.replace(/【([^】]+)】/g,'<span class="gold-quote">【$1】</span>');
+  }
+
+  function escHtml(s){
+    return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function formatDate(ts){
+    if(!ts) return '';
+    var d = ts.toDate ? ts.toDate() : new Date(ts);
+    return d.getFullYear()+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+String(d.getDate()).padStart(2,'0');
+  }
+
+  var db = null;
+  function initDB(){
+    if(typeof firebase==='undefined') return;
+    if(!firebase.apps.length) return; // 已在主站初始化
+    db = firebase.firestore();
+  }
+  function getDB(){
+    if(db) return db;
+    if(typeof firebase==='undefined') return null;
+    try{ db = firebase.firestore(); return db; }catch(e){ return null; }
+  }
+
+  /* ── 留言墙 ── */
+  var whisperDocs=[], whisperPage=0, whisperPageSize=5;
+
+  function loadWhispers(){
+    var d=getDB(); if(!d) return;
+    d.collection('whispers').doc(CAT_ID).collection('messages')
+      .orderBy('timestamp','desc').limit(50).get()
+      .then(function(snap){
+        whisperDocs=[];
+        snap.forEach(function(doc){ whisperDocs.push(doc.data()); });
+        renderWhispers(false);
+      }).catch(function(){});
+  }
+
+  function renderWhispers(append){
+    if(!whisperDocs.length) return;
+    var wall=document.getElementById('whispers-wall');
+    var bubbles=document.getElementById('whisper-bubbles');
+    var moreWrap=document.getElementById('whispers-load-more');
+    if(!wall||!bubbles) return;
+    wall.style.display='block';
+    if(!append){ bubbles.innerHTML=''; whisperPage=0; }
+    var slice=whisperDocs.slice(whisperPage*whisperPageSize, (whisperPage+1)*whisperPageSize);
+    slice.forEach(function(w){
+      var div=document.createElement('div');
+      div.className='whisper-bubble';
+      var l=getLang();
+      var meta=w.name||(l==='en'?'Anonymous':'匿名');
+      div.innerHTML='<div class="whisper-bubble-meta">'+escHtml(meta)+' · '+formatDate(w.timestamp)+'</div>'
+        +'<div class="whisper-bubble-text">'+escHtml(w.message)+'</div>';
+      bubbles.appendChild(div);
+    });
+    whisperPage++;
+    if(moreWrap) moreWrap.style.display=(whisperPage*whisperPageSize<whisperDocs.length)?'block':'none';
+  }
+
+  var moreBtn=document.getElementById('whispers-more-btn');
+  if(moreBtn) moreBtn.addEventListener('click',function(){ renderWhispers(true); });
+
+  /* ── 提交留言 ── */
+  var submitBtn=document.getElementById('whisper-submit');
+  var msgEl=document.getElementById('whisper-msg');
+  var nameEl=document.getElementById('whisper-name');
+  var replyCard=document.getElementById('cat-reply-card');
+  var replyText=document.getElementById('cat-reply-text');
+  var replyBg=document.getElementById('cat-reply-bg-char');
+  if(replyBg) replyBg.textContent=REPLY_CHAR;
+
+  if(submitBtn){
+    submitBtn.addEventListener('click',function(){
+      var msg=(msgEl?msgEl.value:'').trim();
+      if(!msg) return;
+      submitBtn.disabled=true; submitBtn.textContent='…';
+      fetch(BACKEND+'/whisper',{
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({cat_name:getCatName(), message:msg, lang:getLang()})
+      }).then(function(r){return r.json();})
+      .then(function(data){
+        if(data.reply){
+          replyCard.classList.add('visible');
+          replyCard.querySelectorAll('[data-zh]').forEach(function(el){
+            var l=getLang();
+            var txt=l==='en'?(el.dataset.en||el.dataset.zh):l==='ja'?(el.dataset.ja||el.dataset.zh):el.dataset.zh;
+            if(txt!==undefined) el.innerHTML=txt;
+          });
+          replyText.innerHTML='';
+          var full=data.reply, i=0;
+          (function typeNext(){
+            if(i<full.length){ replyText.innerHTML=formatReply(full.slice(0,++i)); setTimeout(typeNext,18); }
+          })();
+          // 存 Firestore
+          var d=getDB();
+          if(d){
+            var nm=nameEl?nameEl.value.trim():null;
+            d.collection('whispers').doc(CAT_ID).collection('messages').add({
+              name:nm||null, message:msg, catReply:data.reply, lang:getLang(),
+              timestamp:firebase.firestore.FieldValue.serverTimestamp()
+            }).then(loadWhispers).catch(function(){});
+          }
+        }
+        submitBtn.disabled=false;
+        var l=getLang(); submitBtn.textContent=l==='en'?'Send':l==='ja'?'送る':'送出';
+        if(msgEl) msgEl.value='';
+      }).catch(function(){
+        submitBtn.disabled=false;
+        var l=getLang(); submitBtn.textContent=l==='en'?'Send':l==='ja'?'送る':'送出';
+      });
+    });
+  }
+
+  /* ── 供养罐头 ── */
+  var selectedAmount=3;
+  var amtBtns=document.querySelectorAll('.feed-amount-btn');
+  var customRow=document.getElementById('feed-custom-row');
+  var customInput=document.getElementById('feed-custom-amount');
+  var feedBtn=document.getElementById('btn-feed-submit');
+
+  amtBtns.forEach(function(btn){
+    btn.addEventListener('click',function(){
+      amtBtns.forEach(function(b){b.classList.remove('active');});
+      btn.classList.add('active');
+      var amt=parseInt(btn.dataset.amount);
+      if(amt===0){ selectedAmount=0; if(customRow) customRow.style.display='flex'; }
+      else{ selectedAmount=amt; if(customRow) customRow.style.display='none'; }
+    });
+  });
+
+  if(feedBtn){
+    feedBtn.addEventListener('click',function(){
+      var amount=selectedAmount===0?parseFloat(customInput?customInput.value:5):selectedAmount;
+      if(!amount||amount<1){ alert(getLang()==='en'?'Minimum $1 please 🐱':'最少 $1 哦 🐱'); return; }
+      var donorName=(document.getElementById('feed-donor-name')?document.getElementById('feed-donor-name').value.trim():'')||null;
+      feedBtn.disabled=true; feedBtn.innerHTML='…';
+      fetch(BACKEND+'/create-feeding-checkout',{
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({amount:amount, cat_id:CAT_ID, cat_name:getCatName(), donor_name:donorName, lang:getLang()})
+      }).then(function(r){return r.json();})
+      .then(function(data){
+        if(data.url){ window.location.href=data.url; }
+        else{ feedBtn.disabled=false; feedBtn.innerHTML=getLang()==='en'?'🥫 Send This Can':'🥫 送出这罐罐头'; }
+      }).catch(function(){
+        feedBtn.disabled=false; feedBtn.innerHTML=getLang()==='en'?'🥫 Send This Can':'🥫 送出这罐罐头';
+      });
+    });
+  }
+
+  /* ── 喂食记录墙 ── */
+  function loadFeedingWall(){
+    var d=getDB(); if(!d) return;
+    var container=document.getElementById('feeding-cards'); if(!container) return;
+    d.collection('feedings').doc(CAT_ID).collection('records')
+      .orderBy('timestamp','desc').limit(6).get()
+      .then(function(snap){
+        if(snap.empty) return;
+        container.innerHTML='';
+        snap.forEach(function(doc){
+          var f=doc.data();
+          var card=document.createElement('div'); card.className='feeding-card';
+          var imgHtml=f.photo_url
+            ?'<img class="feeding-card-img" src="'+escHtml(f.photo_url)+'" alt="feeding" loading="lazy">'
+            :'<div class="feeding-card-img-placeholder">🐱</div>';
+          var l=getLang();
+          var donorLine=f.donor_name
+            ?(l==='zh'?'这罐是 '+f.donor_name+' 送来的 🐾':l==='ja'?f.donor_name+' さんから 🐾':'From '+f.donor_name+' 🐾')
+            :(l==='en'?'From an anonymous friend 🐾':l==='ja'?'匿名の方から 🐾':'来自匿名猫奴 🐾');
+          card.innerHTML=imgHtml+'<div class="feeding-card-info">'
+            +'<div class="feeding-card-donor">'+escHtml(donorLine)+'</div>'
+            +(f.amount?'<div class="feeding-card-msg">$'+f.amount+'</div>':'')
+            +'<div class="feeding-card-date">'+formatDate(f.timestamp)+'</div></div>';
+          container.appendChild(card);
+        });
+      }).catch(function(){});
+  }
+
+  /* ── 初始化 ── */
+  document.addEventListener('DOMContentLoaded',function(){
+    updatePlaceholders();
+    document.querySelectorAll('.lang-opt').forEach(function(btn){
+      btn.addEventListener('click',function(){ setTimeout(updatePlaceholders,50); });
+    });
+    // Firebase 应已由主站脚本初始化，直接读取
+    setTimeout(function(){ loadWhispers(); loadFeedingWall(); }, 800);
+  });
+})();
+</script>
 
 </body>
 </html>
