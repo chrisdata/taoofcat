@@ -618,7 +618,7 @@ textarea.whisper-input{resize:none;min-height:100px;line-height:1.8;}
 .btn-load-more{font-size:12px;color:var(--ink-faint);font-family:'Noto Sans SC',sans-serif;background:transparent;border:1px solid var(--ink-ghost);border-radius:20px;padding:6px 20px;cursor:pointer;letter-spacing:0.06em;transition:all 0.2s;}
 .btn-load-more:hover{color:var(--ink);border-color:var(--gold);}
 .feed-box{background:#fff8f0;border:1px solid var(--ink-ghost);border-radius:10px;padding:2rem;margin-bottom:2rem;}
-.feed-cat-icon{font-size:48px;margin-bottom:0.75rem;display:block;text-align:center;}
+.feed-cat-icon{margin-bottom:1.25rem;display:block;text-align:center;}.feed-cat-icon img{width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid var(--ink-ghost);box-shadow:0 4px 16px rgba(30,22,8,0.12);}
 .feed-amount-row{display:flex;gap:0.6rem;margin-bottom:1rem;flex-wrap:wrap;}
 .feed-amount-btn{padding:8px 18px;font-size:14px;font-family:'Noto Serif SC',serif;font-weight:400;letter-spacing:0.05em;background:transparent;color:var(--ink-light);border:1px solid var(--ink-ghost);border-radius:20px;cursor:pointer;transition:all 0.2s;}
 .feed-amount-btn:hover,.feed-amount-btn.active{background:var(--gold);color:var(--paper);border-color:var(--gold);}
@@ -888,12 +888,12 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
   <!-- 请猫吃罐头 -->
   <div class="reveal">
     <div class="interact-section-label" data-zh="供养" data-en="Feed the Cat" data-ja="猫を養う">供养</div>
-    <div class="interact-section-title" data-zh="🥫 请傻猪吃一罐" data-en="🥫 Buy Sha Zhu a Can" data-ja="🥫 シャージューに缶詰を">🥫 请傻猪吃一罐</div>
-    <div class="interact-section-sub" data-zh="你供养的每一罐，傻猪都会真的吃到。主人收到通知后会拍视频/照片，记录在下方。" data-en="Every can you send, Sha Zhu actually eats. The owner will photograph or video the feeding and post it below." data-ja="あなたが送った缶詰は、シャージューが本当に食べます。オーナーが写真や動画を撮って下に記録します。">你供养的每一罐，傻猪都会真的吃到。主人收到通知后会拍视频/照片，记录在下方。</div>
+    <div class="interact-section-title" data-zh="🥫 请傻猪吃一罐真罐头" data-en="🥫 Buy Sha Zhu a Real Can" data-ja="🥫 本物の缶詰をシャージューに">🥫 请傻猪吃一罐真罐头</div>
+    <div class="interact-section-sub" data-zh="这是真的罐头，不是积分。你供养的每一罐，我们会真的去买、真的喂给傻猪吃，然后拍视频/照片发在下方证明。" data-en="This is a real can — not points, not credits. Every can you send, we actually buy it, feed it to Sha Zhu, and photograph the proof below." data-ja="これは本物の缶詰です。あなたが送るたびに、本当に買って、シャージューに食べさせて、写真で証明します。">这是真的罐头，不是积分。你供养的每一罐，我们会真的去买、真的喂给傻猪吃，然后拍视频/照片发在下方证明。</div>
   </div>
 
   <div class="feed-box reveal">
-    <span class="feed-cat-icon">🐱</span>
+    <span class="feed-cat-icon"><img src="https://taoofcat.com/cat-shazhu.jpg" alt="傻猪"></span>
     <div class="feed-amount-row" id="feed-amount-row">
       <button class="feed-amount-btn active" data-amount="3">$3</button>
       <button class="feed-amount-btn" data-amount="5">$5</button>
@@ -910,8 +910,8 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
         data-placeholder-zh="如：来自台湾的猫奴" data-placeholder-en="e.g. A cat lover from Singapore" data-placeholder-ja="例：東京の猫好き"
         placeholder="如：来自台湾的猫奴" />
     </div>
-    <button id="btn-feed-submit" class="btn-feed" data-zh="🥫 送出这罐罐头" data-en="🥫 Send This Can" data-ja="🥫 この缶詰を送る">🥫 送出这罐罐头</button>
-    <div class="feed-disclaimer" data-zh="通过 Stripe 安全付款 · 供养不可退款 · 主人承诺每罐必拍" data-en="Secure payment via Stripe · Non-refundable · Owner promises to photograph every can" data-ja="Stripeで安全決済 · 返金不可 · オーナーは必ず撮影を約束">通过 Stripe 安全付款 · 供养不可退款 · 主人承诺每罐必拍</div>
+    <button id="btn-feed-submit" class="btn-feed" data-zh="🥫 送出这罐真罐头" data-en="🥫 Send a Real Can" data-ja="🥫 本物の缶詰を送る">🥫 送出这罐真罐头</button>
+    <div class="feed-disclaimer" data-zh="通过 Stripe 安全付款 · 每罐都是真实购买 · 主人承诺每罐必拍为证" data-en="Secure payment via Stripe · Every can is physically purchased · Owner promises photo proof for every feeding" data-ja="Stripeで安全決済 · 返金不可 · オーナーは必ず撮影を約束">通过 Stripe 安全付款 · 供养不可退款 · 主人承诺每罐必拍</div>
   </div>
 
   <div id="feeding-wall" class="feeding-wall reveal">
