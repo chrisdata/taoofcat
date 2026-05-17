@@ -655,6 +655,22 @@ html[lang="en"] .interact-section-sub,.html[lang="en"] .whisper-bubble-text,html
 html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-reply-divination{font-family:'Lora',serif;letter-spacing:0.08em;}
 
   </style>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script>
+  var _fbConfig = {
+    apiKey: "AIzaSyAqu9pHaAEjFqPvPz3TuoYc60Lpb4DLZrs",
+    authDomain: "taoofcat-6cf6e.firebaseapp.com",
+    projectId: "taoofcat-6cf6e",
+    storageBucket: "taoofcat-6cf6e.firebasestorage.app",
+    messagingSenderId: "1088808296707",
+    appId: "1:1088808296707:web:ce9b54ba34d395681bc936"
+  };
+  if (!firebase.apps.length) firebase.initializeApp(_fbConfig);
+</script>
 </head>
 <body>
 
@@ -988,11 +1004,6 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
   }
 
   var db = null;
-  function initDB(){
-    if(typeof firebase==='undefined') return;
-    if(!firebase.apps.length) return; // 已在主站初始化
-    db = firebase.firestore();
-  }
   function getDB(){
     if(db) return db;
     if(typeof firebase==='undefined') return null;
