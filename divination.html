@@ -2363,7 +2363,7 @@ function getShareUrl() {
     if (el && el.value) ref = new URL(el.value).searchParams.get('ref') || '';
   } catch(e) {}
   const refParam = ref ? '&ref=' + encodeURIComponent(ref) : '';
-  return 'https://taoofcat-share.chrischua83.workers.dev?cat=' + cat + '&lang=' + lang + '&gua=' + guaParam + refParam;
+  return 'https://share.taoofcat.com?cat=' + cat + '&lang=' + lang + '&gua=' + guaParam + refParam;
 }
 
 function getShareSuffix() {
