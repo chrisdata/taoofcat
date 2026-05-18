@@ -232,6 +232,7 @@ html[lang="en"] .scroll-disclaimer {
   nav.scrolled .lang-opt:hover, nav.scrolled .lang-opt.active { color:#1e1608; border-color:#1e1608; }
 
   
+
 /* ── 常驻购书横幅 ── */
 .book-banner{max-width:720px;margin:4rem auto 3rem;padding:0 2rem;}
 .book-banner-inner{background:linear-gradient(135deg,rgba(184,134,11,0.1),rgba(184,134,11,0.04));border:1px solid rgba(184,134,11,0.3);border-radius:16px;padding:1.5rem 2rem;display:flex;align-items:center;gap:1.5rem;}
@@ -243,7 +244,106 @@ html[lang="en"] .scroll-disclaimer {
 .btn-book-banner{display:inline-block;padding:9px 22px;background:var(--gold);color:#fff;font-size:12px;font-family:'Noto Serif SC',serif;font-weight:500;letter-spacing:0.12em;border-radius:4px;text-decoration:none;transition:background 0.2s,transform 0.15s;}
 .btn-book-banner:hover{background:var(--gold-light);transform:translateY(-1px);}
 @media(max-width:520px){.book-banner-inner{flex-direction:column;text-align:center;}.book-banner-cover{width:90px;height:120px;}}
-</style>
+/* ── 猫咪互动模块 ── */
+.cat-interact-wrap{max-width:720px;margin:0 auto;padding:0 2rem 5rem;}
+.interact-divider{display:flex;align-items:center;gap:16px;margin:2rem 0 3.5rem;color:var(--ink-ghost);}
+.interact-divider::before,.interact-divider::after{content:'';flex:1;height:1px;background:var(--ink-ghost);}
+.interact-divider-icon{font-size:14px;}
+.interact-section-label{font-size:11px;letter-spacing:0.4em;color:var(--gold);font-family:'Noto Sans SC',sans-serif;font-weight:300;margin-bottom:0.5rem;text-transform:uppercase;}
+.interact-section-title{font-size:clamp(22px,3.5vw,28px);font-weight:700;color:var(--ink);letter-spacing:0.08em;margin-bottom:0.6rem;line-height:1.3;}
+.interact-section-sub{font-size:14px;color:var(--ink-faint);font-family:'Noto Sans SC',sans-serif;font-weight:300;letter-spacing:0.05em;margin-bottom:2rem;line-height:1.8;}
+.whisper-box{background:rgba(184,134,11,0.04);border:1px solid var(--ink-ghost);border-radius:10px;padding:2rem;margin-bottom:1rem;}
+.whisper-name-row{display:flex;gap:0.75rem;margin-bottom:1rem;}
+.whisper-input{width:100%;padding:12px 16px;font-family:'Noto Serif SC',serif;font-size:15px;color:var(--ink);background:var(--paper);border:1px solid var(--ink-ghost);border-radius:6px;outline:none;transition:border-color 0.2s;letter-spacing:0.03em;}
+.whisper-input:focus{border-color:var(--gold);}
+.whisper-input::placeholder{color:var(--ink-ghost);}
+.whisper-name-input{flex:0 0 180px;}
+textarea.whisper-input{resize:none;min-height:100px;line-height:1.8;}
+.whisper-submit-row{display:flex;align-items:center;justify-content:space-between;margin-top:1rem;flex-wrap:wrap;gap:0.75rem;}
+.whisper-hint{font-size:12px;color:var(--ink-ghost);font-family:'Noto Sans SC',sans-serif;font-weight:300;letter-spacing:0.04em;}
+.btn-whisper{padding:12px 30px;font-size:14px;font-family:'Noto Serif SC',serif;font-weight:500;letter-spacing:0.15em;background:var(--ink);color:var(--paper);border:none;border-radius:4px;cursor:pointer;transition:background 0.2s,transform 0.15s;}
+.btn-whisper:hover{background:#3a2e18;transform:translateY(-1px);}
+.btn-whisper:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+.cat-reply-card{display:none;margin-top:1.5rem;background:var(--ink);color:var(--paper);border-radius:10px;padding:2rem 2rem 1.5rem;position:relative;overflow:hidden;animation:fadeUp 0.5s ease both;}
+.cat-reply-card.visible{display:block;}
+.cat-reply-bg{position:absolute;font-size:160px;font-weight:900;color:rgba(255,255,255,0.03);top:-10px;right:-10px;line-height:1;pointer-events:none;font-family:'Noto Serif SC',serif;}
+.cat-reply-label{font-size:11px;letter-spacing:0.3em;color:var(--gold-light);font-family:'Noto Sans SC',sans-serif;font-weight:300;margin-bottom:1rem;text-transform:uppercase;position:relative;z-index:1;}
+.cat-reply-text{font-size:15px;color:rgba(244,237,224,0.88);line-height:2;letter-spacing:0.04em;white-space:pre-wrap;position:relative;z-index:1;min-height:40px;}
+.cat-reply-text .gold-quote{color:var(--gold-light);font-weight:500;}
+.cat-reply-cta{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(244,237,224,0.1);text-align:center;position:relative;z-index:1;}
+.cat-reply-cta-hint{font-size:12px;color:rgba(244,237,224,0.4);font-family:'Noto Sans SC',sans-serif;font-weight:300;letter-spacing:0.08em;margin-bottom:0.8rem;}
+.btn-reply-divination{padding:11px 28px;font-size:13px;font-family:'Noto Serif SC',serif;font-weight:500;letter-spacing:0.15em;background:var(--gold);color:var(--paper);border:none;border-radius:4px;cursor:pointer;text-decoration:none;display:inline-block;transition:background 0.2s,transform 0.15s;}
+.btn-reply-divination:hover{background:var(--gold-light);transform:translateY(-2px);}
+.whispers-wall{margin-top:2.5rem;}
+.whispers-wall-title{font-size:12px;letter-spacing:0.25em;color:var(--ink-ghost);font-family:'Noto Sans SC',sans-serif;font-weight:300;margin-bottom:1.25rem;text-transform:uppercase;}
+.whisper-bubbles{display:flex;flex-direction:column;gap:0.85rem;}
+.whisper-bubble{background:#fff8f0;border:1px solid var(--ink-ghost);border-radius:8px;padding:1rem 1.25rem;animation:fadeUp 0.4s ease both;}
+.whisper-bubble-meta{font-size:11px;color:var(--ink-ghost);font-family:'Noto Sans SC',sans-serif;font-weight:300;letter-spacing:0.06em;margin-bottom:0.4rem;}
+.whisper-bubble-text{font-size:14px;color:var(--ink-light);line-height:1.8;letter-spacing:0.03em;}
+.whispers-load-more{text-align:center;margin-top:1rem;}
+.btn-load-more{font-size:12px;color:var(--ink-faint);font-family:'Noto Sans SC',sans-serif;background:transparent;border:1px solid var(--ink-ghost);border-radius:20px;padding:6px 20px;cursor:pointer;letter-spacing:0.06em;transition:all 0.2s;}
+.btn-load-more:hover{color:var(--ink);border-color:var(--gold);}
+.feed-box{background:#fff8f0;border:1px solid var(--ink-ghost);border-radius:10px;padding:2rem;margin-bottom:2rem;}
+.feed-cat-icon{margin-bottom:1.25rem;display:block;text-align:center;}.feed-cat-icon img{width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid var(--ink-ghost);box-shadow:0 4px 16px rgba(30,22,8,0.12);}
+.feed-amount-row{display:flex;gap:0.6rem;margin-bottom:1rem;flex-wrap:wrap;}
+.feed-amount-btn{padding:8px 18px;font-size:14px;font-family:'Noto Serif SC',serif;font-weight:400;letter-spacing:0.05em;background:transparent;color:var(--ink-light);border:1px solid var(--ink-ghost);border-radius:20px;cursor:pointer;transition:all 0.2s;}
+.feed-amount-btn:hover,.feed-amount-btn.active{background:var(--gold);color:var(--paper);border-color:var(--gold);}
+.feed-custom-row{display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;flex-wrap:wrap;}
+.feed-custom-label{font-size:13px;color:var(--ink-faint);font-family:'Noto Sans SC',sans-serif;font-weight:300;white-space:nowrap;}
+.feed-custom-input{width:100px;padding:8px 12px;font-family:'Noto Serif SC',serif;font-size:15px;color:var(--ink);background:var(--paper);border:1px solid var(--ink-ghost);border-radius:6px;outline:none;transition:border-color 0.2s;text-align:center;}
+.feed-custom-input:focus{border-color:var(--gold);}
+.feed-name-row{display:flex;gap:0.75rem;margin-bottom:1.25rem;align-items:center;flex-wrap:wrap;}
+.feed-name-label{font-size:13px;color:var(--ink-faint);font-family:'Noto Sans SC',sans-serif;font-weight:300;white-space:nowrap;}
+.feed-name-input{flex:1;min-width:140px;}
+.btn-feed{width:100%;padding:14px;font-size:15px;font-family:'Noto Serif SC',serif;font-weight:500;letter-spacing:0.15em;background:var(--gold);color:var(--paper);border:none;border-radius:6px;cursor:pointer;transition:background 0.2s,transform 0.15s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-feed:hover{background:var(--gold-light);transform:translateY(-2px);}
+.btn-feed:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+.feed-disclaimer{font-size:11px;color:var(--ink-ghost);font-family:'Noto Sans SC',sans-serif;font-weight:300;text-align:center;margin-top:0.75rem;letter-spacing:0.04em;line-height:1.6;}
+.feeding-wall{margin-top:2rem;}
+.feeding-wall-title{font-size:12px;letter-spacing:0.25em;color:var(--ink-ghost);font-family:'Noto Sans SC',sans-serif;font-weight:300;margin-bottom:1.25rem;text-transform:uppercase;}
+.feeding-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.feeding-card{border:1px solid var(--ink-ghost);border-radius:8px;overflow:hidden;background:#fff8f0;animation:fadeUp 0.4s ease both;}
+.feeding-card-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+.feeding-card-img-placeholder{width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,#f4ede0,#e8dcc8);display:flex;align-items:center;justify-content:center;font-size:48px;}
+.feeding-card-info{padding:0.85rem 1rem;}
+.feeding-card-donor{font-size:13px;color:var(--ink);font-weight:500;letter-spacing:0.05em;margin-bottom:3px;}
+.feeding-card-msg{font-size:12px;color:var(--ink-faint);font-family:'Noto Sans SC',sans-serif;font-weight:300;letter-spacing:0.04em;line-height:1.5;}
+.feeding-card-date{font-size:11px;color:var(--ink-ghost);font-family:'Noto Sans SC',sans-serif;font-weight:300;margin-top:4px;}
+.feeding-empty{text-align:center;padding:2rem;color:var(--ink-ghost);font-size:14px;font-family:'Noto Sans SC',sans-serif;font-weight:300;letter-spacing:0.08em;line-height:2;}
+@media(max-width:600px){
+  .feeding-cards{grid-template-columns:1fr;}
+  .whisper-name-row{flex-direction:column;}
+  .whisper-name-input{flex:1;}
+  .cat-interact-wrap{padding:0 1.25rem 4rem;}
+}
+
+/* ── 留言登录提示 ── */
+.whisper-login-wall{background:rgba(184,134,11,0.04);border:1px solid var(--ink-ghost);border-radius:10px;padding:2rem;text-align:center;margin-bottom:1rem;}
+.whisper-login-hint{font-size:14px;color:var(--ink-faint);font-family:'Noto Sans SC',sans-serif;font-weight:300;letter-spacing:0.05em;margin-bottom:1.25rem;line-height:1.8;}
+.btn-google-login{display:inline-flex;align-items:center;gap:10px;padding:11px 24px;font-size:14px;font-family:'Noto Serif SC',serif;font-weight:500;letter-spacing:0.1em;background:#fff;color:#3c3c3c;border:1px solid var(--ink-ghost);border-radius:6px;cursor:pointer;transition:all 0.2s;text-decoration:none;}
+.btn-google-login:hover{border-color:var(--gold);box-shadow:0 2px 8px rgba(0,0,0,0.08);}
+.btn-google-login svg{width:18px;height:18px;flex-shrink:0;}
+.whisper-user-info{font-size:12px;color:var(--ink-ghost);font-family:'Noto Sans SC',sans-serif;margin-bottom:0.75rem;display:flex;align-items:center;justify-content:space-between;}
+.btn-signout{font-size:11px;color:var(--ink-ghost);background:transparent;border:none;cursor:pointer;text-decoration:underline;letter-spacing:0.04em;}
+.btn-signout:hover{color:var(--ink);}
+.whisper-quota{font-size:11px;color:var(--gold);font-family:'Noto Sans SC',sans-serif;letter-spacing:0.04em;}
+/* ── 删除按钮（管理员） ── */
+.btn-delete-whisper{float:right;font-size:11px;color:var(--ink-ghost);background:transparent;border:none;cursor:pointer;padding:2px 6px;border-radius:3px;transition:all 0.2s;line-height:1;}
+.btn-delete-whisper:hover{color:#c0392b;background:rgba(192,57,43,0.08);}
+/* ── 管理员审核 ── */
+.btn-approve-whisper{float:right;font-size:11px;color:#27ae60;background:transparent;border:1px solid #27ae60;cursor:pointer;padding:2px 8px;border-radius:3px;transition:all 0.2s;line-height:1.6;margin-left:4px;}
+.btn-approve-whisper:hover{background:#27ae60;color:#fff;}
+.whisper-bubble.pending{opacity:0.6;border-style:dashed;}
+.whisper-pending-tag{font-size:10px;color:var(--gold);letter-spacing:0.08em;margin-left:6px;font-family:'Noto Sans SC',sans-serif;}
+
+
+html[lang="en"] .interact-section-title{font-family:'Playfair Display',serif;letter-spacing:0.02em;}
+html[lang="en"] .interact-section-sub,.html[lang="en"] .whisper-bubble-text,html[lang="en"] .cat-reply-text{font-family:'Lora',serif;font-size:14px;}
+html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-reply-divination{font-family:'Lora',serif;letter-spacing:0.08em;}
+
+  
+  </style>
+
 <!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
@@ -270,7 +370,19 @@ html[lang="en"] .scroll-disclaimer {
       .st0 {
         fill: #d4a843;
       }
-    </style>
+    
+/* ── 常驻购书横幅 ── */
+.book-banner{max-width:720px;margin:4rem auto 3rem;padding:0 2rem;}
+.book-banner-inner{background:linear-gradient(135deg,rgba(184,134,11,0.1),rgba(184,134,11,0.04));border:1px solid rgba(184,134,11,0.3);border-radius:16px;padding:1.5rem 2rem;display:flex;align-items:center;gap:1.5rem;}
+.book-banner-cover{width:72px;height:96px;object-fit:cover;border-radius:6px;flex-shrink:0;box-shadow:0 6px 20px rgba(30,22,8,0.18);}
+.book-banner-body{flex:1;min-width:0;}
+.book-banner-label{font-size:10px;letter-spacing:0.3em;color:var(--gold);font-family:'Noto Sans SC',sans-serif;font-weight:300;text-transform:uppercase;margin-bottom:4px;}
+.book-banner-title{font-size:17px;font-weight:700;color:var(--ink);letter-spacing:0.06em;margin-bottom:4px;line-height:1.3;}
+.book-banner-sub{font-size:12px;color:var(--ink-faint);font-family:'Noto Sans SC',sans-serif;font-weight:300;line-height:1.7;margin-bottom:12px;}
+.btn-book-banner{display:inline-block;padding:9px 22px;background:var(--gold);color:#fff;font-size:12px;font-family:'Noto Serif SC',serif;font-weight:500;letter-spacing:0.12em;border-radius:4px;text-decoration:none;transition:background 0.2s,transform 0.15s;}
+.btn-book-banner:hover{background:var(--gold-light);transform:translateY(-1px);}
+@media(max-width:520px){.book-banner-inner{flex-direction:column;text-align:center;}.book-banner-cover{width:90px;height:120px;}}
+</style>
   </defs>
   <g>
     <path class="st0" d="M1225.69,465.78c-5.16,2.89-10.14,5.24-15.63,6.98l-12.6,4c-4.1,1.3-8.13,1.1-12.22-.45l1.12-7.52c.39-2.58.52-5.15-.09-7.66l-21.21-12.98c-5.69-3.48-10.51-7.66-15.59-11.94l-8.2-5.37c-6.93-3.91-12.98-8.71-18.16-14.81-3.14-5.41-5.27-11.1-5.98-17.63,3.17.12,6.24.92,8.69,2.92l5.97,4.89c7.54,6.17,16.14,10.45,25,14.5l17.58,8.04c7.15,1.99,13.55,5.01,19.92,8.71l7.34,3.14c3.31,1.42,6.12,3.24,9.01,5.33,3.45,2.49,7.71,3.05,11.55,4.9,3.64,1.75,6.91,9.93,3.48,14.94Z"/>
@@ -409,6 +521,7 @@ html[lang="en"] .scroll-disclaimer {
   </div>
 </div>
 
+<!-- CLOSING -->
 <!-- INTERACT MODULE -->
 <div class="cat-interact-wrap">
 
@@ -423,7 +536,7 @@ html[lang="en"] .scroll-disclaimer {
 
   <!-- 未登录提示 -->
   <div id="whisper-login-wall" class="whisper-login-wall reveal" style="display:none;">
-    <div class="whisper-login-hint" data-zh="登录后才能跟傻猪说话 🐾" data-en="Sign in to whisper to Sha Zhu 🐾" data-ja="ログインしてシャージューに話しかけよう 🐾">登录后才能跟傻猪说话 🐾</div>
+    <div class="whisper-login-hint" data-zh="登录后才能跟茶室猫说话 🐾" data-en="Sign in to whisper to Cha Shi 🐾" data-ja="ログインしてシャージューに話しかけよう 🐾">登录后才能跟茶室猫说话 🐾</div>
     <button id="btn-google-login" class="btn-google-login">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
       <span data-zh="用 Google 登录" data-en="Sign in with Google" data-ja="Googleでログイン">用 Google 登录</span>
@@ -472,7 +585,7 @@ html[lang="en"] .scroll-disclaimer {
   <div class="reveal">
     <div class="interact-section-label" data-zh="供养" data-en="Feed the Cat" data-ja="猫を養う">供养</div>
     <div class="interact-section-title" data-zh='<img src="https://taoofcat.com/can-icon.png" style="width:32px;height:32px;object-fit:contain;vertical-align:middle;margin-right:8px;"> 请傻猪吃一罐真罐头' data-en='<img src="https://taoofcat.com/can-icon.png" style="width:32px;height:32px;object-fit:contain;vertical-align:middle;margin-right:8px;"> Buy Sha Zhu a Real Can' data-ja='<img src="https://taoofcat.com/can-icon.png" style="width:32px;height:32px;object-fit:contain;vertical-align:middle;margin-right:8px;"> 本物の缶詰をシャージューに'><img src="https://taoofcat.com/can-icon.png" style="width:32px;height:32px;object-fit:contain;vertical-align:middle;margin-right:8px;"> 请傻猪吃一罐真罐头</div>
-    <div class="interact-section-sub" data-zh="这是真的罐头，不是积分。你供养的每一罐，我们会真的去买、真的喂给傻猪吃，然后拍视频/照片发在下方证明。" data-en="This is a real can — not points, not credits. Every can you send, we actually buy it, feed it to Sha Zhu, and photograph the proof below." data-ja="これは本物の缶詰です。あなたが送るたびに、本当に買って、シャージューに食べさせて、写真で証明します。">这是真的罐头，不是积分。你供养的每一罐，我们会真的去买、真的喂给傻猪吃，然后拍视频/照片发在下方证明。</div>
+    <div class="interact-section-sub" data-zh="这是真的罐头，不是积分。你供养的每一罐，我们会真的去买、真的喂给茶室猫吃，然后拍视频/照片发在下方证明。" data-en="This is a real can. Every can you send, we actually buy it, feed it to Cha Shi, and photograph the proof." data-ja="これは本物の缶詰です。あなたが送るたびに、本当に買って、シャージューに食べさせて、写真で証明します。">这是真的罐头，不是积分。你供养的每一罐，我们会真的去买、真的喂给茶室猫吃，然后拍视频/照片发在下方证明。</div>
   </div>
 
   <div class="feed-box reveal">
@@ -506,12 +619,31 @@ html[lang="en"] .scroll-disclaimer {
 
 </div>
 <!-- END INTERACT MODULE -->
+
+<!-- 购书横幅 -->
+<div class="book-banner">
+  <div class="book-banner-inner">
+    <img class="book-banner-cover" src="https://taoofcat.com/book-cover.png" alt="Tao of Cat">
+    <div class="book-banner-body">
+      <div class="book-banner-label" data-zh="傻猪推荐好书" data-en="Recommended Reading" data-ja="おすすめの本">傻猪推荐好书</div>
+      <div class="book-banner-title" data-zh="Tao of Cat — 英文电子书" data-en="Tao of Cat — The Ebook" data-ja="Tao of Cat — 英語電子書籍">Tao of Cat — 英文电子书</div>
+      <div class="book-banner-sub"
+        data-zh="英文版。你的猫比你更懂老子。11堂课，30页，$7.99"
+        data-en="Your cat has been teaching you Taoism for years. You just weren't listening. 11 lessons · 30 pages · $7.99"
+        data-ja="英語版。あなたの猫は老子より賢い。11レッスン · 30ページ · $7.99">
+        英文版。你的猫比你更懂老子。11堂课，30页，$7.99
+      </div>
+      <a href="https://taocat.gumroad.com/l/book" target="_blank" class="btn-book-banner"
+        data-zh="✦ 立即获取" data-en="✦ Get the Ebook" data-ja="✦ 今すぐ入手">✦ 立即获取</a>
+    </div>
+  </div>
+</div>
+
 <footer>
   <div class="footer-brand">玄猫之道</div>
   <div style="margin-bottom:8px;"><a href="support.html" style="font-size:13px;color:var(--ink-faint);text-decoration:none;font-family:'Noto Sans SC',sans-serif;font-weight:300;letter-spacing:0.05em;" data-zh="帮助中心" data-en="Support" data-ja="ヘルプ">帮助中心</a></div>
   <div class="footer-copy" data-zh="© 2026 Tao of Your Cat · Ipoh, Malaysia" data-en="© 2026 Tao of Your Cat · Ipoh, Malaysia" data-ja="© 2026 Tao of Your Cat · Ipoh, Malaysia">© 2026 Tao of Your Cat · Ipoh, Malaysia</div>
 </footer>
-
 
 <script>
 (function() {
