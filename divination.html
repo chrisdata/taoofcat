@@ -2266,7 +2266,7 @@ const CAT_DATA = {
   },
   huba: {
     name:'虎斑仔', element:'木', elementDesc:'野性行动',
-    photo:'hubanzai-cattree.jpg',
+    photo:'hubanzai.jpg',
     domain:'突破困境 · 竞争对抗 · 独立决策',
     personality:'不爱被摸，不撒娇，保持距离——但不是冷漠，是自有边界。家里运动健将，跑跳第一名。他不等人来找他，他自己选择跟谁玩。',
     quote:'别等人来邀请你，自己跳出去。',
@@ -2348,8 +2348,9 @@ function getInviteUrl() {
   return (el && el.value) ? el.value : 'https://TaoOfCat.com/divination.html';
 }
 
-// 统一生成带 og:image 的 /share 链接，imgUrl 可选（传 Cloudinary 上传后的 URL）
-function getShareUrl(imgUrl) {
+// 生成 /share 短链（干净，不带 Cloudinary URL）
+// Threads/FB 爬这个链接拿 og:image，用户点进来被 redirect 到邀请链接
+function getShareUrl() {
   if (!currentGua) return getInviteUrl();
   const _en = window._lang === 'en';
   const lang = _en ? 'en' : 'zh';
@@ -2362,8 +2363,7 @@ function getShareUrl(imgUrl) {
     if (el && el.value) ref = new URL(el.value).searchParams.get('ref') || '';
   } catch(e) {}
   const refParam = ref ? '&ref=' + encodeURIComponent(ref) : '';
-  const imgParam = imgUrl ? '&img=' + encodeURIComponent(imgUrl) : '';
-  return 'https://web-production-907c5.up.railway.app/share?cat=' + cat + '&lang=' + lang + '&gua=' + guaParam + refParam + imgParam;
+  return 'https://web-production-907c5.up.railway.app/share?cat=' + cat + '&lang=' + lang + '&gua=' + guaParam + refParam;
 }
 
 function getShareSuffix() {
@@ -2392,30 +2392,51 @@ async function uploadOracleCard() {
   return data.secure_url;
 }
 
-// 统一入口：上传卡片 → 执行分享回调
+// 统一入口：直接执行分享（链接分享不需要上传）
 async function shareWithCard(btnEl, shareFn) {
+  if (!currentGua) return;
+  if (btnEl) { btnEl.style.opacity = '0.5'; btnEl.disabled = true; }
+  try {
+    await shareFn();
+  } finally {
+    if (btnEl) { btnEl.style.opacity = ''; btnEl.disabled = false; }
+  }
+}
+
+// 手机原生分享（navigator.share）才上传卡片图
+async function shareNativeWithCard(btnEl) {
   if (!currentGua) return;
   const _en = window._lang === 'en';
   if (btnEl) { btnEl.style.opacity = '0.5'; btnEl.disabled = true; }
-  showToast(_en ? '⏳ Uploading card...' : '⏳ 上传中...');
+  showToast(_en ? '⏳ Generating card...' : '⏳ 生成卡片中...');
   try {
-    const imgUrl = await uploadOracleCard();
-    await shareFn(imgUrl);
+    const canvas = await generatePNG();
+    const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+    const guaTitle = currentGua ? (_en ? (currentGua.name_en||currentGua.name) : currentGua.name) : '';
+    const file = new File([blob], 'taoofcat-oracle.png', { type: 'image/png' });
+    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({ files: [file], title: _en ? 'Tao of Cat · Oracle' : '玄猫之道占卜', text: guaTitle + ' · TaoOfCat.com' });
+      showToast(_en ? 'Shared!' : '已分享 ✓');
+    } else {
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.download = 'taoofcat-oracle.png'; link.href = url; link.click();
+      URL.revokeObjectURL(url);
+      showToast(_en ? 'Image downloaded' : '图片已下载');
+    }
   } catch(e) {
-    showToast(_en ? 'Upload failed, sharing without image' : '上传失败，以文字分享');
-    await shareFn(null);
+    if (e.name !== 'AbortError') showToast(_en ? 'Failed' : '失败');
   } finally {
     if (btnEl) { btnEl.style.opacity = ''; btnEl.disabled = false; }
   }
 }
 window.shareToThreads = function() {
-  shareWithCard(this, (imgUrl) => {
+  shareWithCard(this, () => {
     const _en = window._lang === 'en';
     const name = _en ? (currentGua.name_en||currentGua.name) : currentGua.name;
     const quote = _en ? (currentGua.quote_en||currentGua.quote) : currentGua.quote;
     const header = _en ? '[Tao of Cat Oracle] ' : '【玄猫之道占卜】';
-    // /share 路由同时负责 og:image 预览 + redirect 到邀请链接
-    const shareUrl = getShareUrl(imgUrl);
+    const shareUrl = getShareUrl();
     const suffix = _en
       ? '\n\n🐾 Try it free → ' + shareUrl + '\n(Sign up & we both get 2 free cans!)'
       : '\n\n🐾 免费试试 → ' + shareUrl + '\n（注册后双方各得2罐罐头！）';
@@ -2425,7 +2446,7 @@ window.shareToThreads = function() {
 };
 
 window.shareToIG = function() {
-  shareWithCard(this, (imgUrl) => {
+  shareWithCard(this, () => {
     const _en = window._lang === 'en';
     const name = _en ? (currentGua.name_en||currentGua.name) : currentGua.name;
     const quote = _en ? (currentGua.quote_en||currentGua.quote) : currentGua.quote;
@@ -2444,7 +2465,7 @@ window.shareToIG = function() {
 };
 
 window.shareToWA = function() {
-  shareWithCard(this, (imgUrl) => {
+  shareWithCard(this, () => {
     const _en = window._lang === 'en';
     const name = _en ? (currentGua.name_en||currentGua.name) : currentGua.name;
     const quote = _en ? (currentGua.quote_en||currentGua.quote) : currentGua.quote;
@@ -2525,7 +2546,7 @@ window.saveCard = async function() {
 
 // Telegram = text link
 window.shareToTelegram = function() {
-  shareWithCard(this, (imgUrl) => {
+  shareWithCard(this, () => {
     const _en = window._lang === 'en';
     const name = _en ? (currentGua.name_en||currentGua.name) : currentGua.name;
     const quote = _en ? (currentGua.quote_en||currentGua.quote) : currentGua.quote;
@@ -2536,8 +2557,8 @@ window.shareToTelegram = function() {
 
 // Facebook = share link
 window.shareToFacebook = function() {
-  shareWithCard(this, (imgUrl) => {
-    window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(getShareUrl(imgUrl)), '_blank');
+  shareWithCard(this, () => {
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(getShareUrl()), '_blank');
   });
 };
 </script>
