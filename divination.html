@@ -2356,13 +2356,19 @@ function getShareUrl() {
 }
 
 function getShareSuffix() {
-  // 分享文字：og 预览链接 + 邀请链接
   const _en = window._lang === 'en';
   const inviteUrl = getInviteUrl();
+  const hasRef = inviteUrl.includes('ref=');
   const shareUrl = 'https://share.taoofcat.com';
-  return _en
-    ? '\n\n🐾 Try it free → ' + shareUrl + '\n(Sign up with my link & we both get 2 free cans! → ' + inviteUrl + ')'
-    : '\n\n🐾 免费试试 → ' + shareUrl + '\n（用我的链接注册双方各得2罐罐头！→ ' + inviteUrl + '）';
+  if (_en) {
+    return hasRef
+      ? '\n\n🐾 Try it free → ' + shareUrl + '\n✨ Sign up with my link & we both get 2 free cans! → ' + inviteUrl
+      : '\n\n🐾 Try it free → ' + shareUrl;
+  } else {
+    return hasRef
+      ? '\n\n🐾 免费试试 → ' + shareUrl + '\n✨ 用我的链接注册，双方各得2罐罐头！→ ' + inviteUrl
+      : '\n\n🐾 免费试试 → ' + shareUrl;
+  }
 }
 
 // 上传占卜卡片 PNG 到 Cloudinary，返回图片 URL
