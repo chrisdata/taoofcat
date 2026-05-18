@@ -287,6 +287,7 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
 
 /* SHARE MODAL */
 .share-modal-overlay { display:none; position:fixed; inset:0; background:rgba(44,36,22,0.7); z-index:200; align-items:center; justify-content:center; padding:1rem; }
+.share-privacy-note { font-size:0.72rem; color:var(--ink-light,#9a8a6a); text-align:center; padding:0.6rem 1.2rem 0; line-height:1.5; opacity:0.85; }
 .share-modal-overlay.show { display:flex; }
 .share-modal { background:var(--paper); border-radius:20px; padding:0; width:100%; max-width:400px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.3); max-height:90vh; overflow-y:auto; }
 .postcard { background:linear-gradient(135deg,#1e1608 0%,#2c1f0a 100%); padding:1.75rem; position:relative; overflow:hidden; }
@@ -1085,10 +1086,11 @@ html[lang="en"] .scroll-disclaimer {
           <button class="share-icon-btn" onclick="saveCard.call(this)" title="保存图片">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path  d="M12 16l-6-6h4V4h4v6h4l-6 6z"/><path  d="M20 18H4v2h16v-2z"/></svg>
           </button>
-          <div class="share-icon-label" data-zh="保存" data-en="Save" data-ja="保存">保存</div>
+          <div class="share-icon-label" data-zh="保存卦象" data-en="Save Card" data-ja="保存">保存卦象</div>
         </div>
 
       </div>
+      <div class="share-privacy-note" data-zh="🔒 为保护您的私隐，卦象图只保存在您的手机里。如要分享，请自便。" data-en="🔒 To protect your privacy, the oracle card is saved only to your device. Feel free to share it yourself.">🔒 为保护您的私隐，卦象图只保存在您的手机里。如要分享，请自便。</div>
       <button class="share-close-btn" onclick="document.getElementById('share-modal').classList.remove('show')" data-zh="关闭" data-en="Close" data-ja="閉じる">关闭</button>
     </div>
   </div>
@@ -2429,14 +2431,10 @@ async function shareNativeWithCard(btnEl) {
 window.shareToThreads = function() {
   shareWithCard(this, () => {
     const _en = window._lang === 'en';
-    const name = _en ? (currentGua.name_en||currentGua.name) : currentGua.name;
-    const quote = _en ? (currentGua.quote_en||currentGua.quote) : currentGua.quote;
-    const header = _en ? '[Tao of Cat Oracle] ' : '【玄猫之道占卜】';
-    const shareUrl = getShareUrl();
-    const suffix = _en
-      ? '\n\n🐾 Try it free → ' + shareUrl + '\n(Sign up & we both get 2 free cans!)'
-      : '\n\n🐾 免费试试 → ' + shareUrl + '\n（注册后双方各得2罐罐头！）';
-    const text = encodeURIComponent(header + name + '\n「' + quote + '」\n\n' + aiText.substring(0,100) + '...' + suffix);
+    const inviteUrl = getInviteUrl();
+    const text = encodeURIComponent(_en
+      ? '🐾 Try Tao of Cat Oracle free → ' + inviteUrl + '\n(Sign up & we both get 2 free cans!)'
+      : '🐾 免费试试玄猫之道占卜 → ' + inviteUrl + '\n（注册后双方各得2罐罐头！）');
     window.open('https://www.threads.net/intent/post?text=' + text, '_blank');
   });
 };
@@ -2444,10 +2442,10 @@ window.shareToThreads = function() {
 window.shareToIG = function() {
   shareWithCard(this, () => {
     const _en = window._lang === 'en';
-    const name = _en ? (currentGua.name_en||currentGua.name) : currentGua.name;
-    const quote = _en ? (currentGua.quote_en||currentGua.quote) : currentGua.quote;
-    const header = _en ? '[Tao of Cat · ' + name + ']' : '【玄猫之道 · ' + currentCat + '占卜结果】';
-    const text = header + '\n「' + quote + '」\n\n' + aiText.substring(0,150) + getShareSuffix();
+    const inviteUrl = getInviteUrl();
+    const text = _en
+      ? '🐾 Try Tao of Cat Oracle free → ' + inviteUrl + '\n(Sign up & we both get 2 free cans!)'
+      : '🐾 免费试试玄猫之道占卜 → ' + inviteUrl + '\n（注册后双方各得2罐罐头！）';
     if (navigator.clipboard && window.isSecureContext) {
       navigator.clipboard.writeText(text).then(() => showToast(t('igCopied')));
     } else {
@@ -2463,10 +2461,10 @@ window.shareToIG = function() {
 window.shareToWA = function() {
   shareWithCard(this, () => {
     const _en = window._lang === 'en';
-    const name = _en ? (currentGua.name_en||currentGua.name) : currentGua.name;
-    const quote = _en ? (currentGua.quote_en||currentGua.quote) : currentGua.quote;
-    const header = _en ? '[Tao of Cat · ' + name + '] ' : '【玄猫之道 · ' + currentCat + '占卜结果】\n' + currentGua.name + '\n';
-    const text = encodeURIComponent(header + '「' + quote + '」\n\n' + aiText.substring(0,150) + getShareSuffix());
+    const inviteUrl = getInviteUrl();
+    const text = encodeURIComponent(_en
+      ? '🐾 Try Tao of Cat Oracle free → ' + inviteUrl + '\n(Sign up & we both get 2 free cans!)'
+      : '🐾 免费试试玄猫之道占卜 → ' + inviteUrl + '\n（注册后双方各得2罐罐头！）');
     window.open('https://wa.me/?text=' + text, '_blank');
   });
 };
@@ -2540,14 +2538,15 @@ window.saveCard = async function() {
   btn.style.opacity = ''; btn.disabled = false;
 };
 
-// Telegram = text link
+// Telegram = invite link
 window.shareToTelegram = function() {
   shareWithCard(this, () => {
     const _en = window._lang === 'en';
-    const name = _en ? (currentGua.name_en||currentGua.name) : currentGua.name;
-    const quote = _en ? (currentGua.quote_en||currentGua.quote) : currentGua.quote;
-    const text = encodeURIComponent((_en ? '[Tao of Cat Oracle] ' : '【玄猫之道占卜】') + name + '\n「' + quote + '」\n\n' + aiText.substring(0,150) + getShareSuffix());
-    window.open('https://t.me/share/url?url=https://taoofcat.com&text=' + text, '_blank');
+    const inviteUrl = getInviteUrl();
+    const text = encodeURIComponent(_en
+      ? '🐾 Try Tao of Cat Oracle free → ' + inviteUrl + '\n(Sign up & we both get 2 free cans!)'
+      : '🐾 免费试试玄猫之道占卜 → ' + inviteUrl + '\n（注册后双方各得2罐罐头！）');
+    window.open('https://t.me/share/url?url=' + encodeURIComponent(inviteUrl) + '&text=' + text, '_blank');
   });
 };
 
