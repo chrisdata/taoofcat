@@ -2348,49 +2348,105 @@ function getInviteUrl() {
   return (el && el.value) ? el.value : 'https://TaoOfCat.com/divination.html';
 }
 
-function getShareSuffix() {
-  const url = getInviteUrl();
+// 统一生成带 og:image 的 /share 链接，imgUrl 可选（传 Cloudinary 上传后的 URL）
+function getShareUrl(imgUrl) {
+  if (!currentGua) return getInviteUrl();
+  const _en = window._lang === 'en';
+  const lang = _en ? 'en' : 'zh';
+  const cat = window._selectedCatKey || 'shazhu';
+  const name = _en ? (currentGua.name_en||currentGua.name) : currentGua.name;
+  const guaParam = encodeURIComponent(name);
+  let ref = '';
+  try {
+    const el = document.getElementById('invite-link-p');
+    if (el && el.value) ref = new URL(el.value).searchParams.get('ref') || '';
+  } catch(e) {}
+  const refParam = ref ? '&ref=' + encodeURIComponent(ref) : '';
+  const imgParam = imgUrl ? '&img=' + encodeURIComponent(imgUrl) : '';
+  return 'https://web-production-907c5.up.railway.app/share?cat=' + cat + '&lang=' + lang + '&gua=' + guaParam + refParam + imgParam;
+}
+
+function getShareSuffix(imgUrl) {
+  const url = getShareUrl(imgUrl);
   const _en = window._lang === 'en';
   return _en
     ? '\n\n🐾 Try it free → ' + url + '\n(Sign up & we both get 2 free cans!)'
     : '\n\n🐾 免费试试 → ' + url + '\n（注册后双方各得2罐罐头！）';
 }
-window.shareToThreads = () => {
-  if (!currentGua) return;
-  const _en = window._lang === 'en';
-  const name = _en ? (currentGua.name_en||currentGua.name) : currentGua.name;
-  const quote = _en ? (currentGua.quote_en||currentGua.quote) : currentGua.quote;
-  const header = _en ? '[Tao of Cat Oracle] ' : '【玄猫之道占卜】';
-  const text = encodeURIComponent(header + name + '\n「' + quote + '」\n\n' + aiText.substring(0,100) + '...' + getShareSuffix());
-  window.open('https://www.threads.net/intent/post?text=' + text, '_blank');
-};
 
-window.shareToIG = () => {
+// 上传占卜卡片 PNG 到 Cloudinary，返回图片 URL
+async function uploadOracleCard() {
+  const canvas = await generatePNG();
+  const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+  // 用卦象+时间戳做 public_id，放在 oracle-shares folder
+  const guaSlug = currentGua ? (currentGua.name_en||currentGua.name||'oracle').replace(/\s+/g,'-').toLowerCase() : 'oracle';
+  const publicId = 'oracle-shares/' + guaSlug + '-' + Date.now();
+  const fd = new FormData();
+  fd.append('file', blob, 'taoofcat-oracle.png');
+  fd.append('upload_preset', 'oracle shares');
+  fd.append('public_id', publicId);
+  const res = await fetch('https://api.cloudinary.com/v1_1/dlm2iyc5i/image/upload', { method:'POST', body:fd });
+  const data = await res.json();
+  if (!data.secure_url) throw new Error('Upload failed');
+  return data.secure_url;
+}
+
+// 统一入口：上传卡片 → 执行分享回调
+async function shareWithCard(btnEl, shareFn) {
   if (!currentGua) return;
   const _en = window._lang === 'en';
-  const name = _en ? (currentGua.name_en||currentGua.name) : currentGua.name;
-  const quote = _en ? (currentGua.quote_en||currentGua.quote) : currentGua.quote;
-  const header = _en ? '[Tao of Cat · ' + name + ']' : '【玄猫之道 · ' + currentCat + '占卜结果】';
-  const text = header + '\n「' + quote + '」\n\n' + aiText.substring(0,150) + getShareSuffix();
-  if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(text).then(() => showToast(t('igCopied')));
-  } else {
-    const ta = document.createElement('textarea');
-    ta.value = text; ta.style.cssText = 'position:fixed;opacity:0;';
-    document.body.appendChild(ta); ta.focus(); ta.select();
-    document.execCommand('copy'); document.body.removeChild(ta);
-    showToast(t('igCopied'));
+  if (btnEl) { btnEl.style.opacity = '0.5'; btnEl.disabled = true; }
+  showToast(_en ? '⏳ Uploading card...' : '⏳ 上传中...');
+  try {
+    const imgUrl = await uploadOracleCard();
+    await shareFn(imgUrl);
+  } catch(e) {
+    showToast(_en ? 'Upload failed, sharing without image' : '上传失败，以文字分享');
+    await shareFn(null);
+  } finally {
+    if (btnEl) { btnEl.style.opacity = ''; btnEl.disabled = false; }
   }
+}
+window.shareToThreads = function() {
+  shareWithCard(this, (imgUrl) => {
+    const _en = window._lang === 'en';
+    const name = _en ? (currentGua.name_en||currentGua.name) : currentGua.name;
+    const quote = _en ? (currentGua.quote_en||currentGua.quote) : currentGua.quote;
+    const header = _en ? '[Tao of Cat Oracle] ' : '【玄猫之道占卜】';
+    const shareUrl = getShareUrl(imgUrl);
+    const text = encodeURIComponent(header + name + '\n「' + quote + '」\n\n' + aiText.substring(0,100) + '...\n\n🐾 ' + (_en ? 'Try it free' : '免费试试') + ' → ' + shareUrl);
+    window.open('https://www.threads.net/intent/post?text=' + text, '_blank');
+  });
 };
 
-window.shareToWA = () => {
-  if (!currentGua) return;
-  const _en = window._lang === 'en';
-  const name = _en ? (currentGua.name_en||currentGua.name) : currentGua.name;
-  const quote = _en ? (currentGua.quote_en||currentGua.quote) : currentGua.quote;
-  const header = _en ? '[Tao of Cat · ' + name + '] ' : '【玄猫之道 · ' + currentCat + '占卜结果】\n' + currentGua.name + '\n';
-  const text = encodeURIComponent(header + '「' + quote + '」\n\n' + aiText.substring(0,150) + getShareSuffix());
-  window.open('https://wa.me/?text=' + text, '_blank');
+window.shareToIG = function() {
+  shareWithCard(this, (imgUrl) => {
+    const _en = window._lang === 'en';
+    const name = _en ? (currentGua.name_en||currentGua.name) : currentGua.name;
+    const quote = _en ? (currentGua.quote_en||currentGua.quote) : currentGua.quote;
+    const header = _en ? '[Tao of Cat · ' + name + ']' : '【玄猫之道 · ' + currentCat + '占卜结果】';
+    const text = header + '\n「' + quote + '」\n\n' + aiText.substring(0,150) + getShareSuffix(imgUrl);
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(() => showToast(t('igCopied')));
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.cssText = 'position:fixed;opacity:0;';
+      document.body.appendChild(ta); ta.focus(); ta.select();
+      document.execCommand('copy'); document.body.removeChild(ta);
+      showToast(t('igCopied'));
+    }
+  });
+};
+
+window.shareToWA = function() {
+  shareWithCard(this, (imgUrl) => {
+    const _en = window._lang === 'en';
+    const name = _en ? (currentGua.name_en||currentGua.name) : currentGua.name;
+    const quote = _en ? (currentGua.quote_en||currentGua.quote) : currentGua.quote;
+    const header = _en ? '[Tao of Cat · ' + name + '] ' : '【玄猫之道 · ' + currentCat + '占卜结果】\n' + currentGua.name + '\n';
+    const text = encodeURIComponent(header + '「' + quote + '」\n\n' + aiText.substring(0,150) + getShareSuffix(imgUrl));
+    window.open('https://wa.me/?text=' + text, '_blank');
+  });
 };
 
 window.copyShareText = () => {
@@ -2464,17 +2520,20 @@ window.saveCard = async function() {
 
 // Telegram = text link
 window.shareToTelegram = function() {
-  if (!currentGua) return;
-  const _en = window._lang === 'en';
-  const name = _en ? (currentGua.name_en||currentGua.name) : currentGua.name;
-  const quote = _en ? (currentGua.quote_en||currentGua.quote) : currentGua.quote;
-  const text = encodeURIComponent((_en ? '[Tao of Cat Oracle] ' : '【玄猫之道占卜】') + name + '\n「' + quote + '」\n\n' + aiText.substring(0,150) + getShareSuffix());
-  window.open('https://t.me/share/url?url=https://taoofcat.com&text=' + text, '_blank');
+  shareWithCard(this, (imgUrl) => {
+    const _en = window._lang === 'en';
+    const name = _en ? (currentGua.name_en||currentGua.name) : currentGua.name;
+    const quote = _en ? (currentGua.quote_en||currentGua.quote) : currentGua.quote;
+    const text = encodeURIComponent((_en ? '[Tao of Cat Oracle] ' : '【玄猫之道占卜】') + name + '\n「' + quote + '」\n\n' + aiText.substring(0,150) + getShareSuffix(imgUrl));
+    window.open('https://t.me/share/url?url=https://taoofcat.com&text=' + text, '_blank');
+  });
 };
 
 // Facebook = share link
 window.shareToFacebook = function() {
-  window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(getInviteUrl()), '_blank');
+  shareWithCard(this, (imgUrl) => {
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(getShareUrl(imgUrl)), '_blank');
+  });
 };
 </script>
 
