@@ -121,6 +121,72 @@ nav.scrolled .nav-login-btn { background:var(--ink); color:var(--paper); border:
 
 /* RESULT */
 .result-section { display:none; }
+
+/* ── 购书区块 ── */
+.book-promo {
+  margin-top:1.5rem;
+  background:linear-gradient(135deg,rgba(184,134,11,0.08),rgba(184,134,11,0.03));
+  border:1px solid rgba(184,134,11,0.25);
+  border-radius:14px;
+  padding:1.5rem;
+  display:flex;
+  align-items:center;
+  gap:1.25rem;
+}
+.book-promo-cover {
+  width:64px;
+  height:86px;
+  object-fit:cover;
+  border-radius:4px;
+  flex-shrink:0;
+  box-shadow:0 4px 12px rgba(30,22,8,0.2);
+}
+.book-promo-info { flex:1; min-width:0; }
+.book-promo-label {
+  font-size:10px;
+  letter-spacing:0.25em;
+  color:var(--gold);
+  font-family:'Noto Sans SC',sans-serif;
+  font-weight:300;
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
+.book-promo-title {
+  font-size:15px;
+  font-weight:700;
+  color:var(--ink);
+  letter-spacing:0.05em;
+  margin-bottom:4px;
+  line-height:1.3;
+}
+.book-promo-sub {
+  font-size:12px;
+  color:var(--ink-faint);
+  font-family:'Noto Sans SC',sans-serif;
+  font-weight:300;
+  letter-spacing:0.04em;
+  line-height:1.6;
+  margin-bottom:10px;
+}
+.btn-book-buy {
+  display:inline-block;
+  padding:8px 20px;
+  background:var(--gold);
+  color:#fff;
+  font-size:12px;
+  font-family:'Noto Serif SC',serif;
+  font-weight:500;
+  letter-spacing:0.12em;
+  border-radius:4px;
+  text-decoration:none;
+  transition:background 0.2s,transform 0.15s;
+}
+.btn-book-buy:hover { background:var(--gold-light); transform:translateY(-1px); }
+@media(max-width:480px){
+  .book-promo { flex-direction:column; text-align:center; }
+  .book-promo-cover { width:80px; height:107px; }
+}
+
 .result-card { background:rgba(255,255,255,0.7); border:1px solid var(--ink-ghost); border-radius:20px; padding:2.5rem; position:relative; overflow:hidden; }
 .result-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(to right,transparent,var(--gold),transparent); }
 .result-gua-sym { font-size:80px; text-align:center; color:var(--ink); margin-bottom:8px; }
@@ -733,6 +799,26 @@ html[lang="en"] .scroll-disclaimer {
         <div class="result-ai-loading" id="ai-loading" data-zh="猫咪正在想..." data-en="The cat is thinking..." data-ja="猫が考え中...">猫咪正在想...</div>
         <div class="result-ai" id="ai-resp"></div>
         <div class="disclaimer" data-zh="⚠ 本卦象仅供参考，不构成任何建议。一切决定请以自身判断为准。" data-en="⚠ This reading is for reference only and does not constitute advice. Trust your own judgment." data-ja="⚠ この結果は参考のみ。いかなる助言も構成しません。すべての判断はご自身で。">⚠ 本卦象仅供参考，不构成任何建议。一切决定请以自身判断为准。</div>
+      </div>
+
+      <!-- 购书区块 -->
+      <div class="book-promo" id="book-promo-block">
+        <img class="book-promo-cover" src="https://taoofcat.com/book-cover.png" alt="Tao of Cat"
+             onerror="this.style.display='none'">
+        <div class="book-promo-info">
+          <div class="book-promo-label" data-zh="傻猪推荐" data-en="Recommended by Sha Zhu" data-ja="シャージュー推薦">傻猪推荐</div>
+          <div class="book-promo-title" data-zh="《玄猫之道》" data-en="Tao of Cat" data-ja="玄猫之道">《玄猫之道》</div>
+          <div class="book-promo-sub"
+            data-zh="你的猫一直在教你道家哲学。只是你没在听。11堂课，30页，一只淡定的白猫。"
+            data-en="Your cat has been teaching you Taoism for years. You just weren't listening. 11 lessons, 30 pages."
+            data-ja="あなたの猫はずっと道家哲学を教えていた。あなたが聞いていなかっただけ。">
+            你的猫一直在教你道家哲学。只是你没在听。11堂课，30页，一只淡定的白猫。
+          </div>
+          <a href="https://taocat.gumroad.com/l/book" target="_blank" class="btn-book-buy"
+            data-zh="✦ 获取电子书 $7.99"
+            data-en="✦ Get the Ebook $7.99"
+            data-ja="✦ 電子書籍を入手 $7.99">✦ 获取电子书 $7.99</a>
+        </div>
       </div>
       <div class="result-actions">
         <button class="result-btn" onclick="window.openShareModal()" data-zh="✦ 分享这次对话" data-en="✦ Share This" data-ja="✦ この対話をシェア">✦ 分享这次对话</button>
