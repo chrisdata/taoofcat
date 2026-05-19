@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中途志愿者 · 玄猫之道</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500&family=IM+Fell+English:ital@0;1&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut }
+  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, collection, query, where, orderBy, getDocs }
+  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAqu9pHaAEjFqPvPz3TuoYc60Lpb4DLZrs",
+  authDomain: "taoofcat-6cf6e.firebaseapp.com",
+  projectId: "taoofcat-6cf6e",
+  storageBucket: "taoofcat-6cf6e.firebasestorage.app",
+  messagingSenderId: "1088808296707",
+  appId: "1:1088808296707:web:ce9b54ba34d395681bc936"
+};
+
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db   = getFirestore(app);
+const provider = new GoogleAuthProvider();
+
+window._auth = auth; window._db = db;
+window._collection = collection; window._query = query;
+window._where = where; window._orderBy = orderBy;
+window._getDocs = getDocs;
+window._signInWithPopup = signInWithPopup;
+window._signOut = signOut;
+window._onAuthStateChanged = onAuthStateChanged;
+window._provider = provider;
+</script>
+
+<style>
+:root{--gold:#d4a843;--gold-lt:#e8c97a;--dark:#0e0c0a;--dark2:#1a1612;--dark3:#252018;--border:rgba(212,168,67,0.18);--border2:rgba(212,168,67,0.38);--text:#e8dcc8;--muted:rgba(232,220,200,0.5);--radius:8px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--dark);color:var(--text);font-family:'Noto Serif SC',serif;font-size:15px;line-height:1.7;min-height:100vh}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;background:rgba(14,12,10,0.92);border-bottom:0.5px solid var(--border);backdrop-filter:blur(8px)}
+.nav-logo{font-family:'IM Fell English',serif;color:var(--gold);font-size:15px;text-decoration:none;letter-spacing:.05em}
+.nav-logo span{font-size:12px;color:var(--muted);margin-left:8px}
+.nav-right{display:flex;align-items:center;gap:12px}
+.nav-link{font-size:12px;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-link:hover{color:var(--gold)}
+#user-name{font-size:12px;color:var(--muted)}
+.btn-sm{font-size:12px;padding:5px 14px;border:0.5px solid var(--border2);background:transparent;color:var(--gold);border-radius:var(--radius);cursor:pointer;font-family:'Noto Serif SC',serif;transition:background .2s}
+.btn-sm:hover{background:rgba(212,168,67,0.1)}
+
+.page{max-width:900px;margin:0 auto;padding:88px 24px 80px}
+
+/* PROFILE HEADER */
+.profile-header{text-align:center;padding:32px 24px 28px;border-bottom:0.5px solid var(--border);margin-bottom:32px}
+.profile-avatar{width:72px;height:72px;border-radius:50%;background:var(--dark2);border:0.5px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px}
+.profile-name{font-size:22px;font-weight:300;color:var(--gold-lt);letter-spacing:.08em;margin-bottom:6px}
+.profile-sub{font-size:13px;color:var(--muted);font-family:'Lora',serif;font-style:italic;margin-bottom:16px}
+.profile-stats{display:flex;justify-content:center;gap:32px}
+.pstat{text-align:center}
+.pstat-num{font-size:20px;font-weight:500;color:var(--gold)}
+.pstat-lbl{font-size:11px;color:var(--muted);letter-spacing:.05em}
+
+/* SHARE BAR（只有本人看到）*/
+.share-bar{background:rgba(212,168,67,0.06);border:0.5px solid var(--border2);border-radius:var(--radius);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:24px}
+.share-bar-text{font-size:13px;color:var(--muted)}
+.share-bar-text strong{color:var(--gold-lt)}
+.share-btns{display:flex;gap:8px;flex-wrap:wrap}
+.share-btn{font-size:11px;padding:5px 12px;border:0.5px solid var(--border2);border-radius:var(--radius);background:transparent;color:var(--gold);cursor:pointer;font-family:'Noto Serif SC',serif;transition:all .2s}
+.share-btn:hover{background:rgba(212,168,67,0.1)}
+
+/* GRID */
+.section-label{font-size:11px;letter-spacing:.2em;color:var(--gold);opacity:.7;text-transform:uppercase;margin-bottom:20px}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+@media(max-width:480px){.cat-grid{grid-template-columns:repeat(2,1fr);gap:10px}}
+
+/* CARD */
+.cat-card{background:var(--dark2);border:0.5px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color .2s,transform .15s;text-decoration:none;display:block;color:inherit}
+.cat-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.card-photo{width:100%;aspect-ratio:1;background:var(--dark3);position:relative;overflow:hidden}
+.card-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.cat-card:hover .card-photo img{transform:scale(1.04)}
+.card-photo .no-photo{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:36px;color:var(--border2)}
+.card-badge{position:absolute;top:8px;left:8px;font-size:10px;padding:3px 8px;border-radius:20px;font-weight:500}
+.badge-new{background:rgba(39,174,96,0.2);border:0.5px solid rgba(39,174,96,0.5);color:#2ecc71}
+.badge-paused{background:rgba(128,128,128,0.2);border:0.5px solid rgba(128,128,128,0.4);color:#aaa}
+.card-body{padding:12px 14px}
+.card-name{font-size:15px;font-weight:500;color:var(--gold-lt);margin-bottom:2px}
+.card-meta{font-size:12px;color:var(--muted);margin-bottom:6px}
+.card-loc{font-size:11px;color:rgba(232,220,200,0.35);display:flex;align-items:center;gap:3px;margin-bottom:8px}
+.card-tags{display:flex;gap:4px;flex-wrap:wrap}
+.card-tag{font-size:10px;padding:2px 7px;background:rgba(212,168,67,0.08);border:0.5px solid var(--border);border-radius:20px;color:var(--muted)}
+
+/* EMPTY / LOADING */
+.empty{text-align:center;padding:60px 24px;color:var(--muted)}
+.empty-icon{font-size:40px;margin-bottom:16px}
+.empty p{font-size:14px;line-height:1.9}
+.loading{text-align:center;padding:40px;color:var(--muted);font-size:13px}
+.spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;margin-right:8px;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* NOT FOUND */
+.not-found{text-align:center;padding:80px 24px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">玄猫之道 <span>Tao of Cat</span></a>
+  <div class="nav-right">
+    <a class="nav-link" href="/adopt.html">← 领养墙</a>
+    <span id="user-name"></span>
+    <button class="btn-sm" id="auth-btn" onclick="handleAuth()">登录</button>
+  </div>
+</nav>
+
+<div class="page">
+  <div id="content">
+    <div class="loading"><span class="spinner"></span>加载中…</div>
+  </div>
+</div>
+
+<script>
+const CLOUDINARY = 'https://res.cloudinary.com/dlm2iyc5i/image/upload';
+const uid = new URLSearchParams(location.search).get('uid');
+let currentUser = null;
+let profileCats = [];
+
+window.addEventListener('DOMContentLoaded', () => {
+  window._onAuthStateChanged(window._auth, user => {
+    currentUser = user;
+    document.getElementById('user-name').textContent = user ? (user.displayName?.split(' ')[0] || '') : '';
+    document.getElementById('auth-btn').textContent  = user ? '登出' : '登录';
+    // 如果是本人，显示分享栏
+    if(user && uid && user.uid === uid){
+      const bar = document.getElementById('share-bar-wrap');
+      if(bar) bar.style.display = 'flex';
+    }
+  });
+
+  if(!uid){
+    document.getElementById('content').innerHTML = `
+      <div class="not-found">
+        <div style="font-size:40px;margin-bottom:16px">🐾</div>
+        <p style="color:var(--muted);font-size:14px">找不到这个页面</p>
+      </div>`;
+    return;
+  }
+  loadProfile();
+});
+
+function handleAuth(){
+  if(currentUser) window._signOut(window._auth);
+  else window._signInWithPopup(window._auth, window._provider).catch(console.error);
+}
+
+async function loadProfile(){
+  try {
+    const snap = await window._getDocs(
+      window._query(
+        window._collection(window._db, 'foster_cats'),
+        window._where('foster_uid', '==', uid),
+        window._where('status', 'in', ['approved', 'paused']),
+        window._orderBy('created_at', 'desc')
+      )
+    );
+
+    profileCats = snap.docs.map(d => ({id: d.id, ...d.data()}));
+
+    // 从第一只猫拿志愿者资料
+    const first   = profileCats[0];
+    const name    = first?.foster_name || '中途志愿者';
+    const langs   = first?.foster_lang || [];
+    const country = first?.country || '';
+    const state   = first?.state   || '';
+    const loc     = [state, country].filter(Boolean).join(', ');
+    const active  = profileCats.filter(c => c.status === 'approved').length;
+    const paused  = profileCats.filter(c => c.status === 'paused').length;
+
+    const profileUrl = `https://taoofcat.com/foster-profile.html?uid=${uid}`;
+
+    document.getElementById('content').innerHTML = `
+      <!-- 分享栏（本人才看到，JS控制显示）-->
+      <div id="share-bar-wrap" class="share-bar" style="display:none">
+        <div class="share-bar-text">
+          分享你的中途主页，让更多人看到你的猫 🐾
+        </div>
+        <div class="share-btns">
+          <button class="share-btn" onclick="shareToWA()">WhatsApp</button>
+          <button class="share-btn" onclick="shareToTG()">Telegram</button>
+          <button class="share-btn" onclick="shareToThreads()">Threads</button>
+          <button class="share-btn" onclick="copyLink()">复制链接</button>
+        </div>
+      </div>
+
+      <!-- 志愿者资料 -->
+      <div class="profile-header">
+        <div class="profile-avatar">🐾</div>
+        <div class="profile-name">${esc(name)}</div>
+        <div class="profile-sub">${loc ? `📍 ${esc(loc)}` : '中途志愿者'}${langs.length ? ' · 会说 ' + langs.join(' / ') : ''}</div>
+        <div class="profile-stats">
+          <div class="pstat">
+            <div class="pstat-num">${active}</div>
+            <div class="pstat-lbl">等待领养</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-num">${paused}</div>
+            <div class="pstat-lbl">暂停中</div>
+          </div>
+          <div class="pstat">
+            <div class="pstat-num">${profileCats.length}</div>
+            <div class="pstat-lbl">总在线</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 猫咪列表 -->
+      <div class="section-label">正在等待有缘人 · ${profileCats.length} 只</div>
+      <div class="cat-grid" id="cat-grid"></div>`;
+
+    // 显示分享栏给本人
+    if(currentUser && currentUser.uid === uid){
+      document.getElementById('share-bar-wrap').style.display = 'flex';
+    }
+
+    // 渲染猫咪
+    renderCats();
+
+  } catch(e){
+    document.getElementById('content').innerHTML =
+      `<div class="empty"><p>加载失败：${e.message}</p></div>`;
+  }
+}
+
+function renderCats(){
+  const grid = document.getElementById('cat-grid');
+  if(!grid) return;
+
+  if(!profileCats.length){
+    grid.innerHTML = `<div class="empty" style="grid-column:1/-1">
+      <div class="empty-icon">🐾</div>
+      <p>暂时没有在线的中途猫</p>
+    </div>`;
+    return;
+  }
+
+  profileCats.forEach(cat => {
+    const card = document.createElement('a');
+    card.className = 'cat-card';
+    card.href = `/foster-cat.html?id=${cat.id}`;
+
+    const photoUrl = cat.cover_photo
+      ? `${CLOUDINARY}/q_auto,f_auto,w_400/${cat.cover_photo}`
+      : null;
+
+    const badge = cat.status === 'paused'
+      ? '<span class="card-badge badge-paused">暂停</span>'
+      : isNew(cat.created_at)
+        ? '<span class="card-badge badge-new">新上架</span>'
+        : '';
+
+    const furMap = {short:'短毛',medium:'中长毛',long:'长毛'};
+    const ageMap = {kitten:'幼猫',adult:'成猫',senior:'老猫'};
+    const genderText = cat.gender==='male'?'公猫':cat.gender==='female'?'母猫':'';
+    const meta = [genderText, ageMap[cat.age_group]||'', furMap[cat.fur_length]||''].filter(Boolean).join(' · ');
+    const loc  = [cat.city, cat.state].filter(Boolean).join(', ');
+
+    const tags = [];
+    if(cat.is_neutered)   tags.push('已绝育');
+    if(cat.is_vaccinated) tags.push('已接种');
+    if(cat.fiv_status === 'negative') tags.push('FIV−');
+
+    card.innerHTML = `
+      <div class="card-photo">
+        ${photoUrl
+          ? `<img src="${photoUrl}" alt="${esc(getName(cat))}" loading="lazy">`
+          : '<div class="no-photo">🐱</div>'}
+        ${badge}
+      </div>
+      <div class="card-body">
+        <div class="card-name">${esc(getName(cat))}</div>
+        <div class="card-meta">${esc(meta)}</div>
+        <div class="card-loc">📍 ${esc(loc)}</div>
+        <div class="card-tags">${tags.map(t=>`<span class="card-tag">${t}</span>`).join('')}</div>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+// ── 分享 ──
+function getUrl(){ return `https://taoofcat.com/foster-profile.html?uid=${uid}`; }
+function shareText(){ return encodeURIComponent(`🐾 我有 ${profileCats.length} 只猫咪等待有缘人领养 · 玄猫之道`); }
+
+function shareToWA(){
+  window.open(`https://wa.me/?text=${shareText()}%20${encodeURIComponent(getUrl())}`);
+}
+function shareToTG(){
+  window.open(`https://t.me/share/url?url=${encodeURIComponent(getUrl())}&text=${shareText()}`);
+}
+function shareToThreads(){
+  window.open(`https://www.threads.net/intent/post?text=${shareText()}%20${encodeURIComponent(getUrl())}`);
+}
+function copyLink(){
+  navigator.clipboard.writeText(getUrl()).then(() => alert('链接已复制 🐾'));
+}
+
+// ── 工具 ──
+function getName(cat){
+  const n = cat.name;
+  if(!n) return '无名猫';
+  if(typeof n === 'string') return n;
+  return n.zh || n.en || '无名猫';
+}
+function isNew(ts){
+  if(!ts) return false;
+  const d = ts.toDate ? ts.toDate() : new Date(ts);
+  return (Date.now() - d.getTime()) < 7*24*60*60*1000;
+}
+function esc(s){
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+</script>
+</body>
+</html>

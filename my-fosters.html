@@ -167,6 +167,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 24px;display:fl
       <div class="page-sub" id="page-sub"></div>
     </div>
     <a href="/foster.html" class="btn-new">＋ 登记新猫</a>
+    <button class="btn-sm" id="btn-share-profile" onclick="shareProfile()" style="display:none">🔗 分享我的主页</button>
   </div>
 
   <!-- 统计 -->
@@ -210,6 +211,7 @@ window.addEventListener('DOMContentLoaded', () => {
       document.getElementById('user-name').textContent = user.displayName?.split(' ')[0] || '';
       document.getElementById('auth-btn').textContent = '登出';
       document.getElementById('page-sub').textContent = user.displayName || user.email;
+      document.getElementById('btn-share-profile').style.display = 'inline-block';
       loadMyCats();
     } else {
       document.getElementById('login-gate').style.display = 'flex';
@@ -445,6 +447,13 @@ function formatDate(ts){
 
 function esc(s){
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function shareProfile(){
+  const url = `https://taoofcat.com/foster-profile.html?uid=${currentUser.uid}`;
+  navigator.clipboard.writeText(url).then(() => {
+    alert('主页链接已复制 🐾\n\n' + url);
+  });
 }
 </script>
 </body>
