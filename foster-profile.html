@@ -57,7 +57,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 24px;display:fl
 
 /* PROFILE HEADER */
 .profile-header{text-align:center;padding:32px 24px 28px;border-bottom:0.5px solid var(--border);margin-bottom:32px}
-.profile-avatar{width:72px;height:72px;border-radius:50%;background:var(--dark2);border:0.5px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px}
+.profile-avatar{width:88px;height:88px;border-radius:50%;margin:0 auto 16px;position:relative;display:flex;align-items:center;justify-content:center}
+.profile-avatar::before{content:'';position:absolute;inset:-3px;border-radius:50%;background:conic-gradient(var(--gold) 0deg,var(--gold-lt) 90deg,var(--gold) 180deg,#8b6914 270deg,var(--gold) 360deg);z-index:0}
+.profile-avatar img{width:82px;height:82px;border-radius:50%;object-fit:cover;object-position:center top;position:relative;z-index:1;border:2px solid var(--dark)}
 .profile-name{font-size:22px;font-weight:300;color:var(--gold-lt);letter-spacing:.08em;margin-bottom:6px}
 .profile-sub{font-size:13px;color:var(--muted);font-family:'Lora',serif;font-style:italic;margin-bottom:16px}
 .profile-stats{display:flex;justify-content:center;gap:32px}
@@ -73,27 +75,49 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 24px;display:fl
 .share-btn{font-size:11px;padding:5px 12px;border:0.5px solid var(--border2);border-radius:var(--radius);background:transparent;color:var(--gold);cursor:pointer;font-family:'Noto Serif SC',serif;transition:all .2s}
 .share-btn:hover{background:rgba(212,168,67,0.1)}
 
-/* GRID */
+/* SECTION LABEL */
 .section-label{font-size:11px;letter-spacing:.2em;color:var(--gold);opacity:.7;text-transform:uppercase;margin-bottom:20px}
-.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
-@media(max-width:480px){.cat-grid{grid-template-columns:repeat(2,1fr);gap:10px}}
+
+/* 走马灯容器 */
+.marquee-wrap{position:relative;overflow:hidden;margin:0 -24px}
+.marquee-wrap::before,.marquee-wrap::after{
+  content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none;
+}
+.marquee-wrap::before{left:0;background:linear-gradient(to right,var(--dark),transparent)}
+.marquee-wrap::after{right:0;background:linear-gradient(to left,var(--dark),transparent)}
+.marquee-track{
+  display:flex;gap:16px;
+  animation:marquee 30s linear infinite;
+  width:max-content;padding:4px 24px;
+}
+.marquee-track:hover{animation-play-state:paused}
+@keyframes marquee{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
 
 /* CARD */
-.cat-card{background:var(--dark2);border:0.5px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color .2s,transform .15s;text-decoration:none;display:block;color:inherit}
-.cat-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.cat-card{
+  background:var(--dark2);border:0.5px solid var(--border);
+  border-radius:12px;overflow:hidden;cursor:pointer;
+  transition:border-color .2s,transform .15s;
+  text-decoration:none;display:block;color:inherit;
+  width:200px;flex-shrink:0;
+}
+.cat-card:hover{border-color:var(--border2);transform:translateY(-3px)}
 .card-photo{width:100%;aspect-ratio:1;background:var(--dark3);position:relative;overflow:hidden}
 .card-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
-.cat-card:hover .card-photo img{transform:scale(1.04)}
+.cat-card:hover .card-photo img{transform:scale(1.05)}
 .card-photo .no-photo{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:36px;color:var(--border2)}
 .card-badge{position:absolute;top:8px;left:8px;font-size:10px;padding:3px 8px;border-radius:20px;font-weight:500}
 .badge-new{background:rgba(39,174,96,0.2);border:0.5px solid rgba(39,174,96,0.5);color:#2ecc71}
 .badge-paused{background:rgba(128,128,128,0.2);border:0.5px solid rgba(128,128,128,0.4);color:#aaa}
-.card-body{padding:12px 14px}
-.card-name{font-size:15px;font-weight:500;color:var(--gold-lt);margin-bottom:2px}
-.card-meta{font-size:12px;color:var(--muted);margin-bottom:6px}
-.card-loc{font-size:11px;color:rgba(232,220,200,0.35);display:flex;align-items:center;gap:3px;margin-bottom:8px}
+.card-body{padding:10px 12px}
+.card-name{font-size:14px;font-weight:500;color:var(--gold-lt);margin-bottom:2px}
+.card-meta{font-size:11px;color:var(--muted);margin-bottom:4px}
+.card-loc{font-size:10px;color:rgba(232,220,200,0.3);margin-bottom:6px}
 .card-tags{display:flex;gap:4px;flex-wrap:wrap}
-.card-tag{font-size:10px;padding:2px 7px;background:rgba(212,168,67,0.08);border:0.5px solid var(--border);border-radius:20px;color:var(--muted)}
+.card-tag{font-size:10px;padding:2px 6px;background:rgba(212,168,67,0.08);border:0.5px solid var(--border);border-radius:20px;color:var(--muted)}
 
 /* EMPTY / LOADING */
 .empty{text-align:center;padding:60px 24px;color:var(--muted)}
@@ -199,7 +223,9 @@ async function loadProfile(){
 
       <!-- 志愿者资料 -->
       <div class="profile-header">
-        <div class="profile-avatar">🐾</div>
+        <div class="profile-avatar">
+          <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200/cat-shazhu.jpg" alt="玄猫之道">
+        </div>
         <div class="profile-name">${esc(name)}</div>
         <div class="profile-sub">${loc ? `📍 ${esc(loc)}` : '中途志愿者'}${langs.length ? ' · 会说 ' + langs.join(' / ') : ''}</div>
         <div class="profile-stats">
@@ -220,7 +246,9 @@ async function loadProfile(){
 
       <!-- 猫咪列表 -->
       <div class="section-label">正在等待有缘人 · ${profileCats.length} 只</div>
-      <div class="cat-grid" id="cat-grid"></div>`;
+      <div class="marquee-wrap">
+        <div class="marquee-track" id="cat-grid"></div>
+      </div>`;
 
     // 显示分享栏给本人
     if(currentUser && currentUser.uid === uid){
@@ -241,14 +269,24 @@ function renderCats(){
   if(!grid) return;
 
   if(!profileCats.length){
-    grid.innerHTML = `<div class="empty" style="grid-column:1/-1">
-      <div class="empty-icon">🐾</div>
-      <p>暂时没有在线的中途猫</p>
+    grid.closest('.marquee-wrap').innerHTML = `<div class="empty" style="padding:40px 24px;text-align:center;color:var(--muted)">
+      <div style="font-size:32px;margin-bottom:12px">🐾</div>
+      <p style="font-size:13px">暂时没有在线的中途猫</p>
     </div>`;
     return;
   }
 
-  profileCats.forEach(cat => {
+  // 猫少于4只时关闭动画，直接显示
+  const shouldAnimate = profileCats.length >= 3;
+  if(!shouldAnimate){
+    grid.style.animation = 'none';
+    grid.style.justifyContent = 'center';
+  }
+
+  // 渲染一遍，动画时复制一遍实现无缝循环
+  const catsToRender = shouldAnimate ? [...profileCats, ...profileCats] : profileCats;
+
+  catsToRender.forEach(cat => {
     const card = document.createElement('a');
     card.className = 'cat-card';
     card.href = `/foster-cat.html?id=${cat.id}`;
@@ -268,7 +306,6 @@ function renderCats(){
     const genderText = cat.gender==='male'?'公猫':cat.gender==='female'?'母猫':'';
     const meta = [genderText, ageMap[cat.age_group]||'', furMap[cat.fur_length]||''].filter(Boolean).join(' · ');
     const loc  = [cat.city, cat.state].filter(Boolean).join(', ');
-
     const tags = [];
     if(cat.is_neutered)   tags.push('已绝育');
     if(cat.is_vaccinated) tags.push('已接种');
@@ -289,6 +326,12 @@ function renderCats(){
       </div>`;
     grid.appendChild(card);
   });
+
+  // 动态调整动画速度（猫越多越快）
+  if(shouldAnimate){
+    const duration = Math.max(15, profileCats.length * 4);
+    grid.style.animationDuration = `${duration}s`;
+  }
 }
 
 // ── 分享 ──
