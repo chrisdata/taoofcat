@@ -143,6 +143,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 24px;display:fl
   <a class="nav-logo" href="/">玄猫之道 <span>Tao of Cat</span></a>
   <div class="nav-right">
     <a class="nav-link" href="/foster.html">登记中途猫 +</a>
+    <a class="nav-link" id="my-fosters-link" href="/my-fosters.html" style="display:none">我的中途猫</a>
     <span id="user-name"></span>
     <button class="btn-sm" id="auth-btn" onclick="handleAuth()">登录</button>
   </div>
@@ -262,6 +263,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if(user){
       document.getElementById('user-name').textContent = user.displayName?.split(' ')[0] || '';
       document.getElementById('auth-btn').textContent  = '登出';
+      document.getElementById('my-fosters-link').style.display = 'inline';
       document.getElementById('foster-cta').style.display = 'block';
       // 根据用户所在国家预设筛选
       await autoDetectCountry();
