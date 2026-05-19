@@ -144,6 +144,75 @@ body { font-family:'Noto Sans SC',sans-serif; background:#1a1408; color:var(--pa
 
 /* ── Loading ── */
 .loading { padding:2rem; text-align:center; color:var(--ink-ghost); font-size:13px; }
+
+/* ── 中途猫模块 ── */
+.foster-section {
+  max-width:1200px; margin:0 auto;
+  padding:0 2rem 2rem;
+}
+.foster-section-title {
+  font-size:11px; letter-spacing:.2em; color:var(--gold);
+  text-transform:uppercase; margin-bottom:1rem;
+  padding-bottom:.5rem; border-bottom:1px solid rgba(212,200,168,0.1);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.foster-grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:1rem;
+}
+.foster-card {
+  background:rgba(244,237,224,0.04); border:1px solid rgba(212,200,168,0.12);
+  border-radius:10px; overflow:hidden;
+}
+.foster-card-photo {
+  width:100%; aspect-ratio:16/9; background:rgba(244,237,224,0.04);
+  position:relative; overflow:hidden;
+}
+.foster-card-photo img { width:100%; height:100%; object-fit:cover; display:block; }
+.foster-card-photo .no-photo {
+  width:100%; height:100%; display:flex; align-items:center;
+  justify-content:center; font-size:32px; color:rgba(212,200,168,0.2);
+}
+.ai-badge {
+  position:absolute; top:8px; right:8px;
+  font-size:10px; padding:2px 8px; border-radius:3px; letter-spacing:.05em;
+}
+.ai-approved { background:rgba(39,174,96,0.25); color:#4caf50; border:1px solid rgba(39,174,96,0.4); }
+.ai-flagged  { background:rgba(184,134,11,0.25); color:var(--gold-light); border:1px solid rgba(184,134,11,0.4); }
+.ai-rejected { background:rgba(192,57,43,0.25); color:#e74c3c; border:1px solid rgba(192,57,43,0.4); }
+.foster-card-body { padding:12px 14px; }
+.fc-name { font-size:14px; font-weight:500; color:var(--paper); margin-bottom:3px; }
+.fc-meta { font-size:11px; color:var(--ink-ghost); margin-bottom:4px; }
+.fc-loc  { font-size:11px; color:var(--gold); margin-bottom:6px; }
+.fc-ai-reason {
+  font-size:11px; color:var(--gold-light);
+  background:rgba(184,134,11,0.1); border-radius:3px;
+  padding:4px 8px; margin-bottom:8px; line-height:1.5;
+}
+.fc-actions { display:flex; gap:6px; flex-wrap:wrap; }
+.btn-fc-approve {
+  font-size:11px; color:#4caf50; background:rgba(39,174,96,0.1);
+  border:1px solid rgba(39,174,96,0.3); border-radius:3px;
+  padding:4px 12px; cursor:pointer; transition:all .2s;
+}
+.btn-fc-approve:hover { background:rgba(39,174,96,0.25); }
+.btn-fc-reject {
+  font-size:11px; color:#e74c3c; background:rgba(192,57,43,0.1);
+  border:1px solid rgba(192,57,43,0.3); border-radius:3px;
+  padding:4px 12px; cursor:pointer; transition:all .2s;
+}
+.btn-fc-reject:hover { background:rgba(192,57,43,0.25); }
+.btn-fc-view {
+  font-size:11px; color:var(--ink-ghost); background:transparent;
+  border:1px solid rgba(212,200,168,0.2); border-radius:3px;
+  padding:4px 12px; cursor:pointer; text-decoration:none;
+  transition:all .2s;
+}
+.btn-fc-view:hover { color:var(--paper); border-color:rgba(212,200,168,0.4); }
+.fc-empty { padding:2rem; text-align:center; font-size:13px; color:var(--ink-ghost); }
+
+/* 中途猫统计卡 */
+.stat-number.foster { color:#5dade2; }
 </style>
 </head>
 <body>
@@ -189,6 +258,43 @@ body { font-family:'Noto Sans SC',sans-serif; background:#1a1408; color:var(--pa
       <div class="stat-label">待审核留言</div>
       <div class="stat-number" id="stat-pending">-</div>
       <div class="stat-sub">所有猫咪</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">中途猫待审</div>
+      <div class="stat-number foster" id="stat-foster-pending">-</div>
+      <div class="stat-sub">待批准上架</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">中途猫在线</div>
+      <div class="stat-number foster" id="stat-foster-total">-</div>
+      <div class="stat-sub">已公开展示</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">已找到家</div>
+      <div class="stat-number foster" id="stat-foster-adopted">-</div>
+      <div class="stat-sub">成功领养</div>
+    </div>
+  </div>
+
+  <!-- 中途猫审核区 -->
+  <div class="foster-section">
+    <div class="foster-section-title">
+      <span>🐾 中途猫审核队列</span>
+      <span id="foster-pending-count" style="font-size:11px;color:var(--ink-ghost)"></span>
+    </div>
+    <div class="foster-grid" id="foster-pending-grid">
+      <div class="loading">加载中…</div>
+    </div>
+  </div>
+
+  <!-- 已上架中途猫 -->
+  <div class="foster-section" style="margin-top:8px">
+    <div class="foster-section-title">
+      <span>✅ 已上架中途猫</span>
+      <span id="foster-approved-count" style="font-size:11px;color:var(--ink-ghost)"></span>
+    </div>
+    <div class="foster-grid" id="foster-approved-grid">
+      <div class="loading">加载中…</div>
     </div>
   </div>
 
@@ -305,6 +411,9 @@ async function initDashboard() {
   loadNewUsers();
   loadPendingWhispers();
   loadAllWhispers();
+  loadFosterStats();
+  loadFosterPending();
+  loadFosterApproved();
 }
 
 // ── 实时在线 ──
@@ -426,7 +535,178 @@ async function loadAllWhispers() {
   all.forEach(w => renderWhisperItem(w, el, false));
 }
 
-function renderWhisperItem(w, container, isPendingView) {
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// 中途猫模块
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+const CLOUDINARY = 'https://res.cloudinary.com/dlm2iyc5i/image/upload';
+
+function fcName(cat) {
+  const n = cat.name;
+  if (!n) return '无名猫';
+  if (typeof n === 'string') return n;
+  return n.zh || n.en || '无名猫';
+}
+
+// ── 中途猫统计 ──
+async function loadFosterStats() {
+  try {
+    const approvedSnap = await getDocs(query(collection(db,'foster_cats'), where('status','==','approved')));
+    const pendingSnap  = await getDocs(query(collection(db,'foster_cats'), where('status','in',['pending'])));
+    const adoptedSnap  = await getDocs(query(collection(db,'foster_cats'), where('status','==','adopted')));
+    document.getElementById('stat-foster-total').textContent   = approvedSnap.size;
+    document.getElementById('stat-foster-pending').textContent = pendingSnap.size;
+    document.getElementById('stat-foster-adopted').textContent = adoptedSnap.size;
+  } catch(e) { console.error(e); }
+}
+
+// ── 待审核中途猫 ──
+async function loadFosterPending() {
+  const grid = document.getElementById('foster-pending-grid');
+  try {
+    const snap = await getDocs(query(
+      collection(db,'foster_cats'),
+      where('status','==','pending'),
+      orderBy('created_at','desc'),
+      limit(20)
+    ));
+    document.getElementById('foster-pending-count').textContent = snap.size + ' 只待审核';
+    if (snap.empty) {
+      grid.innerHTML = '<div class="fc-empty">🎉 没有待审核的中途猫</div>';
+      return;
+    }
+    grid.innerHTML = '';
+    snap.forEach(d => renderFosterCard({id:d.id,...d.data()}, grid, true));
+  } catch(e) {
+    grid.innerHTML = `<div class="fc-empty">加载失败：${e.message}</div>`;
+  }
+}
+
+// ── 已上架中途猫 ──
+async function loadFosterApproved() {
+  const grid = document.getElementById('foster-approved-grid');
+  try {
+    const snap = await getDocs(query(
+      collection(db,'foster_cats'),
+      where('status','==','approved'),
+      orderBy('created_at','desc'),
+      limit(24)
+    ));
+    document.getElementById('foster-approved-count').textContent = snap.size + ' 只在线';
+    if (snap.empty) {
+      grid.innerHTML = '<div class="fc-empty">暂无已上架的中途猫</div>';
+      return;
+    }
+    grid.innerHTML = '';
+    snap.forEach(d => renderFosterCard({id:d.id,...d.data()}, grid, false));
+  } catch(e) {
+    grid.innerHTML = `<div class="fc-empty">加载失败：${e.message}</div>`;
+  }
+}
+
+// ── 渲染单张中途猫卡片 ──
+function renderFosterCard(cat, container, isPending) {
+  const card = document.createElement('div');
+  card.className = 'foster-card';
+
+  const photoUrl = cat.cover_photo
+    ? `${CLOUDINARY}/q_auto,f_auto,w_400/${cat.cover_photo}`
+    : null;
+
+  const aiBadgeClass = cat.ai_review === 'approved' ? 'ai-approved'
+    : cat.ai_review === 'flagged'  ? 'ai-flagged'
+    : cat.ai_review === 'rejected' ? 'ai-rejected' : 'ai-flagged';
+  const aiBadgeText = cat.ai_review === 'approved' ? 'AI ✓'
+    : cat.ai_review === 'flagged'  ? 'AI ⚠ 存疑'
+    : cat.ai_review === 'rejected' ? 'AI ✕' : 'AI ?';
+
+  const furMap = {short:'短毛',medium:'中长毛',long:'长毛'};
+  const ageMap = {kitten:'幼猫',adult:'成猫',senior:'老猫'};
+  const genderText = cat.gender==='male'?'公':cat.gender==='female'?'母':'';
+
+  const meta = [genderText, ageMap[cat.age_group]||'', furMap[cat.fur_length]||'']
+    .filter(Boolean).join(' · ');
+  const loc  = [cat.city, cat.state, cat.country].filter(Boolean).join(', ');
+  const ts   = cat.created_at ? formatDate(cat.created_at) : '';
+
+  card.innerHTML = `
+    <div class="foster-card-photo">
+      ${photoUrl
+        ? `<img src="${photoUrl}" alt="${escHtml(fcName(cat))}" loading="lazy">`
+        : '<div class="no-photo">🐱</div>'}
+      <span class="ai-badge ${aiBadgeClass}">${aiBadgeText}</span>
+    </div>
+    <div class="foster-card-body">
+      <div class="fc-name">${escHtml(fcName(cat))}</div>
+      <div class="fc-meta">${escHtml(meta)}</div>
+      <div class="fc-loc">📍 ${escHtml(loc)}</div>
+      ${cat.ai_review_reason
+        ? `<div class="fc-ai-reason">AI备注：${escHtml(cat.ai_review_reason)}</div>`
+        : ''}
+      <div style="font-size:10px;color:var(--ink-ghost);margin-bottom:8px;">
+        提交：${ts} · 志愿者：${escHtml(cat.foster_name||'')}
+      </div>
+      <div class="fc-actions">
+        ${isPending
+          ? `<button class="btn-fc-approve" data-id="${cat.id}">✓ 批准上架</button>
+             <button class="btn-fc-reject"  data-id="${cat.id}">✕ 拒绝</button>`
+          : `<button class="btn-fc-reject"  data-id="${cat.id}" data-action="archive">下架</button>`
+        }
+        <a class="btn-fc-view" href="/foster-cat.html?id=${cat.id}" target="_blank">查看页面</a>
+      </div>
+    </div>`;
+
+  // 批准
+  const approveBtn = card.querySelector('.btn-fc-approve');
+  if (approveBtn) {
+    approveBtn.onclick = async () => {
+      if (!confirm(`批准上架「${fcName(cat)}」？`)) return;
+      approveBtn.disabled = true; approveBtn.textContent = '处理中…';
+      try {
+        await updateDoc(doc(db,'foster_cats',cat.id), {
+          status: 'approved',
+          approved_at: new Date()
+        });
+        card.style.transition = 'opacity .3s';
+        card.style.opacity = '0';
+        setTimeout(() => {
+          card.remove();
+          const cnt = document.getElementById('stat-foster-pending');
+          cnt.textContent = Math.max(0, parseInt(cnt.textContent||0) - 1);
+          const tot = document.getElementById('stat-foster-total');
+          tot.textContent = parseInt(tot.textContent||0) + 1;
+          // 刷新已上架列表
+          loadFosterApproved();
+        }, 300);
+      } catch(e) { alert('操作失败：'+e.message); approveBtn.disabled=false; }
+    };
+  }
+
+  // 拒绝 / 下架
+  const rejectBtn = card.querySelector('.btn-fc-reject');
+  if (rejectBtn) {
+    const isArchive = rejectBtn.dataset.action === 'archive';
+    rejectBtn.onclick = async () => {
+      const label = isArchive ? '下架' : '拒绝';
+      const reason = prompt(`请输入${label}原因（会通知志愿者）：`);
+      if (reason === null) return;
+      rejectBtn.disabled = true; rejectBtn.textContent = '处理中…';
+      try {
+        await updateDoc(doc(db,'foster_cats',cat.id), {
+          status: isArchive ? 'archived' : 'rejected',
+          reject_reason: reason || '',
+          rejected_at: new Date()
+        });
+        card.style.transition = 'opacity .3s';
+        card.style.opacity = '0';
+        setTimeout(() => { card.remove(); loadFosterStats(); }, 300);
+      } catch(e) { alert('操作失败：'+e.message); rejectBtn.disabled=false; }
+    };
+  }
+
+  container.appendChild(card);
+}
+
   const div = document.createElement('div');
   div.className = 'whisper-item';
   div.dataset.docId = w.id;

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>寻找有缘的猫 · 玄猫之道</title>
+<meta name="description" content="全球中途猫咪领养平台，以猫观道，以道养猫">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500&family=IM+Fell+English:ital@0;1&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut }
+  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, collection, query, where, orderBy, limit, startAfter, getDocs }
+  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyExample",
+  authDomain: "taoofcat-6cf6e.firebaseapp.com",
+  projectId: "taoofcat-6cf6e",
+  storageBucket: "taoofcat-6cf6e.appspot.com",
+  messagingSenderId: "000000000000",
+  appId: "1:000000000000:web:abc"
+};
+
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db   = getFirestore(app);
+const provider = new GoogleAuthProvider();
+
+window._auth = auth;
+window._db   = db;
+window._query = query;
+window._collection = collection;
+window._where = where;
+window._orderBy = orderBy;
+window._limit = limit;
+window._startAfter = startAfter;
+window._getDocs = getDocs;
+window._signInWithPopup = signInWithPopup;
+window._signOut = signOut;
+window._onAuthStateChanged = onAuthStateChanged;
+</script>
+
+<style>
+:root {
+  --gold:   #d4a843;
+  --gold-lt:#e8c97a;
+  --dark:   #0e0c0a;
+  --dark2:  #1a1612;
+  --dark3:  #252018;
+  --border: rgba(212,168,67,0.18);
+  --border2:rgba(212,168,67,0.38);
+  --text:   #e8dcc8;
+  --muted:  rgba(232,220,200,0.5);
+  --radius: 8px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--dark);color:var(--text);font-family:'Noto Serif SC',serif;font-size:15px;line-height:1.7;min-height:100vh}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;background:rgba(14,12,10,0.92);border-bottom:0.5px solid var(--border);backdrop-filter:blur(8px)}
+.nav-logo{font-family:'IM Fell English',serif;color:var(--gold);font-size:15px;text-decoration:none;letter-spacing:.05em}
+.nav-logo span{font-size:12px;color:var(--muted);margin-left:8px}
+.nav-right{display:flex;align-items:center;gap:12px}
+.nav-link{font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:.05em;transition:color .2s}
+.nav-link:hover{color:var(--gold)}
+#user-name{font-size:12px;color:var(--muted)}
+.btn-sm{font-size:12px;padding:5px 14px;border:0.5px solid var(--border2);background:transparent;color:var(--gold);border-radius:var(--radius);cursor:pointer;font-family:'Noto Serif SC',serif;transition:background .2s}
+.btn-sm:hover{background:rgba(212,168,67,0.1)}
+
+/* HERO */
+.hero{padding:100px 24px 36px;text-align:center;border-bottom:0.5px solid var(--border)}
+.hero-tag{font-size:11px;letter-spacing:.2em;color:var(--gold);opacity:.7;text-transform:uppercase;margin-bottom:14px}
+.hero h1{font-size:clamp(22px,3.5vw,32px);font-weight:300;letter-spacing:.1em;color:var(--gold-lt);margin-bottom:8px}
+.hero p{font-size:13px;color:var(--muted);font-family:'Lora',serif;font-style:italic}
+.hero-stats{display:flex;justify-content:center;gap:32px;margin-top:20px}
+.stat{text-align:center}
+.stat-num{font-size:20px;font-weight:500;color:var(--gold)}
+.stat-label{font-size:11px;color:var(--muted);letter-spacing:.05em}
+
+/* FILTERS */
+.filter-bar{padding:20px 24px;border-bottom:0.5px solid var(--border);background:var(--dark2);position:sticky;top:57px;z-index:50}
+.filter-row{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.filter-select{font-size:12px;padding:6px 28px 6px 10px;border-radius:var(--radius);border:0.5px solid var(--border);background:var(--dark);color:var(--text);cursor:pointer;font-family:'Noto Serif SC',serif;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23d4a843' stroke-width='1.2' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 9px center;transition:border-color .2s}
+.filter-select:focus{outline:none;border-color:var(--border2)}
+.filter-select option{background:var(--dark2)}
+.filter-checks{display:flex;gap:10px;flex-wrap:wrap}
+.fcheck{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);cursor:pointer}
+.fcheck input{accent-color:var(--gold);cursor:pointer}
+.fcheck:has(input:checked){color:var(--text)}
+.filter-count{margin-left:auto;font-size:12px;color:var(--muted)}
+.btn-clear{font-size:11px;padding:4px 10px;border:0.5px solid var(--border);background:transparent;color:var(--muted);border-radius:var(--radius);cursor:pointer;font-family:'Noto Serif SC',serif}
+.btn-clear:hover{color:var(--gold);border-color:var(--border2)}
+
+/* GRID */
+.main{max-width:1100px;margin:0 auto;padding:28px 24px 60px}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+@media(max-width:480px){.cat-grid{grid-template-columns:repeat(2,1fr);gap:10px}}
+
+/* CARD */
+.cat-card{background:var(--dark2);border:0.5px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color .2s,transform .15s;text-decoration:none;display:block;color:inherit}
+.cat-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.card-photo{width:100%;aspect-ratio:1;background:var(--dark3);position:relative;overflow:hidden}
+.card-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.cat-card:hover .card-photo img{transform:scale(1.04)}
+.card-photo .no-photo{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:36px;color:var(--border2)}
+.card-badge{position:absolute;top:8px;left:8px;font-size:10px;padding:3px 8px;border-radius:20px;font-weight:500;letter-spacing:.03em}
+.badge-new{background:rgba(39,174,96,0.2);border:0.5px solid rgba(39,174,96,0.5);color:#2ecc71}
+.badge-urgent{background:rgba(192,57,43,0.2);border:0.5px solid rgba(192,57,43,0.5);color:#e74c3c}
+.badge-paused{background:rgba(128,128,128,0.2);border:0.5px solid rgba(128,128,128,0.4);color:#aaa}
+.card-body{padding:12px 14px}
+.card-name{font-size:15px;font-weight:500;color:var(--gold-lt);margin-bottom:2px}
+.card-meta{font-size:12px;color:var(--muted);margin-bottom:6px}
+.card-loc{font-size:11px;color:rgba(232,220,200,0.35);display:flex;align-items:center;gap:3px;margin-bottom:8px}
+.card-tags{display:flex;gap:4px;flex-wrap:wrap}
+.card-tag{font-size:10px;padding:2px 7px;background:rgba(212,168,67,0.08);border:0.5px solid var(--border);border-radius:20px;color:var(--muted)}
+
+/* EMPTY / LOADING */
+.empty{text-align:center;padding:60px 24px;color:var(--muted)}
+.empty-icon{font-size:40px;margin-bottom:16px}
+.empty p{font-size:14px;line-height:1.8}
+.loader{display:flex;justify-content:center;padding:32px}
+.spinner{width:24px;height:24px;border:2px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+#load-more-trigger{height:40px}
+
+/* FOSTER CTA */
+.foster-cta{background:var(--dark2);border:0.5px solid var(--border);border-radius:12px;padding:24px;text-align:center;margin-bottom:24px}
+.foster-cta p{font-size:13px;color:var(--muted);margin-bottom:12px;line-height:1.8}
+.btn-gold{display:inline-block;padding:10px 28px;background:var(--gold);color:var(--dark);border:none;border-radius:var(--radius);font-size:13px;font-weight:500;font-family:'Noto Serif SC',serif;text-decoration:none;cursor:pointer;letter-spacing:.08em;transition:background .2s}
+.btn-gold:hover{background:var(--gold-lt)}
+
+/* COLOR DOTS */
+.color-dots{display:flex;gap:3px;margin-top:6px;flex-wrap:wrap}
+.dot{width:10px;height:10px;border-radius:50%;border:0.5px solid rgba(255,255,255,0.15)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">玄猫之道 <span>Tao of Cat</span></a>
+  <div class="nav-right">
+    <a class="nav-link" href="/foster.html">登记中途猫 +</a>
+    <span id="user-name"></span>
+    <button class="btn-sm" id="auth-btn" onclick="handleAuth()">登录</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">Foster Cat Adoption · 中途猫领养</div>
+  <h1>寻找有缘的猫</h1>
+  <p>Every cat has a destined home · 万物皆有缘起</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num" id="stat-total">—</div>
+      <div class="stat-label">等待缘分</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" id="stat-countries">—</div>
+      <div class="stat-label">个国家</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" id="stat-adopted">—</div>
+      <div class="stat-label">已找到家</div>
+    </div>
+  </div>
+</div>
+
+<div class="filter-bar">
+  <div class="filter-row">
+    <select class="filter-select" id="f-country" onchange="onCountryFilter()">
+      <option value="">全部国家</option>
+    </select>
+    <select class="filter-select" id="f-state" onchange="applyFilters()" disabled>
+      <option value="">全部州/省</option>
+    </select>
+    <select class="filter-select" id="f-gender" onchange="applyFilters()">
+      <option value="">性别不限</option>
+      <option value="male">公猫 ♂</option>
+      <option value="female">母猫 ♀</option>
+    </select>
+    <select class="filter-select" id="f-age" onchange="applyFilters()">
+      <option value="">年龄不限</option>
+      <option value="kitten">幼猫</option>
+      <option value="adult">成猫</option>
+      <option value="senior">老猫</option>
+    </select>
+    <select class="filter-select" id="f-pattern" onchange="applyFilters()">
+      <option value="">花色不限</option>
+      <option value="tabby">虎斑</option>
+      <option value="solid">纯色</option>
+      <option value="bicolor">双色</option>
+      <option value="tricolor">三花</option>
+      <option value="calico">玳瑁</option>
+      <option value="tuxedo">燕尾服</option>
+      <option value="pointed">重点色</option>
+    </select>
+    <select class="filter-select" id="f-fur" onchange="applyFilters()">
+      <option value="">毛长不限</option>
+      <option value="short">短毛</option>
+      <option value="medium">中长毛</option>
+      <option value="long">长毛</option>
+    </select>
+    <div class="filter-checks">
+      <label class="fcheck"><input type="checkbox" id="f-neutered" onchange="applyFilters()"> 已绝育</label>
+      <label class="fcheck"><input type="checkbox" id="f-vaccinated" onchange="applyFilters()"> 已接种</label>
+      <label class="fcheck"><input type="checkbox" id="f-fiv" onchange="applyFilters()"> FIV阴性</label>
+    </div>
+    <span class="filter-count" id="filter-count"></span>
+    <button class="btn-clear" onclick="clearFilters()">清除筛选</button>
+  </div>
+</div>
+
+<div class="main">
+  <div class="foster-cta" id="foster-cta" style="display:none">
+    <p>你也有中途猫需要找家吗？<br>
+    <span style="font-family:'Lora',serif;font-style:italic;font-size:12px;">Do you have a foster cat looking for a forever home?</span></p>
+    <a href="/foster.html" class="btn-gold">登记我的中途猫 +</a>
+  </div>
+
+  <div class="cat-grid" id="cat-grid"></div>
+  <div class="loader" id="loader" style="display:none"><div class="spinner"></div></div>
+  <div class="empty" id="empty" style="display:none">
+    <div class="empty-icon">🐾</div>
+    <p>暂时没有符合条件的猫咪<br>
+    <span style="font-size:12px;">换个筛选条件试试，或者<a href="/foster.html" style="color:var(--gold)">登记你的中途猫</a></span></p>
+  </div>
+  <div id="load-more-trigger"></div>
+</div>
+
+<script>
+const CLOUDINARY = "https://res.cloudinary.com/dlm2iyc5i/image/upload";
+const PAGE_SIZE  = 12;
+const COLOR_MAP  = {black:"#1a1a1a",white:"#f5f5f0",orange:"#e8843a",gray:"#888",brown:"#8b5e3c",cream:"#f0deb0",mixed:"linear-gradient(135deg,#e8843a,#888)"};
+const REGIONS = {
+  "Malaysia":["Johor","Kedah","Kelantan","Kuala Lumpur","Melaka","Negeri Sembilan","Pahang","Penang","Perak","Perlis","Putrajaya","Sabah","Sarawak","Selangor","Terengganu"],
+  "Taiwan":["台北市","新北市","桃園市","台中市","台南市","高雄市","基隆市","新竹市","嘉義市","宜蘭縣","新竹縣","苗栗縣","彰化縣","南投縣","雲林縣","嘉義縣","屏東縣","花蓮縣","台東縣","澎湖縣"],
+  "Singapore":["Singapore"],
+  "Japan":["北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県","茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県","新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県","三重県","滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県"],
+  "Hong Kong":["香港島","九龍","新界"],
+  "South Korea":["서울","부산","인천","대구","광주","대전","울산","경기도","강원도","제주도"],
+  "United States":["California","New York","Texas","Florida","Washington","Illinois","Pennsylvania","Ohio","Georgia","North Carolina"],
+  "Australia":["New South Wales","Victoria","Queensland","Western Australia","South Australia","Tasmania"],
+  "United Kingdom":["England","Scotland","Wales","Northern Ireland"],
+  "Canada":["Ontario","British Columbia","Quebec","Alberta","Manitoba"],
+  "Other":["Other"]
+};
+
+let currentUser  = null;
+let lastDoc      = null;
+let loading      = false;
+let noMore       = false;
+let allCats      = [];
+let currentLang  = localStorage.getItem('toc_lang') || 'zh';
+
+// ── Auth ──
+window.addEventListener('DOMContentLoaded', () => {
+  window._onAuthStateChanged(window._auth, async user => {
+    currentUser = user;
+    if(user){
+      document.getElementById('user-name').textContent = user.displayName?.split(' ')[0] || '';
+      document.getElementById('auth-btn').textContent  = '登出';
+      document.getElementById('foster-cta').style.display = 'block';
+      // 根据用户所在国家预设筛选
+      await autoDetectCountry();
+    } else {
+      document.getElementById('user-name').textContent = '';
+      document.getElementById('auth-btn').textContent  = '登录';
+    }
+  });
+  buildCountryOptions();
+  loadStats();
+  resetAndLoad();
+  initInfiniteScroll();
+});
+
+function handleAuth(){
+  if(currentUser) window._signOut(window._auth);
+  else window._signInWithPopup(window._auth, window._provider).catch(console.error);
+}
+
+// ── 自动检测国家 ──
+async function autoDetectCountry(){
+  try {
+    const res  = await fetch('https://ipapi.co/json/');
+    const data = await res.json();
+    const country = data.country_name;
+    const sel = document.getElementById('f-country');
+    for(let o of sel.options){
+      if(o.value === country){ sel.value = country; onCountryFilter(); return; }
+    }
+  } catch(e){ /* 失败就不预设 */ }
+}
+
+// ── 地区 ──
+function buildCountryOptions(){
+  const sel = document.getElementById('f-country');
+  Object.keys(REGIONS).forEach(c => {
+    const o = document.createElement('option');
+    o.value = c; o.textContent = c;
+    sel.appendChild(o);
+  });
+}
+function onCountryFilter(){
+  const country  = document.getElementById('f-country').value;
+  const stateSel = document.getElementById('f-state');
+  stateSel.innerHTML = '<option value="">全部州/省</option>';
+  if(country && REGIONS[country]){
+    REGIONS[country].forEach(s => {
+      const o = document.createElement('option');
+      o.value = s; o.textContent = s;
+      stateSel.appendChild(o);
+    });
+    stateSel.disabled = false;
+  } else {
+    stateSel.disabled = true;
+  }
+  applyFilters();
+}
+
+// ── 统计数字 ──
+async function loadStats(){
+  try {
+    const snap = await window._getDocs(
+      window._query(window._collection(window._db,'foster_cats'),
+        window._where('status','==','approved'))
+    );
+    document.getElementById('stat-total').textContent = snap.size;
+    const countries = new Set(snap.docs.map(d=>d.data().country).filter(Boolean));
+    document.getElementById('stat-countries').textContent = countries.size || '—';
+
+    const adopted = await window._getDocs(
+      window._query(window._collection(window._db,'foster_cats'),
+        window._where('status','==','adopted'))
+    );
+    document.getElementById('stat-adopted').textContent = adopted.size;
+  } catch(e){}
+}
+
+// ── 加载猫咪 ──
+function getFilters(){
+  return {
+    country:   document.getElementById('f-country').value,
+    state:     document.getElementById('f-state').value,
+    gender:    document.getElementById('f-gender').value,
+    age_group: document.getElementById('f-age').value,
+    pattern:   document.getElementById('f-pattern').value,
+    fur:       document.getElementById('f-fur').value,
+    neutered:  document.getElementById('f-neutered').checked,
+    vaccinated:document.getElementById('f-vaccinated').checked,
+    fiv:       document.getElementById('f-fiv').checked,
+  };
+}
+
+async function loadCats(reset=false){
+  if(loading || (!reset && noMore)) return;
+  loading = true;
+  document.getElementById('loader').style.display = 'flex';
+
+  const f = getFilters();
+  let q = window._query(
+    window._collection(window._db,'foster_cats'),
+    window._where('status','==','approved'),
+    window._orderBy('created_at','desc'),
+    window._limit(PAGE_SIZE)
+  );
+
+  // Firestore 单字段筛选（复合索引需要在 Firebase Console 建）
+  if(f.country)    q = window._query(window._collection(window._db,'foster_cats'), window._where('status','==','approved'), window._where('country','==',f.country), window._orderBy('created_at','desc'), window._limit(PAGE_SIZE));
+  if(f.country && f.state) q = window._query(window._collection(window._db,'foster_cats'), window._where('status','==','approved'), window._where('country','==',f.country), window._where('state','==',f.state), window._orderBy('created_at','desc'), window._limit(PAGE_SIZE));
+
+  if(!reset && lastDoc) q = window._query(q, window._startAfter(lastDoc));
+
+  try {
+    const snap = await window._getDocs(q);
+    const cats = snap.docs.map(d => ({id:d.id, ...d.data()}));
+
+    // 前端过滤（性别、年龄、花色、毛长、健康）
+    const filtered = cats.filter(c => {
+      if(f.gender    && c.gender      !== f.gender)     return false;
+      if(f.age_group && c.age_group   !== f.age_group)  return false;
+      if(f.pattern   && c.coat_pattern!== f.pattern)    return false;
+      if(f.fur       && c.fur_length  !== f.fur)        return false;
+      if(f.neutered  && !c.is_neutered)                 return false;
+      if(f.vaccinated&& !c.is_vaccinated)               return false;
+      if(f.fiv       && c.fiv_status  !== 'negative')   return false;
+      return true;
+    });
+
+    if(reset){
+      allCats = filtered;
+      document.getElementById('cat-grid').innerHTML = '';
+    } else {
+      allCats = [...allCats, ...filtered];
+    }
+
+    if(snap.docs.length < PAGE_SIZE) noMore = true;
+    lastDoc = snap.docs[snap.docs.length - 1] || lastDoc;
+
+    renderCats(filtered, reset);
+    document.getElementById('filter-count').textContent =
+      allCats.length ? `共 ${allCats.length} 只猫` : '';
+    document.getElementById('empty').style.display = allCats.length ? 'none' : 'block';
+
+  } catch(e){ console.error(e); }
+
+  loading = false;
+  document.getElementById('loader').style.display = 'none';
+}
+
+function resetAndLoad(){
+  lastDoc = null; noMore = false; allCats = [];
+  loadCats(true);
+}
+
+function applyFilters(){ resetAndLoad(); }
+
+function clearFilters(){
+  ['f-country','f-state','f-gender','f-age','f-pattern','f-fur'].forEach(id=>{
+    document.getElementById(id).value='';
+  });
+  document.getElementById('f-state').disabled = true;
+  ['f-neutered','f-vaccinated','f-fiv'].forEach(id=>{
+    document.getElementById(id).checked=false;
+  });
+  resetAndLoad();
+}
+
+// ── 渲染 ──
+function getName(cat){
+  const n = cat.name;
+  if(!n) return '无名猫';
+  if(typeof n === 'string') return n;
+  return n[currentLang] || n.zh || n.en || '无名猫';
+}
+
+function renderCats(cats, reset=false){
+  const grid = document.getElementById('cat-grid');
+  cats.forEach(cat => {
+    const card = document.createElement('a');
+    card.className = 'cat-card';
+    card.href = `/foster-cat.html?id=${cat.id}`;
+
+    const photoUrl = cat.cover_photo
+      ? `${CLOUDINARY}/q_auto,f_auto,w_400/${cat.cover_photo}`
+      : null;
+
+    const badge = cat.status === 'paused'
+      ? '<span class="card-badge badge-paused">暂停</span>'
+      : isNew(cat.created_at)
+        ? '<span class="card-badge badge-new">新上架</span>'
+        : '';
+
+    const genderText = cat.gender === 'male' ? '公' : cat.gender === 'female' ? '母' : '';
+    const ageMap = {kitten:'幼猫',adult:'成猫',senior:'老猫'};
+    const furMap = {short:'短毛',medium:'中长毛',long:'长毛'};
+    const patMap = {tabby:'虎斑',solid:'纯色',bicolor:'双色',tricolor:'三花',calico:'玳瑁',tuxedo:'燕尾服',pointed:'重点色',spotted:'斑点'};
+
+    const tags = [];
+    if(cat.is_neutered)   tags.push('已绝育');
+    if(cat.is_vaccinated) tags.push('已接种');
+    if(cat.fiv_status==='negative') tags.push('FIV−');
+
+    const colorDots = (cat.colors||[]).map(c=>{
+      const bg = COLOR_MAP[c] || '#888';
+      return `<span class="dot" style="background:${bg}" title="${c}"></span>`;
+    }).join('');
+
+    card.innerHTML = `
+      <div class="card-photo">
+        ${photoUrl
+          ? `<img src="${photoUrl}" alt="${getName(cat)}" loading="lazy">`
+          : '<div class="no-photo">🐱</div>'}
+        ${badge}
+      </div>
+      <div class="card-body">
+        <div class="card-name">${getName(cat)}</div>
+        <div class="card-meta">${[genderMap(cat.gender), ageMap[cat.age_group]||'', furMap[cat.fur_length]||'', patMap[cat.coat_pattern]||''].filter(Boolean).join(' · ')}</div>
+        <div class="card-loc">📍 ${[cat.city,cat.state,cat.country].filter(Boolean).join(', ')}</div>
+        <div class="card-tags">${tags.map(t=>`<span class="card-tag">${t}</span>`).join('')}</div>
+        ${colorDots ? `<div class="color-dots">${colorDots}</div>` : ''}
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+function genderMap(g){ return g==='male'?'公猫':g==='female'?'母猫':''; }
+
+function isNew(ts){
+  if(!ts) return false;
+  const d = ts.toDate ? ts.toDate() : new Date(ts);
+  return (Date.now() - d.getTime()) < 7*24*60*60*1000;
+}
+
+// ── 无限滚动 ──
+function initInfiniteScroll(){
+  const trigger = document.getElementById('load-more-trigger');
+  const observer = new IntersectionObserver(entries => {
+    if(entries[0].isIntersecting && !loading && !noMore) loadCats();
+  }, {rootMargin:'200px'});
+  observer.observe(trigger);
+}
+</script>
+</body>
+</html>

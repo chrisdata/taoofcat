@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中途猫 · 玄猫之道</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500&family=IM+Fell+English:ital@0;1&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut }
+  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, doc, getDoc, collection, addDoc, query, where, getDocs, serverTimestamp, updateDoc, increment }
+  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyExample",
+  authDomain: "taoofcat-6cf6e.firebaseapp.com",
+  projectId: "taoofcat-6cf6e",
+  storageBucket: "taoofcat-6cf6e.appspot.com",
+  messagingSenderId: "000000000000",
+  appId: "1:000000000000:web:abc"
+};
+
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db   = getFirestore(app);
+const provider = new GoogleAuthProvider();
+
+window._auth = auth; window._db = db;
+window._doc = doc; window._getDoc = getDoc;
+window._collection = collection; window._addDoc = addDoc;
+window._query = query; window._where = where;
+window._getDocs = getDocs; window._serverTimestamp = serverTimestamp;
+window._updateDoc = updateDoc; window._increment = increment;
+window._signInWithPopup = signInWithPopup;
+window._signOut = signOut;
+window._onAuthStateChanged = onAuthStateChanged;
+window._provider = provider;
+</script>
+
+<style>
+:root{--gold:#d4a843;--gold-lt:#e8c97a;--dark:#0e0c0a;--dark2:#1a1612;--dark3:#252018;--border:rgba(212,168,67,0.18);--border2:rgba(212,168,67,0.38);--text:#e8dcc8;--muted:rgba(232,220,200,0.5);--radius:8px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--dark);color:var(--text);font-family:'Noto Serif SC',serif;font-size:15px;line-height:1.7;min-height:100vh}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;background:rgba(14,12,10,0.92);border-bottom:0.5px solid var(--border);backdrop-filter:blur(8px)}
+.nav-logo{font-family:'IM Fell English',serif;color:var(--gold);font-size:15px;text-decoration:none;letter-spacing:.05em}
+.nav-logo span{font-size:12px;color:var(--muted);margin-left:8px}
+.nav-right{display:flex;align-items:center;gap:12px}
+.nav-link{font-size:12px;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-link:hover{color:var(--gold)}
+#user-name{font-size:12px;color:var(--muted)}
+.btn-sm{font-size:12px;padding:5px 14px;border:0.5px solid var(--border2);background:transparent;color:var(--gold);border-radius:var(--radius);cursor:pointer;font-family:'Noto Serif SC',serif;transition:background .2s}
+.btn-sm:hover{background:rgba(212,168,67,0.1)}
+
+.page{max-width:900px;margin:0 auto;padding:88px 24px 80px}
+
+/* PHOTOS */
+.photo-main{width:100%;aspect-ratio:4/3;background:var(--dark2);border-radius:12px;overflow:hidden;margin-bottom:10px;position:relative}
+.photo-main img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-thumbs{display:flex;gap:8px;flex-wrap:wrap}
+.thumb{width:72px;height:72px;border-radius:var(--radius);overflow:hidden;cursor:pointer;border:0.5px solid var(--border);transition:border-color .2s;flex-shrink:0}
+.thumb:hover,.thumb.active{border-color:var(--gold)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:1fr 340px;gap:32px;margin-top:24px}
+@media(max-width:700px){.layout{grid-template-columns:1fr}}
+
+/* INFO */
+.cat-name{font-size:28px;font-weight:300;color:var(--gold-lt);letter-spacing:.08em;margin-bottom:4px}
+.cat-name-sub{font-size:14px;color:var(--muted);font-family:'Lora',serif;font-style:italic;margin-bottom:16px}
+.info-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.info-pill{font-size:12px;padding:4px 12px;background:var(--dark2);border:0.5px solid var(--border);border-radius:20px;color:var(--muted)}
+.info-pill.gold{border-color:var(--border2);color:var(--gold-lt)}
+.section-title{font-size:11px;letter-spacing:.15em;color:var(--gold);opacity:.7;text-transform:uppercase;margin:20px 0 10px;padding-bottom:8px;border-bottom:0.5px solid var(--border)}
+.desc-text{font-size:14px;color:var(--text);line-height:1.9}
+.req-list{list-style:none;padding:0}
+.req-list li{font-size:13px;color:var(--muted);padding:5px 0;border-bottom:0.5px solid var(--border);display:flex;align-items:flex-start;gap:8px}
+.req-list li::before{content:"·";color:var(--gold);flex-shrink:0}
+.lang-toggle{display:flex;gap:0;border:0.5px solid var(--border);border-radius:var(--radius);overflow:hidden;width:fit-content;margin-bottom:16px}
+.lang-btn{padding:5px 14px;font-size:12px;background:transparent;border:none;color:var(--muted);cursor:pointer;font-family:'Noto Serif SC',serif;transition:all .2s}
+.lang-btn.active{background:rgba(212,168,67,0.1);color:var(--gold)}
+
+/* SIDEBAR */
+.sidebar{position:sticky;top:88px;align-self:start}
+@media(max-width:700px){.sidebar{position:static}}
+.sidebar-card{background:var(--dark2);border:0.5px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.foster-name{font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px}
+.foster-meta{font-size:12px;color:var(--muted);margin-bottom:12px}
+.loc-text{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px;margin-bottom:8px}
+
+/* ADOPT FLOW */
+.adopt-btn{width:100%;padding:12px;background:var(--gold);color:var(--dark);border:none;border-radius:var(--radius);font-size:14px;font-weight:500;font-family:'Noto Serif SC',serif;cursor:pointer;letter-spacing:.08em;transition:background .2s;margin-bottom:8px}
+.adopt-btn:hover{background:var(--gold-lt)}
+.adopt-btn:disabled{opacity:.4;cursor:not-allowed}
+.adopt-note{font-size:11px;color:var(--muted);text-align:center;line-height:1.7}
+
+/* QUESTIONNAIRE */
+#questionnaire{display:none}
+.q-title{font-size:13px;color:var(--gold-lt);margin-bottom:14px;line-height:1.6}
+.q-item{margin-bottom:14px}
+.q-label{font-size:12px;color:var(--muted);margin-bottom:5px;display:block}
+.q-input{width:100%;background:var(--dark);border:0.5px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:'Noto Serif SC',serif;font-size:13px;padding:8px 10px;outline:none;resize:vertical;min-height:60px;transition:border-color .2s}
+.q-input:focus{border-color:var(--border2)}
+.btn-submit-q{width:100%;padding:10px;background:var(--gold);color:var(--dark);border:none;border-radius:var(--radius);font-size:13px;font-weight:500;font-family:'Noto Serif SC',serif;cursor:pointer;margin-top:8px;transition:background .2s}
+.btn-submit-q:hover{background:var(--gold-lt)}
+.btn-submit-q:disabled{opacity:.4;cursor:not-allowed}
+
+/* CONTACT REVEAL */
+#contact-reveal{display:none}
+.contact-card{background:rgba(212,168,67,0.06);border:0.5px solid var(--border2);border-radius:var(--radius);padding:14px;margin-bottom:10px}
+.contact-label{font-size:11px;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.contact-val{font-size:14px;color:var(--text)}
+.contact-val a{color:var(--gold-lt);text-decoration:none}
+.contact-val a:hover{text-decoration:underline}
+
+/* SHARE */
+.share-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.share-btn{font-size:11px;padding:5px 12px;border:0.5px solid var(--border);border-radius:var(--radius);background:transparent;color:var(--muted);cursor:pointer;font-family:'Noto Serif SC',serif;transition:all .2s}
+.share-btn:hover{border-color:var(--border2);color:var(--text)}
+
+/* STATUS BADGE */
+.status-badge{display:inline-block;font-size:11px;padding:3px 10px;border-radius:20px;margin-bottom:12px}
+.status-adopted{background:rgba(39,174,96,0.15);border:0.5px solid rgba(39,174,96,0.4);color:#2ecc71}
+.status-paused{background:rgba(128,128,128,0.15);border:0.5px solid rgba(128,128,128,0.3);color:#aaa}
+
+/* SKELETON */
+.skel{background:var(--dark3);border-radius:6px;animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:.8}}
+
+.msg{padding:10px 14px;border-radius:var(--radius);font-size:13px;margin-bottom:10px;display:none}
+.msg.error{background:rgba(192,57,43,0.15);border:0.5px solid rgba(192,57,43,0.4);color:#e74c3c;display:block}
+.msg.success{background:rgba(39,174,96,0.15);border:0.5px solid rgba(39,174,96,0.4);color:#2ecc71;display:block}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">玄猫之道 <span>Tao of Cat</span></a>
+  <div class="nav-right">
+    <a class="nav-link" href="/adopt.html">← 领养墙</a>
+    <span id="user-name"></span>
+    <button class="btn-sm" id="auth-btn" onclick="handleAuth()">登录</button>
+  </div>
+</nav>
+
+<div class="page">
+  <!-- 照片 -->
+  <div class="photo-main" id="photo-main">
+    <div class="skel" style="width:100%;height:100%"></div>
+  </div>
+  <div class="photo-thumbs" id="photo-thumbs"></div>
+
+  <div class="layout">
+    <!-- 左：资料 -->
+    <div>
+      <div id="status-badge-wrap"></div>
+      <div class="lang-toggle" id="lang-toggle">
+        <button class="lang-btn active" onclick="switchLang('zh',this)">中文</button>
+        <button class="lang-btn" onclick="switchLang('en',this)">EN</button>
+        <button class="lang-btn" onclick="switchLang('ja',this)">日本語</button>
+      </div>
+      <div class="cat-name" id="cat-name"><div class="skel" style="height:32px;width:160px"></div></div>
+      <div class="cat-name-sub" id="cat-name-sub"></div>
+      <div class="info-row" id="info-row"></div>
+
+      <div class="section-title">关于这只猫</div>
+      <div class="desc-text" id="cat-desc"><div class="skel" style="height:80px"></div></div>
+
+      <div class="section-title" id="req-title" style="display:none">领养要求</div>
+      <ul class="req-list" id="req-list"></ul>
+    </div>
+
+    <!-- 右：侧边栏 -->
+    <div class="sidebar">
+      <div class="sidebar-card">
+        <div class="foster-name" id="foster-name">—</div>
+        <div class="foster-meta" id="foster-meta"></div>
+        <div class="loc-text" id="loc-text"></div>
+
+        <!-- 状态：待领养 -->
+        <div id="adopt-flow">
+          <div id="msg-q" class="msg"></div>
+          <button class="adopt-btn" id="adopt-btn" onclick="startAdopt()">
+            我想领养这只猫 🐾
+          </button>
+          <p class="adopt-note" id="adopt-note">登录后回答问卷即可查看联系方式</p>
+
+          <!-- 问卷 -->
+          <div id="questionnaire">
+            <div class="q-title">请回答以下问题，志愿者会根据你的答案决定是否适合 🐾</div>
+            <div id="q-items"></div>
+            <button class="btn-submit-q" id="btn-submit-q" onclick="submitAnswers()">提交答案</button>
+          </div>
+
+          <!-- 联系方式 -->
+          <div id="contact-reveal">
+            <div class="contact-card">
+              <div class="contact-label">WhatsApp / 电话</div>
+              <div class="contact-val" id="c-wa"></div>
+            </div>
+            <div class="contact-card" id="c-other-wrap" style="display:none">
+              <div class="contact-label">其他联系方式</div>
+              <div class="contact-val" id="c-other"></div>
+            </div>
+            <p style="font-size:11px;color:var(--muted);line-height:1.7">
+              请直接联系志愿者安排见面。玄猫之道不参与领养交易，仅提供信息平台。
+            </p>
+          </div>
+        </div>
+
+        <!-- 状态：已领养 -->
+        <div id="adopted-msg" style="display:none;text-align:center;padding:12px 0">
+          <div style="font-size:24px;margin-bottom:8px">🎉</div>
+          <div style="font-size:14px;color:var(--gold-lt)">这只猫咪已找到家</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px">缘分已到，祝福它 🐾</div>
+        </div>
+      </div>
+
+      <!-- 分享 -->
+      <div class="sidebar-card">
+        <div style="font-size:12px;color:var(--muted);margin-bottom:8px">分享这只猫</div>
+        <div class="share-row">
+          <button class="share-btn" onclick="shareTo('wa')">WhatsApp</button>
+          <button class="share-btn" onclick="shareTo('tg')">Telegram</button>
+          <button class="share-btn" onclick="shareTo('fb')">Facebook</button>
+          <button class="share-btn" onclick="shareTo('threads')">Threads</button>
+          <button class="share-btn" onclick="copyLink()">复制链接</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const CLOUDINARY = "https://res.cloudinary.com/dlm2iyc5i/image/upload";
+const catId  = new URLSearchParams(location.search).get('id');
+let catData  = null;
+let currentUser = null;
+let currentLang = localStorage.getItem('toc_lang') || 'zh';
+let hasApplied  = false;
+
+window.addEventListener('DOMContentLoaded', () => {
+  window._onAuthStateChanged(window._auth, user => {
+    currentUser = user;
+    document.getElementById('user-name').textContent = user ? (user.displayName?.split(' ')[0]||'') : '';
+    document.getElementById('auth-btn').textContent  = user ? '登出' : '登录';
+    if(catData) updateAdoptUI();
+  });
+  if(!catId){ document.querySelector('.page').innerHTML='<p style="padding:60px;color:var(--muted);text-align:center">找不到这只猫 🐾</p>'; return; }
+  loadCat();
+});
+
+function handleAuth(){
+  if(currentUser) window._signOut(window._auth);
+  else window._signInWithPopup(window._auth, window._provider).catch(console.error);
+}
+
+async function loadCat(){
+  try {
+    const snap = await window._getDoc(window._doc(window._db,'foster_cats',catId));
+    if(!snap.exists()){ document.querySelector('.page').innerHTML='<p style="padding:60px;color:var(--muted);text-align:center">找不到这只猫 🐾</p>'; return; }
+    catData = {id:snap.id, ...snap.data()};
+    // 增加浏览计数
+    window._updateDoc(window._doc(window._db,'foster_cats',catId), {view_count: window._increment(1)}).catch(()=>{});
+    renderCat();
+    updateAdoptUI();
+    // 更新页面 title
+    document.title = `${getName()} · 中途猫 · 玄猫之道`;
+  } catch(e){ console.error(e); }
+}
+
+function getName(lang){
+  const l = lang || currentLang;
+  const n = catData?.name;
+  if(!n) return '无名猫';
+  if(typeof n==='string') return n;
+  return n[l] || n.zh || n.en || '无名猫';
+}
+function getDesc(lang){
+  const l = lang || currentLang;
+  const d = catData?.description;
+  if(!d) return '';
+  if(typeof d==='string') return d;
+  return d[l] || d.zh || d.en || '';
+}
+function getList(field, lang){
+  const l = lang || currentLang;
+  const v = catData?.[field];
+  if(!v) return [];
+  if(Array.isArray(v)) return v;
+  return v[l] || v.zh || v.en || [];
+}
+
+function renderCat(){
+  const c = catData;
+
+  // 照片
+  const photos = (c.photos||[]).filter(Boolean);
+  const mainEl = document.getElementById('photo-main');
+  if(photos.length){
+    mainEl.innerHTML = `<img id="main-img" src="${CLOUDINARY}/q_auto,f_auto,w_900/${photos[0]}" alt="${getName()}">`;
+    const thumbs = document.getElementById('photo-thumbs');
+    photos.forEach((p,i) => {
+      const t = document.createElement('div');
+      t.className = 'thumb' + (i===0?' active':'');
+      t.innerHTML = `<img src="${CLOUDINARY}/q_auto,f_auto,w_150/${p}" loading="lazy">`;
+      t.onclick = () => {
+        document.getElementById('main-img').src = `${CLOUDINARY}/q_auto,f_auto,w_900/${p}`;
+        document.querySelectorAll('.thumb').forEach(x=>x.classList.remove('active'));
+        t.classList.add('active');
+      };
+      thumbs.appendChild(t);
+    });
+  } else {
+    mainEl.innerHTML = '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:60px">🐱</div>';
+  }
+
+  // 状态 badge
+  if(c.status==='adopted'){
+    document.getElementById('status-badge-wrap').innerHTML = '<span class="status-badge status-adopted">已找到家 🎉</span>';
+  } else if(c.status==='paused'){
+    document.getElementById('status-badge-wrap').innerHTML = '<span class="status-badge status-paused">暂停接受申请</span>';
+  }
+
+  // 名字
+  document.getElementById('cat-name').textContent = getName();
+  const otherNames = ['zh','en','ja'].filter(l=>l!==currentLang).map(l=>getName(l)).filter(Boolean).join(' / ');
+  document.getElementById('cat-name-sub').textContent = otherNames;
+
+  // info pills
+  const furMap={short:'短毛',medium:'中长毛',long:'长毛'};
+  const patMap={tabby:'虎斑',solid:'纯色',bicolor:'双色',tricolor:'三花',calico:'玳瑁',tuxedo:'燕尾服',pointed:'重点色',spotted:'斑点'};
+  const ageMap={kitten:'幼猫',adult:'成猫',senior:'老猫'};
+  const pills = [
+    c.gender==='male'?'公猫 ♂':c.gender==='female'?'母猫 ♀':null,
+    c.age_text || ageMap[c.age_group],
+    furMap[c.fur_length],
+    patMap[c.coat_pattern],
+    c.is_neutered?'已绝育':null,
+    c.is_vaccinated?'已接种':null,
+    c.is_dewormed?'已驱虫':null,
+    c.fiv_status==='negative'?'FIV阴性':c.fiv_status==='positive'?'FIV阳性':null,
+  ].filter(Boolean);
+  document.getElementById('info-row').innerHTML = pills.map(p=>`<span class="info-pill">${p}</span>`).join('');
+
+  // 描述
+  document.getElementById('cat-desc').textContent = getDesc();
+
+  // 要求
+  const reqs = getList('requirements');
+  if(reqs.length){
+    document.getElementById('req-title').style.display='block';
+    document.getElementById('req-list').innerHTML = reqs.map(r=>`<li>${r}</li>`).join('');
+  }
+
+  // 地区 & 志愿者
+  document.getElementById('loc-text').innerHTML = `📍 ${[c.city,c.state,c.country].filter(Boolean).join(', ')}`;
+  document.getElementById('foster-name').textContent = c.foster_name || '中途志愿者';
+  const langs = (c.foster_lang||[]).join(' · ');
+  document.getElementById('foster-meta').textContent = langs ? `会说：${langs}` : '';
+}
+
+function switchLang(lang, btn){
+  currentLang = lang;
+  localStorage.setItem('toc_lang', lang);
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  if(!catData) return;
+  document.getElementById('cat-name').textContent = getName();
+  document.getElementById('cat-desc').textContent = getDesc();
+  const reqs = getList('requirements');
+  document.getElementById('req-list').innerHTML = reqs.map(r=>`<li>${r}</li>`).join('');
+  renderQuestions();
+}
+
+function updateAdoptUI(){
+  if(!catData) return;
+  if(catData.status==='adopted'){
+    document.getElementById('adopt-flow').style.display='none';
+    document.getElementById('adopted-msg').style.display='block';
+    return;
+  }
+  if(catData.status==='paused'){
+    document.getElementById('adopt-btn').disabled=true;
+    document.getElementById('adopt-note').textContent='志愿者暂停接受申请';
+    return;
+  }
+  if(!currentUser){
+    document.getElementById('adopt-note').textContent='登录后回答问卷即可查看联系方式';
+    document.getElementById('adopt-btn').disabled=false;
+  } else {
+    document.getElementById('adopt-note').textContent='回答问卷即可解锁联系方式';
+    checkExistingApplication();
+  }
+}
+
+async function checkExistingApplication(){
+  if(!currentUser || !catId) return;
+  try {
+    const snap = await window._getDocs(
+      window._query(
+        window._collection(window._db,'foster_cats',catId,'applications'),
+        window._where('applicant_uid','==',currentUser.uid)
+      )
+    );
+    if(!snap.empty){
+      hasApplied = true;
+      showContact();
+    }
+  } catch(e){}
+}
+
+function startAdopt(){
+  if(!currentUser){
+    window._signInWithPopup(window._auth, window._provider).catch(console.error);
+    return;
+  }
+  const questions = getList('questions');
+  if(!questions.length){
+    // 没有问卷 → 直接显示联系方式
+    showContact();
+    return;
+  }
+  document.getElementById('adopt-btn').style.display='none';
+  document.getElementById('adopt-note').style.display='none';
+  document.getElementById('questionnaire').style.display='block';
+  renderQuestions();
+}
+
+function renderQuestions(){
+  const questions = getList('questions');
+  const wrap = document.getElementById('q-items');
+  wrap.innerHTML = questions.map((q,i)=>`
+    <div class="q-item">
+      <label class="q-label">${i+1}. ${q}</label>
+      <textarea class="q-input" id="q-ans-${i}" rows="2" placeholder="请回答..."></textarea>
+    </div>`).join('');
+}
+
+async function submitAnswers(){
+  const questions = getList('questions');
+  const answers   = {};
+  let allFilled = true;
+  questions.forEach((q,i) => {
+    const val = document.getElementById(`q-ans-${i}`)?.value.trim() || '';
+    if(!val) allFilled = false;
+    answers[q] = val;
+  });
+  if(!allFilled){
+    showQMsg('error','请回答所有问题'); return;
+  }
+  const btn = document.getElementById('btn-submit-q');
+  btn.disabled = true;
+  btn.textContent = '提交中...';
+  try {
+    await window._addDoc(
+      window._collection(window._db,'foster_cats',catId,'applications'),
+      {
+        applicant_uid:   currentUser.uid,
+        applicant_name:  currentUser.displayName || '',
+        applicant_email: currentUser.email || '',
+        answers,
+        status:      'pending',
+        created_at:  window._serverTimestamp(),
+      }
+    );
+    await window._updateDoc(window._doc(window._db,'foster_cats',catId), {inquiry_count: window._increment(1)});
+    hasApplied = true;
+    document.getElementById('questionnaire').style.display='none';
+    showContact();
+  } catch(e){
+    showQMsg('error','提交失败：'+e.message);
+    btn.disabled=false; btn.textContent='提交答案';
+  }
+}
+
+function showContact(){
+  document.getElementById('adopt-btn').style.display='none';
+  document.getElementById('adopt-note').style.display='none';
+  document.getElementById('questionnaire').style.display='none';
+  document.getElementById('contact-reveal').style.display='block';
+  const wa = catData?.foster_contact || '';
+  const other = catData?.foster_contact_other || '';
+  const waEl = document.getElementById('c-wa');
+  if(wa.startsWith('+') || wa.startsWith('http')){
+    const link = wa.startsWith('http') ? wa : `https://wa.me/${wa.replace(/[^0-9]/g,'')}`;
+    waEl.innerHTML = `<a href="${link}" target="_blank">${wa}</a>`;
+  } else {
+    waEl.textContent = wa || '—';
+  }
+  if(other){
+    document.getElementById('c-other-wrap').style.display='block';
+    document.getElementById('c-other').textContent = other;
+  }
+}
+
+function showQMsg(type, text){
+  const el = document.getElementById('msg-q');
+  el.className = `msg ${type}`;
+  el.textContent = text;
+  setTimeout(()=>el.className='msg', 5000);
+}
+
+// ── 分享 ──
+function getShareUrl(){
+  return `https://taoofcat.com/foster-cat.html?id=${catId}`;
+}
+function shareTo(platform){
+  const url = encodeURIComponent(getShareUrl());
+  const name = getName('zh');
+  const text = encodeURIComponent(`🐾 ${name} 正在寻找有缘人 · 玄猫之道`);
+  const links = {
+    wa:      `https://wa.me/?text=${text}%20${url}`,
+    tg:      `https://t.me/share/url?url=${url}&text=${text}`,
+    fb:      `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+    threads: `https://www.threads.net/intent/post?text=${text}%20${url}`,
+  };
+  if(links[platform]) window.open(links[platform],'_blank');
+}
+function copyLink(){
+  navigator.clipboard.writeText(getShareUrl())
+    .then(()=>alert('链接已复制'));
+}
+</script>
+</body>
+</html>
