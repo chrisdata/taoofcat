@@ -399,6 +399,22 @@ function buildActions(cat, wrap){
     note.textContent = '等待管理员审核';
     wrap.appendChild(note);
   }
+
+  if(cat.status === 'adopted'){
+    const restoreBtn = document.createElement('button');
+    restoreBtn.className = 'btn-action btn-resume';
+    restoreBtn.textContent = '↩ 恢复待领养';
+    restoreBtn.onclick = () => updateStatus(cat.id, 'approved', restoreBtn);
+    wrap.appendChild(restoreBtn);
+  }
+
+  if(cat.status === 'archived'){
+    const restoreBtn = document.createElement('button');
+    restoreBtn.className = 'btn-action btn-resume';
+    restoreBtn.textContent = '↩ 重新上架';
+    restoreBtn.onclick = () => updateStatus(cat.id, 'approved', restoreBtn);
+    wrap.appendChild(restoreBtn);
+  }
 }
 
 // ── 更新状态 ──
