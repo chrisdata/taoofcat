@@ -276,15 +276,12 @@ function renderCats(){
     return;
   }
 
-  // 猫少于4只时关闭动画，直接显示
-  const shouldAnimate = profileCats.length >= 3;
-  if(!shouldAnimate){
-    grid.style.animation = 'none';
-    grid.style.justifyContent = 'center';
-  }
+  // 复制到至少6张保证走马灯效果
+  let baseCats = [...profileCats];
+  while(baseCats.length < 6) baseCats = [...baseCats, ...profileCats];
+  const catsToRender = [...baseCats, ...baseCats]; // 复制一遍无缝循环
 
-  // 渲染一遍，动画时复制一遍实现无缝循环
-  const catsToRender = shouldAnimate ? [...profileCats, ...profileCats] : profileCats;
+  const shouldAnimate = true;
 
   catsToRender.forEach(cat => {
     const card = document.createElement('a');
