@@ -294,12 +294,6 @@ async function autoDetectCountry(){
     }
   } catch(e){ /* 失败就不预设 */ }
 }
-    const sel = document.getElementById('f-country');
-    for(let o of sel.options){
-      if(o.value === country){ sel.value = country; onCountryFilter(); return; }
-    }
-  } catch(e){ /* 失败就不预设 */ }
-}
 
 // ── 地区 ──
 function buildCountryOptions(){
