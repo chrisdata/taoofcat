@@ -135,6 +135,26 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 24px;display:fl
 /* COLOR DOTS */
 .color-dots{display:flex;gap:3px;margin-top:6px;flex-wrap:wrap}
 .dot{width:10px;height:10px;border-radius:50%;border:0.5px solid rgba(255,255,255,0.15)}
+
+/* 走马灯 */
+.marquee-section{padding:16px 0 20px;border-bottom:0.5px solid var(--border);overflow:hidden;position:relative}
+.marquee-label{font-size:10px;letter-spacing:.2em;color:var(--gold);opacity:.6;text-transform:uppercase;text-align:center;margin-bottom:12px}
+.marquee-section::before,.marquee-section::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none}
+.marquee-section::before{left:0;background:linear-gradient(to right,var(--dark),transparent)}
+.marquee-section::after{right:0;background:linear-gradient(to left,var(--dark),transparent)}
+.marquee-track{display:flex;gap:14px;animation:marquee 50s linear infinite;width:max-content;padding:0 24px}
+.marquee-track:hover{animation-play-state:paused}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.mq-card{background:var(--dark2);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;text-decoration:none;display:block;color:inherit;width:150px;flex-shrink:0;transition:border-color .2s,transform .15s}
+.mq-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.mq-photo{width:100%;aspect-ratio:1;background:var(--dark3);overflow:hidden}
+.mq-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.mq-card:hover .mq-photo img{transform:scale(1.05)}
+.mq-no-photo{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:28px;color:var(--border2)}
+.mq-body{padding:8px 10px}
+.mq-name{font-size:12px;font-weight:500;color:var(--gold-lt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mq-meta{font-size:10px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mq-loc{font-size:10px;color:rgba(232,220,200,0.3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 </style>
 </head>
 <body>
@@ -166,6 +186,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 24px;display:fl
       <div class="stat-num" id="stat-adopted">—</div>
       <div class="stat-label">已找到家</div>
     </div>
+  </div>
+</div>
+
+<!-- 走马灯：最新上架 -->
+<div class="marquee-section">
+  <div class="marquee-label">最新上架 · Recently Added</div>
+  <div class="marquee-track" id="marquee-track">
+    <!-- JS 渲染 -->
   </div>
 </div>
 
@@ -273,6 +301,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
   buildCountryOptions();
   loadStats();
+  loadMarquee();
   resetAndLoad();
   initInfiniteScroll();
 });
@@ -339,6 +368,60 @@ async function loadStats(){
     document.getElementById('stat-adopted').textContent = adopted.size;
   } catch(e){}
 }
+
+// ── 走马灯 ──
+async function loadMarquee(){
+  try {
+    const snap = await window._getDocs(
+      window._query(
+        window._collection(window._db,'foster_cats'),
+        window._where('status','==','approved'),
+        window._orderBy('created_at','desc'),
+        window._limit(16)
+      )
+    );
+    let cats = snap.docs.map(d=>({id:d.id,...d.data()}));
+    if(!cats.length) return;
+
+    // 复制到至少8张保证走马灯效果
+    let base = [...cats];
+    while(base.length < 8) base = [...base, ...cats];
+    const items = [...base, ...base]; // 无缝循环
+
+    const track = document.getElementById('marquee-track');
+    track.innerHTML = '';
+    items.forEach(cat => {
+      const card = document.createElement('a');
+      card.className = 'mq-card';
+      card.href = `/foster-cat.html?id=${cat.id}`;
+
+      const photoUrl = cat.cover_photo
+        ? `${CLOUDINARY}/q_auto,f_auto,w_300/${cat.cover_photo}`
+        : null;
+
+      const name = getName(cat);
+      const ageMap = {kitten:'幼猫',adult:'成猫',senior:'老猫'};
+      const genderText = cat.gender==='male'?'公':cat.gender==='female'?'母':'';
+      const meta = [genderText, ageMap[cat.age_group]||''].filter(Boolean).join(' · ');
+      const loc  = [cat.city||'', cat.state||'', cat.country||''].filter(Boolean).join(', ');
+
+      card.innerHTML = `
+        <div class="mq-photo">
+          ${photoUrl
+            ? `<img src="${photoUrl}" alt="${escStr(name)}" loading="lazy">`
+            : `<div class="mq-no-photo">🐱</div>`}
+        </div>
+        <div class="mq-body">
+          <div class="mq-name">${escStr(name)}</div>
+          <div class="mq-meta">${escStr(meta)}</div>
+          <div class="mq-loc">📍 ${escStr(loc)}</div>
+        </div>`;
+      track.appendChild(card);
+    });
+  } catch(e){ console.error('marquee error:', e); }
+}
+
+function escStr(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
 // ── 加载猫咪 ──
 function getFilters(){
