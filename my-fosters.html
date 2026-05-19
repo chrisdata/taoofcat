@@ -105,6 +105,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 24px;display:fl
 .fc-meta{font-size:12px;color:var(--muted);margin-bottom:4px}
 .fc-loc{font-size:11px;color:rgba(232,220,200,0.35);margin-bottom:10px}
 .fc-date{font-size:10px;color:rgba(232,220,200,0.25);margin-bottom:12px}
+.fc-remind{background:rgba(184,134,11,0.12);border:0.5px solid rgba(184,134,11,0.35);border-radius:var(--radius);padding:8px 10px;margin-bottom:10px;font-size:11px;color:var(--gold);line-height:1.6}
+.fc-remind-actions{display:flex;gap:6px;margin-top:7px}
+.btn-renew{font-size:11px;padding:4px 10px;border-radius:var(--radius);border:0.5px solid rgba(39,174,96,0.4);background:rgba(39,174,96,0.08);color:#2ecc71;cursor:pointer;font-family:'Noto Serif SC',serif;transition:all .2s}
+.btn-renew:hover{background:rgba(39,174,96,0.18)}
+.btn-adopted-sm{font-size:11px;padding:4px 10px;border-radius:var(--radius);border:0.5px solid rgba(93,173,226,0.4);background:rgba(93,173,226,0.08);color:#5dade2;cursor:pointer;font-family:'Noto Serif SC',serif;transition:all .2s}
+.btn-adopted-sm:hover{background:rgba(93,173,226,0.18)}
 
 /* ACTIONS */
 .fc-actions{display:flex;gap:6px;flex-wrap:wrap}
@@ -345,6 +351,14 @@ function buildCard(cat){
       <div class="fc-meta">${esc(meta)}</div>
       <div class="fc-loc">📍 ${esc(loc)}</div>
       <div class="fc-date">登记于 ${date}</div>
+      ${isOverdue(cat) ? `
+      <div class="fc-remind">
+        ⏰ 已上架超过30天，请确认状态
+        <div class="fc-remind-actions">
+          <button class="btn-renew" onclick="renewCat('${cat.id}',event)">✓ 仍在找家</button>
+          <button class="btn-adopted-sm" onclick="markAdopted('${cat.id}',this)">🎉 已找到家</button>
+        </div>
+      </div>` : ''}
       <div class="fc-actions" id="actions-${cat.id}"></div>
     </div>`;
 
@@ -352,7 +366,27 @@ function buildCard(cat){
   return card;
 }
 
-function buildActions(cat, wrap){
+function isOverdue(cat){
+  if(cat.status !== 'approved') return false;
+  const ref = cat.renewed_at || cat.approved_at;
+  if(!ref) return false;
+  const d = ref.toDate ? ref.toDate() : new Date(ref);
+  return (Date.now() - d.getTime()) > 30 * 24 * 60 * 60 * 1000;
+}
+
+async function renewCat(catId, e){
+  const btn = e.target;
+  btn.disabled = true; btn.textContent = '更新中…';
+  try {
+    await window._updateDoc(window._doc(window._db,'foster_cats',catId), {
+      renewed_at: new Date()
+    });
+    await loadMyCats();
+  } catch(err){
+    alert('操作失败：' + err.message);
+    btn.disabled = false; btn.textContent = '✓ 仍在找家';
+  }
+}
   // 查看页面（所有状态都有）
   const viewBtn = document.createElement('a');
   viewBtn.className = 'btn-action';
