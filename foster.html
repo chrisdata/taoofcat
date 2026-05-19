@@ -289,49 +289,6 @@ select option { background: var(--dark2); }
   font-size: 11px; color: var(--gold);
 }
 
-/* ── AI TRANSLATE BTN ── */
-.translate-bar {
-  margin: 4px 0 24px;
-  display: flex; align-items: center; gap: 12px;
-}
-.btn-translate {
-  display: inline-flex; align-items: center; gap: 7px;
-  padding: 9px 20px;
-  border: 0.5px solid var(--gold);
-  background: rgba(212,168,67,0.06);
-  color: var(--gold); border-radius: var(--radius);
-  cursor: pointer; font-size: 13px;
-  font-family: 'Noto Serif SC', serif;
-  transition: all 0.2s;
-}
-.btn-translate:hover { background: rgba(212,168,67,0.12); }
-.btn-translate:disabled { opacity: 0.4; cursor: not-allowed; }
-.translate-status { font-size: 12px; color: var(--muted); }
-
-/* ── TRANSLATED PREVIEW ── */
-.lang-tabs {
-  display: flex; gap: 0;
-  border: 0.5px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden; margin-bottom: 16px;
-}
-.lang-tab {
-  flex: 1; padding: 7px; text-align: center;
-  font-size: 12px; cursor: pointer; color: var(--muted);
-  background: var(--dark2); border: none;
-  font-family: 'Noto Serif SC', serif;
-  transition: all 0.2s;
-}
-.lang-tab.active { background: rgba(212,168,67,0.1); color: var(--gold); }
-.lang-panel { display: none; }
-.lang-panel.active { display: block; }
-.translated-field { margin-bottom: 14px; }
-.translated-field label {
-  font-size: 11px; color: var(--muted);
-  margin-bottom: 5px; display: block;
-  letter-spacing: 0.08em; text-transform: uppercase;
-}
-
 /* ── CHECKBOXES ── */
 .checks { display: flex; flex-wrap: wrap; gap: 12px; }
 .check-item {
@@ -514,56 +471,6 @@ select option { background: var(--dark2); }
       placeholder="例：橘子是一只活泼好动的小公猫，喜欢追逐玩具，和小朋友很亲。已驱虫接种，身体健康。在我家住了两个月，很快适应了室内生活..."></textarea>
   </div>
 
-  <!-- AI 翻译按钮 -->
-  <div class="translate-bar">
-    <button class="btn-translate" id="btn-translate" onclick="runTranslate()" disabled>
-      ✦ AI 生成三语版本
-    </button>
-    <span class="translate-status" id="translate-status"></span>
-  </div>
-
-  <!-- 翻译预览 -->
-  <div id="translate-preview" style="display:none">
-    <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">
-      以下为 AI 生成内容，可手动修改后提交
-    </div>
-    <div class="lang-tabs">
-      <button class="lang-tab active" onclick="switchLang('zh',this)">中文</button>
-      <button class="lang-tab" onclick="switchLang('en',this)">English</button>
-      <button class="lang-tab" onclick="switchLang('ja',this)">日本語</button>
-    </div>
-    <div id="panel-zh" class="lang-panel active">
-      <div class="translated-field">
-        <label>名字</label>
-        <input type="text" id="t-name-zh" maxlength="30">
-      </div>
-      <div class="translated-field">
-        <label>描述</label>
-        <textarea id="t-desc-zh" rows="4"></textarea>
-      </div>
-    </div>
-    <div id="panel-en" class="lang-panel">
-      <div class="translated-field">
-        <label>Name</label>
-        <input type="text" id="t-name-en" maxlength="30">
-      </div>
-      <div class="translated-field">
-        <label>Description</label>
-        <textarea id="t-desc-en" rows="4"></textarea>
-      </div>
-    </div>
-    <div id="panel-ja" class="lang-panel">
-      <div class="translated-field">
-        <label>名前</label>
-        <input type="text" id="t-name-ja" maxlength="30">
-      </div>
-      <div class="translated-field">
-        <label>説明</label>
-        <textarea id="t-desc-ja" rows="4"></textarea>
-      </div>
-    </div>
-  </div>
-
   <!-- ③ 健康状态 -->
   <div class="sec-title">③ 健康状态 · Health</div>
 
@@ -733,7 +640,6 @@ window.addEventListener('DOMContentLoaded', () => {
       document.getElementById('form-wrap').style.display   = 'block';
       document.getElementById('user-name').textContent     = user.displayName || user.email;
       document.getElementById('auth-btn').textContent      = '登出';
-      document.getElementById('btn-translate').disabled    = false;
     } else {
       document.getElementById('login-gate').style.display  = 'block';
       document.getElementById('form-wrap').style.display   = 'none';
@@ -902,59 +808,6 @@ function addPreset(text){
   renderTags('que');
 }
 
-// ── AI 翻译 ──
-async function runTranslate(){
-  const name = document.getElementById('cat-name').value.trim();
-  const desc = document.getElementById('cat-desc').value.trim();
-  if(!name || !desc){
-    showMsg('error','请先填写猫咪名字和描述');
-    return;
-  }
-  const btn = document.getElementById('btn-translate');
-  const status = document.getElementById('translate-status');
-  btn.disabled = true;
-  status.textContent = 'AI 翻译中...';
-
-  try {
-    const res = await fetch(`${BACKEND}/foster-translate`, {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({
-        name, description: desc,
-        requirements: reqTags,
-        questions: queTags,
-        source_lang: 'zh'
-      })
-    });
-    const data = await res.json();
-    if(data.error){ showMsg('error', data.error); return; }
-
-    // 填入预览
-    document.getElementById('t-name-zh').value = data.name?.zh || name;
-    document.getElementById('t-name-en').value = data.name?.en || '';
-    document.getElementById('t-name-ja').value = data.name?.ja || '';
-    document.getElementById('t-desc-zh').value = data.description?.zh || desc;
-    document.getElementById('t-desc-en').value = data.description?.en || '';
-    document.getElementById('t-desc-ja').value = data.description?.ja || '';
-
-    document.getElementById('translate-preview').style.display = 'block';
-    status.textContent = '✓ 三语版本已生成，可手动修改';
-    window._translated = data;
-
-  } catch(err){
-    showMsg('error', '翻译失败：' + err.message);
-  } finally {
-    btn.disabled = false;
-  }
-}
-
-function switchLang(lang, btn){
-  document.querySelectorAll('.lang-tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.lang-panel').forEach(p => p.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById(`panel-${lang}`).classList.add('active');
-}
-
 // ── 提交 ──
 async function submitFoster(){
   // 验证
@@ -1002,26 +855,38 @@ async function submitFoster(){
   } catch(e){ /* 审核失败不影响提交，标记 flagged */ reviewResult = {status:'flagged',reason:'审核服务异常',confidence:0.5}; }
 
   if(reviewResult.status === 'rejected'){
-    showMsg('error', `提交被拒绝：${reviewResult.reason}`);
+    showMsg('error', `提交被拒绝：${reviewResult.reason || '内容不符合要求'}`);
     btn.disabled = false;
     btn.textContent = '提交审核 · Submit for Review';
     return;
   }
 
-  // 2. 组装三语数据
-  const t = window._translated || {};
-  const nameI18n = {
-    zh: document.getElementById('t-name-zh')?.value || name,
-    en: document.getElementById('t-name-en')?.value || name,
-    ja: document.getElementById('t-name-ja')?.value || name,
-  };
-  const descI18n = {
-    zh: document.getElementById('t-desc-zh')?.value || desc,
-    en: document.getElementById('t-desc-en')?.value || desc,
-    ja: document.getElementById('t-desc-ja')?.value || desc,
-  };
-  const reqI18n = t.requirements || { zh:reqTags, en:reqTags, ja:reqTags };
-  const queI18n = t.questions    || { zh:queTags, en:queTags, ja:queTags };
+  // 2. 后台静默翻译（志愿者不需要看到这个过程）
+  btn.textContent = '翻译中...';
+  let nameI18n = { zh: name, en: name, ja: name };
+  let descI18n = { zh: desc, en: desc, ja: desc };
+  let reqI18n  = { zh: reqTags, en: reqTags, ja: reqTags };
+  let queI18n  = { zh: queTags, en: queTags, ja: queTags };
+
+  try {
+    const tr = await fetch(`${BACKEND}/foster-translate`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name, description: desc,
+        requirements: reqTags,
+        questions: queTags,
+        source_lang: 'zh'
+      })
+    });
+    const tData = await tr.json();
+    if (!tData.error) {
+      nameI18n = { zh: tData.name?.zh || name, en: tData.name?.en || name, ja: tData.name?.ja || name };
+      descI18n = { zh: tData.description?.zh || desc, en: tData.description?.en || desc, ja: tData.description?.ja || desc };
+      reqI18n  = tData.requirements || { zh: reqTags, en: reqTags, ja: reqTags };
+      queI18n  = tData.questions    || { zh: queTags, en: queTags, ja: queTags };
+    }
+  } catch(e) { /* 翻译失败不影响提交，用原文兜底 */ }
 
   // 志愿者语言
   const langs = [];
@@ -1034,46 +899,46 @@ async function submitFoster(){
   const docData = {
     // 基本
     name: nameI18n,
-    gender, 
+    gender,
     age_group: ageGrp,
-    age_text: document.getElementById('cat-age-text').value.trim(),
+    age_text:  document.getElementById('cat-age-text').value.trim() || '',
     coat_pattern: pattern,
     fur_length: fur,
     colors,
     // 描述
-    description: descI18n,
+    description:  descI18n,
     requirements: reqI18n,
-    questions: queI18n,
+    questions:    queI18n,
     // 健康
     is_neutered:   document.getElementById('h-neutered').checked,
     is_vaccinated: document.getElementById('h-vaccinated').checked,
     is_dewormed:   document.getElementById('h-dewormed').checked,
-    fiv_status:    document.getElementById('h-fiv').value,
-    health_notes:  document.getElementById('h-notes').value.trim(),
+    fiv_status:    document.getElementById('h-fiv').value || 'unknown',
+    health_notes:  document.getElementById('h-notes').value.trim() || '',
     // 地区
-    country, 
+    country,
     country_code:  window.REGIONS?.[country]?.code || '',
     state,
     city: document.getElementById('loc-city')?.value.trim() || '',
     // 照片
-    photos: filledPhotos,
-    cover_photo: filledPhotos[0],
-    // 联系（存储但前端只给登录+答题用户读）
-    foster_uid:    currentUser.uid,
-    foster_name:   currentUser.displayName || '',
-    foster_email:  currentUser.email || '',
-    foster_contact: contact,
-    foster_contact_other: document.getElementById('contact-other').value.trim(),
-    foster_lang:   langs,
+    photos:      filledPhotos,
+    cover_photo: filledPhotos[0] || '',
+    // 联系
+    foster_uid:           currentUser.uid,
+    foster_name:          currentUser.displayName || '',
+    foster_email:         currentUser.email || '',
+    foster_contact:       contact,
+    foster_contact_other: document.getElementById('contact-other').value.trim() || '',
+    foster_lang:          langs,
     // 系统
-    status:        reviewResult.status === 'flagged' ? 'pending' : 'approved',
-    ai_review:     reviewResult.status,
-    ai_review_reason: reviewResult.reason,
-    created_at:    window._serverTimestamp(),
-    approved_at:   reviewResult.status === 'approved' ? window._serverTimestamp() : null,
-    adopted_at:    null,
-    view_count:    0,
-    inquiry_count: 0,
+    status:           (reviewResult?.status === 'flagged') ? 'pending' : 'approved',
+    ai_review:        reviewResult?.status        || 'flagged',
+    ai_review_reason: reviewResult?.reason        || '',
+    created_at:       window._serverTimestamp(),
+    approved_at:      (reviewResult?.status === 'approved') ? window._serverTimestamp() : null,
+    adopted_at:       null,
+    view_count:       0,
+    inquiry_count:    0,
   };
 
   try {
