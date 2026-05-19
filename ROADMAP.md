@@ -23,6 +23,7 @@
 | 社媒排程 | Buffer (@taoc.4t) |
 | 自动化 | n8n (本地 Windows PC, PM2 24/7, port 5678) |
 | 邮件 | Cloudflare Email Routing → miao@taoofcat.com → chrischua83@gmail.com |
+| **OG 分享路由** | **Cloudflare Worker (share.taoofcat.com)** |
 | **AI 指挥中心** | **AI Boardroom (本地 Flask, port 7070)** |
 
 **Railway 环境变量：**
@@ -48,6 +49,7 @@
 - API Key: 238641685396762
 - 图片 URL 格式: `https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/文件名`
 - 上传注意: 必须用 Upload preset 且开启「Use filename as public ID」，否则会加随机后缀
+- **oracle-shares** preset（Unsigned）— 专供占卜分享卡片 PNG 上传用
 
 **Firebase Realtime Database：**
 - URL: https://taoofcat-6cf6e-default-rtdb.asia-southeast1.firebasedatabase.app
@@ -150,6 +152,15 @@
 - 五猫性格定义 + 五行对应
 - 各猫金句、擅长领域、占卜语气完整设定（中英双语）
 
+### 分享系统（2026年5月19日）
+- **hero-bg.mp4 迁移 Cloudinary**（q_auto，节省带宽）
+- **虎斑仔图片修正**（photo key 统一为 hubanzai.jpg）
+- **Cloudflare Worker** — `share.taoofcat.com`，处理 og:image + redirect 邀请链接
+- **divination.html og:image** — 换成 Cloudinary og-image.jpg（630×1120）
+- **分享按钮简化** — Threads/WA/TG/FB/IG 只发邀请链接，干净无冗余
+- **保存卦象按钮** — 下载解卦 PNG 到本机，附隐私提示
+- **隐私提示文字** — 「为保护您的私隐，卦象图只保存在您的手机里」
+
 ### AI Boardroom（2026年5月）
 本地 AI 指挥中心，运行在 Windows PC，port 7070。
 
@@ -247,13 +258,13 @@ AI_Boardroom/
 
 ## 下一个聊天继续
 
-1. **Cloudinary 图片验证** — 确认所有页面图片正常显示
-2. **供养系统升级** — 扩展品项 + 积分打通
-3. **付款成功感谢弹窗** — feeding_success=1 参数处理
-4. **Boardroom Step 2** — 执行模式文案一键发 Threads
-5. **Boardroom Step 3** — 猫图生成后 Gemini 写文案，一键发 Threads 带图
-6. **博山炉焚香动画** — Sony 拍 MP4，上传 Cloudinary，加进准备弹窗
-7. **猫咪去背照片** — remove.bg 处理后上传 Cloudinary，更新 CAT_PHOTO_COUNTS
-8. **开始发帖推广** — 傻猪 x 小白父子照片
+1. **供养系统升级** — 扩展品项 + 积分打通
+2. **付款成功感谢弹窗** — feeding_success=1 参数处理
+3. **Boardroom Step 2** — 执行模式文案一键发 Threads
+4. **Boardroom Step 3** — 猫图生成后 Gemini 写文案，一键发 Threads 带图
+5. **博山炉焚香动画** — Sony 拍 MP4，上传 Cloudinary，加进占卜准备弹窗
+6. **猫咪去背照片** — remove.bg 处理后上传 Cloudinary，更新 CAT_PHOTO_COUNTS
+7. **开始发帖推广** — 傻猪 x 小白父子照片
+8. **Cloudinary 图片验证** — 确认所有页面图片正常显示
 
-*最后更新：2026年5月18日*
+*最后更新：2026年5月19日*
