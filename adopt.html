@@ -143,6 +143,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 24px;display:fl
   <a class="nav-logo" href="/">玄猫之道 <span>Tao of Cat</span></a>
   <div class="nav-right">
     <a class="nav-link" href="/foster.html">登记中途猫 +</a>
+    <a class="nav-link" id="my-fosters-link" href="/my-fosters.html" style="display:none">我的中途猫</a>
     <span id="user-name"></span>
     <button class="btn-sm" id="auth-btn" onclick="handleAuth()">登录</button>
   </div>
@@ -263,7 +264,7 @@ window.addEventListener('DOMContentLoaded', () => {
       document.getElementById('user-name').textContent = user.displayName?.split(' ')[0] || '';
       document.getElementById('auth-btn').textContent  = '登出';
       document.getElementById('foster-cta').style.display = 'block';
-      // 根据用户所在国家预设筛选
+      document.getElementById('my-fosters-link').style.display = 'inline';
       await autoDetectCountry();
     } else {
       document.getElementById('user-name').textContent = '';
@@ -287,6 +288,12 @@ async function autoDetectCountry(){
     const res  = await fetch('https://ip-api.com/json/?fields=country');
     const data = await res.json();
     const country = data.country;
+    const sel = document.getElementById('f-country');
+    for(let o of sel.options){
+      if(o.value === country){ sel.value = country; onCountryFilter(); return; }
+    }
+  } catch(e){ /* 失败就不预设 */ }
+}
     const sel = document.getElementById('f-country');
     for(let o of sel.options){
       if(o.value === country){ sel.value = country; onCountryFilter(); return; }
