@@ -128,6 +128,36 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 24px;display:fl
 /* EMPTY */
 .empty{text-align:center;padding:60px 24px;color:var(--muted)}
 .empty-icon{font-size:40px;margin-bottom:16px}
+
+/* 申请面板 */
+.apply-panel{background:var(--dark);border:0.5px solid var(--border);border-radius:12px;margin-top:12px;overflow:hidden;display:none}
+.apply-panel-header{padding:10px 14px;border-bottom:0.5px solid var(--border);font-size:12px;color:var(--gold);display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none}
+.apply-panel-header:hover{background:rgba(212,168,67,0.04)}
+.apply-list{padding:10px}
+.apply-item{background:var(--dark2);border:0.5px solid var(--border);border-radius:var(--radius);padding:12px 14px;margin-bottom:8px}
+.apply-item:last-child{margin-bottom:0}
+.apply-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+.apply-name{font-size:13px;font-weight:500;color:var(--text)}
+.apply-date{font-size:10px;color:var(--muted)}
+.ai-grade{font-size:11px;padding:3px 9px;border-radius:20px;font-weight:500}
+.grade-green{background:rgba(39,174,96,0.15);border:0.5px solid rgba(39,174,96,0.4);color:#2ecc71}
+.grade-yellow{background:rgba(184,134,11,0.15);border:0.5px solid rgba(184,134,11,0.4);color:var(--gold)}
+.grade-red{background:rgba(192,57,43,0.15);border:0.5px solid rgba(192,57,43,0.4);color:#e74c3c}
+.apply-comment{font-size:12px;color:var(--muted);font-style:italic;margin-bottom:8px}
+.apply-qa{margin-bottom:10px}
+.qa-item{margin-bottom:6px}
+.qa-q{font-size:11px;color:var(--muted)}
+.qa-a{font-size:12px;color:var(--text);padding-left:8px;border-left:2px solid var(--border2);margin-top:2px}
+.apply-actions{display:flex;gap:6px;flex-wrap:wrap}
+.btn-accept{font-size:11px;padding:5px 14px;border-radius:var(--radius);border:0.5px solid rgba(39,174,96,0.4);background:rgba(39,174,96,0.08);color:#2ecc71;cursor:pointer;font-family:'Noto Serif SC',serif;transition:all .2s}
+.btn-accept:hover{background:rgba(39,174,96,0.2)}
+.btn-decline{font-size:11px;padding:5px 14px;border-radius:var(--radius);border:0.5px solid rgba(192,57,43,0.3);background:transparent;color:#e74c3c;cursor:pointer;font-family:'Noto Serif SC',serif;transition:all .2s}
+.btn-decline:hover{background:rgba(192,57,43,0.1)}
+.apply-status{font-size:10px;padding:2px 8px;border-radius:20px}
+.status-accepted{background:rgba(39,174,96,0.15);color:#2ecc71;border:0.5px solid rgba(39,174,96,0.3)}
+.status-rejected{background:rgba(192,57,43,0.15);color:#e74c3c;border:0.5px solid rgba(192,57,43,0.3)}
+.apply-empty{text-align:center;padding:20px;font-size:12px;color:var(--muted)}
+.inquiry-count{font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(212,168,67,0.15);border:0.5px solid var(--border2);color:var(--gold);cursor:pointer}
 .empty p{font-size:14px;line-height:1.9}
 
 /* LOADING */
@@ -138,6 +168,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 24px;display:fl
 /* PENDING REVIEW NOTICE */
 .review-notice{background:rgba(184,134,11,0.08);border:0.5px solid rgba(184,134,11,0.3);border-radius:var(--radius);padding:10px 14px;font-size:12px;color:var(--gold);margin-bottom:16px;line-height:1.7}
 </style>
+<script src="/webview-check.js"></script>
 </head>
 <body>
 
@@ -360,9 +391,24 @@ function buildCard(cat){
         </div>
       </div>` : ''}
       <div class="fc-actions" id="actions-${cat.id}"></div>
-    </div>`;
+    </div>
+    ${(cat.status === 'approved' || cat.status === 'paused') ? `
+    <div class="apply-panel" id="panel-${cat.id}">
+      <div class="apply-panel-header" onclick="togglePanel('${cat.id}')">
+        <span id="panel-label-${cat.id}">📬 查看领养申请</span>
+        <span id="panel-arrow-${cat.id}">▼</span>
+      </div>
+      <div class="apply-list" id="panel-list-${cat.id}">
+        <div class="apply-empty">点击上方查看申请</div>
+      </div>
+    </div>` : ''}
+  </div>`;
 
   buildActions(cat, card.querySelector(`#actions-${cat.id}`));
+  // 加载申请数
+  if(cat.status === 'approved' || cat.status === 'paused'){
+    loadApplicationCount(cat.id);
+  }
   return card;
 }
 
@@ -497,6 +543,173 @@ function formatDate(ts){
 
 function esc(s){
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ── 申请数量 ──
+async function loadApplicationCount(catId){
+  try {
+    const snap = await window._getDocs(
+      window._query(
+        window._collection(window._db,'foster_cats',catId,'applications'),
+        window._where('status','==','pending')
+      )
+    );
+    const label = document.getElementById(`panel-label-${catId}`);
+    if(label){
+      const count = snap.size;
+      label.innerHTML = count > 0
+        ? `📬 查看领养申请 <span class="inquiry-count">${count} 个待回复</span>`
+        : `📬 查看领养申请`;
+      if(count > 0){
+        const panel = document.getElementById(`panel-${catId}`);
+        if(panel) panel.style.display = 'block';
+      }
+    }
+  } catch(e){}
+}
+
+// ── 展开/收起申请面板 ──
+let panelLoaded = {};
+async function togglePanel(catId){
+  const panel = document.getElementById(`panel-${catId}`);
+  const list  = document.getElementById(`panel-list-${catId}`);
+  const arrow = document.getElementById(`panel-arrow-${catId}`);
+  if(!panel || !list) return;
+
+  panel.style.display = 'block';
+  const isOpen = list.dataset.open === '1';
+  if(isOpen){
+    list.style.display = 'none';
+    list.dataset.open = '0';
+    if(arrow) arrow.textContent = '▼';
+    return;
+  }
+  list.style.display = 'block';
+  list.dataset.open = '1';
+  if(arrow) arrow.textContent = '▲';
+
+  if(panelLoaded[catId]) return;
+  panelLoaded[catId] = true;
+  await loadApplications(catId, list);
+}
+
+// ── 加载申请列表 ──
+async function loadApplications(catId, container){
+  container.innerHTML = '<div class="apply-empty">加载中…</div>';
+  try {
+    const snap = await window._getDocs(
+      window._query(
+        window._collection(window._db,'foster_cats',catId,'applications'),
+        window._orderBy('created_at','desc')
+      )
+    );
+    if(snap.empty){
+      container.innerHTML = '<div class="apply-empty">暂时没有申请</div>';
+      return;
+    }
+    container.innerHTML = '';
+    snap.forEach(d => {
+      const app = {id:d.id, ...d.data()};
+      container.appendChild(buildApplicationItem(app, catId));
+    });
+  } catch(e){
+    container.innerHTML = `<div class="apply-empty">加载失败：${e.message}</div>`;
+  }
+}
+
+// ── 构建申请卡片 ──
+function buildApplicationItem(app, catId){
+  const item = document.createElement('div');
+  item.className = 'apply-item';
+  item.id = `app-${app.id}`;
+
+  const gradeMap = {
+    green:  ['grade-green',  '🟢 优质申请'],
+    yellow: ['grade-yellow', '🟡 普通申请'],
+    red:    ['grade-red',    '🔴 需注意'],
+  };
+  const [gradeClass, gradeText] = gradeMap[app.ai_grade] || ['grade-yellow','🟡 普通申请'];
+  const date = app.created_at ? formatDate(app.created_at) : '';
+
+  const qaHtml = Object.entries(app.answers || {}).map(([q,a]) => `
+    <div class="qa-item">
+      <div class="qa-q">问：${esc(q)}</div>
+      <div class="qa-a">${esc(a)}</div>
+    </div>`).join('');
+
+  const statusHtml = app.status === 'accepted'
+    ? '<span class="apply-status status-accepted">已接受</span>'
+    : app.status === 'rejected'
+      ? '<span class="apply-status status-rejected">已拒绝</span>'
+      : '';
+
+  const actionsHtml = app.status === 'pending' ? `
+    <div class="apply-actions">
+      <button class="btn-accept" onclick="acceptApplication('${catId}','${app.id}',this)">✓ 接受申请</button>
+      <button class="btn-decline" onclick="declineApplication('${catId}','${app.id}',this)">✕ 拒绝</button>
+    </div>` : '';
+
+  item.innerHTML = `
+    <div class="apply-top">
+      <div>
+        <span class="apply-name">${esc(app.applicant_name || '匿名')}</span>
+        <span style="font-size:10px;color:var(--muted);margin-left:6px">${esc(app.applicant_email||'')}</span>
+      </div>
+      <div style="display:flex;gap:6px;align-items:center">
+        <span class="ai-grade ${gradeClass}">${gradeText}</span>
+        ${statusHtml}
+      </div>
+    </div>
+    ${app.ai_comment ? `<div class="apply-comment">AI：${esc(app.ai_comment)}</div>` : ''}
+    <div class="apply-qa">${qaHtml}</div>
+    <div style="font-size:10px;color:var(--muted);margin-bottom:8px">申请时间：${date}</div>
+    ${actionsHtml}`;
+
+  return item;
+}
+
+// ── 接受申请 ──
+async function acceptApplication(catId, appId, btn){
+  if(!confirm('确认接受这个领养申请？\n接受后申请人将看到你的联络方式。')) return;
+  btn.disabled = true; btn.textContent = '处理中…';
+  try {
+    await window._updateDoc(
+      window._doc(window._db,'foster_cats',catId,'applications',appId),
+      { status: 'accepted', responded_at: new Date() }
+    );
+    // 刷新这个申请项
+    const item = document.getElementById(`app-${appId}`);
+    if(item){
+      item.querySelector('.apply-actions').innerHTML =
+        '<span class="apply-status status-accepted">已接受 ✓</span>';
+    }
+    // 重置面板缓存让下次重新加载
+    panelLoaded[catId] = false;
+  } catch(e){
+    alert('操作失败：'+e.message);
+    btn.disabled = false; btn.textContent = '✓ 接受申请';
+  }
+}
+
+// ── 拒绝申请 ──
+async function declineApplication(catId, appId, btn){
+  if(!confirm('确认拒绝这个申请？')) return;
+  btn.disabled = true; btn.textContent = '处理中…';
+  try {
+    await window._updateDoc(
+      window._doc(window._db,'foster_cats',catId,'applications',appId),
+      { status: 'rejected', responded_at: new Date() }
+    );
+    const item = document.getElementById(`app-${appId}`);
+    if(item){
+      item.querySelector('.apply-actions').innerHTML =
+        '<span class="apply-status status-rejected">已拒绝</span>';
+    }
+    panelLoaded[catId] = false;
+  } catch(e){
+    alert('操作失败：'+e.message);
+    btn.disabled = false; btn.textContent = '✕ 拒绝';
+  }
 }
 
 function shareProfile(){

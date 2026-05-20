@@ -348,6 +348,7 @@ select option { background: var(--dark2); }
 /* ── LOCATION SELECTS ── */
 #city-wrap { display: none; }
 </style>
+<script src="/webview-check.js"></script>
 </head>
 <body>
 
@@ -416,8 +417,40 @@ select option { background: var(--dark2); }
       </select>
     </div>
     <div class="field">
-      <label>大约几个月 / 岁</label>
-      <input type="text" id="cat-age-text" placeholder="例：4个月、2岁" maxlength="20">
+      <label>大约年龄</label>
+      <select id="cat-age-text">
+        <option value="">请选择</option>
+        <optgroup label="幼猫 Kitten">
+          <option value="1个月">1 个月</option>
+          <option value="2个月">2 个月</option>
+          <option value="3个月">3 个月</option>
+          <option value="4个月">4 个月</option>
+          <option value="5个月">5 个月</option>
+          <option value="6个月">6 个月</option>
+          <option value="7个月">7 个月</option>
+          <option value="8个月">8 个月</option>
+          <option value="9个月">9 个月</option>
+          <option value="10个月">10 个月</option>
+          <option value="11个月">11 个月</option>
+        </optgroup>
+        <optgroup label="成猫 Adult">
+          <option value="1岁">1 岁</option>
+          <option value="2岁">2 岁</option>
+          <option value="3岁">3 岁</option>
+          <option value="4岁">4 岁</option>
+          <option value="5岁">5 岁</option>
+          <option value="6岁">6 岁</option>
+          <option value="7岁">7 岁</option>
+        </optgroup>
+        <optgroup label="老猫 Senior">
+          <option value="8岁">8 岁</option>
+          <option value="9岁">9 岁</option>
+          <option value="10岁">10 岁</option>
+          <option value="11岁">11 岁</option>
+          <option value="12岁">12 岁</option>
+          <option value="13岁以上">13 岁以上</option>
+        </optgroup>
+      </select>
     </div>
   </div>
 
@@ -475,9 +508,10 @@ select option { background: var(--dark2); }
   <div class="sec-title">③ 健康状态 · Health</div>
 
   <div class="checks" style="margin-bottom:16px">
-    <label class="check-item"><input type="checkbox" id="h-neutered"> 已绝育</label>
+    <label class="check-item"><input type="checkbox" id="h-neutered" onchange="if(this.checked)document.getElementById('h-pregnant').checked=false"> 已绝育</label>
     <label class="check-item"><input type="checkbox" id="h-vaccinated"> 已接种疫苗</label>
     <label class="check-item"><input type="checkbox" id="h-dewormed"> 已驱虫</label>
+    <label class="check-item"><input type="checkbox" id="h-pregnant" onchange="if(this.checked)document.getElementById('h-neutered').checked=false"> 🤰 怀孕中</label>
   </div>
 
   <div class="field">
@@ -618,10 +652,7 @@ select option { background: var(--dark2); }
     Thank you for giving this cat a chance at a forever home 🐾</span>
   </p>
   <br>
-  <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
-    <a href="/my-fosters.html" style="font-size:13px;padding:10px 24px;background:var(--gold);color:var(--dark);border-radius:var(--radius);text-decoration:none;letter-spacing:.06em;">管理我的中途猫 →</a>
-    <a href="/adopt.html" style="color:var(--muted);font-size:12px;">← 查看中途猫领养墙</a>
-  </div>
+  <a href="/adopt" style="color:var(--gold);font-size:13px;">← 查看中途猫领养墙</a>
 </div>
 
 <script>
@@ -916,6 +947,7 @@ async function submitFoster(){
     is_neutered:   document.getElementById('h-neutered').checked,
     is_vaccinated: document.getElementById('h-vaccinated').checked,
     is_dewormed:   document.getElementById('h-dewormed').checked,
+    is_pregnant:   document.getElementById('h-pregnant').checked,
     fiv_status:    document.getElementById('h-fiv').value || 'unknown',
     health_notes:  document.getElementById('h-notes').value.trim() || '',
     // 地区

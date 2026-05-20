@@ -15,12 +15,12 @@ import { getFirestore, doc, getDoc, collection, addDoc, query, where, getDocs, s
   from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAqu9pHaAEjFqPvPz3TuoYc60Lpb4DLZrs",
+  apiKey: "AIzaSyExample",
   authDomain: "taoofcat-6cf6e.firebaseapp.com",
   projectId: "taoofcat-6cf6e",
   storageBucket: "taoofcat-6cf6e.appspot.com",
-  messagingSenderId: "1088808296707",
-  appId: "1:1088808296707:web:ce9b54ba34d395681bc936"
+  messagingSenderId: "000000000000",
+  appId: "1:000000000000:web:abc"
 };
 
 const app  = initializeApp(firebaseConfig);
@@ -135,6 +135,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 24px;display:fl
 .msg.error{background:rgba(192,57,43,0.15);border:0.5px solid rgba(192,57,43,0.4);color:#e74c3c;display:block}
 .msg.success{background:rgba(39,174,96,0.15);border:0.5px solid rgba(39,174,96,0.4);color:#2ecc71;display:block}
 </style>
+<script src="/webview-check.js"></script>
 </head>
 <body>
 
@@ -394,24 +395,8 @@ function updateAdoptUI(){
     document.getElementById('adopt-btn').disabled=false;
   } else {
     document.getElementById('adopt-note').textContent='回答问卷即可解锁联系方式';
-    checkExistingApplication();
+    checkApplicationStatus();
   }
-}
-
-async function checkExistingApplication(){
-  if(!currentUser || !catId) return;
-  try {
-    const snap = await window._getDocs(
-      window._query(
-        window._collection(window._db,'foster_cats',catId,'applications'),
-        window._where('applicant_uid','==',currentUser.uid)
-      )
-    );
-    if(!snap.empty){
-      hasApplied = true;
-      showContact();
-    }
-  } catch(e){}
 }
 
 function startAdopt(){
@@ -450,13 +435,38 @@ async function submitAnswers(){
     if(!val) allFilled = false;
     answers[q] = val;
   });
-  if(!allFilled){
-    showQMsg('error','请回答所有问题'); return;
-  }
+  if(!allFilled){ showQMsg('error','请回答所有问题'); return; }
+
   const btn = document.getElementById('btn-submit-q');
-  btn.disabled = true;
-  btn.textContent = '提交中...';
+  btn.disabled = true; btn.textContent = '提交中...';
+
   try {
+    // 1. 调用后端 AI 分析 + Telegram 通知
+    btn.textContent = 'AI 分析中...';
+    let aiGrade = 'yellow', aiComment = '', aiDetail = '';
+    try {
+      const res = await fetch('https://web-production-907c5.up.railway.app/foster-apply', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+          cat_id:          catId,
+          cat_name:        getName('zh'),
+          applicant_uid:   currentUser.uid,
+          applicant_name:  currentUser.displayName || '',
+          applicant_email: currentUser.email || '',
+          answers,
+          foster_uid:      catData?.foster_uid  || '',
+          foster_name:     catData?.foster_name || '',
+        })
+      });
+      const rd = await res.json();
+      aiGrade   = rd.ai_grade   || 'yellow';
+      aiComment = rd.ai_comment || '';
+      aiDetail  = rd.ai_detail  || '';
+    } catch(e){ /* 后端失败不影响提交 */ }
+
+    // 2. 写入 Firestore applications 子集合
+    btn.textContent = '提交中...';
     await window._addDoc(
       window._collection(window._db,'foster_cats',catId,'applications'),
       {
@@ -464,38 +474,108 @@ async function submitAnswers(){
         applicant_name:  currentUser.displayName || '',
         applicant_email: currentUser.email || '',
         answers,
-        status:      'pending',
-        created_at:  window._serverTimestamp(),
+        ai_grade:   aiGrade,
+        ai_comment: aiComment,
+        ai_detail:  aiDetail,
+        status:     'pending',
+        created_at: window._serverTimestamp(),
       }
     );
-    await window._updateDoc(window._doc(window._db,'foster_cats',catId), {inquiry_count: window._increment(1)});
+    await window._updateDoc(
+      window._doc(window._db,'foster_cats',catId),
+      {inquiry_count: window._increment(1)}
+    );
+
     hasApplied = true;
-    document.getElementById('questionnaire').style.display='none';
-    showContact();
+    document.getElementById('questionnaire').style.display = 'none';
+    showWaiting();
+
   } catch(e){
     showQMsg('error','提交失败：'+e.message);
-    btn.disabled=false; btn.textContent='提交答案';
+    btn.disabled = false; btn.textContent = '提交答案';
   }
 }
 
-function showContact(){
-  document.getElementById('adopt-btn').style.display='none';
-  document.getElementById('adopt-note').style.display='none';
-  document.getElementById('questionnaire').style.display='none';
-  document.getElementById('contact-reveal').style.display='block';
-  const wa = catData?.foster_contact || '';
+function showWaiting(){
+  document.getElementById('adopt-btn').style.display   = 'none';
+  document.getElementById('adopt-note').style.display  = 'none';
+  document.getElementById('questionnaire').style.display = 'none';
+  document.getElementById('contact-reveal').style.display = 'block';
+  document.getElementById('c-wa').innerHTML = `
+    <div style="text-align:center;padding:12px 0">
+      <div style="font-size:28px;margin-bottom:8px">🐾</div>
+      <div style="font-size:14px;color:var(--gold-lt);margin-bottom:6px">申请已提交！</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.8">
+        志愿者正在审核你的申请<br>
+        请耐心等待回复，可随时回来查看状态<br>
+        <span style="font-family:'Lora',serif;font-style:italic;font-size:11px;">
+        We'll notify the foster parent. Please check back soon 🐾</span>
+      </div>
+    </div>`;
+  document.getElementById('c-other-wrap').style.display = 'none';
+}
+
+// 检查申请状态（已有申请时调用）
+async function checkApplicationStatus(){
+  if(!currentUser || !catId) return;
+  try {
+    const snap = await window._getDocs(
+      window._query(
+        window._collection(window._db,'foster_cats',catId,'applications'),
+        window._where('applicant_uid','==',currentUser.uid)
+      )
+    );
+    if(snap.empty) return;
+    const app = snap.docs[0].data();
+    if(app.status === 'accepted'){
+      showContactAccepted();
+    } else if(app.status === 'rejected'){
+      showRejected();
+    } else {
+      // pending — 显示等待状态
+      hasApplied = true;
+      showWaiting();
+    }
+  } catch(e){}
+}
+
+function showContactAccepted(){
+  document.getElementById('adopt-btn').style.display   = 'none';
+  document.getElementById('adopt-note').style.display  = 'none';
+  document.getElementById('contact-reveal').style.display = 'block';
+  const wa    = catData?.foster_contact || '';
   const other = catData?.foster_contact_other || '';
-  const waEl = document.getElementById('c-wa');
-  if(wa.startsWith('+') || wa.startsWith('http')){
+  const waEl  = document.getElementById('c-wa');
+  waEl.innerHTML = `
+    <div style="font-size:12px;color:#2ecc71;margin-bottom:8px">✓ 志愿者已接受你的申请！</div>`;
+  if(wa){
     const link = wa.startsWith('http') ? wa : `https://wa.me/${wa.replace(/[^0-9]/g,'')}`;
-    waEl.innerHTML = `<a href="${link}" target="_blank">${wa}</a>`;
-  } else {
-    waEl.textContent = wa || '—';
+    waEl.innerHTML += `<a href="${link}" target="_blank" style="color:var(--gold-lt)">${wa}</a>`;
   }
   if(other){
-    document.getElementById('c-other-wrap').style.display='block';
+    document.getElementById('c-other-wrap').style.display = 'block';
     document.getElementById('c-other').textContent = other;
   }
+}
+
+function showRejected(){
+  document.getElementById('adopt-btn').style.display   = 'none';
+  document.getElementById('adopt-note').style.display  = 'none';
+  document.getElementById('contact-reveal').style.display = 'block';
+  document.getElementById('c-wa').innerHTML = `
+    <div style="text-align:center;padding:12px 0">
+      <div style="font-size:22px;margin-bottom:8px">🙏</div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.8">
+        志愿者暂未接受这次申请<br>
+        也许缘分在别处，继续寻找吧 🐾
+      </div>
+      <a href="/adopt.html" style="display:inline-block;margin-top:12px;font-size:12px;color:var(--gold)">← 继续寻找有缘的猫</a>
+    </div>`;
+  document.getElementById('c-other-wrap').style.display = 'none';
+}
+
+function showContact(){
+  showContactAccepted();
 }
 
 function showQMsg(type, text){
