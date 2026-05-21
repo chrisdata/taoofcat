@@ -49,6 +49,10 @@ nav {
 .nav-right { display:flex; gap:20px; align-items:center }
 .nav-link { font-size:12px; color:var(--muted); text-decoration:none; letter-spacing:.08em; transition:color .2s }
 .nav-link:hover { color:var(--gold) }
+.lang-toggle { display:flex; gap:0; border:0.5px solid var(--border2); border-radius:var(--radius); overflow:hidden }
+.lang-btn { padding:4px 10px; font-size:11px; background:transparent; border:none; color:var(--muted); cursor:pointer; font-family:'Noto Serif SC',serif; transition:all .2s; letter-spacing:.05em }
+.lang-btn.active { background:rgba(212,168,67,0.12); color:var(--gold) }
+.lang-btn:hover { color:var(--text) }
 
 /* ── HERO ── */
 .hero {
@@ -350,26 +354,30 @@ footer {
 <nav>
   <a class="nav-logo" href="/">玄猫之道 <span>Tao of Cat</span></a>
   <div class="nav-right">
-    <a class="nav-link" href="/adopt.html">领养中途猫</a>
-    <a class="nav-link" href="#contact">联络我</a>
+    <a class="nav-link" href="/adopt.html" data-zh="领养中途猫" data-en="Adopt a Cat">领养中途猫</a>
+    <a class="nav-link" href="#contact" data-zh="联络我" data-en="Contact">联络我</a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('zh',this)">中文</button>
+      <button class="lang-btn" onclick="setLang('en',this)">EN</button>
+    </div>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <div class="hero-eyebrow">Cat Portrait Commission · 猫咪插画委托</div>
+    <div class="hero-eyebrow" data-zh="Cat Portrait Commission · 猫咪插画委托" data-en="Cat Portrait Commission · Digital Vector Art">Cat Portrait Commission · 猫咪插画委托</div>
     <h1 class="hero-title">
-      每一只猫
-      <em>都值得被永恒</em>
+      <span data-zh="每一只猫" data-en="Every Cat">每一只猫</span>
+      <em data-zh="都值得被永恒" data-en="Deserves to Be Eternal">都值得被永恒</em>
     </h1>
-    <p class="hero-sub">
+    <p class="hero-sub" data-zh="用 Adobe Illustrator 将你的猫咪<br>化为一幅永恒的数字插画<br><span style='font-size:12px;opacity:.6'>Vector art that captures their soul, not just their face.</span>" data-en="Using Adobe Illustrator to transform your cat<br>into a timeless digital illustration<br><span style='font-size:12px;opacity:.6'>Vector art that captures their soul, not just their face.</span>">
       用 Adobe Illustrator 将你的猫咪<br>
       化为一幅永恒的数字插画<br>
       <span style="font-size:12px;opacity:.6">Vector art that captures their soul, not just their face.</span>
     </p>
     <a href="#contact" class="hero-cta">
-      联络委托 <span class="hero-cta-arrow">→</span>
+      <span data-zh="联络委托" data-en="Commission Now">联络委托</span> <span class="hero-cta-arrow">→</span>
     </a>
   </div>
   <div class="hero-right">
@@ -387,20 +395,26 @@ footer {
 
 <!-- STORY -->
 <section class="section reveal">
-  <div class="section-label">关于画者</div>
-  <h2 class="section-title">从人像到猫咪<br><em>因为猫更让我快乐</em></h2>
+  <div class="section-label" data-zh="关于画者" data-en="About the Artist">关于画者</div>
+  <h2 class="section-title">
+    <span data-zh="从人像到猫咪" data-en="From Portraits to Cats">从人像到猫咪</span><br>
+    <em data-zh="因为猫更让我快乐" data-en="Because Cats Make Me Happier">因为猫更让我快乐</em>
+  </h2>
   <div class="story-grid">
     <div class="story-text">
-      <p>
+      <p data-zh="我是一位拥有 <strong>20年经验的 Vector Artist</strong>，曾在香港开设设计礼品店，将 vector art 印制成各式礼品。在 Fiverr 上以 <strong>Top Rated Seller & Pro</strong> 身份服务过无数企业与个人客户。"
+         data-en="I'm a <strong>Vector Artist with 20 years of experience</strong>. I ran a design gift shop in Hong Kong, turning vector art into all kinds of merchandise. On Fiverr, I served countless businesses and individuals as a <strong>Top Rated Seller & Pro</strong>.">
         我是一位拥有 <strong>20年经验的 Vector Artist</strong>，曾在香港开设设计礼品店，
         将 vector art 印制成各式礼品。在 Fiverr 上以 <strong>Top Rated Seller & Pro</strong>
         身份服务过无数企业与个人客户。
       </p>
-      <p>
+      <p data-zh="我本来只画人。两年前，猫咪走进了我的生命——从此，我只画猫。<em>因为画猫更开心。</em>"
+         data-en="I used to draw people. Two years ago, cats walked into my life — and since then, I only draw cats. <em>Because drawing cats makes me happier.</em>">
         我本来只画人。两年前，猫咪走进了我的生命——
         从此，我只画猫。<em>因为画猫更开心。</em>
       </p>
-      <p>
+      <p data-zh="我用 <strong>Adobe Illustrator + 绘图板</strong>，以每一根毛发、每一道光影，诠释猫咪独一无二的灵魂。他们不只是宠物，是家人，是灵魂伙伴。他们教会我如何做自己，活在当下。"
+         data-en="Using <strong>Adobe Illustrator + drawing tablet</strong>, I render every strand of fur, every ray of light, to capture the unique soul of each cat. They're not just pets — they're family, soulmates. They've taught me how to be myself and live in the present.">
         我用 <strong>Adobe Illustrator + 绘图板</strong>，
         以每一根毛发、每一道光影，诠释猫咪独一无二的灵魂。
         他们不只是宠物，是家人，是灵魂伙伴。
@@ -409,15 +423,15 @@ footer {
       <div class="story-stats">
         <div class="stat">
           <div class="stat-num">20</div>
-          <div class="stat-label">年 Vector Art 经验</div>
+          <div class="stat-label" data-zh="年 Vector Art 经验" data-en="Years of Vector Art">年 Vector Art 经验</div>
         </div>
         <div class="stat">
           <div class="stat-num">Pro</div>
-          <div class="stat-label">Fiverr Top Rated</div>
+          <div class="stat-label" data-zh="Fiverr Top Rated" data-en="Fiverr Top Rated">Fiverr Top Rated</div>
         </div>
         <div class="stat">
           <div class="stat-num">✦</div>
-          <div class="stat-label">只画猫</div>
+          <div class="stat-label" data-zh="只画猫" data-en="Cats Only">只画猫</div>
         </div>
       </div>
     </div>
@@ -425,7 +439,7 @@ footer {
       <img class="story-img"
         src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_800/MVIMG_20260511_010947.jpg"
         alt="傻猪 · 异瞳白猫">
-      <div class="story-img-caption">傻猪 · 异瞳白猫 · 我的灵感来源</div>
+      <div class="story-img-caption" data-zh="傻猪 · 异瞳白猫 · 我的灵感来源" data-en="Sha Zhu · Odd-eyed White Cat · My Muse">傻猪 · 异瞳白猫 · 我的灵感来源</div>
     </div>
   </div>
 </section>
@@ -438,32 +452,35 @@ footer {
 
 <!-- PROCESS -->
 <section class="section reveal">
-  <div class="section-label">创作过程</div>
-  <h2 class="section-title">从一张照片<br><em>到一幅永恒</em></h2>
-  <p class="process-intro">
+  <div class="section-label" data-zh="创作过程" data-en="The Process">创作过程</div>
+  <h2 class="section-title">
+    <span data-zh="从一张照片" data-en="From a Photo">从一张照片</span><br>
+    <em data-zh="到一幅永恒" data-en="To Something Eternal">到一幅永恒</em>
+  </h2>
+  <p class="process-intro" data-zh="每一幅作品都从理解这只猫开始——不只是外形，而是他们的神韵、性格、和你们之间的故事。" data-en="Every piece begins with understanding the cat — not just their appearance, but their spirit, personality, and the story between you two.">
     每一幅作品都从理解这只猫开始——不只是外形，而是他们的神韵、性格、和你们之间的故事。
   </p>
   <div class="process-steps">
     <div class="step">
-      <div class="step-num">一</div>
-      <div class="step-title">联络 & 沟通</div>
-      <div class="step-text">
+      <div class="step-num" data-zh="一" data-en="I">一</div>
+      <div class="step-title" data-zh="联络 & 沟通" data-en="Contact & Consult">联络 & 沟通</div>
+      <div class="step-text" data-zh="发邮件告诉我你的猫咪，附上清晰的照片。我们一起聊聊他们的个性，确认构图与风格方向。" data-en="Email me about your cat with clear photos. We'll chat about their personality and confirm the composition and style.">
         发邮件告诉我你的猫咪，附上清晰的照片。
         我们一起聊聊他们的个性，确认构图与风格方向。
       </div>
     </div>
     <div class="step">
-      <div class="step-num">二</div>
-      <div class="step-title">线稿 & 确认</div>
-      <div class="step-text">
+      <div class="step-num" data-zh="二" data-en="II">二</div>
+      <div class="step-title" data-zh="线稿 & 确认" data-en="Sketch & Approval">线稿 & 确认</div>
+      <div class="step-text" data-zh="先完成线稿草图给你确认，确保构图比例和神态方向完全符合你的期望。" data-en="I'll complete a sketch for your approval first, ensuring the composition and expression are exactly what you envision.">
         先完成线稿草图给你确认，
         确保构图比例和神态方向完全符合你的期望。
       </div>
     </div>
     <div class="step">
-      <div class="step-num">三</div>
-      <div class="step-title">上色 & 交付</div>
-      <div class="step-text">
+      <div class="step-num" data-zh="三" data-en="III">三</div>
+      <div class="step-title" data-zh="上色 & 交付" data-en="Color & Delivery">上色 & 交付</div>
+      <div class="step-text" data-zh="逐层上色、细化毛发与光影。完成后以高分辨率数字档案交付，可印制任何尺寸。" data-en="Layer by layer — fur, light, shadow. Delivered as a high-resolution digital file, ready to print at any size.">
         逐层上色、细化毛发与光影。
         完成后以高分辨率数字档案交付，可印制任何尺寸。
       </div>
@@ -479,9 +496,12 @@ footer {
 
 <!-- GALLERY -->
 <section class="section reveal">
-  <div class="section-label">作品欣赏 · 傻猪</div>
-  <h2 class="section-title">他的两只眼睛<br><em>看见两个世界</em></h2>
-  <p class="gallery-intro">
+  <div class="section-label" data-zh="作品欣赏 · 傻猪" data-en="Portfolio · Sha Zhu">作品欣赏 · 傻猪</div>
+  <h2 class="section-title">
+    <span data-zh="他的两只眼睛" data-en="His Two Eyes">他的两只眼睛</span><br>
+    <em data-zh="看见两个世界" data-en="See Two Different Worlds">看见两个世界</em>
+  </h2>
+  <p class="gallery-intro" data-zh="这是我的猫咪傻猪——异瞳白猫，占卜师，玄猫之道的守护者。以下是他的肖像创作过程，从真实到永恒。" data-en="This is my cat Sha Zhu — an odd-eyed white cat, divination master, and guardian of the Tao of Cat. Here is his portrait journey, from reality to eternity.">
     这是我的猫咪傻猪——异瞳白猫，占卜师，玄猫之道的守护者。
     以下是他的肖像创作过程，从真实到永恒。
   </p>
@@ -521,12 +541,12 @@ footer {
 
 <!-- CONTACT -->
 <section class="contact-wrap reveal" id="contact">
-  <div class="contact-label">委托联络 · Commission</div>
+  <div class="contact-label" data-zh="委托联络 · Commission" data-en="Commission · Enquiry">委托联络 · Commission</div>
   <h2 class="contact-title">
-    让你的猫咪<br>
-    成为一幅永恒
+    <span data-zh="让你的猫咪" data-en="Let Your Cat">让你的猫咪</span><br>
+    <span data-zh="成为一幅永恒" data-en="Become Something Eternal">成为一幅永恒</span>
   </h2>
-  <p class="contact-sub">
+  <p class="contact-sub" data-zh="发一封邮件给我，告诉我你的猫咪的故事<br>附上他们最喜欢的照片，我们来谈谈<br><span style='font-size:12px;opacity:.6'>Tell me about your cat. I'll listen.</span>" data-en="Send me an email and tell me your cat's story.<br>Attach their favourite photo and let's talk.<br><span style='font-size:12px;opacity:.6'>Tell me about your cat. I'll listen.</span>">
     发一封邮件给我，告诉我你的猫咪的故事<br>
     附上他们最喜欢的照片，我们来谈谈<br>
     <span style="font-size:12px;opacity:.6">Tell me about your cat. I'll listen.</span>
@@ -534,7 +554,7 @@ footer {
   <a href="mailto:miao@taoofcat.com?subject=猫咪插画委托" class="contact-email">
     ✦ &nbsp;miao@taoofcat.com &nbsp;✦
   </a>
-  <div class="contact-note">
+  <div class="contact-note" data-zh="回复时间通常在 1-2 个工作日内<br>请附上猫咪清晰照片以便评估报价" data-en="Usually replies within 1-2 business days.<br>Please attach clear photos of your cat for a quote.">
     回复时间通常在 1-2 个工作日内<br>
     请附上猫咪清晰照片以便评估报价
   </div>
@@ -554,6 +574,44 @@ const observer = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.1 });
 reveals.forEach(el => observer.observe(el));
+
+// 语言切换
+let currentLang = localStorage.getItem('toc_lang') || 'zh';
+
+function setLang(lang, btn){
+  currentLang = lang;
+  localStorage.setItem('toc_lang', lang);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyLang();
+}
+
+function applyLang(){
+  document.querySelectorAll('[data-zh]').forEach(el => {
+    const val = el.getAttribute(`data-${currentLang}`) || el.getAttribute('data-zh');
+    if(el.tagName === 'INPUT' || el.tagName === 'TEXTAREA'){
+      el.placeholder = val;
+    } else {
+      el.innerHTML = val;
+    }
+  });
+  // 更新邮件链接 subject
+  const emailLink = document.querySelector('.contact-email');
+  if(emailLink){
+    emailLink.href = currentLang === 'en'
+      ? 'mailto:miao@taoofcat.com?subject=Cat Portrait Commission'
+      : 'mailto:miao@taoofcat.com?subject=猫咪插画委托';
+  }
+  // 同步按钮状态
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.toLowerCase().includes(currentLang === 'zh' ? '中' : 'en'));
+  });
+}
+
+// 页面加载时应用语言
+document.addEventListener('DOMContentLoaded', () => {
+  if(currentLang === 'en') applyLang();
+});
 </script>
 </body>
 </html>
