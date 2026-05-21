@@ -622,6 +622,27 @@ footer {
     </div>
 
   </div>
+
+  <!-- 对比表 -->
+  <div style="margin-top:56px">
+    <div class="section-label" style="margin-bottom:20px" data-zh="Vector vs 传统绘画" data-en="Vector vs Traditional Art">Vector vs 传统绘画</div>
+    <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead>
+          <tr>
+            <th style="text-align:left;padding:12px 16px;border-bottom:0.5px solid var(--border2);color:var(--muted);font-weight:400;letter-spacing:.08em;width:36%"
+              data-zh="" data-en=""></th>
+            <th style="text-align:center;padding:12px 16px;border-bottom:0.5px solid var(--border2);color:var(--gold-lt);font-weight:500;letter-spacing:.05em"
+              data-zh="Vector 数字插画" data-en="Vector Digital Art">Vector 数字插画</th>
+            <th style="text-align:center;padding:12px 16px;border-bottom:0.5px solid var(--border);color:var(--muted);font-weight:400;letter-spacing:.05em"
+              data-zh="传统手绘" data-en="Traditional Art">传统手绘</th>
+          </tr>
+        </thead>
+        <tbody id="compare-table-body">
+        </tbody>
+      </table>
+    </div>
+  </div>
 </section>
 
 <!-- CONTACT -->
@@ -651,6 +672,39 @@ footer {
 </footer>
 
 <script>
+// 对比表格数据
+const compareData = [
+  { zh: '无限放大不失真',    en: 'Infinitely scalable',         vector: true,  trad: false },
+  { zh: '印制周边商品',       en: 'Merchandise ready',           vector: true,  trad: false },
+  { zh: '轻松修改颜色',       en: 'Editable colours',            vector: true,  trad: false },
+  { zh: '完美去背景',         en: 'Clean background removal',    vector: true,  trad: false },
+  { zh: '交付数字档案',       en: 'Digital file delivery',       vector: true,  trad: true  },
+  { zh: '手绘温度与笔触',     en: 'Handmade warmth & texture',   vector: false, trad: true  },
+  { zh: '实体原画收藏',       en: 'Physical original artwork',   vector: false, trad: true  },
+  { zh: '永不褪色、永不损坏', en: 'Never fades or deteriorates', vector: true,  trad: false },
+];
+
+function renderCompareTable(lang){
+  const tbody = document.getElementById('compare-table-body');
+  if(!tbody) return;
+  tbody.innerHTML = compareData.map((row, i) => `
+    <tr style="background:${i%2===0?'transparent':'rgba(212,168,67,0.02)'}">
+      <td style="padding:11px 16px;border-bottom:0.5px solid var(--border);color:var(--muted)">
+        ${lang === 'en' ? row.en : row.zh}
+      </td>
+      <td style="text-align:center;padding:11px 16px;border-bottom:0.5px solid var(--border)">
+        ${row.vector
+          ? '<span style="color:#2ecc71;font-size:16px">✓</span>'
+          : '<span style="color:rgba(232,220,200,0.2);font-size:14px">—</span>'}
+      </td>
+      <td style="text-align:center;padding:11px 16px;border-bottom:0.5px solid var(--border)">
+        ${row.trad
+          ? '<span style="color:#2ecc71;font-size:16px">✓</span>'
+          : '<span style="color:rgba(232,220,200,0.2);font-size:14px">—</span>'}
+      </td>
+    </tr>`).join('');
+}
+
 // Reveal on scroll
 const reveals = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver(entries => {
@@ -669,6 +723,7 @@ function setLang(lang, btn){
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   applyLang();
+  renderCompareTable(lang);
 }
 
 function applyLang(){
@@ -695,6 +750,7 @@ function applyLang(){
 
 // 页面加载时应用语言
 document.addEventListener('DOMContentLoaded', () => {
+  renderCompareTable(currentLang);
   if(currentLang === 'en') applyLang();
 });
 </script>
