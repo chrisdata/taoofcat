@@ -131,6 +131,48 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 24px;display:fl
 .not-found{text-align:center;padding:80px 24px;color:var(--muted)}
 </style>
 <script src="/webview-check.js"></script>
+<script>
+(function(){
+  var _l = localStorage.getItem('taoc_lang') || localStorage.getItem('toc_lang') || 'zh';
+  if(_l !== 'tw') return;
+  var MAP = {"分享你的中途主页，让更多人看到你的猫 🐾": "分享你的中途主頁，讓更多人看到你的貓 🐾", "中途志愿者 · 玄猫之道": "中途志願者 · 玄貓之道", "暂时没有在线的中途猫": "暫時沒有線上的中途貓", "找不到这个页面": "找不到這個頁面", "链接已复制 🐾": "連結已複製 🐾", "中途志愿者": "中途志願者", "← 领养墙": "← 領養牆", "加载中…": "載入中…", "玄猫之道": "玄貓之道", "· 会说": "· 會說", "复制链接": "複製連結", "等待领养": "等待領養", "无名猫": "無名貓", "中长毛": "中長毛", "已绝育": "已絕育", "已接种": "已接種", "暂停中": "暫停中", "总在线": "總線上", "成猫": "成貓", "母猫": "母貓", "长毛": "長毛", "公猫": "公貓", "老猫": "老貓", "幼猫": "幼貓", "暂停": "暫停", "登录": "登入"};
+  function walkText(node){
+    if(node.nodeType===3){
+      var t=node.nodeValue, changed=false;
+      Object.keys(MAP).forEach(function(k){ if(t.indexOf(k)>=0){ t=t.split(k).join(MAP[k]); changed=true; } });
+      if(changed) node.nodeValue=t;
+    } else if(node.nodeType===1 && !/^(SCRIPT|STYLE|NOSCRIPT)$/i.test(node.tagName)){
+      Array.from(node.childNodes).forEach(walkText);
+    }
+  }
+  document.addEventListener('DOMContentLoaded',function(){
+    walkText(document.body);
+    document.querySelectorAll('[placeholder]').forEach(function(el){
+      var p=el.getAttribute('placeholder'), np=p, ch=false;
+      Object.keys(MAP).forEach(function(k){ if(np.indexOf(k)>=0){ np=np.split(k).join(MAP[k]); ch=true; } });
+      if(ch) el.setAttribute('placeholder',np);
+    });
+    document.documentElement.lang='zh-TW';
+  });
+})();
+</script>
+<script>
+(function(){
+  document.addEventListener('DOMContentLoaded', function(){
+    var nav=document.querySelector('nav'); if(!nav) return;
+    var cur=localStorage.getItem('taoc_lang')||localStorage.getItem('toc_lang')||'zh';
+    var btn=document.createElement('button');
+    btn.style.cssText='font-size:11px;font-family:"Noto Sans SC",sans-serif;background:transparent;color:rgba(212,168,67,0.8);border:1px solid rgba(212,168,67,0.3);border-radius:20px;padding:4px 10px;cursor:pointer;margin-left:8px;';
+    btn.textContent=cur==='tw'?'简':'繁'; btn.title=cur==='tw'?'切换简体':'切換繁體';
+    btn.addEventListener('click',function(){
+      var next=(localStorage.getItem('taoc_lang')||'zh')==='tw'?'zh':'tw';
+      localStorage.setItem('taoc_lang',next); localStorage.setItem('toc_lang',next); location.reload();
+    });
+    nav.appendChild(btn);
+  });
+})();
+</script>
+
 </head>
 <body>
 

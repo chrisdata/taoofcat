@@ -42,10 +42,11 @@
   function applyLang(l) {
     _lang = l;
     localStorage.setItem('taoc_lang', l);
-    document.documentElement.lang = l;
+    document.documentElement.lang = l === 'tw' ? 'zh-TW' : l;
     document.querySelectorAll('[data-zh]').forEach(function(el) {
       var txt = l === 'en' ? (el.dataset.en || el.dataset.zh)
               : l === 'ja' ? (el.dataset.ja || el.dataset.zh)
+              : l === 'tw' ? (el.dataset.tw || el.dataset.zh)
               : el.dataset.zh;
       if (txt !== undefined) el.innerHTML = txt;
     });
@@ -84,7 +85,7 @@
   gtag('js', new Date());
   gtag('config', 'G-7Q71WCDFF0');
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400&family=IM+Fell+English:ital@0;1&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400&family=IM+Fell+English:ital@0;1&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&display=swap" rel="stylesheet">
 <style>
 :root { --paper:#f4ede0; --ink:#1e1608; --ink-light:#5c4c2c; --ink-faint:#9c8c6c; --ink-ghost:#d4c8a8; --gold:#b8860b; --gold-light:#d4a843; }
 * { box-sizing:border-box; margin:0; padding:0; }
@@ -420,9 +421,10 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
     <path class="st0" d="M748.64,412.06c2.79,15.55,8.22,32.63,19.11,43.58-1.76,5.36-2.06,10.44-2.5,15.87-.23,2.86-3.14,5.4-4.86,7.48-2.29,1.85-4.81,3.42-7.63,3.26-3.5-3.01-6.15-6.48-8.73-10.23-5.54-8.06-9.84-16.43-13.38-25.59l-8.26-25.01-8.15-26.92c-.87-2.86-3.8-4.87-6.17-6.46l-7.86-5.27c-2.09-1.4-2.35-3.55-1.74-5.95l2.46-9.78c.95-3.78,1.86-7.48,3.38-11.03,2.91-6.84-1.62-9.95-2.05-16.37,3.64-2.72,7.44-4.95,12.06-4.66l7.99.5c12.93-6.55,24.03-15.75,32.95-27.23l-3.62-11.14c-1.15-3.55-1.59-7.02-2-10.82-.35-3.23-4.8-6.18-3.66-9.54,2.41-7.15,3.47-14.44,2.31-21.84-5.43.17-10,2.26-14.23,5.13l-13.05,8.84c-1.9,1.38-2.79,4.36-4.62,5.86-5.43,4.43-9.79,9.37-13.82,15.1l-7.79,11.09c-1.08,1.54-3.27,2.35-5.06,3.37-1.55-1.2-2.76-2.49-3.81-4.07l-5.42-8.19c-4.31-6.51-5.85-15.1-11.67-21.83,6.72-2.44,12.56,2.56,20.75-1.28l13.4-6.28,22.71-7.93,19.89-6.9c.62-11.04-.55-21.34-2.31-32.09l-5.37-32.69c-1.52-9.24-8.14-11.91-9.71-18.69-.81-3.48-1.84-6.43-4.03-9.25-1.52-1.96-2.74-3.93-3.88-6.22,5.5-2.97,10.83-1.03,15.71,2.29,7.56,5.15,14.35,6.88,19.55,11.1,7.75,6.28,12.74,14.53,16.03,23.86,1.83,5.19,2.61,10.16,1.47,15.68-1.04,5.03-.75,9.86-.3,14.94l1.5,16.91c9.68-1.38,17.12-7.96,26.67-11.39l12.04-3.28c5.19-1.41,9.01-4.47,11.42-9.31l4.21-8.45c3.05-6.12,6.37-11.77,8.3-18.4,2.29-7.85,3.61-15.91,2.28-24.04-.81-4.96-4.94-10.01-3.1-11.95.48-.51,1.81-.62,2.72-.38,7.38,1.91,14.26,4.76,20.04,9.79,4.08,3.55,3.37,10.85,9.13,18.41,3,3.95,3.86,8.2,3.93,13.05.22,14.59-10.36,13.66-10.64,22.18l25.62-5.46c1.18-.25,2.45-1.34,3.4-2.33-3.4-7.27-7.48-13.67-12.02-20.18l-9.48-13.59c4.69-2.17,10.81,2.7,14.53,6.77,3.45,3.77,7.15,6.62,11.72,8.9,4.01,2,7.46,4.6,10.68,7.67,5.71,5.45,12.65,8.6,20.4,9.8l5.74,1.36c1.65.39,3.49,1.99,4.23,3.56l5.35,11.35c-5.68,9.31-15.54,13.36-26.08,13.58l-22.43.48c-20.89,1.71-33.53,11.92-51.33,14.85-1.6.26-4.29.34-5.36,1.58-3.82,4.41-6.66,9.11-9.72,14l-9.77,15.62-9.05,11.92,1.11,2.83c10.11,2.3,19.55-3.5,27.01-4.46,21.23-2.73,42.6.22,62.44,8.21,3.8,1.53,5.49,9.59,12.28,16.64,3.12,3.24,4.97,6.95,6.23,11.31l4.91,16.96c1.52,5.27,2.18,10.24,1.77,15.69-1.3,17.07-6.04,33.69-20.13,44.24-1.6,1.2-2.85,2.93-3.56,4.75-2.55,6.49-7.52,7.92-10.65,15.63-1.47,3.6-4.11,5.87-7.75,7.25l-11.04,2.53c-11.98,4.13-23.88,7.27-36.5,9.01-5.39.74-9.15,7.07-12.8,9.02-6.37,3.39-13.37,3.48-20.27,1.89-5.94-1.36-15.45,3.29-19.79,2.3-5.04-1.15-9.71-5.75-11.56-10.66-2.21-5.89-2.5-12.05-2.48-18.23s-.57-11.38-2.11-17.15c-.98-3.69-2.11-7.77-1.53-11.54.66-4.25,6.7-8.88,1.18-16.09-2.02-1.72-4.99-1.98-7.13-3.47-3.05-2.12-5.14-5.25-6.72-8.57l-4.13-8.72c-.35-.75-2.73-.49-3.39.07-5.06,4.22-9.58,8.14-8.03,14.08s3.9,11.76,6.66,17.42c3.34,6.88,5.56,13.57,6.96,21.33ZM791.99,261.21l8.37-12.37c1.3-1.93,1.31-4.25-.24-5.87-3.89-2.48-8.02-3.95-12.7-4.71-4.21,1.51-8.11,3.66-11.56,6.18l2.78,14.73c1.01,5.35,1.96,10.42,3.89,15.7,3.88-4.47,6.27-8.95,9.46-13.66ZM817.11,400.99c5.42-.87,9.76-1.25,14.59-1.21,14.26.51,25.2-2.97,35.53-12.73,5.76-5.45,10.04-11.79,14.48-18.35,3.88-5.74,7.4-11.26,9.23-18.08.66-6.64.59-13.08.13-19.84-2.49-4.06-5.14-7.91-8.72-11.08-2.35-2.08-5.65-2.77-8.58-3.7-4.36-1.39-8.57-2.17-13.17-2.14-9.39.06-17.9-5.24-27.94-1.64l-9.6,3.44c-2.99,1.07-4.13,3.46-4.52,6.63-.51,4.24-.86,9.49,2.51,12.76s10.91,3.48,16.61,6.54c5.14,2.77,8.39,7.56,8.97,13.42.93,9.29-.76,18.93-7.06,25.85l-10.02,11.01c-4.59,5.04-10.54,4.96-12.44,9.12ZM762.34,344.3c9.85-1.69,18.33-4.32,26.47-8.43l1.34-13.61c-3.5-1.28-6.99-.21-9.55,2.3l-9.49,9.29c-3.4,3.04-7.12,5.94-8.77,10.45ZM769.63,392.31l16.01-13.67c1.9-1.62,3.1-3.61,3.76-6.43-3.99.82-7.03,2.69-10.64,3.91l-8.82,2.97c-.54,4.52-.64,8.91-.31,13.21Z"/>
   </g>
 </svg></a>
-  <a href="/#cats" class="nav-back" data-zh="← 猫咪家族" data-en="← Cat Family" data-ja="← 猫の家族">← 猫咪家族</a>
+  <a href="/#cats" class="nav-back" data-zh="← 猫咪家族" data-tw="← 貓咪家族" data-en="← Cat Family" data-ja="← 猫の家族">← 猫咪家族</a>
   <div class="lang-switcher">
-  <button class="lang-opt" data-lang="zh">中</button>
+  <button class="lang-opt" data-lang="zh">简</button>
+  <button class="lang-opt" data-lang="tw">繁</button>
   <button class="lang-opt" data-lang="en">EN</button>
   <button class="lang-opt" data-lang="ja">JP</button>
 </div>
@@ -432,11 +434,11 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
   <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/xiaohei-stray.jpg" alt="小黑" class="hero-img">
   <div class="hero-gradient"></div>
   <div class="hero-content">
-    <div class="hero-label" data-zh="In Loving Memory · 已归道" data-en="In Loving Memory · 已归道" data-ja="In Loving Memory · 旅立った">In Loving Memory · 已归道</div>
-    <div class="hero-name" data-zh="小 黑" data-en="Xiao Hei" data-ja="シャオヘイ">小 黑</div>
+    <div class="hero-label" data-zh="In Loving Memory · 已归道" data-tw="In Loving Memory · 已歸道" data-en="In Loving Memory · 已归道" data-ja="In Loving Memory · 旅立った">In Loving Memory · 已归道</div>
+    <div class="hero-name" data-zh="小 黑" data-tw="小 黑" data-en="Xiao Hei" data-ja="シャオヘイ">小 黑</div>
     <div class="hero-en">Xiao Hei · The Midnight Guest</div>
     <div class="hero-divider"></div>
-    <div class="hero-tagline" data-zh="流浪来客 · 半年信任 · 三个月后归道" data-en="Stray Guest · Six Months of Trust · Gone After Three Months" data-ja="流浪の客 · 半年の信頼 · 三ヶ月後に旅立つ">流浪来客 · 半年信任 · 三个月后归道</div>
+    <div class="hero-tagline" data-zh="流浪来客 · 半年信任 · 三个月后归道" data-tw="流浪來客 · 半年信任 · 三個月後歸道" data-en="Stray Guest · Six Months of Trust · Gone After Three Months" data-ja="流浪の客 · 半年の信頼 · 三ヶ月後に旅立つ">流浪来客 · 半年信任 · 三个月后归道</div>
   </div>
 </div>
 
@@ -444,61 +446,61 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
 
   <div class="chapter reveal">
     <div class="chapter-label">Chapter One</div>
-    <div class="chapter-title" data-zh="农历新年的访客" data-en="The Lunar New Year Visitor" data-ja="旧正月の訪問者">农历新年的访客</div>
-    <p class="chapter-text" data-zh="2025年农历新年，小黑出现在我们门口。" data-en="At Lunar New Year 2025, Xiao Hei appeared at our door." data-ja="2025年の旧正月、シャオヘイが私たちの玄関に現れた。">
+    <div class="chapter-title" data-zh="农历新年的访客" data-tw="農曆新年的訪客" data-en="The Lunar New Year Visitor" data-ja="旧正月の訪問者">农历新年的访客</div>
+    <p class="chapter-text" data-zh="2025年农历新年，小黑出现在我们门口。" data-tw="2025年農曆新年，小黑出現在我們門口。" data-en="At Lunar New Year 2025, Xiao Hei appeared at our door." data-ja="2025年の旧正月、シャオヘイが私たちの玄関に現れた。">
       2025年农历新年，小黑出现在我们门口。
     </p>
-    <p class="chapter-text" data-zh="我好心喂了他，没想到喂了没多久，他就在门口大呕吐。我们马上带他去看兽医。" data-en="Out of kindness I fed him — and shortly after, he vomited heavily at the doorstep. We took him to the vet straight away." data-ja="親切心で餌をやったら、少しして玄関で盛大に吐いた。すぐに獣医に連れて行った。">
+    <p class="chapter-text" data-zh="我好心喂了他，没想到喂了没多久，他就在门口大呕吐。我们马上带他去看兽医。" data-tw="我好心餵了他，沒想到餵了沒多久，他就在門口大嘔吐。我們馬上帶他去看獸醫。" data-en="Out of kindness I fed him — and shortly after, he vomited heavily at the doorstep. We took him to the vet straight away." data-ja="親切心で餌をやったら、少しして玄関で盛大に吐いた。すぐに獣医に連れて行った。">
       我好心喂了他，没想到喂了没多久，他就在门口大呕吐。我们马上带他去看兽医。
     </p>
-    <p class="chapter-text" data-zh="就是那一次兽医检查，让我们决定收养他。" data-en="That vet visit was what made us decide to adopt him." data-ja="あの獣医の診察が、引き取ることを決めさせた。">
+    <p class="chapter-text" data-zh="就是那一次兽医检查，让我们决定收养他。" data-tw="就是那一次獸醫檢查，讓我們決定收養他。" data-en="That vet visit was what made us decide to adopt him." data-ja="あの獣医の診察が、引き取ることを決めさせた。">
       就是那一次兽医检查，让我们决定收养他。
     </p>
-    <p class="chapter-text" data-zh="有时候，一场呕吐就是缘分的开始。" data-en="Sometimes, a vomit is how fate begins." data-ja="ときには、一度の嘔吐が縁の始まりになる。">
+    <p class="chapter-text" data-zh="有时候，一场呕吐就是缘分的开始。" data-tw="有時候，一場嘔吐就是緣分的開始。" data-en="Sometimes, a vomit is how fate begins." data-ja="ときには、一度の嘔吐が縁の始まりになる。">
       有时候，一场呕吐就是缘分的开始。
     </p>
   </div>
 
   <img loading="lazy" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/xiaohei-stray.jpg" alt="流浪时的小黑" class="story-photo reveal">
-  <div class="story-photo-caption reveal" data-zh="流浪时的小黑 · 怡保街头 · 那双黄绿色的眼睛" data-en="Xiao Hei as a stray · Ipoh streets · Those yellow-green eyes" data-ja="野良時代のシャオヘイ · イポーの街 · あの黄緑色の目">流浪时的小黑 · 怡保街头 · 那双黄绿色的眼睛</div>
+  <div class="story-photo-caption reveal" data-zh="流浪时的小黑 · 怡保街头 · 那双黄绿色的眼睛" data-tw="流浪時的小黑 · 怡保街頭 · 那雙黃綠色的眼睛" data-en="Xiao Hei as a stray · Ipoh streets · Those yellow-green eyes" data-ja="野良時代のシャオヘイ · イポーの街 · あの黄緑色の目">流浪时的小黑 · 怡保街头 · 那双黄绿色的眼睛</div>
 
   <div class="tao-quote reveal">
-    <div class="tao-quote-text" data-zh="「信言不美，美言不信」" data-en="「True words are not beautiful; beautiful words are not true」" data-ja="「信言は美ならず、美言は信ならず」">「信言不美，美言不信」</div>
-    <div class="tao-quote-source" data-zh="— 小黑说" data-en="— Xiao Hei" data-ja="— シャオヘイ曰く">— 小黑说</div>
+    <div class="tao-quote-text" data-zh="「信言不美，美言不信」" data-tw="「信言不美，美言不信」" data-en="「True words are not beautiful; beautiful words are not true」" data-ja="「信言は美ならず、美言は信ならず」">「信言不美，美言不信」</div>
+    <div class="tao-quote-source" data-zh="— 小黑说" data-tw="— 小黑說" data-en="— Xiao Hei" data-ja="— シャオヘイ曰く">— 小黑说</div>
   </div>
 
   <div class="chapter reveal">
     <div class="chapter-label">Chapter Two</div>
-    <div class="chapter-title" data-zh="笼养半年，乖得让人心疼" data-en="Half a Year in a Cage — Heartbreakingly Well-Behaved" data-ja="半年のケージ生活、おとなしさが胸に刺さる">笼养半年，乖得让人心疼</div>
-    <p class="chapter-text" data-zh="小黑收养后，我们把他养在笼子里观察。" data-en="After adopting Xiao Hei, we kept him in a cage to monitor him." data-ja="シャオヘイを引き取った後、ケージに入れて様子を見た。">
+    <div class="chapter-title" data-zh="笼养半年，乖得让人心疼" data-tw="籠養半年，乖得讓人心疼" data-en="Half a Year in a Cage — Heartbreakingly Well-Behaved" data-ja="半年のケージ生活、おとなしさが胸に刺さる">笼养半年，乖得让人心疼</div>
+    <p class="chapter-text" data-zh="小黑收养后，我们把他养在笼子里观察。" data-tw="小黑收養後，我們把他養在籠子裡觀察。" data-en="After adopting Xiao Hei, we kept him in a cage to monitor him." data-ja="シャオヘイを引き取った後、ケージに入れて様子を見た。">
       小黑收养后，我们把他养在笼子里观察。
     </p>
-    <p class="chapter-text" data-zh="不是因为他不信任我们——其实他很快就信任了。但他的肠胃一直不稳定，需要持续观察。加上那时候其他猫咪还没有全屋自由活动，需要慢慢整合。" data-en="Not because he didn't trust us — actually he trusted us quickly. But his digestive system was never stable; he needed continuous monitoring. The other cats also weren't yet free-roaming throughout the house, so everything needed to be integrated slowly." data-ja="信頼していないわけじゃなかった——実はすぐに信頼してくれた。でも胃腸がずっと不安定で、継続観察が必要だった。他の猫たちもまだ家全体を自由に動き回れる状態じゃなくて、ゆっくり統合していく必要があった。">
+    <p class="chapter-text" data-zh="不是因为他不信任我们——其实他很快就信任了。但他的肠胃一直不稳定，需要持续观察。加上那时候其他猫咪还没有全屋自由活动，需要慢慢整合。" data-tw="不是因為他不信任我們——其實他很快就信任了。但他的腸胃一直不穩定，需要持續觀察。加上那時候其他貓咪還沒有全屋自由活動，需要慢慢整合。" data-en="Not because he didn't trust us — actually he trusted us quickly. But his digestive system was never stable; he needed continuous monitoring. The other cats also weren't yet free-roaming throughout the house, so everything needed to be integrated slowly." data-ja="信頼していないわけじゃなかった——実はすぐに信頼してくれた。でも胃腸がずっと不安定で、継続観察が必要だった。他の猫たちもまだ家全体を自由に動き回れる状態じゃなくて、ゆっくり統合していく必要があった。">
       不是因为他不信任我们——其实他很快就信任了。但他的肠胃一直不稳定，需要持续观察。加上那时候其他猫咪还没有全屋自由活动，需要慢慢整合。
     </p>
-    <p class="chapter-text" data-zh="小黑在笼子里待了半年，从来没有抱怨。黄绿色的眼睛透过铁栏杆看着我们，安静，温顺，乖得让人心疼。" data-en="Xiao Hei spent half a year in that cage and never once complained. Those yellow-green eyes watching us through the bars — quiet, gentle, so well-behaved it broke your heart." data-ja="シャオヘイはケージの中で半年間、一度も文句を言わなかった。鉄格子越しに黄緑色の目で私たちを見て、静かで、おとなしくて、その従順さが胸に刺さった。">
+    <p class="chapter-text" data-zh="小黑在笼子里待了半年，从来没有抱怨。黄绿色的眼睛透过铁栏杆看着我们，安静，温顺，乖得让人心疼。" data-tw="小黑在籠子裡待了半年，從來沒有抱怨。黃綠色的眼睛透過鐵欄杆看著我們，安靜，溫順，乖得讓人心疼。" data-en="Xiao Hei spent half a year in that cage and never once complained. Those yellow-green eyes watching us through the bars — quiet, gentle, so well-behaved it broke your heart." data-ja="シャオヘイはケージの中で半年間、一度も文句を言わなかった。鉄格子越しに黄緑色の目で私たちを見て、静かで、おとなしくて、その従順さが胸に刺さった。">
       小黑在笼子里待了半年，从来没有抱怨。黄绿色的眼睛透过铁栏杆看着我们，安静，温顺，乖得让人心疼。
     </p>
   </div>
 
   <img loading="lazy" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/xiaohei-cage.jpg" alt="笼养中的小黑" class="story-photo reveal">
-  <div class="story-photo-caption reveal" data-zh="笼养半年多 · 透过铁栏杆看世界" data-en="Half a year in a cage · Watching the world through iron bars" data-ja="半年以上のケージ生活 · 鉄格子越しに世界を見る">笼养半年多 · 透过铁栏杆看世界</div>
+  <div class="story-photo-caption reveal" data-zh="笼养半年多 · 透过铁栏杆看世界" data-tw="籠養半年多 · 透過鐵欄杆看世界" data-en="Half a year in a cage · Watching the world through iron bars" data-ja="半年以上のケージ生活 · 鉄格子越しに世界を見る">笼养半年多 · 透过铁栏杆看世界</div>
 
   <div class="story-divider reveal"><span>✦</span></div>
 
   <div class="chapter reveal">
     <div class="chapter-label">Chapter Three</div>
-    <div class="chapter-title" data-zh="第一晚入屋，傻猪隔着铁栏好奇他" data-en="First Night Indoors — Sha Zhu Curious Through the Bars" data-ja="家に入った最初の夜、シャージューが鉄格子越しに興味津々">第一晚入屋，傻猪隔着铁栏好奇他</div>
-    <p class="chapter-text" data-zh="终于有一天，我们让小黑进入楼上的独立房间——和其他猫咪隔离，怕他们起冲突。" data-en="Finally, one day we let Xiao Hei into a separate room upstairs — kept apart from the others at first, in case of conflict." data-ja="ある日ついに、シャオヘイを二階の独立した部屋に移した——他の猫との衝突を心配して、隔離したまま。">
+    <div class="chapter-title" data-zh="第一晚入屋，傻猪隔着铁栏好奇他" data-tw="第一晚入屋，傻豬隔著鐵欄好奇他" data-en="First Night Indoors — Sha Zhu Curious Through the Bars" data-ja="家に入った最初の夜、シャージューが鉄格子越しに興味津々">第一晚入屋，傻猪隔着铁栏好奇他</div>
+    <p class="chapter-text" data-zh="终于有一天，我们让小黑进入楼上的独立房间——和其他猫咪隔离，怕他们起冲突。" data-tw="終於有一天，我們讓小黑進入樓上的獨立房間——和其他貓咪隔離，怕他們起衝突。" data-en="Finally, one day we let Xiao Hei into a separate room upstairs — kept apart from the others at first, in case of conflict." data-ja="ある日ついに、シャオヘイを二階の独立した部屋に移した——他の猫との衝突を心配して、隔離したまま。">
       终于有一天，我们让小黑进入楼上的独立房间——和其他猫咪隔离，怕他们起冲突。
     </p>
-    <p class="chapter-text" data-zh="没想到傻猪第一个跑过来，隔着铁栏杆好奇地盯着小黑看。" data-en="Unexpectedly, Sha Zhu was the first to come running — staring at Xiao Hei through the bars with pure curiosity." data-ja="なんとシャージューが一番に駆けてきて、鉄格子越しに興味深そうにシャオヘイを凝視した。">
+    <p class="chapter-text" data-zh="没想到傻猪第一个跑过来，隔着铁栏杆好奇地盯着小黑看。" data-tw="沒想到傻豬第一個跑過來，隔著鐵欄杆好奇地盯著小黑看。" data-en="Unexpectedly, Sha Zhu was the first to come running — staring at Xiao Hei through the bars with pure curiosity." data-ja="なんとシャージューが一番に駆けてきて、鉄格子越しに興味深そうにシャオヘイを凝視した。">
       没想到傻猪第一个跑过来，隔着铁栏杆好奇地盯着小黑看。
     </p>
-    <p class="chapter-text" data-zh="隔天，我们打开门，他们已经变成了玩伴。" data-en="The next day, we opened the door. They were already friends." data-ja="翌日扉を開けたら、もう遊び相手になっていた。">
+    <p class="chapter-text" data-zh="隔天，我们打开门，他们已经变成了玩伴。" data-tw="隔天，我們開啟門，他們已經變成了玩伴。" data-en="The next day, we opened the door. They were already friends." data-ja="翌日扉を開けたら、もう遊び相手になっていた。">
       隔天，我们打开门，他们已经变成了玩伴。
     </p>
-    <p class="chapter-text" data-zh="我们都觉得不可思议。一黑一白，一个傲娇异瞳仙猫，一个新来的流浪黑猫——就这样，成了最好的朋友。" data-en="We couldn't believe it. One black, one white — one proud odd-eyed celestial cat, one newly arrived black stray. Just like that, best friends." data-ja="みんな信じられなかった。黒と白、ツンデレのオッドアイ猫と、新入りの流浪黒猫——そうして、最高の友達になった。">
+    <p class="chapter-text" data-zh="我们都觉得不可思议。一黑一白，一个傲娇异瞳仙猫，一个新来的流浪黑猫——就这样，成了最好的朋友。" data-tw="我們都覺得不可思議。一黑一白，一個傲嬌異瞳仙貓，一個新來的流浪黑貓——就這樣，成了最好的朋友。" data-en="We couldn't believe it. One black, one white — one proud odd-eyed celestial cat, one newly arrived black stray. Just like that, best friends." data-ja="みんな信じられなかった。黒と白、ツンデレのオッドアイ猫と、新入りの流浪黒猫——そうして、最高の友達になった。">
       我们都觉得不可思议。一黑一白，一个傲娇异瞳仙猫，一个新来的流浪黑猫——就这样，成了最好的朋友。
     </p>
   </div>
@@ -507,49 +509,49 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
     <img loading="lazy" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/xiaohei-happy.jpg" alt="小黑第一晚入屋" style="object-position:center 20%;">
     <img loading="lazy" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/xiaohei-best.jpg" alt="小黑最美的照片" style="object-position:center 25%;">
   </div>
-  <div class="story-photo-caption reveal" data-zh="左：第一晚入屋，好高兴 · 右：最美的那张" data-en="Left: First night indoors — so happy · Right: The most beautiful photo" data-ja="左：家に入った最初の夜、とても嬉しそう · 右：一番美しい一枚">左：第一晚入屋，好高兴 · 右：最美的那张</div>
+  <div class="story-photo-caption reveal" data-zh="左：第一晚入屋，好高兴 · 右：最美的那张" data-tw="左：第一晚入屋，好高興 · 右：最美的那張" data-en="Left: First night indoors — so happy · Right: The most beautiful photo" data-ja="左：家に入った最初の夜、とても嬉しそう · 右：一番美しい一枚">左：第一晚入屋，好高兴 · 右：最美的那张</div>
 
   <div class="chapter reveal">
     <div class="chapter-label">Chapter Four</div>
-    <div class="chapter-title" data-zh="傻猪最爱的玩伴" data-en="Sha Zhu's Favourite Companion" data-ja="シャージューの一番の遊び相手">傻猪最爱的玩伴</div>
-    <p class="chapter-text" data-zh="小黑和傻猪成了最好的玩伴。" data-en="Xiao Hei and Sha Zhu became inseparable." data-ja="シャオヘイとシャージューは最高の遊び相手になった。">
+    <div class="chapter-title" data-zh="傻猪最爱的玩伴" data-tw="傻豬最愛的玩伴" data-en="Sha Zhu's Favourite Companion" data-ja="シャージューの一番の遊び相手">傻猪最爱的玩伴</div>
+    <p class="chapter-text" data-zh="小黑和傻猪成了最好的玩伴。" data-tw="小黑和傻豬成了最好的玩伴。" data-en="Xiao Hei and Sha Zhu became inseparable." data-ja="シャオヘイとシャージューは最高の遊び相手になった。">
       小黑和傻猪成了最好的玩伴。
     </p>
-    <p class="chapter-text" data-zh="一黑一白，整天在家里追来追去。傻猪那只平时傲娇的异瞳仙猫，遇到小黑就变成了另一只猫——活泼，好奇，充满孩子气。" data-en="One black, one white, chasing each other around the house all day. The usually aloof Sha Zhu became a different cat entirely around Xiao Hei — playful, curious, full of childlike energy." data-ja="黒と白、一日中家の中を追いかけっこしていた。普段ツンデレのオッドアイ猫シャージューが、シャオヘイに会うと別の猫になった——活発で、好奇心旺盛で、子供っぽさにあふれていた。">
+    <p class="chapter-text" data-zh="一黑一白，整天在家里追来追去。傻猪那只平时傲娇的异瞳仙猫，遇到小黑就变成了另一只猫——活泼，好奇，充满孩子气。" data-tw="一黑一白，整天在家裡追來追去。傻豬那隻平時傲嬌的異瞳仙貓，遇到小黑就變成了另一隻貓——活潑，好奇，充滿孩子氣。" data-en="One black, one white, chasing each other around the house all day. The usually aloof Sha Zhu became a different cat entirely around Xiao Hei — playful, curious, full of childlike energy." data-ja="黒と白、一日中家の中を追いかけっこしていた。普段ツンデレのオッドアイ猫シャージューが、シャオヘイに会うと別の猫になった——活発で、好奇心旺盛で、子供っぽさにあふれていた。">
       一黑一白，整天在家里追来追去。傻猪那只平时傲娇的异瞳仙猫，遇到小黑就变成了另一只猫——活泼，好奇，充满孩子气。
     </p>
-    <p class="chapter-text" data-zh="他们也最爱并排躺着，一黑一白，像太极的阴阳——你中有我，我中有你。" data-en="They loved to lie side by side too — one black, one white, yin and yang, each containing the other." data-ja="二匹は並んで横たわるのも大好きだった。黒と白、太極の陰陽のように——あなたの中に私があり、私の中にあなたがある。">
+    <p class="chapter-text" data-zh="他们也最爱并排躺着，一黑一白，像太极的阴阳——你中有我，我中有你。" data-tw="他們也最愛並排躺著，一黑一白，像太極的陰陽——你中有我，我中有你。" data-en="They loved to lie side by side too — one black, one white, yin and yang, each containing the other." data-ja="二匹は並んで横たわるのも大好きだった。黒と白、太極の陰陽のように——あなたの中に私があり、私の中にあなたがある。">
       他们也最爱并排躺着，一黑一白，像太极的阴阳——你中有我，我中有你。
     </p>
   </div>
 
   <img loading="lazy" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/xiaohei-shazhu.jpg" alt="小黑和傻猪" class="story-photo reveal">
-  <div class="story-photo-caption reveal" data-zh="傻猪与小黑 · 阴阳相依" data-en="Sha Zhu and Xiao Hei · Yin and yang, side by side" data-ja="シャージューとシャオヘイ · 陰陽の相依">傻猪与小黑 · 阴阳相依</div>
+  <div class="story-photo-caption reveal" data-zh="傻猪与小黑 · 阴阳相依" data-tw="傻豬與小黑 · 陰陽相依" data-en="Sha Zhu and Xiao Hei · Yin and yang, side by side" data-ja="シャージューとシャオヘイ · 陰陽の相依">傻猪与小黑 · 阴阳相依</div>
 
   <div class="story-divider reveal"><span>✦</span></div>
 
   <div class="chapter reveal">
     <div class="chapter-label">Chapter Five</div>
-    <div class="chapter-title" data-zh="小白走后一个月" data-en="One Month After Xiao Bai Left" data-ja="シャオバイが旅立って一ヶ月後">小白走后一个月</div>
-    <p class="chapter-text" data-zh="小白离世一个月后，小黑突然不吃不喝，开始呕吐。" data-en="One month after Xiao Bai passed, Xiao Hei suddenly stopped eating and drinking, and began vomiting." data-ja="シャオバイが旅立って一ヶ月後、シャオヘイが突然食べなくなり、飲まなくなり、吐き始めた。">
+    <div class="chapter-title" data-zh="小白走后一个月" data-tw="小白走後一個月" data-en="One Month After Xiao Bai Left" data-ja="シャオバイが旅立って一ヶ月後">小白走后一个月</div>
+    <p class="chapter-text" data-zh="小白离世一个月后，小黑突然不吃不喝，开始呕吐。" data-tw="小白離世一個月後，小黑突然不吃不喝，開始嘔吐。" data-en="One month after Xiao Bai passed, Xiao Hei suddenly stopped eating and drinking, and began vomiting." data-ja="シャオバイが旅立って一ヶ月後、シャオヘイが突然食べなくなり、飲まなくなり、吐き始めた。">
       小白离世一个月后，小黑突然不吃不喝，开始呕吐。
     </p>
-    <p class="chapter-text" data-zh="我们带他去看兽医。检查发现他肠道里有一个大球状物，情况严重，需要手术才能知道里面是什么。" data-en="We took him to the vet. The examination found a large mass in his intestines — serious, requiring surgery to determine what it was." data-ja="獣医に連れて行った。検査で腸に大きな塊が見つかり、状況は深刻で、何かを知るには手術が必要だった。">
+    <p class="chapter-text" data-zh="我们带他去看兽医。检查发现他肠道里有一个大球状物，情况严重，需要手术才能知道里面是什么。" data-tw="我們帶他去看獸醫。檢查發現他腸道里有一個大球狀物，情況嚴重，需要手術才能知道里面是什麼。" data-en="We took him to the vet. The examination found a large mass in his intestines — serious, requiring surgery to determine what it was." data-ja="獣医に連れて行った。検査で腸に大きな塊が見つかり、状況は深刻で、何かを知るには手術が必要だった。">
       我们带他去看兽医。检查发现他肠道里有一个大球状物，情况严重，需要手术才能知道里面是什么。
     </p>
-    <p class="chapter-text" data-zh="我们决定做手术。但手术出现了并发症——小黑走了。" data-en="We agreed to the surgery. But complications arose. Xiao Hei was gone." data-ja="手術を決めた。でも手術中に合併症が起きた——シャオヘイは逝った。">
+    <p class="chapter-text" data-zh="我们决定做手术。但手术出现了并发症——小黑走了。" data-tw="我們決定做手術。但手術出現了併發症——小黑走了。" data-en="We agreed to the surgery. But complications arose. Xiao Hei was gone." data-ja="手術を決めた。でも手術中に合併症が起きた——シャオヘイは逝った。">
       我们决定做手术。但手术出现了并发症——小黑走了。
     </p>
-    <p class="chapter-text" data-zh="同一年，我们失去了小白，又失去了小黑。一个月之内，两只猫。" data-en="In the same year, we lost Xiao Bai, then lost Xiao Hei. Two cats, within one month." data-ja="同じ年に、シャオバイを失い、またシャオヘイを失った。一ヶ月以内に、二匹の猫。">
+    <p class="chapter-text" data-zh="同一年，我们失去了小白，又失去了小黑。一个月之内，两只猫。" data-tw="同一年，我們失去了小白，又失去了小黑。一個月之內，兩隻貓。" data-en="In the same year, we lost Xiao Bai, then lost Xiao Hei. Two cats, within one month." data-ja="同じ年に、シャオバイを失い、またシャオヘイを失った。一ヶ月以内に、二匹の猫。">
       同一年，我们失去了小白，又失去了小黑。一个月之内，两只猫。
     </p>
-    <p class="chapter-text" data-zh="后来我们发现，兽医给小黑开的处方猫粮，无意中医好了困扰傻猪已久的软便问题。小黑的处方，成了傻猪的礼物。" data-en="Later we discovered that the prescription food the vet had prescribed for Xiao Hei had inadvertently cured Sha Zhu's long-standing digestive problem. Xiao Hei's prescription became Sha Zhu's gift." data-ja="後から気づいたのだが、獣医がシャオヘイのために処方した療法食が、シャージューを長年悩ませていた軟便の問題を思わず治していた。シャオヘイの処方が、シャージューへの贈り物になった。">
+    <p class="chapter-text" data-zh="后来我们发现，兽医给小黑开的处方猫粮，无意中医好了困扰傻猪已久的软便问题。小黑的处方，成了傻猪的礼物。" data-tw="後來我們發現，獸醫給小黑開的處方貓糧，無意中醫好了困擾傻豬已久的軟便問題。小黑的處方，成了傻豬的禮物。" data-en="Later we discovered that the prescription food the vet had prescribed for Xiao Hei had inadvertently cured Sha Zhu's long-standing digestive problem. Xiao Hei's prescription became Sha Zhu's gift." data-ja="後から気づいたのだが、獣医がシャオヘイのために処方した療法食が、シャージューを長年悩ませていた軟便の問題を思わず治していた。シャオヘイの処方が、シャージューへの贈り物になった。">
       后来我们发现，兽医给小黑开的处方猫粮，无意中医好了困扰傻猪已久的软便问题。小黑的处方，成了傻猪的礼物。
     </p>
   </div>
 
   <div class="highlight-box reveal">
-    <p class="highlight-box-text" data-zh="「祸兮福之所倚，福兮祸之所伏」<br><br>      小黑来了，带来了欢笑。<br>      小黑走了，留下了傻猪的健康。<br>      来去之间，皆是缘分，皆是礼物。" data-en="「In misfortune lies fortune; in fortune hides misfortune」<br><br>      Xiao Hei arrived and brought laughter.<br>      Xiao Hei left and gave Sha Zhu his health.<br>      In coming and going, all is fate — all is a gift." data-ja="「禍は福の倚るところ、福は禍の伏すところ」<br><br>シャオヘイは来て、笑顔をもたらした。<br>シャオヘイは去って、シャージューの健康を残した。<br>来ては去る、すべては縁、すべては贈り物。">
+    <p class="highlight-box-text" data-zh="「祸兮福之所倚，福兮祸之所伏」<br><br>      小黑来了，带来了欢笑。<br>      小黑走了，留下了傻猪的健康。<br>      来去之间，皆是缘分，皆是礼物。" data-tw="「禍兮福之所倚，福兮禍之所伏」<br><br>      小黑來了，帶來了歡笑。<br>      小黑走了，留下了傻豬的健康。<br>      來去之間，皆是緣分，皆是禮物。" data-en="「In misfortune lies fortune; in fortune hides misfortune」<br><br>      Xiao Hei arrived and brought laughter.<br>      Xiao Hei left and gave Sha Zhu his health.<br>      In coming and going, all is fate — all is a gift." data-ja="「禍は福の倚るところ、福は禍の伏すところ」<br><br>シャオヘイは来て、笑顔をもたらした。<br>シャオヘイは去って、シャージューの健康を残した。<br>来ては去る、すべては縁、すべては贈り物。">
       「祸兮福之所倚，福兮祸之所伏」<br><br>
       小黑来了，带来了欢笑。<br>
       小黑走了，留下了傻猪的健康。<br>
@@ -558,17 +560,17 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
   </div>
 
   <img loading="lazy" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/xiaobai-xiaohei.jpg" alt="小白和小黑" class="story-photo-bw reveal">
-  <div class="story-photo-caption reveal" data-zh="小白与小黑 · 两个已归道的朋友 · 曾经在一起" data-en="Xiao Bai and Xiao Hei · Two friends who returned to the Tao · Together once" data-ja="シャオバイとシャオヘイ · 旅立った二人の友 · かつて一緒にいた">小白与小黑 · 两个已归道的朋友 · 曾经在一起</div>
+  <div class="story-photo-caption reveal" data-zh="小白与小黑 · 两个已归道的朋友 · 曾经在一起" data-tw="小白與小黑 · 兩個已歸道的朋友 · 曾經在一起" data-en="Xiao Bai and Xiao Hei · Two friends who returned to the Tao · Together once" data-ja="シャオバイとシャオヘイ · 旅立った二人の友 · かつて一緒にいた">小白与小黑 · 两个已归道的朋友 · 曾经在一起</div>
 
 </div>
 
 <div class="closing">
   <div class="closing-bg-char">缘</div>
   <div style="position:relative;z-index:1;">
-    <div class="closing-label reveal" data-zh="小黑留言" data-en="A note from Xiao Hei" data-ja="シャオヘイより">小黑留言</div>
-    <div class="closing-quote reveal" data-zh="「祸兮福之所倚<br>福兮祸之所伏」" data-en="「In misfortune lies the seed of fortune;<br>in fortune hides the root of misfortune」" data-ja="「禍は福の倚るところ<br>福は禍の伏すところ」">「祸兮福之所倚<br>福兮祸之所伏」</div>
-    <div class="closing-source reveal" data-zh="" data-en="" data-ja=""></div>
-    <div class="closing-note reveal" data-zh="小黑用半年换来三个月的家。<br>      短暂，但真实。<br>      <br>      他走的时候，留下了傻猪的健康。<br>      这就是他来这里的意义。" data-en="Xiao Hei spent half a year earning three months of home.<br>      Brief — but real.<br>      <br>      When he left, he left Sha Zhu's health behind.<br>      That was his purpose in coming here." data-ja="シャオヘイは半年かけて三ヶ月の家を手に入れた。<br>短くても、本物だった。<br><br>去るとき、シャージューの健康を残していった。<br>これが彼がここに来た意味。">
+    <div class="closing-label reveal" data-zh="小黑留言" data-tw="小黑留言" data-en="A note from Xiao Hei" data-ja="シャオヘイより">小黑留言</div>
+    <div class="closing-quote reveal" data-zh="「祸兮福之所倚<br>福兮祸之所伏」" data-tw="「禍兮福之所倚<br>福兮禍之所伏」" data-en="「In misfortune lies the seed of fortune;<br>in fortune hides the root of misfortune」" data-ja="「禍は福の倚るところ<br>福は禍の伏すところ」">「祸兮福之所倚<br>福兮祸之所伏」</div>
+    <div class="closing-source reveal" data-zh="" data-tw="" data-en="" data-ja=""></div>
+    <div class="closing-note reveal" data-zh="小黑用半年换来三个月的家。<br>      短暂，但真实。<br>      <br>      他走的时候，留下了傻猪的健康。<br>      这就是他来这里的意义。" data-tw="小黑用半年換來三個月的家。<br>      短暫，但真實。<br>      <br>      他走的時候，留下了傻豬的健康。<br>      這就是他來這裡的意義。" data-en="Xiao Hei spent half a year earning three months of home.<br>      Brief — but real.<br>      <br>      When he left, he left Sha Zhu's health behind.<br>      That was his purpose in coming here." data-ja="シャオヘイは半年かけて三ヶ月の家を手に入れた。<br>短くても、本物だった。<br><br>去るとき、シャージューの健康を残していった。<br>これが彼がここに来た意味。">
       小黑用半年换来三个月的家。<br>
       短暂，但真实。<br>
       <br>
@@ -576,8 +578,8 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
       这就是他来这里的意义。
     </div>
     <div class="reveal">
-      <a href="divination.html" class="btn-gold" data-zh="✦ 让傻猪陪你想想" data-en="✦ Ask Sha Zhu" data-ja="✦ シャージューに聞く">✦ 让傻猪陪你想想</a>
-      <a href="/#cats" class="btn-outline-light" data-zh="回到猫咪家族" data-en="Back to Cat Family" data-ja="猫の家族に戻る">回到猫咪家族</a>
+      <a href="divination.html" class="btn-gold" data-zh="✦ 让傻猪陪你想想" data-tw="✦ 讓傻豬陪你想想" data-en="✦ Ask Sha Zhu" data-ja="✦ シャージューに聞く">✦ 让傻猪陪你想想</a>
+      <a href="/#cats" class="btn-outline-light" data-zh="回到猫咪家族" data-tw="回到貓咪家族" data-en="Back to Cat Family" data-ja="猫の家族に戻る">回到猫咪家族</a>
     </div>
   </div>
 </div>
@@ -590,17 +592,17 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
 
   <!-- 跟猫说话 -->
   <div class="reveal">
-    <div class="interact-section-label" data-zh="与猫对话" data-en="Whisper to the Cat" data-ja="猫に話しかける">与猫对话</div>
-    <div class="interact-section-title" data-zh="🐱 跟小黑说句话" data-en="🐱 Whisper to Xiao Hei" data-ja="🐱 シャオヘイに話しかける">🐱 跟小黑说句话</div>
-    <div class="interact-section-sub" data-zh="有什么话想对小黑说？已归道的玄猫。也许是思念，也许是告别。" data-en="Something you'd like to say to Xiao Hei? Gone but not forgotten, at peace in the Tao." data-ja="何か言いたいことはある？シャージューに話しかけてみて。">有什么话想对小黑说？已归道的玄猫。也许是思念，也许是告别。</div>
+    <div class="interact-section-label" data-zh="与猫对话" data-tw="與貓對話" data-en="Whisper to the Cat" data-ja="猫に話しかける">与猫对话</div>
+    <div class="interact-section-title" data-zh="🐱 跟小黑说句话" data-tw="🐱 跟小黑說句話" data-en="🐱 Whisper to Xiao Hei" data-ja="🐱 シャオヘイに話しかける">🐱 跟小黑说句话</div>
+    <div class="interact-section-sub" data-zh="有什么话想对小黑说？已归道的玄猫。也许是思念，也许是告别。" data-tw="有什麼話想對小黑說？已歸道的玄貓。也許是思念，也許是告別。" data-en="Something you'd like to say to Xiao Hei? Gone but not forgotten, at peace in the Tao." data-ja="何か言いたいことはある？シャージューに話しかけてみて。">有什么话想对小黑说？已归道的玄猫。也许是思念，也许是告别。</div>
   </div>
 
   <!-- 未登录提示 -->
   <div id="whisper-login-wall" class="whisper-login-wall reveal" style="display:none;">
-    <div class="whisper-login-hint" data-zh="登录后才能跟小黑说话 🐾" data-en="Sign in to whisper to Xiao Hei 🐾" data-ja="ログインしてシャージューに話しかけよう 🐾">登录后才能跟小黑说话 🐾</div>
+    <div class="whisper-login-hint" data-zh="登录后才能跟小黑说话 🐾" data-tw="登入後才能跟小黑說話 🐾" data-en="Sign in to whisper to Xiao Hei 🐾" data-ja="ログインしてシャージューに話しかけよう 🐾">登录后才能跟小黑说话 🐾</div>
     <button id="btn-google-login" class="btn-google-login">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-      <span data-zh="用 Google 登录" data-en="Sign in with Google" data-ja="Googleでログイン">用 Google 登录</span>
+      <span data-zh="用 Google 登录" data-tw="用 Google 登入" data-en="Sign in with Google" data-ja="Googleでログイン">用 Google 登录</span>
     </button>
   </div>
 
@@ -610,33 +612,33 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
       <span id="whisper-user-name" style="font-size:12px;color:var(--ink-faint);"></span>
       <div style="display:flex;align-items:center;gap:12px;">
         <span id="whisper-quota" class="whisper-quota"></span>
-        <button id="btn-signout" class="btn-signout" data-zh="退出" data-en="Sign out" data-ja="ログアウト">退出</button>
+        <button id="btn-signout" class="btn-signout" data-zh="退出" data-tw="退出" data-en="Sign out" data-ja="ログアウト">退出</button>
       </div>
     </div>
     <textarea id="whisper-msg" class="whisper-input" maxlength="200"
       data-placeholder-zh="写下你想说的……（最多200字）" data-placeholder-en="Write what's on your heart… (up to 200 characters)" data-placeholder-ja="心の中にあることを書いてみて…（200字まで）"
       placeholder="写下你想说的……（最多200字）"></textarea>
     <div class="whisper-submit-row">
-      <span class="whisper-hint" data-zh="小黑会亲自回应 🐾" data-en="Xiao Hei will respond personally 🐾" data-ja="シャージューが直接返事するよ 🐾">小黑会亲自回应 🐾</span>
-      <button id="whisper-submit" class="btn-whisper" data-zh="送出" data-en="Send" data-ja="送る">送出</button>
+      <span class="whisper-hint" data-zh="小黑会亲自回应 🐾" data-tw="小黑會親自回應 🐾" data-en="Xiao Hei will respond personally 🐾" data-ja="シャージューが直接返事するよ 🐾">小黑会亲自回应 🐾</span>
+      <button id="whisper-submit" class="btn-whisper" data-zh="送出" data-tw="送出" data-en="Send" data-ja="送る">送出</button>
     </div>
   </div>
 
   <div id="cat-reply-card" class="cat-reply-card">
     <div class="cat-reply-bg" id="cat-reply-bg-char">黑</div>
-    <div class="cat-reply-label" data-zh="小黑说" data-en="Xiao Hei says" data-ja="シャージューより">小黑说</div>
+    <div class="cat-reply-label" data-zh="小黑说" data-tw="小黑說" data-en="Xiao Hei says" data-ja="シャージューより">小黑说</div>
     <div id="cat-reply-text" class="cat-reply-text"></div>
     <div class="cat-reply-cta">
-      <div class="cat-reply-cta-hint" data-zh="想让小黑为你占卜？" data-en="Want Xiao Hei to read for you?" data-ja="もっと深く読んでほしい？">想让小黑为你占卜？</div>
-      <a href="divination.html" class="btn-reply-divination" data-zh="✦ 投币问卦" data-en="✦ Cast the Oracle" data-ja="✦ 占いに進む">✦ 投币问卦</a>
+      <div class="cat-reply-cta-hint" data-zh="想让小黑为你占卜？" data-tw="想讓小黑為你占卜？" data-en="Want Xiao Hei to read for you?" data-ja="もっと深く読んでほしい？">想让小黑为你占卜？</div>
+      <a href="divination.html" class="btn-reply-divination" data-zh="✦ 投币问卦" data-tw="✦ 投幣問卦" data-en="✦ Cast the Oracle" data-ja="✦ 占いに進む">✦ 投币问卦</a>
     </div>
   </div>
 
   <div id="whispers-wall" class="whispers-wall" style="display:none;">
-    <div class="whispers-wall-title" data-zh="其他人也说了" data-en="Others have whispered" data-ja="みんなの声">其他人也说了</div>
+    <div class="whispers-wall-title" data-zh="其他人也说了" data-tw="其他人也說了" data-en="Others have whispered" data-ja="みんなの声">其他人也说了</div>
     <div id="whisper-bubbles" class="whisper-bubbles"></div>
     <div class="whispers-load-more" id="whispers-load-more" style="display:none;">
-      <button class="btn-load-more" id="whispers-more-btn" data-zh="看更多" data-en="Load more" data-ja="もっと見る">看更多</button>
+      <button class="btn-load-more" id="whispers-more-btn" data-zh="看更多" data-tw="看更多" data-en="Load more" data-ja="もっと見る">看更多</button>
     </div>
   </div>
 
@@ -644,9 +646,9 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
 
   <!-- 请猫吃罐头 -->
   <div class="reveal">
-    <div class="interact-section-label" data-zh="供养" data-en="Feed the Cat" data-ja="猫を養う">供养</div>
-    <div class="interact-section-title" data-zh='🕯️ 为小黑点一盏灯' data-en='🕯️ Light a Candle for Xiao Hei' data-ja='🕯️ シャオヘイに灯を'>🕯️ 为小黑点一盏灯</div>
-    <div class="interact-section-sub" data-zh="小黑已归道。你的供养是一份思念，一份祝福。我们会为他点上一盏灯，拍照留念。" data-en="Xiao Hei has passed into the Tao. Your offering is a tribute. We will photograph it." data-ja="これは本物の缶詰です。あなたが送るたびに、本当に買って、シャージューに食べさせて、写真で証明します。">小黑已归道。你的供养是一份思念，一份祝福。我们会为他点上一盏灯，拍照留念。</div>
+    <div class="interact-section-label" data-zh="供养" data-tw="供養" data-en="Feed the Cat" data-ja="猫を養う">供养</div>
+    <div class="interact-section-title" data-zh='🕯️ 为小黑点一盏灯' data-tw='🕯️ 為小黑點一盞燈' data-en='🕯️ Light a Candle for Xiao Hei' data-ja='🕯️ シャオヘイに灯を'>🕯️ 为小黑点一盏灯</div>
+    <div class="interact-section-sub" data-zh="小黑已归道。你的供养是一份思念，一份祝福。我们会为他点上一盏灯，拍照留念。" data-tw="小黑已歸道。你的供養是一份思念，一份祝福。我們會為他點上一盞燈，拍照留念。" data-en="Xiao Hei has passed into the Tao. Your offering is a tribute. We will photograph it." data-ja="これは本物の缶詰です。あなたが送るたびに、本当に買って、シャージューに食べさせて、写真で証明します。">小黑已归道。你的供养是一份思念，一份祝福。我们会为他点上一盏灯，拍照留念。</div>
   </div>
 
   <div class="feed-box reveal">
@@ -655,26 +657,26 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
       <button class="feed-amount-btn active" data-amount="3">$3</button>
       <button class="feed-amount-btn" data-amount="5">$5</button>
       <button class="feed-amount-btn" data-amount="10">$10</button>
-      <button class="feed-amount-btn" data-amount="0" data-zh="自定义" data-en="Custom" data-ja="カスタム">自定义</button>
+      <button class="feed-amount-btn" data-amount="0" data-zh="自定义" data-tw="自定義" data-en="Custom" data-ja="カスタム">自定义</button>
     </div>
     <div class="feed-custom-row" id="feed-custom-row" style="display:none;">
-      <span class="feed-custom-label" data-zh="金额 USD $" data-en="Amount USD $" data-ja="金額 USD $">金额 USD $</span>
+      <span class="feed-custom-label" data-zh="金额 USD $" data-tw="金額 USD $" data-en="Amount USD $" data-ja="金額 USD $">金额 USD $</span>
       <input type="number" id="feed-custom-amount" class="feed-custom-input" min="1" max="999" value="5" placeholder="5" />
     </div>
     <div class="feed-name-row">
-      <span class="feed-name-label" data-zh="供养人（可匿名）" data-en="Your name (optional)" data-ja="お名前（匿名可）">供养人（可匿名）</span>
+      <span class="feed-name-label" data-zh="供养人（可匿名）" data-tw="供養人（可匿名）" data-en="Your name (optional)" data-ja="お名前（匿名可）">供养人（可匿名）</span>
       <input type="text" id="feed-donor-name" class="whisper-input feed-name-input" maxlength="30"
         data-placeholder-zh="如：来自台湾的猫奴" data-placeholder-en="e.g. A cat lover from Singapore" data-placeholder-ja="例：東京の猫好き"
         placeholder="如：来自台湾的猫奴" />
     </div>
-    <button id="btn-feed-submit" class="btn-feed" data-zh='送出这罐真罐头' data-en='Send a Real Can' data-ja='本物の缶詰を送る'>送出这罐真罐头</button>
-    <div class="feed-disclaimer" data-zh="通过 Stripe 安全付款 · 每罐都是真实购买 · 主人承诺每罐必拍为证" data-en="Secure payment via Stripe · Every can is physically purchased · Owner promises photo proof for every feeding" data-ja="Stripeで安全決済 · 返金不可 · オーナーは必ず撮影を約束">通过 Stripe 安全付款 · 供养不可退款 · 主人承诺每罐必拍</div>
+    <button id="btn-feed-submit" class="btn-feed" data-zh='送出这罐真罐头' data-tw='送出這罐真罐頭' data-en='Send a Real Can' data-ja='本物の缶詰を送る'>送出这罐真罐头</button>
+    <div class="feed-disclaimer" data-zh="通过 Stripe 安全付款 · 每罐都是真实购买 · 主人承诺每罐必拍为证" data-tw="透過 Stripe 安全付款 · 每罐都是真實購買 · 主人承諾每罐必拍為證" data-en="Secure payment via Stripe · Every can is physically purchased · Owner promises photo proof for every feeding" data-ja="Stripeで安全決済 · 返金不可 · オーナーは必ず撮影を約束">通过 Stripe 安全付款 · 供养不可退款 · 主人承诺每罐必拍</div>
   </div>
 
   <div id="feeding-wall" class="feeding-wall reveal">
-    <div class="feeding-wall-title" data-zh="📸 已经吃掉的罐头" data-en="📸 Cans Already Eaten" data-ja="📸 食べた缶詰の記録">📸 已经吃掉的罐头</div>
+    <div class="feeding-wall-title" data-zh="📸 已经吃掉的罐头" data-tw="📸 已經吃掉的罐頭" data-en="📸 Cans Already Eaten" data-ja="📸 食べた缶詰の記録">📸 已经吃掉的罐头</div>
     <div id="feeding-cards" class="feeding-cards">
-      <div class="feeding-empty" data-zh="还没有供养记录<br>成为第一个为小黑点灯的人 🕯️" data-en="No offerings yet.<br>Be the first to light a candle for Xiao Hei 🕯️" data-ja="まだ記録がありません。<br>最初に缶詰を送ってみよう 🐾">还没有供养记录<br>成为第一个为小黑点灯的人 🕯️</div>
+      <div class="feeding-empty" data-zh="还没有供养记录<br>成为第一个为小黑点灯的人 🕯️" data-tw="還沒有供養記錄<br>成為第一個為小黑點燈的人 🕯️" data-en="No offerings yet.<br>Be the first to light a candle for Xiao Hei 🕯️" data-ja="まだ記録がありません。<br>最初に缶詰を送ってみよう 🐾">还没有供养记录<br>成为第一个为小黑点灯的人 🕯️</div>
     </div>
   </div>
 
@@ -686,24 +688,24 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
   <div class="book-banner-inner">
     <img loading="lazy" class="book-banner-cover" src="https://taoofcat.com/book-cover.png" alt="Tao of Cat">
     <div class="book-banner-body">
-      <div class="book-banner-label" data-zh="傻猪推荐好书" data-en="Recommended Reading" data-ja="おすすめの本">傻猪推荐好书</div>
-      <div class="book-banner-title" data-zh="Tao of Cat — 英文电子书" data-en="Tao of Cat — The Ebook" data-ja="Tao of Cat — 英語電子書籍">Tao of Cat — 英文电子书</div>
+      <div class="book-banner-label" data-zh="傻猪推荐好书" data-tw="傻豬推薦好書" data-en="Recommended Reading" data-ja="おすすめの本">傻猪推荐好书</div>
+      <div class="book-banner-title" data-zh="Tao of Cat — 英文电子书" data-tw="Tao of Cat — 英文電子書" data-en="Tao of Cat — The Ebook" data-ja="Tao of Cat — 英語電子書籍">Tao of Cat — 英文电子书</div>
       <div class="book-banner-sub"
-        data-zh="英文版。你的猫比你更懂老子。11堂课，30页，$7.99"
+        data-zh="英文版。你的猫比你更懂老子。11堂课，30页，$7.99" data-tw="英文版。你的貓比你更懂老子。11堂課，30頁，$7.99"
         data-en="Your cat has been teaching you Taoism for years. You just weren't listening. 11 lessons · 30 pages · $7.99"
         data-ja="英語版。あなたの猫は老子より賢い。11レッスン · 30ページ · $7.99">
         英文版。你的猫比你更懂老子。11堂课，30页，$7.99
       </div>
       <a href="https://taocat.gumroad.com/l/book" target="_blank" class="btn-book-banner"
-        data-zh="✦ 立即获取" data-en="✦ Get the Ebook" data-ja="✦ 今すぐ入手">✦ 立即获取</a>
+        data-zh="✦ 立即获取" data-tw="✦ 立即獲取" data-en="✦ Get the Ebook" data-ja="✦ 今すぐ入手">✦ 立即获取</a>
     </div>
   </div>
 </div>
 
 <footer>
   <div class="footer-brand">玄猫之道</div>
-  <div style="margin-bottom:8px;"><a href="support.html" style="font-size:13px;color:var(--ink-faint);text-decoration:none;font-family:'Noto Sans SC',sans-serif;font-weight:300;letter-spacing:0.05em;" data-zh="帮助中心" data-en="Support" data-ja="ヘルプ">帮助中心</a></div>
-  <div class="footer-copy" data-zh="© 2026 Tao of Your Cat · Ipoh, Malaysia · 小黑 · 永远在这里" data-en="© 2026 Tao of Your Cat · Ipoh, Malaysia · Xiao Hei · Always Here" data-ja="© 2026 Tao of Your Cat · Ipoh, Malaysia · シャオヘイ · ずっとここにいる">© 2026 Tao of Your Cat · Ipoh, Malaysia · 小黑 · 永远在这里</div>
+  <div style="margin-bottom:8px;"><a href="support.html" style="font-size:13px;color:var(--ink-faint);text-decoration:none;font-family:'Noto Sans SC',sans-serif;font-weight:300;letter-spacing:0.05em;" data-zh="帮助中心" data-tw="幫助中心" data-en="Support" data-ja="ヘルプ">帮助中心</a></div>
+  <div class="footer-copy" data-zh="© 2026 Tao of Your Cat · Ipoh, Malaysia · 小黑 · 永远在这里" data-tw="© 2026 Tao of Your Cat · Ipoh, Malaysia · 小黑 · 永遠在這裡" data-en="© 2026 Tao of Your Cat · Ipoh, Malaysia · Xiao Hei · Always Here" data-ja="© 2026 Tao of Your Cat · Ipoh, Malaysia · シャオヘイ · ずっとここにいる">© 2026 Tao of Your Cat · Ipoh, Malaysia · 小黑 · 永远在这里</div>
 </footer>
 
 <script>

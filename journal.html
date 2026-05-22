@@ -29,7 +29,7 @@
 <meta name="twitter:image" content="https://taoofcat.com/cat-shazhu.jpg">
   <link rel="icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500&family=Noto+Sans+SC:wght@300;400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500&family=Noto+Serif+TC:wght@300;400;500&family=Noto+Sans+SC:wght@300;400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #1a1610;
@@ -232,7 +232,12 @@
       font-size: 12px; color: rgba(244,237,224,0.25);
       letter-spacing: 0.15em;
     }
-  </style>
+  
+/* ── TW TYPOGRAPHY ── */
+html[lang="zh-TW"] body {
+  font-family: 'Noto Serif TC', serif;
+}
+</style>
 </head>
 <body>
 
@@ -246,19 +251,19 @@
     </svg>
   </a>
   <ul class="nav-links">
-    <li><a href="index.html" data-zh="首页" data-en="Home">首页</a></li>
-    <li><a href="index.html#cats" data-zh="猫咪家族" data-en="The Cats">猫咪家族</a></li>
-    <li><a href="divination.html" data-zh="问猫" data-en="Ask the Cat">问猫</a></li>
-    <li><a href="journal.html" data-zh="猫语日记" data-en="Journal" style="color:var(--gold)">猫语日记</a></li>
+    <li><a href="index.html" data-zh="首页" data-tw="首頁" data-en="Home">首页</a></li>
+    <li><a href="index.html#cats" data-zh="猫咪家族" data-tw="貓咪家族" data-en="The Cats">猫咪家族</a></li>
+    <li><a href="divination.html" data-zh="问猫" data-tw="問貓" data-en="Ask the Cat">问猫</a></li>
+    <li><a href="journal.html" data-zh="猫语日记" data-tw="貓語日記" data-en="Journal" style="color:var(--gold)">猫语日记</a></li>
   </ul>
   <button id="lang-btn" class="lang-btn">EN</button>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-label" data-zh="精选 · 玄猫日记" data-en="Selected · Cat Journal">精选 · 玄猫日记</div>
-  <div class="hero-title" data-zh="猫语日记" data-en="Cat Journal">猫语日记</div>
-  <div class="hero-sub" data-zh="值得留下来的那些时刻。<br>不是每天都有，但每一条都是真的。" data-en="Moments worth keeping.<br>Not every day. But every one is real.">
+  <div class="hero-label" data-zh="精选 · 玄猫日记" data-tw="精選 · 玄貓日記" data-en="Selected · Cat Journal">精选 · 玄猫日记</div>
+  <div class="hero-title" data-zh="猫语日记" data-tw="貓語日記" data-en="Cat Journal">猫语日记</div>
+  <div class="hero-sub" data-zh="值得留下来的那些时刻。<br>不是每天都有，但每一条都是真的。" data-tw="值得留下來的那些時刻。<br>不是每天都有，但每一條都是真的。" data-en="Moments worth keeping.<br>Not every day. But every one is real.">
     值得留下来的那些时刻。<br>不是每天都有，但每一条都是真的。
   </div>
 </div>
@@ -268,7 +273,7 @@
   <div class="journal-grid" id="journal-grid">
     <div class="journal-empty" id="journal-empty" style="display:none;">
       <div style="font-size:32px;margin-bottom:16px;">🐱</div>
-      <div data-zh="还没有记录。<br>猫在等一个值得留下来的时刻。" data-en="Nothing here yet.<br>The cat is waiting for a moment worth keeping.">
+      <div data-zh="还没有记录。<br>猫在等一个值得留下来的时刻。" data-tw="還沒有記錄。<br>貓在等一個值得留下來的時刻。" data-en="Nothing here yet.<br>The cat is waiting for a moment worth keeping.">
         还没有记录。<br>猫在等一个值得留下来的时刻。
       </div>
     </div>
@@ -379,7 +384,7 @@ function renderCards(posts) {
         <div class="card-content">${post.content}</div>
         <a href="${post.threads_url}" target="_blank" rel="noopener" class="card-link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          <span data-zh="在 Threads 查看" data-en="View on Threads">在 Threads 查看</span>
+          <span data-zh="在 Threads 查看" data-tw="在 Threads 檢視" data-en="View on Threads">在 Threads 查看</span>
         </a>
       </div>
     `;

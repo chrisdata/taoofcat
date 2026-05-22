@@ -169,6 +169,48 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 24px;display:fl
 .review-notice{background:rgba(184,134,11,0.08);border:0.5px solid rgba(184,134,11,0.3);border-radius:var(--radius);padding:10px 14px;font-size:12px;color:var(--gold);margin-bottom:16px;line-height:1.7}
 </style>
 <script src="/webview-check.js"></script>
+<script>
+(function(){
+  var _l = localStorage.getItem('taoc_lang') || localStorage.getItem('toc_lang') || 'zh';
+  if(_l !== 'tw') return;
+  var MAP = {"⏳ 你有猫咪正在等待管理员审核，通过后会自动公开展示。": "⏳ 你有貓咪正在等待管理員稽核，透過後會自動公開展示。", "0\n        ? `📬 查看领养申请": "0\n        ? `📬 檢視領養申請", "⏰ 已上架超过30天，请确认状态": "⏰ 已上架超過30天，請確認狀態", "以 Google 账号登录": "以 Google 賬號登入", "我的中途猫 · 玄猫之道": "我的中途貓 · 玄貓之道", "请先登录查看你的中途猫": "請先登入檢視你的中途貓", "确认拒绝这个申请？": "確認拒絕這個申請？", "没有待审核的猫咪": "沒有待稽核的貓咪", "📬 查看领养申请": "📬 檢視領養申請", "🔗 分享我的主页": "🔗 分享我的主頁", "点击上方查看申请": "點選上方檢視申請", "等待管理员审核": "等待管理員稽核", "登记第一只 →": "登記第一隻 →", "↩ 恢复待领养": "↩ 恢復待領養", "＋ 登记新猫": "＋ 登記新貓", "✓ 接受申请": "✓ 接受申請", "恢复接受申请": "恢復接受申請", "🟡 普通申请": "🟡 普通申請", "🟢 优质申请": "🟢 優質申請", "暂停接受申请": "暫停接受申請", "暂时没有申请": "暫時沒有申請", "操作失败：": "操作失敗：", "我的中途猫": "我的中途貓", "加载中…": "載入中…", "处理中…": "處理中…", "玄猫之道": "玄貓之道", "暂停申请": "暫停申請", "收到申请": "收到申請", "查看页面": "檢視頁面", "更新状态": "更新狀態", "✕ 拒绝": "✕ 拒絕", "已拒绝": "已拒絕", "无名猫": "無名貓", "中长毛": "中長毛", "已暂停": "已暫停", "待审核": "待稽核", "领养墙": "領養牆", "在线中": "線上中", "总登记": "總登記", "成猫": "成貓", "母猫": "母貓", "长毛": "長毛", "公猫": "公貓", "老猫": "老貓", "幼猫": "幼貓", "登录": "登入"};
+  function walkText(node){
+    if(node.nodeType===3){
+      var t=node.nodeValue, changed=false;
+      Object.keys(MAP).forEach(function(k){ if(t.indexOf(k)>=0){ t=t.split(k).join(MAP[k]); changed=true; } });
+      if(changed) node.nodeValue=t;
+    } else if(node.nodeType===1 && !/^(SCRIPT|STYLE|NOSCRIPT)$/i.test(node.tagName)){
+      Array.from(node.childNodes).forEach(walkText);
+    }
+  }
+  document.addEventListener('DOMContentLoaded',function(){
+    walkText(document.body);
+    document.querySelectorAll('[placeholder]').forEach(function(el){
+      var p=el.getAttribute('placeholder'), np=p, ch=false;
+      Object.keys(MAP).forEach(function(k){ if(np.indexOf(k)>=0){ np=np.split(k).join(MAP[k]); ch=true; } });
+      if(ch) el.setAttribute('placeholder',np);
+    });
+    document.documentElement.lang='zh-TW';
+  });
+})();
+</script>
+<script>
+(function(){
+  document.addEventListener('DOMContentLoaded', function(){
+    var nav=document.querySelector('nav'); if(!nav) return;
+    var cur=localStorage.getItem('taoc_lang')||localStorage.getItem('toc_lang')||'zh';
+    var btn=document.createElement('button');
+    btn.style.cssText='font-size:11px;font-family:"Noto Sans SC",sans-serif;background:transparent;color:rgba(212,168,67,0.8);border:1px solid rgba(212,168,67,0.3);border-radius:20px;padding:4px 10px;cursor:pointer;margin-left:8px;';
+    btn.textContent=cur==='tw'?'简':'繁'; btn.title=cur==='tw'?'切换简体':'切換繁體';
+    btn.addEventListener('click',function(){
+      var next=(localStorage.getItem('taoc_lang')||'zh')==='tw'?'zh':'tw';
+      localStorage.setItem('taoc_lang',next); localStorage.setItem('toc_lang',next); location.reload();
+    });
+    nav.appendChild(btn);
+  });
+})();
+</script>
+
 </head>
 <body>
 

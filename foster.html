@@ -349,6 +349,48 @@ select option { background: var(--dark2); }
 #city-wrap { display: none; }
 </style>
 <script src="/webview-check.js"></script>
+<script>
+(function(){
+  var _l = localStorage.getItem('taoc_lang') || localStorage.getItem('toc_lang') || 'zh';
+  if(_l !== 'tw') return;
+  var MAP = {"最多6张，第一张为封面 · Up to 6 photos, first one is the cover": "最多6張，第一張為封面 · Up to 6 photos, first one is the cover", "Every cat has a destined home · 每一只猫都有它的缘分": "Every cat has a destined home · 每一隻貓都有它的緣分", "Foster Cat Registration · 中途猫登记": "Foster Cat Registration · 中途貓登記", "例：领养后每月传照片回报  →  按 Enter": "例：領養後每月傳照片回報  →  按 Enter", "提交审核 · Submit for Review": "提交稽核 · Submit for Review", "例：你家有其他宠物吗？  →  按 Enter": "例：你家有其他寵物嗎？  →  按 Enter", "⑥ 领养要求 · Requirements": "⑥ 領養要求 · Requirements", "① 猫咪基本资料 · Basic Info": "① 貓咪基本資料 · Basic Info", "提交后 AI 自动审核，通常数分钟内完成": "提交後 AI 自動稽核，通常數分鐘內完成", "② 猫咪描述 · Description": "② 貓咪描述 · Description", "例：需要定期检查肾脏，不可吃干粮...": "例：需要定期檢查腎臟，不可吃乾糧...", "⑦ 领养问卷 · Questions": "⑦ 領養問卷 · Questions", "请填写所有必填项（标 * 的字段）": "請填寫所有必填項（標 * 的欄位）", "领养者必须回答才能查看你的联系方式": "領養者必須回答才能檢視你的聯絡方式", "④ 所在地区 · Location": "④ 所在地區 · Location", "存疑内容由管理员人工复查后公开展示": "存疑內容由管理員人工複查後公開展示", "⑧ 联系方式 · Contact": "⑧ 聯絡方式 · Contact", "每行一条，按 Enter 添加": "每行一條，按 Enter 新增", "⑤ 猫咪照片 · Photos": "⑤ 貓咪照片 · Photos", "只有登录用户答完问卷后才能看到": "只有登入使用者答完問卷後才能看到", "③ 健康状态 · Health": "③ 健康狀態 · Health", "特别医疗需求、过敏等（选填）": "特別醫療需求、過敏等（選填）", "AI 审核通常在数分钟内完成": "AI 稽核通常在數分鐘內完成", "WhatsApp / 电话": "WhatsApp / 電話", "以 Google 账号登录": "以 Google 賬號登入", "例：Ipoh、吉隆坡、东京": "例：Ipoh、吉隆坡、東京", "领养后愿意定期传照片吗？": "領養後願意定期傳照片嗎？", "我们已收到你的中途猫资料": "我們已收到你的中途貓資料", "通过后即会在平台公开展示": "透過後即會在平臺公開展示", "住公寓还是有院子的房子？": "住公寓還是有院子的房子？", "FIV / 猫艾滋 状态": "FIV / 貓艾滋 狀態", "登记中途猫 · 玄猫之道": "登記中途貓 · 玄貓之道", "重点色 Pointed": "重點色 Pointed", "图片不能超过 10MB": "圖片不能超過 10MB", "为你的猫咪找到有缘人": "為你的貓咪找到有緣人", "登记中途猫需要先登录": "登記中途貓需要先登入", "领养者必须同意的条件": "領養者必須同意的條件", "斑点 Spotted": "斑點 Spotted", "每天有多少时间陪猫？": "每天有多少時間陪貓？", "按 Enter 添加": "按 Enter 新增", "← 查看中途猫领养墙": "← 檢視中途貓領養牆", "性格、喜好、特别之处": "性格、喜好、特別之處", "双色 Bicolor": "雙色 Bicolor", "家里有小孩吗？几岁？": "家裡有小孩嗎？幾歲？", "老猫 Senior": "老貓 Senior", "你家有其他宠物吗？": "你家有其他寵物嗎？", "请至少上传一张照片": "請至少上傳一張照片", "请至少选择一种颜色": "請至少選擇一種顏色", "Google 登录": "Google 登入", "幼猫 Kitten": "幼貓 Kitten", "成猫 Adult": "成貓 Adult", "已提交，等待审核": "已提交，等待稽核", "志愿者自取的名字": "志願者自取的名字", "上传失败，请重试": "上傳失敗，請重試", "纯色 Solid": "純色 Solid", "成猫（1–7岁）": "成貓（1–7歲）", "颜色（可多选）": "顏色（可多選）", "老猫（7岁+）": "老貓（7歲+）", "幼猫（＜1岁）": "幼貓（＜1歲）", "阴性（健康）": "陰性（健康）", "你会说的语言": "你會說的語言", "上传中...": "上傳中...", "翻译中...": "翻譯中...", "审核服务异常": "稽核服務異常", "其他联系方式": "其他聯絡方式", "审核中...": "稽核中...", "城市 / 区": "城市 / 區", "13 岁以上": "13 歲以上", "请选择州/省": "請選擇州/省", "请选择国家": "請選擇國家", "+回报照片": "+回報照片", "11 个月": "11 個月", "+其他宠物": "+其他寵物", "提交失败：": "提交失敗：", "介绍这只猫": "介紹這隻貓", "快速添加：": "快速新增：", "10 个月": "10 個月", "上传失败：": "上傳失敗：", "已接种疫苗": "已接種疫苗", "13岁以上": "13歲以上", "+陪伴时间": "+陪伴時間", "+居住环境": "+居住環境", "🤰 怀孕中": "🤰 懷孕中", "3 个月": "3 個月", "12 岁": "12 歲", "1 个月": "1 個月", "11 岁": "11 歲", "10个月": "10個月", "玄猫之道": "玄貓之道", "猫咪名字": "貓咪名字", "8 个月": "8 個月", "问题列表": "問題列表", "健康备注": "健康備註", "大约年龄": "大約年齡", "母猫 ♀": "母貓 ♀", "10 岁": "10 歲", "先选国家": "先選國家", "5 个月": "5 個月", "2 个月": "2 個月", "7 个月": "7 個月", "6 个月": "6 個月", "9 个月": "9 個月", "4 个月": "4 個月", "公猫 ♂": "公貓 ♂", "11个月": "11個月", "台南市": "臺南市", "中长毛": "中長毛", "台東縣": "臺東縣", "10岁": "10歲", "2 岁": "2 歲", "9 岁": "9 歲", "3 岁": "3 歲", "7个月": "7個月", "8 岁": "8 歲", "9个月": "9個月", "台北市": "臺北市", "7 岁": "7 歲", "12岁": "12歲", "8个月": "8個月", "6个月": "6個月", "5 岁": "5 歲", "请选择": "請選擇", "已驱虫": "已驅蟲", "2个月": "2個月", "已绝育": "已絕育", "4 岁": "4 歲", "3个月": "3個月", "静岡県": "靜岡県", "11岁": "11歲", "岩手県": "巖手県", "台中市": "臺中市", "4个月": "4個月", "5个月": "5個月", "1 岁": "1 歲", "1个月": "1個月", "6 岁": "6 歲", "6岁": "6歲", "阳性": "陽性", "1岁": "1歲", "9岁": "9歲", "杂色": "雜色", "选填": "選填", "年龄": "年齡", "性别": "性別", "2岁": "2歲", "8岁": "8歲", "毛长": "毛長", "3岁": "3歲", "4岁": "4歲", "7岁": "7歲", "长毛": "長毛", "5岁": "5歲", "国家": "國家"};
+  function walkText(node){
+    if(node.nodeType===3){
+      var t=node.nodeValue, changed=false;
+      Object.keys(MAP).forEach(function(k){ if(t.indexOf(k)>=0){ t=t.split(k).join(MAP[k]); changed=true; } });
+      if(changed) node.nodeValue=t;
+    } else if(node.nodeType===1 && !/^(SCRIPT|STYLE|NOSCRIPT)$/i.test(node.tagName)){
+      Array.from(node.childNodes).forEach(walkText);
+    }
+  }
+  document.addEventListener('DOMContentLoaded',function(){
+    walkText(document.body);
+    document.querySelectorAll('[placeholder]').forEach(function(el){
+      var p=el.getAttribute('placeholder'), np=p, ch=false;
+      Object.keys(MAP).forEach(function(k){ if(np.indexOf(k)>=0){ np=np.split(k).join(MAP[k]); ch=true; } });
+      if(ch) el.setAttribute('placeholder',np);
+    });
+    document.documentElement.lang='zh-TW';
+  });
+})();
+</script>
+<script>
+(function(){
+  document.addEventListener('DOMContentLoaded', function(){
+    var nav=document.querySelector('nav'); if(!nav) return;
+    var cur=localStorage.getItem('taoc_lang')||localStorage.getItem('toc_lang')||'zh';
+    var btn=document.createElement('button');
+    btn.style.cssText='font-size:11px;font-family:"Noto Sans SC",sans-serif;background:transparent;color:rgba(212,168,67,0.8);border:1px solid rgba(212,168,67,0.3);border-radius:20px;padding:4px 10px;cursor:pointer;margin-left:8px;';
+    btn.textContent=cur==='tw'?'简':'繁'; btn.title=cur==='tw'?'切换简体':'切換繁體';
+    btn.addEventListener('click',function(){
+      var next=(localStorage.getItem('taoc_lang')||'zh')==='tw'?'zh':'tw';
+      localStorage.setItem('taoc_lang',next); localStorage.setItem('toc_lang',next); location.reload();
+    });
+    nav.appendChild(btn);
+  });
+})();
+</script>
+
 </head>
 <body>
 

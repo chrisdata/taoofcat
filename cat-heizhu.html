@@ -42,10 +42,11 @@
     _lang = l;
     localStorage.setItem('taoc_lang', l);
     localStorage.setItem('lang', l);
-    document.documentElement.lang = l;
+    document.documentElement.lang = l === 'tw' ? 'zh-TW' : l;
     document.querySelectorAll('[data-zh]').forEach(function(el) {
       var txt = l === 'en' ? (el.dataset.en || el.dataset.zh)
               : l === 'ja' ? (el.dataset.ja || el.dataset.zh)
+              : l === 'tw' ? (el.dataset.tw || el.dataset.zh)
               : el.dataset.zh;
       if (txt !== undefined) el.innerHTML = txt;
     });
@@ -74,7 +75,7 @@
 })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700&family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#1a1610;--paper:#f4ede0;--gold:#d4a843;--gold-light:rgba(212,168,67,0.7);--ink:#2c2416;--ink-ghost:rgba(244,237,224,0.12);}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -151,7 +152,7 @@ footer{border-top:1px solid var(--ink-ghost);padding:32px 40px;text-align:center
 <body>
 
 <nav id="nav">
-  <a href="/#cats" class="nav-back" data-zh="← 猫咪家族" data-en="← Cat Family" data-ja="← 猫の家族">← 猫咪家族</a>
+  <a href="/#cats" class="nav-back" data-zh="← 猫咪家族" data-tw="← 貓咪家族" data-en="← Cat Family" data-ja="← 猫の家族">← 猫咪家族</a>
   <div class="lang-switcher">
     <button class="lang-opt" data-lang="zh" onclick="applyLang('zh')">中</button>
     <button class="lang-opt" data-lang="en" onclick="applyLang('en')">EN</button>
@@ -163,20 +164,20 @@ footer{border-top:1px solid var(--ink-ghost);padding:32px 40px;text-align:center
 <div class="hero">
   <div class="hero-bg">黑</div>
   <img src="cat-heizhu.jpg" alt="黑珠仔" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.25;object-position:center 30%;">
-  <div class="hero-label" data-zh="乌云衔金 · 神秘来客" data-en="Gold in the Dark · Mysterious Guest" data-ja="黒雲に金を帯びる · 謎の来客">乌云衔金 · 神秘来客</div>
-  <div class="hero-name" data-zh="黑珠仔" data-en="Hei Zhu Zai" data-ja="ヘイジュージャイ">黑珠仔</div>
+  <div class="hero-label" data-zh="乌云衔金 · 神秘来客" data-tw="烏雲銜金 · 神秘來客" data-en="Gold in the Dark · Mysterious Guest" data-ja="黒雲に金を帯びる · 謎の来客">乌云衔金 · 神秘来客</div>
+  <div class="hero-name" data-zh="黑珠仔" data-tw="黑珠仔" data-en="Hei Zhu Zai" data-ja="ヘイジュージャイ">黑珠仔</div>
   <div class="hero-en">Hei Zhu Zai · The Dark Mirror</div>
   <div class="hero-divider"></div>
-  <div class="hero-tagline" data-zh="黑色土耳其安哥拉（推测）· 雨夜来客 · 玄猫之道第六猫" data-en="Black Turkish Angora (est.) · Rainy Night Guest · Sixth Cat of the Tao" data-ja="黒いターキッシュアンゴラ（推測）· 雨の夜の来客 · 玄猫之道の第六の猫">黑色土耳其安哥拉（推测）· 雨夜来客 · 玄猫之道第六猫</div>
+  <div class="hero-tagline" data-zh="黑色土耳其安哥拉（推测）· 雨夜来客 · 玄猫之道第六猫" data-tw="黑色土耳其安哥拉（推測）· 雨夜來客 · 玄貓之道第六貓" data-en="Black Turkish Angora (est.) · Rainy Night Guest · Sixth Cat of the Tao" data-ja="黒いターキッシュアンゴラ（推測）· 雨の夜の来客 · 玄猫之道の第六の猫">黑色土耳其安哥拉（推测）· 雨夜来客 · 玄猫之道第六猫</div>
 </div>
 
 <!-- COMING SOON -->
 <div class="coming-soon reveal">
 
-  <div class="cs-title" data-zh="故事正在发生中" data-en="His Story Is Still Unfolding" data-ja="物語は、まだ続いている">故事正在发生中</div>
+  <div class="cs-title" data-zh="故事正在发生中" data-tw="故事正在發生中" data-en="His Story Is Still Unfolding" data-ja="物語は、まだ続いている">故事正在发生中</div>
   <div class="cs-divider"></div>
-  <div class="cs-text" data-zh="黑珠仔刚刚到来。<br><br>他的故事还没写完——<br>因为它还在发生。<br><br>雨夜降临，乌云衔金。<br>傻猪的黑色镜像，64的另一半。<br><br>一黑一白，阴阳闭环。" data-en="Hei Zhu Zai just arrived.<br><br>His story isn't written yet —<br>because it's still happening.<br><br>Came on a rainy night, with golden whiskers.<br>The dark mirror of Sha Zhu. The other half of 64.<br><br>Black and white. Yin and yang. Complete." data-ja="ヘイジュージャイは、たった今やってきた。<br><br>彼の物語はまだ書かれていない——<br>まだ続いているから。<br><br>雨の夜に降り立ち、金色の髭を持つ。<br>シャージューの黒い鏡像、64のもう半分。<br><br>黒と白。陰と陽。これで一つになった。">黑珠仔刚刚到来。<br><br>他的故事还没写完——<br>因为它还在发生。<br><br>雨夜降临，乌云衔金。<br>傻猪的黑色镜像，64的另一半。<br><br>一黑一白，阴阳闭环。</div>
-  <div class="cs-badge" data-zh="✦ 新玄猫加入中..." data-en="✦ New member arriving..." data-ja="✦ 新しい仲間、参上中...">✦ 新玄猫加入中...</div>
+  <div class="cs-text" data-zh="黑珠仔刚刚到来。<br><br>他的故事还没写完——<br>因为它还在发生。<br><br>雨夜降临，乌云衔金。<br>傻猪的黑色镜像，64的另一半。<br><br>一黑一白，阴阳闭环。" data-tw="黑珠仔剛剛到來。<br><br>他的故事還沒寫完——<br>因為它還在發生。<br><br>雨夜降臨，烏雲銜金。<br>傻豬的黑色映象，64的另一半。<br><br>一黑一白，陰陽閉環。" data-en="Hei Zhu Zai just arrived.<br><br>His story isn't written yet —<br>because it's still happening.<br><br>Came on a rainy night, with golden whiskers.<br>The dark mirror of Sha Zhu. The other half of 64.<br><br>Black and white. Yin and yang. Complete." data-ja="ヘイジュージャイは、たった今やってきた。<br><br>彼の物語はまだ書かれていない——<br>まだ続いているから。<br><br>雨の夜に降り立ち、金色の髭を持つ。<br>シャージューの黒い鏡像、64のもう半分。<br><br>黒と白。陰と陽。これで一つになった。">黑珠仔刚刚到来。<br><br>他的故事还没写完——<br>因为它还在发生。<br><br>雨夜降临，乌云衔金。<br>傻猪的黑色镜像，64的另一半。<br><br>一黑一白，阴阳闭环。</div>
+  <div class="cs-badge" data-zh="✦ 新玄猫加入中..." data-tw="✦ 新玄貓加入中..." data-en="✦ New member arriving..." data-ja="✦ 新しい仲間、参上中...">✦ 新玄猫加入中...</div>
 </div>
 
 <!-- FACTS -->
@@ -184,34 +185,34 @@ footer{border-top:1px solid var(--ink-ghost);padding:32px 40px;text-align:center
   <div class="fact-item">
     <div class="fact-icon">🌧</div>
     <div class="fact-text">
-      <span class="fact-label" data-zh="降临" data-en="Arrival" data-ja="降臨">降临</span>
-      <span data-zh="2025年，雨夜精准降落门前。身型、长毛、眼神与傻猪流浪时如出一辙。一黑一白，互为镜像。" data-en="Arrived on a rainy night in 2025. Same build, same long fur, same eyes as Sha Zhu when he was a stray. Black and white — mirror images of each other." data-ja="2025年、雨の夜に玄関前に現れた。体型、長い毛、目の表情——流浪時代のシャージューとそっくり。黒と白、互いの鏡像。">2025年，雨夜精准降落门前。身型、长毛、眼神与傻猪流浪时如出一辙。一黑一白，互为镜像。</span>
+      <span class="fact-label" data-zh="降临" data-tw="降臨" data-en="Arrival" data-ja="降臨">降临</span>
+      <span data-zh="2025年，雨夜精准降落门前。身型、长毛、眼神与傻猪流浪时如出一辙。一黑一白，互为镜像。" data-tw="2025年，雨夜精準降落門前。身型、長毛、眼神與傻豬流浪時如出一轍。一黑一白，互為映象。" data-en="Arrived on a rainy night in 2025. Same build, same long fur, same eyes as Sha Zhu when he was a stray. Black and white — mirror images of each other." data-ja="2025年、雨の夜に玄関前に現れた。体型、長い毛、目の表情——流浪時代のシャージューとそっくり。黒と白、互いの鏡像。">2025年，雨夜精准降落门前。身型、长毛、眼神与傻猪流浪时如出一辙。一黑一白，互为镜像。</span>
     </div>
   </div>
   <div class="fact-item">
     <div class="fact-icon">✨</div>
     <div class="fact-text">
-      <span class="fact-label" data-zh="乌云衔金" data-en="Gold in the Dark" data-ja="黒雲に金を帯びる">乌云衔金</span>
-      <span data-zh="纯黑的底色下，嘴角长着几根金色的猫胡须。相猫经称「乌云衔金」，宛如自带的高频雷达天线。" data-en="Under the pure black coat, a few golden whiskers at the corners of his mouth. The cat-reading tradition calls this 'dark cloud carrying gold' — like a built-in high-frequency antenna." data-ja="純黒の毛並みの下、口角に数本の金色の髭。猫相学では「黒雲に金を帯びる」と呼ぶ——まるで生まれつきの高周波アンテナ。">纯黑的底色下，嘴角长着几根金色的猫胡须。相猫经称「乌云衔金」，宛如自带的高频雷达天线。</span>
+      <span class="fact-label" data-zh="乌云衔金" data-tw="烏雲銜金" data-en="Gold in the Dark" data-ja="黒雲に金を帯びる">乌云衔金</span>
+      <span data-zh="纯黑的底色下，嘴角长着几根金色的猫胡须。相猫经称「乌云衔金」，宛如自带的高频雷达天线。" data-tw="純黑的底色下，嘴角長著幾根金色的貓鬍鬚。相貓經稱「烏雲銜金」，宛如自帶的高頻雷達天線。" data-en="Under the pure black coat, a few golden whiskers at the corners of his mouth. The cat-reading tradition calls this 'dark cloud carrying gold' — like a built-in high-frequency antenna." data-ja="純黒の毛並みの下、口角に数本の金色の髭。猫相学では「黒雲に金を帯びる」と呼ぶ——まるで生まれつきの高周波アンテナ。">纯黑的底色下，嘴角长着几根金色的猫胡须。相猫经称「乌云衔金」，宛如自带的高频雷达天线。</span>
     </div>
   </div>
   <div class="fact-item">
     <div class="fact-icon">6️⃣4️⃣</div>
     <div class="fact-text">
-      <span class="fact-label" data-zh="64锁定" data-en="The 64 Seal" data-ja="64の封印">64锁定</span>
-      <span data-zh="绝育日期：6月4日。新家门牌：64号。易经：六十四卦。时间、空间、符号，三重64完全对齐。" data-en="Neutering date: June 4th. New home address: No. 64. I Ching: 64 hexagrams. Time, space, symbol — triple 64, perfectly aligned." data-ja="去勢日：6月4日。新居の住所：64号。易経：六十四卦。時間、空間、シンボル——三重の64が完全に一致。">绝育日期：6月4日。新家门牌：64号。易经：六十四卦。时间、空间、符号，三重64完全对齐。</span>
+      <span class="fact-label" data-zh="64锁定" data-tw="64鎖定" data-en="The 64 Seal" data-ja="64の封印">64锁定</span>
+      <span data-zh="绝育日期：6月4日。新家门牌：64号。易经：六十四卦。时间、空间、符号，三重64完全对齐。" data-tw="絕育日期：6月4日。新家門牌：64號。易經：六十四卦。時間、空間、符號，三重64完全對齊。" data-en="Neutering date: June 4th. New home address: No. 64. I Ching: 64 hexagrams. Time, space, symbol — triple 64, perfectly aligned." data-ja="去勢日：6月4日。新居の住所：64号。易経：六十四卦。時間、空間、シンボル——三重の64が完全に一致。">绝育日期：6月4日。新家门牌：64号。易经：六十四卦。时间、空间、符号，三重64完全对齐。</span>
     </div>
   </div>
 </div>
 
 <!-- CTA -->
 <div class="cta-section reveal">
-  <a href="cat-shazhu.html" class="btn-gold" data-zh="认识傻猪 · 他的镜像" data-en="Meet Sha Zhu · His Mirror" data-ja="シャージューに会う · 彼の鏡像">认识傻猪 · 他的镜像</a>
-  <a href="/#cats" class="btn-outline" data-zh="回到猫咪家族" data-en="Back to the Cats" data-ja="猫の家族に戻る">回到猫咪家族</a>
+  <a href="cat-shazhu.html" class="btn-gold" data-zh="认识傻猪 · 他的镜像" data-tw="認識傻豬 · 他的映象" data-en="Meet Sha Zhu · His Mirror" data-ja="シャージューに会う · 彼の鏡像">认识傻猪 · 他的镜像</a>
+  <a href="/#cats" class="btn-outline" data-zh="回到猫咪家族" data-tw="回到貓咪家族" data-en="Back to the Cats" data-ja="猫の家族に戻る">回到猫咪家族</a>
 </div>
 
 <footer>
-  <div class="footer-copy" data-zh="© 2026 玄猫之道 · 黑珠仔 · 故事未完待续" data-en="© 2026 Tao of Your Cat · Hei Zhu Zai · To be continued" data-ja="© 2026 玄猫之道 · ヘイジュージャイ · 続く">© 2026 玄猫之道 · 黑珠仔 · 故事未完待续</div>
+  <div class="footer-copy" data-zh="© 2026 玄猫之道 · 黑珠仔 · 故事未完待续" data-tw="© 2026 玄貓之道 · 黑珠仔 · 故事未完待續" data-en="© 2026 Tao of Your Cat · Hei Zhu Zai · To be continued" data-ja="© 2026 玄猫之道 · ヘイジュージャイ · 続く">© 2026 玄猫之道 · 黑珠仔 · 故事未完待续</div>
 </footer>
 
 <script>

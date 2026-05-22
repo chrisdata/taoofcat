@@ -157,6 +157,48 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 24px;display:fl
 .mq-loc{font-size:10px;color:rgba(232,220,200,0.3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 </style>
 <script src="/webview-check.js"></script>
+<script>
+(function(){
+  var _l = localStorage.getItem('taoc_lang') || localStorage.getItem('toc_lang') || 'zh';
+  if(_l !== 'tw') return;
+  var MAP = {"Every cat has a destined home · 万物皆有缘起": "Every cat has a destined home · 萬物皆有緣起", "Foster Cat Adoption · 中途猫领养": "Foster Cat Adoption · 中途貓領養", "全球中途猫咪领养平台，以猫观道，以道养猫": "全球中途貓咪領養平臺，以貓觀道，以道養貓", "寻找有缘的猫 · 玄猫之道": "尋找有緣的貓 · 玄貓之道", "你也有中途猫需要找家吗？": "你也有中途貓需要找家嗎？", "换个筛选条件试试，或者": "換個篩選條件試試，或者", "暂时没有符合条件的猫咪": "暫時沒有符合條件的貓咪", "登记我的中途猫 +": "登記我的中途貓 +", "登记中途猫 +": "登記中途貓 +", "登记你的中途猫": "登記你的中途貓", "寻找有缘的猫": "尋找有緣的貓", "我的中途猫": "我的中途貓", "FIV阴性": "FIV陰性", "年龄不限": "年齡不限", "性别不限": "性別不限", "全部国家": "全部國家", "玄猫之道": "玄貓之道", "等待缘分": "等待緣分", "清除筛选": "清除篩選", "母猫 ♀": "母貓 ♀", "公猫 ♂": "公貓 ♂", "毛长不限": "毛長不限", "台南市": "臺南市", "中长毛": "中長毛", "台東縣": "臺東縣", "个国家": "個國家", "台北市": "臺北市", "已接种": "已接種", "无名猫": "無名貓", "已绝育": "已絕育", "静岡県": "靜岡県", "岩手県": "巖手県", "重点色": "重點色", "台中市": "臺中市", "斑点": "斑點", "登录": "登入", "成猫": "成貓", "暂停": "暫停", "母猫": "母貓", "公猫": "公貓", "幼猫": "幼貓", "长毛": "長毛", "双色": "雙色", "纯色": "純色", "老猫": "老貓"};
+  function walkText(node){
+    if(node.nodeType===3){
+      var t=node.nodeValue, changed=false;
+      Object.keys(MAP).forEach(function(k){ if(t.indexOf(k)>=0){ t=t.split(k).join(MAP[k]); changed=true; } });
+      if(changed) node.nodeValue=t;
+    } else if(node.nodeType===1 && !/^(SCRIPT|STYLE|NOSCRIPT)$/i.test(node.tagName)){
+      Array.from(node.childNodes).forEach(walkText);
+    }
+  }
+  document.addEventListener('DOMContentLoaded',function(){
+    walkText(document.body);
+    document.querySelectorAll('[placeholder]').forEach(function(el){
+      var p=el.getAttribute('placeholder'), np=p, ch=false;
+      Object.keys(MAP).forEach(function(k){ if(np.indexOf(k)>=0){ np=np.split(k).join(MAP[k]); ch=true; } });
+      if(ch) el.setAttribute('placeholder',np);
+    });
+    document.documentElement.lang='zh-TW';
+  });
+})();
+</script>
+<script>
+(function(){
+  document.addEventListener('DOMContentLoaded', function(){
+    var nav=document.querySelector('nav'); if(!nav) return;
+    var cur=localStorage.getItem('taoc_lang')||localStorage.getItem('toc_lang')||'zh';
+    var btn=document.createElement('button');
+    btn.style.cssText='font-size:11px;font-family:"Noto Sans SC",sans-serif;background:transparent;color:rgba(212,168,67,0.8);border:1px solid rgba(212,168,67,0.3);border-radius:20px;padding:4px 10px;cursor:pointer;margin-left:8px;';
+    btn.textContent=cur==='tw'?'简':'繁'; btn.title=cur==='tw'?'切换简体':'切換繁體';
+    btn.addEventListener('click',function(){
+      var next=(localStorage.getItem('taoc_lang')||'zh')==='tw'?'zh':'tw';
+      localStorage.setItem('taoc_lang',next); localStorage.setItem('toc_lang',next); location.reload();
+    });
+    nav.appendChild(btn);
+  });
+})();
+</script>
+
 </head>
 <body>
 

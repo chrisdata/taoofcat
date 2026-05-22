@@ -41,10 +41,11 @@
   function applyLang(l) {
     _lang = l;
     localStorage.setItem('taoc_lang', l);
-    document.documentElement.lang = l;
+    document.documentElement.lang = l === 'tw' ? 'zh-TW' : l;
     document.querySelectorAll('[data-zh]').forEach(function(el) {
       var txt = l === 'en' ? (el.dataset.en || el.dataset.zh)
               : l === 'ja' ? (el.dataset.ja || el.dataset.zh)
+              : l === 'tw' ? (el.dataset.tw || el.dataset.zh)
               : el.dataset.zh;
       if (txt !== undefined) el.innerHTML = txt;
     });
@@ -66,7 +67,7 @@
   gtag('js', new Date());
   gtag('config', 'G-7Q71WCDFF0');
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400&family=IM+Fell+English:ital@0;1&family=Lora:ital,wght@0,400;0,500;1,400&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400&family=IM+Fell+English:ital@0;1&family=Lora:ital,wght@0,400;0,500;1,400&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root { --paper:#f4ede0; --ink:#1e1608; --ink-light:#5c4c2c; --ink-faint:#9c8c6c; --ink-ghost:#d4c8a8; --gold:#b8860b; --gold-light:#d4a843; }
 * { box-sizing:border-box; margin:0; padding:0; }
@@ -190,9 +191,10 @@ html[lang="en"] .faq-a, html[lang="en"] .contact-sub, html[lang="en"] .hero-sub 
   </g>
 </svg></a>
   <div class="nav-right">
-    <a href="/" class="nav-back" data-zh="← 返回主页" data-en="← Home" data-ja="← ホームへ">← 返回主页</a>
+    <a href="/" class="nav-back" data-zh="← 返回主页" data-tw="← 返回主頁" data-en="← Home" data-ja="← ホームへ">← 返回主页</a>
     <div class="lang-switcher">
-  <button class="lang-opt" data-lang="zh">中</button>
+  <button class="lang-opt" data-lang="zh">简</button>
+  <button class="lang-opt" data-lang="tw">繁</button>
   <button class="lang-opt" data-lang="en">EN</button>
   <button class="lang-opt" data-lang="ja">JP</button>
 </div>
@@ -200,9 +202,9 @@ html[lang="en"] .faq-a, html[lang="en"] .contact-sub, html[lang="en"] .hero-sub 
 </nav>
 
 <div class="hero">
-  <div class="hero-label" data-zh="Help · 帮助中心" data-en="Help · Support" data-ja="Help · ヘルプセンター">Help · 帮助中心</div>
-  <div class="hero-title" data-zh="有什么可以帮你？" data-en="How can we help?" data-ja="何かお手伝いできることは？">有什么可以帮你？</div>
-  <div class="hero-sub" data-zh="找不到答案？直接写信给我们" data-en="Can't find your answer? Write to us directly" data-ja="答えが見つからない？直接メールして">找不到答案？直接写信给我们</div>
+  <div class="hero-label" data-zh="Help · 帮助中心" data-tw="Help · 幫助中心" data-en="Help · Support" data-ja="Help · ヘルプセンター">Help · 帮助中心</div>
+  <div class="hero-title" data-zh="有什么可以帮你？" data-tw="有什麼可以幫你？" data-en="How can we help?" data-ja="何かお手伝いできることは？">有什么可以帮你？</div>
+  <div class="hero-sub" data-zh="找不到答案？直接写信给我们" data-tw="找不到答案？直接寫信給我們" data-en="Can't find your answer? Write to us directly" data-ja="答えが見つからない？直接メールして">找不到答案？直接写信给我们</div>
   <div class="hero-divider"></div>
 </div>
 
@@ -210,56 +212,56 @@ html[lang="en"] .faq-a, html[lang="en"] .contact-sub, html[lang="en"] .hero-sub 
 
   <!-- FAQ -->
   <div class="reveal">
-    <div class="section-label" data-zh="常见问题" data-en="FAQ" data-ja="よくある質問">常见问题</div>
-    <div class="section-title" data-zh="你可能想知道的" data-en="You might be wondering" data-ja="気になること、答えます">你可能想知道的</div>
+    <div class="section-label" data-zh="常见问题" data-tw="常見問題" data-en="FAQ" data-ja="よくある質問">常见问题</div>
+    <div class="section-title" data-zh="你可能想知道的" data-tw="你可能想知道的" data-en="You might be wondering" data-ja="気になること、答えます">你可能想知道的</div>
   </div>
 
   <div class="faq-item reveal">
-    <div class="faq-q" data-zh="罐头是什么？" data-en="What are cans?" data-ja="缶詰って何？" onclick="toggleFaq(this)">罐头是什么？</div>
-    <div class="faq-a" data-zh="罐头是玄猫之道的虚拟积分，每次易经占卜消耗1罐。新注册用户获赠1罐，邀请朋友双方各得2罐。" data-en="Cans are virtual credits used in Tao of Cat. Each I Ching reading costs 1 can. New users receive 1 free can, and both you and your friend get 2 cans when you invite someone." data-ja="缶詰は玄猫之道のバーチャルポイント。猫に聞くたびに1缶消費。新規登録で1缶プレゼント、友達招待でお互い2缶ゲット。">罐头是玄猫之道的虚拟积分，每次易经占卜消耗1罐。新注册用户获赠1罐，邀请朋友双方各得2罐。</div>
+    <div class="faq-q" data-zh="罐头是什么？" data-tw="罐頭是什麼？" data-en="What are cans?" data-ja="缶詰って何？" onclick="toggleFaq(this)">罐头是什么？</div>
+    <div class="faq-a" data-zh="罐头是玄猫之道的虚拟积分，每次易经占卜消耗1罐。新注册用户获赠1罐，邀请朋友双方各得2罐。" data-tw="罐頭是玄貓之道的虛擬積分，每次易經占卜消耗1罐。新註冊使用者獲贈1罐，邀請朋友雙方各得2罐。" data-en="Cans are virtual credits used in Tao of Cat. Each I Ching reading costs 1 can. New users receive 1 free can, and both you and your friend get 2 cans when you invite someone." data-ja="缶詰は玄猫之道のバーチャルポイント。猫に聞くたびに1缶消費。新規登録で1缶プレゼント、友達招待でお互い2缶ゲット。">罐头是玄猫之道的虚拟积分，每次易经占卜消耗1罐。新注册用户获赠1罐，邀请朋友双方各得2罐。</div>
   </div>
 
   <div class="faq-item reveal">
-    <div class="faq-q" data-zh="罐头可以退款吗？" data-en="Are cans refundable?" data-ja="缶詰は返金できる？" onclick="toggleFaq(this)">罐头可以退款吗？</div>
-    <div class="faq-a" data-zh="罐头为不可退款的虚拟积分，购买即确认，不支持退款或转让。罐头永久有效，与账号绑定，不会过期。如有特殊情况请联系我们。" data-en="Cans are non-refundable digital credits. All purchases are final and cannot be transferred. Cans never expire and are permanently tied to your account. For exceptional circumstances, please contact us." data-ja="缶詰は返金不可のバーチャルポイントです。購入後の返金・譲渡はできません。有効期限なし、アカウントに紐付け。特別な事情はご連絡ください。">罐头为不可退款的虚拟积分，购买即确认，不支持退款或转让。罐头永久有效，与账号绑定，不会过期。如有特殊情况请联系我们。</div>
+    <div class="faq-q" data-zh="罐头可以退款吗？" data-tw="罐頭可以退款嗎？" data-en="Are cans refundable?" data-ja="缶詰は返金できる？" onclick="toggleFaq(this)">罐头可以退款吗？</div>
+    <div class="faq-a" data-zh="罐头为不可退款的虚拟积分，购买即确认，不支持退款或转让。罐头永久有效，与账号绑定，不会过期。如有特殊情况请联系我们。" data-tw="罐頭為不可退款的虛擬積分，購買即確認，不支援退款或轉讓。罐頭永久有效，與賬號繫結，不會過期。如有特殊情況請聯絡我們。" data-en="Cans are non-refundable digital credits. All purchases are final and cannot be transferred. Cans never expire and are permanently tied to your account. For exceptional circumstances, please contact us." data-ja="缶詰は返金不可のバーチャルポイントです。購入後の返金・譲渡はできません。有効期限なし、アカウントに紐付け。特別な事情はご連絡ください。">罐头为不可退款的虚拟积分，购买即确认，不支持退款或转让。罐头永久有效，与账号绑定，不会过期。如有特殊情况请联系我们。</div>
   </div>
 
   <div class="faq-item reveal">
-    <div class="faq-q" data-zh="我换了设备，罐头还在吗？" data-en="Will my cans be there if I switch devices?" data-ja="デバイスを変えたら缶詰はどうなる？" onclick="toggleFaq(this)">我换了设备，罐头还在吗？</div>
-    <div class="faq-a" data-zh="在！罐头绑定你的 Google 账号，任何设备登录都能看到。" data-en="Yes! Cans are tied to your Google account, so they follow you across all devices." data-ja="安心して！缶詰はGoogleアカウントに紐付け。どのデバイスからでも確認できる。">在！罐头绑定你的 Google 账号，任何设备登录都能看到。</div>
+    <div class="faq-q" data-zh="我换了设备，罐头还在吗？" data-tw="我換了裝置，罐頭還在嗎？" data-en="Will my cans be there if I switch devices?" data-ja="デバイスを変えたら缶詰はどうなる？" onclick="toggleFaq(this)">我换了设备，罐头还在吗？</div>
+    <div class="faq-a" data-zh="在！罐头绑定你的 Google 账号，任何设备登录都能看到。" data-tw="在！罐頭繫結你的 Google 賬號，任何裝置登入都能看到。" data-en="Yes! Cans are tied to your Google account, so they follow you across all devices." data-ja="安心して！缶詰はGoogleアカウントに紐付け。どのデバイスからでも確認できる。">在！罐头绑定你的 Google 账号，任何设备登录都能看到。</div>
   </div>
 
   <div class="faq-item reveal">
-    <div class="faq-q" data-zh="付款后罐头没有增加怎么办？" data-en="I paid but my cans didn't increase. What should I do?" data-ja="支払い後に缶詰が増えない場合は？" onclick="toggleFaq(this)">付款后罐头没有增加怎么办？</div>
-    <div class="faq-a" data-zh="请稍等几分钟并刷新页面。如果仍未到账，请截图付款凭证发送至 miao@taoofcat.com，我们会在24小时内处理。" data-en="Please wait a few minutes and refresh the page. If cans still haven't arrived, please send a screenshot of your payment receipt to miao@taoofcat.com and we will resolve it within 24 hours." data-ja="数分待ってページを更新してください。それでも反映されない場合は、支払い証明のスクリーンショットを miao@taoofcat.com にお送りください。24時間以内に対応します。">请稍等几分钟并刷新页面。如果仍未到账，请截图付款凭证发送至 miao@taoofcat.com，我们会在24小时内处理。</div>
+    <div class="faq-q" data-zh="付款后罐头没有增加怎么办？" data-tw="付款後罐頭沒有增加怎麼辦？" data-en="I paid but my cans didn't increase. What should I do?" data-ja="支払い後に缶詰が増えない場合は？" onclick="toggleFaq(this)">付款后罐头没有增加怎么办？</div>
+    <div class="faq-a" data-zh="请稍等几分钟并刷新页面。如果仍未到账，请截图付款凭证发送至 miao@taoofcat.com，我们会在24小时内处理。" data-tw="請稍等幾分鐘並重新整理頁面。如果仍未到賬，請截圖付款憑證傳送至 miao@taoofcat.com，我們會在24小時內處理。" data-en="Please wait a few minutes and refresh the page. If cans still haven't arrived, please send a screenshot of your payment receipt to miao@taoofcat.com and we will resolve it within 24 hours." data-ja="数分待ってページを更新してください。それでも反映されない場合は、支払い証明のスクリーンショットを miao@taoofcat.com にお送りください。24時間以内に対応します。">请稍等几分钟并刷新页面。如果仍未到账，请截图付款凭证发送至 miao@taoofcat.com，我们会在24小时内处理。</div>
   </div>
 
   <div class="faq-item reveal">
-    <div class="faq-q" data-zh="付款支持哪些方式？" data-en="What payment methods do you accept?" data-ja="支払い方法は？" onclick="toggleFaq(this)">付款支持哪些方式？</div>
-    <div class="faq-a" data-zh="支持信用卡、Apple Pay、Google Pay，通过 Stripe 安全处理。我们不储存任何付款信息。" data-en="We accept credit cards, Apple Pay, and Google Pay, all processed securely through Stripe. We do not store any payment information." data-ja="クレジットカード、Apple Pay、Google Payに対応。Stripeで安全に処理。支払い情報は保存しません。">支持信用卡、Apple Pay、Google Pay，通过 Stripe 安全处理。我们不储存任何付款信息。</div>
+    <div class="faq-q" data-zh="付款支持哪些方式？" data-tw="付款支援哪些方式？" data-en="What payment methods do you accept?" data-ja="支払い方法は？" onclick="toggleFaq(this)">付款支持哪些方式？</div>
+    <div class="faq-a" data-zh="支持信用卡、Apple Pay、Google Pay，通过 Stripe 安全处理。我们不储存任何付款信息。" data-tw="支援信用卡、Apple Pay、Google Pay，透過 Stripe 安全處理。我們不儲存任何付款資訊。" data-en="We accept credit cards, Apple Pay, and Google Pay, all processed securely through Stripe. We do not store any payment information." data-ja="クレジットカード、Apple Pay、Google Payに対応。Stripeで安全に処理。支払い情報は保存しません。">支持信用卡、Apple Pay、Google Pay，通过 Stripe 安全处理。我们不储存任何付款信息。</div>
   </div>
 
   <div class="faq-item reveal">
-    <div class="faq-q" data-zh="占卜结果准确吗？" data-en="How accurate are the readings?" data-ja="猫の答えは当たる？" onclick="toggleFaq(this)">占卜结果准确吗？</div>
-    <div class="faq-a" data-zh="易经占卜是基于三千年智慧的参考工具，结合 AI 解读你的卦象。结果仅供参考，不构成任何专业建议。一切决定请以自身判断为准。" data-en="I Ching readings are a reference tool based on three thousand years of wisdom, combined with AI interpretation of your hexagram. Results are for reference only and do not constitute professional advice of any kind. Always trust your own judgment." data-ja="猫との対話は参考ツール。AIが卦象を解読。結果は参考のみで、専門的なアドバイスではありません。すべての判断はご自身で。">易经占卜是基于三千年智慧的参考工具，结合 AI 解读你的卦象。结果仅供参考，不构成任何专业建议。一切决定请以自身判断为准。</div>
+    <div class="faq-q" data-zh="占卜结果准确吗？" data-tw="占卜結果準確嗎？" data-en="How accurate are the readings?" data-ja="猫の答えは当たる？" onclick="toggleFaq(this)">占卜结果准确吗？</div>
+    <div class="faq-a" data-zh="易经占卜是基于三千年智慧的参考工具，结合 AI 解读你的卦象。结果仅供参考，不构成任何专业建议。一切决定请以自身判断为准。" data-tw="易經占卜是基於三千年智慧的參考工具，結合 AI 解讀你的卦象。結果僅供參考，不構成任何專業建議。一切決定請以自身判斷為準。" data-en="I Ching readings are a reference tool based on three thousand years of wisdom, combined with AI interpretation of your hexagram. Results are for reference only and do not constitute professional advice of any kind. Always trust your own judgment." data-ja="猫との対話は参考ツール。AIが卦象を解読。結果は参考のみで、専門的なアドバイスではありません。すべての判断はご自身で。">易经占卜是基于三千年智慧的参考工具，结合 AI 解读你的卦象。结果仅供参考，不构成任何专业建议。一切决定请以自身判断为准。</div>
   </div>
 
   <div class="faq-item reveal">
-    <div class="faq-q" data-zh="我的隐私有保障吗？" data-en="Is my privacy protected?" data-ja="プライバシーは守られる？" onclick="toggleFaq(this)">我的隐私有保障吗？</div>
-    <div class="faq-a" data-zh="我们只储存你的账号基本资料（名字、头像）及游戏数据（罐头、等级、占卜次数）。你的占卜问题及解卦内容不会被记录或储存，不会用于任何商业用途。" data-en="We only store your basic profile (name, avatar) and game data (cans, level, reading count). Your questions and readings are never recorded, stored, or used for any commercial purpose." data-ja="保存するのはアカウント基本情報（名前・アバター）とゲームデータ（缶詰・レベル・対話回数）のみ。問いの内容と回答は記録・保存しません。商業利用もしません。">我们只储存你的账号基本资料（名字、头像）及游戏数据（罐头、等级、占卜次数）。你的占卜问题及解卦内容不会被记录或储存，不会用于任何商业用途。</div>
+    <div class="faq-q" data-zh="我的隐私有保障吗？" data-tw="我的隱私有保障嗎？" data-en="Is my privacy protected?" data-ja="プライバシーは守られる？" onclick="toggleFaq(this)">我的隐私有保障吗？</div>
+    <div class="faq-a" data-zh="我们只储存你的账号基本资料（名字、头像）及游戏数据（罐头、等级、占卜次数）。你的占卜问题及解卦内容不会被记录或储存，不会用于任何商业用途。" data-tw="我們只儲存你的賬號基本資料（名字、頭像）及遊戲資料（罐頭、等級、占卜次數）。你的占卜問題及解卦內容不會被記錄或儲存，不會用於任何商業用途。" data-en="We only store your basic profile (name, avatar) and game data (cans, level, reading count). Your questions and readings are never recorded, stored, or used for any commercial purpose." data-ja="保存するのはアカウント基本情報（名前・アバター）とゲームデータ（缶詰・レベル・対話回数）のみ。問いの内容と回答は記録・保存しません。商業利用もしません。">我们只储存你的账号基本资料（名字、头像）及游戏数据（罐头、等级、占卜次数）。你的占卜问题及解卦内容不会被记录或储存，不会用于任何商业用途。</div>
   </div>
 
   <div class="faq-item reveal">
-    <div class="faq-q" data-zh="如何邀请朋友获得罐头？" data-en="How do I invite friends to get cans?" data-ja="友達を招待して缶詰をもらうには？" onclick="toggleFaq(this)">如何邀请朋友获得罐头？</div>
-    <div class="faq-a" data-zh="登录后点击右上角头像，在个人面板中找到邀请链接，分享给朋友。朋友注册后双方各得2罐罐头。" data-en="After signing in, click your avatar in the top right corner. Find your invite link in the profile panel and share it with friends. Once they sign up, both of you will receive 2 cans." data-ja="ログイン後、右上のアバターをタップ。個人パネルから招待リンクをコピーして友達にシェア。友達が登録したらお互い2缶もらえる。">登录后点击右上角头像，在个人面板中找到邀请链接，分享给朋友。朋友注册后双方各得2罐罐头。</div>
+    <div class="faq-q" data-zh="如何邀请朋友获得罐头？" data-tw="如何邀請朋友獲得罐頭？" data-en="How do I invite friends to get cans?" data-ja="友達を招待して缶詰をもらうには？" onclick="toggleFaq(this)">如何邀请朋友获得罐头？</div>
+    <div class="faq-a" data-zh="登录后点击右上角头像，在个人面板中找到邀请链接，分享给朋友。朋友注册后双方各得2罐罐头。" data-tw="登入後點選右上角頭像，在個人面板中找到邀請連結，分享給朋友。朋友註冊後雙方各得2罐罐頭。" data-en="After signing in, click your avatar in the top right corner. Find your invite link in the profile panel and share it with friends. Once they sign up, both of you will receive 2 cans." data-ja="ログイン後、右上のアバターをタップ。個人パネルから招待リンクをコピーして友達にシェア。友達が登録したらお互い2缶もらえる。">登录后点击右上角头像，在个人面板中找到邀请链接，分享给朋友。朋友注册后双方各得2罐罐头。</div>
   </div>
 
   <!-- CONTACT -->
   <div class="contact-card reveal" style="margin-top:4rem;">
-    <div class="contact-title" data-zh="还有问题？" data-en="Still have questions?" data-ja="まだ質問がある？">还有问题？</div>
-    <div class="contact-sub" data-zh="猫咪会看邮件的（也许）<br>我们尽量在 24–48 小时内回复" data-en="The cats check their email (sometimes)<br>We aim to reply within 24–48 hours" data-ja="猫がメールを見るかも（たぶん）<br>24〜48時間以内に返信します">猫咪会看邮件的（也许）<br>我们尽量在 24–48 小时内回复</div>
+    <div class="contact-title" data-zh="还有问题？" data-tw="還有問題？" data-en="Still have questions?" data-ja="まだ質問がある？">还有问题？</div>
+    <div class="contact-sub" data-zh="猫咪会看邮件的（也许）<br>我们尽量在 24–48 小时内回复" data-tw="貓咪會看郵件的（也許）<br>我們儘量在 24–48 小時內回覆" data-en="The cats check their email (sometimes)<br>We aim to reply within 24–48 hours" data-ja="猫がメールを見るかも（たぶん）<br>24〜48時間以内に返信します">猫咪会看邮件的（也许）<br>我们尽量在 24–48 小时内回复</div>
     <a href="mailto:miao@taoofcat.com" class="contact-email">miao@taoofcat.com</a>
-    <div class="contact-note" data-zh="付款问题请附上付款截图，方便我们更快处理" data-en="For payment issues, please include a screenshot of your receipt so we can help faster" data-ja="支払い関連は証明のスクリーンショットを添付してください">付款问题请附上付款截图，方便我们更快处理</div>
+    <div class="contact-note" data-zh="付款问题请附上付款截图，方便我们更快处理" data-tw="付款問題請附上付款截圖，方便我們更快處理" data-en="For payment issues, please include a screenshot of your receipt so we can help faster" data-ja="支払い関連は証明のスクリーンショットを添付してください">付款问题请附上付款截图，方便我们更快处理</div>
     <div class="social-row">
       <a href="https://www.instagram.com/taoc.4t" target="_blank" class="social-btn">📷 Instagram @taoc.4t</a>
       <a href="https://www.threads.net/@taoc.4t" target="_blank" class="social-btn">🧵 Threads @taoc.4t</a>
@@ -270,23 +272,23 @@ html[lang="en"] .faq-a, html[lang="en"] .contact-sub, html[lang="en"] .hero-sub 
   <div class="info-strip reveal">
     <div class="info-item">
       <div class="info-icon">⏱</div>
-      <div class="info-label" data-zh="回复时间" data-en="Response Time" data-ja="返信時間">回复时间</div>
-      <div class="info-sub" data-zh="24–48 小时" data-en="24–48 hours" data-ja="24〜48時間">24–48 小时</div>
+      <div class="info-label" data-zh="回复时间" data-tw="回覆時間" data-en="Response Time" data-ja="返信時間">回复时间</div>
+      <div class="info-sub" data-zh="24–48 小时" data-tw="24–48 小時" data-en="24–48 hours" data-ja="24〜48時間">24–48 小时</div>
     </div>
     <div class="info-item">
       <div class="info-icon">🔒</div>
-      <div class="info-label" data-zh="付款安全" data-en="Secure Payment" data-ja="支払いセキュリティ">付款安全</div>
-      <div class="info-sub" data-zh="Stripe 加密处理" data-en="Encrypted via Stripe" data-ja="Stripe暗号化処理">Stripe 加密处理</div>
+      <div class="info-label" data-zh="付款安全" data-tw="付款安全" data-en="Secure Payment" data-ja="支払いセキュリティ">付款安全</div>
+      <div class="info-sub" data-zh="Stripe 加密处理" data-tw="Stripe 加密處理" data-en="Encrypted via Stripe" data-ja="Stripe暗号化処理">Stripe 加密处理</div>
     </div>
     <div class="info-item">
       <div class="info-icon">🐾</div>
-      <div class="info-label" data-zh="罐头有效期" data-en="Can Expiry" data-ja="缶詰の有効期限">罐头有效期</div>
-      <div class="info-sub" data-zh="永久有效" data-en="Never expire" data-ja="永久有效">永久有效</div>
+      <div class="info-label" data-zh="罐头有效期" data-tw="罐頭有效期" data-en="Can Expiry" data-ja="缶詰の有効期限">罐头有效期</div>
+      <div class="info-sub" data-zh="永久有效" data-tw="永久有效" data-en="Never expire" data-ja="永久有效">永久有效</div>
     </div>
     <div class="info-item">
       <div class="info-icon">📍</div>
-      <div class="info-label" data-zh="我们在" data-en="Based in" data-ja="我们在">我们在</div>
-      <div class="info-sub" data-zh="怡保，马来西亚" data-en="Ipoh, Malaysia" data-ja="怡保，马来西亚">怡保，马来西亚</div>
+      <div class="info-label" data-zh="我们在" data-tw="我們在" data-en="Based in" data-ja="我们在">我们在</div>
+      <div class="info-sub" data-zh="怡保，马来西亚" data-tw="怡保，馬來西亞" data-en="Ipoh, Malaysia" data-ja="怡保，马来西亚">怡保，马来西亚</div>
     </div>
   </div>
 
@@ -294,7 +296,7 @@ html[lang="en"] .faq-a, html[lang="en"] .contact-sub, html[lang="en"] .hero-sub 
 
 <footer>
   <div class="footer-brand">玄猫之道</div>
-  <div class="footer-copy" data-zh="© 2026 玄猫之道 · TaoOfCat.com" data-en="© 2026 Tao of Your Cat · TaoOfCat.com" data-ja="© 2026 玄猫之道 · TaoOfCat.com">© 2026 玄猫之道 · TaoOfCat.com</div>
+  <div class="footer-copy" data-zh="© 2026 玄猫之道 · TaoOfCat.com" data-tw="© 2026 玄貓之道 · TaoOfCat.com" data-en="© 2026 Tao of Your Cat · TaoOfCat.com" data-ja="© 2026 玄猫之道 · TaoOfCat.com">© 2026 玄猫之道 · TaoOfCat.com</div>
 </footer>
 
 <script>

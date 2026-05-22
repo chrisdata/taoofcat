@@ -42,10 +42,11 @@
   function applyLang(l) {
     _lang = l;
     localStorage.setItem('taoc_lang', l);
-    document.documentElement.lang = l;
+    document.documentElement.lang = l === 'tw' ? 'zh-TW' : l;
     document.querySelectorAll('[data-zh]').forEach(function(el) {
       var txt = l === 'en' ? (el.dataset.en || el.dataset.zh)
               : l === 'ja' ? (el.dataset.ja || el.dataset.zh)
+              : l === 'tw' ? (el.dataset.tw || el.dataset.zh)
               : el.dataset.zh;
       if (txt !== undefined) el.innerHTML = txt;
     });
@@ -84,7 +85,7 @@
   gtag('js', new Date());
   gtag('config', 'G-7Q71WCDFF0');
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400&family=IM+Fell+English:ital@0;1&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400&family=IM+Fell+English:ital@0;1&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&display=swap" rel="stylesheet">
 <style>
 :root {
   --paper: #f4ede0;
@@ -418,9 +419,10 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
     <path class="st0" d="M748.64,412.06c2.79,15.55,8.22,32.63,19.11,43.58-1.76,5.36-2.06,10.44-2.5,15.87-.23,2.86-3.14,5.4-4.86,7.48-2.29,1.85-4.81,3.42-7.63,3.26-3.5-3.01-6.15-6.48-8.73-10.23-5.54-8.06-9.84-16.43-13.38-25.59l-8.26-25.01-8.15-26.92c-.87-2.86-3.8-4.87-6.17-6.46l-7.86-5.27c-2.09-1.4-2.35-3.55-1.74-5.95l2.46-9.78c.95-3.78,1.86-7.48,3.38-11.03,2.91-6.84-1.62-9.95-2.05-16.37,3.64-2.72,7.44-4.95,12.06-4.66l7.99.5c12.93-6.55,24.03-15.75,32.95-27.23l-3.62-11.14c-1.15-3.55-1.59-7.02-2-10.82-.35-3.23-4.8-6.18-3.66-9.54,2.41-7.15,3.47-14.44,2.31-21.84-5.43.17-10,2.26-14.23,5.13l-13.05,8.84c-1.9,1.38-2.79,4.36-4.62,5.86-5.43,4.43-9.79,9.37-13.82,15.1l-7.79,11.09c-1.08,1.54-3.27,2.35-5.06,3.37-1.55-1.2-2.76-2.49-3.81-4.07l-5.42-8.19c-4.31-6.51-5.85-15.1-11.67-21.83,6.72-2.44,12.56,2.56,20.75-1.28l13.4-6.28,22.71-7.93,19.89-6.9c.62-11.04-.55-21.34-2.31-32.09l-5.37-32.69c-1.52-9.24-8.14-11.91-9.71-18.69-.81-3.48-1.84-6.43-4.03-9.25-1.52-1.96-2.74-3.93-3.88-6.22,5.5-2.97,10.83-1.03,15.71,2.29,7.56,5.15,14.35,6.88,19.55,11.1,7.75,6.28,12.74,14.53,16.03,23.86,1.83,5.19,2.61,10.16,1.47,15.68-1.04,5.03-.75,9.86-.3,14.94l1.5,16.91c9.68-1.38,17.12-7.96,26.67-11.39l12.04-3.28c5.19-1.41,9.01-4.47,11.42-9.31l4.21-8.45c3.05-6.12,6.37-11.77,8.3-18.4,2.29-7.85,3.61-15.91,2.28-24.04-.81-4.96-4.94-10.01-3.1-11.95.48-.51,1.81-.62,2.72-.38,7.38,1.91,14.26,4.76,20.04,9.79,4.08,3.55,3.37,10.85,9.13,18.41,3,3.95,3.86,8.2,3.93,13.05.22,14.59-10.36,13.66-10.64,22.18l25.62-5.46c1.18-.25,2.45-1.34,3.4-2.33-3.4-7.27-7.48-13.67-12.02-20.18l-9.48-13.59c4.69-2.17,10.81,2.7,14.53,6.77,3.45,3.77,7.15,6.62,11.72,8.9,4.01,2,7.46,4.6,10.68,7.67,5.71,5.45,12.65,8.6,20.4,9.8l5.74,1.36c1.65.39,3.49,1.99,4.23,3.56l5.35,11.35c-5.68,9.31-15.54,13.36-26.08,13.58l-22.43.48c-20.89,1.71-33.53,11.92-51.33,14.85-1.6.26-4.29.34-5.36,1.58-3.82,4.41-6.66,9.11-9.72,14l-9.77,15.62-9.05,11.92,1.11,2.83c10.11,2.3,19.55-3.5,27.01-4.46,21.23-2.73,42.6.22,62.44,8.21,3.8,1.53,5.49,9.59,12.28,16.64,3.12,3.24,4.97,6.95,6.23,11.31l4.91,16.96c1.52,5.27,2.18,10.24,1.77,15.69-1.3,17.07-6.04,33.69-20.13,44.24-1.6,1.2-2.85,2.93-3.56,4.75-2.55,6.49-7.52,7.92-10.65,15.63-1.47,3.6-4.11,5.87-7.75,7.25l-11.04,2.53c-11.98,4.13-23.88,7.27-36.5,9.01-5.39.74-9.15,7.07-12.8,9.02-6.37,3.39-13.37,3.48-20.27,1.89-5.94-1.36-15.45,3.29-19.79,2.3-5.04-1.15-9.71-5.75-11.56-10.66-2.21-5.89-2.5-12.05-2.48-18.23s-.57-11.38-2.11-17.15c-.98-3.69-2.11-7.77-1.53-11.54.66-4.25,6.7-8.88,1.18-16.09-2.02-1.72-4.99-1.98-7.13-3.47-3.05-2.12-5.14-5.25-6.72-8.57l-4.13-8.72c-.35-.75-2.73-.49-3.39.07-5.06,4.22-9.58,8.14-8.03,14.08s3.9,11.76,6.66,17.42c3.34,6.88,5.56,13.57,6.96,21.33ZM791.99,261.21l8.37-12.37c1.3-1.93,1.31-4.25-.24-5.87-3.89-2.48-8.02-3.95-12.7-4.71-4.21,1.51-8.11,3.66-11.56,6.18l2.78,14.73c1.01,5.35,1.96,10.42,3.89,15.7,3.88-4.47,6.27-8.95,9.46-13.66ZM817.11,400.99c5.42-.87,9.76-1.25,14.59-1.21,14.26.51,25.2-2.97,35.53-12.73,5.76-5.45,10.04-11.79,14.48-18.35,3.88-5.74,7.4-11.26,9.23-18.08.66-6.64.59-13.08.13-19.84-2.49-4.06-5.14-7.91-8.72-11.08-2.35-2.08-5.65-2.77-8.58-3.7-4.36-1.39-8.57-2.17-13.17-2.14-9.39.06-17.9-5.24-27.94-1.64l-9.6,3.44c-2.99,1.07-4.13,3.46-4.52,6.63-.51,4.24-.86,9.49,2.51,12.76s10.91,3.48,16.61,6.54c5.14,2.77,8.39,7.56,8.97,13.42.93,9.29-.76,18.93-7.06,25.85l-10.02,11.01c-4.59,5.04-10.54,4.96-12.44,9.12ZM762.34,344.3c9.85-1.69,18.33-4.32,26.47-8.43l1.34-13.61c-3.5-1.28-6.99-.21-9.55,2.3l-9.49,9.29c-3.4,3.04-7.12,5.94-8.77,10.45ZM769.63,392.31l16.01-13.67c1.9-1.62,3.1-3.61,3.76-6.43-3.99.82-7.03,2.69-10.64,3.91l-8.82,2.97c-.54,4.52-.64,8.91-.31,13.21Z"/>
   </g>
 </svg></a>
-  <a href="/#cats" class="nav-back" data-zh="← 猫咪家族" data-en="← Cat Family" data-ja="← 猫の家族">← 猫咪家族</a>
+  <a href="/#cats" class="nav-back" data-zh="← 猫咪家族" data-tw="← 貓咪家族" data-en="← Cat Family" data-ja="← 猫の家族">← 猫咪家族</a>
   <div class="lang-switcher">
-  <button class="lang-opt" data-lang="zh">中</button>
+  <button class="lang-opt" data-lang="zh">简</button>
+  <button class="lang-opt" data-lang="tw">繁</button>
   <button class="lang-opt" data-lang="en">EN</button>
   <button class="lang-opt" data-lang="ja">JP</button>
 </div>
@@ -430,11 +432,11 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
   <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/feimao-hero.jpg" alt="肥猫" class="hero-img">
   <div class="hero-gradient"></div>
   <div class="hero-content">
-    <div class="hero-label" data-zh="The Elder · 长老" data-en="The Elder · The Patient One" data-ja="The Elder · 長老">The Elder · 长老</div>
-    <div class="hero-name" data-zh="肥猫" data-en="Fei Mao" data-ja="フェイマオ">肥猫</div>
+    <div class="hero-label" data-zh="The Elder · 长老" data-tw="The Elder · 長老" data-en="The Elder · The Patient One" data-ja="The Elder · 長老">The Elder · 长老</div>
+    <div class="hero-name" data-zh="肥猫" data-tw="肥貓" data-en="Fei Mao" data-ja="フェイマオ">肥猫</div>
     <div class="hero-en">Fei Mao · The Patient One</div>
     <div class="hero-divider"></div>
-    <div class="hero-tagline" data-zh="十岁雀猫 · 等待两年的始祖 · 无为长老" data-en="10-Year-Old Tabby · Waited 2 Years · The Wu Wei Elder" data-ja="十歳の猫 · 二年待った始祖 · 無為の長老">十岁雀猫 · 等待两年的始祖 · 无为长老</div>
+    <div class="hero-tagline" data-zh="十岁雀猫 · 等待两年的始祖 · 无为长老" data-tw="十歲雀貓 · 等待兩年的始祖 · 無為長老" data-en="10-Year-Old Tabby · Waited 2 Years · The Wu Wei Elder" data-ja="十歳の猫 · 二年待った始祖 · 無為の長老">十岁雀猫 · 等待两年的始祖 · 无为长老</div>
   </div>
 </div>
 
@@ -442,39 +444,39 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
 
   <div class="chapter reveal">
     <div class="chapter-label">Chapter One</div>
-    <div class="chapter-title" data-zh="花园里的等待" data-en="The Garden Vigil" data-ja="庭での待ち続け">花园里的等待</div>
-    <p class="chapter-text" data-zh="我和太太从来没打算养猫。那时候我们只是偶尔在门外看到流浪猫，顶多给点食物，仅此而已。" data-en="My wife and I never planned on having cats. Back then we would occasionally spot a stray outside, maybe leave some food — nothing more than that." data-ja="妻と私は猫を飼うつもりなんてなかった。当時は外で野良猫を見かけたら、せいぜい餌をやる程度。それだけだった。">
+    <div class="chapter-title" data-zh="花园里的等待" data-tw="花園裡的等待" data-en="The Garden Vigil" data-ja="庭での待ち続け">花园里的等待</div>
+    <p class="chapter-text" data-zh="我和太太从来没打算养猫。那时候我们只是偶尔在门外看到流浪猫，顶多给点食物，仅此而已。" data-tw="我和太太從來沒打算養貓。那時候我們只是偶爾在門外看到流浪貓，頂多給點食物，僅此而已。" data-en="My wife and I never planned on having cats. Back then we would occasionally spot a stray outside, maybe leave some food — nothing more than that." data-ja="妻と私は猫を飼うつもりなんてなかった。当時は外で野良猫を見かけたら、せいぜい餌をやる程度。それだけだった。">
       我和太太从来没打算养猫。那时候我们只是偶尔在门外看到流浪猫，顶多给点食物，仅此而已。
     </p>
-    <p class="chapter-text" data-zh="但有一只猫，开始每天出现在我们花园里。" data-en="But one cat started appearing in our garden every single day." data-ja="でも一匹の猫が、毎日庭に現れるようになった。">
+    <p class="chapter-text" data-zh="但有一只猫，开始每天出现在我们花园里。" data-tw="但有一隻貓，開始每天出現在我們花園裡。" data-en="But one cat started appearing in our garden every single day." data-ja="でも一匹の猫が、毎日庭に現れるようになった。">
       但有一只猫，开始每天出现在我们花园里。
     </p>
-    <p class="chapter-text" data-zh="不吵闹，不撒娇，只是坐在那里。今天来，明天来，后天还来。就这样，整整两年。" data-en="No noise, no demands — she just sat there. Came today, came tomorrow, came the day after. Like that, for two full years." data-ja="騒がない、甘えない。ただそこに座っている。今日も来て、明日も来て、明後日も来る。それが丸二年続いた。">
+    <p class="chapter-text" data-zh="不吵闹，不撒娇，只是坐在那里。今天来，明天来，后天还来。就这样，整整两年。" data-tw="不吵鬧，不撒嬌，只是坐在那裡。今天來，明天來，後天還來。就這樣，整整兩年。" data-en="No noise, no demands — she just sat there. Came today, came tomorrow, came the day after. Like that, for two full years." data-ja="騒がない、甘えない。ただそこに座っている。今日も来て、明日も来て、明後日も来る。それが丸二年続いた。">
       不吵闹，不撒娇，只是坐在那里。今天来，明天来，后天还来。就这样，整整两年。
     </p>
-    <p class="chapter-text" data-zh="我们开始喂她。从偶尔到每天，从门外到花园，慢慢地，她成了我们生活的一部分。" data-en="We started feeding her. From occasionally to daily, from the doorstep to the garden — slowly, she became part of our lives." data-ja="私たちは餌をやりはじめた。ときどきから毎日へ、門の外から庭へ。ゆっくりと、彼女は私たちの生活の一部になっていった。">
+    <p class="chapter-text" data-zh="我们开始喂她。从偶尔到每天，从门外到花园，慢慢地，她成了我们生活的一部分。" data-tw="我們開始喂她。從偶爾到每天，從門外到花園，慢慢地，她成了我們生活的一部分。" data-en="We started feeding her. From occasionally to daily, from the doorstep to the garden — slowly, she became part of our lives." data-ja="私たちは餌をやりはじめた。ときどきから毎日へ、門の外から庭へ。ゆっくりと、彼女は私たちの生活の一部になっていった。">
       我们开始喂她。从偶尔到每天，从门外到花园，慢慢地，她成了我们生活的一部分。
     </p>
   </div>
 
   <img loading="lazy" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/feimao-stray.jpg" alt="流浪时期的肥猫" class="story-photo reveal">
-  <div class="story-photo-caption reveal" data-zh="怡保街头的夕阳 · 等待的那些年" data-en="Ipoh streets at dusk · The years of waiting" data-ja="イポーの街の夕陽 · 待ち続けたあの年月">怡保街头的夕阳 · 等待的那些年</div>
+  <div class="story-photo-caption reveal" data-zh="怡保街头的夕阳 · 等待的那些年" data-tw="怡保街頭的夕陽 · 等待的那些年" data-en="Ipoh streets at dusk · The years of waiting" data-ja="イポーの街の夕陽 · 待ち続けたあの年月">怡保街头的夕阳 · 等待的那些年</div>
 
   <div class="tao-quote reveal">
-    <div class="tao-quote-text" data-zh="「为学日益，为道日损<br>损之又损，以至於無為」" data-en="「In pursuit of learning, every day something is added.<br>In pursuit of the Tao, every day something is dropped.<br>Less and less — until you arrive at non-action」" data-ja="「学を為せば日々に益し<br>道を為せば日々に損す<br>損して又損して、無為に至る」">「为学日益，为道日损<br>损之又损，以至於無為」</div>
-    <div class="tao-quote-source" data-zh="— 肥猫说" data-en="— Fei Mao" data-ja="— フェイマオ曰く">— 肥猫说</div>
+    <div class="tao-quote-text" data-zh="「为学日益，为道日损<br>损之又损，以至於無為」" data-tw="「為學日益，為道日損<br>損之又損，以至於無為」" data-en="「In pursuit of learning, every day something is added.<br>In pursuit of the Tao, every day something is dropped.<br>Less and less — until you arrive at non-action」" data-ja="「学を為せば日々に益し<br>道を為せば日々に損す<br>損して又損して、無為に至る」">「为学日益，为道日损<br>损之又损，以至於無為」</div>
+    <div class="tao-quote-source" data-zh="— 肥猫说" data-tw="— 肥貓說" data-en="— Fei Mao" data-ja="— フェイマオ曰く">— 肥猫说</div>
   </div>
 
   <div class="chapter reveal">
     <div class="chapter-label">Chapter Two</div>
-    <div class="chapter-title" data-zh="心软的那一刻" data-en="The Moment We Gave In" data-ja="心が折れた瞬間">心软的那一刻</div>
-    <p class="chapter-text" data-zh="两年后的某一天，我没忍住——把她带进了屋。" data-en="One day, two years later, I couldn't hold back — I brought her inside." data-ja="二年後のある日、我慢できなくて——彼女を家の中に連れて入れた。">
+    <div class="chapter-title" data-zh="心软的那一刻" data-tw="心軟的那一刻" data-en="The Moment We Gave In" data-ja="心が折れた瞬間">心软的那一刻</div>
+    <p class="chapter-text" data-zh="两年后的某一天，我没忍住——把她带进了屋。" data-tw="兩年後的某一天，我沒忍住——把她帶進了屋。" data-en="One day, two years later, I couldn't hold back — I brought her inside." data-ja="二年後のある日、我慢できなくて——彼女を家の中に連れて入れた。">
       两年后的某一天，我没忍住——把她带进了屋。
     </p>
-    <p class="chapter-text" data-zh="就这样，一只在花园等了两年的流浪猫，正式成为了家里的一员。我们叫她肥猫——因为她爱吃，圆滚滚的，满足感写在脸上。" data-en="And just like that, a stray who had waited in our garden for two years officially became part of the family. We called her Fei Mao — because she loved to eat, round and content, satisfaction written all over her face." data-ja="こうして、庭で二年間待ち続けた野良猫が、正式に家族の一員になった。フェイマオと呼ぶことにした——食べるのが大好きで、ころころと丸く、満足感が顔に書いてあるから。">
+    <p class="chapter-text" data-zh="就这样，一只在花园等了两年的流浪猫，正式成为了家里的一员。我们叫她肥猫——因为她爱吃，圆滚滚的，满足感写在脸上。" data-tw="就這樣，一隻在花園等了兩年的流浪貓，正式成為了家裡的一員。我們叫她肥貓——因為她愛吃，圓滾滾的，滿足感寫在臉上。" data-en="And just like that, a stray who had waited in our garden for two years officially became part of the family. We called her Fei Mao — because she loved to eat, round and content, satisfaction written all over her face." data-ja="こうして、庭で二年間待ち続けた野良猫が、正式に家族の一員になった。フェイマオと呼ぶことにした——食べるのが大好きで、ころころと丸く、満足感が顔に書いてあるから。">
       就这样，一只在花园等了两年的流浪猫，正式成为了家里的一员。我们叫她肥猫——因为她爱吃，圆滚滚的，满足感写在脸上。
     </p>
-    <p class="chapter-text" data-zh="道家说，无为而无不为。肥猫什么都没做，只是每天出现，然后等待。结果她等到了一个家。这就是她的道。" data-en="The Taoists say: through non-action, nothing is left undone. Fei Mao did nothing — she only showed up, and waited. In the end she waited her way into a home. That was her Tao." data-ja="老子は言う、無為にして為さざるなし。フェイマオは何もしなかった。ただ毎日現れて、待ち続けた。その結果、家を手に入れた。これが彼女の道。">
+    <p class="chapter-text" data-zh="道家说，无为而无不为。肥猫什么都没做，只是每天出现，然后等待。结果她等到了一个家。这就是她的道。" data-tw="道家說，無為而無不為。肥貓什麼都沒做，只是每天出現，然後等待。結果她等到了一個家。這就是她的道。" data-en="The Taoists say: through non-action, nothing is left undone. Fei Mao did nothing — she only showed up, and waited. In the end she waited her way into a home. That was her Tao." data-ja="老子は言う、無為にして為さざるなし。フェイマオは何もしなかった。ただ毎日現れて、待ち続けた。その結果、家を手に入れた。これが彼女の道。">
       道家说，无为而无不为。肥猫什么都没做，只是每天出现，然后等待。结果她等到了一个家。这就是她的道。
     </p>
   </div>
@@ -483,29 +485,29 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
     <img loading="lazy" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/feimao-catio.jpg" alt="肥猫在catio" style="object-position:center 20%;">
     <img loading="lazy" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/feimao-box.jpg" alt="肥猫睡箱子" style="object-position:center 30%;">
   </div>
-  <div class="story-photo-caption reveal" data-zh="左：catio里的长老 · 右：800°C牛排炉纸箱也是好床" data-en="Left: The elder in her catio · Right: Even a steak-oven box makes a fine bed" data-ja="左：キャティオの長老 · 右：800°C炉の段ボールも立派なベッド">左：catio里的长老 · 右：800°C牛排炉纸箱也是好床</div>
+  <div class="story-photo-caption reveal" data-zh="左：catio里的长老 · 右：800°C牛排炉纸箱也是好床" data-tw="左：catio裡的長老 · 右：800°C牛排爐紙箱也是好床" data-en="Left: The elder in her catio · Right: Even a steak-oven box makes a fine bed" data-ja="左：キャティオの長老 · 右：800°C炉の段ボールも立派なベッド">左：catio里的长老 · 右：800°C牛排炉纸箱也是好床</div>
 
   <div class="story-divider reveal"><span class="story-divider-icon">✦</span></div>
 
   <div class="chapter reveal">
     <div class="chapter-label">Chapter Three</div>
-    <div class="chapter-title" data-zh="Facebook上的惊喜" data-en="The Surprise on Facebook" data-ja="Facebookでの驚き">Facebook上的惊喜</div>
-    <p class="chapter-text" data-zh="收养肥猫一段时间后，有一天我在Facebook偶然看到一篇帖子。" data-en="Some time after we took her in, I stumbled across a post on Facebook." data-ja="フェイマオを引き取ってしばらくして、ある日Facebookで偶然一つの投稿を見かけた。">
+    <div class="chapter-title" data-zh="Facebook上的惊喜" data-tw="Facebook上的驚喜" data-en="The Surprise on Facebook" data-ja="Facebookでの驚き">Facebook上的惊喜</div>
+    <p class="chapter-text" data-zh="收养肥猫一段时间后，有一天我在Facebook偶然看到一篇帖子。" data-tw="收養肥貓一段時間後，有一天我在Facebook偶然看到一篇帖子。" data-en="Some time after we took her in, I stumbled across a post on Facebook." data-ja="フェイマオを引き取ってしばらくして、ある日Facebookで偶然一つの投稿を見かけた。">
       收养肥猫一段时间后，有一天我在Facebook偶然看到一篇帖子。
     </p>
-    <p class="chapter-text" data-zh="是四年前的寻猫帖。照片里的猫，就是肥猫。" data-en="It was a missing cat notice from four years ago. The cat in the photo was Fei Mao." data-ja="四年前の迷い猫を探す投稿だった。写真の猫は、フェイマオだった。">
+    <p class="chapter-text" data-zh="是四年前的寻猫帖。照片里的猫，就是肥猫。" data-tw="是四年前的尋貓帖。照片裡的貓，就是肥貓。" data-en="It was a missing cat notice from four years ago. The cat in the photo was Fei Mao." data-ja="四年前の迷い猫を探す投稿だった。写真の猫は、フェイマオだった。">
       是四年前的寻猫帖。照片里的猫，就是肥猫。
     </p>
-    <p class="chapter-text" data-zh="我马上联系了发帖的人。对方非常激动——原来肥猫以前是有主人的，失踪了整整四年，主人一直在找她。" data-en="I reached out immediately. They were overwhelmed — Fei Mao had had a family, had been missing for four full years, and they had never stopped looking." data-ja="すぐに投稿者に連絡した。相手はとても興奮していた——フェイマオにはもともと飼い主がいて、まるまる四年間行方不明で、ずっと探していたのだと。">
+    <p class="chapter-text" data-zh="我马上联系了发帖的人。对方非常激动——原来肥猫以前是有主人的，失踪了整整四年，主人一直在找她。" data-tw="我馬上聯絡了發帖的人。對方非常激動——原來肥貓以前是有主人的，失蹤了整整四年，主人一直在找她。" data-en="I reached out immediately. They were overwhelmed — Fei Mao had had a family, had been missing for four full years, and they had never stopped looking." data-ja="すぐに投稿者に連絡した。相手はとても興奮していた——フェイマオにはもともと飼い主がいて、まるまる四年間行方不明で、ずっと探していたのだと。">
       我马上联系了发帖的人。对方非常激动——原来肥猫以前是有主人的，失踪了整整四年，主人一直在找她。
     </p>
-    <p class="chapter-text" data-zh="他们全家人来了，看到肥猫，泪流满面。" data-en="The whole family came. When they saw her, they wept." data-ja="家族全員がやってきて、フェイマオを見て、涙を流した。">
+    <p class="chapter-text" data-zh="他们全家人来了，看到肥猫，泪流满面。" data-tw="他們全家人來了，看到肥貓，淚流滿面。" data-en="The whole family came. When they saw her, they wept." data-ja="家族全員がやってきて、フェイマオを見て、涙を流した。">
       他们全家人来了，看到肥猫，泪流满面。
     </p>
   </div>
 
   <div class="highlight-box reveal">
-    <p class="highlight-box-text" data-zh="「她认出我们了，但她没有要跟我们走的意思。」<br><br>      前主人看着肥猫，沉默了很久，最后说：她在这里比较好，你们照顾她吧。<br><br>      然后，他们离开了。" data-en="「She recognised us — but she had no intention of leaving with us.」<br><br>      Her former owner looked at Fei Mao for a long time in silence. Then said: she is better off here. Please take care of her.<br><br>      And then they left." data-ja="「彼女は私たちを認識しています。でも、一緒に帰ろうとはしない。」<br><br>元の飼い主はフェイマオをしばらく黙って見つめ、最後に言った：ここの方が幸せそうです。引き続き世話をしてあげてください。<br><br>そして、彼らは去っていった。">
+    <p class="highlight-box-text" data-zh="「她认出我们了，但她没有要跟我们走的意思。」<br><br>      前主人看着肥猫，沉默了很久，最后说：她在这里比较好，你们照顾她吧。<br><br>      然后，他们离开了。" data-tw="「她認出我們了，但她沒有要跟我們走的意思。」<br><br>      前主人看著肥貓，沉默了很久，最後說：她在這裡比較好，你們照顧她吧。<br><br>      然後，他們離開了。" data-en="「She recognised us — but she had no intention of leaving with us.」<br><br>      Her former owner looked at Fei Mao for a long time in silence. Then said: she is better off here. Please take care of her.<br><br>      And then they left." data-ja="「彼女は私たちを認識しています。でも、一緒に帰ろうとはしない。」<br><br>元の飼い主はフェイマオをしばらく黙って見つめ、最後に言った：ここの方が幸せそうです。引き続き世話をしてあげてください。<br><br>そして、彼らは去っていった。">
       「她认出我们了，但她没有要跟我们走的意思。」<br><br>
       前主人看着肥猫，沉默了很久，最后说：她在这里比较好，你们照顾她吧。<br><br>
       然后，他们离开了。
@@ -514,14 +516,14 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
 
   <div class="chapter reveal">
     <div class="chapter-label">Chapter Four</div>
-    <div class="chapter-title" data-zh="归处不是出发点" data-en="Home Is Not Where You Started" data-ja="帰る場所は、出発した場所じゃない">归处不是出发点</div>
-    <p class="chapter-text" data-zh="肥猫失踪了四年，流浪了四年，在我们花园等了两年。" data-en="Fei Mao had been missing for four years, wandering for four years, waiting in our garden for two." data-ja="フェイマオは四年間行方不明になり、四年間流浪して、私たちの庭で二年間待った。">
+    <div class="chapter-title" data-zh="归处不是出发点" data-tw="歸處不是出發點" data-en="Home Is Not Where You Started" data-ja="帰る場所は、出発した場所じゃない">归处不是出发点</div>
+    <p class="chapter-text" data-zh="肥猫失踪了四年，流浪了四年，在我们花园等了两年。" data-tw="肥貓失蹤了四年，流浪了四年，在我們花園等了兩年。" data-en="Fei Mao had been missing for four years, wandering for four years, waiting in our garden for two." data-ja="フェイマオは四年間行方不明になり、四年間流浪して、私たちの庭で二年間待った。">
       肥猫失踪了四年，流浪了四年，在我们花园等了两年。
     </p>
-    <p class="chapter-text" data-zh="她认得前主人，但她选择留下。" data-en="She recognised her former family — and chose to stay." data-ja="前の飼い主を認識していた。それでも、彼女は留まることを選んだ。">
+    <p class="chapter-text" data-zh="她认得前主人，但她选择留下。" data-tw="她認得前主人，但她選擇留下。" data-en="She recognised her former family — and chose to stay." data-ja="前の飼い主を認識していた。それでも、彼女は留まることを選んだ。">
       她认得前主人，但她选择留下。
     </p>
-    <p class="chapter-text" data-zh="也许对她来说，家不是出发的地方，而是心安的地方。她用四年的时间，找到了那个地方。" data-en="Perhaps for her, home is not where you started — it's where your heart rests. She spent four years finding that place." data-ja="彼女にとって家とは、出発した場所ではなく、心が安らぐ場所なのかもしれない。四年かけて、彼女はその場所を見つけた。">
+    <p class="chapter-text" data-zh="也许对她来说，家不是出发的地方，而是心安的地方。她用四年的时间，找到了那个地方。" data-tw="也許對她來說，家不是出發的地方，而是心安的地方。她用四年的時間，找到了那個地方。" data-en="Perhaps for her, home is not where you started — it's where your heart rests. She spent four years finding that place." data-ja="彼女にとって家とは、出発した場所ではなく、心が安らぐ場所なのかもしれない。四年かけて、彼女はその場所を見つけた。">
       也许对她来说，家不是出发的地方，而是心安的地方。她用四年的时间，找到了那个地方。
     </p>
   </div>
@@ -530,21 +532,21 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
     <img loading="lazy" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/feimao-calligraphy.jpg" alt="肥猫与书法" style="object-position:center 20%;">
     <img loading="lazy" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/feimao-desk.jpg" alt="肥猫占据工作台" style="object-position:center 20%;">
   </div>
-  <div class="story-photo-caption reveal" data-zh="左：书法卷轴前的长老禅师 · 右：十岁了，还是这么霸气" data-en="Left: The Zen master before the calligraphy · Right: Ten years old, still commanding" data-ja="左：書道の掛け軸前の長老禅師 · 右：十歳になっても、この貫禄">左：书法卷轴前的长老禅师 · 右：十岁了，还是这么霸气</div>
+  <div class="story-photo-caption reveal" data-zh="左：书法卷轴前的长老禅师 · 右：十岁了，还是这么霸气" data-tw="左：書法卷軸前的長老禪師 · 右：十歲了，還是這麼霸氣" data-en="Left: The Zen master before the calligraphy · Right: Ten years old, still commanding" data-ja="左：書道の掛け軸前の長老禅師 · 右：十歳になっても、この貫禄">左：书法卷轴前的长老禅师 · 右：十岁了，还是这么霸气</div>
 
   <div class="chapter reveal">
     <div class="chapter-label">Chapter Five</div>
-    <div class="chapter-title" data-zh="十岁的智慧" data-en="The Wisdom of Ten Years" data-ja="十歳の知恵">十岁的智慧</div>
-    <p class="chapter-text" data-zh="肥猫现在十岁了。是家里年纪最大的猫，也是最淡定的一只。" data-en="Fei Mao is ten years old now. The eldest in the house, and the most unshakeable." data-ja="フェイマオは今十歳。家の中で一番年上で、一番落ち着いている猫。">
+    <div class="chapter-title" data-zh="十岁的智慧" data-tw="十歲的智慧" data-en="The Wisdom of Ten Years" data-ja="十歳の知恵">十岁的智慧</div>
+    <p class="chapter-text" data-zh="肥猫现在十岁了。是家里年纪最大的猫，也是最淡定的一只。" data-tw="肥貓現在十歲了。是家裡年紀最大的貓，也是最淡定的一隻。" data-en="Fei Mao is ten years old now. The eldest in the house, and the most unshakeable." data-ja="フェイマオは今十歳。家の中で一番年上で、一番落ち着いている猫。">
       肥猫现在十岁了。是家里年纪最大的猫，也是最淡定的一只。
     </p>
-    <p class="chapter-text" data-zh="她不争，不抢，不吵。吃饱了就睡，睡醒了就吃。偶尔坐在书法卷轴前，像个参透世事的禅师，什么都看在眼里，什么都不说。" data-en="She doesn't fight, doesn't rush, doesn't fuss. Eat, sleep, eat again. Occasionally she sits before the calligraphy scroll like a Zen master who has seen through everything — watching it all, saying nothing." data-ja="争わない、奪わない、騒がない。お腹いっぱいになったら寝て、目が覚めたら食べる。ときおり書道の掛け軸の前に座って、世の理を悟り切った禅師のように、すべてを見ていながら何も言わない。">
+    <p class="chapter-text" data-zh="她不争，不抢，不吵。吃饱了就睡，睡醒了就吃。偶尔坐在书法卷轴前，像个参透世事的禅师，什么都看在眼里，什么都不说。" data-tw="她不爭，不搶，不吵。吃飽了就睡，睡醒了就吃。偶爾坐在書法卷軸前，像個參透世事的禪師，什麼都看在眼裡，什麼都不說。" data-en="She doesn't fight, doesn't rush, doesn't fuss. Eat, sleep, eat again. Occasionally she sits before the calligraphy scroll like a Zen master who has seen through everything — watching it all, saying nothing." data-ja="争わない、奪わない、騒がない。お腹いっぱいになったら寝て、目が覚めたら食べる。ときおり書道の掛け軸の前に座って、世の理を悟り切った禅師のように、すべてを見ていながら何も言わない。">
       她不争，不抢，不吵。吃饱了就睡，睡醒了就吃。偶尔坐在书法卷轴前，像个参透世事的禅师，什么都看在眼里，什么都不说。
     </p>
-    <p class="chapter-text" data-zh="庄子说，至人无己。肥猫就是这样——她不需要证明自己是谁，只是好好地活着，把每一天过得圆满。" data-en="Zhuangzi said: the perfect person has no self. Fei Mao is exactly that — she has no need to prove who she is. She simply lives well, and makes each day complete." data-ja="荘子は言う、至人は己なし。フェイマオはそういう猫だ——自分が何者かを証明する必要もなく、ただよく生きて、毎日を満ち足りたものにする。">
+    <p class="chapter-text" data-zh="庄子说，至人无己。肥猫就是这样——她不需要证明自己是谁，只是好好地活着，把每一天过得圆满。" data-tw="莊子說，至人無己。肥貓就是這樣——她不需要證明自己是誰，只是好好地活著，把每一天過得圓滿。" data-en="Zhuangzi said: the perfect person has no self. Fei Mao is exactly that — she has no need to prove who she is. She simply lives well, and makes each day complete." data-ja="荘子は言う、至人は己なし。フェイマオはそういう猫だ——自分が何者かを証明する必要もなく、ただよく生きて、毎日を満ち足りたものにする。">
       庄子说，至人无己。肥猫就是这样——她不需要证明自己是谁，只是好好地活着，把每一天过得圆满。
     </p>
-    <p class="chapter-text" data-zh="这就是无为的境界。" data-en="This is the state of Wu Wei." data-ja="これが無為の境地。">
+    <p class="chapter-text" data-zh="这就是无为的境界。" data-tw="這就是無為的境界。" data-en="This is the state of Wu Wei." data-ja="これが無為の境地。">
       这就是无为的境界。
     </p>
   </div>
@@ -554,18 +556,18 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
 <div class="closing">
   <div class="closing-bg-char">無</div>
   <div style="position:relative; z-index:1;">
-    <div class="closing-label reveal" data-zh="肥猫留言" data-en="A note from Fei Mao" data-ja="フェイマオより">肥猫留言</div>
-    <div class="closing-quote reveal" data-zh="「知足者富<br>强行者有志」" data-en="「Those who know contentment are wealthy.<br>Those who persevere have will」" data-ja="「足るを知る者は富む<br>強いて行う者は志あり」">「知足者富<br>强行者有志」</div>
-    <div class="closing-source reveal" data-zh="" data-en="" data-ja=""></div>
-    <div class="closing-note reveal" data-zh="肥猫等了两年，流浪了四年。<br>      她不急，不慌，不怨。<br>      最后，心安之处，便是家。<br>      这就是她教会我们的道。" data-en="Fei Mao waited two years. Wandered for four.<br>      No urgency, no panic, no resentment.<br>      In the end, where the heart rests — that is home.<br>      This is the Tao she taught us." data-ja="フェイマオは二年待ち、四年流浪した。<br>焦らず、慌てず、恨まず。<br>最後に、心が安らぐ場所が、家になった。<br>それが彼女の教えてくれた道。">
+    <div class="closing-label reveal" data-zh="肥猫留言" data-tw="肥貓留言" data-en="A note from Fei Mao" data-ja="フェイマオより">肥猫留言</div>
+    <div class="closing-quote reveal" data-zh="「知足者富<br>强行者有志」" data-tw="「知足者富<br>強行者有志」" data-en="「Those who know contentment are wealthy.<br>Those who persevere have will」" data-ja="「足るを知る者は富む<br>強いて行う者は志あり」">「知足者富<br>强行者有志」</div>
+    <div class="closing-source reveal" data-zh="" data-tw="" data-en="" data-ja=""></div>
+    <div class="closing-note reveal" data-zh="肥猫等了两年，流浪了四年。<br>      她不急，不慌，不怨。<br>      最后，心安之处，便是家。<br>      这就是她教会我们的道。" data-tw="肥貓等了兩年，流浪了四年。<br>      她不急，不慌，不怨。<br>      最後，心安之處，便是家。<br>      這就是她教會我們的道。" data-en="Fei Mao waited two years. Wandered for four.<br>      No urgency, no panic, no resentment.<br>      In the end, where the heart rests — that is home.<br>      This is the Tao she taught us." data-ja="フェイマオは二年待ち、四年流浪した。<br>焦らず、慌てず、恨まず。<br>最後に、心が安らぐ場所が、家になった。<br>それが彼女の教えてくれた道。">
       肥猫等了两年，流浪了四年。<br>
       她不急，不慌，不怨。<br>
       最后，心安之处，便是家。<br>
       这就是她教会我们的道。
     </div>
     <div class="reveal">
-      <a href="divination.html" class="btn-gold" data-zh="✦ 让肥猫陪你想想" data-en="✦ Ask Fei Mao" data-ja="✦ フェイマオに聞く">✦ 让肥猫陪你想想</a>
-      <a href="/#cats" class="btn-outline" data-zh="认识其他猫咪" data-en="Meet the Cats" data-ja="他の猫に会う">认识其他猫咪</a>
+      <a href="divination.html" class="btn-gold" data-zh="✦ 让肥猫陪你想想" data-tw="✦ 讓肥貓陪你想想" data-en="✦ Ask Fei Mao" data-ja="✦ フェイマオに聞く">✦ 让肥猫陪你想想</a>
+      <a href="/#cats" class="btn-outline" data-zh="认识其他猫咪" data-tw="認識其他貓咪" data-en="Meet the Cats" data-ja="他の猫に会う">认识其他猫咪</a>
     </div>
   </div>
 </div>
@@ -578,17 +580,17 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
 
   <!-- 跟猫说话 -->
   <div class="reveal">
-    <div class="interact-section-label" data-zh="与猫对话" data-en="Whisper to the Cat" data-ja="猫に話しかける">与猫对话</div>
-    <div class="interact-section-title" data-zh="🐱 跟肥猫说句话" data-en="🐱 Whisper to Fei Mao" data-ja="🐱 フェイマオに話しかける">🐱 跟肥猫说句话</div>
-    <div class="interact-section-sub" data-zh="有什么话想对肥猫说？这位十岁老猫，见过太多，说话不多，但句句有重量。" data-en="Got something on your mind? Fei Mao has seen it all. He doesn't say much — but when he does, it lands." data-ja="何か言いたいことはある？シャージューに話しかけてみて。">有什么话想对肥猫说？这位十岁老猫，见过太多，说话不多，但句句有重量。</div>
+    <div class="interact-section-label" data-zh="与猫对话" data-tw="與貓對話" data-en="Whisper to the Cat" data-ja="猫に話しかける">与猫对话</div>
+    <div class="interact-section-title" data-zh="🐱 跟肥猫说句话" data-tw="🐱 跟肥貓說句話" data-en="🐱 Whisper to Fei Mao" data-ja="🐱 フェイマオに話しかける">🐱 跟肥猫说句话</div>
+    <div class="interact-section-sub" data-zh="有什么话想对肥猫说？这位十岁老猫，见过太多，说话不多，但句句有重量。" data-tw="有什麼話想對肥貓說？這位十歲老貓，見過太多，說話不多，但句句有重量。" data-en="Got something on your mind? Fei Mao has seen it all. He doesn't say much — but when he does, it lands." data-ja="何か言いたいことはある？シャージューに話しかけてみて。">有什么话想对肥猫说？这位十岁老猫，见过太多，说话不多，但句句有重量。</div>
   </div>
 
   <!-- 未登录提示 -->
   <div id="whisper-login-wall" class="whisper-login-wall reveal" style="display:none;">
-    <div class="whisper-login-hint" data-zh="登录后才能跟肥猫说话 🐾" data-en="Sign in to whisper to Fei Mao 🐾" data-ja="ログインしてシャージューに話しかけよう 🐾">登录后才能跟肥猫说话 🐾</div>
+    <div class="whisper-login-hint" data-zh="登录后才能跟肥猫说话 🐾" data-tw="登入後才能跟肥貓說話 🐾" data-en="Sign in to whisper to Fei Mao 🐾" data-ja="ログインしてシャージューに話しかけよう 🐾">登录后才能跟肥猫说话 🐾</div>
     <button id="btn-google-login" class="btn-google-login">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-      <span data-zh="用 Google 登录" data-en="Sign in with Google" data-ja="Googleでログイン">用 Google 登录</span>
+      <span data-zh="用 Google 登录" data-tw="用 Google 登入" data-en="Sign in with Google" data-ja="Googleでログイン">用 Google 登录</span>
     </button>
   </div>
 
@@ -598,33 +600,33 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
       <span id="whisper-user-name" style="font-size:12px;color:var(--ink-faint);"></span>
       <div style="display:flex;align-items:center;gap:12px;">
         <span id="whisper-quota" class="whisper-quota"></span>
-        <button id="btn-signout" class="btn-signout" data-zh="退出" data-en="Sign out" data-ja="ログアウト">退出</button>
+        <button id="btn-signout" class="btn-signout" data-zh="退出" data-tw="退出" data-en="Sign out" data-ja="ログアウト">退出</button>
       </div>
     </div>
     <textarea id="whisper-msg" class="whisper-input" maxlength="200"
       data-placeholder-zh="写下你想说的……（最多200字）" data-placeholder-en="Write what's on your heart… (up to 200 characters)" data-placeholder-ja="心の中にあることを書いてみて…（200字まで）"
       placeholder="写下你想说的……（最多200字）"></textarea>
     <div class="whisper-submit-row">
-      <span class="whisper-hint" data-zh="肥猫会亲自回应 🐾" data-en="Fei Mao will respond personally 🐾" data-ja="シャージューが直接返事するよ 🐾">肥猫会亲自回应 🐾</span>
-      <button id="whisper-submit" class="btn-whisper" data-zh="送出" data-en="Send" data-ja="送る">送出</button>
+      <span class="whisper-hint" data-zh="肥猫会亲自回应 🐾" data-tw="肥貓會親自回應 🐾" data-en="Fei Mao will respond personally 🐾" data-ja="シャージューが直接返事するよ 🐾">肥猫会亲自回应 🐾</span>
+      <button id="whisper-submit" class="btn-whisper" data-zh="送出" data-tw="送出" data-en="Send" data-ja="送る">送出</button>
     </div>
   </div>
 
   <div id="cat-reply-card" class="cat-reply-card">
     <div class="cat-reply-bg" id="cat-reply-bg-char">老</div>
-    <div class="cat-reply-label" data-zh="肥猫说" data-en="Fei Mao says" data-ja="シャージューより">肥猫说</div>
+    <div class="cat-reply-label" data-zh="肥猫说" data-tw="肥貓說" data-en="Fei Mao says" data-ja="シャージューより">肥猫说</div>
     <div id="cat-reply-text" class="cat-reply-text"></div>
     <div class="cat-reply-cta">
-      <div class="cat-reply-cta-hint" data-zh="想让肥猫更深入地陪你想想？" data-en="Want Fei Mao to read deeper into it?" data-ja="もっと深く読んでほしい？">想让肥猫更深入地陪你想想？</div>
-      <a href="divination.html" class="btn-reply-divination" data-zh="✦ 投币问卦" data-en="✦ Cast the Oracle" data-ja="✦ 占いに進む">✦ 投币问卦</a>
+      <div class="cat-reply-cta-hint" data-zh="想让肥猫更深入地陪你想想？" data-tw="想讓肥貓更深入地陪你想想？" data-en="Want Fei Mao to read deeper into it?" data-ja="もっと深く読んでほしい？">想让肥猫更深入地陪你想想？</div>
+      <a href="divination.html" class="btn-reply-divination" data-zh="✦ 投币问卦" data-tw="✦ 投幣問卦" data-en="✦ Cast the Oracle" data-ja="✦ 占いに進む">✦ 投币问卦</a>
     </div>
   </div>
 
   <div id="whispers-wall" class="whispers-wall" style="display:none;">
-    <div class="whispers-wall-title" data-zh="其他人也说了" data-en="Others have whispered" data-ja="みんなの声">其他人也说了</div>
+    <div class="whispers-wall-title" data-zh="其他人也说了" data-tw="其他人也說了" data-en="Others have whispered" data-ja="みんなの声">其他人也说了</div>
     <div id="whisper-bubbles" class="whisper-bubbles"></div>
     <div class="whispers-load-more" id="whispers-load-more" style="display:none;">
-      <button class="btn-load-more" id="whispers-more-btn" data-zh="看更多" data-en="Load more" data-ja="もっと見る">看更多</button>
+      <button class="btn-load-more" id="whispers-more-btn" data-zh="看更多" data-tw="看更多" data-en="Load more" data-ja="もっと見る">看更多</button>
     </div>
   </div>
 
@@ -632,9 +634,9 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
 
   <!-- 请猫吃罐头 -->
   <div class="reveal">
-    <div class="interact-section-label" data-zh="供养" data-en="Feed the Cat" data-ja="猫を養う">供养</div>
-    <div class="interact-section-title" data-zh='🥫 请肥猫吃一罐真罐头' data-en='🥫 Buy Fei Mao a Real Can' data-ja='🥫 フェイマオに缶詰を'>🥫 请肥猫吃一罐真罐头</div>
-    <div class="interact-section-sub" data-zh="这是真的罐头，不是积分。你供养的每一罐，我们会真的去买、真的喂给肥猫吃，然后拍视频/照片发在下方证明。" data-en="This is a real can. Every can you send, we actually buy it, feed it to Fei Mao, and photograph the proof." data-ja="これは本物の缶詰です。あなたが送るたびに、本当に買って、シャージューに食べさせて、写真で証明します。">这是真的罐头，不是积分。你供养的每一罐，我们会真的去买、真的喂给肥猫吃，然后拍视频/照片发在下方证明。</div>
+    <div class="interact-section-label" data-zh="供养" data-tw="供養" data-en="Feed the Cat" data-ja="猫を養う">供养</div>
+    <div class="interact-section-title" data-zh='🥫 请肥猫吃一罐真罐头' data-tw='🥫 請肥貓吃一罐真罐頭' data-en='🥫 Buy Fei Mao a Real Can' data-ja='🥫 フェイマオに缶詰を'>🥫 请肥猫吃一罐真罐头</div>
+    <div class="interact-section-sub" data-zh="这是真的罐头，不是积分。你供养的每一罐，我们会真的去买、真的喂给肥猫吃，然后拍视频/照片发在下方证明。" data-tw="這是真的罐頭，不是積分。你供養的每一罐，我們會真的去買、真的餵給肥貓吃，然後拍影片/照片發在下方證明。" data-en="This is a real can. Every can you send, we actually buy it, feed it to Fei Mao, and photograph the proof." data-ja="これは本物の缶詰です。あなたが送るたびに、本当に買って、シャージューに食べさせて、写真で証明します。">这是真的罐头，不是积分。你供养的每一罐，我们会真的去买、真的喂给肥猫吃，然后拍视频/照片发在下方证明。</div>
   </div>
 
   <div class="feed-box reveal">
@@ -643,26 +645,26 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
       <button class="feed-amount-btn active" data-amount="3">$3</button>
       <button class="feed-amount-btn" data-amount="5">$5</button>
       <button class="feed-amount-btn" data-amount="10">$10</button>
-      <button class="feed-amount-btn" data-amount="0" data-zh="自定义" data-en="Custom" data-ja="カスタム">自定义</button>
+      <button class="feed-amount-btn" data-amount="0" data-zh="自定义" data-tw="自定義" data-en="Custom" data-ja="カスタム">自定义</button>
     </div>
     <div class="feed-custom-row" id="feed-custom-row" style="display:none;">
-      <span class="feed-custom-label" data-zh="金额 USD $" data-en="Amount USD $" data-ja="金額 USD $">金额 USD $</span>
+      <span class="feed-custom-label" data-zh="金额 USD $" data-tw="金額 USD $" data-en="Amount USD $" data-ja="金額 USD $">金额 USD $</span>
       <input type="number" id="feed-custom-amount" class="feed-custom-input" min="1" max="999" value="5" placeholder="5" />
     </div>
     <div class="feed-name-row">
-      <span class="feed-name-label" data-zh="供养人（可匿名）" data-en="Your name (optional)" data-ja="お名前（匿名可）">供养人（可匿名）</span>
+      <span class="feed-name-label" data-zh="供养人（可匿名）" data-tw="供養人（可匿名）" data-en="Your name (optional)" data-ja="お名前（匿名可）">供养人（可匿名）</span>
       <input type="text" id="feed-donor-name" class="whisper-input feed-name-input" maxlength="30"
         data-placeholder-zh="如：来自台湾的猫奴" data-placeholder-en="e.g. A cat lover from Singapore" data-placeholder-ja="例：東京の猫好き"
         placeholder="如：来自台湾的猫奴" />
     </div>
-    <button id="btn-feed-submit" class="btn-feed" data-zh='送出这罐真罐头' data-en='Send a Real Can' data-ja='本物の缶詰を送る'>送出这罐真罐头</button>
-    <div class="feed-disclaimer" data-zh="通过 Stripe 安全付款 · 每罐都是真实购买 · 主人承诺每罐必拍为证" data-en="Secure payment via Stripe · Every can is physically purchased · Owner promises photo proof for every feeding" data-ja="Stripeで安全決済 · 返金不可 · オーナーは必ず撮影を約束">通过 Stripe 安全付款 · 供养不可退款 · 主人承诺每罐必拍</div>
+    <button id="btn-feed-submit" class="btn-feed" data-zh='送出这罐真罐头' data-tw='送出這罐真罐頭' data-en='Send a Real Can' data-ja='本物の缶詰を送る'>送出这罐真罐头</button>
+    <div class="feed-disclaimer" data-zh="通过 Stripe 安全付款 · 每罐都是真实购买 · 主人承诺每罐必拍为证" data-tw="透過 Stripe 安全付款 · 每罐都是真實購買 · 主人承諾每罐必拍為證" data-en="Secure payment via Stripe · Every can is physically purchased · Owner promises photo proof for every feeding" data-ja="Stripeで安全決済 · 返金不可 · オーナーは必ず撮影を約束">通过 Stripe 安全付款 · 供养不可退款 · 主人承诺每罐必拍</div>
   </div>
 
   <div id="feeding-wall" class="feeding-wall reveal">
-    <div class="feeding-wall-title" data-zh="📸 已经吃掉的罐头" data-en="📸 Cans Already Eaten" data-ja="📸 食べた缶詰の記録">📸 已经吃掉的罐头</div>
+    <div class="feeding-wall-title" data-zh="📸 已经吃掉的罐头" data-tw="📸 已經吃掉的罐頭" data-en="📸 Cans Already Eaten" data-ja="📸 食べた缶詰の記録">📸 已经吃掉的罐头</div>
     <div id="feeding-cards" class="feeding-cards">
-      <div class="feeding-empty" data-zh="还没有供养记录<br>成为第一个请肥猫吃罐头的人 🐾" data-en="No feedings yet.<br>Be the first to feed Fei Mao 🐾" data-ja="まだ記録がありません。<br>最初に缶詰を送ってみよう 🐾">还没有供养记录<br>成为第一个请肥猫吃罐头的人 🐾</div>
+      <div class="feeding-empty" data-zh="还没有供养记录<br>成为第一个请肥猫吃罐头的人 🐾" data-tw="還沒有供養記錄<br>成為第一個請肥貓吃罐頭的人 🐾" data-en="No feedings yet.<br>Be the first to feed Fei Mao 🐾" data-ja="まだ記録がありません。<br>最初に缶詰を送ってみよう 🐾">还没有供养记录<br>成为第一个请肥猫吃罐头的人 🐾</div>
     </div>
   </div>
 
@@ -674,24 +676,24 @@ html[lang="en"] .btn-whisper,html[lang="en"] .btn-feed,html[lang="en"] .btn-repl
   <div class="book-banner-inner">
     <img loading="lazy" class="book-banner-cover" src="https://taoofcat.com/book-cover.png" alt="Tao of Cat">
     <div class="book-banner-body">
-      <div class="book-banner-label" data-zh="傻猪推荐好书" data-en="Recommended Reading" data-ja="おすすめの本">傻猪推荐好书</div>
-      <div class="book-banner-title" data-zh="Tao of Cat — 英文电子书" data-en="Tao of Cat — The Ebook" data-ja="Tao of Cat — 英語電子書籍">Tao of Cat — 英文电子书</div>
+      <div class="book-banner-label" data-zh="傻猪推荐好书" data-tw="傻豬推薦好書" data-en="Recommended Reading" data-ja="おすすめの本">傻猪推荐好书</div>
+      <div class="book-banner-title" data-zh="Tao of Cat — 英文电子书" data-tw="Tao of Cat — 英文電子書" data-en="Tao of Cat — The Ebook" data-ja="Tao of Cat — 英語電子書籍">Tao of Cat — 英文电子书</div>
       <div class="book-banner-sub"
-        data-zh="英文版。你的猫比你更懂老子。11堂课，30页，$7.99"
+        data-zh="英文版。你的猫比你更懂老子。11堂课，30页，$7.99" data-tw="英文版。你的貓比你更懂老子。11堂課，30頁，$7.99"
         data-en="Your cat has been teaching you Taoism for years. You just weren't listening. 11 lessons · 30 pages · $7.99"
         data-ja="英語版。あなたの猫は老子より賢い。11レッスン · 30ページ · $7.99">
         英文版。你的猫比你更懂老子。11堂课，30页，$7.99
       </div>
       <a href="https://taocat.gumroad.com/l/book" target="_blank" class="btn-book-banner"
-        data-zh="✦ 立即获取" data-en="✦ Get the Ebook" data-ja="✦ 今すぐ入手">✦ 立即获取</a>
+        data-zh="✦ 立即获取" data-tw="✦ 立即獲取" data-en="✦ Get the Ebook" data-ja="✦ 今すぐ入手">✦ 立即获取</a>
     </div>
   </div>
 </div>
 
 <footer>
   <div class="footer-brand">玄猫之道</div>
-  <div style="margin-bottom:8px;"><a href="support.html" style="font-size:13px;color:var(--ink-faint);text-decoration:none;font-family:'Noto Sans SC',sans-serif;font-weight:300;letter-spacing:0.05em;" data-zh="帮助中心" data-en="Support" data-ja="ヘルプ">帮助中心</a></div>
-  <div class="footer-copy" data-zh="© 2026 Tao of Your Cat · Ipoh, Malaysia" data-en="© 2026 Tao of Your Cat · Ipoh, Malaysia" data-ja="© 2026 Tao of Your Cat · Ipoh, Malaysia">© 2026 Tao of Your Cat · Ipoh, Malaysia</div>
+  <div style="margin-bottom:8px;"><a href="support.html" style="font-size:13px;color:var(--ink-faint);text-decoration:none;font-family:'Noto Sans SC',sans-serif;font-weight:300;letter-spacing:0.05em;" data-zh="帮助中心" data-tw="幫助中心" data-en="Support" data-ja="ヘルプ">帮助中心</a></div>
+  <div class="footer-copy" data-zh="© 2026 Tao of Your Cat · Ipoh, Malaysia" data-tw="© 2026 Tao of Your Cat · Ipoh, Malaysia" data-en="© 2026 Tao of Your Cat · Ipoh, Malaysia" data-ja="© 2026 Tao of Your Cat · Ipoh, Malaysia">© 2026 Tao of Your Cat · Ipoh, Malaysia</div>
 </footer>
 
 <script>
