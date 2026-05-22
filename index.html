@@ -42,10 +42,11 @@
   function applyLang(l) {
     _lang = l;
     localStorage.setItem('taoc_lang', l);
-    document.documentElement.lang = l;
+    document.documentElement.lang = l === 'tw' ? 'zh-TW' : l;
     document.querySelectorAll('[data-zh]').forEach(function(el) {
       var txt = l === 'en' ? (el.dataset.en || el.dataset.zh)
               : l === 'ja' ? (el.dataset.ja || el.dataset.zh)
+              : l === 'tw' ? (el.dataset.tw || el.dataset.zh)
               : el.dataset.zh;
       if (txt !== undefined) el.innerHTML = txt;
     });
@@ -67,7 +68,7 @@
   gtag('js', new Date());
   gtag('config', 'G-7Q71WCDFF0');
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400&family=IM+Fell+English:ital@0;1&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400&family=IM+Fell+English:ital@0;1&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&display=swap" rel="stylesheet">
 <style>
 :root {
   --paper: #f4ede0;
@@ -780,6 +781,11 @@ html[lang="en"] .nav-brand {
   font-family: 'Playfair Display', serif;
   letter-spacing: 0.15em;
 }
+
+/* ── TW TYPOGRAPHY ── */
+html[lang="zh-TW"] body {
+  font-family: 'Noto Serif TC', serif;
+}
 html[lang="en"] .story-photo-caption,
 html[lang="en"] .video-caption,
 html[lang="en"] .tao-quote-source,
@@ -918,12 +924,13 @@ nav.scrolled .nav-brand svg circle { fill: #1e1608 !important; }
   </g>
 </svg></a>
   <ul class="nav-links">
-    <li><a href="#cats" data-zh="猫咪家族" data-en="The Cats" data-ja="猫の家族">猫咪家族</a></li>
-    <li><a href="#philosophy" data-zh="玄猫哲学" data-en="Daily Life" data-ja="猫の哲学">玄猫哲学</a></li>
-    <li><a href="divination.html" data-zh="问猫" data-en="Ask the Cat" data-ja="猫に聞く">问猫</a></li>
+    <li><a href="#cats" data-zh="猫咪家族" data-tw="貓咪家族" data-en="The Cats" data-ja="猫の家族">猫咪家族</a></li>
+    <li><a href="#philosophy" data-zh="玄猫哲学" data-tw="玄貓哲學" data-en="Daily Life" data-ja="猫の哲学">玄猫哲学</a></li>
+    <li><a href="divination.html" data-zh="问猫" data-tw="問貓" data-en="Ask the Cat" data-ja="猫に聞く">问猫</a></li>
   </ul>
   <div class="lang-switcher">
-  <button class="lang-opt" data-lang="zh">中</button>
+  <button class="lang-opt" data-lang="zh">简</button>
+  <button class="lang-opt" data-lang="tw">繁</button>
   <button class="lang-opt" data-lang="en">EN</button>
   <button class="lang-opt" data-lang="ja">JP</button>
 </div>
@@ -976,26 +983,26 @@ nav.scrolled .nav-brand svg circle { fill: #1e1608 !important; }
       <span style="position:absolute;left:78.9%;transform:translateX(-50%);font-family:'IM Fell English',serif;font-style:italic;font-weight:300;font-size:clamp(10px,1.3vw,13px);color:rgba(212,168,67,0.55);white-space:nowrap;letter-spacing:0.05em;">Dào</span>
     </div>
     <div class="hero-divider" style="margin-top:2.5rem;"></div>
-    <div class="hero-tagline" data-zh="心里那个答案，从来都在。猫只是帮你记起来。" data-en="The answer was always there. The cat just helped you remember." data-ja="その答えは、ずっとそこにあった。猫が、ただ思い出させてくれただけ。">心里那个答案，从来都在。猫只是帮你记起来。</div>
+    <div class="hero-tagline" data-zh="心里那个答案，从来都在。猫只是帮你记起来。" data-tw="心裡那個答案，從來都在。貓只是幫你記起來。" data-en="The answer was always there. The cat just helped you remember." data-ja="その答えは、ずっとそこにあった。猫が、ただ思い出させてくれただけ。">心里那个答案，从来都在。猫只是帮你记起来。</div>
   </div>
 
   
 
   <div class="hero-cta">
-    <a href="divination.html" class="btn-primary" data-zh="✦ 去问猫" data-en="✦ Ask the Cat" data-ja="✦ 猫に聞く">✦ 去问猫</a>
-    <a href="commission.html" class="btn-secondary reveal" data-zh="🎨 定制猫咪插画" data-en="🎨 Cat Portrait" data-ja="🎨 猫の肖像画">🎨 定制猫咪插画</a>
-    <a href="#cats" class="btn-secondary" data-zh="认识猫咪家族" data-en="Meet the Cats" data-ja="猫の家族に会う">认识猫咪家族</a>
+    <a href="divination.html" class="btn-primary" data-zh="✦ 去问猫" data-tw="✦ 去問貓" data-en="✦ Ask the Cat" data-ja="✦ 猫に聞く">✦ 去问猫</a>
+    <a href="commission.html" class="btn-secondary reveal" data-zh="🎨 定制猫咪插画" data-tw="🎨 訂製貓咪插畫" data-en="🎨 Cat Portrait" data-ja="🎨 猫の肖像画">🎨 定制猫咪插画</a>
+    <a href="#cats" class="btn-secondary" data-zh="认识猫咪家族" data-tw="認識貓咪家族" data-en="Meet the Cats" data-ja="猫の家族に会う">认识猫咪家族</a>
   </div>
 
-  <div class="scroll-hint" data-zh="往下探索 ↓" data-en="Scroll to explore ↓" data-ja="もっと見る ↓">往下探索 ↓</div>
+  <div class="scroll-hint" data-zh="往下探索 ↓" data-tw="往下探索 ↓" data-en="Scroll to explore ↓" data-ja="もっと見る ↓">往下探索 ↓</div>
 </div>
 
 <!-- CAT FAMILY -->
 <section id="cats">
   <div class="section-header reveal">
     <div class="section-label">The Family</div>
-    <div class="section-title" data-zh="玄猫家族" data-en="The Cat Family" data-ja="玄猫ファミリー">玄猫家族</div>
-    <div class="section-sub" data-zh="每一只猫的到来，都不是偶然" data-en="Every cat arrived for a reason" data-ja="どの猫の訪れも、偶然ではない">每一只猫的到来，都不是偶然</div>
+    <div class="section-title" data-zh="玄猫家族" data-tw="玄貓家族" data-en="The Cat Family" data-ja="玄猫ファミリー">玄猫家族</div>
+    <div class="section-sub" data-zh="每一只猫的到来，都不是偶然" data-tw="每一隻貓的到來，都不是偶然" data-en="Every cat arrived for a reason" data-ja="どの猫の訪れも、偶然ではない">每一只猫的到来，都不是偶然</div>
     <div class="section-divider"></div>
   </div>
 
@@ -1004,70 +1011,70 @@ nav.scrolled .nav-brand svg circle { fill: #1e1608 !important; }
       <div class="cat-card-img-wrap">
         <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200/cat-shazhu.jpg" alt="傻猪" class="cat-card-img" style="object-position:center 15%;">
       </div>
-      <div class="cat-card-name" data-zh="傻 猪" data-en="Sha Zhu" data-ja="シャージュー">傻 猪</div>
-      <div class="cat-card-role" data-zh="看透一切 · 异瞳白猫" data-en="Sees Through Everything · Odd-eyed Cat" data-ja="すべてを見通す · オッドアイの白猫">看透一切 · 异瞳白猫</div>
-      <div class="cat-card-desc" data-zh="流浪猫出身，异瞳白狮子猫。一眼看世界，一眼望无极。" data-en="A stray who became an oracle. One eye sees the world, the other sees the infinite." data-ja="元野良猫、オッドアイの白いライオン猫。片目で世界を、もう片目で無限を見つめる。">流浪猫出身，异瞳白狮子猫。一眼看世界，一眼望无极。</div>
+      <div class="cat-card-name" data-zh="傻 猪" data-tw="傻 豬" data-en="Sha Zhu" data-ja="シャージュー">傻 猪</div>
+      <div class="cat-card-role" data-zh="看透一切 · 异瞳白猫" data-tw="看透一切 · 異瞳白貓" data-en="Sees Through Everything · Odd-eyed Cat" data-ja="すべてを見通す · オッドアイの白猫">看透一切 · 异瞳白猫</div>
+      <div class="cat-card-desc" data-zh="流浪猫出身，异瞳白狮子猫。一眼看世界，一眼望无极。" data-tw="流浪貓出身，異瞳白獅子貓。一眼看世界，一眼望無極。" data-en="A stray who became an oracle. One eye sees the world, the other sees the infinite." data-ja="元野良猫、オッドアイの白いライオン猫。片目で世界を、もう片目で無限を見つめる。">流浪猫出身，异瞳白狮子猫。一眼看世界，一眼望无极。</div>
     </a>
 
     <a href="cat-feimao.html" class="cat-card" style="text-decoration:none;color:inherit;">
       <div class="cat-card-img-wrap">
         <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200/cat-feimao.jpg" alt="肥猫" class="cat-card-img">
       </div>
-      <div class="cat-card-name" data-zh="肥 猫" data-en="Fei Mao" data-ja="フェイマオ">肥 猫</div>
-      <div class="cat-card-role" data-zh="十岁长老 · 无为" data-en="Elder of Ten Years · Wu Wei" data-ja="十歳の長老 · 無為">十岁长老 · 无为</div>
-      <div class="cat-card-desc" data-zh="在花园等候两年，终于入门。吃饱睡足，便是最高智慧。" data-en="Waited two years in the garden to be let in. Eat, sleep, be content — the highest wisdom." data-ja="庭で二年間待ち続け、ついに家族に。食べて、寝て——それが最高の知恵。">在花园等候两年，终于入门。吃饱睡足，便是最高智慧。</div>
+      <div class="cat-card-name" data-zh="肥 猫" data-tw="肥 貓" data-en="Fei Mao" data-ja="フェイマオ">肥 猫</div>
+      <div class="cat-card-role" data-zh="十岁长老 · 无为" data-tw="十歲長老 · 無為" data-en="Elder of Ten Years · Wu Wei" data-ja="十歳の長老 · 無為">十岁长老 · 无为</div>
+      <div class="cat-card-desc" data-zh="在花园等候两年，终于入门。吃饱睡足，便是最高智慧。" data-tw="在花園等候兩年，終於入門。吃飽睡足，便是最高智慧。" data-en="Waited two years in the garden to be let in. Eat, sleep, be content — the highest wisdom." data-ja="庭で二年間待ち続け、ついに家族に。食べて、寝て——それが最高の知恵。">在花园等候两年，终于入门。吃饱睡足，便是最高智慧。</div>
     </a>
 
     <a href="cat-feipo.html" class="cat-card" style="text-decoration:none;color:inherit;">
       <div class="cat-card-img-wrap">
         <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200/cat-feipo.jpg" alt="肥婆" class="cat-card-img">
       </div>
-      <div class="cat-card-name" data-zh="茶室猫" data-en="Cha Shi" data-ja="チャシマオ">茶室猫</div>
-      <div class="cat-card-role" data-zh="玳瑁猫妈 · 自然" data-en="Tortoiseshell Mama · Nature" data-ja="べっ甲模様の猫ママ · 自然">玳瑁猫妈 · 自然</div>
-      <div class="cat-card-desc" data-zh="外卖克星，茶室常客。流浪中孕育生命，随心而动，纯粹本性。" data-en="Food detective, teahouse regular. Gave birth while homeless — pure instinct, pure nature." data-ja="出前の常連から茶屋の主役へ。流浪の中で命を宿し、心のままに生きる。">外卖克星，茶室常客。流浪中孕育生命，随心而动，纯粹本性。</div>
+      <div class="cat-card-name" data-zh="茶室猫" data-tw="茶室貓" data-en="Cha Shi" data-ja="チャシマオ">茶室猫</div>
+      <div class="cat-card-role" data-zh="玳瑁猫妈 · 自然" data-tw="玳瑁貓媽 · 自然" data-en="Tortoiseshell Mama · Nature" data-ja="べっ甲模様の猫ママ · 自然">玳瑁猫妈 · 自然</div>
+      <div class="cat-card-desc" data-zh="外卖克星，茶室常客。流浪中孕育生命，随心而动，纯粹本性。" data-tw="外賣剋星，茶室常客。流浪中孕育生命，隨心而動，純粹本性。" data-en="Food detective, teahouse regular. Gave birth while homeless — pure instinct, pure nature." data-ja="出前の常連から茶屋の主役へ。流浪の中で命を宿し、心のままに生きる。">外卖克星，茶室常客。流浪中孕育生命，随心而动，纯粹本性。</div>
     </a>
 
     <a href="cat-hubanzai.html" class="cat-card" style="text-decoration:none;color:inherit;">
       <div class="cat-card-img-wrap">
         <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200/hubanzai.jpg" alt="虎斑仔" class="cat-card-img">
       </div>
-      <div class="cat-card-name" data-zh="虎斑仔" data-en="Hu Ban Zai" data-ja="フーバンザイ">虎斑仔</div>
-      <div class="cat-card-role" data-zh="狸花二哥 · 禅" data-en="Tabby Brother · Zen" data-ja="トラ猫の兄貴 · 禅">狸花二哥 · 禅</div>
-      <div class="cat-card-desc" data-zh="近在眼前却不可得，追之愈远——正是禅的公案。" data-en="So close, yet untouchable. The more you chase, the further he goes — a living Zen koan." data-ja="目の前にいるのに捕まえられない。追えば追うほど遠ざかる——まさに禅の公案。">近在眼前却不可得，追之愈远——正是禅的公案。</div>
+      <div class="cat-card-name" data-zh="虎斑仔" data-tw="虎斑仔" data-en="Hu Ban Zai" data-ja="フーバンザイ">虎斑仔</div>
+      <div class="cat-card-role" data-zh="狸花二哥 · 禅" data-tw="狸花二哥 · 禪" data-en="Tabby Brother · Zen" data-ja="トラ猫の兄貴 · 禅">狸花二哥 · 禅</div>
+      <div class="cat-card-desc" data-zh="近在眼前却不可得，追之愈远——正是禅的公案。" data-tw="近在眼前卻不可得，追之愈遠——正是禪的公案。" data-en="So close, yet untouchable. The more you chase, the further he goes — a living Zen koan." data-ja="目の前にいるのに捕まえられない。追えば追うほど遠ざかる——まさに禅の公案。">近在眼前却不可得，追之愈远——正是禅的公案。</div>
     </a>
 
     <a href="cat-mengmengda.html" class="cat-card" style="text-decoration:none;color:inherit;">
       <div class="cat-card-img-wrap">
         <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200/cat-mengmengda.jpg" alt="萌萌哒" class="cat-card-img">
       </div>
-      <div class="cat-card-name" data-zh="萌萌哒" data-en="Meng Meng Da" data-ja="モンモンダー">萌萌哒</div>
-      <div class="cat-card-role" data-zh="西伯利亚小公主 · 慈悲" data-en="Siberian Princess · Compassion" data-ja="シベリアの小さなプリンセス · 慈悲">西伯利亚小公主 · 慈悲</div>
-      <div class="cat-card-desc" data-zh="以娇嗔示爱，以任性撒娇，以柔软征服一切。" data-en="She loves through her whims, charms through her sass, and conquers everything with softness." data-ja="甘えで愛を示し、気ままで魅了し、柔らかさですべてを制する。">以娇嗔示爱，以任性撒娇，以柔软征服一切。</div>
+      <div class="cat-card-name" data-zh="萌萌哒" data-tw="萌萌噠" data-en="Meng Meng Da" data-ja="モンモンダー">萌萌哒</div>
+      <div class="cat-card-role" data-zh="西伯利亚小公主 · 慈悲" data-tw="西伯利亞小公主 · 慈悲" data-en="Siberian Princess · Compassion" data-ja="シベリアの小さなプリンセス · 慈悲">西伯利亚小公主 · 慈悲</div>
+      <div class="cat-card-desc" data-zh="以娇嗔示爱，以任性撒娇，以柔软征服一切。" data-tw="以嬌嗔示愛，以任性撒嬌，以柔軟征服一切。" data-en="She loves through her whims, charms through her sass, and conquers everything with softness." data-ja="甘えで愛を示し、気ままで魅了し、柔らかさですべてを制する。">以娇嗔示爱，以任性撒娇，以柔软征服一切。</div>
     </a>
 
     <a href="cat-heizhu.html" class="cat-card" style="text-decoration:none;color:inherit;position:relative;">
       <div class="cat-card-img-wrap">
         <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200/cat-heizhu.jpg" alt="黑珠仔" class="cat-card-img">
       </div>
-      <div class="cat-card-name" data-zh="黑珠仔" data-en="Hei Zhu Zai" data-ja="ヘイジュージャイ">黑珠仔</div>
-      <div class="cat-card-role" data-zh="乌云衔金 · 神秘来客" data-en="Gold in the Dark · Mysterious Guest" data-ja="黒雲に金を帯びる · 謎の来客">乌云衔金 · 神秘来客</div>
-      <div class="cat-card-desc" data-zh="雨夜降临，乌云衔金。傻猪的黑色镜像，64的另一半。故事，正在发生中。" data-en="Arrived on a rainy night with golden whiskers. The dark mirror of Sha Zhu. His story is still unfolding." data-ja="雨の夜に現れた、金色の髭を持つ黒猫。シャージューの鏡像、64のもう半分。物語は、まだ続いている。">雨夜降临，乌云衔金。傻猪的黑色镜像，64的另一半。故事，正在发生中。</div>
-      <div style="position:absolute;top:10px;right:10px;font-size:10px;letter-spacing:0.15em;color:var(--gold);font-family:'Noto Sans SC',sans-serif;background:rgba(212,168,67,0.12);border:1px solid rgba(212,168,67,0.3);border-radius:20px;padding:3px 8px;" data-zh="新成员" data-en="New" data-ja="新メンバー">新成员</div>
+      <div class="cat-card-name" data-zh="黑珠仔" data-tw="黑珠仔" data-en="Hei Zhu Zai" data-ja="ヘイジュージャイ">黑珠仔</div>
+      <div class="cat-card-role" data-zh="乌云衔金 · 神秘来客" data-tw="烏雲銜金 · 神秘來客" data-en="Gold in the Dark · Mysterious Guest" data-ja="黒雲に金を帯びる · 謎の来客">乌云衔金 · 神秘来客</div>
+      <div class="cat-card-desc" data-zh="雨夜降临，乌云衔金。傻猪的黑色镜像，64的另一半。故事，正在发生中。" data-tw="雨夜降臨，烏雲銜金。傻豬的黑色鏡像，64的另一半。故事，正在發生中。" data-en="Arrived on a rainy night with golden whiskers. The dark mirror of Sha Zhu. His story is still unfolding." data-ja="雨の夜に現れた、金色の髭を持つ黒猫。シャージューの鏡像、64のもう半分。物語は、まだ続いている。">雨夜降临，乌云衔金。傻猪的黑色镜像，64的另一半。故事，正在发生中。</div>
+      <div style="position:absolute;top:10px;right:10px;font-size:10px;letter-spacing:0.15em;color:var(--gold);font-family:'Noto Sans SC',sans-serif;background:rgba(212,168,67,0.12);border:1px solid rgba(212,168,67,0.3);border-radius:20px;padding:3px 8px;" data-zh="新成员" data-tw="新成員" data-en="New" data-ja="新メンバー">新成员</div>
     </a>
   </div>
 
   <!-- MEMORIAL -->
   <div class="memorial reveal">
-    <div class="memorial-title" data-zh="✦ &nbsp; 已归道的玄猫 &nbsp; ✦" data-en="✦ &nbsp; In Loving Memory &nbsp; ✦" data-ja="✦ &nbsp; 旅立った玄猫たち &nbsp; ✦">✦ &nbsp; 已归道的玄猫 &nbsp; ✦</div>
+    <div class="memorial-title" data-zh="✦ &nbsp; 已归道的玄猫 &nbsp; ✦" data-tw="✦ &nbsp; 已歸道的玄貓 &nbsp; ✦" data-en="✦ &nbsp; In Loving Memory &nbsp; ✦" data-ja="✦ &nbsp; 旅立った玄猫たち &nbsp; ✦">✦ &nbsp; 已归道的玄猫 &nbsp; ✦</div>
     <div class="memorial-cats">
       <a href="cat-xiaobai.html" class="memorial-cat" style="text-decoration:none;color:inherit;">
         <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200/cat-xiaobai.jpg" alt="小白" class="memorial-cat-img" style="object-position:center 20%;">
-        <div class="memorial-cat-name" data-zh="小 白" data-en="Xiao Bai" data-ja="シャオバイ">小 白</div>
+        <div class="memorial-cat-name" data-zh="小 白" data-tw="小 白" data-en="Xiao Bai" data-ja="シャオバイ">小 白</div>
         <div class="memorial-cat-note">傻猪之子 · 异瞳白猫<br>短暂而完整的一生</div>
       </a>
       <a href="cat-xiaohei.html" class="memorial-cat" style="text-decoration:none;color:inherit;">
         <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200/cat-xiaohei.jpg" alt="小黑" class="memorial-cat-img">
-        <div class="memorial-cat-name" data-zh="小 黑" data-en="Xiao Hei" data-ja="シャオヘイ">小 黑</div>
+        <div class="memorial-cat-name" data-zh="小 黑" data-tw="小 黑" data-en="Xiao Hei" data-ja="シャオヘイ">小 黑</div>
         <div class="memorial-cat-note">流浪来客 · 半年信任<br>来去皆是缘</div>
       </a>
     </div>
@@ -1079,8 +1086,8 @@ nav.scrolled .nav-brand svg circle { fill: #1e1608 !important; }
   <div style="max-width:1200px; margin:0 auto;">
     <div class="section-header reveal">
       <div class="section-label">Daily Life · 猫咪日常</div>
-      <div class="section-title" data-zh="他们的每一天" data-en="Their Every Day" data-ja="彼らの毎日">他们的每一天</div>
-      <div class="section-sub" data-zh="每一张照片，都是道在生活里的样子" data-en="Every photo is the Tao showing up in daily life" data-ja="一枚一枚の写真が、日常の中の道（タオ）">每一张照片，都是道在生活里的样子</div>
+      <div class="section-title" data-zh="他们的每一天" data-tw="他們的每一天" data-en="Their Every Day" data-ja="彼らの毎日">他们的每一天</div>
+      <div class="section-sub" data-zh="每一张照片，都是道在生活里的样子" data-tw="每一張照片，都是道在生活裡的樣子" data-en="Every photo is the Tao showing up in daily life" data-ja="一枚一枚の写真が、日常の中の道（タオ）">每一张照片，都是道在生活里的样子</div>
       <div class="section-divider"></div>
     </div>
     <div class="reveal">
@@ -1093,7 +1100,7 @@ nav.scrolled .nav-brand svg circle { fill: #1e1608 !important; }
       </script>
     </div>
     <div style="text-align:center; margin-top:1.5rem;">
-      <a href="https://www.instagram.com/taoc.4t" target="_blank" style="font-size:13px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; text-decoration:none; letter-spacing:0.05em;" data-zh="在 Instagram 关注 @taoc.4t →" data-en="Follow on Instagram @taoc.4t →" data-ja="Instagram @taoc.4t をフォロー →">在 Instagram 关注 @taoc.4t →</a>
+      <a href="https://www.instagram.com/taoc.4t" target="_blank" style="font-size:13px; color:var(--ink-faint); font-family:'Noto Sans SC',sans-serif; text-decoration:none; letter-spacing:0.05em;" data-zh="在 Instagram 关注 @taoc.4t →" data-tw="在 Instagram 關注 @taoc.4t →" data-en="Follow on Instagram @taoc.4t →" data-ja="Instagram @taoc.4t をフォロー →">在 Instagram 关注 @taoc.4t →</a>
     </div>
   </div>
 </section>
@@ -1102,12 +1109,12 @@ nav.scrolled .nav-brand svg circle { fill: #1e1608 !important; }
 <div class="div-cta">
   <div class="div-cta-bg">卦</div>
   <div style="position:relative; z-index:1;">
-    <div class="div-cta-label reveal" data-zh="AI · 五只猫 · 一个问题" data-en="AI · Five Cats · One Question" data-ja="AI · 五匹の猫 · ひとつの問い">AI · 五只猫 · 一个问题</div>
-    <div class="div-cta-title reveal" data-zh="让猫替你<br>想一想" data-en="Let the Cat<br>Think With You" data-ja="猫に<br>考えてもらおう">让猫替你<br>想一想</div>
-    <div class="div-cta-sub reveal" data-zh="心里有什么放不下的？<br>选一只猫，说出来。" data-en="Something weighing on you?<br>Pick a cat. Say it out loud." data-ja="心に引っかかることがある？<br>猫を選んで、話してみて。">心里有什么放不下的？<br>选一只猫，说出来。</div>
-    <a href="divination.html" class="btn-gold reveal" data-zh="✦ 去问猫" data-en="✦ Ask the Cat" data-ja="✦ 猫に聞く">✦ 去问猫</a>
+    <div class="div-cta-label reveal" data-zh="AI · 五只猫 · 一个问题" data-tw="AI · 五隻貓 · 一個問題" data-en="AI · Five Cats · One Question" data-ja="AI · 五匹の猫 · ひとつの問い">AI · 五只猫 · 一个问题</div>
+    <div class="div-cta-title reveal" data-zh="让猫替你<br>想一想" data-tw="讓貓替你<br>想一想" data-en="Let the Cat<br>Think With You" data-ja="猫に<br>考えてもらおう">让猫替你<br>想一想</div>
+    <div class="div-cta-sub reveal" data-zh="心里有什么放不下的？<br>选一只猫，说出来。" data-tw="心裡有什麼放不下的？<br>選一隻貓，說出來。" data-en="Something weighing on you?<br>Pick a cat. Say it out loud." data-ja="心に引っかかることがある？<br>猫を選んで、話してみて。">心里有什么放不下的？<br>选一只猫，说出来。</div>
+    <a href="divination.html" class="btn-gold reveal" data-zh="✦ 去问猫" data-tw="✦ 去問貓" data-en="✦ Ask the Cat" data-ja="✦ 猫に聞く">✦ 去问猫</a>
     <a href="commission.html" class="btn-gold reveal" style="margin-left:12px;background:transparent;border:1px solid rgba(212,168,67,0.3);color:var(--muted);"
-      data-zh="🎨 定制猫咪插画" data-en="🎨 Cat Portrait Commission" data-ja="🎨 猫の肖像画">🎨 定制猫咪插画</a>
+      data-zh="🎨 定制猫咪插画" data-tw="🎨 訂製貓咪插畫" data-en="🎨 Cat Portrait Commission" data-ja="🎨 猫の肖像画">🎨 定制猫咪插画</a>
   </div>
 </div>
 
@@ -1118,16 +1125,18 @@ nav.scrolled .nav-brand svg circle { fill: #1e1608 !important; }
   <div class="book-banner-inner">
     <img class="book-banner-cover" src="https://taoofcat.com/book-cover.png" alt="Tao of Cat Book">
     <div class="book-banner-body">
-      <div class="book-banner-label" data-zh="傻猪推荐好书" data-en="Recommended by Sha Zhu" data-ja="シャージュー推薦">傻猪推荐好书</div>
-      <div class="book-banner-title" data-zh="Tao of Cat — 英文电子书" data-en="Tao of Cat — The Ebook" data-ja="Tao of Cat — 英語電子書籍">Tao of Cat — 英文电子书</div>
+      <div class="book-banner-label" data-zh="傻猪推荐好书" data-tw="傻豬推薦好書" data-en="Recommended by Sha Zhu" data-ja="シャージュー推薦">傻猪推荐好书</div>
+      <div class="book-banner-title" data-zh="Tao of Cat — 英文电子书" data-tw="Tao of Cat — 英文電子書" data-en="Tao of Cat — The Ebook" data-ja="Tao of Cat — 英語電子書籍">Tao of Cat — 英文电子书</div>
       <div class="book-banner-sub"
         data-zh="英文版。你的猫比你更懂老子。11堂课，30页，$7.99"
+        data-tw="英文版。你的貓比你更懂老子。11堂課，30頁，$7.99"
         data-en="Your cat has been teaching you Taoism for years. You just weren't listening. 11 lessons · 30 pages · $7.99"
         data-ja="英語版。あなたの猫は老子より賢い。11レッスン · 30ページ · $7.99">
         英文版。你的猫比你更懂老子。11堂课，30页，$7.99
       </div>
       <a href="https://taocat.gumroad.com/l/book" target="_blank" class="btn-book-banner"
         data-zh="✦ 立即获取"
+        data-tw="✦ 立即獲取"
         data-en="✦ Get the Ebook"
         data-ja="✦ 今すぐ入手">✦ 立即获取</a>
     </div>
@@ -1138,12 +1147,12 @@ nav.scrolled .nav-brand svg circle { fill: #1e1608 !important; }
   <div class="footer-brand">玄猫之道</div>
   <div style="font-family:'IM Fell English',serif; font-style:italic; font-size:13px; color:var(--ink-faint); margin-bottom:1rem;">Tao of Cat</div>
   <div class="footer-links">
-    <a href="divination.html" data-zh="问猫" data-en="Ask the Cat" data-ja="猫に聞く">问猫</a>
-    <a href="#cats" data-zh="猫咪家族" data-en="The Cats" data-ja="猫の家族">猫咪家族</a>
-    <a href="https://a.co/d/04csJqXO" target="_blank" data-zh="我的书" data-en="My Book" data-ja="著書">我的书</a>
-    <a href="support.html" data-zh="帮助中心" data-en="Support" data-ja="ヘルプ">帮助中心</a>
+    <a href="divination.html" data-zh="问猫" data-tw="問貓" data-en="Ask the Cat" data-ja="猫に聞く">问猫</a>
+    <a href="#cats" data-zh="猫咪家族" data-tw="貓咪家族" data-en="The Cats" data-ja="猫の家族">猫咪家族</a>
+    <a href="https://a.co/d/04csJqXO" target="_blank" data-zh="我的书" data-tw="我的書" data-en="My Book" data-ja="著書">我的书</a>
+    <a href="support.html" data-zh="帮助中心" data-tw="幫助中心" data-en="Support" data-ja="ヘルプ">帮助中心</a>
   </div>
-  <div class="footer-copy" data-zh="© 2026 玄猫之道" data-en="© 2026 Tao of Your Cat" data-ja="© 2026 玄猫之道">© 2026 玄猫之道</div>
+  <div class="footer-copy" data-zh="© 2026 玄猫之道" data-tw="© 2026 玄貓之道" data-en="© 2026 Tao of Your Cat" data-ja="© 2026 玄猫之道">© 2026 玄猫之道</div>
 </footer>
 
 <script>
