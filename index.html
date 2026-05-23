@@ -53,6 +53,12 @@
     document.querySelectorAll('.lang-opt').forEach(function(btn) {
       btn.classList.toggle('active', btn.dataset.lang === l);
     });
+    var book2btn = document.getElementById('book2-btn');
+    if (book2btn) {
+      book2btn.href = (l === 'tw')
+        ? 'https://taocat.gumroad.com/l/iwasnevergone_tw'
+        : 'https://taocat.gumroad.com/l/iwasnevergone';
+    }
   }
   document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.lang-opt').forEach(function(btn) {
@@ -818,71 +824,96 @@ nav.scrolled .nav-brand svg circle { fill: #1e1608 !important; }
   nav.scrolled .lang-opt:hover, nav.scrolled .lang-opt.active { color:#1e1608; border-color:#1e1608; }
 
   
-/* ── 常驻购书横幅 ── */
-.book-banner {
+/* ── 书籍区块 ── */
+.books-section {
   max-width: 720px;
   margin: 4rem auto 3rem;
   padding: 0 1.5rem;
 }
-.book-banner-inner {
-  background: linear-gradient(135deg, rgba(184,134,11,0.1), rgba(184,134,11,0.04));
-  border: 1px solid rgba(184,134,11,0.3);
-  border-radius: 16px;
-  padding: 1.5rem 2rem;
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-.book-banner-cover {
-  width: 72px;
-  height: 96px;
-  object-fit: cover;
-  border-radius: 6px;
-  flex-shrink: 0;
-  box-shadow: 0 6px 20px rgba(30,22,8,0.18);
-}
-.book-banner-body { flex: 1; min-width: 0; }
-.book-banner-label {
+.books-section-label {
   font-size: 10px;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.35em;
   color: var(--gold);
   font-family: 'Noto Sans SC', sans-serif;
   font-weight: 300;
   text-transform: uppercase;
-  margin-bottom: 4px;
+  text-align: center;
+  margin-bottom: 1.2rem;
 }
-.book-banner-title {
-  font-size: 17px;
+.books-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+.book-card {
+  background: linear-gradient(135deg, rgba(184,134,11,0.08), rgba(184,134,11,0.03));
+  border: 1px solid rgba(184,134,11,0.25);
+  border-radius: 16px;
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.8rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.book-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(30,22,8,0.12);
+}
+.book-card-cover {
+  width: 90px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 6px 20px rgba(30,22,8,0.2);
+  flex-shrink: 0;
+}
+.book-card-tag {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+.book-card-title {
+  font-size: 14px;
   font-weight: 700;
   color: var(--ink);
-  letter-spacing: 0.06em;
-  margin-bottom: 4px;
-  line-height: 1.3;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
 }
-.book-banner-sub {
-  font-size: 12px;
+.book-card-sub {
+  font-size: 11px;
   color: var(--ink-faint);
   font-family: 'Noto Sans SC', sans-serif;
   font-weight: 300;
   line-height: 1.7;
-  margin-bottom: 12px;
+  flex: 1;
 }
-.btn-book-banner {
+.btn-book-card {
   display: inline-block;
-  padding: 9px 22px;
+  padding: 8px 20px;
   background: var(--gold);
   color: #fff;
-  font-size: 12px;
+  font-size: 11px;
   font-family: 'Noto Serif SC', serif;
   font-weight: 500;
   letter-spacing: 0.12em;
   border-radius: 4px;
   text-decoration: none;
   transition: background 0.2s, transform 0.15s;
+  width: 100%;
+  box-sizing: border-box;
 }
-.btn-book-banner:hover { background: var(--gold-light); transform: translateY(-1px); }
+.btn-book-card:hover { background: var(--gold-light); transform: translateY(-1px); }
 @media (max-width: 520px) {
-  .book-banner-inner { flex-direction: column; text-align: center; }
+  .books-grid { grid-template-columns: 1fr; }
+  .book-card { flex-direction: row; text-align: left; }
+  .book-card-cover { width: 72px; height: 96px; }
+  .btn-book-card { width: auto; }
+}
   .book-banner-cover { width: 90px; height: 120px; }
 }
 
@@ -1120,26 +1151,55 @@ nav.scrolled .nav-brand svg circle { fill: #1e1608 !important; }
 
 
 
-<!-- 常驻购书横幅 -->
-<div class="book-banner">
-  <div class="book-banner-inner">
-    <img class="book-banner-cover" src="https://taoofcat.com/book-cover.png" alt="Tao of Cat Book">
-    <div class="book-banner-body">
-      <div class="book-banner-label" data-zh="傻猪推荐好书" data-tw="傻豬推薦好書" data-en="Recommended by Sha Zhu" data-ja="シャージュー推薦">傻猪推荐好书</div>
-      <div class="book-banner-title" data-zh="Tao of Cat — 英文电子书" data-tw="Tao of Cat — 英文電子書" data-en="Tao of Cat — The Ebook" data-ja="Tao of Cat — 英語電子書籍">Tao of Cat — 英文电子书</div>
-      <div class="book-banner-sub"
-        data-zh="英文版。你的猫比你更懂老子。11堂课，30页"
-        data-tw="英文版。你的貓比你更懂老子。11堂課，30頁"
-        data-en="Your cat has been teaching you Taoism for years. You just weren't listening. 11 lessons · 30 pages"
-        data-ja="英語版。あなたの猫は老子より賢い。11レッスン · 30ページ">
-        英文版。你的猫比你更懂老子。11堂课，30页
+<!-- 书籍区块 -->
+<div class="books-section">
+  <div class="books-section-label"
+    data-zh="傻猪推荐好书" data-tw="傻豬推薦好書"
+    data-en="Books by Chris C." data-ja="おすすめの本">傻猪推荐好书</div>
+  <div class="books-grid">
+
+    <!-- Book 1: Tao of Your Spoiled Cat -->
+    <div class="book-card">
+      <img class="book-card-cover" src="https://taoofcat.com/book-cover.png" alt="Tao of Cat Book">
+      <div class="book-card-tag"
+        data-zh="英文电子书" data-tw="英文電子書"
+        data-en="Ebook" data-ja="電子書籍">英文电子书</div>
+      <div class="book-card-title"
+        data-zh="The Tao of Your Spoiled Cat" data-tw="The Tao of Your Spoiled Cat"
+        data-en="The Tao of Your Spoiled Cat" data-ja="The Tao of Your Spoiled Cat">The Tao of Your Spoiled Cat</div>
+      <div class="book-card-sub"
+        data-zh="你的猫比你更懂老子。11堂课，30页。"
+        data-tw="你的貓比你更懂老子。11堂課，30頁。"
+        data-en="Your cat has been teaching you Taoism for years. You just weren't listening. 11 lessons · 30 pages."
+        data-ja="あなたの猫は老子より賢い。11レッスン · 30ページ。">
+        你的猫比你更懂老子。11堂课，30页。
       </div>
-      <a href="https://taocat.gumroad.com/l/book" target="_blank" class="btn-book-banner"
-        data-zh="✦ 立即获取"
-        data-tw="✦ 立即獲取"
-        data-en="✦ Get the Ebook"
-        data-ja="✦ 今すぐ入手">✦ 立即获取</a>
+      <a href="https://taocat.gumroad.com/l/book" target="_blank" class="btn-book-card"
+        data-zh="✦ 立即获取" data-tw="✦ 立即獲取"
+        data-en="✦ Get the Ebook" data-ja="✦ 今すぐ入手">✦ 立即获取</a>
     </div>
+
+    <!-- Book 2: I Was Never Gone -->
+    <div class="book-card">
+      <img class="book-card-cover" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200/iwasnevergone_cover" alt="I Was Never Gone">
+      <div class="book-card-tag"
+        data-zh="中英文版" data-tw="中英文版"
+        data-en="EN · ZH" data-ja="英語・中国語">中英文版</div>
+      <div class="book-card-title"
+        data-zh="我从未离去" data-tw="我從未離去"
+        data-en="I Was Never Gone" data-ja="I Was Never Gone">I Was Never Gone</div>
+      <div class="book-card-sub"
+        data-zh="12封来自你猫咪的信。关于它从未真正离开的真相。"
+        data-tw="12封來自你貓咪的信。關於牠從未真正離開的真相。"
+        data-en="12 letters from your cat. Based on real animal communication sessions. For anyone who has loved a cat and lost them."
+        data-ja="あなたの猫からの12通の手紙。本物の動物コミュニケーションセッションより。">
+        12封来自你猫咪的信。关于它从未真正离开的真相。
+      </div>
+      <a id="book2-btn" href="https://taocat.gumroad.com/l/iwasnevergone" target="_blank" class="btn-book-card"
+        data-zh="✦ 英文版" data-tw="✦ 繁體中文版"
+        data-en="✦ Get the Ebook" data-ja="✦ 今すぐ入手">✦ 英文版</a>
+    </div>
+
   </div>
 </div>
 
