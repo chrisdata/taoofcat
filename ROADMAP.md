@@ -211,14 +211,17 @@
 - **cat-xiaobai结尾：** 改为「我从未离去」真言，四语版本
 - **待办：** Cloudinary上传封面图 iwasnevergone_cover
 
-### 第三本 Ebook — YouTube to Passive Income（规划中）
-- **书名：** How to Turn Your YouTube Subscriptions into Passive Income in One Day
-- **副标题：** No writing experience needed. Just AI and what you already watch.
-- **理念：** 每个人都是某领域收藏家，只是不知道收藏可以变成书
-- **流程：** 找喜欢的YouTube → Tactiq抓字幕 → 喂AI分析提炼 → 整理成ebook → Gumroad上架
-- **真实案例：** 今天与Claude对话的完整过程就是书的主要素材
-- **定价：** $9.99（卖可复制系统）
-- **待完成：** 新chat继续写作
+### 第三本 Ebook — Turn YouTube Into a $9.99 Asset ✅（2026年5月24日完成）
+- **书名：** Turn YouTube Into a $9.99 Asset
+- **副标题：** A One-Day System to Turn Your YouTube Binge into a Selling Ebook
+- **Gumroad：** taocat.gumroad.com/l/hobbytomoney（$9.99）
+- **封面：** ChatGPT生成，黑金配色，YouTube→Book→PDF视觉流程
+- **内容：** Chapter 0–8 + Bonus Prompt Templates，32页 PDF
+- **推广账号：** 独立 Threads @hobbytomoney（待申请），与玄猫之道品牌分离
+- **推广策略：** Reddit / Facebook Group / Threads（不用 @taoc.4t 推）
+- **book.taoofcat.com：** Gumroad custom domain 已设置（Cloudflare CNAME）
+- **index.html footer「我的书」** 链接已更新为 book.taoofcat.com
+- **当前状态：** 已上架，Reddit r/Petloss 帖子 7.8K views，Facebook 白猫 Group 已发帖
 
 ### 五猫 IP 系统 & 分享系统
 
@@ -232,6 +235,7 @@
 - [ ] Cloudinary 图片链接验证（确认所有页面图片正常显示）
 - [ ] Threads Access Token 续期（约2026年7月到期）
 - [ ] foster_cats applications 子集合 Firestore Rules 加 update 权限（志愿者接受/拒绝申请）
+- [ ] Threads @hobbytomoney 账号申请
 
 ### 中途猫系统待完善
 - [ ] 领养成功缘起卡生成（付费下载）
@@ -296,7 +300,10 @@
 - **Threads：** @taoc.4t（已发委托帖子 + ebook自动推广）
 - **太太 IG：** @cjluckycats
 - **书：** The Tao of Your Spoiled Cat (ISBN 9798277657362)
-- **Gumroad：** taocat.gumroad.com/l/book（$7.99）
+- **Gumroad：** book.taoofcat.com（三本书）
+  - Tao of Cat $7.99 → taocat.gumroad.com/l/book
+  - I Was Never Gone $7.99 → taocat.gumroad.com/l/iwasnevergone
+  - Turn YouTube Into a $9.99 Asset $9.99 → taocat.gumroad.com/l/hobbytomoney
 - **委托：** miao@taoofcat.com
 - **理念：** 以猫观道，以道养猫，万物皆有缘起
 - **主IP：** 傻猪（异瞳白猫，占卜师·土）
@@ -308,11 +315,11 @@
 
 ## 下一个聊天继续
 
-1. **第三本 Ebook** — How to Turn Your YouTube Subscriptions into Passive Income in One Day（新chat写作）
-2. **Fiverr $1,107 brief** — 客户回复后跟进报价
-3. **Amanda Pan 回复** — 安排傻猪沟通session
-4. **iwasnevergone_cover** — 上传封面图到 Cloudinary
-5. **Reddit r/Petloss** — 关注帖子反应，回复评论
+1. **Threads @hobbytomoney** — 申请账号，规划前10条内容配合 hobbytomoney ebook 上架
+2. **Reddit r/Petloss** — 持续跟进帖子评论，DM 感兴趣者发 I Was Never Gone 链接
+3. **Fiverr $1,107 brief** — 客户回复后跟进报价
+4. **Amanda Pan 回复** — 安排傻猪沟通session
+5. **iwasnevergone_cover** — 上传封面图到 Cloudinary
 6. **玄猫御膳房 Logo** — 书法体设计
 7. **御膳房网页** — taoofcat.com 新增页面
 8. **YouTube 第一条视频** — 傻猪窗边发呆
@@ -321,4 +328,4 @@
 11. **供养系统升级** — 扩展品项 + 积分打通
 12. **Boardroom Step 2** — 执行模式文案一键发 Threads
 
-*最后更新：2026年5月23日*
+*最后更新：2026年5月24日*
