@@ -139,10 +139,63 @@
 
 ### Gumroad 电子书
 - 书名：Tao of Cat，链接：taocat.gumroad.com/l/book，价格：$7.99
+- **Receipt 页面已更新**：Custom message 含傻猪署名、taoofcat.com 导流、占卜页链接、@taoc.4t
+- **Button text**：Meet the Cats 🐱
 
 ### Support 页面、邮件系统、书法 Logo、自动化营销
 - Threads 全自动发帖（n8n，每天 9am/1pm/7pm）
 - Buffer 连接 IG + Threads
+- **n8n Threads workflow 升级（2026年5月23日）**：Claude节点已Deactivate，Code节点改为10条ebook文案库随机发，每天3次全部推电子书，含 #CatsOfThreads #TaoOfCat #CatWisdom 等hashtag
+
+### 全站繁体中文支持（2026年5月23日）
+19个HTML页面全部完成简/繁/EN/JP四语切换。
+
+**A组（14页）**：index / cat-* / commission / daily / divination / journal / support
+- applyLang() 加 tw 分支，document.lang → zh-TW
+- 导航按钮：简 / 繁 / EN / JP
+- Google Fonts 加载 Noto Serif TC
+- 每个 data-zh 元素自动加 data-tw，100% 覆盖率
+
+**B组（5页）**：adopt / foster / foster-cat / foster-profile / my-fosters
+- JS MAP系统（OpenCC s2twp转换，45-153条/页）
+- 页面加载时DOM text-walker自动替换
+- 导航栏加繁简切换按钮，reload生效
+- 两组共享 localStorage key（taoc_lang）
+
+### YouTube 频道规划（2026年5月23日）
+- **定位**：胶片美学 · 猫咪存在的瞬间 · 无声胜有声
+- **设备**：Sony ZV-E1 全画幅 + Helios 44 苏联老镜头 + DaVinci Resolve + Filmbox Pro + Scatter
+- **风格**：慢动作无声纯音乐，彩色与黑白混用
+  - 静止/凝视/光影 → 黑白或极低饱和
+  - 玩耍/扑跳/多猫 → 保留彩色胶片暖调
+  - 傻猪异瞳特写 → 永远彩色（异瞳是最强视觉资产）
+- **频道名**：玄猫之道 / Tao of Cat（与现有品牌统一）
+- **内容系列**：傻猪日常 / 五猫众生相 / 猫式禅意特写 / 已归道特别篇
+- **频道简介**：中英双语已撰写，含关键词 cat asmr / relaxing cat videos / vintage Soviet glass
+- **工作流**：S-Cinetone → 120fps → Resolve 24fps → Filmbox LUT → Scatter片头 → 导出
+
+### 宠物沟通师合作（2026年5月23日）
+- **目标**：Amanda Pan（@pettingeverything），Ipoh出生现KL，32岁，RM168/小时，WhatsApp远程
+- **DM已发**：邀请免费为傻猪做沟通session，以Ipoh老乡切入
+- **等待回复中**：测试问题——傻猪为何挑食
+- **合作愿景**：taoofcat.com 宠物沟通预约页面，平台收款分成（平台30% / 沟通师70%）
+- **最深价值**：失去宠物的人「最后一次对话」服务
+
+### 玄猫御膳房（2026年5月23日规划）
+- **品牌名**：玄猫御膳房 · Tao of Cat Imperial Feast
+- **主理人**：太太（香港人，擅长烟熏/低温慢煮Sous Vide/熟成牛肉/中西餐）
+- **产品方向**：手工猫咪鲜食，Fine Dining工艺，高压灭菌机确保食品安全
+- **起步**：小批量 → 朋友宠物店寄卖 → 玄猫之道网站销售
+- **自动化**：AI咨询 → Stripe下单 → Telegram通知备货 → 物流追踪
+- **合作渠道**：本地宠物店老板（已认识，曾来家中看傻猪）
+- **内容**：傻猪第一批试吃员，ZV-E1慢动作记录，Helios 44胶片色调
+- **待建**：玄猫御膳房网页，品牌logo（书法体）
+
+### Fiverr 重新启动（2026年5月23日）
+- Top Rated + Pro 身份保留（两年inactive仍在）
+- 51个portfolio作品
+- 画人/猫vector portrait gig已上架，猫gig审核中
+- 收到 $1,107 portrait brief，已发portfolio等客户回复
 
 ### 五猫 IP 系统 & 分享系统
 
@@ -165,6 +218,25 @@
 ### 猫咪插画委托
 - [ ] 更多作品上传（傻猪之后的新作品）
 - [ ] 推广：Threads 已发第一条委托帖子 ✅
+- [ ] $1,107 brief 跟进，等客户回复
+
+### 玄猫御膳房
+- [ ] 书法体品牌 Logo（玄猫御膳房）
+- [ ] taoofcat.com 新增御膳房页面
+- [ ] 太太购入高压灭菌机，开始研发配方
+- [ ] 第一批产品小批量寄卖（宠物店老板）
+- [ ] AI咨询→下单→物流自动化系统
+
+### 宠物沟通师
+- [ ] Amanda Pan 回复后安排傻猪沟通session
+- [ ] taoofcat.com 宠物沟通预约页面
+- [ ] 沟通合作内容策划（YouTube + 网站）
+
+### YouTube 频道
+- [ ] 第一条视频：傻猪窗边发呆，慢动作，古琴配乐
+- [ ] 建立Filmbox Pro胶片预设（定一个LUT不换）
+- [ ] 联络香港副导演朋友来家拍摄内容
+- [ ] 片尾卡片设置（导流taoofcat.com）
 
 ### 玄猫之道网站功能
 - [ ] 每日打卡系统（来了送积分，兑换罐头）
@@ -184,7 +256,6 @@
 
 ### 产品
 - [ ] 猫式金刚功 PDF（$9.99，Gumroad）
-- [ ] 英文 YouTube 频道
 - [ ] 月度会员（$4.99/月）
 
 ### 优化
@@ -197,26 +268,31 @@
 ## 品牌
 
 - **品牌：** 玄猫之道 / Tao of Cat
+- **子品牌：** 玄猫御膳房 · Tao of Cat Imperial Feast（猫咪手工鲜食）
 - **IG：** @taoc.4t
-- **Threads：** @taoc.4t（已发委托帖子）
+- **Threads：** @taoc.4t（已发委托帖子 + ebook自动推广）
 - **太太 IG：** @cjluckycats
 - **书：** The Tao of Your Spoiled Cat (ISBN 9798277657362)
 - **Gumroad：** taocat.gumroad.com/l/book（$7.99）
 - **委托：** miao@taoofcat.com
 - **理念：** 以猫观道，以道养猫，万物皆有缘起
 - **主IP：** 傻猪（异瞳白猫，占卜师·土）
-- **变现路线：** 猫咪插画委托 → 罐头占卜 → 供养真罐头 → 电子书 → 中途缘起卡 → 数字产品
+- **变现路线：** 猫咪插画委托 → 罐头占卜 → 供养真罐头 → 电子书 → 中途缘起卡 → 宠物沟通 → 玄猫御膳房鲜食
 - **受众定位：** 猫奴为核心——失去猫的人、日常猫奴、人生迷茫的猫奴、想定制猫咪插画的人
+- **品牌根源：** 道德经 / 庄子 / 意识探索（OBE/Darius J Wright）/ 宠物沟通（Lori Cowen）/ 灵魂契约
 
 ---
 
 ## 下一个聊天继续
 
-1. **中途猫系统测试** — 完整跑通志愿者上传→审核→领养者申请→接受流程
-2. **委托第一单** — 等 Threads 帖子发酵，有询问就跟进
-3. **foster_cats Rules 更新** — applications 子集合加 update 权限
-4. **更多插画作品** — 傻猪之后继续画，充实 commission 页面
-5. **供养系统升级** — 扩展品项 + 积分打通
-6. **Boardroom Step 2** — 执行模式文案一键发 Threads
+1. **Fiverr $1,107 brief** — 客户回复后跟进报价
+2. **Amanda Pan 回复** — 安排傻猪沟通session
+3. **玄猫御膳房 Logo** — 书法体设计
+4. **御膳房网页** — taoofcat.com 新增页面
+5. **YouTube 第一条视频** — 傻猪窗边发呆
+6. **香港副导演朋友** — 联络约来家拍摄
+7. **foster_cats Rules 更新** — applications 子集合加 update 权限
+8. **供养系统升级** — 扩展品项 + 积分打通
+9. **Boardroom Step 2** — 执行模式文案一键发 Threads
 
-*最后更新：2026年5月22日*
+*最后更新：2026年5月23日*
