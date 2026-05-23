@@ -197,6 +197,29 @@
 - 画人/猫vector portrait gig已上架，猫gig审核中
 - 收到 $1,107 portrait brief，已发portfolio等客户回复
 
+### 第二本 Ebook — I Was Never Gone（2026年5月23日）
+- **书名：** I Was Never Gone — Letters from your cat
+- **英文版：** taocat.gumroad.com/l/iwasnevergone（$4.99）
+- **繁体中文版：** taocat.gumroad.com/l/iwasnevergone_tw（$4.99）
+- **封面：** AI生成异瞳白猫，"Dedicated to Xiaobai"
+- **内容：** 12封猫的第一人称信，基于 Lori Cowen 动物沟通 YouTube 视频素材
+- **素材来源：** Baxter / Milo / Opie / Capone / Miriam / Carie / Mac / Stanley / 被车撞的猫 / Admiral / Bacon 共11个视频
+- **核心框架：** 猫选择相遇→守护宇宙→离开时灵魂平静→没有离开只是换形式→就在你身边→灵眼打开再见面
+- **定位：** 素材搜集员，不声称灵性权威，前言说明来源
+- **n8n推广：** 25条文案轮转（Tao of Cat 10条 + 英文10条 + 繁体5条）
+- **网站：** index.html & cat-xiaobai.html 已更新双书卡区块，繁体自动切换繁体版链接
+- **cat-xiaobai结尾：** 改为「我从未离去」真言，四语版本
+- **待办：** Cloudinary上传封面图 iwasnevergone_cover
+
+### 第三本 Ebook — YouTube to Passive Income（规划中）
+- **书名：** How to Turn Your YouTube Subscriptions into Passive Income in One Day
+- **副标题：** No writing experience needed. Just AI and what you already watch.
+- **理念：** 每个人都是某领域收藏家，只是不知道收藏可以变成书
+- **流程：** 找喜欢的YouTube → Tactiq抓字幕 → 喂AI分析提炼 → 整理成ebook → Gumroad上架
+- **真实案例：** 今天与Claude对话的完整过程就是书的主要素材
+- **定价：** $9.99（卖可复制系统）
+- **待完成：** 新chat继续写作
+
 ### 五猫 IP 系统 & 分享系统
 
 ### AI Boardroom（本地 Flask, port 7070）
@@ -285,14 +308,17 @@
 
 ## 下一个聊天继续
 
-1. **Fiverr $1,107 brief** — 客户回复后跟进报价
-2. **Amanda Pan 回复** — 安排傻猪沟通session
-3. **玄猫御膳房 Logo** — 书法体设计
-4. **御膳房网页** — taoofcat.com 新增页面
-5. **YouTube 第一条视频** — 傻猪窗边发呆
-6. **香港副导演朋友** — 联络约来家拍摄
-7. **foster_cats Rules 更新** — applications 子集合加 update 权限
-8. **供养系统升级** — 扩展品项 + 积分打通
-9. **Boardroom Step 2** — 执行模式文案一键发 Threads
+1. **第三本 Ebook** — How to Turn Your YouTube Subscriptions into Passive Income in One Day（新chat写作）
+2. **Fiverr $1,107 brief** — 客户回复后跟进报价
+3. **Amanda Pan 回复** — 安排傻猪沟通session
+4. **iwasnevergone_cover** — 上传封面图到 Cloudinary
+5. **Reddit r/Petloss** — 关注帖子反应，回复评论
+6. **玄猫御膳房 Logo** — 书法体设计
+7. **御膳房网页** — taoofcat.com 新增页面
+8. **YouTube 第一条视频** — 傻猪窗边发呆
+9. **香港副导演朋友** — 联络约来家拍摄
+10. **foster_cats Rules 更新** — applications 子集合加 update 权限
+11. **供养系统升级** — 扩展品项 + 积分打通
+12. **Boardroom Step 2** — 执行模式文案一键发 Threads
 
 *最后更新：2026年5月23日*
