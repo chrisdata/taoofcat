@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>玄猫御膳坊 · Xuanmao Imperial Kitchen</title>
+<!-- SEO -->
+<meta name="description" content="本地鸡鸭熬制原汤，Retort工艺锁鲜，不加防腐剂/色素/胶稠剂/诱食剂。一碗汤，熬给猫看的心意。">
+<meta name="keywords" content="玄猫御膳坊, retort猫粮, 猫粮, 无添加猫粮, cat food, Xuanmao Imperial Kitchen, 玄猫之道">
+<meta name="author" content="玄猫之道 · TaoOfCat.com">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://taoofcat.com/imperial-kitchen.html">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="玄猫御膳坊 · Xuanmao Imperial Kitchen">
+<meta property="og:description" content="本地鸡鸭熬制原汤，Retort工艺锁鲜，不加防腐剂/色素/胶稠剂/诱食剂。">
+<meta property="og:url" content="https://taoofcat.com/imperial-kitchen.html">
+<meta property="og:image" content="https://taoofcat.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="玄猫之道 · Tao of Cat">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ja_JP">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="玄猫御膳坊 · Xuanmao Imperial Kitchen">
+<meta name="twitter:description" content="A broth simmered with the same care you'd give family. Local chicken and duck, Retort-sealed, four nevers.">
+<meta name="twitter:image" content="https://taoofcat.com/og-image.jpg">
+<link rel="icon" href="favicon.ico">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7Q71WCDFF0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7Q71WCDFF0');
+</script>
+<script>
+(function() {
+  var _lang = localStorage.getItem('taoc_lang') || 'zh';
+  function applyLang(l) {
+    _lang = l;
+    localStorage.setItem('taoc_lang', l);
+    document.documentElement.lang = l === 'tw' ? 'zh-TW' : l;
+    document.querySelectorAll('[data-zh]').forEach(function(el) {
+      var txt = l === 'en' ? (el.dataset.en || el.dataset.zh)
+              : l === 'ja' ? (el.dataset.ja || el.dataset.zh)
+              : l === 'tw' ? (el.dataset.tw || el.dataset.zh)
+              : el.dataset.zh;
+      if (txt !== undefined) el.innerHTML = txt;
+    });
+    document.querySelectorAll('.lang-opt').forEach(function(btn) {
+      btn.classList.toggle('active', btn.dataset.lang === l);
+    });
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.lang-opt').forEach(function(btn) {
+      btn.addEventListener('click', function() { applyLang(btn.dataset.lang); });
+    });
+    var reveals = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+        });
+      }, { threshold: 0.08 });
+      reveals.forEach(function(el) { observer.observe(el); });
+    } else {
+      reveals.forEach(function(el) { el.classList.add('visible'); });
+    }
+    applyLang(_lang);
+  });
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f4ede0;
+  --ink: #1e1608;
+  --ink-light: #5c4c2c;
+  --ink-faint: #9c8c6c;
+  --ink-ghost: #d4c8a8;
+  --gold: #b8860b;
+  --gold-light: #d4a843;
+  --whatsapp: #25d366;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Serif SC', serif;
+  background: var(--paper);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* NAV */
+nav#nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 40px; transition: background 0.3s, padding 0.3s, box-shadow 0.3s;
+}
+nav#nav.scrolled { background: rgba(244,237,224,0.95); backdrop-filter: blur(8px); padding: 14px 40px; box-shadow: 0 1px 0 rgba(30,22,8,0.06); }
+.nav-back { text-decoration: none; font-size: 13px; letter-spacing: 0.1em; color: var(--ink-light); font-family: 'Noto Sans SC', sans-serif; font-weight: 300; }
+.lang-switcher { display: flex; gap: 4px; align-items: center; }
+.lang-opt { font-size: 11px; font-family: 'Noto Sans SC', sans-serif; background: transparent; border: 1px solid rgba(30,22,8,0.2); border-radius: 20px; padding: 4px 10px; cursor: pointer; color: var(--ink-light); transition: all 0.2s; }
+.lang-opt:hover, .lang-opt.active { color: var(--gold); border-color: var(--gold); }
+
+/* HERO */
+.hero {
+  min-height: 92vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 140px 24px 80px; position: relative; overflow: hidden;
+  background: linear-gradient(180deg, #2c2416 0%, #241d10 100%);
+}
+.hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.45; }
+.hero-label { font-size: 11px; letter-spacing: 0.5em; color: var(--gold-light); font-family: 'Noto Sans SC', sans-serif; font-weight: 300; margin-bottom: 20px; text-transform: uppercase; position: relative; }
+.hero-title { font-size: clamp(40px, 8vw, 68px); font-weight: 900; letter-spacing: 0.12em; color: #fff; line-height: 1.3; margin-bottom: 16px; position: relative; }
+.hero-en { font-family: 'IM Fell English', serif; font-style: italic; font-size: clamp(13px, 2.2vw, 17px); color: rgba(255,255,255,0.6); letter-spacing: 0.06em; margin-bottom: 24px; position: relative; }
+.hero-divider { width: 60px; height: 1px; background: linear-gradient(to right, transparent, var(--gold-light), transparent); margin: 0 auto 24px; position: relative; }
+.hero-tagline { font-size: clamp(15px, 2.4vw, 19px); color: rgba(255,255,255,0.85); line-height: 1.9; letter-spacing: 0.03em; max-width: 480px; position: relative; }
+
+/* SECTION */
+.section { max-width: 760px; margin: 0 auto; padding: 5rem 2rem; }
+.section-label { font-size: 11px; letter-spacing: 0.3em; color: var(--gold); font-family: 'Noto Sans SC', sans-serif; text-transform: uppercase; margin-bottom: 12px; text-align: center; }
+.section-title { font-size: clamp(24px, 4vw, 32px); font-weight: 700; letter-spacing: 0.05em; text-align: center; margin-bottom: 8px; }
+.section-en { font-family: 'IM Fell English', serif; font-style: italic; font-size: 14px; color: var(--ink-faint); text-align: center; margin-bottom: 2rem; }
+.section-divider { width: 40px; height: 1px; background: var(--gold-light); margin: 0 auto 2.5rem; }
+.section-body { font-size: 16px; line-height: 2.1; letter-spacing: 0.02em; color: var(--ink-light); }
+.section-body p { margin-bottom: 1.2rem; }
+.section-body p:last-child { margin-bottom: 0; }
+
+.section-alt { background: rgba(184,134,11,0.05); border-top: 1px solid rgba(184,134,11,0.15); border-bottom: 1px solid rgba(184,134,11,0.15); }
+
+/* 四不加 PLEDGE */
+.pledge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 560px) { .pledge-grid { grid-template-columns: 1fr; } }
+.pledge-card { background: var(--paper); border: 1px solid rgba(184,134,11,0.25); border-radius: 12px; padding: 1.5rem; text-align: center; }
+.pledge-icon { font-size: 28px; margin-bottom: 10px; }
+.pledge-text { font-size: 15px; font-weight: 500; color: var(--ink); line-height: 1.6; }
+.pledge-sub { font-size: 12px; color: var(--ink-faint); font-family: 'Noto Sans SC', sans-serif; margin-top: 6px; line-height: 1.6; }
+
+/* GALLERY */
+.gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 2rem; }
+@media (max-width: 560px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+.gallery-item { aspect-ratio: 1; background: rgba(30,22,8,0.06); border: 1px dashed rgba(30,22,8,0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--ink-faint); font-size: 12px; font-family: 'Noto Sans SC', sans-serif; overflow: hidden; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+.gallery-note { text-align: center; font-size: 13px; color: var(--ink-faint); font-family: 'Noto Sans SC', sans-serif; }
+
+/* CTA */
+.cta-section { text-align: center; padding: 5rem 2rem 6rem; }
+.cta-title { font-size: clamp(22px, 4vw, 30px); font-weight: 700; margin-bottom: 12px; letter-spacing: 0.04em; }
+.cta-sub { font-size: 15px; color: var(--ink-light); margin-bottom: 2rem; line-height: 1.8; }
+.btn-whatsapp { display: inline-flex; align-items: center; gap: 10px; padding: 15px 36px; background: var(--whatsapp); color: #fff; text-decoration: none; font-size: 15px; letter-spacing: 0.05em; font-family: 'Noto Sans SC', sans-serif; font-weight: 500; border-radius: 30px; transition: transform 0.15s, box-shadow 0.15s; box-shadow: 0 4px 16px rgba(37,211,102,0.35); }
+.btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(37,211,102,0.45); }
+.btn-whatsapp svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+/* FLOATING WHATSAPP BUTTON */
+.whatsapp-float {
+  position: fixed; bottom: 24px; right: 24px; z-index: 200;
+  width: 58px; height: 58px; border-radius: 50%; background: var(--whatsapp);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 18px rgba(37,211,102,0.5); text-decoration: none;
+  animation: wa-pulse 2.4s ease-in-out infinite;
+}
+.whatsapp-float svg { width: 30px; height: 30px; }
+@keyframes wa-pulse {
+  0%, 100% { box-shadow: 0 4px 18px rgba(37,211,102,0.5); }
+  50% { box-shadow: 0 4px 18px rgba(37,211,102,0.5), 0 0 0 8px rgba(37,211,102,0.15); }
+}
+@media (max-width: 560px) {
+  .whatsapp-float { width: 52px; height: 52px; bottom: 18px; right: 18px; }
+  .whatsapp-float svg { width: 26px; height: 26px; }
+}
+
+footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-align: center; }
+.footer-copy { font-size: 12px; color: var(--ink-faint); letter-spacing: 0.1em; }
+.footer-back { display: block; margin-top: 10px; font-size: 13px; color: var(--gold); text-decoration: none; }
+
+@media (max-width: 600px) {
+  nav#nav { padding: 16px 20px; }
+  .section { padding: 3.5rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="/#cats" class="nav-back" data-zh="← 玄猫之道" data-tw="← 玄貓之道" data-en="← Tao of Cat" data-ja="← 玄猫之道">← 玄猫之道</a>
+  <div class="lang-switcher">
+    <button class="lang-opt" data-lang="zh">简</button>
+    <button class="lang-opt" data-lang="tw">繁</button>
+    <button class="lang-opt" data-lang="en">EN</button>
+    <button class="lang-opt" data-lang="ja">JP</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <img class="hero-img" src="imperial-kitchen-hero.jpg" alt="玄猫御膳坊">
+  <div class="hero-label" data-zh="太太手作 · Retort 猫粮" data-tw="太太手作 · Retort 貓糧" data-en="Handmade by 傻猪's Mom · Retort Cat Food" data-ja="奥様手作り · Retortキャットフード">太太手作 · Retort 猫粮</div>
+  <div class="hero-title" data-zh="玄猫御膳坊" data-tw="玄貓御膳坊" data-en="Xuanmao Imperial Kitchen" data-ja="玄猫御膳房">玄猫御膳坊</div>
+  <div class="hero-en">Xuanmao Imperial Kitchen</div>
+  <div class="hero-divider"></div>
+  <div class="hero-tagline" data-zh="一碗汤，熬给猫看的心意" data-tw="一碗湯，熬給貓看的心意" data-en="A broth simmered with the same care you'd give family" data-ja="一杯のスープに込めた、猫への想い">一碗汤，熬给猫看的心意</div>
+</div>
+
+<!-- 食材故事 -->
+<section class="section reveal">
+  <div class="section-label" data-zh="Ingredients" data-tw="Ingredients" data-en="Ingredients" data-ja="Ingredients">Ingredients</div>
+  <div class="section-title" data-zh="本地鸡鸭，熬一锅原汤" data-tw="本地雞鴨，熬一鍋原湯" data-en="Local Chicken & Duck, Slow-Simmered" data-ja="地元の鶏と鴨で、原汤を炊く">本地鸡鸭，熬一锅原汤</div>
+  <div class="section-divider"></div>
+  <div class="section-body">
+    <p data-zh="我们只用本地鸡、本地鸭。" data-tw="我們只用本地雞、本地鴨。" data-en="We use local chicken and local duck — nothing imported, nothing exotic for the sake of a label." data-ja="使うのは地元の鶏と鴨だけ。">我们只用本地鸡、本地鸭。</p>
+    <p data-zh="汤底不是水兑出来的——是本地鸡壳、鸭壳，加本地海味，慢火熬煮而成的原汤。骨头里的鲜味、海味里的甘味，都留在这碗汤里，才拿来调理成猫能吃的一餐。" data-tw="湯底不是水兌出來的——是本地雞殼、鴨殼，加本地海味，慢火熬煮而成的原湯。骨頭裡的鮮味、海味裡的甘味，都留在這碗湯裡，才拿來調理成貓能吃的一餐。" data-en="The broth isn't water with flavoring added. It's simmered slowly from local chicken and duck bones, with local seafood, until the natural richness settles into the stock. That's the base every meal starts from." data-ja="スープは水で薄めたものではない。地元の鶏と鴨の骨に、地元の海鮮を加え、弱火でじっくり炊き上げた原汤。骨から出る旨味と海鮮の甘みがそのまま残った、この一杯から猫のごはんが始まる。">汤底不是水兑出来的——是本地鸡壳、鸭壳，加本地海味，慢火熬煮而成的原汤。骨头里的鲜味、海味里的甘味，都留在这碗汤里，才拿来调理成猫能吃的一餐。</p>
+    <p data-zh="没有远洋进口的噱头，没有听不懂的成分表。就是本地的鸡、本地的鸭、本地的海味，熬给猫看的一碗汤。" data-tw="沒有遠洋進口的噱頭，沒有聽不懂的成分表。就是本地的雞、本地的鴨、本地的海味，熬給貓看的一碗湯。" data-en="No overseas sourcing story, no ingredient list you need a dictionary for. Just local chicken, local duck, and local seafood, slow-cooked into something worth serving." data-ja="遠方から輸入した謳い文句も、読めない成分表もない。ただ地元の鶏、地元の鴨、地元の海鮮を、猫のために炊き上げた一杯。">没有远洋进口的噱头，没有听不懂的成分表。就是本地的鸡、本地的鸭、本地的海味，熬给猫看的一碗汤。</p>
+  </div>
+</section>
+
+<!-- RETORT 工艺 -->
+<section class="section section-alt reveal">
+  <div class="section-label" data-zh="Process" data-tw="Process" data-en="Process" data-ja="Process">Process</div>
+  <div class="section-title" data-zh="什么是 Retort 工艺" data-tw="什麼是 Retort 工藝" data-en="What Is Retort?" data-ja="Retort工程とは">什么是 Retort 工艺</div>
+  <div class="section-divider"></div>
+  <div class="section-body">
+    <p data-zh="Retort 是一种高温高压杀菌工艺——把煮好的猫粮密封进包装后，整包放进高温高压环境处理，让包装内外都达到无菌状态。" data-tw="Retort 是一種高溫高壓殺菌工藝——把煮好的貓糧密封進包裝後，整包放進高溫高壓環境處理，讓包裝內外都達到無菌狀態。" data-en="Retort is a high-temperature, high-pressure sterilization process. Once the food is sealed in its pouch, the entire pack is processed under heat and pressure until it's sterile inside and out." data-ja="Retortとは高温高圧による殺菌工程のこと。調理済みのフードを密封した後、パックごと高温高圧環境で処理し、内外ともに無菌状態にする。">Retort 是一种高温高压杀菌工艺——把煮好的猫粮密封进包装后，整包放进高温高压环境处理，让包装内外都达到无菌状态。</p>
+    <p data-zh="好处是：不需要额外加防腐剂就能常温保存、开封即食，同时锁住食材本身的水分和风味，不像风干粮那样流失营养，也不像普通湿粮罐头那样容易在杀菌过程中把口感煮老。" data-tw="好處是：不需要額外加防腐劑就能常溫保存、開封即食，同時鎖住食材本身的水分和風味，不像風乾糧那樣流失營養，也不像普通濕糧罐頭那樣容易在殺菌過程中把口感煮老。" data-en="That means it can be shelf-stable without preservatives, ready to serve straight from the pack, while keeping more of the natural moisture and flavor than dry kibble — and without the overcooked texture common in cheaper wet-food canning." data-ja="そのため防腐剤なしで常温保存が可能で、開封してそのまま与えられる。同時に水分と風味をしっかり閉じ込め、ドライフードのように栄養が失われることも、安価な缶詰のように加熱しすぎて食感が硬くなることもない。">好处是：不需要额外加防腐剂就能常温保存、开封即食，同时锁住食材本身的水分和风味，不像风干粮那样流失营养，也不像普通湿粮罐头那样容易在杀菌过程中把口感煮老。</p>
+    <p data-zh="简单说：这是让「新鲜」跟「安全」可以同时成立的做法。" data-tw="簡單說：這是讓「新鮮」跟「安全」可以同時成立的做法。" data-en="In short: it's how freshness and food safety can both be true at once." data-ja="簡単に言えば、「新鮮さ」と「安全性」を両立させる方法。">简单说：这是让「新鲜」跟「安全」可以同时成立的做法。</p>
+  </div>
+</section>
+
+<!-- 四不加 -->
+<section class="section reveal">
+  <div class="section-label" data-zh="Our Promise" data-tw="Our Promise" data-en="Our Promise" data-ja="Our Promise">Our Promise</div>
+  <div class="section-title" data-zh="玄猫御膳坊 · 四不加" data-tw="玄貓御膳坊 · 四不加" data-en="The Xuanmao Four Nevers" data-ja="玄猫御膳房 · 四つの不加">玄猫御膳坊 · 四不加</div>
+  <div class="section-divider"></div>
+  <div class="pledge-grid">
+    <div class="pledge-card">
+      <div class="pledge-icon">🚫</div>
+      <div class="pledge-text" data-zh="不加防腐剂" data-tw="不加防腐劑" data-en="No Preservatives" data-ja="防腐剤不使用">不加防腐剂</div>
+    </div>
+    <div class="pledge-card">
+      <div class="pledge-icon">🎨</div>
+      <div class="pledge-text" data-zh="不加色素" data-tw="不加色素" data-en="No Colorants" data-ja="着色料不使用">不加色素</div>
+    </div>
+    <div class="pledge-card">
+      <div class="pledge-icon">🧪</div>
+      <div class="pledge-text" data-zh="不加胶稠剂" data-tw="不加膠稠劑" data-en="No Thickening Gums" data-ja="増粘剤不使用">不加胶稠剂</div>
+    </div>
+    <div class="pledge-card">
+      <div class="pledge-icon">✨</div>
+      <div class="pledge-text" data-zh="不加诱食剂" data-tw="不加誘食劑" data-en="No Artificial Palatants" data-ja="嗜好性添加物不使用">不加诱食剂</div>
+      <div class="pledge-sub" data-zh="本地鸡鸭壳与海味熬出的鲜味，就是天然的诱食力" data-tw="本地雞鴨殼與海味熬出的鮮味，就是天然的誘食力" data-en="The umami from real local chicken, duck, and seafood does that work naturally" data-ja="地元の鶏鴨と海鮮から引き出す旨味こそが、天然の誘因力">本地鸡鸭壳与海味熬出的鲜味，就是天然的诱食力</div>
+    </div>
+  </div>
+</section>
+
+<!-- 实拍图集 -->
+<section class="section section-alt reveal">
+  <div class="section-label" data-zh="Behind the Kitchen" data-tw="Behind the Kitchen" data-en="Behind the Kitchen" data-ja="Behind the Kitchen">Behind the Kitchen</div>
+  <div class="section-title" data-zh="熬汤实拍" data-tw="熬湯實拍" data-en="From Our Kitchen" data-ja="キッチンの様子">熬汤实拍</div>
+  <div class="section-divider"></div>
+  <div class="gallery-grid">
+    <div class="gallery-item" data-zh="实拍图 1" data-tw="實拍圖 1" data-en="Photo 1" data-ja="写真 1">实拍图 1</div>
+    <div class="gallery-item" data-zh="实拍图 2" data-tw="實拍圖 2" data-en="Photo 2" data-ja="写真 2">实拍图 2</div>
+    <div class="gallery-item" data-zh="实拍图 3" data-tw="實拍圖 3" data-en="Photo 3" data-ja="写真 3">实拍图 3</div>
+  </div>
+  <div class="gallery-note" data-zh="更多实拍照片，即将上线" data-tw="更多實拍照片，即將上線" data-en="More photos coming soon" data-ja="写真は順次追加予定">更多实拍照片，即将上线</div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section reveal">
+  <div class="cta-title" data-zh="想了解更多？" data-tw="想了解更多？" data-en="Want to Know More?" data-ja="もっと知りたい方へ">想了解更多？</div>
+  <div class="cta-sub" data-zh="口味、份量、订购方式，直接 WhatsApp 我们" data-tw="口味、份量、訂購方式，直接 WhatsApp 我們" data-en="Flavors, portions, ordering — just message us on WhatsApp" data-ja="味、量、ご注文方法など、WhatsAppでお気軽にどうぞ">口味、份量、订购方式，直接 WhatsApp 我们</div>
+  <a href="https://wa.me/601133677951" target="_blank" rel="noopener" class="btn-whatsapp">
+    <svg viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 004.74 1.21h.005c5.46 0 9.9-4.45 9.9-9.91C21.93 6.45 17.5 2 12.04 2zm5.83 14.07c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.6-2.91-1.26-4.81-4.2-4.96-4.4-.15-.19-1.18-1.57-1.18-3 0-1.43.75-2.13 1.02-2.42.27-.29.58-.36.78-.36.19 0 .39 0 .55.01.18.01.42-.07.65.5.24.58.82 2.01.89 2.15.07.15.12.32.02.51-.09.19-.14.31-.28.48-.14.16-.29.36-.42.48-.14.13-.28.28-.12.55.16.27.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.21 1.37.27.14.43.12.59-.07.16-.19.68-.79.87-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.27.14.44.2.51.31.07.12.07.66-.17 1.34z"/></svg>
+    <span data-zh="WhatsApp 咨询" data-tw="WhatsApp 諮詢" data-en="Chat on WhatsApp" data-ja="WhatsAppで問い合わせる">WhatsApp 咨询</span>
+  </a>
+</div>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/601133677951" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 004.74 1.21h.005c5.46 0 9.9-4.45 9.9-9.91C21.93 6.45 17.5 2 12.04 2zm5.83 14.07c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.6-2.91-1.26-4.81-4.2-4.96-4.4-.15-.19-1.18-1.57-1.18-3 0-1.43.75-2.13 1.02-2.42.27-.29.58-.36.78-.36.19 0 .39 0 .55.01.18.01.42-.07.65.5.24.58.82 2.01.89 2.15.07.15.12.32.02.51-.09.19-.14.31-.28.48-.14.16-.29.36-.42.48-.14.13-.28.28-.12.55.16.27.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.21 1.37.27.14.43.12.59-.07.16-.19.68-.79.87-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.27.14.44.2.51.31.07.12.07.66-.17 1.34z"/></svg>
+</a>
+
+<footer>
+  <div class="footer-copy" data-zh="© 2026 玄猫御膳坊 · 玄猫之道出品" data-tw="© 2026 玄貓御膳坊 · 玄貓之道出品" data-en="© 2026 Xuanmao Imperial Kitchen · By Tao of Cat" data-ja="© 2026 玄猫御膳房 · 玄猫之道">© 2026 玄猫御膳坊 · 玄猫之道出品</div>
+  <a href="/#cats" class="footer-back" data-zh="回到玄猫之道" data-tw="回到玄貓之道" data-en="Back to Tao of Cat" data-ja="玄猫之道に戻る">回到玄猫之道</a>
+</footer>
+
+<script>
+const navEl = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  navEl.classList.toggle('scrolled', window.scrollY > 60);
+});
+</script>
+</body>
+</html>
