@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>麒麟仔 · 玄猫之道</title>
+<!-- SEO -->
+<meta name="description" content="家里最小的新成员，虎斑幼猫，眼里全是好奇，正学着怎么当一只猫。">
+<meta name="keywords" content="tabby kitten, 虎斑猫, 幼猫, 玄猫之道, 麒麟仔, new cat">
+<meta name="author" content="玄猫之道 · TaoOfCat.com">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://taoofcat.com/cat-qilinzai.html">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="麒麟仔 · 虎斑幼子 · 玄猫之道">
+<meta property="og:description" content="家里最小的新成员，虎斑幼猫，眼里全是好奇，正学着怎么当一只猫。">
+<meta property="og:url" content="https://taoofcat.com/cat-qilinzai.html">
+<meta property="og:image" content="https://taoofcat.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="玄猫之道 · Tao of Cat">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ja_JP">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="麒麟仔 · 虎斑幼子 · 玄猫之道">
+<meta name="twitter:description" content="The youngest of the family, eyes full of wonder, still learning what it means to be a cat.">
+<meta name="twitter:image" content="https://taoofcat.com/og-image.jpg">
+<link rel="icon" href="favicon.ico">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7Q71WCDFF0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-7Q71WCDFF0');
+</script>
+<script>
+(function() {
+  var _lang = localStorage.getItem('taoc_lang') || 'zh';
+  function applyLang(l) {
+    _lang = l;
+    localStorage.setItem('taoc_lang', l);
+    localStorage.setItem('lang', l);
+    document.documentElement.lang = l === 'tw' ? 'zh-TW' : l;
+    document.querySelectorAll('[data-zh]').forEach(function(el) {
+      var txt = l === 'en' ? (el.dataset.en || el.dataset.zh)
+              : l === 'ja' ? (el.dataset.ja || el.dataset.zh)
+              : l === 'tw' ? (el.dataset.tw || el.dataset.zh)
+              : el.dataset.zh;
+      if (txt !== undefined) el.innerHTML = txt;
+    });
+    document.querySelectorAll('.lang-opt').forEach(function(btn) {
+      btn.classList.toggle('active', btn.dataset.lang === l);
+    });
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.lang-opt').forEach(function(btn) {
+      btn.addEventListener('click', function() { applyLang(btn.dataset.lang); });
+    });
+    // reveal
+    var reveals = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+        });
+      }, { threshold: 0.08 });
+      reveals.forEach(function(el) { observer.observe(el); });
+    } else {
+      reveals.forEach(function(el) { el.classList.add('visible'); });
+    }
+    applyLang(_lang);
+  });
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700&family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#1a1610;--paper:#f4ede0;--gold:#d4a843;--gold-light:rgba(212,168,67,0.7);--ink:#2c2416;--ink-ghost:rgba(244,237,224,0.12);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--paper);font-family:'Noto Sans SC',sans-serif;font-weight:300;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 40px;transition:background 0.3s,padding 0.3s;}
+nav.scrolled{background:var(--paper);padding:14px 40px;}
+.nav-back{text-decoration:none;font-size:13px;letter-spacing:0.1em;color:rgba(244,237,224,0.7);font-family:'Noto Sans SC',sans-serif;font-weight:300;transition:color 0.2s;}
+nav.scrolled .nav-back{color:var(--ink);}
+.lang-switcher{display:flex;gap:4px;align-items:center;}
+.lang-opt{font-size:11px;font-family:'Noto Sans SC',sans-serif;background:transparent;border:1px solid rgba(244,237,224,0.25);border-radius:20px;padding:4px 10px;cursor:pointer;color:rgba(244,237,224,0.7);transition:all 0.2s;}
+.lang-opt:hover,.lang-opt.active{color:var(--gold);border-color:var(--gold);}
+nav.scrolled .lang-opt{color:rgba(44,36,22,0.6);border-color:rgba(44,36,22,0.25);}
+nav.scrolled .lang-opt:hover,.lang-opt.active{color:#1e1608;border-color:#1e1608;}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 40px 80px;position:relative;overflow:hidden;background:linear-gradient(180deg,#0d0b07 0%,#1a1610 60%,#1a1610 100%);}
+.hero-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:clamp(200px,40vw,400px);font-weight:900;color:rgba(255,255,255,0.02);pointer-events:none;letter-spacing:-0.05em;user-select:none;}
+.hero-label{font-size:11px;letter-spacing:0.5em;color:var(--gold-light);font-family:'Noto Sans SC',sans-serif;font-weight:300;margin-bottom:24px;text-transform:uppercase;position:relative;}
+.hero-name{font-size:clamp(64px,15vw,140px);font-family:'Noto Serif SC',serif;font-weight:700;color:var(--paper);letter-spacing:0.2em;line-height:1;margin-bottom:16px;position:relative;}
+.hero-en{font-family:'IM Fell English',serif;font-style:italic;font-size:clamp(14px,2.5vw,20px);color:rgba(244,237,224,0.45);letter-spacing:0.08em;margin-bottom:32px;}
+.hero-divider{width:60px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);margin:0 auto 32px;}
+.hero-tagline{font-size:clamp(12px,2vw,15px);color:rgba(244,237,224,0.55);letter-spacing:0.2em;line-height:2;font-family:'Noto Sans SC',sans-serif;font-weight:300;}
+
+/* COMING SOON */
+.coming-soon{max-width:640px;margin:0 auto;padding:100px 40px;text-align:center;}
+.cs-icon{font-size:64px;margin-bottom:32px;}
+.cs-title{font-family:'Noto Serif SC',serif;font-size:clamp(20px,4vw,28px);font-weight:400;color:var(--paper);letter-spacing:0.15em;margin-bottom:20px;}
+.cs-divider{width:40px;height:1px;background:var(--gold-light);margin:0 auto 24px;}
+.cs-text{font-size:15px;color:rgba(244,237,224,0.55);line-height:2.2;letter-spacing:0.06em;font-family:'Noto Serif SC',serif;font-weight:300;}
+.cs-badge{display:inline-block;margin-top:32px;font-size:11px;letter-spacing:0.3em;color:var(--gold);border:1px solid rgba(212,168,67,0.3);border-radius:20px;padding:8px 20px;font-family:'Noto Sans SC',sans-serif;font-weight:300;}
+
+/* FACT STRIP */
+.fact-strip{background:rgba(212,168,67,0.05);border-top:1px solid var(--ink-ghost);border-bottom:1px solid var(--ink-ghost);padding:48px 40px;max-width:760px;margin:0 auto 80px;}
+.fact-item{display:flex;gap:24px;align-items:flex-start;margin-bottom:28px;}
+.fact-item:last-child{margin-bottom:0;}
+.fact-icon{font-size:20px;flex:0 0 28px;padding-top:2px;}
+.fact-text{font-size:14px;color:rgba(244,237,224,0.7);line-height:1.9;letter-spacing:0.05em;font-family:'Noto Serif SC',serif;font-weight:300;}
+.fact-label{font-size:11px;letter-spacing:0.2em;color:var(--gold);font-family:'Noto Sans SC',sans-serif;display:block;margin-bottom:4px;}
+
+/* CTA */
+.cta-section{text-align:center;padding:60px 40px 100px;}
+.btn-gold{display:inline-block;padding:14px 36px;background:var(--gold);color:var(--ink);text-decoration:none;font-size:13px;letter-spacing:0.15em;font-family:'Noto Sans SC',sans-serif;font-weight:400;border-radius:4px;transition:opacity 0.2s;}
+.btn-gold:hover{opacity:0.85;}
+.btn-outline{display:inline-block;padding:14px 36px;border:1px solid rgba(244,237,224,0.3);color:rgba(244,237,224,0.7);text-decoration:none;font-size:13px;letter-spacing:0.15em;font-family:'Noto Sans SC',sans-serif;font-weight:300;border-radius:4px;margin-left:12px;transition:all 0.2s;}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+footer{border-top:1px solid var(--ink-ghost);padding:32px 40px;text-align:center;}
+.footer-copy{font-size:12px;color:rgba(244,237,224,0.25);letter-spacing:0.15em;}
+
+@media(max-width:600px){
+  nav{padding:16px 20px;}
+  .coming-soon{padding:80px 24px;}
+  .fact-strip{padding:40px 24px;}
+  .cta-section{padding:40px 24px 80px;}
+  .btn-outline{margin-left:0;margin-top:10px;display:block;}
+}
+
+/* ── 常驻购书横幅 ── */
+.book-banner{max-width:720px;margin:4rem auto 3rem;padding:0 2rem;}
+.book-banner-inner{background:linear-gradient(135deg,rgba(184,134,11,0.1),rgba(184,134,11,0.04));border:1px solid rgba(184,134,11,0.3);border-radius:16px;padding:1.5rem 2rem;display:flex;align-items:center;gap:1.5rem;}
+.book-banner-cover{width:72px;height:96px;object-fit:cover;border-radius:6px;flex-shrink:0;box-shadow:0 6px 20px rgba(30,22,8,0.18);}
+.book-banner-body{flex:1;min-width:0;}
+.book-banner-label{font-size:10px;letter-spacing:0.3em;color:var(--gold);font-family:'Noto Sans SC',sans-serif;font-weight:300;text-transform:uppercase;margin-bottom:4px;}
+.book-banner-title{font-size:17px;font-weight:700;color:var(--ink);letter-spacing:0.06em;margin-bottom:4px;line-height:1.3;}
+.book-banner-sub{font-size:12px;color:var(--ink-faint);font-family:'Noto Sans SC',sans-serif;font-weight:300;line-height:1.7;margin-bottom:12px;}
+.btn-book-banner{display:inline-block;padding:9px 22px;background:var(--gold);color:#fff;font-size:12px;font-family:'Noto Serif SC',serif;font-weight:500;letter-spacing:0.12em;border-radius:4px;text-decoration:none;transition:background 0.2s,transform 0.15s;}
+.btn-book-banner:hover{background:var(--gold-light);transform:translateY(-1px);}
+@media(max-width:520px){.book-banner-inner{flex-direction:column;text-align:center;}.book-banner-cover{width:90px;height:120px;}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="/#cats" class="nav-back" data-zh="← 猫咪家族" data-tw="← 貓咪家族" data-en="← Cat Family" data-ja="← 猫の家族">← 猫咪家族</a>
+  <div class="lang-switcher">
+    <button class="lang-opt" data-lang="zh" onclick="applyLang('zh')">中</button>
+    <button class="lang-opt" data-lang="en" onclick="applyLang('en')">EN</button>
+    <button class="lang-opt" data-lang="ja" onclick="applyLang('ja')">JP</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg">麒</div>
+  <img src="cat-qilinzai.jpg" alt="麒麟仔" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.25;object-position:center 30%;">
+  <div class="hero-label" data-zh="虎斑幼子 · 稚" data-tw="虎斑幼子 · 稚" data-en="Tabby Kitten · Wonder" data-ja="キジトラの子猫 · 幼心">虎斑幼子 · 稚</div>
+  <div class="hero-name" data-zh="麒麟仔" data-tw="麒麟仔" data-en="Qi Lin Zai" data-ja="キーリンザイ">麒麟仔</div>
+  <div class="hero-en">Qi Lin Zai · The Little One</div>
+  <div class="hero-divider"></div>
+  <div class="hero-tagline" data-zh="虎斑幼猫 · 家中最小成员 · 玄猫之道新成员" data-tw="虎斑幼貓 · 家中最小成員 · 玄貓之道新成員" data-en="Tabby Kitten · Youngest of the Family · New Member of the Tao" data-ja="キジトラの子猫 · 家族最年少 · 玄猫之道の新メンバー">虎斑幼猫 · 家中最小成员 · 玄猫之道新成员</div>
+</div>
+
+<!-- COMING SOON -->
+<div class="coming-soon reveal">
+  <div class="cs-title" data-zh="故事正在发生中" data-tw="故事正在發生中" data-en="His Story Is Still Unfolding" data-ja="物語は、まだ続いている">故事正在发生中</div>
+  <div class="cs-divider"></div>
+  <div class="cs-text" data-zh="麒麟仔刚刚加入这个家。<br><br>他的故事还没写完——<br>因为他自己还在写。<br><br>家里最小的新成员，虎斑纹路还没长开。<br>眼里全是好奇，正学着怎么当一只猫。<br><br>取名麒麟，是希望他此后的日子，都吉祥如意。" data-tw="麒麟仔剛剛加入這個家。<br><br>他的故事還沒寫完——<br>因為他自己還在寫。<br><br>家裡最小的新成員，虎斑紋路還沒長開。<br>眼裡全是好奇，正學著怎麼當一隻貓。<br><br>取名麒麟，是希望他此後的日子，都吉祥如意。" data-en="Qi Lin Zai just joined the family.<br><br>His story isn't written yet —<br>because he's still writing it himself.<br><br>The youngest of the household, his tabby stripes not fully grown in.<br>Eyes full of wonder, still learning what it means to be a cat.<br><br>Named after the Qilin, a mythical creature of good fortune — a wish for his days ahead." data-ja="キーリンザイは、たった今この家族に加わった。<br><br>彼の物語はまだ書かれていない——<br>まだ自分自身で書いている最中だから。<br><br>家族最年少の新入り、キジトラの縞模様もまだ完成していない。<br>好奇心いっぱいの目で、猫としての在り方を学んでいる。<br><br>「麒麟」と名付けたのは、これからの日々が吉祥でありますようにという願いから。">麒麟仔刚刚加入这个家。<br><br>他的故事还没写完——<br>因为他自己还在写。<br><br>家里最小的新成员，虎斑纹路还没长开。<br>眼里全是好奇，正学着怎么当一只猫。<br><br>取名麒麟，是希望他此后的日子，都吉祥如意。</div>
+  <div class="cs-badge" data-zh="✦ 新玄猫加入中..." data-tw="✦ 新玄貓加入中..." data-en="✦ New member arriving..." data-ja="✦ 新しい仲間、参上中...">✦ 新玄猫加入中...</div>
+</div>
+
+<!-- FACTS -->
+<div class="fact-strip reveal">
+  <div class="fact-item">
+    <div class="fact-icon">🐯</div>
+    <div class="fact-text">
+      <span class="fact-label" data-zh="纹路" data-tw="紋路" data-en="Markings" data-ja="模様">纹路</span>
+      <span data-zh="经典虎斑幼猫，深浅相间的条纹还在慢慢清晰，是家里目前唯一的"未完成品"。" data-tw="經典虎斑幼貓，深淺相間的條紋還在慢慢清晰，是家裡目前唯一的「未完成品」。" data-en="A classic tabby kitten — his light and dark stripes are still coming into focus, making him the one 'work in progress' in the household right now." data-ja="典型的なキジトラの子猫。濃淡の縞模様は徐々にはっきりしてきているところで、家の中で唯一の「未完成品」。">经典虎斑幼猫，深浅相间的条纹还在慢慢清晰，是家里目前唯一的"未完成品"。</span>
+    </div>
+  </div>
+  <div class="fact-item">
+    <div class="fact-icon">🐣</div>
+    <div class="fact-text">
+      <span class="fact-label" data-zh="最小成员" data-tw="最小成員" data-en="The Youngest" data-ja="家族最年少">最小成员</span>
+      <span data-zh="家里目前年纪最小的一只，还带着幼猫特有的莽撞和好奇，什么都想扑一下。" data-tw="家裡目前年紀最小的一隻，還帶著幼貓特有的莽撞和好奇，什麼都想撲一下。" data-en="The youngest cat in the house right now — still has that kitten recklessness and curiosity, pouncing on anything that moves." data-ja="現在家の中で一番若い猫。子猫特有の無鉄砲さと好奇心にあふれ、何にでも飛びかかりたがる。">家里目前年纪最小的一只，还带着幼猫特有的莽撞和好奇，什么都想扑一下。</span>
+    </div>
+  </div>
+  <div class="fact-item">
+    <div class="fact-icon">✨</div>
+    <div class="fact-text">
+      <span class="fact-label" data-zh="名字的寓意" data-tw="名字的寓意" data-en="The Meaning of His Name" data-ja="名前の由来">名字的寓意</span>
+      <span data-zh="麒麟是传说中的祥瑞之兽，寓意平安吉祥。愿他此后的每一天，都被好好照顾。" data-tw="麒麟是傳說中的祥瑞之獸，寓意平安吉祥。願他此後的每一天，都被好好照顧。" data-en="The Qilin is a mythical creature said to bring peace and good fortune — a hope that every day ahead of him will be a cared-for one." data-ja="麒麟は伝説上の瑞獣で、平安と吉祥を意味する。これからの毎日が、大切にされたものでありますように。">麒麟是传说中的祥瑞之兽，寓意平安吉祥。愿他此后的每一天，都被好好照顾。</span>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section reveal">
+  <a href="cat-qqju.html" class="btn-gold" data-zh="认识QQ橘 · 同期新猫" data-tw="認識QQ橘 · 同期新貓" data-en="Meet QQ Ju · Also New" data-ja="QQジューに会う · 同期の新入り">认识QQ橘 · 同期新猫</a>
+  <a href="/#cats" class="btn-outline" data-zh="回到猫咪家族" data-tw="回到貓咪家族" data-en="Back to the Cats" data-ja="猫の家族に戻る">回到猫咪家族</a>
+</div>
+
+<footer>
+  <div class="footer-copy" data-zh="© 2026 玄猫之道 · 麒麟仔 · 故事未完待续" data-tw="© 2026 玄貓之道 · 麒麟仔 · 故事未完待續" data-en="© 2026 Tao of Your Cat · Qi Lin Zai · To be continued" data-ja="© 2026 玄猫之道 · キーリンザイ · 続く">© 2026 玄猫之道 · 麒麟仔 · 故事未完待续</div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+</script>
+</body>
+</html>
