@@ -142,9 +142,9 @@ nav#nav.scrolled { background: rgba(244,237,224,0.95); backdrop-filter: blur(8px
 .story-split { display: flex; align-items: center; min-height: 72vh; }
 .story-split.reverse { flex-direction: row-reverse; }
 .story-split-media { position: relative; flex: 1 1 50%; height: 62vh; overflow: hidden; }
-.story-split-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.story-split-media.fade-right img { -webkit-mask-image: linear-gradient(to right, black 45%, transparent 96%); mask-image: linear-gradient(to right, black 45%, transparent 96%); }
-.story-split-media.fade-left img { -webkit-mask-image: linear-gradient(to left, black 45%, transparent 96%); mask-image: linear-gradient(to left, black 45%, transparent 96%); }
+.story-split-media img, .story-split-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.story-split-media.fade-right img, .story-split-media.fade-right video { -webkit-mask-image: linear-gradient(to right, black 45%, transparent 96%); mask-image: linear-gradient(to right, black 45%, transparent 96%); }
+.story-split-media.fade-left img, .story-split-media.fade-left video { -webkit-mask-image: linear-gradient(to left, black 45%, transparent 96%); mask-image: linear-gradient(to left, black 45%, transparent 96%); }
 
 /* BEFORE / AFTER COMPARISON */
 .story-split-compare { width: 100%; height: 100%; display: flex; flex-direction: column; }
@@ -175,7 +175,7 @@ nav#nav.scrolled { background: rgba(244,237,224,0.95); backdrop-filter: blur(8px
 @media (max-width: 768px) {
   .story-split, .story-split.reverse { flex-direction: column; min-height: auto; }
   .story-split-media { width: 100%; height: 42vh; flex: none; }
-  .story-split-media img { -webkit-mask-image: none; mask-image: none; }
+  .story-split-media img, .story-split-media video { -webkit-mask-image: none; mask-image: none; }
   .story-split-text { padding: 2.5rem 1.5rem; }
 }
 
@@ -685,7 +685,9 @@ footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-ali
 <section class="section has-story">
   <div class="story-split">
     <div class="story-split-media fade-right">
-      <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/hero-story-ourcats.jpg" alt="我们家的猫，天天在吃">
+      <video autoplay loop muted playsinline poster="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/hero-story-ourcats.jpg">
+        <source src="https://res.cloudinary.com/dlm2iyc5i/video/upload/q_auto,vc_auto,f_mp4/ourcats-eating.mp4" type="video/mp4">
+      </video>
     </div>
     <div class="story-split-text">
       <div class="story-split-eyebrow" data-zh="From Our Own Table" data-tw="From Our Own Table" data-en="From Our Own Table" data-ja="From Our Own Table">From Our Own Table</div>
