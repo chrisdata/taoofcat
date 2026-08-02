@@ -250,6 +250,19 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 .gallery-caption-desc { display: block; font-size: 12px; color: var(--ink-faint); font-family: 'Noto Sans SC', sans-serif; font-weight: 300; line-height: 1.7; }
 .gallery-note { text-align: center; font-size: 13px; color: var(--ink-faint); font-family: 'Noto Sans SC', sans-serif; }
 
+/* SPEECH BUBBLE */
+.speech-wrap { display: flex; align-items: flex-end; gap: 4px; max-width: 560px; margin: 2rem auto 0; }
+.speech-bubble { position: relative; flex: 1; background: #241d13; border: 1px solid rgba(212,168,67,0.35); border-radius: 16px; padding: 1.25rem 1.5rem; }
+.speech-bubble::before { content: ''; position: absolute; right: -9px; bottom: 30px; width: 0; height: 0; border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-left: 10px solid rgba(212,168,67,0.35); }
+.speech-bubble::after { content: ''; position: absolute; right: -7px; bottom: 31px; width: 0; height: 0; border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-left: 8px solid #241d13; }
+.speech-bubble-title { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+.speech-bubble-text { font-size: 13px; color: var(--ink-light); font-family: 'Noto Sans SC', sans-serif; line-height: 1.9; }
+.speech-cat { width: 110px; height: auto; flex-shrink: 0; margin-bottom: -6px; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.4)); }
+@media (max-width: 560px) {
+  .speech-wrap { max-width: 100%; }
+  .speech-cat { width: 80px; }
+}
+
 /* CTA */
 .cta-section { text-align: center; padding: 5rem 2rem 6rem; }
 .cta-title { font-size: clamp(22px, 4vw, 30px); font-weight: 700; margin-bottom: 12px; letter-spacing: 0.04em; }
@@ -705,9 +718,12 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
     <p data-zh="我们家八只猫，天天吃的都是这一款猫粮——从傻猪到最近加入的QQ橘、麒麟仔，全部吃的是同一套配方调理出来的，不是拿去给别人家的猫试，是我们自己天天在喂。" data-tw="我們家八隻貓，天天吃的都是這一款貓糧——從傻豬到最近加入的QQ橘、麒麟仔，全部吃的是同一套配方調理出來的，不是拿去給別人家的貓試，是我們自己天天在餵。" data-en="All eight cats in our house eat this — every day. From Sha Zhu to our newest members QQ Ju and Qi Lin Zai, everyone eats the same recipe. This isn't food we made to test on other people's cats — it's what we feed our own family, every single day." data-ja="うちの猫8匹は、毎日これを食べています。シャージューから最近加わったQQジュー、キーリンザイまで、みんな同じレシピのごはんです。よその猫のために試作したものではなく、自分たちが毎日与えているものです。">我们家八只猫，天天吃的都是这一款猫粮——从傻猪到最近加入的QQ橘、麒麟仔，全部吃的是同一套配方调理出来的，不是拿去给别人家的猫试，是我们自己天天在喂。</p>
     <p data-zh="比起市面上买的猫粮，他们更愿意吃这个。这不是营销话术，是我们家真实的日常。" data-tw="比起市面上買的貓糧，他們更願意吃這個。這不是行銷話術，是我們家真實的日常。" data-en="Given the choice, they go for this over store-bought food. That's not a sales line — that's just what happens at home." data-ja="市販のフードより、うちの猫たちはこちらを選びます。宣伝文句ではなく、我が家の日常です。">比起市面上买的猫粮，他们更愿意吃这个。这不是营销话术，是我们家真实的日常。</p>
   </div>
-  <div style="max-width:480px;margin:2rem auto 0;background:rgba(184,134,11,0.06);border:1px dashed rgba(184,134,11,0.35);border-radius:12px;padding:1.25rem 1.5rem;text-align:center;">
-    <div style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:6px;" data-zh="😄 悄悄说一句" data-tw="😄 悄悄說一句" data-en="😄 A Little Secret" data-ja="😄 ちょっとした秘密">😄 悄悄说一句</div>
-    <div style="font-size:13px;color:var(--ink-light);font-family:'Noto Sans SC',sans-serif;line-height:1.9;" data-zh="这款猫粮真的可以给人下饭吃——前提是你不嫌它不够重口味。我们没加盐没加味精，是给猫吃的，不是给你配啤酒的。" data-tw="這款貓糧真的可以給人下飯吃——前提是你不嫌它不夠重口味。我們沒加鹽沒加味精，是給貓吃的，不是給你配啤酒的。" data-en="Honestly, this cat food is good enough for a human meal too — as long as you don't mind it being under-seasoned. No salt, no MSG. Made for cats, not for pairing with beer." data-ja="正直、このごはんは人が食べてもおいしいです——味が薄めでも気にしなければ、ですが。塩もうま味調味料も入れていません。猫のためのごはんで、おつまみ用ではありません。">这款猫粮真的可以给人下饭吃——前提是你不嫌它不够重口味。我们没加盐没加味精，是给猫吃的，不是给你配啤酒的。</div>
+  <div class="speech-wrap">
+    <div class="speech-bubble">
+      <div class="speech-bubble-title" data-zh="😄 悄悄说一句" data-tw="😄 悄悄說一句" data-en="😄 A Little Secret" data-ja="😄 ちょっとした秘密">😄 悄悄说一句</div>
+      <div class="speech-bubble-text" data-zh="这款猫粮真的可以给人下饭吃——前提是你不嫌它不够重口味。我们没加盐没加味精，是给猫吃的，不是给你配啤酒的。" data-tw="這款貓糧真的可以給人下飯吃——前提是你不嫌它不夠重口味。我們沒加鹽沒加味精，是給貓吃的，不是給你配啤酒的。" data-en="Honestly, this cat food is good enough for a human meal too — as long as you don't mind it being under-seasoned. No salt, no MSG. Made for cats, not for pairing with beer." data-ja="正直、このごはんは人が食べてもおいしいです——味が薄めでも気にしなければ、ですが。塩もうま味調味料も入れていません。猫のためのごはんで、おつまみ用ではありません。">这款猫粮真的可以给人下饭吃——前提是你不嫌它不够重口味。我们没加盐没加味精，是给猫吃的，不是给你配啤酒的。</div>
+    </div>
+    <img class="speech-cat" src="heizhu-speech.png" alt="黑珠仔">
   </div>
   </div>
   </div>
