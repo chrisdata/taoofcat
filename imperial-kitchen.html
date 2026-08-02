@@ -174,7 +174,7 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 .story-split-text .umami-step-icon { width: 48px; height: 48px; margin: 0; flex-shrink: 0; }
 .story-split-text .umami-step-title { font-size: 13px; margin-bottom: 2px; }
 .story-split-text .umami-step-sub { font-size: 11px; }
-.story-split-text .umami-connector { display: none; }
+.story-split-text .umami-connector { display: block; text-align: center; font-size: 16px; margin: -2px 0; }
 .story-split-text .umami-benefits { grid-template-columns: 1fr 1fr; gap: 8px; }
 .story-split-text .umami-benefit { padding: 0.6rem 0.75rem; text-align: left; display: flex; align-items: center; gap: 8px; }
 .story-split-text .umami-benefit-icon { margin-bottom: 0; font-size: 16px; flex-shrink: 0; }
@@ -218,7 +218,7 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 .flavor-row-label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: #2e8b57; margin-bottom: 3px; }
 .flavor-row.caution .flavor-row-label { color: var(--gold); }
 .pledge-card { position: relative; background: var(--paper); border: 1px solid rgba(184,134,11,0.25); border-radius: 12px; padding: 1.5rem; text-align: center; }
-.pledge-badge { position: absolute; top: 12px; right: 12px; width: 32px; height: 32px; border-radius: 50%; background: var(--gold); color: #fff; font-size: 9px; font-weight: 700; line-height: 1.1; display: flex; align-items: center; justify-content: center; font-family: 'Noto Sans SC', sans-serif; box-shadow: 0 2px 8px rgba(30,22,8,0.2); }
+.pledge-badge { position: absolute; top: 12px; right: 12px; width: 52px; height: 52px; border-radius: 50%; background: var(--gold); color: #fff; font-size: 13px; font-weight: 700; line-height: 1.2; display: flex; align-items: center; justify-content: center; font-family: 'Noto Sans SC', sans-serif; box-shadow: 0 2px 8px rgba(30,22,8,0.2); }
 
 /* UMAMI FLOW */
 .umami-flow { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 2.5rem; }
@@ -407,7 +407,7 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
       <div class="umami-step-title" data-zh="天然海味食材" data-tw="天然海味食材" data-en="Natural Seafood" data-ja="天然の海鮮食材">天然海味食材</div>
       <div class="umami-step-sub" data-zh="提供丰富矿物质与鲜味来源" data-tw="提供豐富礦物質與鮮味來源" data-en="A rich source of minerals and umami" data-ja="豊富なミネラルと旨味の源">提供丰富矿物质与鲜味来源</div>
     </div>
-    <div class="umami-connector">»</div>
+    <div class="umami-connector">=</div>
     <div class="umami-step">
       <img class="umami-step-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200,h_200,c_fill/umami-simmer.jpg" alt="长时间熬煮萃取">
       <div class="umami-step-title" data-zh="长时间熬煮萃取" data-tw="長時間熬煮萃取" data-en="Long, Slow Extraction" data-ja="長時間かけて煮出す">长时间熬煮萃取</div>
