@@ -160,8 +160,13 @@ nav#nav.scrolled { background: rgba(244,237,224,0.95); backdrop-filter: blur(8px
 /* GALLERY */
 .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 2rem; }
 @media (max-width: 560px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
-.gallery-item { aspect-ratio: 1; background: rgba(30,22,8,0.06); border: 1px solid rgba(184,134,11,0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--ink-faint); font-size: 12px; font-family: 'Noto Sans SC', sans-serif; overflow: hidden; }
-.gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+.gallery-item { display: flex; flex-direction: column; }
+.gallery-photo { position: relative; aspect-ratio: 1; background: rgba(30,22,8,0.06); border: 1px solid rgba(184,134,11,0.2); border-radius: 8px; overflow: hidden; }
+.gallery-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.gallery-step { position: absolute; top: 8px; left: 8px; z-index: 2; width: 26px; height: 26px; border-radius: 50%; background: var(--gold); color: #fff; font-size: 12px; font-weight: 700; font-family: 'Noto Sans SC', sans-serif; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(30,22,8,0.3); }
+.gallery-caption { margin-top: 10px; }
+.gallery-caption-title { display: block; font-size: 13px; font-weight: 700; color: var(--ink); letter-spacing: 0.04em; margin-bottom: 4px; }
+.gallery-caption-desc { display: block; font-size: 12px; color: var(--ink-faint); font-family: 'Noto Sans SC', sans-serif; font-weight: 300; line-height: 1.7; }
 .gallery-note { text-align: center; font-size: 13px; color: var(--ink-faint); font-family: 'Noto Sans SC', sans-serif; }
 
 /* CTA */
@@ -446,9 +451,73 @@ footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-ali
   <div class="section-title" data-zh="制作实拍" data-tw="製作實拍" data-en="From Our Kitchen" data-ja="キッチンの様子">制作实拍</div>
   <div class="section-divider"></div>
   <div class="gallery-grid">
-    <div class="gallery-item"><img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_400/kitchen-process-1.jpg" alt="制作实拍 1" loading="lazy"></div>
-    <div class="gallery-item"><img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_400/kitchen-process-2.jpg" alt="制作实拍 2" loading="lazy"></div>
-    <div class="gallery-item"><img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_400/kitchen-process-3.jpg" alt="制作实拍 3" loading="lazy"></div>
+
+    <div class="gallery-item">
+      <div class="gallery-photo">
+        <span class="gallery-step">01</span>
+        <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_400/kitchen-process-1.jpg" alt="挑选食材" loading="lazy">
+      </div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-title" data-zh="挑选食材" data-tw="挑選食材" data-en="Sourcing" data-ja="食材選び">挑选食材</span>
+        <span class="gallery-caption-desc" data-zh="亲自前往本地市场，挑选新鲜的鸡、鸭、鱼、海味。" data-tw="親自前往本地市場，挑選新鮮的雞、鴨、魚、海味。" data-en="Handpicked at local markets — fresh chicken, duck, fish, and seafood." data-ja="地元の市場に足を運び、新鮮な鶏・鴨・魚・海鮮を選びます。">亲自前往本地市场，挑选新鲜的鸡、鸭、鱼、海味。</span>
+      </div>
+    </div>
+
+    <div class="gallery-item">
+      <div class="gallery-photo">
+        <span class="gallery-step">02</span>
+        <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_400/kitchen-process-2.jpg" alt="处理食材" loading="lazy">
+      </div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-title" data-zh="处理食材" data-tw="處理食材" data-en="Prepping" data-ja="下処理">处理食材</span>
+        <span class="gallery-caption-desc" data-zh="逐一手工处理，鱼要去骨，肉要分切。" data-tw="逐一手工處理，魚要去骨，肉要分切。" data-en="Each ingredient prepped by hand — fish deboned, meat cut to size." data-ja="ひとつひとつ手作業で下処理。魚は骨を取り、肉は切り分けます。">逐一手工处理，鱼要去骨，肉要分切。</span>
+      </div>
+    </div>
+
+    <div class="gallery-item">
+      <div class="gallery-photo">
+        <span class="gallery-step">03</span>
+        <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_400/kitchen-process-3.jpg" alt="熬出底味" loading="lazy">
+      </div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-title" data-zh="熬出底味" data-tw="熬出底味" data-en="Simmering" data-ja="旨味を引き出す">熬出底味</span>
+        <span class="gallery-caption-desc" data-zh="食材下锅慢熬，熬出猫咪愿意吃的鲜味底味。" data-tw="食材下鍋慢熬，熬出貓咪願意吃的鮮味底味。" data-en="Simmered slowly into the umami base cats can't resist." data-ja="食材をじっくり煮込み、猫が喜ぶ旨味のベースを作ります。">食材下锅慢熬，熬出猫咪愿意吃的鲜味底味。</span>
+      </div>
+    </div>
+
+    <div class="gallery-item">
+      <div class="gallery-photo">
+        <span class="gallery-step">04</span>
+        <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_400/kitchen-process-4.jpg" alt="装袋封口" loading="lazy">
+      </div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-title" data-zh="装袋封口" data-tw="裝袋封口" data-en="Sealing" data-ja="真空・密封">装袋封口</span>
+        <span class="gallery-caption-desc" data-zh="底味与食材一起入袋，抽真空后双重封口。" data-tw="底味與食材一起入袋，抽真空後雙重封口。" data-en="The stock and ingredients go into the pouch, vacuum-sealed with a double seal." data-ja="旨味と食材を袋に入れ、真空にしてから二重に密封します。">底味与食材一起入袋，抽真空后双重封口。</span>
+      </div>
+    </div>
+
+    <div class="gallery-item">
+      <div class="gallery-photo">
+        <span class="gallery-step">05</span>
+        <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_400/kitchen-process-5.jpg" alt="Retort 灭菌" loading="lazy">
+      </div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-title" data-zh="Retort 灭菌" data-tw="Retort 滅菌" data-en="Retort" data-ja="Retort殺菌">Retort 灭菌</span>
+        <span class="gallery-caption-desc" data-zh="整袋送入 Retort 高温高压杀菌，不需要额外加防腐剂。" data-tw="整袋送入 Retort 高溫高壓殺菌，不需要額外加防腐劑。" data-en="Each sealed pouch goes through Retort's high-heat, high-pressure sterilization — no preservatives needed." data-ja="密封したパウチをRetortの高温高圧殺菌にかけます。防腐剤は不要です。">整袋送入 Retort 高温高压杀菌，不需要额外加防腐剂。</span>
+      </div>
+    </div>
+
+    <div class="gallery-item">
+      <div class="gallery-photo">
+        <span class="gallery-step">06</span>
+        <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_400/kitchen-process-6.jpg" alt="贴标装箱" loading="lazy">
+      </div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-title" data-zh="贴标装箱" data-tw="貼標裝箱" data-en="Packing" data-ja="ラベル・梱包">贴标装箱</span>
+        <span class="gallery-caption-desc" data-zh="灭菌完成，逐包贴标、装箱，准备发货给你。" data-tw="滅菌完成，逐包貼標、裝箱，準備發貨給你。" data-en="Once sterilized, each pack is labeled, boxed, and ready to ship to you." data-ja="殺菌が終わったら、一つずつラベルを貼り、箱詰めして発送準備をします。">灭菌完成，逐包贴标、装箱，准备发货给你。</span>
+      </div>
+    </div>
+
   </div>
   <div class="gallery-note" data-zh="更多实拍照片，即将上线" data-tw="更多實拍照片，即將上線" data-en="More photos coming soon" data-ja="写真は順次追加予定">更多实拍照片，即将上线</div>
 </section>
