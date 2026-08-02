@@ -152,7 +152,22 @@ nav#nav.scrolled { background: rgba(244,237,224,0.95); backdrop-filter: blur(8px
 .flavor-row.caution { border-left-color: rgba(184,134,11,0.5); margin-bottom: 0; }
 .flavor-row-label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: #2e8b57; margin-bottom: 3px; }
 .flavor-row.caution .flavor-row-label { color: var(--gold); }
-.pledge-card { background: var(--paper); border: 1px solid rgba(184,134,11,0.25); border-radius: 12px; padding: 1.5rem; text-align: center; }
+.pledge-card { position: relative; background: var(--paper); border: 1px solid rgba(184,134,11,0.25); border-radius: 12px; padding: 1.5rem; text-align: center; }
+.pledge-badge { position: absolute; top: 12px; right: 12px; width: 32px; height: 32px; border-radius: 50%; background: var(--gold); color: #fff; font-size: 9px; font-weight: 700; line-height: 1.1; display: flex; align-items: center; justify-content: center; font-family: 'Noto Sans SC', sans-serif; box-shadow: 0 2px 8px rgba(30,22,8,0.2); }
+
+/* UMAMI FLOW */
+.umami-flow { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.umami-step { text-align: center; width: 150px; }
+.umami-step-icon { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; margin: 0 auto 10px; display: block; border: 3px solid rgba(184,134,11,0.25); box-shadow: 0 4px 14px rgba(30,22,8,0.12); }
+.umami-step-title { font-size: 14px; font-weight: 700; color: var(--ink); letter-spacing: 0.03em; margin-bottom: 4px; }
+.umami-step-sub { font-size: 11px; color: var(--ink-faint); font-family: 'Noto Sans SC', sans-serif; font-weight: 300; line-height: 1.6; }
+.umami-connector { font-size: 22px; color: var(--gold); font-weight: 700; flex-shrink: 0; }
+@media (max-width: 560px) { .umami-connector { width: 100%; text-align: center; transform: rotate(90deg); } }
+.umami-benefits { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+@media (max-width: 700px) { .umami-benefits { grid-template-columns: repeat(2, 1fr); } }
+.umami-benefit { background: rgba(184,134,11,0.06); border: 1px solid rgba(184,134,11,0.2); border-radius: 12px; padding: 1rem 0.75rem; text-align: center; }
+.umami-benefit-icon { font-size: 22px; margin-bottom: 6px; }
+.umami-benefit-text { font-size: 12px; color: var(--ink-light); font-family: 'Noto Sans SC', sans-serif; font-weight: 300; line-height: 1.5; }
 .pledge-icon { font-size: 28px; margin-bottom: 10px; }
 .pledge-text { font-size: 15px; font-weight: 500; color: var(--ink); line-height: 1.6; }
 .pledge-sub { font-size: 12px; color: var(--ink-faint); font-family: 'Noto Sans SC', sans-serif; margin-top: 6px; line-height: 1.6; }
@@ -313,21 +328,74 @@ footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-ali
   <div class="section-divider"></div>
   <div class="pledge-grid">
     <div class="pledge-card">
+      <div class="pledge-badge">0%<br>防腐剂</div>
       <div class="pledge-icon">🚫</div>
       <div class="pledge-text" data-zh="不加防腐剂" data-tw="不加防腐劑" data-en="No Preservatives" data-ja="防腐剤不使用">不加防腐剂</div>
+      <div class="pledge-sub" data-zh="如 BHA、BHT、亚硝酸盐，长期累积可能增加肝肾负担。我们以高温高压杀菌延长保存期，不靠化学防腐。" data-tw="如 BHA、BHT、亞硝酸鹽，長期累積可能增加肝腎負擔。我們以高溫高壓殺菌延長保存期，不靠化學防腐。" data-en="Preservatives like BHA, BHT, or nitrites can burden the liver and kidneys over time. We extend shelf life through high-heat, high-pressure sterilization instead — no chemical preservatives needed." data-ja="BHA、BHT、亜硝酸塩などは、蓄積すると肝臓や腎臓に負担をかける可能性があります。私たちは高温高圧殺菌で保存期間を延ばし、化学的な防腐剤には頼りません。">如 BHA、BHT、亚硝酸盐，长期累积可能增加肝肾负担。我们以高温高压杀菌延长保存期，不靠化学防腐。</div>
     </div>
     <div class="pledge-card">
+      <div class="pledge-badge">0%<br>色素</div>
       <div class="pledge-icon">🎨</div>
       <div class="pledge-text" data-zh="不加色素" data-tw="不加色素" data-en="No Colorants" data-ja="着色料不使用">不加色素</div>
+      <div class="pledge-sub" data-zh="人工色素可能引发过敏、影响健康。食材本身的自然色泽，才是最真实的样子。" data-tw="人工色素可能引發過敏、影響健康。食材本身的自然色澤，才是最真實的樣子。" data-en="Artificial colorants can trigger allergies or affect long-term health. The ingredients' natural color is the real thing." data-ja="人工着色料はアレルギーを引き起こしたり、健康に影響を与える可能性があります。食材本来の自然な色こそが、本当の姿です。">人工色素可能引发过敏、影响健康。食材本身的自然色泽，才是最真实的样子。</div>
     </div>
     <div class="pledge-card">
+      <div class="pledge-badge">0%<br>胶稠剂</div>
       <div class="pledge-icon">🧪</div>
       <div class="pledge-text" data-zh="不加胶稠剂" data-tw="不加膠稠劑" data-en="No Thickening Gums" data-ja="増粘剤不使用">不加胶稠剂</div>
+      <div class="pledge-sub" data-zh="如卡拉胶、瓜尔胶，可能加重肠胃负担、影响营养吸收。我们保留食材原始质地与营养。" data-tw="如卡拉膠、瓜爾膠，可能加重腸胃負擔、影響營養吸收。我們保留食材原始質地與營養。" data-en="Thickeners like carrageenan or guar gum can strain digestion and hinder nutrient absorption. We keep the ingredients' natural texture and nutrition intact." data-ja="カラギーナンやグアーガムなどの増粘剤は、消化に負担をかけ、栄養吸収を妨げる可能性があります。私たちは食材本来の質感と栄養をそのまま残します。">如卡拉胶、瓜尔胶，可能加重肠胃负担、影响营养吸收。我们保留食材原始质地与营养。</div>
     </div>
     <div class="pledge-card">
+      <div class="pledge-badge">0%<br>诱食剂</div>
       <div class="pledge-icon">✨</div>
       <div class="pledge-text" data-zh="不加诱食剂" data-tw="不加誘食劑" data-en="No Artificial Palatants" data-ja="嗜好性添加物不使用">不加诱食剂</div>
-      <div class="pledge-sub" data-zh="本地鸡鸭壳与海味熬出的鲜味，就是天然的诱食力" data-tw="本地雞鴨殼與海味熬出的鮮味，就是天然的誘食力" data-en="The umami from real local chicken, duck, and seafood does that work naturally" data-ja="地元の鶏鴨と海鮮から引き出す旨味こそが、天然の誘因力">本地鸡鸭壳与海味熬出的鲜味，就是天然的诱食力</div>
+      <div class="pledge-sub" data-zh="人工诱食剂容易让猫咪养成挑食、依赖化学香气。本地鸡鸭壳与海味熬出的鲜味，就是天然的诱食力。" data-tw="人工誘食劑容易讓貓咪養成挑食、依賴化學香氣。本地雞鴨殼與海味熬出的鮮味，就是天然的誘食力。" data-en="Artificial palatants can lead to picky eating and a reliance on chemical flavoring. The umami from real local chicken, duck, and seafood does that job naturally." data-ja="人工的な嗜好性添加物は、偏食や化学的な香りへの依存を招くことがあります。地元の鶏鴨と海鮮から引き出す旨味こそが、天然の誘因力です。">人工诱食剂容易让猫咪养成挑食、依赖化学香气。本地鸡鸭壳与海味熬出的鲜味，就是天然的诱食力。</div>
+    </div>
+  </div>
+</section>
+
+<!-- 鲜味来源 -->
+<section class="section reveal">
+  <div class="section-label" data-zh="Natural Umami" data-tw="Natural Umami" data-en="Natural Umami" data-ja="Natural Umami">Natural Umami</div>
+  <div class="section-title" data-zh="本地食材与海味熬出的鲜味，就是猫咪喜欢的味道" data-tw="本地食材與海味熬出的鮮味，就是貓咪喜歡的味道" data-en="The Umami from Local Ingredients & Seafood — The Flavor Cats Naturally Love" data-ja="地元の食材と海鮮から引き出す旨味こそが、猫が好む味">本地食材与海味熬出的鲜味，就是猫咪喜欢的味道</div>
+  <div class="section-divider"></div>
+
+  <div class="umami-flow">
+    <div class="umami-step">
+      <img class="umami-step-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200,h_200,c_fill/umami-chicken-duck.jpg" alt="本地鸡鸭壳">
+      <div class="umami-step-title" data-zh="本地鸡鸭壳" data-tw="本地雞鴨殼" data-en="Local Chicken & Duck Frames" data-ja="地元の鶏鴨の骨">本地鸡鸭壳</div>
+      <div class="umami-step-sub" data-zh="富含胶原蛋白与胺基酸" data-tw="富含膠原蛋白與胺基酸" data-en="Rich in collagen and amino acids" data-ja="コラーゲンとアミノ酸が豊富">富含胶原蛋白与胺基酸</div>
+    </div>
+    <div class="umami-connector">+</div>
+    <div class="umami-step">
+      <img class="umami-step-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200,h_200,c_fill/umami-seafood.jpg" alt="天然海味食材">
+      <div class="umami-step-title" data-zh="天然海味食材" data-tw="天然海味食材" data-en="Natural Seafood" data-ja="天然の海鮮食材">天然海味食材</div>
+      <div class="umami-step-sub" data-zh="提供丰富矿物质与鲜味来源" data-tw="提供豐富礦物質與鮮味來源" data-en="A rich source of minerals and umami" data-ja="豊富なミネラルと旨味の源">提供丰富矿物质与鲜味来源</div>
+    </div>
+    <div class="umami-connector">»</div>
+    <div class="umami-step">
+      <img class="umami-step-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200,h_200,c_fill/umami-simmer.jpg" alt="长时间熬煮萃取">
+      <div class="umami-step-title" data-zh="长时间熬煮萃取" data-tw="長時間熬煮萃取" data-en="Long, Slow Extraction" data-ja="長時間かけて煮出す">长时间熬煮萃取</div>
+      <div class="umami-step-sub" data-zh="释放天然鲜味与营养精华" data-tw="釋放天然鮮味與營養精華" data-en="Releasing natural umami and nutrients" data-ja="天然の旨味と栄養を引き出す">释放天然鲜味与营养精华</div>
+    </div>
+  </div>
+
+  <div class="umami-benefits">
+    <div class="umami-benefit">
+      <div class="umami-benefit-icon">😺</div>
+      <div class="umami-benefit-text" data-zh="天然鲜香<br>激发食欲" data-tw="天然鮮香<br>激發食慾" data-en="Natural aroma<br>excites appetite" data-ja="天然の香りで<br>食欲をそそる">天然鲜香<br>激发食欲</div>
+    </div>
+    <div class="umami-benefit">
+      <div class="umami-benefit-icon">💧</div>
+      <div class="umami-benefit-text" data-zh="好消化吸收<br>肠胃无负担" data-tw="好消化吸收<br>腸胃無負擔" data-en="Easy to digest<br>gentle on the gut" data-ja="消化吸収がよく<br>お腹に優しい">好消化吸收<br>肠胃无负担</div>
+    </div>
+    <div class="umami-benefit">
+      <div class="umami-benefit-icon">🛡️</div>
+      <div class="umami-benefit-text" data-zh="营养丰富<br>增强免疫力" data-tw="營養豐富<br>增強免疫力" data-en="Nutrient-rich<br>supports immunity" data-ja="栄養豊富で<br>免疫力をサポート">营养丰富<br>增强免疫力</div>
+    </div>
+    <div class="umami-benefit">
+      <div class="umami-benefit-icon">❤️</div>
+      <div class="umami-benefit-text" data-zh="安心天然<br>健康每一餐" data-tw="安心天然<br>健康每一餐" data-en="Natural & reassuring<br>every meal" data-ja="天然で安心<br>毎食が健康的に">安心天然<br>健康每一餐</div>
     </div>
   </div>
 </section>
