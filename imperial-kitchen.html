@@ -109,10 +109,7 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 .lang-opt:hover, .lang-opt.active { color: var(--gold); border-color: var(--gold); }
 
 /* HERO */
-/* PHOTO WATERMARK */
-.photo-watermark { position: absolute !important; right: 12px; bottom: 12px; width: 60px !important; height: auto !important; object-fit: contain !important; opacity: 0.75; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5)); pointer-events: none; z-index: 3; }
-.photo-watermark.small { width: 30px !important; right: 8px; bottom: 8px; }
-@media (max-width: 600px) { .photo-watermark { width: 42px !important; right: 8px; bottom: 8px; } }
+
 
 .hero {
   min-height: 92vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -392,7 +389,6 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
   <div class="story-split">
     <div class="story-split-media fade-right">
       <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/hero-story-origin.jpg" alt="为什么我们开始做猫粮">
-      <img class="photo-watermark" src="yushanfang_logo.svg" alt="">
     </div>
     <div class="story-split-text">
       <div class="story-split-eyebrow" data-zh="Our Story" data-tw="Our Story" data-en="Our Story" data-ja="Our Story">Our Story</div>
@@ -412,7 +408,6 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
   <div class="story-split reverse">
     <div class="story-split-media fade-left">
       <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/hero-story-ingredients.jpg" alt="白肉、红肉、海鲜，都想让你家猫试试看">
-      <img class="photo-watermark" src="yushanfang_logo.svg" alt="">
     </div>
     <div class="story-split-text">
       <div class="story-split-eyebrow" data-zh="Ingredients" data-tw="Ingredients" data-en="Ingredients" data-ja="Ingredients">Ingredients</div>
@@ -643,7 +638,6 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
   <div class="story-split reverse">
     <div class="story-split-media fade-left">
       <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/hero-story-retort.jpg" alt="什么是 Retort 工艺">
-      <img class="photo-watermark" src="yushanfang_logo.svg" alt="">
     </div>
     <div class="story-split-text">
       <div class="story-split-eyebrow" data-zh="Process" data-tw="Process" data-en="Process" data-ja="Process">Process</div>
@@ -667,7 +661,6 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
       <div class="gallery-photo">
         <span class="gallery-step">01</span>
         <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_400/kitchen-process-1.jpg" alt="挑选食材" loading="lazy">
-      <img class="photo-watermark small" src="yushanfang_logo.svg" alt="">
       </div>
       <div class="gallery-caption">
         <span class="gallery-caption-title" data-zh="挑选食材" data-tw="挑選食材" data-en="Sourcing" data-ja="食材選び">挑选食材</span>
@@ -679,7 +672,6 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
       <div class="gallery-photo">
         <span class="gallery-step">02</span>
         <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_400/kitchen-process-2.jpg" alt="处理食材" loading="lazy">
-      <img class="photo-watermark small" src="yushanfang_logo.svg" alt="">
       </div>
       <div class="gallery-caption">
         <span class="gallery-caption-title" data-zh="处理食材" data-tw="處理食材" data-en="Prepping" data-ja="下処理">处理食材</span>
@@ -691,7 +683,6 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
       <div class="gallery-photo">
         <span class="gallery-step">03</span>
         <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_400/kitchen-process-3.jpg" alt="熬出底味" loading="lazy">
-      <img class="photo-watermark small" src="yushanfang_logo.svg" alt="">
       </div>
       <div class="gallery-caption">
         <span class="gallery-caption-title" data-zh="熬出底味" data-tw="熬出底味" data-en="Simmering" data-ja="旨味を引き出す">熬出底味</span>
@@ -703,7 +694,6 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
       <div class="gallery-photo">
         <span class="gallery-step">04</span>
         <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_400/kitchen-process-4.jpg" alt="装袋封口" loading="lazy">
-      <img class="photo-watermark small" src="yushanfang_logo.svg" alt="">
       </div>
       <div class="gallery-caption">
         <span class="gallery-caption-title" data-zh="装袋封口" data-tw="裝袋封口" data-en="Sealing" data-ja="真空・密封">装袋封口</span>
@@ -715,7 +705,6 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
       <div class="gallery-photo">
         <span class="gallery-step">05</span>
         <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_400/kitchen-process-5.jpg" alt="Retort 灭菌" loading="lazy">
-      <img class="photo-watermark small" src="yushanfang_logo.svg" alt="">
       </div>
       <div class="gallery-caption">
         <span class="gallery-caption-title" data-zh="Retort 灭菌" data-tw="Retort 滅菌" data-en="Retort" data-ja="Retort殺菌">Retort 灭菌</span>
@@ -727,7 +716,6 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
       <div class="gallery-photo">
         <span class="gallery-step">06</span>
         <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_400/kitchen-process-6.jpg" alt="贴标装箱" loading="lazy">
-      <img class="photo-watermark small" src="yushanfang_logo.svg" alt="">
       </div>
       <div class="gallery-caption">
         <span class="gallery-caption-title" data-zh="贴标装箱" data-tw="貼標裝箱" data-en="Packing" data-ja="ラベル・梱包">贴标装箱</span>
@@ -744,7 +732,6 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
       <video autoplay loop muted playsinline poster="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/hero-story-ourcats.jpg">
         <source src="https://res.cloudinary.com/dlm2iyc5i/video/upload/q_auto,vc_auto,f_mp4/ourcats-eating.mp4" type="video/mp4">
       </video>
-      <img class="photo-watermark" src="yushanfang_logo.svg" alt="">
     </div>
     <div class="story-split-text">
       <div class="story-split-eyebrow" data-zh="From Our Own Table" data-tw="From Our Own Table" data-en="From Our Own Table" data-ja="From Our Own Table">From Our Own Table</div>
