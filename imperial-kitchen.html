@@ -169,6 +169,7 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 }
 .story-split-text .umami-flow { display: flex; flex-direction: row; align-items: center; gap: 16px; margin-bottom: 2rem; flex-wrap: wrap; }
 .story-split-text .umami-step { display: flex; align-items: center; gap: 12px; text-align: left; flex: 0 1 auto; }
+.story-split-text .umami-step-text { display: flex; flex-direction: column; justify-content: center; min-width: 130px; max-width: 220px; }
 .story-split-text .umami-step-icon { width: 96px; height: 96px; margin: 0; flex-shrink: 0; }
 .story-split-text .umami-step-title { font-size: 13px; margin-bottom: 2px; }
 .story-split-text .umami-step-sub { font-size: 11px; }
@@ -431,20 +432,26 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
   <div class="umami-flow">
     <div class="umami-step">
       <img class="umami-step-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200,h_200,c_fill/umami-chicken-duck.jpg" alt="家禽壳类，鱼骨类，肉骨类等材料">
-      <div class="umami-step-title" data-zh="家禽壳类、鱼骨类、肉骨类等材料" data-tw="家禽殼類、魚骨類、肉骨類等材料" data-en="Poultry Frames, Fish Bones & Meat Bones" data-ja="家禽の殻、魚の骨、肉の骨など">家禽壳类、鱼骨类、肉骨类等材料</div>
-      <div class="umami-step-sub" data-zh="富含胶原蛋白与胺基酸" data-tw="富含膠原蛋白與胺基酸" data-en="Rich in collagen and amino acids" data-ja="コラーゲンとアミノ酸が豊富">富含胶原蛋白与胺基酸</div>
+      <div class="umami-step-text">
+        <div class="umami-step-title" data-zh="家禽壳类、鱼骨类、肉骨类等材料" data-tw="家禽殼類、魚骨類、肉骨類等材料" data-en="Poultry Frames, Fish Bones & Meat Bones" data-ja="家禽の殻、魚の骨、肉の骨など">家禽壳类、鱼骨类、肉骨类等材料</div>
+        <div class="umami-step-sub" data-zh="富含胶原蛋白与胺基酸" data-tw="富含膠原蛋白與胺基酸" data-en="Rich in collagen and amino acids" data-ja="コラーゲンとアミノ酸が豊富">富含胶原蛋白与胺基酸</div>
+      </div>
     </div>
     <div class="umami-connector">+</div>
     <div class="umami-step">
       <img class="umami-step-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200,h_200,c_fill/umami-seafood.jpg" alt="天然海味食材">
-      <div class="umami-step-title" data-zh="天然海味食材" data-tw="天然海味食材" data-en="Natural Seafood" data-ja="天然の海鮮食材">天然海味食材</div>
-      <div class="umami-step-sub" data-zh="提供丰富矿物质与鲜味来源" data-tw="提供豐富礦物質與鮮味來源" data-en="A rich source of minerals and umami" data-ja="豊富なミネラルと旨味の源">提供丰富矿物质与鲜味来源</div>
+      <div class="umami-step-text">
+        <div class="umami-step-title" data-zh="天然海味食材" data-tw="天然海味食材" data-en="Natural Seafood" data-ja="天然の海鮮食材">天然海味食材</div>
+        <div class="umami-step-sub" data-zh="提供丰富矿物质与鲜味来源" data-tw="提供豐富礦物質與鮮味來源" data-en="A rich source of minerals and umami" data-ja="豊富なミネラルと旨味の源">提供丰富矿物质与鲜味来源</div>
+      </div>
     </div>
     <div class="umami-connector">=</div>
     <div class="umami-step">
       <img class="umami-step-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200,h_200,c_fill/umami-simmer.jpg" alt="长时间熬煮萃取">
-      <div class="umami-step-title" data-zh="长时间熬煮萃取" data-tw="長時間熬煮萃取" data-en="Long, Slow Extraction" data-ja="長時間かけて煮出す">长时间熬煮萃取</div>
-      <div class="umami-step-sub" data-zh="释放天然鲜味与营养精华" data-tw="釋放天然鮮味與營養精華" data-en="Releasing natural umami and nutrients" data-ja="天然の旨味と栄養を引き出す">释放天然鲜味与营养精华</div>
+      <div class="umami-step-text">
+        <div class="umami-step-title" data-zh="长时间熬煮萃取" data-tw="長時間熬煮萃取" data-en="Long, Slow Extraction" data-ja="長時間かけて煮出す">长时间熬煮萃取</div>
+        <div class="umami-step-sub" data-zh="释放天然鲜味与营养精华" data-tw="釋放天然鮮味與營養精華" data-en="Releasing natural umami and nutrients" data-ja="天然の旨味と栄養を引き出す">释放天然鲜味与营养精华</div>
+      </div>
     </div>
   </div>
 
