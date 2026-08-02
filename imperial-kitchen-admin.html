@@ -180,15 +180,25 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
         else data[key] = el.value.trim();
       });
       data.updated_at = serverTimestamp();
-      await setDoc(doc(db, COL, id), data, { merge: true });
-      const status = cardEl.querySelector('[data-role="status"]');
-      status.classList.add('show');
-      setTimeout(() => status.classList.remove('show'), 1500);
-      cardEl.classList.toggle('inactive', !data.active);
+      try {
+        await setDoc(doc(db, COL, id), data, { merge: true });
+        const status = cardEl.querySelector('[data-role="status"]');
+        status.classList.add('show');
+        setTimeout(() => status.classList.remove('show'), 1500);
+        cardEl.classList.toggle('inactive', !data.active);
+      } catch (err) {
+        console.error('保存失败:', err);
+        alert('保存失败：' + err.code + '\n' + err.message);
+      }
     };
     cardEl.querySelector('[data-role="delete"]').onclick = async () => {
       if (!confirm('确定要删除这个口味吗？这个动作不能复原。')) return;
-      await deleteDoc(doc(db, COL, id));
+      try {
+        await deleteDoc(doc(db, COL, id));
+      } catch (err) {
+        console.error('删除失败:', err);
+        alert('删除失败：' + err.code + '\n' + err.message);
+      }
     };
   }
 
@@ -205,15 +215,29 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
       empty.style.display = 'none';
       list.innerHTML = snap.docs.map(d => itemCardHTML(d.id, d.data())).join('');
       snap.docs.forEach(d => bindCard(list.querySelector(`[data-id="${d.id}"]`), d.id));
+    }, (err) => {
+      console.error('读取失败:', err);
+      alert('读取库存列表失败：' + err.code + '\n' + err.message + '\n\n请检查 Firestore Rules 是否已经设置好。');
     });
   }
 
   document.getElementById('btnAddNew').onclick = async () => {
-    await addDoc(collection(db, COL), {
-      name_zh: '新口味', name_tw: '新口味', name_en: 'New Flavor', name_ja: '新しい味',
-      qty_zh: '现货', qty_tw: '現貨', qty_en: 'In stock', qty_ja: '在庫あり',
-      order: 99, active: true, created_at: serverTimestamp()
-    });
+    const btn = document.getElementById('btnAddNew');
+    btn.disabled = true;
+    btn.textContent = '新增中…';
+    try {
+      await addDoc(collection(db, COL), {
+        name_zh: '新口味', name_tw: '新口味', name_en: 'New Flavor', name_ja: '新しい味',
+        qty_zh: '现货', qty_tw: '現貨', qty_en: 'In stock', qty_ja: '在庫あり',
+        order: 99, active: true, created_at: serverTimestamp()
+      });
+    } catch (err) {
+      console.error('新增失败:', err);
+      alert('新增失败：' + err.code + '\n' + err.message + '\n\n请检查 Firestore Rules 是否已经加好、Firestore 数据库是否已经建立。');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = '+ 新增一款口味';
+    }
   };
 </script>
 
