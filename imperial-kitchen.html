@@ -126,6 +126,7 @@ nav#nav.scrolled { background: rgba(244,237,224,0.95); backdrop-filter: blur(8px
 /* SECTION */
 .section { max-width: 760px; margin: 0 auto; padding: 0 2rem; }
 .section-wide { max-width: 1100px; }
+.section-xwide { max-width: 1360px; }
 .section-label { font-size: 11px; letter-spacing: 0.3em; color: var(--gold); font-family: 'Noto Sans SC', sans-serif; text-transform: uppercase; margin-bottom: 12px; text-align: center; }
 .section-title { font-size: clamp(24px, 4vw, 32px); font-weight: 700; letter-spacing: 0.05em; text-align: center; margin-bottom: 8px; }
 .section-en { font-family: 'IM Fell English', serif; font-style: italic; font-size: 14px; color: var(--ink-faint); text-align: center; margin-bottom: 2rem; }
@@ -175,9 +176,10 @@ nav#nav.scrolled { background: rgba(244,237,224,0.95); backdrop-filter: blur(8px
 @media (max-width: 560px) { .pledge-grid { grid-template-columns: 1fr; } }
 
 /* FLAVOR CARDS */
-.flavor-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-@media (max-width: 900px) { .flavor-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 560px) { .flavor-grid { grid-template-columns: 1fr; } }
+.flavor-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+@media (max-width: 1100px) { .flavor-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 700px) { .flavor-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .flavor-grid { grid-template-columns: 1fr; } }
 .flavor-card { background: var(--paper); border: 1px solid rgba(184,134,11,0.22); border-radius: 16px; padding: 1.75rem 1.5rem; text-align: center; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
 .flavor-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(30,22,8,0.1); border-color: rgba(184,134,11,0.4); }
 .flavor-icon { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; margin: 0 auto 14px; display: block; border: 3px solid rgba(184,134,11,0.25); box-shadow: 0 4px 14px rgba(30,22,8,0.12); }
@@ -208,7 +210,8 @@ nav#nav.scrolled { background: rgba(244,237,224,0.95); backdrop-filter: blur(8px
 .pledge-sub { font-size: 12px; color: var(--ink-faint); font-family: 'Noto Sans SC', sans-serif; margin-top: 6px; line-height: 1.6; }
 
 /* GALLERY */
-.gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 2rem; }
+.gallery-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-bottom: 2rem; }
+@media (max-width: 1200px) { .gallery-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 560px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
 .gallery-item { display: flex; flex-direction: column; }
 .gallery-photo { position: relative; aspect-ratio: 1; background: rgba(30,22,8,0.06); border: 1px solid rgba(184,134,11,0.2); border-radius: 8px; overflow: hidden; }
@@ -405,7 +408,7 @@ footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-ali
   </div>
 </section>
 <!-- 口味小科普 -->
-<section class="section section-alt">
+<section class="section section-alt section-xwide">
   <div class="section-label" data-zh="Flavor Notes" data-tw="Flavor Notes" data-en="Flavor Notes" data-ja="Flavor Notes">Flavor Notes</div>
   <div class="section-title" data-zh="口味小科普" data-tw="口味小科普" data-en="Know Your Flavors" data-ja="味の豆知識">口味小科普</div>
   <div class="section-en" data-zh="好处，跟需要留意的地方，我们都写给你看" data-tw="好處，跟需要留意的地方，我們都寫給你看" data-en="The benefits — and the things worth knowing" data-ja="良い点も、気をつけたい点も、正直にお伝えします">好处，跟需要留意的地方，我们都写给你看</div>
@@ -579,7 +582,7 @@ footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-ali
   </div>
 </section>
 <!-- 实拍图集 -->
-<section class="section">
+<section class="section section-xwide">
   <div class="section-label" data-zh="Behind the Kitchen" data-tw="Behind the Kitchen" data-en="Behind the Kitchen" data-ja="Behind the Kitchen">Behind the Kitchen</div>
   <div class="section-title" data-zh="制作实拍" data-tw="製作實拍" data-en="From Our Kitchen" data-ja="キッチンの様子">制作实拍</div>
   <div class="section-divider"></div>
