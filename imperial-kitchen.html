@@ -150,10 +150,17 @@ nav#nav.scrolled { background: rgba(244,237,224,0.95); backdrop-filter: blur(8px
 /* narrower grids when nested beside the media column */
 .story-split-text .pledge-grid,
 .story-split-text .flavor-grid,
-.story-split-text .gallery-grid,
-.story-split-text .umami-benefits { grid-template-columns: 1fr; }
-.story-split-text .umami-flow { flex-direction: column; }
-.story-split-text .umami-connector { transform: rotate(90deg); }
+.story-split-text .gallery-grid { grid-template-columns: 1fr; }
+.story-split-text .umami-flow { flex-direction: column; align-items: stretch; gap: 10px; margin-bottom: 1.5rem; }
+.story-split-text .umami-step { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; }
+.story-split-text .umami-step-icon { width: 48px; height: 48px; margin: 0; flex-shrink: 0; }
+.story-split-text .umami-step-title { font-size: 13px; margin-bottom: 2px; }
+.story-split-text .umami-step-sub { font-size: 11px; }
+.story-split-text .umami-connector { display: none; }
+.story-split-text .umami-benefits { grid-template-columns: 1fr 1fr; gap: 8px; }
+.story-split-text .umami-benefit { padding: 0.6rem 0.75rem; text-align: left; display: flex; align-items: center; gap: 8px; }
+.story-split-text .umami-benefit-icon { margin-bottom: 0; font-size: 16px; flex-shrink: 0; }
+.story-split-text .umami-benefit-text { font-size: 11px; line-height: 1.4; }
 @media (max-width: 768px) {
   .story-split, .story-split.reverse { flex-direction: column; min-height: auto; }
   .story-split-media { width: 100%; height: 42vh; flex: none; }
@@ -309,7 +316,7 @@ footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-ali
 </div>
 
 <!-- 起源故事 -->
-<section class="section has-story reveal">
+<section class="section has-story">
   <div class="story-split">
     <div class="story-split-media fade-right">
       <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/hero-story-origin.jpg" alt="为什么我们开始做猫粮">
@@ -328,7 +335,7 @@ footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-ali
   </div>
 </section>
 <!-- 食材阵容 -->
-<section class="section has-story reveal">
+<section class="section has-story">
   <div class="story-split reverse">
     <div class="story-split-media fade-left">
       <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/hero-story-ingredients.jpg" alt="白肉、红肉、海鲜，都想让你家猫试试看">
@@ -345,7 +352,7 @@ footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-ali
   </div>
 </section>
 <!-- 鲜味来源 -->
-<section class="section has-story reveal">
+<section class="section has-story">
   <div class="story-split">
     <div class="story-split-media fade-right">
       <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/hero-story-umami.jpg" alt="本地食材与海味熬出的鲜味，就是猫咪喜欢的味道">
@@ -396,7 +403,7 @@ footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-ali
   </div>
 </section>
 <!-- 口味小科普 -->
-<section class="section has-story reveal">
+<section class="section has-story">
   <div class="story-split reverse">
     <div class="story-split-media fade-left">
       <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/hero-story-flavors.jpg" alt="口味小科普">
@@ -527,7 +534,7 @@ footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-ali
   </div>
 </section>
 <!-- 四不加 -->
-<section class="section has-story reveal">
+<section class="section has-story">
   <div class="story-split">
     <div class="story-split-media fade-right">
       <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/hero-story-fournevers.jpg" alt="玄猫御膳坊 · 坚持四不加">
@@ -565,7 +572,7 @@ footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-ali
   </div>
 </section>
 <!-- RETORT 工艺 -->
-<section class="section has-story reveal">
+<section class="section has-story">
   <div class="story-split reverse">
     <div class="story-split-media fade-left">
       <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/hero-story-retort.jpg" alt="什么是 Retort 工艺">
@@ -582,7 +589,7 @@ footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-ali
   </div>
 </section>
 <!-- 实拍图集 -->
-<section class="section has-story reveal">
+<section class="section has-story">
   <div class="story-split">
     <div class="story-split-media fade-right">
       <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/hero-story-kitchen.jpg" alt="制作实拍">
@@ -663,7 +670,7 @@ footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-ali
   </div>
 </section>
 <!-- 自家实测 -->
-<section class="section has-story reveal">
+<section class="section has-story">
   <div class="story-split reverse">
     <div class="story-split-media fade-left">
       <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/hero-story-ourcats.jpg" alt="我们家的猫，天天在吃">
@@ -683,7 +690,7 @@ footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-ali
   </div>
 </section>
 <!-- 预购须知 -->
-<section class="section has-story reveal">
+<section class="section has-story">
   <div class="story-split">
     <div class="story-split-media fade-right">
       <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/hero-story-order.jpg" alt="预购须知">
