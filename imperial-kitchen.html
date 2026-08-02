@@ -110,9 +110,9 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 
 /* HERO */
 /* PHOTO WATERMARK */
-.photo-watermark { position: absolute; right: 12px; bottom: 12px; width: 60px; height: auto; opacity: 0.75; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5)); pointer-events: none; z-index: 3; }
-.photo-watermark.small { width: 30px; right: 8px; bottom: 8px; }
-@media (max-width: 600px) { .photo-watermark { width: 42px; right: 8px; bottom: 8px; } }
+.photo-watermark { position: absolute !important; right: 12px; bottom: 12px; width: 60px !important; height: auto !important; object-fit: contain !important; opacity: 0.75; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5)); pointer-events: none; z-index: 3; }
+.photo-watermark.small { width: 30px !important; right: 8px; bottom: 8px; }
+@media (max-width: 600px) { .photo-watermark { width: 42px !important; right: 8px; bottom: 8px; } }
 
 .hero {
   min-height: 92vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
