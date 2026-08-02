@@ -169,7 +169,8 @@ nav#nav.scrolled { background: rgba(244,237,224,0.95); backdrop-filter: blur(8px
 }
 
 /* 四不加 PLEDGE */
-.pledge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.pledge-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 900px) { .pledge-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .pledge-grid { grid-template-columns: 1fr; } }
 
 /* FLAVOR CARDS */
@@ -403,15 +404,11 @@ footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-ali
   </div>
 </section>
 <!-- 口味小科普 -->
-<section class="section has-story">
-  <div class="story-split reverse">
-    <div class="story-split-media fade-left">
-      <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/hero-story-flavors.jpg" alt="口味小科普">
-    </div>
-    <div class="story-split-text">
-      <div class="story-split-eyebrow" data-zh="Flavor Notes" data-tw="Flavor Notes" data-en="Flavor Notes" data-ja="Flavor Notes">Flavor Notes</div>
-      <div class="story-split-headline" data-zh="口味小科普" data-tw="口味小科普" data-en="Know Your Flavors" data-ja="味の豆知識">口味小科普</div>
-      <div class="story-split-sub" data-zh="好处，跟需要留意的地方，我们都写给你看" data-tw="好處，跟需要留意的地方，我們都寫給你看" data-en="The benefits — and the things worth knowing" data-ja="良い点も、気をつけたい点も、正直にお伝えします">好处，跟需要留意的地方，我们都写给你看</div>
+<section class="section section-alt">
+  <div class="section-label" data-zh="Flavor Notes" data-tw="Flavor Notes" data-en="Flavor Notes" data-ja="Flavor Notes">Flavor Notes</div>
+  <div class="section-title" data-zh="口味小科普" data-tw="口味小科普" data-en="Know Your Flavors" data-ja="味の豆知識">口味小科普</div>
+  <div class="section-en" data-zh="好处，跟需要留意的地方，我们都写给你看" data-tw="好處，跟需要留意的地方，我們都寫給你看" data-en="The benefits — and the things worth knowing" data-ja="良い点も、気をつけたい点も、正直にお伝えします">好处，跟需要留意的地方，我们都写给你看</div>
+  <div class="section-divider"></div>
 
   <div class="flavor-grid">
 
@@ -530,18 +527,12 @@ footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-ali
   </div>
 
   <div class="gallery-note" style="margin-top:1.5rem;" data-zh="所有口味都以 Retort 工艺整包灭菌，不额外加防腐剂——上面这些「注意」，是给你的科普参考，不是说不能吃，而是提醒轮替、适量，跟人吃饭是一个道理。" data-tw="所有口味都以 Retort 工藝整包滅菌，不額外加防腐劑——上面這些「注意」，是給你的科普參考，不是說不能吃，而是提醒輪替、適量，跟人吃飯是一個道理。" data-en="Every flavor goes through the same Retort process — no added preservatives. These notes are here to inform, not to alarm: rotate flavors and feed in moderation, the same way we'd think about our own diet." data-ja="どの味も同じRetort工程で殺菌しており、防腐剤は加えていません。上記の「注意点」は不安を煽るためではなく、ローテーションと適量を心がけるための参考情報です——人の食事と同じ考え方です。">所有口味都以 Retort 工艺整包灭菌，不额外加防腐剂——上面这些「注意」，是给你的科普参考，不是说不能吃，而是提醒轮替、适量，跟人吃饭是一个道理。</div>
-  </div>
-  </div>
 </section>
 <!-- 四不加 -->
-<section class="section has-story">
-  <div class="story-split">
-    <div class="story-split-media fade-right">
-      <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/hero-story-fournevers.jpg" alt="玄猫御膳坊 · 坚持四不加">
-    </div>
-    <div class="story-split-text">
-      <div class="story-split-eyebrow" data-zh="Our Promise" data-tw="Our Promise" data-en="Our Promise" data-ja="Our Promise">Our Promise</div>
-      <div class="story-split-headline" data-zh="玄猫御膳坊 · 坚持四不加" data-tw="玄貓御膳坊 · 堅持四不加" data-en="Xuanmao Imperial Kitchen — Committed to the Four Nevers" data-ja="玄猫御膳房 · 四つの不加を守り抜く">玄猫御膳坊 · 坚持四不加</div>
+<section class="section">
+  <div class="section-label" data-zh="Our Promise" data-tw="Our Promise" data-en="Our Promise" data-ja="Our Promise">Our Promise</div>
+  <div class="section-title" data-zh="玄猫御膳坊 · 坚持四不加" data-tw="玄貓御膳坊 · 堅持四不加" data-en="Xuanmao Imperial Kitchen — Committed to the Four Nevers" data-ja="玄猫御膳房 · 四つの不加を守り抜く">玄猫御膳坊 · 坚持四不加</div>
+  <div class="section-divider"></div>
   <div class="pledge-grid">
     <div class="pledge-card">
       <div class="pledge-badge" data-zh="0%<br>防腐剂" data-tw="0%<br>防腐劑" data-en="0%<br>Preserv." data-ja="0%<br>防腐剤">0%<br>防腐剂</div>
@@ -568,8 +559,6 @@ footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-ali
       <div class="pledge-sub" data-zh="人工诱食剂容易让猫咪养成挑食、依赖化学香气。本地鸡鸭壳与海味熬出的鲜味，就是天然的诱食力。" data-tw="人工誘食劑容易讓貓咪養成挑食、依賴化學香氣。本地雞鴨殼與海味熬出的鮮味，就是天然的誘食力。" data-en="Artificial palatants can lead to picky eating and a reliance on chemical flavoring. The umami from real local chicken, duck, and seafood does that job naturally." data-ja="人工的な嗜好性添加物は、偏食や化学的な香りへの依存を招くことがあります。地元の鶏鴨と海鮮から引き出す旨味こそが、天然の誘因力です。">人工诱食剂容易让猫咪养成挑食、依赖化学香气。本地鸡鸭壳与海味熬出的鲜味，就是天然的诱食力。</div>
     </div>
   </div>
-  </div>
-  </div>
 </section>
 <!-- RETORT 工艺 -->
 <section class="section has-story">
@@ -589,14 +578,10 @@ footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-ali
   </div>
 </section>
 <!-- 实拍图集 -->
-<section class="section has-story">
-  <div class="story-split">
-    <div class="story-split-media fade-right">
-      <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/hero-story-kitchen.jpg" alt="制作实拍">
-    </div>
-    <div class="story-split-text">
-      <div class="story-split-eyebrow" data-zh="Behind the Kitchen" data-tw="Behind the Kitchen" data-en="Behind the Kitchen" data-ja="Behind the Kitchen">Behind the Kitchen</div>
-      <div class="story-split-headline" data-zh="制作实拍" data-tw="製作實拍" data-en="From Our Kitchen" data-ja="キッチンの様子">制作实拍</div>
+<section class="section">
+  <div class="section-label" data-zh="Behind the Kitchen" data-tw="Behind the Kitchen" data-en="Behind the Kitchen" data-ja="Behind the Kitchen">Behind the Kitchen</div>
+  <div class="section-title" data-zh="制作实拍" data-tw="製作實拍" data-en="From Our Kitchen" data-ja="キッチンの様子">制作实拍</div>
+  <div class="section-divider"></div>
   <div class="gallery-grid">
 
     <div class="gallery-item">
@@ -665,8 +650,6 @@ footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-ali
       </div>
     </div>
 
-  </div>
-  </div>
   </div>
 </section>
 <!-- 自家实测 -->
