@@ -150,7 +150,7 @@ nav#nav.scrolled { background: rgba(244,237,224,0.95); backdrop-filter: blur(8px
 .story-split-compare { width: 100%; height: 100%; display: flex; flex-direction: column; }
 .story-split-compare-item { position: relative; flex: 1; overflow: hidden; }
 .story-split-compare-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.story-split-compare-label { position: absolute; top: 14px; right: 14px; z-index: 2; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #fff; background: rgba(30,22,8,0.7); padding: 5px 14px; border-radius: 20px; font-family: 'Noto Sans SC', sans-serif; font-weight: 300; white-space: nowrap; }
+.story-split-compare-label { position: absolute; top: 14px; left: 14px; z-index: 2; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #fff; background: rgba(30,22,8,0.7); padding: 5px 14px; border-radius: 20px; font-family: 'Noto Sans SC', sans-serif; font-weight: 300; white-space: nowrap; }
 .story-split-compare-item.after .story-split-compare-label { background: var(--gold); }
 .story-split-media.fade-left .story-split-compare { -webkit-mask-image: linear-gradient(to left, black 45%, transparent 96%); mask-image: linear-gradient(to left, black 45%, transparent 96%); }
 .story-split-media.fade-right .story-split-compare { -webkit-mask-image: linear-gradient(to right, black 45%, transparent 96%); mask-image: linear-gradient(to right, black 45%, transparent 96%); }
@@ -185,10 +185,22 @@ nav#nav.scrolled { background: rgba(244,237,224,0.95); backdrop-filter: blur(8px
 @media (max-width: 560px) { .pledge-grid { grid-template-columns: 1fr; } }
 
 /* FLAVOR CARDS */
-.flavor-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
-@media (max-width: 1100px) { .flavor-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 700px) { .flavor-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 480px) { .flavor-grid { grid-template-columns: 1fr; } }
+.flavor-carousel { position: relative; }
+.flavor-grid { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding-bottom: 10px; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none; }
+.flavor-grid::-webkit-scrollbar { display: none; }
+.flavor-grid .flavor-card { flex: 0 0 calc((100% - 5 * 18px) / 6); scroll-snap-align: start; }
+@media (max-width: 1100px) { .flavor-grid .flavor-card { flex-basis: calc((100% - 2 * 18px) / 3); } }
+@media (max-width: 700px) { .flavor-grid .flavor-card { flex-basis: calc((100% - 18px) / 2); } }
+@media (max-width: 480px) { .flavor-grid .flavor-card { flex-basis: 82%; } }
+.flavor-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; background: var(--paper); border: 1px solid rgba(184,134,11,0.35); color: var(--gold); font-size: 18px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(30,22,8,0.15); z-index: 5; transition: background 0.2s, color 0.2s; }
+.flavor-nav-btn:hover { background: var(--gold); color: #fff; }
+.flavor-nav-prev { left: -20px; }
+.flavor-nav-next { right: -20px; }
+@media (max-width: 700px) {
+  .flavor-nav-prev { left: -8px; }
+  .flavor-nav-next { right: -8px; }
+  .flavor-nav-btn { width: 34px; height: 34px; font-size: 15px; }
+}
 .flavor-card { background: var(--paper); border: 1px solid rgba(184,134,11,0.22); border-radius: 16px; padding: 1.75rem 1.5rem; text-align: center; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
 .flavor-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(30,22,8,0.1); border-color: rgba(184,134,11,0.4); }
 .flavor-icon { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; margin: 0 auto 14px; display: block; border: 3px solid rgba(184,134,11,0.25); box-shadow: 0 4px 14px rgba(30,22,8,0.12); }
@@ -423,7 +435,10 @@ footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-ali
   <div class="section-en" data-zh="好处，跟需要留意的地方，我们都写给你看" data-tw="好處，跟需要留意的地方，我們都寫給你看" data-en="The benefits — and the things worth knowing" data-ja="良い点も、気をつけたい点も、正直にお伝えします">好处，跟需要留意的地方，我们都写给你看</div>
   <div class="section-divider"></div>
 
-  <div class="flavor-grid">
+  <div class="flavor-carousel">
+    <button class="flavor-nav-btn flavor-nav-prev" onclick="document.getElementById('flavorScroll').scrollBy({left:-460,behavior:'smooth'})" aria-label="Previous">‹</button>
+    <button class="flavor-nav-btn flavor-nav-next" onclick="document.getElementById('flavorScroll').scrollBy({left:460,behavior:'smooth'})" aria-label="Next">›</button>
+  <div class="flavor-grid" id="flavorScroll">
 
     <div class="flavor-card">
       <img class="flavor-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200,h_200,c_fill/flavor-salmon.jpg" alt="三文鱼">
@@ -537,6 +552,7 @@ footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-ali
       </div>
     </div>
 
+  </div>
   </div>
 
   <div class="gallery-note" style="margin-top:1.5rem;" data-zh="所有口味都以 Retort 工艺整包灭菌，不额外加防腐剂——上面这些「注意」，是给你的科普参考，不是说不能吃，而是提醒轮替、适量，跟人吃饭是一个道理。" data-tw="所有口味都以 Retort 工藝整包滅菌，不額外加防腐劑——上面這些「注意」，是給你的科普參考，不是說不能吃，而是提醒輪替、適量，跟人吃飯是一個道理。" data-en="Every flavor goes through the same Retort process — no added preservatives. These notes are here to inform, not to alarm: rotate flavors and feed in moderation, the same way we'd think about our own diet." data-ja="どの味も同じRetort工程で殺菌しており、防腐剤は加えていません。上記の「注意点」は不安を煽るためではなく、ローテーションと適量を心がけるための参考情報です——人の食事と同じ考え方です。">所有口味都以 Retort 工艺整包灭菌，不额外加防腐剂——上面这些「注意」，是给你的科普参考，不是说不能吃，而是提醒轮替、适量，跟人吃饭是一个道理。</div>
@@ -667,8 +683,8 @@ footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-ali
 </section>
 <!-- 自家实测 -->
 <section class="section has-story">
-  <div class="story-split reverse">
-    <div class="story-split-media fade-left">
+  <div class="story-split">
+    <div class="story-split-media fade-right">
       <div class="story-split-compare">
         <div class="story-split-compare-item before">
           <span class="story-split-compare-label" data-zh="市面猫粮 · 没动过" data-tw="市面貓糧 · 沒動過" data-en="Store-Bought · Untouched" data-ja="市販フード · 手つかず">市面猫粮 · 没动过</span>
