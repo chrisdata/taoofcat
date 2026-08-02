@@ -188,6 +188,14 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 
 /* 四不加 PLEDGE */
 .pledge-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+/* AVAILABLE NOW */
+.available-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; max-width: 620px; margin: 0 auto; }
+.available-item { position: relative; background: rgba(76,175,80,0.06); border: 1px solid rgba(76,175,80,0.3); border-radius: 16px; padding: 1.5rem; text-align: center; }
+.available-badge { display: inline-block; font-size: 10px; letter-spacing: 0.15em; color: #7ed389; background: rgba(76,175,80,0.15); border: 1px solid rgba(76,175,80,0.4); border-radius: 20px; padding: 3px 12px; margin-bottom: 12px; font-family: 'Noto Sans SC', sans-serif; }
+.available-icon { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; margin: 0 auto 12px; display: block; border: 3px solid rgba(76,175,80,0.3); }
+.available-name { font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.available-desc { font-size: 13px; color: var(--ink-light); font-family: 'Noto Sans SC', sans-serif; line-height: 1.7; }
 @media (max-width: 900px) { .pledge-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .pledge-grid { grid-template-columns: 1fr; } }
 
@@ -208,7 +216,10 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
   .flavor-nav-next { right: -8px; }
   .flavor-nav-btn { width: 34px; height: 34px; font-size: 15px; }
 }
-.flavor-card { background: var(--paper); border: 1px solid rgba(184,134,11,0.22); border-radius: 16px; padding: 1.75rem 1.5rem; text-align: center; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
+.flavor-card { position: relative; background: var(--paper); border: 1px solid rgba(184,134,11,0.22); border-radius: 16px; padding: 1.75rem 1.5rem; text-align: center; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
+.flavor-status { position: absolute; top: 12px; left: 12px; font-size: 10px; letter-spacing: 0.1em; padding: 3px 10px; border-radius: 20px; font-family: 'Noto Sans SC', sans-serif; font-weight: 500; }
+.flavor-status.in-stock { background: rgba(76,175,80,0.18); color: #7ed389; border: 1px solid rgba(76,175,80,0.4); }
+.flavor-status.coming-soon { background: rgba(184,134,11,0.1); color: var(--ink-faint); border: 1px solid rgba(184,134,11,0.25); }
 .flavor-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(30,22,8,0.1); border-color: rgba(184,134,11,0.4); }
 .flavor-icon { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; margin: 0 auto 14px; display: block; border: 3px solid rgba(184,134,11,0.25); box-shadow: 0 4px 14px rgba(30,22,8,0.12); }
 .flavor-tag { display: inline-block; font-size: 10px; letter-spacing: 0.15em; color: var(--gold); background: rgba(184,134,11,0.08); border-radius: 12px; padding: 3px 12px; margin-bottom: 12px; font-family: 'Noto Sans SC', sans-serif; }
@@ -579,6 +590,40 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
 
   <div class="gallery-note" style="margin-top:1.5rem;" data-zh="所有口味都以 Retort 工艺整包灭菌，不额外加防腐剂——上面这些「注意」，是给你的科普参考，不是说不能吃，而是提醒轮替、适量，跟人吃饭是一个道理。" data-tw="所有口味都以 Retort 工藝整包滅菌，不額外加防腐劑——上面這些「注意」，是給你的科普參考，不是說不能吃，而是提醒輪替、適量，跟人吃飯是一個道理。" data-en="Every flavor goes through the same Retort process — no added preservatives. These notes are here to inform, not to alarm: rotate flavors and feed in moderation, the same way we'd think about our own diet." data-ja="どの味も同じRetort工程で殺菌しており、防腐剤は加えていません。上記の「注意点」は不安を煽るためではなく、ローテーションと適量を心がけるための参考情報です——人の食事と同じ考え方です。">所有口味都以 Retort 工艺整包灭菌，不额外加防腐剂——上面这些「注意」，是给你的科普参考，不是说不能吃，而是提醒轮替、适量，跟人吃饭是一个道理。</div>
 </section>
+<!-- 现在可订购 -->
+<section class="section">
+  <div class="section-label" data-zh="Available Now" data-tw="Available Now" data-en="Available Now" data-ja="Available Now">Available Now</div>
+  <div class="section-title" data-zh="现在可订购" data-tw="現在可訂購" data-en="Available to Order Right Now" data-ja="現在ご注文いただけます">现在可订购</div>
+  <div class="section-en" data-zh="上面口味小科普里的其他口味还在陆续制作中，这两款现在就能下单" data-tw="上面口味小科普裡的其他口味還在陸續製作中，這兩款現在就能下單" data-en="The other flavors above are still in the works — these two are ready to order right now." data-ja="上記の他の味は順次製造中です。この2種類は今すぐご注文いただけます。">上面口味小科普里的其他口味还在陆续制作中，这两款现在就能下单</div>
+  <div class="section-divider"></div>
+
+  <div class="available-list">
+
+    <!-- 每新增一款可订购的产品，复制这一整个 available-item 区块，改图片、名称、说明就行 -->
+    <div class="available-item">
+      <div class="available-badge" data-zh="✓ 现货" data-tw="✓ 現貨" data-en="✓ In Stock" data-ja="✓ 在庫あり">✓ 现货</div>
+      <img class="available-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200,h_200,c_fill/available-pomfret.jpg" alt="金鲳鱼猫粮">
+      <div class="available-name" data-zh="金鲳鱼猫粮" data-tw="金鯧魚貓糧" data-en="Golden Pomfret Cat Food" data-ja="金鯧魚キャットフード">金鲳鱼猫粮</div>
+      <div class="available-desc" data-zh="金鲳鱼熬煮的正餐，肉块加汤汁，现货供应中。" data-tw="金鯧魚熬煮的正餐，肉塊加湯汁，現貨供應中。" data-en="A full meal simmered with golden pomfret — fish and broth together, in stock now." data-ja="金鯧魚を炊き込んだ本格メニュー。魚の身とスープが一緒に、在庫ございます。">金鲳鱼熬煮的正餐，肉块加汤汁，现货供应中。</div>
+    </div>
+
+    <div class="available-item">
+      <div class="available-badge" data-zh="✓ 现货" data-tw="✓ 現貨" data-en="✓ In Stock" data-ja="✓ 在庫あり">✓ 现货</div>
+      <img class="available-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200,h_200,c_fill/available-pomfret-broth.jpg" alt="金鲳鱼汤包">
+      <div class="available-name" data-zh="金鲳鱼汤包" data-tw="金鯧魚湯包" data-en="Golden Pomfret Broth Sachet" data-ja="金鯧魚スープパック">金鲳鱼汤包</div>
+      <div class="available-desc" data-zh="纯汤汁小包装，没有肉块，拌饭或加进猫粮里都合适。" data-tw="純湯汁小包裝，沒有肉塊，拌飯或加進貓糧裡都合適。" data-en="Pure broth, no fish chunks — great for mixing into rice or topping up your cat's regular food." data-ja="魚の身は入っていない純粋なスープパック。ごはんに混ぜたり、普段の猫ごはんに足したりするのに向いています。">纯汤汁小包装，没有肉块，拌饭或加进猫粮里都合适。</div>
+    </div>
+
+  </div>
+
+  <div style="text-align:center;margin-top:2rem;">
+    <a href="https://wa.me/601133677951" target="_blank" rel="noopener" class="btn-whatsapp" style="padding:12px 30px;font-size:14px;">
+      <svg viewBox="0 0 24 24" fill="#fff" style="width:16px;height:16px;"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 004.74 1.21h.005c5.46 0 9.9-4.45 9.9-9.91C21.93 6.45 17.5 2 12.04 2zm5.83 14.07c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.6-2.91-1.26-4.81-4.2-4.96-4.4-.15-.19-1.18-1.57-1.18-3 0-1.43.75-2.13 1.02-2.42.27-.29.58-.36.78-.36.19 0 .39 0 .55.01.18.01.42-.07.65.5.24.58.82 2.01.89 2.15.07.15.12.32.02.51-.09.19-.14.31-.28.48-.14.16-.29.36-.42.48-.14.13-.28.28-.12.55.16.27.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.21 1.37.27.14.43.12.59-.07.16-.19.68-.79.87-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.27.14.44.2.51.31.07.12.07.66-.17 1.34z"/></svg>
+      <span data-zh="WhatsApp 下单咨询" data-tw="WhatsApp 下單諮詢" data-en="Order via WhatsApp" data-ja="WhatsAppで注文する">WhatsApp 下单咨询</span>
+    </a>
+  </div>
+</section>
+
 <!-- 四不加 -->
 <section class="section section-wide">
   <div class="section-label" data-zh="Our Promise" data-tw="Our Promise" data-en="Our Promise" data-ja="Our Promise">Our Promise</div>
