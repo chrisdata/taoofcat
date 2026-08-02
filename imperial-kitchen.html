@@ -162,6 +162,13 @@ nav#nav.scrolled { background: rgba(244,237,224,0.95); backdrop-filter: blur(8px
 .story-split-text .pledge-grid,
 .story-split-text .flavor-grid,
 .story-split-text .gallery-grid { grid-template-columns: 1fr; }
+.story-split-text .umami-row { display: flex; gap: 18px; align-items: flex-start; }
+.story-split-text .umami-row .umami-flow { flex: 1 1 56%; margin-bottom: 0; }
+.story-split-text .umami-row .umami-benefits { flex: 1 1 44%; grid-template-columns: 1fr; gap: 8px; }
+@media (max-width: 640px) {
+  .story-split-text .umami-row { flex-direction: column; }
+  .story-split-text .umami-row .umami-benefits { grid-template-columns: 1fr 1fr; }
+}
 .story-split-text .umami-flow { flex-direction: column; align-items: stretch; gap: 10px; margin-bottom: 1.5rem; }
 .story-split-text .umami-step { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; }
 .story-split-text .umami-step-icon { width: 48px; height: 48px; margin: 0; flex-shrink: 0; }
@@ -387,6 +394,7 @@ footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-ali
       <div class="story-split-eyebrow" data-zh="Natural Umami" data-tw="Natural Umami" data-en="Natural Umami" data-ja="Natural Umami">Natural Umami</div>
       <div class="story-split-headline" data-zh="本地食材与海味熬出的鲜味，就是猫咪喜欢的味道" data-tw="本地食材與海味熬出的鮮味，就是貓咪喜歡的味道" data-en="The Umami from Local Ingredients & Seafood — The Flavor Cats Naturally Love" data-ja="地元の食材と海鮮から引き出す旨味こそが、猫が好む味">本地食材与海味熬出的鲜味，就是猫咪喜欢的味道</div>
 
+  <div class="umami-row">
   <div class="umami-flow">
     <div class="umami-step">
       <img class="umami-step-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200,h_200,c_fill/umami-chicken-duck.jpg" alt="家禽壳类，鱼骨类，肉骨类等材料">
@@ -424,6 +432,7 @@ footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-ali
       <div class="umami-benefit-icon">❤️</div>
       <div class="umami-benefit-text" data-zh="安心天然<br>健康每一餐" data-tw="安心天然<br>健康每一餐" data-en="Natural & reassuring<br>every meal" data-ja="天然で安心<br>毎食が健康的に">安心天然<br>健康每一餐</div>
     </div>
+  </div>
   </div>
   </div>
   </div>
