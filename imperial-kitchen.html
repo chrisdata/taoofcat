@@ -138,6 +138,20 @@ nav#nav.scrolled { background: rgba(244,237,224,0.95); backdrop-filter: blur(8px
 /* 四不加 PLEDGE */
 .pledge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 @media (max-width: 560px) { .pledge-grid { grid-template-columns: 1fr; } }
+
+/* FLAVOR CARDS */
+.flavor-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+@media (max-width: 900px) { .flavor-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .flavor-grid { grid-template-columns: 1fr; } }
+.flavor-card { background: var(--paper); border: 1px solid rgba(184,134,11,0.22); border-radius: 16px; padding: 1.75rem 1.5rem; text-align: center; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
+.flavor-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(30,22,8,0.1); border-color: rgba(184,134,11,0.4); }
+.flavor-icon { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; margin: 0 auto 14px; display: block; border: 3px solid rgba(184,134,11,0.25); box-shadow: 0 4px 14px rgba(30,22,8,0.12); }
+.flavor-tag { display: inline-block; font-size: 10px; letter-spacing: 0.15em; color: var(--gold); background: rgba(184,134,11,0.08); border-radius: 12px; padding: 3px 12px; margin-bottom: 12px; font-family: 'Noto Sans SC', sans-serif; }
+.flavor-name { font-size: 17px; font-weight: 700; letter-spacing: 0.04em; color: var(--ink); margin-bottom: 16px; }
+.flavor-row { text-align: left; font-size: 13px; line-height: 1.75; color: var(--ink-light); font-family: 'Noto Sans SC', sans-serif; font-weight: 300; margin-bottom: 12px; padding-left: 8px; border-left: 2px solid rgba(46,139,87,0.4); }
+.flavor-row.caution { border-left-color: rgba(184,134,11,0.5); margin-bottom: 0; }
+.flavor-row-label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: #2e8b57; margin-bottom: 3px; }
+.flavor-row.caution .flavor-row-label { color: var(--gold); }
 .pledge-card { background: var(--paper); border: 1px solid rgba(184,134,11,0.25); border-radius: 12px; padding: 1.5rem; text-align: center; }
 .pledge-icon { font-size: 28px; margin-bottom: 10px; }
 .pledge-text { font-size: 15px; font-weight: 500; color: var(--ink); line-height: 1.6; }
@@ -335,53 +349,89 @@ footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-ali
   <div class="section-en" data-zh="好处，跟需要留意的地方，我们都写给你看" data-tw="好處，跟需要留意的地方，我們都寫給你看" data-en="The benefits — and the things worth knowing" data-ja="良い点も、気をつけたい点も、正直にお伝えします">好处，跟需要留意的地方，我们都写给你看</div>
   <div class="section-divider"></div>
 
-  <div class="pledge-grid" style="grid-template-columns: 1fr; gap: 14px;">
+  <div class="flavor-grid">
 
-    <div class="pledge-card" style="text-align:left; display:flex; gap:14px; align-items:flex-start; padding:1.25rem 1.5rem;">
-      <div class="pledge-icon" style="margin-bottom:0;">🐟</div>
-      <div>
-        <div class="pledge-text" data-zh="三文鱼" data-tw="三文魚" data-en="Salmon" data-ja="サーモン">三文鱼</div>
-        <div class="pledge-sub" data-zh="好处：富含 Omega-3 脂肪酸，护毛亮泽，有助抗炎。<br>注意：深海鱼类若长期单一大量食用，需留意汞等重金属累积，建议搭配其他口味轮替。" data-tw="好處：富含 Omega-3 脂肪酸，護毛亮澤，有助抗炎。<br>注意：深海魚類若長期單一大量食用，需留意汞等重金屬累積，建議搭配其他口味輪替。" data-en="Benefits: Rich in omega-3s, supports a shiny coat and helps reduce inflammation.<br>Caution: Like most deep-sea fish, feeding it exclusively and in excess raises mercury accumulation concerns — best rotated with other flavors." data-ja="良い点：オメガ3脂肪酸が豊富で、毛艶を良くし、炎症を抑える助けになります。<br>注意点：深海魚は同じ種類ばかり大量に与え続けると水銀などの蓄積が懸念されるため、他の味とローテーションすることをおすすめします。">好处：富含 Omega-3 脂肪酸，护毛亮泽，有助抗炎。<br>注意：深海鱼类若长期单一大量食用，需留意汞等重金属累积，建议搭配其他口味轮替。</div>
+    <div class="flavor-card">
+      <img class="flavor-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200,h_200,c_fill/flavor-salmon.jpg" alt="三文鱼">
+      <div class="flavor-tag" data-zh="海鲜" data-tw="海鮮" data-en="Seafood" data-ja="シーフード">海鲜</div>
+      <div class="flavor-name" data-zh="三文鱼" data-tw="三文魚" data-en="Salmon" data-ja="サーモン">三文鱼</div>
+      <div class="flavor-row">
+        <span class="flavor-row-label" data-zh="✓ 好处" data-tw="✓ 好處" data-en="✓ Benefits" data-ja="✓ 良い点">✓ 好处</span>
+        <span data-zh="富含 Omega-3 脂肪酸，护毛亮泽，有助抗炎。" data-tw="富含 Omega-3 脂肪酸，護毛亮澤，有助抗炎。" data-en="Rich in omega-3s, supports a shiny coat and helps reduce inflammation." data-ja="オメガ3脂肪酸が豊富で、毛艶を良くし、炎症を抑える助けになります。">富含 Omega-3 脂肪酸，护毛亮泽，有助抗炎。</span>
+      </div>
+      <div class="flavor-row caution">
+        <span class="flavor-row-label" data-zh="⚠ 注意" data-tw="⚠ 注意" data-en="⚠ Caution" data-ja="⚠ 注意点">⚠ 注意</span>
+        <span data-zh="深海鱼类若长期单一大量食用，需留意汞等重金属累积，建议搭配其他口味轮替。" data-tw="深海魚類若長期單一大量食用，需留意汞等重金屬累積，建議搭配其他口味輪替。" data-en="Like most deep-sea fish, feeding it exclusively and in excess raises mercury accumulation concerns — best rotated with other flavors." data-ja="深海魚は同じ種類ばかり大量に与え続けると水銀などの蓄積が懸念されるため、他の味とローテーションすることをおすすめします。">深海鱼类若长期单一大量食用，需留意汞等重金属累积，建议搭配其他口味轮替。</span>
       </div>
     </div>
 
-    <div class="pledge-card" style="text-align:left; display:flex; gap:14px; align-items:flex-start; padding:1.25rem 1.5rem;">
-      <div class="pledge-icon" style="margin-bottom:0;">🍗</div>
-      <div>
-        <div class="pledge-text" data-zh="鸡肉（白肉）" data-tw="雞肉（白肉）" data-en="Chicken (White Meat)" data-ja="鶏肉（白身肉）">鸡肉（白肉）</div>
-        <div class="pledge-sub" data-zh="好处：优质易消化蛋白质，脂肪含量低，适合日常主食。<br>注意：去皮去多余脂肪处理，避免额外油脂负担。" data-tw="好處：優質易消化蛋白質，脂肪含量低，適合日常主食。<br>注意：去皮去多餘脂肪處理，避免額外油脂負擔。" data-en="Benefits: Lean, easily digestible protein — a solid everyday staple.<br>Caution: Skin and excess fat are trimmed to avoid unnecessary fat intake." data-ja="良い点：消化しやすい良質なタンパク質で、脂肪分も少なく日常食に向いています。<br>注意点：皮や余分な脂肪は取り除き、脂質の摂りすぎを防ぎます。">好处：优质易消化蛋白质，脂肪含量低，适合日常主食。<br>注意：去皮去多余脂肪处理，避免额外油脂负担。</div>
+    <div class="flavor-card">
+      <img class="flavor-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200,h_200,c_fill/flavor-chicken.jpg" alt="鸡肉">
+      <div class="flavor-tag" data-zh="白肉" data-tw="白肉" data-en="White Meat" data-ja="白身肉">白肉</div>
+      <div class="flavor-name" data-zh="鸡肉" data-tw="雞肉" data-en="Chicken" data-ja="鶏肉">鸡肉</div>
+      <div class="flavor-row">
+        <span class="flavor-row-label" data-zh="✓ 好处" data-tw="✓ 好處" data-en="✓ Benefits" data-ja="✓ 良い点">✓ 好处</span>
+        <span data-zh="优质易消化蛋白质，脂肪含量低，适合日常主食。" data-tw="優質易消化蛋白質，脂肪含量低，適合日常主食。" data-en="Lean, easily digestible protein — a solid everyday staple." data-ja="消化しやすい良質なタンパク質で、脂肪分も少なく日常食に向いています。">优质易消化蛋白质，脂肪含量低，适合日常主食。</span>
+      </div>
+      <div class="flavor-row caution">
+        <span class="flavor-row-label" data-zh="⚠ 注意" data-tw="⚠ 注意" data-en="⚠ Caution" data-ja="⚠ 注意点">⚠ 注意</span>
+        <span data-zh="去皮去多余脂肪处理，避免额外油脂负担。" data-tw="去皮去多餘脂肪處理，避免額外油脂負擔。" data-en="Skin and excess fat are trimmed to avoid unnecessary fat intake." data-ja="皮や余分な脂肪は取り除き、脂質の摂りすぎを防ぎます。">去皮去多余脂肪处理，避免额外油脂负担。</span>
       </div>
     </div>
 
-    <div class="pledge-card" style="text-align:left; display:flex; gap:14px; align-items:flex-start; padding:1.25rem 1.5rem;">
-      <div class="pledge-icon" style="margin-bottom:0;">🦆</div>
-      <div>
-        <div class="pledge-text" data-zh="鸭肉（白肉）" data-tw="鴨肉（白肉）" data-en="Duck (White Meat)" data-ja="鴨肉（白身肉）">鸭肉（白肉）</div>
-        <div class="pledge-sub" data-zh="好处：肉质细嫩，风味浓郁，铁质含量比鸡肉略高。<br>注意：脂肪含量略高于鸡肉，肠胃敏感的猫咪建议少量尝试。" data-tw="好處：肉質細嫩，風味濃郁，鐵質含量比雞肉略高。<br>注意：脂肪含量略高於雞肉，腸胃敏感的貓咪建議少量嘗試。" data-en="Benefits: Tender and richly flavored, with slightly more iron than chicken.<br>Caution: A bit fattier than chicken — cats with sensitive stomachs should start with small portions." data-ja="良い点：肉質が柔らかく風味が濃く、鶏肉よりやや鉄分が多めです。<br>注意点：鶏肉よりやや脂肪分が多いため、お腹が敏感な猫は少量から試してください。">好处：肉质细嫩，风味浓郁，铁质含量比鸡肉略高。<br>注意：脂肪含量略高于鸡肉，肠胃敏感的猫咪建议少量尝试。</div>
+    <div class="flavor-card">
+      <img class="flavor-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200,h_200,c_fill/flavor-duck.jpg" alt="鸭肉">
+      <div class="flavor-tag" data-zh="白肉" data-tw="白肉" data-en="White Meat" data-ja="白身肉">白肉</div>
+      <div class="flavor-name" data-zh="鸭肉" data-tw="鴨肉" data-en="Duck" data-ja="鴨肉">鸭肉</div>
+      <div class="flavor-row">
+        <span class="flavor-row-label" data-zh="✓ 好处" data-tw="✓ 好處" data-en="✓ Benefits" data-ja="✓ 良い点">✓ 好处</span>
+        <span data-zh="肉质细嫩，风味浓郁，铁质含量比鸡肉略高。" data-tw="肉質細嫩，風味濃郁，鐵質含量比雞肉略高。" data-en="Tender and richly flavored, with slightly more iron than chicken." data-ja="肉質が柔らかく風味が濃く、鶏肉よりやや鉄分が多めです。">肉质细嫩，风味浓郁，铁质含量比鸡肉略高。</span>
+      </div>
+      <div class="flavor-row caution">
+        <span class="flavor-row-label" data-zh="⚠ 注意" data-tw="⚠ 注意" data-en="⚠ Caution" data-ja="⚠ 注意点">⚠ 注意</span>
+        <span data-zh="脂肪含量略高于鸡肉，肠胃敏感的猫咪建议少量尝试。" data-tw="脂肪含量略高於雞肉，腸胃敏感的貓咪建議少量嘗試。" data-en="A bit fattier than chicken — cats with sensitive stomachs should start with small portions." data-ja="鶏肉よりやや脂肪分が多いため、お腹が敏感な猫は少量から試してください。">脂肪含量略高于鸡肉，肠胃敏感的猫咪建议少量尝试。</span>
       </div>
     </div>
 
-    <div class="pledge-card" style="text-align:left; display:flex; gap:14px; align-items:flex-start; padding:1.25rem 1.5rem;">
-      <div class="pledge-icon" style="margin-bottom:0;">🐮</div>
-      <div>
-        <div class="pledge-text" data-zh="牛肉（红肉）" data-tw="牛肉（紅肉）" data-en="Beef (Red Meat)" data-ja="牛肉（赤身肉）">牛肉（红肉）</div>
-        <div class="pledge-sub" data-zh="好处：铁质、锌含量丰富，有助肌肉与红血球健康。<br>注意：蛋白质与磷含量较高，肾脏功能较弱的猫咪需控制份量，建议咨询兽医。" data-tw="好處：鐵質、鋅含量豐富，有助肌肉與紅血球健康。<br>注意：蛋白質與磷含量較高，腎臟功能較弱的貓咪需控制份量，建議諮詢獸醫。" data-en="Benefits: Rich in iron and zinc, supports muscle and healthy red blood cells.<br>Caution: Higher in protein and phosphorus — cats with weaker kidney function should moderate portions; consult your vet if unsure." data-ja="良い点：鉄分と亜鉛が豊富で、筋肉と赤血球の健康をサポートします。<br>注意点：タンパク質とリンが多めなので、腎機能が弱い猫は量を調整し、必要なら獣医師に相談してください。">好处：铁质、锌含量丰富，有助肌肉与红血球健康。<br>注意：蛋白质与磷含量较高，肾脏功能较弱的猫咪需控制份量，建议咨询兽医。</div>
+    <div class="flavor-card">
+      <img class="flavor-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200,h_200,c_fill/flavor-beef.jpg" alt="牛肉">
+      <div class="flavor-tag" data-zh="红肉" data-tw="紅肉" data-en="Red Meat" data-ja="赤身肉">红肉</div>
+      <div class="flavor-name" data-zh="牛肉" data-tw="牛肉" data-en="Beef" data-ja="牛肉">牛肉</div>
+      <div class="flavor-row">
+        <span class="flavor-row-label" data-zh="✓ 好处" data-tw="✓ 好處" data-en="✓ Benefits" data-ja="✓ 良い点">✓ 好处</span>
+        <span data-zh="铁质、锌含量丰富，有助肌肉与红血球健康。" data-tw="鐵質、鋅含量豐富，有助肌肉與紅血球健康。" data-en="Rich in iron and zinc, supports muscle and healthy red blood cells." data-ja="鉄分と亜鉛が豊富で、筋肉と赤血球の健康をサポートします。">铁质、锌含量丰富，有助肌肉与红血球健康。</span>
+      </div>
+      <div class="flavor-row caution">
+        <span class="flavor-row-label" data-zh="⚠ 注意" data-tw="⚠ 注意" data-en="⚠ Caution" data-ja="⚠ 注意点">⚠ 注意</span>
+        <span data-zh="蛋白质与磷含量较高，肾脏功能较弱的猫咪需控制份量，建议咨询兽医。" data-tw="蛋白質與磷含量較高，腎臟功能較弱的貓咪需控制份量，建議諮詢獸醫。" data-en="Higher in protein and phosphorus — cats with weaker kidney function should moderate portions; consult your vet if unsure." data-ja="タンパク質とリンが多めなので、腎機能が弱い猫は量を調整し、必要なら獣医師に相談してください。">蛋白质与磷含量较高，肾脏功能较弱的猫咪需控制份量，建议咨询兽医。</span>
       </div>
     </div>
 
-    <div class="pledge-card" style="text-align:left; display:flex; gap:14px; align-items:flex-start; padding:1.25rem 1.5rem;">
-      <div class="pledge-icon" style="margin-bottom:0;">🐑</div>
-      <div>
-        <div class="pledge-text" data-zh="羊肉（红肉）" data-tw="羊肉（紅肉）" data-en="Lamb (Red Meat)" data-ja="羊肉（赤身肉）">羊肉（红肉）</div>
-        <div class="pledge-sub" data-zh="好处：性质温补，适合体质偏寒或食欲不振的猫咪。<br>注意：油脂含量较高，容易发胖或胰腺敏感的猫咪建议适量。" data-tw="好處：性質溫補，適合體質偏寒或食慾不振的貓咪。<br>注意：油脂含量較高，容易發胖或胰臟敏感的貓咪建議適量。" data-en="Benefits: Warming and rich — good for cats prone to a weaker appetite.<br>Caution: Higher in fat — cats prone to weight gain or pancreatic sensitivity should have it in moderation." data-ja="良い点：体を温める性質があり、食欲が落ちがちな猫に向いています。<br>注意点：脂肪分が多めなので、太りやすい猫や膵臓が敏感な猫は量を控えめに。">好处：性质温补，适合体质偏寒或食欲不振的猫咪。<br>注意：油脂含量较高，容易发胖或胰腺敏感的猫咪建议适量。</div>
+    <div class="flavor-card">
+      <img class="flavor-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200,h_200,c_fill/flavor-lamb.jpg" alt="羊肉">
+      <div class="flavor-tag" data-zh="红肉" data-tw="紅肉" data-en="Red Meat" data-ja="赤身肉">红肉</div>
+      <div class="flavor-name" data-zh="羊肉" data-tw="羊肉" data-en="Lamb" data-ja="羊肉">羊肉</div>
+      <div class="flavor-row">
+        <span class="flavor-row-label" data-zh="✓ 好处" data-tw="✓ 好處" data-en="✓ Benefits" data-ja="✓ 良い点">✓ 好处</span>
+        <span data-zh="性质温补，适合体质偏寒或食欲不振的猫咪。" data-tw="性質溫補，適合體質偏寒或食慾不振的貓咪。" data-en="Warming and rich — good for cats prone to a weaker appetite." data-ja="体を温める性質があり、食欲が落ちがちな猫に向いています。">性质温补，适合体质偏寒或食欲不振的猫咪。</span>
+      </div>
+      <div class="flavor-row caution">
+        <span class="flavor-row-label" data-zh="⚠ 注意" data-tw="⚠ 注意" data-en="⚠ Caution" data-ja="⚠ 注意点">⚠ 注意</span>
+        <span data-zh="油脂含量较高，容易发胖或胰腺敏感的猫咪建议适量。" data-tw="油脂含量較高，容易發胖或胰臟敏感的貓咪建議適量。" data-en="Higher in fat — cats prone to weight gain or pancreatic sensitivity should have it in moderation." data-ja="脂肪分が多めなので、太りやすい猫や膵臓が敏感な猫は量を控えめに。">油脂含量较高，容易发胖或胰腺敏感的猫咪建议适量。</span>
       </div>
     </div>
 
-    <div class="pledge-card" style="text-align:left; display:flex; gap:14px; align-items:flex-start; padding:1.25rem 1.5rem;">
-      <div class="pledge-icon" style="margin-bottom:0;">🐠</div>
-      <div>
-        <div class="pledge-text" data-zh="本地鱼（海鲜）" data-tw="本地魚（海鮮）" data-en="Local Fish (Seafood)" data-ja="地元魚（シーフード）">本地鱼（海鲜）</div>
-        <div class="pledge-sub" data-zh="好处：脂肪较低，蛋白质优质，取材新鲜方便。<br>注意：海鲜类适合搭配其他口味轮替，不建议长期以单一鱼类为主食。" data-tw="好處：脂肪較低，蛋白質優質，取材新鮮方便。<br>注意：海鮮類適合搭配其他口味輪替，不建議長期以單一魚類為主食。" data-en="Benefits: Lean, high-quality protein, sourced fresh and locally.<br>Caution: Best as part of a rotation, rather than a cat's sole long-term staple." data-ja="良い点：脂肪分が少なく良質なタンパク質で、新鮮なものを手に入れやすいです。<br>注意点：他の味とローテーションするのがおすすめで、長期間これだけを主食にするのは避けましょう。">好处：脂肪较低，蛋白质优质，取材新鲜方便。<br>注意：海鲜类适合搭配其他口味轮替，不建议长期以单一鱼类为主食。</div>
+    <div class="flavor-card">
+      <img class="flavor-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200,h_200,c_fill/flavor-fish.jpg" alt="本地鱼">
+      <div class="flavor-tag" data-zh="海鲜" data-tw="海鮮" data-en="Seafood" data-ja="シーフード">海鲜</div>
+      <div class="flavor-name" data-zh="本地鱼" data-tw="本地魚" data-en="Local Fish" data-ja="地元魚">本地鱼</div>
+      <div class="flavor-row">
+        <span class="flavor-row-label" data-zh="✓ 好处" data-tw="✓ 好處" data-en="✓ Benefits" data-ja="✓ 良い点">✓ 好处</span>
+        <span data-zh="脂肪较低，蛋白质优质，取材新鲜方便。" data-tw="脂肪較低，蛋白質優質，取材新鮮方便。" data-en="Lean, high-quality protein, sourced fresh and locally." data-ja="脂肪分が少なく良質なタンパク質で、新鮮なものを手に入れやすいです。">脂肪较低，蛋白质优质，取材新鲜方便。</span>
+      </div>
+      <div class="flavor-row caution">
+        <span class="flavor-row-label" data-zh="⚠ 注意" data-tw="⚠ 注意" data-en="⚠ Caution" data-ja="⚠ 注意点">⚠ 注意</span>
+        <span data-zh="适合搭配其他口味轮替，不建议长期以单一鱼类为主食。" data-tw="適合搭配其他口味輪替，不建議長期以單一魚類為主食。" data-en="Best as part of a rotation, rather than a cat's sole long-term staple." data-ja="他の味とローテーションするのがおすすめで、長期間これだけを主食にするのは避けましょう。">适合搭配其他口味轮替，不建议长期以单一鱼类为主食。</span>
       </div>
     </div>
 
