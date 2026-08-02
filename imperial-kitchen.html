@@ -76,13 +76,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@300;400;500;700;900&family=Noto+Sans+SC:wght@300;400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root {
-  --paper: #f4ede0;
-  --ink: #1e1608;
-  --ink-light: #5c4c2c;
-  --ink-faint: #9c8c6c;
-  --ink-ghost: #d4c8a8;
-  --gold: #b8860b;
-  --gold-light: #d4a843;
+  --paper: #1a1610;
+  --ink: #f4ede0;
+  --ink-light: #cbbfa0;
+  --ink-faint: #8a7c60;
+  --ink-ghost: #46392a;
+  --gold: #d4a843;
+  --gold-light: #e8c674;
   --whatsapp: #25d366;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -102,10 +102,10 @@ nav#nav {
   display: flex; align-items: center; justify-content: space-between;
   padding: 20px 40px; transition: background 0.3s, padding 0.3s, box-shadow 0.3s;
 }
-nav#nav.scrolled { background: rgba(244,237,224,0.95); backdrop-filter: blur(8px); padding: 14px 40px; box-shadow: 0 1px 0 rgba(30,22,8,0.06); }
+nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); padding: 14px 40px; box-shadow: 0 1px 0 rgba(244,237,224,0.08); }
 .nav-back { text-decoration: none; font-size: 13px; letter-spacing: 0.1em; color: var(--ink-light); font-family: 'Noto Sans SC', sans-serif; font-weight: 300; }
 .lang-switcher { display: flex; gap: 4px; align-items: center; }
-.lang-opt { font-size: 11px; font-family: 'Noto Sans SC', sans-serif; background: transparent; border: 1px solid rgba(30,22,8,0.2); border-radius: 20px; padding: 4px 10px; cursor: pointer; color: var(--ink-light); transition: all 0.2s; }
+.lang-opt { font-size: 11px; font-family: 'Noto Sans SC', sans-serif; background: transparent; border: 1px solid rgba(244,237,224,0.25); border-radius: 20px; padding: 4px 10px; cursor: pointer; color: var(--ink-light); transition: all 0.2s; }
 .lang-opt:hover, .lang-opt.active { color: var(--gold); border-color: var(--gold); }
 
 /* HERO */
@@ -276,7 +276,7 @@ nav#nav.scrolled { background: rgba(244,237,224,0.95); backdrop-filter: blur(8px
   .whatsapp-float svg { width: 26px; height: 26px; }
 }
 
-footer { border-top: 1px solid rgba(30,22,8,0.1); padding: 2.5rem 2rem; text-align: center; }
+footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; text-align: center; }
 .footer-copy { font-size: 12px; color: var(--ink-faint); letter-spacing: 0.1em; }
 .footer-back { display: block; margin-top: 10px; font-size: 13px; color: var(--gold); text-decoration: none; }
 
