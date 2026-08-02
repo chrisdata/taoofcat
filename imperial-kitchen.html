@@ -69,6 +69,26 @@
       reveals.forEach(function(el) { el.classList.add('visible'); });
     }
     applyLang(_lang);
+
+    // flavor category tabs
+    var tabs = document.querySelectorAll('.flavor-tab');
+    var cards = document.querySelectorAll('.flavor-card');
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        tabs.forEach(function(t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+        var cat = tab.dataset.cat;
+        cards.forEach(function(card) {
+          if (cat === 'all' || card.dataset.cat === cat) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+        var scroller = document.getElementById('flavorScroll');
+        if (scroller) scroller.scrollTo({ left: 0, behavior: 'smooth' });
+      });
+    });
   });
 })();
 </script>
@@ -221,6 +241,13 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 @media (max-width: 480px) { .flavor-grid .flavor-card { flex-basis: 82%; } }
 .flavor-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; background: var(--paper); border: 1px solid rgba(184,134,11,0.35); color: var(--gold); font-size: 18px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(30,22,8,0.15); z-index: 5; transition: background 0.2s, color 0.2s; }
 .flavor-nav-btn:hover { background: var(--gold); color: #fff; }
+
+/* FLAVOR CATEGORY TABS */
+.flavor-tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 1.75rem; flex-wrap: wrap; }
+.flavor-tab { font-size: 12px; font-family: 'Noto Sans SC', sans-serif; background: transparent; border: 1px solid rgba(184,134,11,0.3); color: var(--ink-light); padding: 6px 18px; border-radius: 20px; cursor: pointer; transition: all 0.2s; }
+.flavor-tab:hover { border-color: var(--gold); color: var(--gold); }
+.flavor-tab.active { background: var(--gold); border-color: var(--gold); color: #fff; }
+.flavor-card.hidden { display: none; }
 .flavor-nav-prev { left: -20px; }
 .flavor-nav-next { right: -20px; }
 @media (max-width: 700px) {
@@ -249,8 +276,9 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 .umami-step-icon { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin: 0 auto 12px; display: block; border: 3px solid rgba(184,134,11,0.25); box-shadow: 0 4px 14px rgba(30,22,8,0.12); }
 .umami-step-title { font-size: 15px; font-weight: 700; color: var(--ink); letter-spacing: 0.03em; margin-bottom: 4px; }
 .umami-step-sub { font-size: 12px; color: var(--ink-faint); font-family: 'Noto Sans SC', sans-serif; font-weight: 300; line-height: 1.6; }
-.umami-connector { font-size: 26px; color: var(--gold); font-weight: 700; flex-shrink: 0; }
-@media (max-width: 560px) { .umami-connector { width: 100%; text-align: center; transform: rotate(90deg); } }
+.umami-connector { width: 46px; height: 46px; border-radius: 50%; border: 1.5px solid rgba(212,168,67,0.55); background: rgba(212,168,67,0.06); display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--gold); font-weight: 700; flex-shrink: 0; position: relative; }
+.umami-connector::before { content: ''; position: absolute; inset: -6px; border: 1px solid rgba(212,168,67,0.2); border-radius: 50%; }
+@media (max-width: 560px) { .umami-connector { width: 40px; height: 40px; font-size: 15px; } }
 .umami-benefits { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 @media (max-width: 700px) { .umami-benefits { grid-template-columns: repeat(2, 1fr); } }
 .umami-benefit { background: rgba(184,134,11,0.06); border: 1px solid rgba(184,134,11,0.2); border-radius: 12px; padding: 1rem 0.75rem; text-align: center; }
@@ -479,12 +507,19 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
   <div class="section-en" data-zh="好处，跟需要留意的地方，我们都写给你看" data-tw="好處，跟需要留意的地方，我們都寫給你看" data-en="The benefits — and the things worth knowing" data-ja="良い点も、気をつけたい点も、正直にお伝えします">好处，跟需要留意的地方，我们都写给你看</div>
   <div class="section-divider"></div>
 
+  <div class="flavor-tabs" id="flavorTabs">
+    <button class="flavor-tab active" data-cat="all" data-zh="全部" data-tw="全部" data-en="All" data-ja="すべて">全部</button>
+    <button class="flavor-tab" data-cat="bairou" data-zh="白肉" data-tw="白肉" data-en="White Meat" data-ja="白身肉">白肉</button>
+    <button class="flavor-tab" data-cat="hongrou" data-zh="红肉" data-tw="紅肉" data-en="Red Meat" data-ja="赤身肉">红肉</button>
+    <button class="flavor-tab" data-cat="haixian" data-zh="海鲜" data-tw="海鮮" data-en="Seafood" data-ja="シーフード">海鲜</button>
+  </div>
+
   <div class="flavor-carousel">
     <button class="flavor-nav-btn flavor-nav-prev" onclick="document.getElementById('flavorScroll').scrollBy({left:-460,behavior:'smooth'})" aria-label="Previous">‹</button>
     <button class="flavor-nav-btn flavor-nav-next" onclick="document.getElementById('flavorScroll').scrollBy({left:460,behavior:'smooth'})" aria-label="Next">›</button>
   <div class="flavor-grid" id="flavorScroll">
 
-    <div class="flavor-card">
+    <div class="flavor-card" data-cat="haixian">
       <img class="flavor-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200,h_200,c_fill/flavor-salmon.jpg" alt="三文鱼">
       <div class="flavor-tag" data-zh="海鲜" data-tw="海鮮" data-en="Seafood" data-ja="シーフード">海鲜</div>
       <div class="flavor-name" data-zh="三文鱼" data-tw="三文魚" data-en="Salmon" data-ja="サーモン">三文鱼</div>
@@ -498,7 +533,7 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
       </div>
     </div>
 
-    <div class="flavor-card">
+    <div class="flavor-card" data-cat="bairou">
       <img class="flavor-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200,h_200,c_fill/flavor-chicken.jpg" alt="鸡肉">
       <div class="flavor-tag" data-zh="白肉" data-tw="白肉" data-en="White Meat" data-ja="白身肉">白肉</div>
       <div class="flavor-name" data-zh="鸡肉" data-tw="雞肉" data-en="Chicken" data-ja="鶏肉">鸡肉</div>
@@ -512,7 +547,7 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
       </div>
     </div>
 
-    <div class="flavor-card">
+    <div class="flavor-card" data-cat="bairou">
       <img class="flavor-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200,h_200,c_fill/flavor-duck.jpg" alt="鸭肉">
       <div class="flavor-tag" data-zh="白肉" data-tw="白肉" data-en="White Meat" data-ja="白身肉">白肉</div>
       <div class="flavor-name" data-zh="鸭肉" data-tw="鴨肉" data-en="Duck" data-ja="鴨肉">鸭肉</div>
@@ -526,7 +561,7 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
       </div>
     </div>
 
-    <div class="flavor-card">
+    <div class="flavor-card" data-cat="hongrou">
       <img class="flavor-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200,h_200,c_fill/flavor-beef.jpg" alt="牛肉">
       <div class="flavor-tag" data-zh="红肉" data-tw="紅肉" data-en="Red Meat" data-ja="赤身肉">红肉</div>
       <div class="flavor-name" data-zh="牛肉" data-tw="牛肉" data-en="Beef" data-ja="牛肉">牛肉</div>
@@ -540,7 +575,7 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
       </div>
     </div>
 
-    <div class="flavor-card">
+    <div class="flavor-card" data-cat="hongrou">
       <img class="flavor-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200,h_200,c_fill/flavor-lamb.jpg" alt="羊肉">
       <div class="flavor-tag" data-zh="红肉" data-tw="紅肉" data-en="Red Meat" data-ja="赤身肉">红肉</div>
       <div class="flavor-name" data-zh="羊肉" data-tw="羊肉" data-en="Lamb" data-ja="羊肉">羊肉</div>
@@ -554,7 +589,7 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
       </div>
     </div>
 
-    <div class="flavor-card">
+    <div class="flavor-card" data-cat="haixian">
       <img class="flavor-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200,h_200,c_fill/flavor-fish.jpg" alt="本地鱼">
       <div class="flavor-tag" data-zh="海鲜" data-tw="海鮮" data-en="Seafood" data-ja="シーフード">海鲜</div>
       <div class="flavor-name" data-zh="本地鱼" data-tw="本地魚" data-en="Local Fish" data-ja="地元魚">本地鱼</div>
@@ -568,7 +603,7 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
       </div>
     </div>
 
-    <div class="flavor-card">
+    <div class="flavor-card" data-cat="bairou">
       <img class="flavor-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200,h_200,c_fill/flavor-quail.jpg" alt="本地鹌鹑">
       <div class="flavor-tag" data-zh="白肉" data-tw="白肉" data-en="White Meat" data-ja="白身肉">白肉</div>
       <div class="flavor-name" data-zh="本地鹌鹑" data-tw="本地鵪鶉" data-en="Local Quail" data-ja="地元産うずら">本地鹌鹑</div>
@@ -582,7 +617,7 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
       </div>
     </div>
 
-    <div class="flavor-card">
+    <div class="flavor-card" data-cat="hongrou">
       <img class="flavor-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200,h_200,c_fill/flavor-pork.jpg" alt="猪肉">
       <div class="flavor-tag" data-zh="红肉" data-tw="紅肉" data-en="Red Meat" data-ja="赤身肉">红肉</div>
       <div class="flavor-name" data-zh="猪肉" data-tw="豬肉" data-en="Pork" data-ja="豚肉">猪肉</div>
@@ -770,6 +805,7 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
     <svg viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 004.74 1.21h.005c5.46 0 9.9-4.45 9.9-9.91C21.93 6.45 17.5 2 12.04 2zm5.83 14.07c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.6-2.91-1.26-4.81-4.2-4.96-4.4-.15-.19-1.18-1.57-1.18-3 0-1.43.75-2.13 1.02-2.42.27-.29.58-.36.78-.36.19 0 .39 0 .55.01.18.01.42-.07.65.5.24.58.82 2.01.89 2.15.07.15.12.32.02.51-.09.19-.14.31-.28.48-.14.16-.29.36-.42.48-.14.13-.28.28-.12.55.16.27.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.21 1.37.27.14.43.12.59-.07.16-.19.68-.79.87-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.27.14.44.2.51.31.07.12.07.66-.17 1.34z"/></svg>
     <span data-zh="WhatsApp 咨询" data-tw="WhatsApp 諮詢" data-en="Chat on WhatsApp" data-ja="WhatsAppで問い合わせる">WhatsApp 咨询</span>
   </a>
+  <div style="margin-top:12px;font-size:12px;color:var(--ink-faint);font-family:'Noto Sans SC',sans-serif;" data-zh="告诉我们你家猫咪的喜好，为你推荐试吃组合" data-tw="告訴我們你家貓咪的喜好，為你推薦試吃組合" data-en="Tell us what your cat likes — we'll suggest a trial set for you" data-ja="猫ちゃんの好みを教えてください。おすすめのお試しセットをご提案します">告诉我们你家猫咪的喜好，为你推荐试吃组合</div>
 </div>
 
 <!-- FLOATING WHATSAPP -->
