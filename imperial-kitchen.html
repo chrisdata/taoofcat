@@ -242,12 +242,12 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 .pledge-badge { position: absolute; top: 12px; right: 12px; width: 52px; height: 52px; border-radius: 50%; background: var(--gold); color: #fff; font-size: 13px; font-weight: 700; line-height: 1.2; display: flex; align-items: center; justify-content: center; font-family: 'Noto Sans SC', sans-serif; box-shadow: 0 2px 8px rgba(30,22,8,0.2); }
 
 /* UMAMI FLOW */
-.umami-flow { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 2.5rem; }
-.umami-step { text-align: center; width: 150px; }
-.umami-step-icon { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; margin: 0 auto 10px; display: block; border: 3px solid rgba(184,134,11,0.25); box-shadow: 0 4px 14px rgba(30,22,8,0.12); }
-.umami-step-title { font-size: 14px; font-weight: 700; color: var(--ink); letter-spacing: 0.03em; margin-bottom: 4px; }
-.umami-step-sub { font-size: 11px; color: var(--ink-faint); font-family: 'Noto Sans SC', sans-serif; font-weight: 300; line-height: 1.6; }
-.umami-connector { font-size: 22px; color: var(--gold); font-weight: 700; flex-shrink: 0; }
+.umami-flow { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.umami-step { text-align: center; width: 200px; }
+.umami-step-icon { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin: 0 auto 12px; display: block; border: 3px solid rgba(184,134,11,0.25); box-shadow: 0 4px 14px rgba(30,22,8,0.12); }
+.umami-step-title { font-size: 15px; font-weight: 700; color: var(--ink); letter-spacing: 0.03em; margin-bottom: 4px; }
+.umami-step-sub { font-size: 12px; color: var(--ink-faint); font-family: 'Noto Sans SC', sans-serif; font-weight: 300; line-height: 1.6; }
+.umami-connector { font-size: 26px; color: var(--gold); font-weight: 700; flex-shrink: 0; }
 @media (max-width: 560px) { .umami-connector { width: 100%; text-align: center; transform: rotate(90deg); } }
 .umami-benefits { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 @media (max-width: 700px) { .umami-benefits { grid-template-columns: repeat(2, 1fr); } }
@@ -419,16 +419,12 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
   </div>
 </section>
 <!-- 鲜味来源 -->
-<section class="section has-story">
-  <div class="story-split">
-    <div class="story-split-media fade-right">
-      <img src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1200/hero-story-umami.jpg" alt="本地食材与海味熬出的鲜味，就是猫咪喜欢的味道">
-    </div>
-    <div class="story-split-text">
-      <div class="story-split-eyebrow" data-zh="Natural Umami" data-tw="Natural Umami" data-en="Natural Umami" data-ja="Natural Umami">Natural Umami</div>
-      <div class="story-split-headline" data-zh="本地食材与海味熬出的鲜味，就是猫咪喜欢的味道" data-tw="本地食材與海味熬出的鮮味，就是貓咪喜歡的味道" data-en="The Umami from Local Ingredients & Seafood — The Flavor Cats Naturally Love" data-ja="地元の食材と海鮮から引き出す旨味こそが、猫が好む味">本地食材与海味熬出的鲜味，就是猫咪喜欢的味道</div>
+<section class="section section-xwide">
+  <div class="section-label" data-zh="Natural Umami" data-tw="Natural Umami" data-en="Natural Umami" data-ja="Natural Umami">Natural Umami</div>
+  <div class="section-title" data-zh="本土食材与海味的交融，慢熬出最纯粹的原鲜。" data-tw="本土食材與海味的交融，慢熬出最純粹的原鮮。" data-en="Local ingredients meet the sea — slow-simmered into pure, original umami." data-ja="地元の食材と海の恵みが溶け合い、じっくりと純粋な旨味を引き出す。">本土食材与海味的交融，慢熬出最纯粹的原鲜。</div>
+  <div class="section-en" data-zh="每一口，都是猫咪心头最惬意的温情。" data-tw="每一口，都是貓咪心頭最愜意的溫情。" data-en="Every bite is a little warmth cats hold close." data-ja="一口ごとに、猫の心にそっと寄り添うぬくもりを。">每一口，都是猫咪心头最惬意的温情。</div>
+  <div class="section-divider"></div>
 
-  <div class="umami-row">
   <div class="umami-flow">
     <div class="umami-step">
       <img class="umami-step-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_200,h_200,c_fill/umami-chicken-duck.jpg" alt="家禽壳类，鱼骨类，肉骨类等材料">
@@ -472,9 +468,6 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
       <div class="umami-benefit-icon">❤️</div>
       <div class="umami-benefit-text" data-zh="安心天然<br>健康每一餐" data-tw="安心天然<br>健康每一餐" data-en="Natural & reassuring<br>every meal" data-ja="天然で安心<br>毎食が健康的に">安心天然<br>健康每一餐</div>
     </div>
-  </div>
-  </div>
-  </div>
   </div>
 </section>
 <!-- 口味小科普 -->
