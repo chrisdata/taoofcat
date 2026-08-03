@@ -159,6 +159,13 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 
 .section-alt { background: rgba(184,134,11,0.05); border-top: 1px solid rgba(184,134,11,0.15); border-bottom: 1px solid rgba(184,134,11,0.15); }
 
+/* SECTION WITH BACKGROUND PHOTO */
+.section.has-bg { max-width: none; padding: 0; position: relative; overflow: hidden; }
+.section-bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.section-bg-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,15,6,0.8) 0%, rgba(20,15,6,0.92) 100%); z-index: 1; }
+.section-bg-inner { position: relative; z-index: 2; max-width: 760px; margin: 0 auto; padding: 5rem 2rem; }
+.section.has-bg .section-title, .section.has-bg .section-body p { color: var(--ink); }
+
 /* STORY SPLIT (magazine-style: image fades into page, text sits beside it) */
 .section.has-story { max-width: none; padding: 0; }
 .story-split { display: flex; align-items: center; min-height: 72vh; }
@@ -786,7 +793,10 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
   </div>
 </section>
 <!-- 预购须知 -->
-<section class="section">
+<section class="section has-bg">
+  <img class="section-bg-img" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_1600/hero-story-order.jpg" alt="预购须知">
+  <div class="section-bg-overlay"></div>
+  <div class="section-bg-inner">
   <div class="section-label" data-zh="Before You Order" data-tw="Before You Order" data-en="Before You Order" data-ja="Before You Order">Before You Order</div>
   <div class="section-title" data-zh="预购须知" data-tw="預購須知" data-en="Good to Know" data-ja="ご注文の前に">预购须知</div>
   <div class="section-divider"></div>
@@ -794,6 +804,7 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
     <p data-zh="我们不是工厂，是小量预定——只做给真心想让猫咪试试看的猫奴。" data-tw="我們不是工廠，是小量預定——只做給真心想讓貓咪試試看的貓奴。" data-en="We're not a factory — this is small-batch, pre-order only, made for cat parents who genuinely want to give it a try." data-ja="私たちは工場ではありません。少量の予約制で、本当に試してみたい飼い主さんのために作っています。">我们不是工厂，是小量预定——只做给真心想让猫咪试试看的猫奴。</p>
     <p data-zh="食材会顺应本地市场与时节做调整，口味可能因批次略有不同。" data-tw="食材會順應本地市場與時節做調整，口味可能因批次略有不同。" data-en="Ingredients follow the local market and the season, so flavors may vary slightly from batch to batch." data-ja="食材は地元の市場や季節に応じて調整するため、味はバッチごとに多少変わることがあります。">食材会顺应本地市场与时节做调整，口味可能因批次略有不同。</p>
     <p data-zh="目前暂时只接受马来西亚西马的订单与配送，东马及海外还没办法覆盖，请见谅。" data-tw="目前暫時只接受馬來西亞西馬的訂單與配送，東馬及海外還沒辦法覆蓋，請見諒。" data-en="For now, we only accept orders and deliver within Peninsular (West) Malaysia. East Malaysia and international orders aren't available yet — thank you for understanding." data-ja="現在のところ、ご注文と配送はマレーシア半島部（西マレーシア）のみとなります。東マレーシアおよび海外へのお届けはまだ対応しておりません。ご理解のほどよろしくお願いいたします。">目前暂时只接受马来西亚西马的订单与配送，东马及海外还没办法覆盖，请见谅。</p>
+  </div>
   </div>
 </section>
 
