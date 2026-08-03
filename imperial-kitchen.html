@@ -106,7 +106,7 @@
   --whatsapp: #25d366;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+html { scroll-snap-type: y mandatory; }
 body {
   font-family: 'Noto Serif SC', serif;
   background: var(--paper);
@@ -239,6 +239,24 @@ section.section:nth-of-type(9) { z-index: 9; }
 #stockWidget { position: fixed; left: 20px; bottom: 20px; z-index: 300; font-family: 'Noto Sans SC', sans-serif; }
 .stock-toggle { display: flex; align-items: center; gap: 8px; background: #241d13; border: 1px solid rgba(76,175,80,0.4); color: var(--ink); font-size: 13px; padding: 10px 16px; border-radius: 30px; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.35); }
 .stock-toggle-dot { width: 8px; height: 8px; border-radius: 50%; background: #4caf50; flex-shrink: 0; animation: stockPulse 2s ease-in-out infinite; }
+
+/* SCROLL DOWN HINT */
+.scroll-down-hint { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 60; display: flex; flex-direction: column; align-items: center; gap: 4px; background: none; border: none; cursor: pointer; color: rgba(244,237,224,0.6); font-family: 'Noto Sans SC', sans-serif; font-size: 11px; letter-spacing: 0.15em; transition: opacity 0.3s; }
+.scroll-down-hint span.arrow { font-size: 16px; animation: scrollHintBounce 1.6s ease-in-out infinite; }
+@keyframes scrollHintBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+.scroll-down-hint.hidden { opacity: 0; pointer-events: none; }
+
+/* SECTION PROGRESS BAR */
+#sectionProgress { position: fixed; right: 18px; top: 50%; transform: translateY(-50%); z-index: 60; display: flex; flex-direction: column; gap: 8px; }
+.progress-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(244,237,224,0.25); cursor: pointer; transition: background 0.25s, transform 0.25s; }
+.progress-dot.active { background: var(--gold); transform: scale(1.4); }
+@media (max-width: 700px) { #sectionProgress { display: none; } }
+
+/* BACK TO TOP */
+.back-to-top { position: fixed; left: 20px; bottom: 88px; z-index: 60; width: 42px; height: 42px; border-radius: 50%; background: #241d13; border: 1px solid rgba(212,168,67,0.4); color: var(--gold); font-size: 16px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,0.35); opacity: 0; pointer-events: none; transition: opacity 0.3s, transform 0.2s; }
+.back-to-top.show { opacity: 1; pointer-events: auto; }
+.back-to-top:hover { transform: translateY(-2px); border-color: var(--gold); }
+@media (max-width: 560px) { .back-to-top { left: 12px; bottom: 78px; width: 38px; height: 38px; } }
 @keyframes stockPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
 .stock-panel { display: none; position: absolute; left: 0; bottom: 52px; width: 260px; max-height: 340px; overflow-y: auto; background: #241d13; border: 1px solid rgba(76,175,80,0.35); border-radius: 14px; padding: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
 .stock-panel.open { display: block; }
@@ -870,8 +888,35 @@ footer { position: relative; z-index: 20; background: var(--paper); border-top: 
 <script>
 (function() {
   var sections = Array.prototype.slice.call(document.querySelectorAll('section.section'));
+  var hero = document.querySelector('.hero');
+  var stops = hero ? [hero].concat(sections) : sections;
+
+  // build progress dots
+  var progressWrap = document.getElementById('sectionProgress');
+  stops.forEach(function(stop, i) {
+    var dot = document.createElement('div');
+    dot.className = 'progress-dot';
+    dot.addEventListener('click', function() {
+      stop.scrollIntoView({ block: 'start' });
+    });
+    progressWrap.appendChild(dot);
+  });
+  var dots = progressWrap.querySelectorAll('.progress-dot');
+
+  var scrollHint = document.getElementById('scrollDownHint');
+  var backToTop = document.getElementById('backToTop');
+
+  scrollHint.addEventListener('click', function() {
+    var vh = window.innerHeight;
+    window.scrollBy({ top: vh, behavior: 'auto' });
+  });
+  backToTop.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  });
+
   function updateDim() {
     var vh = window.innerHeight;
+
     sections.forEach(function(sec, i) {
       var next = sections[i + 1];
       var overlay = sec.querySelector('.section-dim-overlay');
@@ -882,13 +927,41 @@ footer { position: relative; z-index: 20; background: var(--paper); border-top: 
       ratio = Math.max(0, Math.min(1, ratio));
       overlay.style.opacity = (ratio * 0.8).toFixed(2);
     });
+
+    // figure out which stop is currently active (closest to top of viewport)
+    var activeIndex = 0;
+    var bestDist = Infinity;
+    stops.forEach(function(stop, i) {
+      var dist = Math.abs(stop.getBoundingClientRect().top);
+      if (dist < bestDist) { bestDist = dist; activeIndex = i; }
+    });
+    dots.forEach(function(d, i) { d.classList.toggle('active', i === activeIndex); });
+
+    // hide scroll-down hint on the very last stop
+    scrollHint.classList.toggle('hidden', activeIndex === stops.length - 1);
+
+    // show back-to-top once scrolled past the hero
+    backToTop.classList.toggle('show', window.scrollY > vh * 0.5);
   }
+
   window.addEventListener('scroll', updateDim, { passive: true });
   window.addEventListener('resize', updateDim);
   window.addEventListener('load', updateDim);
   updateDim();
 })();
 </script>
+
+<!-- SCROLL DOWN HINT -->
+<button class="scroll-down-hint" id="scrollDownHint" type="button" aria-label="Scroll down">
+  <span data-zh="往下探索" data-tw="往下探索" data-en="Scroll to explore" data-ja="もっと見る">往下探索</span>
+  <span class="arrow">↓</span>
+</button>
+
+<!-- SECTION PROGRESS BAR -->
+<div id="sectionProgress"></div>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">↑</button>
 
 <!-- FLOATING WHATSAPP -->
 <a href="https://wa.me/601133677951" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
