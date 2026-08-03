@@ -350,7 +350,20 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 }
 
 /* CTA */
-.cta-section { position: relative; z-index: 20; background: var(--paper); text-align: center; padding: 5rem 2rem 6rem; }
+.cta-section {
+  position: relative;
+  z-index: 20;
+  background: var(--paper);
+  text-align: center;
+  padding: 5rem 2rem 6rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
 .cta-title { font-size: clamp(22px, 4vw, 30px); font-weight: 700; margin-bottom: 12px; letter-spacing: 0.04em; }
 .cta-sub { font-size: 15px; color: var(--ink-light); margin-bottom: 2rem; line-height: 1.8; }
 .btn-whatsapp { display: inline-flex; align-items: center; gap: 10px; padding: 15px 36px; background: var(--whatsapp); color: #fff; text-decoration: none; font-size: 15px; letter-spacing: 0.05em; font-family: 'Noto Sans SC', sans-serif; font-weight: 500; border-radius: 30px; transition: transform 0.15s, box-shadow 0.15s; box-shadow: 0 4px 16px rgba(37,211,102,0.35); }
@@ -883,7 +896,7 @@ footer { position: relative; z-index: 20; background: var(--paper); border-top: 
 </section>
 
 <!-- CTA -->
-<div class="cta-section reveal">
+<section class="section cta-section reveal">
   <div class="cta-title" data-zh="想了解更多？" data-tw="想了解更多？" data-en="Want to Know More?" data-ja="もっと知りたい方へ">想了解更多？</div>
   <div class="cta-sub" data-zh="口味、份量、订购方式，直接 WhatsApp 我们" data-tw="口味、份量、訂購方式，直接 WhatsApp 我們" data-en="Flavors, portions, ordering — just message us on WhatsApp" data-ja="味、量、ご注文方法など、WhatsAppでお気軽にどうぞ">口味、份量、订购方式，直接 WhatsApp 我们</div>
   <a href="https://wa.me/601133677951" target="_blank" rel="noopener" class="btn-whatsapp">
