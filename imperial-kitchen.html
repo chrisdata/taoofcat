@@ -106,7 +106,7 @@
   --whatsapp: #25d366;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-snap-type: y proximity; }
+html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
 body {
   font-family: 'Noto Serif SC', serif;
   background: var(--paper);
@@ -148,6 +148,9 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 
 /* SECTION */
 .section { width: 100%; padding: 3rem 2rem; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; background: var(--paper); scroll-snap-align: start; scroll-snap-stop: always; }
+.section-fade-ready .hero, .section-fade-ready .section { opacity: 0.24; transition: opacity 0.7s ease; }
+.section-fade-ready .hero.section-visible, .section-fade-ready .section.section-visible { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .section-fade-ready .hero, .section-fade-ready .section { opacity: 1; transition: none; } }
 .section-content { max-width: 760px; margin: 0 auto; width: 100%; }
 .section-content.wide { max-width: 1100px; }
 .section-content.xwide { max-width: 1360px; }
@@ -227,9 +230,11 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 .stock-toggle-dot { width: 8px; height: 8px; border-radius: 50%; background: #4caf50; flex-shrink: 0; animation: stockPulse 2s ease-in-out infinite; }
 
 /* SCROLL DOWN HINT */
-.scroll-down-hint { margin-top: auto; align-self: center; padding-top: 2rem; display: flex; flex-direction: column; align-items: center; gap: 4px; background: none; border: none; cursor: pointer; color: rgba(244,237,224,0.5); font-family: 'Noto Sans SC', sans-serif; font-size: 11px; letter-spacing: 0.15em; }
-.scroll-down-hint span.arrow { font-size: 16px; animation: scrollHintBounce 1.6s ease-in-out infinite; }
-@keyframes scrollHintBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+.scroll-down-hint { margin-top: 24px; margin-bottom: 0; align-self: center; flex: 0 0 auto; width: 38px; height: 38px; padding: 0; display: flex; align-items: center; justify-content: center; background: rgba(36,29,19,0.42); border: 1px solid rgba(244,237,224,0.24); border-radius: 50%; cursor: pointer; color: rgba(244,237,224,0.82); box-shadow: 0 4px 16px rgba(0,0,0,0.16); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease; }
+.scroll-down-hint > span:first-child { display: none; }
+.scroll-down-hint span.arrow { width: 8px; height: 8px; display: block; font-size: 0; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translate(-2px, -2px); animation: scrollHintBounce 1.6s ease-in-out infinite; }
+.scroll-down-hint:hover { background: rgba(36,29,19,0.7); border-color: rgba(212,168,67,0.72); transform: translateY(1px); }
+@keyframes scrollHintBounce { 0%, 100% { transform: rotate(45deg) translate(-2px, -2px); } 50% { transform: rotate(45deg) translate(1px, 1px); } }
 
 /* SECTION PROGRESS BAR */
 #sectionProgress { position: fixed; right: 18px; top: 50%; transform: translateY(-50%); z-index: 60; display: flex; flex-direction: column; gap: 8px; }
@@ -237,37 +242,19 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 .progress-dot.active { background: var(--gold); transform: scale(1.4); }
 @media (max-width: 700px) { #sectionProgress { display: none; } }
 
-.progress-dot{position:relative;}
-.progress-label{
- position:absolute;
- right:18px;
- top:50%;
- transform:translateY(-50%) translateX(8px);
- background:rgba(20,20,20,.92);
- color:#f4ede0;
- padding:6px 10px;
- border-radius:6px;
- font:12px 'Noto Sans SC',sans-serif;
- white-space:nowrap;
- opacity:0;
- pointer-events:none;
- transition:.2s;
- border:1px solid rgba(212,168,67,.35);
-}
-.progress-dot:hover .progress-label{
- opacity:1;
- transform:translateY(-50%) translateX(0);
-}
 .progress-dot.active{
  box-shadow:0 0 10px rgba(212,168,67,.7);
 }
+.progress-dot { position: relative; }
+.progress-label { position: absolute; right: 18px; top: 50%; transform: translateY(-50%) translateX(8px); background: rgba(20,20,20,.92); color: #f4ede0; padding: 6px 10px; border-radius: 6px; font: 12px 'Noto Sans SC',sans-serif; white-space: nowrap; opacity: 0; pointer-events: none; transition: .2s; border: 1px solid rgba(212,168,67,.35); }
+.progress-dot:hover .progress-label { opacity: 1; transform: translateY(-50%) translateX(0); }
 
 
 /* BACK TO TOP */
-.back-to-top { position: fixed; left: 20px; bottom: 88px; z-index: 60; width: 42px; height: 42px; border-radius: 50%; background: #241d13; border: 1px solid rgba(212,168,67,0.4); color: var(--gold); font-size: 16px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,0.35); opacity: 0; pointer-events: none; transition: opacity 0.3s, transform 0.2s; }
-.back-to-top.show { opacity: 1; pointer-events: auto; }
-.back-to-top:hover { transform: translateY(-2px); border-color: var(--gold); }
-@media (max-width: 560px) { .back-to-top { left: 12px; bottom: 78px; width: 38px; height: 38px; } }
+.back-to-top { width: 38px; height: 38px; margin: 50px auto 0; padding: 0; border-radius: 50%; background: rgba(36,29,19,0.42); border: 1px solid rgba(244,237,224,0.24); color: rgba(244,237,224,0.82); font-size: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.16); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); transition: transform 0.2s, background 0.2s, border-color 0.2s; }
+.back-to-top::after { content: ''; width: 8px; height: 8px; border-top: 1.5px solid currentColor; border-left: 1.5px solid currentColor; transform: rotate(45deg) translate(2px, 2px); }
+.back-to-top:hover { transform: translateY(-1px); background: rgba(36,29,19,0.7); border-color: rgba(212,168,67,0.72); }
+@media (max-width: 560px) { .back-to-top { width: 38px; height: 38px; } }
 @keyframes stockPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
 .stock-panel { display: none; position: absolute; left: 0; bottom: 52px; width: 260px; max-height: 340px; overflow-y: auto; background: #241d13; border: 1px solid rgba(76,175,80,0.35); border-radius: 14px; padding: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
 .stock-panel.open { display: block; }
@@ -377,8 +364,8 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 
 /* CTA */
 .cta-section { position: relative; z-index: 20; background: var(--paper); text-align: center; padding: 5rem 2rem 6rem; 
-  scroll-snap-align:none;
-  scroll-snap-stop:normal;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
 }
 .cta-title { font-size: clamp(22px, 4vw, 30px); font-weight: 700; margin-bottom: 12px; letter-spacing: 0.04em; }
 .cta-sub { font-size: 15px; color: var(--ink-light); margin-bottom: 2rem; line-height: 1.8; }
@@ -404,7 +391,7 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
   .whatsapp-float svg { width: 26px; height: 26px; }
 }
 
-footer { scroll-snap-align:none; position: relative; z-index: 20; background: var(--paper); border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; text-align: center; }
+footer { scroll-snap-align:end; scroll-snap-stop:always; position: relative; z-index: 20; background: var(--paper); border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; text-align: center; }
 .footer-copy { font-size: 12px; color: var(--ink-faint); letter-spacing: 0.1em; }
 .footer-back { display: block; margin-top: 10px; font-size: 13px; color: var(--gold); text-decoration: none; }
 
@@ -474,6 +461,10 @@ footer { scroll-snap-align:none; position: relative; z-index: 20; background: va
   <div class="hero-en">Tao of Cat<br>Imperial Kitchen</div>
   <div class="hero-divider"></div>
   <div class="hero-tagline" data-zh="一碗好粮，熬给猫看的心意" data-tw="一碗好糧，熬給貓看的心意" data-en="A meal simmered with the same care you'd give family" data-ja="一杯の食事に込めた、猫への想い">一碗好粮，熬给猫看的心意</div>
+  <button class="scroll-down-hint" type="button" aria-label="Scroll down">
+    <span data-zh="往下探索" data-tw="往下探索" data-en="Scroll to explore" data-ja="もっと見る">往下探索</span>
+    <span class="arrow">↓</span>
+  </button>
 </div>
 
 <!-- 起源故事 -->
@@ -919,13 +910,15 @@ footer { scroll-snap-align:none; position: relative; z-index: 20; background: va
     <svg viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 004.74 1.21h.005c5.46 0 9.9-4.45 9.9-9.91C21.93 6.45 17.5 2 12.04 2zm5.83 14.07c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.6-2.91-1.26-4.81-4.2-4.96-4.4-.15-.19-1.18-1.57-1.18-3 0-1.43.75-2.13 1.02-2.42.27-.29.58-.36.78-.36.19 0 .39 0 .55.01.18.01.42-.07.65.5.24.58.82 2.01.89 2.15.07.15.12.32.02.51-.09.19-.14.31-.28.48-.14.16-.29.36-.42.48-.14.13-.28.28-.12.55.16.27.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.21 1.37.27.14.43.12.59-.07.16-.19.68-.79.87-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.27.14.44.2.51.31.07.12.07.66-.17 1.34z"/></svg>
     <span data-zh="WhatsApp 咨询" data-tw="WhatsApp 諮詢" data-en="Chat on WhatsApp" data-ja="WhatsAppで問い合わせる">WhatsApp 咨询</span>
   </a>
-  <div style="margin-top:12px;font-size:12px;color:var(--ink-faint);font-family:'Noto Sans SC',sans-serif;" data-zh="告诉我们你家猫咪的喜好，为你推荐试吃组合" data-tw="告訴我們你家貓咪的喜好，為你推薦試吃組合" data-en="Tell us what your cat likes — we'll suggest a trial set for you" data-ja="猫ちゃんの好みを教えてください。おすすめのお試しセットをご提案します">告诉我们你家猫咪的喜好，为你推荐试吃组合</div>
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">↑</button>
 </div>
 
 <script>
 (function() {
 document.addEventListener('DOMContentLoaded', function() {
-  var sections = Array.prototype.slice.call(document.querySelectorAll('section.section'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll('section.section')).filter(function(section) {
+    return !section.classList.contains('hero');
+  });
   var hero = document.querySelector('.hero');
   var stops = hero ? [hero].concat(sections) : sections;
 
@@ -935,10 +928,9 @@ document.addEventListener('DOMContentLoaded', function() {
   stops.forEach(function(stop, i) {
     var dot = document.createElement('div');
     dot.className = 'progress-dot';
-    var label=document.createElement('span');
-    label.className='progress-label';
-    var titleEl=stop.querySelector ? stop.querySelector('.section-title') : null;
-    label.textContent=titleEl?titleEl.innerText:(stop.classList&&stop.classList.contains('hero')?'首页':'');
+    var label = document.createElement('span');
+    label.className = 'progress-label';
+    label.textContent = getStopTitle(stop);
     dot.appendChild(label);
     dot.addEventListener('click', function() {
       stop.scrollIntoView({ block: 'start', behavior: 'smooth' });
@@ -947,6 +939,23 @@ document.addEventListener('DOMContentLoaded', function() {
     dots.push(dot);
   });
 
+  function getStopTitle(stop) {
+    var titleEl = stop.querySelector ? stop.querySelector('.section-title, .story-split-headline') : null;
+    return (stop.dataset.title || (titleEl ? titleEl.textContent.trim() : '') || (stop.classList && stop.classList.contains('hero') ? '首页' : '')).trim();
+  }
+
+  function setActive(index) {
+    currentIndex = index;
+    dots.forEach(function(dot, dotIndex) { dot.classList.toggle('active', dotIndex === index); });
+  }
+
+  function refreshProgressTitles() {
+    dots.forEach(function(dot, index) {
+      dot.querySelector('.progress-label').textContent = getStopTitle(stops[index]);
+    });
+    setActive(currentIndex);
+  }
+
   var backToTop = document.getElementById('backToTop');
   backToTop.addEventListener('click', function() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -954,7 +963,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   document.querySelectorAll('.scroll-down-hint').forEach(function(btn) {
     btn.addEventListener('click', function() {
-      var section = btn.closest('section.section');
+      var section = btn.closest('.hero, section.section');
       var idx = stops.indexOf(section);
       var next = stops[idx + 1];
       if (next) next.scrollIntoView({ block: 'start', behavior: 'smooth' });
@@ -963,31 +972,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // which stop is currently in view — the standard, reliable way to do this
   var currentIndex = 0;
+  document.documentElement.classList.add('section-fade-ready');
   var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
+      entry.target.classList.toggle('section-visible', entry.isIntersecting);
       if (entry.isIntersecting) {
         var idx = stops.indexOf(entry.target);
         if (idx !== -1) {
-          currentIndex = idx;
-          dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
+          setActive(idx);
         }
       }
     });
   }, { threshold: 0.6 });
   stops.forEach(function(stop) { observer.observe(stop); });
+  setActive(0);
 
-  window.addEventListener('scroll', function() {
-    backToTop.classList.toggle('show', window.scrollY > window.innerHeight * 0.5);
-  }, { passive: true });
+  // Language changes update section text in this page; refresh the navigation labels too.
+  var titleObserver = new MutationObserver(refreshProgressTitles);
+  sections.forEach(function(section) {
+    var title = section.querySelector('.section-title, .story-split-headline');
+    if (title) titleObserver.observe(title, { childList: true, characterData: true, subtree: true });
+  });
+
 });
 })();
 </script>
 
 <!-- SECTION PROGRESS BAR -->
 <div id="sectionProgress"></div>
-
-<!-- BACK TO TOP -->
-<button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">↑</button>
 
 <!-- FLOATING WHATSAPP -->
 <a href="https://wa.me/601133677951" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
