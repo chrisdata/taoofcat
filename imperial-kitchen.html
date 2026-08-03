@@ -929,6 +929,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var dot = document.createElement('div');
     dot.className = 'progress-dot';
     dot.addEventListener('click', function() {
+      dots.forEach(function(d) { d.classList.remove('active'); });
+      dot.classList.add('active');
       stop.scrollIntoView({ block: 'start', behavior: 'smooth' });
     });
     progressWrap.appendChild(dot);
