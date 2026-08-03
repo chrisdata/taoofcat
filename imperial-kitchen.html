@@ -147,23 +147,10 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 .hero-tagline { font-size: clamp(15px, 2.4vw, 19px); color: rgba(255,255,255,0.85); line-height: 1.9; letter-spacing: 0.03em; max-width: 480px; position: relative; }
 
 /* SECTION */
-.section { width: 100%; padding: 3rem 2rem; position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; justify-content: flex-start; background: var(--paper); scroll-snap-align: start; scroll-snap-stop: always; scroll-margin-top: 76px; scroll-margin-bottom: 76px; }
+.section { width: 100%; padding: 3rem 2rem; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; background: var(--paper); scroll-snap-align: start; scroll-snap-stop: always; }
 .section-content { max-width: 760px; margin: 0 auto; width: 100%; }
 .section-content.wide { max-width: 1100px; }
 .section-content.xwide { max-width: 1360px; }
-.section::-webkit-scrollbar { width: 0; }
-.section { scrollbar-width: none; }
-.section-dim-overlay { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; z-index: 50; transition: opacity 0.1s linear; }
-.section.has-bg { display: block; }
-section.section:nth-of-type(1) { z-index: 1; }
-section.section:nth-of-type(2) { z-index: 2; }
-section.section:nth-of-type(3) { z-index: 3; }
-section.section:nth-of-type(4) { z-index: 4; }
-section.section:nth-of-type(5) { z-index: 5; }
-section.section:nth-of-type(6) { z-index: 6; }
-section.section:nth-of-type(7) { z-index: 7; }
-section.section:nth-of-type(8) { z-index: 8; }
-section.section:nth-of-type(9) { z-index: 9; }
 .section-label { font-size: 11px; letter-spacing: 0.3em; color: var(--gold); font-family: 'Noto Sans SC', sans-serif; text-transform: uppercase; margin-bottom: 12px; text-align: center; }
 .section-title { font-size: clamp(24px, 4vw, 32px); font-weight: 700; letter-spacing: 0.05em; text-align: center; margin-bottom: 8px; }
 .section-en { font-family: 'IM Fell English', serif; font-style: italic; font-size: 14px; color: var(--ink-faint); text-align: center; margin-bottom: 2rem; }
@@ -177,8 +164,7 @@ section.section:nth-of-type(9) { z-index: 9; }
 .section-alt { background-color: var(--paper); background-image: linear-gradient(rgba(184,134,11,0.05), rgba(184,134,11,0.05)); border-top: 1px solid rgba(184,134,11,0.15); border-bottom: 1px solid rgba(184,134,11,0.15); }
 
 /* SECTION WITH BACKGROUND PHOTO */
-.section.has-bg { max-width: none; padding: 0; position: sticky; overflow: hidden; }
-.section.has-bg .section-bg-inner { max-height: 100vh; overflow-y: auto; }
+.section.has-bg { max-width: none; padding: 0; position: relative; overflow: hidden; }
 .section-bg-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
 .section-bg-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,15,6,0.8) 0%, rgba(20,15,6,0.92) 100%); z-index: 1; }
 .section-bg-inner { position: relative; z-index: 2; max-width: 760px; margin: 0 auto; padding: 5rem 2rem; }
@@ -483,7 +469,6 @@ footer { position: relative; z-index: 20; background: var(--paper); border-top: 
   <span data-zh="往下探索" data-tw="往下探索" data-en="Scroll to explore" data-ja="もっと見る">往下探索</span>
   <span class="arrow">↓</span>
 </button>
-<div class="section-dim-overlay"></div>
 </section>
 <!-- 食材阵容 -->
 <section class="section has-story">
@@ -505,7 +490,6 @@ footer { position: relative; z-index: 20; background: var(--paper); border-top: 
   <span data-zh="往下探索" data-tw="往下探索" data-en="Scroll to explore" data-ja="もっと見る">往下探索</span>
   <span class="arrow">↓</span>
 </button>
-<div class="section-dim-overlay"></div>
 </section>
 <!-- 鲜味来源 -->
 <section class="section">
@@ -568,7 +552,6 @@ footer { position: relative; z-index: 20; background: var(--paper); border-top: 
   <span data-zh="往下探索" data-tw="往下探索" data-en="Scroll to explore" data-ja="もっと見る">往下探索</span>
   <span class="arrow">↓</span>
 </button>
-<div class="section-dim-overlay"></div>
 </section>
 <!-- 口味小科普 -->
 <section class="section section-alt">
@@ -711,7 +694,6 @@ footer { position: relative; z-index: 20; background: var(--paper); border-top: 
   <span data-zh="往下探索" data-tw="往下探索" data-en="Scroll to explore" data-ja="もっと見る">往下探索</span>
   <span class="arrow">↓</span>
 </button>
-<div class="section-dim-overlay"></div>
 </section>
 <!-- 四不加 -->
 <section class="section">
@@ -750,7 +732,6 @@ footer { position: relative; z-index: 20; background: var(--paper); border-top: 
   <span data-zh="往下探索" data-tw="往下探索" data-en="Scroll to explore" data-ja="もっと見る">往下探索</span>
   <span class="arrow">↓</span>
 </button>
-<div class="section-dim-overlay"></div>
 </section>
 <!-- RETORT 工艺 -->
 <section class="section has-story">
@@ -772,7 +753,6 @@ footer { position: relative; z-index: 20; background: var(--paper); border-top: 
   <span data-zh="往下探索" data-tw="往下探索" data-en="Scroll to explore" data-ja="もっと見る">往下探索</span>
   <span class="arrow">↓</span>
 </button>
-<div class="section-dim-overlay"></div>
 </section>
 <!-- 实拍图集 -->
 <section class="section">
@@ -854,7 +834,6 @@ footer { position: relative; z-index: 20; background: var(--paper); border-top: 
   <span data-zh="往下探索" data-tw="往下探索" data-en="Scroll to explore" data-ja="もっと見る">往下探索</span>
   <span class="arrow">↓</span>
 </button>
-<div class="section-dim-overlay"></div>
 </section>
 <!-- 自家实测 -->
 <section class="section has-story">
@@ -886,7 +865,6 @@ footer { position: relative; z-index: 20; background: var(--paper); border-top: 
   <span data-zh="往下探索" data-tw="往下探索" data-en="Scroll to explore" data-ja="もっと見る">往下探索</span>
   <span class="arrow">↓</span>
 </button>
-<div class="section-dim-overlay"></div>
 </section>
 <!-- 预购须知 -->
 <section class="section has-bg">
@@ -902,7 +880,6 @@ footer { position: relative; z-index: 20; background: var(--paper); border-top: 
     <p data-zh="目前暂时只接受马来西亚西马的订单与配送，东马及海外还没办法覆盖，请见谅。" data-tw="目前暫時只接受馬來西亞西馬的訂單與配送，東馬及海外還沒辦法覆蓋，請見諒。" data-en="For now, we only accept orders and deliver within Peninsular (West) Malaysia. East Malaysia and international orders aren't available yet — thank you for understanding." data-ja="現在のところ、ご注文と配送はマレーシア半島部（西マレーシア）のみとなります。東マレーシアおよび海外へのお届けはまだ対応しておりません。ご理解のほどよろしくお願いいたします。">目前暂时只接受马来西亚西马的订单与配送，东马及海外还没办法覆盖，请见谅。</p>
   </div>
   </div>
-<div class="section-dim-overlay"></div>
 </section>
 
 <!-- CTA -->
@@ -925,130 +902,49 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // build progress dots
   var progressWrap = document.getElementById('sectionProgress');
+  var dots = [];
   stops.forEach(function(stop, i) {
     var dot = document.createElement('div');
     dot.className = 'progress-dot';
     dot.addEventListener('click', function() {
-      dots.forEach(function(d) { d.classList.remove('active'); });
-      dot.classList.add('active');
       stop.scrollIntoView({ block: 'start', behavior: 'smooth' });
     });
     progressWrap.appendChild(dot);
+    dots.push(dot);
   });
-  var dots = progressWrap.querySelectorAll('.progress-dot');
 
   var backToTop = document.getElementById('backToTop');
-
   backToTop.addEventListener('click', function() {
-    window.scrollTo({ top: 0, behavior: 'auto' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
   document.querySelectorAll('.scroll-down-hint').forEach(function(btn) {
     btn.addEventListener('click', function() {
-      var vh = window.innerHeight;
-      window.scrollBy({ top: vh, behavior: 'auto' });
+      var section = btn.closest('section.section');
+      var idx = stops.indexOf(section);
+      var next = stops[idx + 1];
+      if (next) next.scrollIntoView({ block: 'start', behavior: 'smooth' });
     });
   });
 
-  // FORCED SNAP: one wheel gesture = jump a full stop, unless the current
-  // section still has its own internal content left to scroll through.
-  var isJumping = false;
-  var wheelLock = false;
-
-  function currentStopIndex() {
-    var bestDist = Infinity, idx = 0;
-    stops.forEach(function(stop, i) {
-      var dist = Math.abs(stop.getBoundingClientRect().top);
-      if (dist < bestDist) { bestDist = dist; idx = i; }
-    });
-    return idx;
-  }
-
-  function jumpTo(idx) {
-    idx = Math.max(0, Math.min(stops.length - 1, idx));
-    isJumping = true;
-    stops[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
-    setTimeout(function() { isJumping = false; }, 550);
-  }
-
-  window.addEventListener('wheel', function(e) {
-    if (isJumping || wheelLock) { e.preventDefault(); return; }
-    var idx = currentStopIndex();
-    var current = stops[idx];
-    var scrollable = current.scrollHeight > current.clientHeight + 2;
-
-    if (e.deltaY > 0) {
-      // scrolling down
-      var atBottom = !scrollable || (current.scrollTop + current.clientHeight >= current.scrollHeight - 2);
-      if (atBottom) {
-        e.preventDefault();
-        jumpTo(idx + 1);
-        wheelLock = true;
-        setTimeout(function() { wheelLock = false; }, 600);
-      } else {
-        // letting native scroll happen — but verify it actually moved;
-        // if not (layout quirk / stuck), force the jump as a safety net
-        var beforeTop = current.scrollTop;
-        setTimeout(function() {
-          if (current.scrollTop === beforeTop) {
-            jumpTo(idx + 1);
-            wheelLock = true;
-            setTimeout(function() { wheelLock = false; }, 600);
-          }
-        }, 120);
+  // which stop is currently in view — the standard, reliable way to do this
+  var currentIndex = 0;
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var idx = stops.indexOf(entry.target);
+        if (idx !== -1) {
+          currentIndex = idx;
+          dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
+        }
       }
-    } else if (e.deltaY < 0) {
-      // scrolling up
-      var atTop = !scrollable || current.scrollTop <= 2;
-      if (atTop) {
-        e.preventDefault();
-        jumpTo(idx - 1);
-        wheelLock = true;
-        setTimeout(function() { wheelLock = false; }, 600);
-      } else {
-        var beforeTop2 = current.scrollTop;
-        setTimeout(function() {
-          if (current.scrollTop === beforeTop2) {
-            jumpTo(idx - 1);
-            wheelLock = true;
-            setTimeout(function() { wheelLock = false; }, 600);
-          }
-        }, 120);
-      }
-    }
-  }, { passive: false });
-
-  function updateDim() {
-    var vh = window.innerHeight;
-
-    sections.forEach(function(sec, i) {
-      var next = sections[i + 1];
-      var overlay = sec.querySelector('.section-dim-overlay');
-      if (!overlay) return;
-      if (!next) { overlay.style.opacity = 0; return; }
-      var nextTop = next.getBoundingClientRect().top;
-      var ratio = 1 - (nextTop / vh);
-      ratio = Math.max(0, Math.min(1, ratio));
-      overlay.style.opacity = (ratio * 0.8).toFixed(2);
     });
+  }, { threshold: 0.6 });
+  stops.forEach(function(stop) { observer.observe(stop); });
 
-    // figure out which stop is currently active (closest to top of viewport)
-    var activeIndex = 0;
-    var bestDist = Infinity;
-    stops.forEach(function(stop, i) {
-      var dist = Math.abs(stop.getBoundingClientRect().top);
-      if (dist < bestDist) { bestDist = dist; activeIndex = i; }
-    });
-    dots.forEach(function(d, i) { d.classList.toggle('active', i === activeIndex); });
-
-    // show back-to-top once scrolled past the hero
-    backToTop.classList.toggle('show', window.scrollY > vh * 0.5);
-  }
-
-  window.addEventListener('scroll', updateDim, { passive: true });
-  window.addEventListener('resize', updateDim);
-  window.addEventListener('load', updateDim);
-  updateDim();
+  window.addEventListener('scroll', function() {
+    backToTop.classList.toggle('show', window.scrollY > window.innerHeight * 0.5);
+  }, { passive: true });
 });
 })();
 </script>
