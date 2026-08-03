@@ -149,6 +149,7 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 .section { max-width: 760px; margin: 0 auto; padding: 3rem 2rem; position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; justify-content: center; background: var(--paper); }
 .section::-webkit-scrollbar { width: 0; }
 .section { scrollbar-width: none; }
+.section-dim-overlay { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; z-index: 50; transition: opacity 0.1s linear; }
 .section.has-bg { display: block; }
 section.section:nth-of-type(1) { z-index: 1; }
 section.section:nth-of-type(2) { z-index: 2; }
@@ -463,6 +464,7 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
   </div>
   </div>
   </div>
+<div class="section-dim-overlay"></div>
 </section>
 <!-- 食材阵容 -->
 <section class="section has-story">
@@ -480,6 +482,7 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
   </div>
   </div>
   </div>
+<div class="section-dim-overlay"></div>
 </section>
 <!-- 鲜味来源 -->
 <section class="section section-xwide">
@@ -536,6 +539,7 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
       <div class="umami-benefit-text" data-zh='安心天然<br>健康每一餐<br><span class="umami-benefit-extra">日日好心情</span>' data-tw='安心天然<br>健康每一餐<br><span class="umami-benefit-extra">日日好心情</span>' data-en='Natural & reassuring<br>every meal<br><span class="umami-benefit-extra">a happy mood every day</span>' data-ja='天然で安心<br>毎食が健康的に<br><span class="umami-benefit-extra">毎日ご機嫌に</span>'>安心天然<br>健康每一餐<br><span class="umami-benefit-extra">日日好心情</span></div>
     </div>
   </div>
+<div class="section-dim-overlay"></div>
 </section>
 <!-- 口味小科普 -->
 <section class="section section-alt section-xwide">
@@ -672,6 +676,7 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
   </div>
 
   <div class="gallery-note" style="margin-top:1.5rem;" data-zh="所有口味都以 Retort 工艺整包灭菌，不额外加防腐剂——上面这些「注意」，是给你的科普参考，不是说不能吃，而是提醒轮替、适量，跟人吃饭是一个道理。" data-tw="所有口味都以 Retort 工藝整包滅菌，不額外加防腐劑——上面這些「注意」，是給你的科普參考，不是說不能吃，而是提醒輪替、適量，跟人吃飯是一個道理。" data-en="Every flavor goes through the same Retort process — no added preservatives. These notes are here to inform, not to alarm: rotate flavors and feed in moderation, the same way we'd think about our own diet." data-ja="どの味も同じRetort工程で殺菌しており、防腐剤は加えていません。上記の「注意点」は不安を煽るためではなく、ローテーションと適量を心がけるための参考情報です——人の食事と同じ考え方です。">所有口味都以 Retort 工艺整包灭菌，不额外加防腐剂——上面这些「注意」，是给你的科普参考，不是说不能吃，而是提醒轮替、适量，跟人吃饭是一个道理。</div>
+<div class="section-dim-overlay"></div>
 </section>
 <!-- 四不加 -->
 <section class="section section-wide">
@@ -704,6 +709,7 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
       <div class="pledge-sub" data-zh="人工诱食剂容易让猫咪养成挑食、依赖化学香气。本地鸡鸭壳与海味熬出的鲜味，就是天然的诱食力。" data-tw="人工誘食劑容易讓貓咪養成挑食、依賴化學香氣。本地雞鴨殼與海味熬出的鮮味，就是天然的誘食力。" data-en="Artificial palatants can lead to picky eating and a reliance on chemical flavoring. The umami from real local chicken, duck, and seafood does that job naturally." data-ja="人工的な嗜好性添加物は、偏食や化学的な香りへの依存を招くことがあります。地元の鶏鴨と海鮮から引き出す旨味こそが、天然の誘因力です。">人工诱食剂容易让猫咪养成挑食、依赖化学香气。本地鸡鸭壳与海味熬出的鲜味，就是天然的诱食力。</div>
     </div>
   </div>
+<div class="section-dim-overlay"></div>
 </section>
 <!-- RETORT 工艺 -->
 <section class="section has-story">
@@ -721,6 +727,7 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
   </div>
   </div>
   </div>
+<div class="section-dim-overlay"></div>
 </section>
 <!-- 实拍图集 -->
 <section class="section section-xwide">
@@ -796,6 +803,7 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
     </div>
 
   </div>
+<div class="section-dim-overlay"></div>
 </section>
 <!-- 自家实测 -->
 <section class="section has-story">
@@ -823,6 +831,7 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
   </div>
   </div>
   </div>
+<div class="section-dim-overlay"></div>
 </section>
 <!-- 预购须知 -->
 <section class="section has-bg">
@@ -838,6 +847,7 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
     <p data-zh="目前暂时只接受马来西亚西马的订单与配送，东马及海外还没办法覆盖，请见谅。" data-tw="目前暫時只接受馬來西亞西馬的訂單與配送，東馬及海外還沒辦法覆蓋，請見諒。" data-en="For now, we only accept orders and deliver within Peninsular (West) Malaysia. East Malaysia and international orders aren't available yet — thank you for understanding." data-ja="現在のところ、ご注文と配送はマレーシア半島部（西マレーシア）のみとなります。東マレーシアおよび海外へのお届けはまだ対応しておりません。ご理解のほどよろしくお願いいたします。">目前暂时只接受马来西亚西马的订单与配送，东马及海外还没办法覆盖，请见谅。</p>
   </div>
   </div>
+<div class="section-dim-overlay"></div>
 </section>
 
 <!-- CTA -->
@@ -850,6 +860,29 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
   </a>
   <div style="margin-top:12px;font-size:12px;color:var(--ink-faint);font-family:'Noto Sans SC',sans-serif;" data-zh="告诉我们你家猫咪的喜好，为你推荐试吃组合" data-tw="告訴我們你家貓咪的喜好，為你推薦試吃組合" data-en="Tell us what your cat likes — we'll suggest a trial set for you" data-ja="猫ちゃんの好みを教えてください。おすすめのお試しセットをご提案します">告诉我们你家猫咪的喜好，为你推荐试吃组合</div>
 </div>
+
+<script>
+(function() {
+  var sections = Array.prototype.slice.call(document.querySelectorAll('section.section'));
+  function updateDim() {
+    var vh = window.innerHeight;
+    sections.forEach(function(sec, i) {
+      var next = sections[i + 1];
+      var overlay = sec.querySelector('.section-dim-overlay');
+      if (!overlay) return;
+      if (!next) { overlay.style.opacity = 0; return; }
+      var nextTop = next.getBoundingClientRect().top;
+      var ratio = 1 - (nextTop / vh);
+      ratio = Math.max(0, Math.min(1, ratio));
+      overlay.style.opacity = (ratio * 0.8).toFixed(2);
+    });
+  }
+  window.addEventListener('scroll', updateDim, { passive: true });
+  window.addEventListener('resize', updateDim);
+  window.addEventListener('load', updateDim);
+  updateDim();
+})();
+</script>
 
 <!-- FLOATING WHATSAPP -->
 <a href="https://wa.me/601133677951" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
