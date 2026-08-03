@@ -929,7 +929,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var dot = document.createElement('div');
     dot.className = 'progress-dot';
     dot.addEventListener('click', function() {
-      stop.scrollIntoView({ block: 'start' });
+      stop.scrollIntoView({ block: 'start', behavior: 'smooth' });
     });
     progressWrap.appendChild(dot);
   });
@@ -983,8 +983,18 @@ document.addEventListener('DOMContentLoaded', function() {
         jumpTo(idx + 1);
         wheelLock = true;
         setTimeout(function() { wheelLock = false; }, 600);
+      } else {
+        // letting native scroll happen — but verify it actually moved;
+        // if not (layout quirk / stuck), force the jump as a safety net
+        var beforeTop = current.scrollTop;
+        setTimeout(function() {
+          if (current.scrollTop === beforeTop) {
+            jumpTo(idx + 1);
+            wheelLock = true;
+            setTimeout(function() { wheelLock = false; }, 600);
+          }
+        }, 120);
       }
-      // else: let native scroll handle it (still reading this section's content)
     } else if (e.deltaY < 0) {
       // scrolling up
       var atTop = !scrollable || current.scrollTop <= 2;
@@ -993,6 +1003,15 @@ document.addEventListener('DOMContentLoaded', function() {
         jumpTo(idx - 1);
         wheelLock = true;
         setTimeout(function() { wheelLock = false; }, 600);
+      } else {
+        var beforeTop2 = current.scrollTop;
+        setTimeout(function() {
+          if (current.scrollTop === beforeTop2) {
+            jumpTo(idx - 1);
+            wheelLock = true;
+            setTimeout(function() { wheelLock = false; }, 600);
+          }
+        }, 120);
       }
     }
   }, { passive: false });
