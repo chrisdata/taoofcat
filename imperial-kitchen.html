@@ -918,6 +918,7 @@ footer { position: relative; z-index: 20; background: var(--paper); border-top: 
 
 <script>
 (function() {
+document.addEventListener('DOMContentLoaded', function() {
   var sections = Array.prototype.slice.call(document.querySelectorAll('section.section'));
   var hero = document.querySelector('.hero');
   var stops = hero ? [hero].concat(sections) : sections;
@@ -946,6 +947,55 @@ footer { position: relative; z-index: 20; background: var(--paper); border-top: 
       window.scrollBy({ top: vh, behavior: 'auto' });
     });
   });
+
+  // FORCED SNAP: one wheel gesture = jump a full stop, unless the current
+  // section still has its own internal content left to scroll through.
+  var isJumping = false;
+  var wheelLock = false;
+
+  function currentStopIndex() {
+    var bestDist = Infinity, idx = 0;
+    stops.forEach(function(stop, i) {
+      var dist = Math.abs(stop.getBoundingClientRect().top);
+      if (dist < bestDist) { bestDist = dist; idx = i; }
+    });
+    return idx;
+  }
+
+  function jumpTo(idx) {
+    idx = Math.max(0, Math.min(stops.length - 1, idx));
+    isJumping = true;
+    stops[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(function() { isJumping = false; }, 550);
+  }
+
+  window.addEventListener('wheel', function(e) {
+    if (isJumping || wheelLock) { e.preventDefault(); return; }
+    var idx = currentStopIndex();
+    var current = stops[idx];
+    var scrollable = current.scrollHeight > current.clientHeight + 2;
+
+    if (e.deltaY > 0) {
+      // scrolling down
+      var atBottom = !scrollable || (current.scrollTop + current.clientHeight >= current.scrollHeight - 2);
+      if (atBottom) {
+        e.preventDefault();
+        jumpTo(idx + 1);
+        wheelLock = true;
+        setTimeout(function() { wheelLock = false; }, 600);
+      }
+      // else: let native scroll handle it (still reading this section's content)
+    } else if (e.deltaY < 0) {
+      // scrolling up
+      var atTop = !scrollable || current.scrollTop <= 2;
+      if (atTop) {
+        e.preventDefault();
+        jumpTo(idx - 1);
+        wheelLock = true;
+        setTimeout(function() { wheelLock = false; }, 600);
+      }
+    }
+  }, { passive: false });
 
   function updateDim() {
     var vh = window.innerHeight;
@@ -978,6 +1028,7 @@ footer { position: relative; z-index: 20; background: var(--paper); border-top: 
   window.addEventListener('resize', updateDim);
   window.addEventListener('load', updateDim);
   updateDim();
+});
 })();
 </script>
 
