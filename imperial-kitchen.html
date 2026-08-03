@@ -146,7 +146,10 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 .hero-tagline { font-size: clamp(15px, 2.4vw, 19px); color: rgba(255,255,255,0.85); line-height: 1.9; letter-spacing: 0.03em; max-width: 480px; position: relative; }
 
 /* SECTION */
-.section { max-width: 760px; margin: 0 auto; padding: 3rem 2rem; position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; justify-content: center; background: var(--paper); }
+.section { width: 100%; padding: 3rem 2rem; position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; justify-content: center; background: var(--paper); }
+.section-content { max-width: 760px; margin: 0 auto; width: 100%; }
+.section-content.wide { max-width: 1100px; }
+.section-content.xwide { max-width: 1360px; }
 .section::-webkit-scrollbar { width: 0; }
 .section { scrollbar-width: none; }
 .section-dim-overlay { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; z-index: 50; transition: opacity 0.1s linear; }
@@ -160,12 +163,6 @@ section.section:nth-of-type(6) { z-index: 6; }
 section.section:nth-of-type(7) { z-index: 7; }
 section.section:nth-of-type(8) { z-index: 8; }
 section.section:nth-of-type(9) { z-index: 9; }
-@media (max-width: 640px) {
-  .section { height: auto; max-height: none; overflow-y: visible; position: relative; top: auto; }
-  .section.has-bg .section-bg-inner { max-height: none; overflow-y: visible; }
-}
-.section-wide { max-width: 1100px; }
-.section-xwide { max-width: 1360px; }
 .section-label { font-size: 11px; letter-spacing: 0.3em; color: var(--gold); font-family: 'Noto Sans SC', sans-serif; text-transform: uppercase; margin-bottom: 12px; text-align: center; }
 .section-title { font-size: clamp(24px, 4vw, 32px); font-weight: 700; letter-spacing: 0.05em; text-align: center; margin-bottom: 8px; }
 .section-en { font-family: 'IM Fell English', serif; font-style: italic; font-size: 14px; color: var(--ink-faint); text-align: center; margin-bottom: 2rem; }
@@ -485,7 +482,8 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
 <div class="section-dim-overlay"></div>
 </section>
 <!-- 鲜味来源 -->
-<section class="section section-xwide">
+<section class="section">
+  <div class="section-content xwide">
   <div class="section-label" data-zh="Natural Umami" data-tw="Natural Umami" data-en="Natural Umami" data-ja="Natural Umami">Natural Umami</div>
   <div class="section-title" data-zh="本土食材与海味的交融，慢熬出最纯粹的原鲜。" data-tw="本土食材與海味的交融，慢熬出最純粹的原鮮。" data-en="Local ingredients meet the sea — slow-simmered into pure, original umami." data-ja="地元の食材と海の恵みが溶け合い、じっくりと純粋な旨味を引き出す。">本土食材与海味的交融，慢熬出最纯粹的原鲜。</div>
   <div class="section-en" data-zh="每一口，都是猫咪心头最惬意的温情。" data-tw="每一口，都是貓咪心頭最愜意的溫情。" data-en="Every bite is a little warmth cats hold close." data-ja="一口ごとに、猫の心にそっと寄り添うぬくもりを。">每一口，都是猫咪心头最惬意的温情。</div>
@@ -539,10 +537,12 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
       <div class="umami-benefit-text" data-zh='安心天然<br>健康每一餐<br><span class="umami-benefit-extra">日日好心情</span>' data-tw='安心天然<br>健康每一餐<br><span class="umami-benefit-extra">日日好心情</span>' data-en='Natural & reassuring<br>every meal<br><span class="umami-benefit-extra">a happy mood every day</span>' data-ja='天然で安心<br>毎食が健康的に<br><span class="umami-benefit-extra">毎日ご機嫌に</span>'>安心天然<br>健康每一餐<br><span class="umami-benefit-extra">日日好心情</span></div>
     </div>
   </div>
+  </div>
 <div class="section-dim-overlay"></div>
 </section>
 <!-- 口味小科普 -->
-<section class="section section-alt section-xwide">
+<section class="section section-alt">
+  <div class="section-content xwide">
   <div class="section-label" data-zh="Flavor Notes" data-tw="Flavor Notes" data-en="Flavor Notes" data-ja="Flavor Notes">Flavor Notes</div>
   <div class="section-title" data-zh="口味小科普" data-tw="口味小科普" data-en="Know Your Flavors" data-ja="味の豆知識">口味小科普</div>
   <div class="section-en" data-zh="好处，跟需要留意的地方，我们都写给你看" data-tw="好處，跟需要留意的地方，我們都寫給你看" data-en="The benefits — and the things worth knowing" data-ja="良い点も、気をつけたい点も、正直にお伝えします">好处，跟需要留意的地方，我们都写给你看</div>
@@ -676,10 +676,12 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
   </div>
 
   <div class="gallery-note" style="margin-top:1.5rem;" data-zh="所有口味都以 Retort 工艺整包灭菌，不额外加防腐剂——上面这些「注意」，是给你的科普参考，不是说不能吃，而是提醒轮替、适量，跟人吃饭是一个道理。" data-tw="所有口味都以 Retort 工藝整包滅菌，不額外加防腐劑——上面這些「注意」，是給你的科普參考，不是說不能吃，而是提醒輪替、適量，跟人吃飯是一個道理。" data-en="Every flavor goes through the same Retort process — no added preservatives. These notes are here to inform, not to alarm: rotate flavors and feed in moderation, the same way we'd think about our own diet." data-ja="どの味も同じRetort工程で殺菌しており、防腐剤は加えていません。上記の「注意点」は不安を煽るためではなく、ローテーションと適量を心がけるための参考情報です——人の食事と同じ考え方です。">所有口味都以 Retort 工艺整包灭菌，不额外加防腐剂——上面这些「注意」，是给你的科普参考，不是说不能吃，而是提醒轮替、适量，跟人吃饭是一个道理。</div>
+  </div>
 <div class="section-dim-overlay"></div>
 </section>
 <!-- 四不加 -->
-<section class="section section-wide">
+<section class="section">
+  <div class="section-content wide">
   <div class="section-label" data-zh="Our Promise" data-tw="Our Promise" data-en="Our Promise" data-ja="Our Promise">Our Promise</div>
   <div class="section-title" data-zh="玄猫御膳坊 · 坚持四不加" data-tw="玄貓御膳坊 · 堅持四不加" data-en="Tao of Cat Imperial Kitchen — Committed to the Four Nevers" data-ja="玄猫御膳房 · 四つの不加を守り抜く">玄猫御膳坊 · 坚持四不加</div>
   <div class="section-divider"></div>
@@ -709,6 +711,7 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
       <div class="pledge-sub" data-zh="人工诱食剂容易让猫咪养成挑食、依赖化学香气。本地鸡鸭壳与海味熬出的鲜味，就是天然的诱食力。" data-tw="人工誘食劑容易讓貓咪養成挑食、依賴化學香氣。本地雞鴨殼與海味熬出的鮮味，就是天然的誘食力。" data-en="Artificial palatants can lead to picky eating and a reliance on chemical flavoring. The umami from real local chicken, duck, and seafood does that job naturally." data-ja="人工的な嗜好性添加物は、偏食や化学的な香りへの依存を招くことがあります。地元の鶏鴨と海鮮から引き出す旨味こそが、天然の誘因力です。">人工诱食剂容易让猫咪养成挑食、依赖化学香气。本地鸡鸭壳与海味熬出的鲜味，就是天然的诱食力。</div>
     </div>
   </div>
+  </div>
 <div class="section-dim-overlay"></div>
 </section>
 <!-- RETORT 工艺 -->
@@ -730,7 +733,8 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
 <div class="section-dim-overlay"></div>
 </section>
 <!-- 实拍图集 -->
-<section class="section section-xwide">
+<section class="section">
+  <div class="section-content xwide">
   <div class="section-label" data-zh="Behind the Kitchen" data-tw="Behind the Kitchen" data-en="Behind the Kitchen" data-ja="Behind the Kitchen">Behind the Kitchen</div>
   <div class="section-title" data-zh="制作实拍" data-tw="製作實拍" data-en="From Our Kitchen" data-ja="キッチンの様子">制作实拍</div>
   <div class="section-divider"></div>
@@ -802,6 +806,7 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
       </div>
     </div>
 
+  </div>
   </div>
 <div class="section-dim-overlay"></div>
 </section>
