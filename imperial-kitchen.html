@@ -241,10 +241,9 @@ section.section:nth-of-type(9) { z-index: 9; }
 .stock-toggle-dot { width: 8px; height: 8px; border-radius: 50%; background: #4caf50; flex-shrink: 0; animation: stockPulse 2s ease-in-out infinite; }
 
 /* SCROLL DOWN HINT */
-.scroll-down-hint { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 60; display: flex; flex-direction: column; align-items: center; gap: 4px; background: none; border: none; cursor: pointer; color: rgba(244,237,224,0.6); font-family: 'Noto Sans SC', sans-serif; font-size: 11px; letter-spacing: 0.15em; transition: opacity 0.3s; }
+.scroll-down-hint { margin-top: auto; align-self: center; padding-top: 2rem; display: flex; flex-direction: column; align-items: center; gap: 4px; background: none; border: none; cursor: pointer; color: rgba(244,237,224,0.5); font-family: 'Noto Sans SC', sans-serif; font-size: 11px; letter-spacing: 0.15em; }
 .scroll-down-hint span.arrow { font-size: 16px; animation: scrollHintBounce 1.6s ease-in-out infinite; }
 @keyframes scrollHintBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
-.scroll-down-hint.hidden { opacity: 0; pointer-events: none; }
 
 /* SECTION PROGRESS BAR */
 #sectionProgress { position: fixed; right: 18px; top: 50%; transform: translateY(-50%); z-index: 60; display: flex; flex-direction: column; gap: 8px; }
@@ -480,6 +479,10 @@ footer { position: relative; z-index: 20; background: var(--paper); border-top: 
   </div>
   </div>
   </div>
+<button class="scroll-down-hint" type="button" aria-label="Scroll down">
+  <span data-zh="往下探索" data-tw="往下探索" data-en="Scroll to explore" data-ja="もっと見る">往下探索</span>
+  <span class="arrow">↓</span>
+</button>
 <div class="section-dim-overlay"></div>
 </section>
 <!-- 食材阵容 -->
@@ -498,6 +501,10 @@ footer { position: relative; z-index: 20; background: var(--paper); border-top: 
   </div>
   </div>
   </div>
+<button class="scroll-down-hint" type="button" aria-label="Scroll down">
+  <span data-zh="往下探索" data-tw="往下探索" data-en="Scroll to explore" data-ja="もっと見る">往下探索</span>
+  <span class="arrow">↓</span>
+</button>
 <div class="section-dim-overlay"></div>
 </section>
 <!-- 鲜味来源 -->
@@ -557,6 +564,10 @@ footer { position: relative; z-index: 20; background: var(--paper); border-top: 
     </div>
   </div>
   </div>
+<button class="scroll-down-hint" type="button" aria-label="Scroll down">
+  <span data-zh="往下探索" data-tw="往下探索" data-en="Scroll to explore" data-ja="もっと見る">往下探索</span>
+  <span class="arrow">↓</span>
+</button>
 <div class="section-dim-overlay"></div>
 </section>
 <!-- 口味小科普 -->
@@ -696,6 +707,10 @@ footer { position: relative; z-index: 20; background: var(--paper); border-top: 
 
   <div class="gallery-note" style="margin-top:1.5rem;" data-zh="所有口味都以 Retort 工艺整包灭菌，不额外加防腐剂——上面这些「注意」，是给你的科普参考，不是说不能吃，而是提醒轮替、适量，跟人吃饭是一个道理。" data-tw="所有口味都以 Retort 工藝整包滅菌，不額外加防腐劑——上面這些「注意」，是給你的科普參考，不是說不能吃，而是提醒輪替、適量，跟人吃飯是一個道理。" data-en="Every flavor goes through the same Retort process — no added preservatives. These notes are here to inform, not to alarm: rotate flavors and feed in moderation, the same way we'd think about our own diet." data-ja="どの味も同じRetort工程で殺菌しており、防腐剤は加えていません。上記の「注意点」は不安を煽るためではなく、ローテーションと適量を心がけるための参考情報です——人の食事と同じ考え方です。">所有口味都以 Retort 工艺整包灭菌，不额外加防腐剂——上面这些「注意」，是给你的科普参考，不是说不能吃，而是提醒轮替、适量，跟人吃饭是一个道理。</div>
   </div>
+<button class="scroll-down-hint" type="button" aria-label="Scroll down">
+  <span data-zh="往下探索" data-tw="往下探索" data-en="Scroll to explore" data-ja="もっと見る">往下探索</span>
+  <span class="arrow">↓</span>
+</button>
 <div class="section-dim-overlay"></div>
 </section>
 <!-- 四不加 -->
@@ -731,6 +746,10 @@ footer { position: relative; z-index: 20; background: var(--paper); border-top: 
     </div>
   </div>
   </div>
+<button class="scroll-down-hint" type="button" aria-label="Scroll down">
+  <span data-zh="往下探索" data-tw="往下探索" data-en="Scroll to explore" data-ja="もっと見る">往下探索</span>
+  <span class="arrow">↓</span>
+</button>
 <div class="section-dim-overlay"></div>
 </section>
 <!-- RETORT 工艺 -->
@@ -749,6 +768,10 @@ footer { position: relative; z-index: 20; background: var(--paper); border-top: 
   </div>
   </div>
   </div>
+<button class="scroll-down-hint" type="button" aria-label="Scroll down">
+  <span data-zh="往下探索" data-tw="往下探索" data-en="Scroll to explore" data-ja="もっと見る">往下探索</span>
+  <span class="arrow">↓</span>
+</button>
 <div class="section-dim-overlay"></div>
 </section>
 <!-- 实拍图集 -->
@@ -827,6 +850,10 @@ footer { position: relative; z-index: 20; background: var(--paper); border-top: 
 
   </div>
   </div>
+<button class="scroll-down-hint" type="button" aria-label="Scroll down">
+  <span data-zh="往下探索" data-tw="往下探索" data-en="Scroll to explore" data-ja="もっと見る">往下探索</span>
+  <span class="arrow">↓</span>
+</button>
 <div class="section-dim-overlay"></div>
 </section>
 <!-- 自家实测 -->
@@ -855,6 +882,10 @@ footer { position: relative; z-index: 20; background: var(--paper); border-top: 
   </div>
   </div>
   </div>
+<button class="scroll-down-hint" type="button" aria-label="Scroll down">
+  <span data-zh="往下探索" data-tw="往下探索" data-en="Scroll to explore" data-ja="もっと見る">往下探索</span>
+  <span class="arrow">↓</span>
+</button>
 <div class="section-dim-overlay"></div>
 </section>
 <!-- 预购须知 -->
@@ -903,15 +934,17 @@ footer { position: relative; z-index: 20; background: var(--paper); border-top: 
   });
   var dots = progressWrap.querySelectorAll('.progress-dot');
 
-  var scrollHint = document.getElementById('scrollDownHint');
   var backToTop = document.getElementById('backToTop');
 
-  scrollHint.addEventListener('click', function() {
-    var vh = window.innerHeight;
-    window.scrollBy({ top: vh, behavior: 'auto' });
-  });
   backToTop.addEventListener('click', function() {
     window.scrollTo({ top: 0, behavior: 'auto' });
+  });
+
+  document.querySelectorAll('.scroll-down-hint').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var vh = window.innerHeight;
+      window.scrollBy({ top: vh, behavior: 'auto' });
+    });
   });
 
   function updateDim() {
@@ -937,9 +970,6 @@ footer { position: relative; z-index: 20; background: var(--paper); border-top: 
     });
     dots.forEach(function(d, i) { d.classList.toggle('active', i === activeIndex); });
 
-    // hide scroll-down hint on the very last stop
-    scrollHint.classList.toggle('hidden', activeIndex === stops.length - 1);
-
     // show back-to-top once scrolled past the hero
     backToTop.classList.toggle('show', window.scrollY > vh * 0.5);
   }
@@ -950,12 +980,6 @@ footer { position: relative; z-index: 20; background: var(--paper); border-top: 
   updateDim();
 })();
 </script>
-
-<!-- SCROLL DOWN HINT -->
-<button class="scroll-down-hint" id="scrollDownHint" type="button" aria-label="Scroll down">
-  <span data-zh="往下探索" data-tw="往下探索" data-en="Scroll to explore" data-ja="もっと見る">往下探索</span>
-  <span class="arrow">↓</span>
-</button>
 
 <!-- SECTION PROGRESS BAR -->
 <div id="sectionProgress"></div>
