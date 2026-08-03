@@ -290,8 +290,8 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 @media (max-width: 560px) { .umami-connector { width: 40px; height: 40px; font-size: 15px; } }
 .umami-benefits { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 @media (max-width: 700px) { .umami-benefits { grid-template-columns: repeat(2, 1fr); } }
-.umami-benefit { background: rgba(184,134,11,0.06); border: 1px solid rgba(184,134,11,0.2); border-radius: 12px; padding: 1rem 0.75rem; text-align: center; }
-.umami-benefit-icon { font-size: 22px; margin-bottom: 6px; }
+.umami-benefit { background: rgba(184,134,11,0.06); border: 1px solid rgba(184,134,11,0.2); border-radius: 12px; padding: 1rem 1.1rem; text-align: left; display: flex; align-items: center; gap: 12px; }
+.umami-benefit-icon { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid rgba(184,134,11,0.3); }
 .umami-benefit-text { font-size: 12px; color: var(--ink-light); font-family: 'Noto Sans SC', sans-serif; font-weight: 300; line-height: 1.5; }
 .pledge-icon { width: 128px; height: 128px; border-radius: 50%; object-fit: cover; margin: 0 auto 14px; display: block; border: 3px solid rgba(184,134,11,0.25); box-shadow: 0 4px 14px rgba(30,22,8,0.12); }
 .pledge-text { font-size: 15px; font-weight: 500; color: var(--ink); line-height: 1.6; }
@@ -492,19 +492,19 @@ footer { border-top: 1px solid rgba(244,237,224,0.12); padding: 2.5rem 2rem; tex
 
   <div class="umami-benefits">
     <div class="umami-benefit">
-      <div class="umami-benefit-icon">😺</div>
+      <img class="umami-benefit-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_150,h_150,c_fill/benefit-appetite.jpg" alt="天然鲜香激发食欲">
       <div class="umami-benefit-text" data-zh="天然鲜香<br>激发食欲" data-tw="天然鮮香<br>激發食慾" data-en="Natural aroma<br>excites appetite" data-ja="天然の香りで<br>食欲をそそる">天然鲜香<br>激发食欲</div>
     </div>
     <div class="umami-benefit">
-      <div class="umami-benefit-icon">💧</div>
+      <img class="umami-benefit-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_150,h_150,c_fill/benefit-digest.jpg" alt="好消化吸收肠胃无负担">
       <div class="umami-benefit-text" data-zh="好消化吸收<br>肠胃无负担" data-tw="好消化吸收<br>腸胃無負擔" data-en="Easy to digest<br>gentle on the gut" data-ja="消化吸収がよく<br>お腹に優しい">好消化吸收<br>肠胃无负担</div>
     </div>
     <div class="umami-benefit">
-      <div class="umami-benefit-icon">🛡️</div>
+      <img class="umami-benefit-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_150,h_150,c_fill/benefit-immunity.jpg" alt="营养丰富增强免疫力">
       <div class="umami-benefit-text" data-zh="营养丰富<br>增强免疫力" data-tw="營養豐富<br>增強免疫力" data-en="Nutrient-rich<br>supports immunity" data-ja="栄養豊富で<br>免疫力をサポート">营养丰富<br>增强免疫力</div>
     </div>
     <div class="umami-benefit">
-      <div class="umami-benefit-icon">❤️</div>
+      <img class="umami-benefit-icon" src="https://res.cloudinary.com/dlm2iyc5i/image/upload/q_auto,f_auto,w_150,h_150,c_fill/benefit-natural.jpg" alt="安心天然健康每一餐">
       <div class="umami-benefit-text" data-zh="安心天然<br>健康每一餐" data-tw="安心天然<br>健康每一餐" data-en="Natural & reassuring<br>every meal" data-ja="天然で安心<br>毎食が健康的に">安心天然<br>健康每一餐</div>
     </div>
   </div>
