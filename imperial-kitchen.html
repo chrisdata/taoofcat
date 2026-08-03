@@ -150,6 +150,7 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 .section { width: 100%; padding: 3rem 2rem; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; background: var(--paper); scroll-snap-align: start; scroll-snap-stop: always; }
 .section-fade-ready .hero, .section-fade-ready .section { opacity: 0.24; transition: opacity 0.7s ease; }
 .section-fade-ready .hero.section-visible, .section-fade-ready .section.section-visible { opacity: 1; }
+@media (max-width: 700px) { .section-fade-ready .hero, .section-fade-ready .section { opacity: 0.8; transition-duration: 0.4s; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .section-fade-ready .hero, .section-fade-ready .section { opacity: 1; transition: none; } }
 .section-content { max-width: 760px; margin: 0 auto; width: 100%; }
 .section-content.wide { max-width: 1100px; }
@@ -372,6 +373,8 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 .btn-whatsapp { display: inline-flex; align-items: center; gap: 10px; padding: 15px 36px; background: var(--whatsapp); color: #fff; text-decoration: none; font-size: 15px; letter-spacing: 0.05em; font-family: 'Noto Sans SC', sans-serif; font-weight: 500; border-radius: 30px; transition: transform 0.15s, box-shadow 0.15s; box-shadow: 0 4px 16px rgba(37,211,102,0.35); }
 .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(37,211,102,0.45); }
 .btn-whatsapp svg { width: 20px; height: 20px; flex-shrink: 0; }
+.delivery-notice { margin: 2rem auto 0; max-width: 420px; color: var(--gold-light); font-family: 'Noto Sans SC', sans-serif; font-size: 15px; line-height: 1.8; }
+.btn-whatsapp[hidden], .whatsapp-float[hidden], .stock-cta[hidden], .delivery-notice[hidden], .cta-sub[hidden] { display: none !important; }
 
 /* FLOATING WHATSAPP BUTTON */
 .whatsapp-float {
@@ -905,11 +908,12 @@ footer { scroll-snap-align:end; scroll-snap-stop:always; position: relative; z-i
 <!-- CTA -->
 <div class="cta-section reveal">
   <div class="cta-title" data-zh="想了解更多？" data-tw="想了解更多？" data-en="Want to Know More?" data-ja="もっと知りたい方へ">想了解更多？</div>
-  <div class="cta-sub" data-zh="口味、份量、订购方式，直接 WhatsApp 我们" data-tw="口味、份量、訂購方式，直接 WhatsApp 我們" data-en="Flavors, portions, ordering — just message us on WhatsApp" data-ja="味、量、ご注文方法など、WhatsAppでお気軽にどうぞ">口味、份量、订购方式，直接 WhatsApp 我们</div>
-  <a href="https://wa.me/601133677951" target="_blank" rel="noopener" class="btn-whatsapp">
+  <div class="cta-sub" id="whatsappCtaSub" data-zh="口味、份量、订购方式，直接 WhatsApp 我们" data-tw="口味、份量、訂購方式，直接 WhatsApp 我們" data-en="Flavors, portions, ordering — just message us on WhatsApp" data-ja="味、量、ご注文方法など、WhatsAppでお気軽にどうぞ">口味、份量、订购方式，直接 WhatsApp 我们</div>
+  <a href="https://wa.me/601133677951" target="_blank" rel="noopener" class="btn-whatsapp" id="whatsappCta" hidden>
     <svg viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 004.74 1.21h.005c5.46 0 9.9-4.45 9.9-9.91C21.93 6.45 17.5 2 12.04 2zm5.83 14.07c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.6-2.91-1.26-4.81-4.2-4.96-4.4-.15-.19-1.18-1.57-1.18-3 0-1.43.75-2.13 1.02-2.42.27-.29.58-.36.78-.36.19 0 .39 0 .55.01.18.01.42-.07.65.5.24.58.82 2.01.89 2.15.07.15.12.32.02.51-.09.19-.14.31-.28.48-.14.16-.29.36-.42.48-.14.13-.28.28-.12.55.16.27.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.21 1.37.27.14.43.12.59-.07.16-.19.68-.79.87-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.27.14.44.2.51.31.07.12.07.66-.17 1.34z"/></svg>
     <span data-zh="WhatsApp 咨询" data-tw="WhatsApp 諮詢" data-en="Chat on WhatsApp" data-ja="WhatsAppで問い合わせる">WhatsApp 咨询</span>
   </a>
+  <div class="delivery-notice" id="deliveryNotice" hidden data-zh="目前暂不配送至东马及海外地区，敬请留意后续更新。" data-tw="目前暫不配送至東馬及海外地區，敬請留意後續更新。" data-en="Delivery is currently unavailable to East Malaysia and overseas. Please check back for updates." data-ja="現在、東マレーシアおよび海外への配送には対応しておりません。今後の更新をお待ちください。">目前暂不配送至东马及海外地区，敬请留意后续更新。</div>
   <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">↑</button>
 </div>
 
@@ -975,7 +979,6 @@ document.addEventListener('DOMContentLoaded', function() {
   document.documentElement.classList.add('section-fade-ready');
   var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
-      entry.target.classList.toggle('section-visible', entry.isIntersecting);
       if (entry.isIntersecting) {
         var idx = stops.indexOf(entry.target);
         if (idx !== -1) {
@@ -985,6 +988,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }, { threshold: 0.6 });
   stops.forEach(function(stop) { observer.observe(stop); });
+  var fadeObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      entry.target.classList.toggle('section-visible', entry.isIntersecting);
+    });
+  }, { threshold: window.matchMedia('(max-width: 700px)').matches ? 0.01 : 0.6 });
+  stops.forEach(function(stop) { fadeObserver.observe(stop); });
   setActive(0);
 
   // Language changes update section text in this page; refresh the navigation labels too.
@@ -1002,7 +1011,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div id="sectionProgress"></div>
 
 <!-- FLOATING WHATSAPP -->
-<a href="https://wa.me/601133677951" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
+<a href="https://wa.me/601133677951" target="_blank" rel="noopener" class="whatsapp-float" id="whatsappFloat" aria-label="WhatsApp" hidden>
   <svg viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 004.74 1.21h.005c5.46 0 9.9-4.45 9.9-9.91C21.93 6.45 17.5 2 12.04 2zm5.83 14.07c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.6-2.91-1.26-4.81-4.2-4.96-4.4-.15-.19-1.18-1.57-1.18-3 0-1.43.75-2.13 1.02-2.42.27-.29.58-.36.78-.36.19 0 .39 0 .55.01.18.01.42-.07.65.5.24.58.82 2.01.89 2.15.07.15.12.32.02.51-.09.19-.14.31-.28.48-.14.16-.29.36-.42.48-.14.13-.28.28-.12.55.16.27.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.21 1.37.27.14.43.12.59-.07.16-.19.68-.79.87-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.27.14.44.2.51.31.07.12.07.66-.17 1.34z"/></svg>
 </a>
 
@@ -1013,7 +1022,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div id="stockRows">
       <div class="stock-empty" data-zh="读取中…" data-tw="讀取中…" data-en="Loading…" data-ja="読み込み中…">读取中…</div>
     </div>
-    <a href="https://wa.me/601133677951" target="_blank" rel="noopener" class="stock-cta" data-zh="WhatsApp 下单咨询 →" data-tw="WhatsApp 下單諮詢 →" data-en="Order via WhatsApp →" data-ja="WhatsAppで注文する →">WhatsApp 下单咨询 →</a>
+    <a href="https://wa.me/601133677951" target="_blank" rel="noopener" class="stock-cta" data-geo-whatsapp hidden data-zh="WhatsApp 下单咨询 →" data-tw="WhatsApp 下單諮詢 →" data-en="Order via WhatsApp →" data-ja="WhatsAppで注文する →">WhatsApp 下单咨询 →</a>
   </div>
   <button class="stock-toggle" id="stockToggle" type="button">
     <span class="stock-toggle-dot"></span>
@@ -1085,6 +1094,34 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="footer-copy" data-zh="© 2026 玄猫御膳坊 · 玄猫之道出品" data-tw="© 2026 玄貓御膳坊 · 玄貓之道出品" data-en="© 2026 Tao of Cat Imperial Kitchen" data-ja="© 2026 玄猫御膳房 · 玄猫之道">© 2026 玄猫御膳坊 · 玄猫之道出品</div>
   <a href="/#cats" class="footer-back" data-zh="回到玄猫之道" data-tw="回到玄貓之道" data-en="Back to Tao of Cat" data-ja="玄猫之道に戻る">回到玄猫之道</a>
 </footer>
+
+<script>
+// GeoIP is used only to decide whether delivery is available; the location data is not stored.
+(function() {
+  var whatsappButtons = document.querySelectorAll('#whatsappCta, #whatsappFloat, [data-geo-whatsapp]');
+  var ctaSub = document.getElementById('whatsappCtaSub');
+  var deliveryNotice = document.getElementById('deliveryNotice');
+
+  function setDeliveryAvailability(isWestMalaysia) {
+    whatsappButtons.forEach(function(button) { button.hidden = !isWestMalaysia; });
+    ctaSub.hidden = !isWestMalaysia;
+    deliveryNotice.hidden = isWestMalaysia;
+  }
+
+  function isWestMalaysia(location) {
+    if (!location || location.country_code !== 'MY') return false;
+    var region = String(location.region_code || location.region || '').toLowerCase();
+    return !['12', '13', '15', 'sabah', 'sarawak', 'labuan'].some(function(eastMalaysia) {
+      return region === eastMalaysia || region.indexOf(eastMalaysia) !== -1;
+    });
+  }
+
+  fetch('https://ipapi.co/json/')
+    .then(function(response) { return response.ok ? response.json() : Promise.reject(); })
+    .then(function(location) { setDeliveryAvailability(isWestMalaysia(location)); })
+    .catch(function() { setDeliveryAvailability(false); });
+})();
+</script>
 
 <script>
 const navEl = document.getElementById('nav');
