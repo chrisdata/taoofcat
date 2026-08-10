@@ -345,7 +345,8 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 .price-tabs { display: flex; gap: 8px; margin-bottom: 12px; }
 .price-tab { font-size: 12px; font-family: 'Noto Sans SC', sans-serif; background: transparent; border: 1px solid rgba(184,134,11,0.3); color: var(--ink-light); padding: 6px 16px; border-radius: 20px; cursor: pointer; transition: all 0.2s; }
 .price-tab.active { background: var(--gold); border-color: var(--gold); color: #fff; }
-.pricing-list { display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-flow: column; grid-template-rows: repeat(4, auto); gap: 10px; overflow-x: auto; }
+.pricing-list { display: flex; gap: 10px; align-items: flex-start; }
+.pricing-col { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
 .pricing-card { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 6px; background: rgba(255,255,255,0.02); border: 1px solid rgba(184,134,11,0.18); border-radius: 12px; padding: 10px; transition: opacity 0.2s ease; }
 .pricing-card.unavailable { opacity: 0.55; }
 .pricing-card-ribbon { position: absolute; top: 0; right: 0; background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: #1a1610; font-size: 8px; font-weight: 800; letter-spacing: 0.02em; padding: 3px 9px; border-radius: 0 12px 0 10px; white-space: nowrap; font-family: 'Noto Sans SC', sans-serif; z-index: 2; }
@@ -361,11 +362,12 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 .pricing-card-status-label { font-size: 10px; color: var(--ink-faint); }
 .pricing-card-status-label.available { color: #7ed389; }
 .pricing-card-price { font-size: 14px; font-weight: 800; color: var(--gold); white-space: nowrap; flex-shrink: 0; }
-.pricing-empty { text-align: center; color: var(--ink-faint); font-size: 13px; padding: 1.5rem 0; grid-column: 1 / -1; }
+.pricing-empty { text-align: center; color: var(--ink-faint); font-size: 13px; padding: 1.5rem 0; width: 100%; }
 @media (max-width: 560px) {
   #priceWidget { bottom: 14px; }
   .price-panel { width: calc(100vw - 32px); bottom: 50px; }
-  .pricing-list { grid-template-columns: 1fr; grid-auto-flow: row; grid-template-rows: none; }
+  .pricing-list { flex-direction: column; }
+  .pricing-col { display: contents; }
 }
 
 /* SPEECH BUBBLE */
@@ -1093,7 +1095,8 @@ document.addEventListener('DOMContentLoaded', function() {
       wrap.innerHTML = `<div class="pricing-empty">${empty[lang] || empty.zh}</div>`;
       return;
     }
-    wrap.innerHTML = items.map(d => {
+
+    function cardHTML(d) {
       const available = d.active !== false;
       const name = esc(d['name_' + lang] || d.name_zh || '');
       const desc = esc(d['description_' + lang] || d.description_zh || '');
@@ -1119,7 +1122,16 @@ document.addEventListener('DOMContentLoaded', function() {
           <span class="pricing-card-status-label ${available ? 'available' : ''}">${statusLabel}</span>
         </div>
       </div>`;
-    }).join('');
+    }
+
+    // split evenly into two columns (left column gets the extra item when odd)
+    const mid = Math.ceil(items.length / 2);
+    const colA = items.slice(0, mid);
+    const colB = items.slice(mid);
+    wrap.innerHTML = `
+      <div class="pricing-col">${colA.map(cardHTML).join('')}</div>
+      <div class="pricing-col">${colB.map(cardHTML).join('')}</div>
+    `;
   }
 
   const q = query(collection(db, 'imperial_kitchen_pricing'), orderBy('order', 'asc'));
