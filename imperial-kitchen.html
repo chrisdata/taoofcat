@@ -145,6 +145,7 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 .hero-en { font-family: 'IM Fell English', serif; font-style: italic; font-size: clamp(13px, 2.2vw, 17px); color: rgba(255,255,255,0.6); letter-spacing: 0.06em; line-height: 1.6; margin-bottom: 24px; position: relative; }
 .hero-divider { width: 60px; height: 1px; background: linear-gradient(to right, transparent, var(--gold-light), transparent); margin: 0 auto 24px; position: relative; }
 .hero-tagline { font-size: clamp(15px, 2.4vw, 19px); color: rgba(255,255,255,0.85); line-height: 1.9; letter-spacing: 0.03em; max-width: 480px; position: relative; }
+.hero-badge { display: inline-block; margin-top: 14px; font-size: 11.5px; letter-spacing: 0.05em; color: var(--gold-light); background: rgba(212,168,67,0.1); border: 1px solid rgba(212,168,67,0.35); border-radius: 20px; padding: 6px 16px; position: relative; }
 
 /* SECTION */
 .section { width: 100%; padding: 3rem 2rem; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; background: var(--paper); scroll-snap-align: start; scroll-snap-stop: always; }
@@ -347,6 +348,7 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 .price-panel-close { background: transparent; border: none; color: var(--ink-faint); font-size: 20px; line-height: 1; cursor: pointer; padding: 2px 8px; }
 .price-panel-close:hover { color: var(--ink); }
 .price-tabs { display: flex; gap: 8px; margin-bottom: 12px; }
+.price-panel-note { font-size: 10.5px; color: var(--ink-faint); margin: -6px 0 12px; }
 .price-tab { font-size: 12px; font-family: 'Noto Sans SC', sans-serif; background: transparent; border: 1px solid rgba(184,134,11,0.3); color: var(--ink-light); padding: 6px 16px; border-radius: 20px; cursor: pointer; transition: all 0.2s; }
 .price-tab.active { background: var(--gold); border-color: var(--gold); color: #fff; }
 .pricing-list { display: flex; gap: 10px; align-items: flex-start; }
@@ -493,6 +495,7 @@ footer { scroll-snap-align:end; scroll-snap-stop:always; position: relative; z-i
   <div class="hero-en">Tao of Cat<br>Imperial Kitchen</div>
   <div class="hero-divider"></div>
   <div class="hero-tagline" data-zh="一碗好粮，熬给猫看的心意" data-tw="一碗好糧，熬給貓看的心意" data-en="A meal simmered with the same care you'd give family" data-ms="Semangkuk kasih, dimasak khas untuk kucing tersayang">一碗好粮，熬给猫看的心意</div>
+  <div class="hero-badge" data-zh="辅食包 · 搭配主食干粮食用 · 猫咪补水好帮手" data-tw="輔食包 · 搭配主食乾糧食用 · 貓咪補水好幫手" data-en="Complementary Topper · Pair with Dry Kibble · Great for Hydration" data-ms="Pek Tambahan · Gandingkan dengan Makanan Kering · Bantu Penghidratan">辅食包 · 搭配主食干粮食用 · 猫咪补水好帮手</div>
   <button class="scroll-down-hint" type="button" aria-label="Scroll down">
     <span data-zh="往下探索" data-tw="往下探索" data-en="Scroll to explore" data-ms="Terokai Lagi">往下探索</span>
     <span class="arrow">↓</span>
@@ -645,7 +648,7 @@ footer { scroll-snap-align:end; scroll-snap-stop:always; position: relative; z-i
       <div class="flavor-name" data-zh="鸡肉" data-tw="雞肉" data-en="Chicken" data-ms="Ayam">鸡肉</div>
       <div class="flavor-row">
         <span class="flavor-row-label" data-zh="✓ 好处" data-tw="✓ 好處" data-en="✓ Benefits" data-ms="✓ Kebaikan">✓ 好处</span>
-        <span data-zh="优质易消化蛋白质，脂肪含量低，适合日常主食。" data-tw="優質易消化蛋白質，脂肪含量低，適合日常主食。" data-en="Lean, easily digestible protein — a solid everyday staple." data-ms="Protein berkualiti tinggi yang mudah dihadam — pilihan harian yang kukuh.">优质易消化蛋白质，脂肪含量低，适合日常主食。</span>
+        <span data-zh="优质易消化蛋白质，脂肪含量低，日常搭配主食干粮刚刚好。" data-tw="優質易消化蛋白質，脂肪含量低，日常搭配主食乾糧剛剛好。" data-en="Lean, easily digestible protein — a great everyday pairing with dry kibble." data-ms="Protein berkualiti tinggi yang mudah dihadam — sesuai digandingkan dengan makanan kering harian.">优质易消化蛋白质，脂肪含量低，日常搭配主食干粮刚刚好。</span>
       </div>
       <div class="flavor-row caution">
         <span class="flavor-row-label" data-zh="⚠ 注意" data-tw="⚠ 注意" data-en="⚠ Caution" data-ms="⚠ Peringatan">⚠ 注意</span>
@@ -927,6 +930,7 @@ footer { scroll-snap-align:end; scroll-snap-stop:always; position: relative; z-i
   <div class="section-title" data-zh="预购须知" data-tw="預購須知" data-en="Good to Know" data-ms="Perkara Penting">预购须知</div>
   <div class="section-divider"></div>
   <div class="section-body">
+    <p data-zh="这是辅食包，不是主食——建议搭配主食干粮喂食，主要用途是帮猫咪补充水分、增添适口性，不建议长期单独作为唯一食物来源。" data-tw="這是輔食包，不是主食——建議搭配主食乾糧餵食，主要用途是幫貓咪補充水分、增添適口性，不建議長期單獨作為唯一食物來源。" data-en="This is a complementary topper, not a complete meal — best served alongside dry kibble as the main diet. It's meant to boost hydration and palatability, not to be your cat's sole long-term food source." data-ms="Ini ialah pek tambahan, bukan makanan utama — sebaiknya dihidangkan bersama makanan kering sebagai diet utama. Tujuannya untuk membantu penghidratan dan menambah selera makan, bukan sebagai sumber makanan tunggal jangka panjang.">这是辅食包，不是主食——建议搭配主食干粮喂食，主要用途是帮猫咪补充水分、增添适口性，不建议长期单独作为唯一食物来源。</p>
     <p data-zh="我们不是工厂，是小量预定——只做给真心想让猫咪试试看的猫奴。" data-tw="我們不是工廠，是小量預定——只做給真心想讓貓咪試試看的貓奴。" data-en="We're not a factory — this is small-batch, pre-order only, made for cat parents who genuinely want to give it a try." data-ms="Kami bukan kilang — ini pengeluaran kecil secara tempahan awal, khas untuk pemilik kucing yang benar-benar ingin mencuba.">我们不是工厂，是小量预定——只做给真心想让猫咪试试看的猫奴。</p>
     <p data-zh="食材会顺应本地市场与时节做调整，口味可能因批次略有不同。" data-tw="食材會順應本地市場與時節做調整，口味可能因批次略有不同。" data-en="Ingredients follow the local market and the season, so flavors may vary slightly from batch to batch." data-ms="Bahan-bahan mengikut pasaran tempatan dan musim, jadi perisa mungkin berbeza sedikit dari kelompok ke kelompok.">食材会顺应本地市场与时节做调整，口味可能因批次略有不同。</p>
     <p data-zh="目前暂时只接受马来西亚西马的订单与配送，东马及海外还没办法覆盖，请见谅。" data-tw="目前暫時只接受馬來西亞西馬的訂單與配送，東馬及海外還沒辦法覆蓋，請見諒。" data-en="For now, we only accept orders and deliver within Peninsular (West) Malaysia. East Malaysia and international orders aren't available yet — thank you for understanding." data-ms="Buat masa ini, kami hanya menerima tempahan dan menghantar dalam Semenanjung (Barat) Malaysia. Tempahan ke Malaysia Timur dan luar negara masih belum tersedia — terima kasih atas pengertian anda.">目前暂时只接受马来西亚西马的订单与配送，东马及海外还没办法覆盖，请见谅。</p>
@@ -1055,6 +1059,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <button class="price-tab active" data-cat="meat" data-zh="肉包" data-tw="肉包" data-en="Meat Pack" data-ms="Bungkusan Daging">肉包</button>
       <button class="price-tab" data-cat="soup" data-zh="汤包" data-tw="湯包" data-en="Soup Pack" data-ms="Bungkusan Sup">汤包</button>
     </div>
+    <div class="price-panel-note" data-zh="辅食包，建议搭配主食干粮喂食" data-tw="輔食包，建議搭配主食乾糧餵食" data-en="A complementary topper — best paired with dry kibble" data-ms="Pek tambahan — sebaiknya digandingkan dengan makanan kering">辅食包，建议搭配主食干粮喂食</div>
     <div id="pricingGrid" class="pricing-list">
       <div class="pricing-empty" data-zh="读取中…" data-tw="讀取中…" data-en="Loading…" data-ms="Memuatkan…">读取中…</div>
     </div>
