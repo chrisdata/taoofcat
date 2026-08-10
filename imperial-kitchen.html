@@ -349,6 +349,20 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 .gallery-caption-desc { display: block; font-size: 12px; color: var(--ink-faint); font-family: 'Noto Sans SC', sans-serif; font-weight: 300; line-height: 1.7; }
 .gallery-note { text-align: center; font-size: 13px; color: var(--ink-faint); font-family: 'Noto Sans SC', sans-serif; }
 
+/* PRICING TABLE */
+.price-tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 1.75rem; flex-wrap: wrap; }
+.price-tab { font-size: 12px; font-family: 'Noto Sans SC', sans-serif; background: transparent; border: 1px solid rgba(184,134,11,0.3); color: var(--ink-light); padding: 6px 18px; border-radius: 20px; cursor: pointer; transition: all 0.2s; }
+.price-tab.active { background: var(--gold); border-color: var(--gold); color: #fff; }
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 900px) { .pricing-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .pricing-grid { grid-template-columns: 1fr; } }
+.pricing-card { background: var(--paper); border: 1px solid rgba(184,134,11,0.22); border-radius: 14px; padding: 1.1rem 1.4rem; display: flex; align-items: center; justify-content: space-between; gap: 12px; transition: transform 0.2s ease, border-color 0.2s ease; }
+.pricing-card:hover { transform: translateY(-2px); border-color: rgba(184,134,11,0.4); }
+.pricing-card-name { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.pricing-card-weight { font-size: 12px; color: var(--ink-faint); font-family: 'Noto Sans SC', sans-serif; font-weight: 300; }
+.pricing-card-price { font-size: 20px; font-weight: 800; color: var(--gold); white-space: nowrap; }
+.pricing-empty { text-align: center; color: var(--ink-faint); font-size: 13px; grid-column: 1 / -1; padding: 2rem 0; }
+
 /* SPEECH BUBBLE */
 .speech-wrap { display: flex; align-items: flex-end; gap: 20px; max-width: 560px; margin: 2rem auto 0; }
 .speech-bubble { position: relative; flex: 1; background: #241d13; border: 1px solid rgba(212,168,67,0.35); border-radius: 16px; padding: 1.25rem 1.5rem; }
@@ -712,6 +726,30 @@ footer { scroll-snap-align:end; scroll-snap-stop:always; position: relative; z-i
   </div>
 
   <div class="gallery-note" style="margin-top:1.5rem;" data-zh="所有口味都以 Retort 工艺整包灭菌，不额外加防腐剂——上面这些「注意」，是给你的科普参考，不是说不能吃，而是提醒轮替、适量，跟人吃饭是一个道理。" data-tw="所有口味都以 Retort 工藝整包滅菌，不額外加防腐劑——上面這些「注意」，是給你的科普參考，不是說不能吃，而是提醒輪替、適量，跟人吃飯是一個道理。" data-en="Every flavor goes through the same Retort process — no added preservatives. These notes are here to inform, not to alarm: rotate flavors and feed in moderation, the same way we'd think about our own diet." data-ja="どの味も同じRetort工程で殺菌しており、防腐剤は加えていません。上記の「注意点」は不安を煽るためではなく、ローテーションと適量を心がけるための参考情報です——人の食事と同じ考え方です。">所有口味都以 Retort 工艺整包灭菌，不额外加防腐剂——上面这些「注意」，是给你的科普参考，不是说不能吃，而是提醒轮替、适量，跟人吃饭是一个道理。</div>
+  </div>
+<button class="scroll-down-hint" type="button" aria-label="Scroll down">
+  <span data-zh="往下探索" data-tw="往下探索" data-en="Scroll to explore" data-ja="もっと見る">往下探索</span>
+  <span class="arrow">↓</span>
+</button>
+</section>
+<!-- 口味与价目 -->
+<section class="section">
+  <div class="section-content wide">
+  <div class="section-label" data-zh="Price List" data-tw="Price List" data-en="Price List" data-ja="Price List">Price List</div>
+  <div class="section-title" data-zh="口味与价目" data-tw="口味與價目" data-en="Flavors & Pricing" data-ja="味と価格">口味与价目</div>
+  <div class="section-en" data-zh="每一份都用心熬煮，价目一目了然" data-tw="每一份都用心熬煮，價目一目了然" data-en="Every pack simmered with care — pricing at a glance" data-ja="一つひとつ丁寧に仕込んだ、わかりやすい価格表">每一份都用心熬煮，价目一目了然</div>
+  <div class="section-divider"></div>
+
+  <div class="price-tabs" id="priceTabs">
+    <button class="price-tab active" data-cat="meat" data-zh="肉包" data-tw="肉包" data-en="Meat Pack" data-ja="肉パック">肉包</button>
+    <button class="price-tab" data-cat="soup" data-zh="汤包" data-tw="湯包" data-en="Soup Pack" data-ja="スープパック">汤包</button>
+  </div>
+
+  <div id="pricingGrid" class="pricing-grid">
+    <div class="pricing-empty" data-zh="读取中…" data-tw="讀取中…" data-en="Loading…" data-ja="読み込み中…">读取中…</div>
+  </div>
+
+  <div class="gallery-note" style="margin-top:1.5rem;" data-zh="价格与库存以 WhatsApp 咨询实际回复为准，节庆或食材成本波动时可能调整。" data-tw="價格與庫存以 WhatsApp 諮詢實際回覆為準，節慶或食材成本波動時可能調整。" data-en="Prices and availability are confirmed via WhatsApp — they may shift with seasonal ingredient costs." data-ja="価格と在庫はWhatsAppでのご確認が最終基準となります。季節や食材コストにより変動する場合があります。">价格与库存以 WhatsApp 咨询实际回复为准，节庆或食材成本波动时可能调整。</div>
   </div>
 <button class="scroll-down-hint" type="button" aria-label="Scroll down">
   <span data-zh="往下探索" data-tw="往下探索" data-en="Scroll to explore" data-ja="もっと見る">往下探索</span>
@@ -1087,6 +1125,76 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!widget.contains(e.target)) {
       document.getElementById('stockPanel').classList.remove('open');
     }
+  });
+</script>
+
+<!-- PRICING TABLE -->
+<script type="module">
+  import { initializeApp, getApps, getApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getFirestore, collection, query, orderBy, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAqu9pHaAEjFqPvPz3TuoYc60Lpb4DLZrs",
+    authDomain: "taoofcat-6cf6e.firebaseapp.com",
+    projectId: "taoofcat-6cf6e",
+    storageBucket: "taoofcat-6cf6e.firebasestorage.app",
+    messagingSenderId: "1088808296707",
+    appId: "1:1088808296707:web:ce9b54ba34d395681bc936"
+  };
+  const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  function currentLang() {
+    return localStorage.getItem('taoc_lang') || 'zh';
+  }
+
+  let latestPricing = [];
+  let activeCat = 'meat';
+
+  function renderPricing() {
+    const wrap = document.getElementById('pricingGrid');
+    const lang = currentLang();
+    const empty = { zh: '暂时没有价目资料，请稍后再来看看', tw: '暫時沒有價目資料，請稍後再來看看', en: 'No pricing available right now — check back soon', ja: '現在価格情報はありません。しばらくしてからご確認ください' };
+    const items = latestPricing.filter(d => d.active !== false && (d.category || 'meat') === activeCat);
+    if (items.length === 0) {
+      wrap.innerHTML = `<div class="pricing-empty">${empty[lang] || empty.zh}</div>`;
+      return;
+    }
+    wrap.innerHTML = items.map(d => {
+      const name = d['name_' + lang] || d.name_zh || '';
+      const weight = d.weight || '';
+      const price = (typeof d.price === 'number') ? `RM${d.price % 1 === 0 ? d.price : d.price.toFixed(2)}` : '';
+      return `<div class="pricing-card">
+        <div>
+          <div class="pricing-card-name">${name}</div>
+          <div class="pricing-card-weight">${weight}</div>
+        </div>
+        <div class="pricing-card-price">${price}</div>
+      </div>`;
+    }).join('');
+  }
+
+  const q = query(collection(db, 'imperial_kitchen_pricing'), orderBy('order', 'asc'));
+  onSnapshot(q, (snap) => {
+    latestPricing = snap.docs.map(d => d.data());
+    renderPricing();
+  }, (err) => {
+    console.error('pricing widget error', err);
+    document.getElementById('pricingGrid').innerHTML = '<div class="pricing-empty">—</div>';
+  });
+
+  document.querySelectorAll('.price-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.price-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      activeCat = tab.dataset.cat;
+      renderPricing();
+    });
+  });
+
+  // re-render when language switcher changes
+  document.querySelectorAll('.lang-opt').forEach(btn => {
+    btn.addEventListener('click', () => setTimeout(renderPricing, 50));
   });
 </script>
 

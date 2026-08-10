@@ -33,8 +33,16 @@ body { font-family: 'Noto Sans SC', sans-serif; background: var(--paper); color:
 .dash-user { font-size: 13px; color: var(--ink-faint); display: flex; align-items: center; gap: 12px; }
 .btn-signout { background: transparent; border: 1px solid rgba(244,237,224,0.25); color: var(--ink-light); padding: 6px 14px; border-radius: 20px; font-size: 12px; cursor: pointer; }
 
+.admin-tabs { display: flex; gap: 8px; margin-bottom: 1.5rem; }
+.admin-tab { font-size: 13px; background: transparent; border: 1px solid rgba(212,168,67,0.3); color: var(--ink-light); padding: 8px 20px; border-radius: 20px; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+.admin-tab.active { background: var(--gold); border-color: var(--gold); color: #1a1610; font-weight: 500; }
+.admin-panel { display: none; }
+.admin-panel.active { display: block; }
+
 .item-card { background: #241d13; border: 1px solid rgba(212,168,67,0.25); border-radius: 14px; padding: 1.25rem 1.5rem; margin-bottom: 14px; }
 .item-card.inactive { opacity: 0.5; }
+select.pricing-cat { width: 100%; background: #1a1610; border: 1px solid rgba(244,237,224,0.15); color: var(--ink); padding: 8px 10px; border-radius: 6px; font-size: 13px; font-family: inherit; }
+select.pricing-cat:focus { outline: none; border-color: var(--gold); }
 .field-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 10px; }
 .field-grid.qty { grid-template-columns: repeat(4, 1fr); }
 @media (max-width: 700px) { .field-grid { grid-template-columns: 1fr 1fr; } }
@@ -79,15 +87,34 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
     </div>
   </div>
 
-  <div class="hint">
-    在这里加/改/删「现在可订购」的口味，网页右下角的浮动小窗口会实时同步更新，不用改代码、不用重新部署。<br>
-    每个口味 4 个语言的名称和库存说明都要填（没有繁体/英文/日文可以先跟简体一样，之后再慢慢补）。「排序」数字越小排越前面。取消勾选「上架显示」可以先隐藏、不删除。
+  <div class="admin-tabs">
+    <button class="admin-tab active" data-panel="stock">库存管理</button>
+    <button class="admin-tab" data-panel="pricing">价目表管理</button>
   </div>
 
-  <div id="itemsList"></div>
+  <div id="panel-stock" class="admin-panel active">
+    <div class="hint">
+      在这里加/改/删「现在可订购」的口味，网页右下角的浮动小窗口会实时同步更新，不用改代码、不用重新部署。<br>
+      每个口味 4 个语言的名称和库存说明都要填（没有繁体/英文/日文可以先跟简体一样，之后再慢慢补）。「排序」数字越小排越前面。取消勾选「上架显示」可以先隐藏、不删除。
+    </div>
 
-  <button class="add-new-btn" id="btnAddNew">+ 新增一款口味</button>
-  <div id="emptyState" style="display:none;">目前还没有任何口味，点上面「新增一款口味」开始加。</div>
+    <div id="itemsList"></div>
+
+    <button class="add-new-btn" id="btnAddNew">+ 新增一款口味</button>
+    <div id="emptyState" style="display:none;">目前还没有任何口味，点上面「新增一款口味」开始加。</div>
+  </div>
+
+  <div id="panel-pricing" class="admin-panel">
+    <div class="hint">
+      在这里加/改/删价目表上的项目，网页价目表 section 会实时同步更新，不用改代码、不用重新部署。<br>
+      「分类」决定这个项目显示在肉包还是汤包底下。「排序」数字越小排越前面。取消勾选「上架显示」可以先隐藏、不删除。
+    </div>
+
+    <div id="pricingList"></div>
+
+    <button class="add-new-btn" id="btnAddPricing">+ 新增一个价目</button>
+    <div id="pricingEmptyState" style="display:none;">目前还没有任何价目项目，点上面「新增一个价目」开始加。</div>
+  </div>
 </div>
 
 <script type="module">
@@ -120,6 +147,7 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
       document.getElementById('loginWall').style.display = 'flex';
       document.getElementById('dashboard').style.display = 'none';
       if (unsub) { unsub(); unsub = null; }
+      if (unsubPricing) { unsubPricing(); unsubPricing = null; }
       return;
     }
     if (user.email !== ADMIN_EMAIL) {
@@ -238,6 +266,135 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
       btn.disabled = false;
       btn.textContent = '+ 新增一款口味';
     }
+  };
+
+  // ===== TAB SWITCHING =====
+  document.querySelectorAll('.admin-tab').forEach(tab => {
+    tab.onclick = () => {
+      document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+    };
+  });
+
+  // ===== PRICING MANAGEMENT =====
+  const COL_PRICING = 'imperial_kitchen_pricing';
+  let unsubPricing = null;
+
+  function pricingCardHTML(id, d) {
+    const active = d.active !== false;
+    const cat = d.category || 'meat';
+    return `
+    <div class="item-card ${active ? '' : 'inactive'}" data-id="${id}">
+      <div class="field-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+        <div>
+          <label>分类</label>
+          <select class="pricing-cat" data-f="category">
+            <option value="meat" ${cat === 'meat' ? 'selected' : ''}>肉包 Meat pack</option>
+            <option value="soup" ${cat === 'soup' ? 'selected' : ''}>汤包 Soup pack</option>
+          </select>
+        </div>
+        <div><label>规格重量</label><input type="text" data-f="weight" value="${esc(d.weight)}" placeholder="例：80g"></div>
+        <div><label>价格 RM</label><input type="number" data-f="price" value="${d.price ?? 0}" step="0.01"></div>
+      </div>
+      <div class="field-grid">
+        <div><label>名称 · 简体</label><input type="text" data-f="name_zh" value="${esc(d.name_zh)}"></div>
+        <div><label>名称 · 繁體</label><input type="text" data-f="name_tw" value="${esc(d.name_tw)}"></div>
+        <div><label>Name · EN</label><input type="text" data-f="name_en" value="${esc(d.name_en)}"></div>
+        <div><label>名前 · 日本語</label><input type="text" data-f="name_ja" value="${esc(d.name_ja)}"></div>
+      </div>
+      <div class="field-grid" style="grid-template-columns:120px 1fr;">
+        <div><label>排序</label><input type="number" data-f="order" value="${d.order ?? 0}"></div>
+      </div>
+      <div class="row-controls">
+        <label class="toggle-active">
+          <input type="checkbox" data-f="active" ${active ? 'checked' : ''}> 上架显示
+        </label>
+        <div class="btns">
+          <span class="save-status" data-role="status">已保存 ✓</span>
+          <button class="action btn-save" data-role="save">保存</button>
+          <button class="action btn-delete" data-role="delete">删除</button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function bindPricingCard(cardEl, id) {
+    cardEl.querySelector('[data-role="save"]').onclick = async () => {
+      const data = { order: 0 };
+      cardEl.querySelectorAll('[data-f]').forEach(el => {
+        const key = el.dataset.f;
+        if (el.type === 'checkbox') data[key] = el.checked;
+        else if (el.type === 'number') data[key] = Number(el.value) || 0;
+        else data[key] = el.value.trim();
+      });
+      data.updated_at = serverTimestamp();
+      try {
+        await setDoc(doc(db, COL_PRICING, id), data, { merge: true });
+        const status = cardEl.querySelector('[data-role="status"]');
+        status.classList.add('show');
+        setTimeout(() => status.classList.remove('show'), 1500);
+        cardEl.classList.toggle('inactive', !data.active);
+      } catch (err) {
+        console.error('保存失败:', err);
+        alert('保存失败：' + err.code + '\n' + err.message);
+      }
+    };
+    cardEl.querySelector('[data-role="delete"]').onclick = async () => {
+      if (!confirm('确定要删除这个价目项目吗？这个动作不能复原。')) return;
+      try {
+        await deleteDoc(doc(db, COL_PRICING, id));
+      } catch (err) {
+        console.error('删除失败:', err);
+        alert('删除失败：' + err.code + '\n' + err.message);
+      }
+    };
+  }
+
+  function startListeningPricing() {
+    const q = query(collection(db, COL_PRICING), orderBy('order', 'asc'));
+    unsubPricing = onSnapshot(q, (snap) => {
+      const list = document.getElementById('pricingList');
+      const empty = document.getElementById('pricingEmptyState');
+      if (snap.empty) {
+        list.innerHTML = '';
+        empty.style.display = 'block';
+        return;
+      }
+      empty.style.display = 'none';
+      list.innerHTML = snap.docs.map(d => pricingCardHTML(d.id, d.data())).join('');
+      snap.docs.forEach(d => bindPricingCard(list.querySelector(`[data-id="${d.id}"]`), d.id));
+    }, (err) => {
+      console.error('读取失败:', err);
+      alert('读取价目表失败：' + err.code + '\n' + err.message + '\n\n请检查 Firestore Rules 是否已经设置好。');
+    });
+  }
+
+  document.getElementById('btnAddPricing').onclick = async () => {
+    const btn = document.getElementById('btnAddPricing');
+    btn.disabled = true;
+    btn.textContent = '新增中…';
+    try {
+      await addDoc(collection(db, COL_PRICING), {
+        category: 'meat', weight: '80g', price: 0,
+        name_zh: '新项目', name_tw: '新項目', name_en: 'New Item', name_ja: '新しい項目',
+        order: 99, active: true, created_at: serverTimestamp()
+      });
+    } catch (err) {
+      console.error('新增失败:', err);
+      alert('新增失败：' + err.code + '\n' + err.message + '\n\n请检查 Firestore Rules 是否已经加好、Firestore 数据库是否已经建立。');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = '+ 新增一个价目';
+    }
+  };
+
+  // start pricing listener alongside stock listener once the admin is authenticated
+  const _origStartListening = startListening;
+  startListening = function() {
+    _origStartListening();
+    startListeningPricing();
   };
 </script>
 
