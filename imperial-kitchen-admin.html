@@ -35,6 +35,7 @@ body { font-family: 'Noto Sans SC', sans-serif; background: var(--paper); color:
 
 .item-card { background: #241d13; border: 1px solid rgba(212,168,67,0.25); border-radius: 14px; padding: 1.25rem 1.5rem; margin-bottom: 14px; }
 .item-card.inactive { opacity: 0.5; }
+.item-card.hidden-product { border-color: rgba(91,155,213,0.5); opacity: 0.4; }
 select.pricing-cat { width: 100%; background: #1a1610; border: 1px solid rgba(244,237,224,0.15); color: var(--ink); padding: 8px 10px; border-radius: 6px; font-size: 13px; font-family: inherit; }
 select.pricing-cat:focus { outline: none; border-color: var(--gold); }
 .field-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 10px; }
@@ -51,6 +52,7 @@ input[type=text]:focus, input[type=number]:focus { outline: none; border-color: 
 .toggle-active input:checked ~ .toggle-active-dot { background: var(--green); box-shadow: 0 0 6px rgba(76,175,80,0.65); }
 .toggle-limited input:checked ~ .toggle-active-dot { background: var(--gold); box-shadow: 0 0 6px rgba(212,168,67,0.65); }
 .toggle-lowstock input:checked ~ .toggle-active-dot { background: #e05a4e; box-shadow: 0 0 6px rgba(224,90,78,0.65); }
+.toggle-visible input:checked ~ .toggle-active-dot { background: #5b9bd5; box-shadow: 0 0 6px rgba(91,155,213,0.65); }
 .badge-toggles { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 10px; }
 .btns { display: flex; gap: 8px; }
 button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 12px; cursor: pointer; font-family: inherit; }
@@ -89,7 +91,8 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
     在这里加/改/删价目表上的口味，网页悬浮的「口味与价目」窗口会实时同步更新，不用改代码、不用重新部署。<br>
     「分类」决定这个项目显示在肉包还是汤包底下。「排序」数字越小排越前面。<br>
     右下角的<strong>绿灯开关</strong>就是库存状态：亮灯 = 现在可订购，网页上会显示绿点 + Available；不亮 = 制作中，网页上仍会显示这个口味，但会显示 Crafting 并变暗——不用刻意删除项目，缺货时关灯、回货时开灯即可。<br>
-    上面的两个<strong>金色/橘红色开关</strong>控制卡片右上角的角标：「限时特别制作」和「小量供应」，两个都可以单独开，也可以同时开，不需要就都关掉。
+    上面的两个<strong>金色/橘红色开关</strong>控制卡片右上角的角标：「限时特别制作」和「小量供应」，两个都可以单独开，也可以同时开，不需要就都关掉。<br>
+    最左边的<strong>蓝色开关「显示此产品」</strong>决定这个口味要不要出现在前台价目表——关掉之后网页上完全看不到这个项目（比库存灯更彻底），适合还没准备好公开、或暂时下架的口味，不用删除资料，之后随时可以重新打开。
   </div>
 
   <div id="pricingList"></div>
@@ -148,9 +151,10 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
 
   function pricingCardHTML(id, d) {
     const active = d.active !== false;
+    const visible = d.visible !== false;
     const cat = d.category || 'meat';
     return `
-    <div class="item-card ${active ? '' : 'inactive'}" data-id="${id}">
+    <div class="item-card ${active ? '' : 'inactive'} ${visible ? '' : 'hidden-product'}" data-id="${id}">
       <div class="field-grid" style="grid-template-columns: 1fr 1fr 1fr;">
         <div>
           <label>分类</label>
@@ -184,6 +188,11 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
         <div><label>排序</label><input type="number" data-f="order" value="${d.order ?? 0}"></div>
       </div>
       <div class="badge-toggles">
+        <label class="toggle-active toggle-visible">
+          <input type="checkbox" data-f="visible" ${d.visible !== false ? 'checked' : ''} style="display:none;">
+          <span class="toggle-active-dot"></span>
+          显示此产品（前台是否显示）
+        </label>
         <label class="toggle-active toggle-limited">
           <input type="checkbox" data-f="limited" ${d.limited ? 'checked' : ''} style="display:none;">
           <span class="toggle-active-dot"></span>
@@ -226,6 +235,7 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
         status.classList.add('show');
         setTimeout(() => status.classList.remove('show'), 1500);
         cardEl.classList.toggle('inactive', !data.active);
+        cardEl.classList.toggle('hidden-product', !data.visible);
       } catch (err) {
         console.error('保存失败:', err);
         alert('保存失败：' + err.code + '\n' + err.message);
@@ -270,7 +280,7 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
         category: 'meat', weight: '80g', price: 0, image: '',
         name_zh: '新口味', name_tw: '新口味', name_en: 'New Flavor', name_ms: 'Perisa Baharu',
         description_zh: '', description_tw: '', description_en: '', description_ms: '',
-        order: 99, active: true, limited: false, lowStock: false, created_at: serverTimestamp()
+        order: 99, active: true, visible: true, limited: false, lowStock: false, created_at: serverTimestamp()
       });
     } catch (err) {
       console.error('新增失败:', err);
