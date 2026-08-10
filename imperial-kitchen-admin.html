@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>御膳坊库存后台 · 玄猫之道</title>
+<title>御膳坊价目表后台 · 玄猫之道</title>
 <meta name="robots" content="noindex, nofollow">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -33,18 +33,11 @@ body { font-family: 'Noto Sans SC', sans-serif; background: var(--paper); color:
 .dash-user { font-size: 13px; color: var(--ink-faint); display: flex; align-items: center; gap: 12px; }
 .btn-signout { background: transparent; border: 1px solid rgba(244,237,224,0.25); color: var(--ink-light); padding: 6px 14px; border-radius: 20px; font-size: 12px; cursor: pointer; }
 
-.admin-tabs { display: flex; gap: 8px; margin-bottom: 1.5rem; }
-.admin-tab { font-size: 13px; background: transparent; border: 1px solid rgba(212,168,67,0.3); color: var(--ink-light); padding: 8px 20px; border-radius: 20px; cursor: pointer; font-family: inherit; transition: all 0.2s; }
-.admin-tab.active { background: var(--gold); border-color: var(--gold); color: #1a1610; font-weight: 500; }
-.admin-panel { display: none; }
-.admin-panel.active { display: block; }
-
 .item-card { background: #241d13; border: 1px solid rgba(212,168,67,0.25); border-radius: 14px; padding: 1.25rem 1.5rem; margin-bottom: 14px; }
 .item-card.inactive { opacity: 0.5; }
 select.pricing-cat { width: 100%; background: #1a1610; border: 1px solid rgba(244,237,224,0.15); color: var(--ink); padding: 8px 10px; border-radius: 6px; font-size: 13px; font-family: inherit; }
 select.pricing-cat:focus { outline: none; border-color: var(--gold); }
 .field-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 10px; }
-.field-grid.qty { grid-template-columns: repeat(4, 1fr); }
 @media (max-width: 700px) { .field-grid { grid-template-columns: 1fr 1fr; } }
 label { display: block; font-size: 10px; color: var(--ink-faint); letter-spacing: 0.05em; margin-bottom: 4px; text-transform: uppercase; }
 input[type=text], input[type=number] {
@@ -54,6 +47,8 @@ input[type=text], input[type=number] {
 input[type=text]:focus, input[type=number]:focus { outline: none; border-color: var(--gold); }
 .row-controls { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; gap: 10px; flex-wrap: wrap; }
 .toggle-active { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-light); cursor: pointer; }
+.toggle-active-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(244,237,224,0.2); flex-shrink: 0; transition: background 0.2s, box-shadow 0.2s; }
+.toggle-active input:checked ~ .toggle-active-dot { background: var(--green); box-shadow: 0 0 6px rgba(76,175,80,0.65); }
 .btns { display: flex; gap: 8px; }
 button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 12px; cursor: pointer; font-family: inherit; }
 .btn-save { background: var(--green); color: #fff; }
@@ -67,54 +62,36 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
 .add-new-btn:hover { background: rgba(212,168,67,0.06); }
 
 .hint { font-size: 12px; color: var(--ink-faint); line-height: 1.8; margin-bottom: 1.5rem; background: rgba(212,168,67,0.06); border: 1px solid rgba(212,168,67,0.2); border-radius: 10px; padding: 1rem 1.25rem; }
-#emptyState { text-align: center; color: var(--ink-faint); padding: 3rem 0; font-size: 13px; }
+#pricingEmptyState { text-align: center; color: var(--ink-faint); padding: 3rem 0; font-size: 13px; }
 </style>
 </head>
 <body>
 
 <div id="loginWall">
-  <h1>玄猫御膳坊 · 库存后台</h1>
+  <h1>玄猫御膳坊 · 价目表后台</h1>
   <button class="btn-google" id="btnLogin">用 Google 帐号登入</button>
   <div id="deniedMsg">这个帐号没有权限访问，请用管理员帐号登入。</div>
 </div>
 
 <div id="dashboard">
   <div class="dash-header">
-    <div class="dash-title">🐾 御膳坊库存管理</div>
+    <div class="dash-title">🐾 御膳坊价目表管理</div>
     <div class="dash-user">
       <span id="adminName"></span>
       <button class="btn-signout" id="btnSignout">登出</button>
     </div>
   </div>
 
-  <div class="admin-tabs">
-    <button class="admin-tab active" data-panel="stock">库存管理</button>
-    <button class="admin-tab" data-panel="pricing">价目表管理</button>
+  <div class="hint">
+    在这里加/改/删价目表上的口味，网页悬浮的「口味与价目」窗口会实时同步更新，不用改代码、不用重新部署。<br>
+    「分类」决定这个项目显示在肉包还是汤包底下。「排序」数字越小排越前面。<br>
+    右下角的<strong>绿灯开关</strong>就是库存状态：亮灯 = 现在可订购，网页上会显示绿点 + Available；不亮 = 补货中/缺货，网页上仍会显示这个口味，但会显示 Out of Stock 并变暗——不用刻意删除项目，缺货时关灯、回货时开灯即可。
   </div>
 
-  <div id="panel-stock" class="admin-panel active">
-    <div class="hint">
-      在这里加/改/删「现在可订购」的口味，网页右下角的浮动小窗口会实时同步更新，不用改代码、不用重新部署。<br>
-      每个口味 4 个语言的名称和库存说明都要填（没有繁体/英文/日文可以先跟简体一样，之后再慢慢补）。「排序」数字越小排越前面。取消勾选「上架显示」可以先隐藏、不删除。
-    </div>
+  <div id="pricingList"></div>
 
-    <div id="itemsList"></div>
-
-    <button class="add-new-btn" id="btnAddNew">+ 新增一款口味</button>
-    <div id="emptyState" style="display:none;">目前还没有任何口味，点上面「新增一款口味」开始加。</div>
-  </div>
-
-  <div id="panel-pricing" class="admin-panel">
-    <div class="hint">
-      在这里加/改/删价目表上的项目，网页价目表 section 会实时同步更新，不用改代码、不用重新部署。<br>
-      「分类」决定这个项目显示在肉包还是汤包底下。「排序」数字越小排越前面。取消勾选「上架显示」可以先隐藏、不删除。
-    </div>
-
-    <div id="pricingList"></div>
-
-    <button class="add-new-btn" id="btnAddPricing">+ 新增一个价目</button>
-    <div id="pricingEmptyState" style="display:none;">目前还没有任何价目项目，点上面「新增一个价目」开始加。</div>
-  </div>
+  <button class="add-new-btn" id="btnAddPricing">+ 新增一个口味</button>
+  <div id="pricingEmptyState" style="display:none;">目前还没有任何口味，点上面「新增一个口味」开始加。</div>
 </div>
 
 <script type="module">
@@ -135,18 +112,17 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
   const auth = getAuth(app);
   const db = getFirestore(app);
   const provider = new GoogleAuthProvider();
-  const COL = 'imperial_kitchen_stock';
+  const COL_PRICING = 'imperial_kitchen_pricing';
 
   document.getElementById('btnLogin').onclick = () => signInWithPopup(auth, provider).catch(console.error);
   document.getElementById('btnSignout').onclick = () => signOut(auth);
 
-  let unsub = null;
+  let unsubPricing = null;
 
   onAuthStateChanged(auth, (user) => {
     if (!user) {
       document.getElementById('loginWall').style.display = 'flex';
       document.getElementById('dashboard').style.display = 'none';
-      if (unsub) { unsub(); unsub = null; }
       if (unsubPricing) { unsubPricing(); unsubPricing = null; }
       return;
     }
@@ -159,128 +135,12 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
     document.getElementById('loginWall').style.display = 'none';
     document.getElementById('dashboard').style.display = 'block';
     document.getElementById('adminName').textContent = user.displayName || user.email;
-    startListening();
+    startListeningPricing();
   });
 
   function esc(s) {
     return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
-
-  function itemCardHTML(id, d) {
-    const active = d.active !== false;
-    return `
-    <div class="item-card ${active ? '' : 'inactive'}" data-id="${id}">
-      <div class="field-grid">
-        <div><label>名称 · 简体</label><input type="text" data-f="name_zh" value="${esc(d.name_zh)}"></div>
-        <div><label>名称 · 繁體</label><input type="text" data-f="name_tw" value="${esc(d.name_tw)}"></div>
-        <div><label>Name · EN</label><input type="text" data-f="name_en" value="${esc(d.name_en)}"></div>
-        <div><label>Nama · Bahasa Melayu</label><input type="text" data-f="name_ms" value="${esc(d.name_ms)}"></div>
-      </div>
-      <div class="field-grid qty">
-        <div><label>库存说明 · 简体</label><input type="text" data-f="qty_zh" value="${esc(d.qty_zh)}" placeholder="例：现货 / 剩5包"></div>
-        <div><label>庫存說明 · 繁體</label><input type="text" data-f="qty_tw" value="${esc(d.qty_tw)}"></div>
-        <div><label>Stock · EN</label><input type="text" data-f="qty_en" value="${esc(d.qty_en)}"></div>
-        <div><label>Stok · Bahasa Melayu</label><input type="text" data-f="qty_ms" value="${esc(d.qty_ms)}"></div>
-      </div>
-      <div class="field-grid" style="grid-template-columns:120px 1fr;">
-        <div><label>排序</label><input type="number" data-f="order" value="${d.order ?? 0}"></div>
-      </div>
-      <div class="row-controls">
-        <label class="toggle-active">
-          <input type="checkbox" data-f="active" ${active ? 'checked' : ''}> 上架显示
-        </label>
-        <div class="btns">
-          <span class="save-status" data-role="status">已保存 ✓</span>
-          <button class="action btn-save" data-role="save">保存</button>
-          <button class="action btn-delete" data-role="delete">删除</button>
-        </div>
-      </div>
-    </div>`;
-  }
-
-  function bindCard(cardEl, id) {
-    cardEl.querySelector('[data-role="save"]').onclick = async () => {
-      const data = { order: 0 };
-      cardEl.querySelectorAll('[data-f]').forEach(el => {
-        const key = el.dataset.f;
-        if (el.type === 'checkbox') data[key] = el.checked;
-        else if (el.type === 'number') data[key] = Number(el.value) || 0;
-        else data[key] = el.value.trim();
-      });
-      data.updated_at = serverTimestamp();
-      try {
-        await setDoc(doc(db, COL, id), data, { merge: true });
-        const status = cardEl.querySelector('[data-role="status"]');
-        status.classList.add('show');
-        setTimeout(() => status.classList.remove('show'), 1500);
-        cardEl.classList.toggle('inactive', !data.active);
-      } catch (err) {
-        console.error('保存失败:', err);
-        alert('保存失败：' + err.code + '\n' + err.message);
-      }
-    };
-    cardEl.querySelector('[data-role="delete"]').onclick = async () => {
-      if (!confirm('确定要删除这个口味吗？这个动作不能复原。')) return;
-      try {
-        await deleteDoc(doc(db, COL, id));
-      } catch (err) {
-        console.error('删除失败:', err);
-        alert('删除失败：' + err.code + '\n' + err.message);
-      }
-    };
-  }
-
-  function startListening() {
-    const q = query(collection(db, COL), orderBy('order', 'asc'));
-    unsub = onSnapshot(q, (snap) => {
-      const list = document.getElementById('itemsList');
-      const empty = document.getElementById('emptyState');
-      if (snap.empty) {
-        list.innerHTML = '';
-        empty.style.display = 'block';
-        return;
-      }
-      empty.style.display = 'none';
-      list.innerHTML = snap.docs.map(d => itemCardHTML(d.id, d.data())).join('');
-      snap.docs.forEach(d => bindCard(list.querySelector(`[data-id="${d.id}"]`), d.id));
-    }, (err) => {
-      console.error('读取失败:', err);
-      alert('读取库存列表失败：' + err.code + '\n' + err.message + '\n\n请检查 Firestore Rules 是否已经设置好。');
-    });
-  }
-
-  document.getElementById('btnAddNew').onclick = async () => {
-    const btn = document.getElementById('btnAddNew');
-    btn.disabled = true;
-    btn.textContent = '新增中…';
-    try {
-      await addDoc(collection(db, COL), {
-        name_zh: '新口味', name_tw: '新口味', name_en: 'New Flavor', name_ms: 'Perisa Baharu',
-        qty_zh: '现货', qty_tw: '現貨', qty_en: 'In stock', qty_ms: 'Ada stok',
-        order: 99, active: true, created_at: serverTimestamp()
-      });
-    } catch (err) {
-      console.error('新增失败:', err);
-      alert('新增失败：' + err.code + '\n' + err.message + '\n\n请检查 Firestore Rules 是否已经加好、Firestore 数据库是否已经建立。');
-    } finally {
-      btn.disabled = false;
-      btn.textContent = '+ 新增一款口味';
-    }
-  };
-
-  // ===== TAB SWITCHING =====
-  document.querySelectorAll('.admin-tab').forEach(tab => {
-    tab.onclick = () => {
-      document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
-      tab.classList.add('active');
-      document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
-    };
-  });
-
-  // ===== PRICING MANAGEMENT =====
-  const COL_PRICING = 'imperial_kitchen_pricing';
-  let unsubPricing = null;
 
   function pricingCardHTML(id, d) {
     const active = d.active !== false;
@@ -321,7 +181,9 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
       </div>
       <div class="row-controls">
         <label class="toggle-active">
-          <input type="checkbox" data-f="active" ${active ? 'checked' : ''}> 上架显示
+          <input type="checkbox" data-f="active" ${active ? 'checked' : ''} style="display:none;">
+          <span class="toggle-active-dot"></span>
+          现在可订购（绿灯 = 现货，不亮 = 缺货）
         </label>
         <div class="btns">
           <span class="save-status" data-role="status">已保存 ✓</span>
@@ -354,7 +216,7 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
       }
     };
     cardEl.querySelector('[data-role="delete"]').onclick = async () => {
-      if (!confirm('确定要删除这个价目项目吗？这个动作不能复原。')) return;
+      if (!confirm('确定要删除这个口味吗？这个动作不能复原。')) return;
       try {
         await deleteDoc(doc(db, COL_PRICING, id));
       } catch (err) {
@@ -390,7 +252,7 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
     try {
       await addDoc(collection(db, COL_PRICING), {
         category: 'meat', weight: '80g', price: 0, image: '',
-        name_zh: '新项目', name_tw: '新項目', name_en: 'New Item', name_ms: 'Item Baharu',
+        name_zh: '新口味', name_tw: '新口味', name_en: 'New Flavor', name_ms: 'Perisa Baharu',
         description_zh: '', description_tw: '', description_en: '', description_ms: '',
         order: 99, active: true, created_at: serverTimestamp()
       });
@@ -399,15 +261,8 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
       alert('新增失败：' + err.code + '\n' + err.message + '\n\n请检查 Firestore Rules 是否已经加好、Firestore 数据库是否已经建立。');
     } finally {
       btn.disabled = false;
-      btn.textContent = '+ 新增一个价目';
+      btn.textContent = '+ 新增一个口味';
     }
-  };
-
-  // start pricing listener alongside stock listener once the admin is authenticated
-  const _origStartListening = startListening;
-  startListening = function() {
-    _origStartListening();
-    startListeningPricing();
   };
 </script>
 
