@@ -359,7 +359,8 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 .pricing-card-ribbon.lowstock { background: linear-gradient(135deg, #ff8a65, #e05a4e); color: #fff; }
 .pricing-status-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(244,237,224,0.18); flex-shrink: 0; }
 .pricing-status-dot.available { background: #4caf50; box-shadow: 0 0 6px rgba(76,175,80,0.65); }
-.pricing-card-img { width: 100%; height: 88px; border-radius: 8px; object-fit: contain; background: #fff; border: 2px solid rgba(184,134,11,0.25); padding: 4px; }
+.pricing-card-img-wrap { width: 100%; height: 88px; border-radius: 8px; background: #fff; border: 2px solid rgba(184,134,11,0.25); box-sizing: border-box; padding: 4px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.pricing-card-img { max-width: 100%; max-height: 100%; width: auto; height: auto; display: block; }
 .pricing-card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 6px; }
 .pricing-card-name-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 5px; min-width: 0; }
 .pricing-card-name { font-size: 13.5px; font-weight: 700; color: var(--ink); }
@@ -1110,7 +1111,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const desc = esc(d['description_' + lang] || d.description_zh || '');
       const weight = d.weight ? esc(d.weight) + (weightSuffix[lang] || weightSuffix.zh) : '';
       const price = (typeof d.price === 'number') ? `RM${d.price % 1 === 0 ? d.price : d.price.toFixed(2)}` : '';
-      const img = d.image ? `<img class="pricing-card-img" src="${esc(d.image)}" alt="${name}" loading="lazy">` : '';
+      const img = d.image ? `<div class="pricing-card-img-wrap"><img class="pricing-card-img" src="${esc(d.image)}" alt="${name}" loading="lazy"></div>` : '';
       const status = available ? statusText.available : statusText.out;
       const statusLabel = status[lang] || status.zh;
       let ribbons = '';
