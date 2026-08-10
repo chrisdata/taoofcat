@@ -298,11 +298,23 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
         <div><label>规格重量</label><input type="text" data-f="weight" value="${esc(d.weight)}" placeholder="例：80g"></div>
         <div><label>价格 RM</label><input type="number" data-f="price" value="${d.price ?? 0}" step="0.01"></div>
       </div>
+      <div class="field-grid" style="grid-template-columns:64px 1fr;">
+        <div style="display:flex;align-items:flex-end;justify-content:center;">
+          ${d.image ? `<img src="${esc(d.image)}" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:1px solid rgba(212,168,67,0.3);">` : ''}
+        </div>
+        <div><label>小图 URL（Cloudinary 图片链接）</label><input type="text" data-f="image" value="${esc(d.image)}" placeholder="https://res.cloudinary.com/..."></div>
+      </div>
       <div class="field-grid">
         <div><label>名称 · 简体</label><input type="text" data-f="name_zh" value="${esc(d.name_zh)}"></div>
         <div><label>名称 · 繁體</label><input type="text" data-f="name_tw" value="${esc(d.name_tw)}"></div>
         <div><label>Name · EN</label><input type="text" data-f="name_en" value="${esc(d.name_en)}"></div>
         <div><label>Nama · Bahasa Melayu</label><input type="text" data-f="name_ms" value="${esc(d.name_ms)}"></div>
+      </div>
+      <div class="field-grid">
+        <div><label>简介 · 简体</label><input type="text" data-f="description_zh" value="${esc(d.description_zh)}" placeholder="一句话描述"></div>
+        <div><label>簡介 · 繁體</label><input type="text" data-f="description_tw" value="${esc(d.description_tw)}"></div>
+        <div><label>Description · EN</label><input type="text" data-f="description_en" value="${esc(d.description_en)}"></div>
+        <div><label>Deskripsi · Bahasa Melayu</label><input type="text" data-f="description_ms" value="${esc(d.description_ms)}"></div>
       </div>
       <div class="field-grid" style="grid-template-columns:120px 1fr;">
         <div><label>排序</label><input type="number" data-f="order" value="${d.order ?? 0}"></div>
@@ -377,8 +389,9 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
     btn.textContent = '新增中…';
     try {
       await addDoc(collection(db, COL_PRICING), {
-        category: 'meat', weight: '80g', price: 0,
+        category: 'meat', weight: '80g', price: 0, image: '',
         name_zh: '新项目', name_tw: '新項目', name_en: 'New Item', name_ms: 'Item Baharu',
+        description_zh: '', description_tw: '', description_en: '', description_ms: '',
         order: 99, active: true, created_at: serverTimestamp()
       });
     } catch (err) {
