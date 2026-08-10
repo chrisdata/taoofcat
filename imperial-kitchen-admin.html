@@ -174,13 +174,13 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
         <div><label>名称 · 简体</label><input type="text" data-f="name_zh" value="${esc(d.name_zh)}"></div>
         <div><label>名称 · 繁體</label><input type="text" data-f="name_tw" value="${esc(d.name_tw)}"></div>
         <div><label>Name · EN</label><input type="text" data-f="name_en" value="${esc(d.name_en)}"></div>
-        <div><label>名前 · 日本語</label><input type="text" data-f="name_ja" value="${esc(d.name_ja)}"></div>
+        <div><label>Nama · Bahasa Melayu</label><input type="text" data-f="name_ms" value="${esc(d.name_ms)}"></div>
       </div>
       <div class="field-grid qty">
         <div><label>库存说明 · 简体</label><input type="text" data-f="qty_zh" value="${esc(d.qty_zh)}" placeholder="例：现货 / 剩5包"></div>
         <div><label>庫存說明 · 繁體</label><input type="text" data-f="qty_tw" value="${esc(d.qty_tw)}"></div>
         <div><label>Stock · EN</label><input type="text" data-f="qty_en" value="${esc(d.qty_en)}"></div>
-        <div><label>在庫 · 日本語</label><input type="text" data-f="qty_ja" value="${esc(d.qty_ja)}"></div>
+        <div><label>Stok · Bahasa Melayu</label><input type="text" data-f="qty_ms" value="${esc(d.qty_ms)}"></div>
       </div>
       <div class="field-grid" style="grid-template-columns:120px 1fr;">
         <div><label>排序</label><input type="number" data-f="order" value="${d.order ?? 0}"></div>
@@ -255,8 +255,8 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
     btn.textContent = '新增中…';
     try {
       await addDoc(collection(db, COL), {
-        name_zh: '新口味', name_tw: '新口味', name_en: 'New Flavor', name_ja: '新しい味',
-        qty_zh: '现货', qty_tw: '現貨', qty_en: 'In stock', qty_ja: '在庫あり',
+        name_zh: '新口味', name_tw: '新口味', name_en: 'New Flavor', name_ms: 'Perisa Baharu',
+        qty_zh: '现货', qty_tw: '現貨', qty_en: 'In stock', qty_ms: 'Ada stok',
         order: 99, active: true, created_at: serverTimestamp()
       });
     } catch (err) {
@@ -302,7 +302,7 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
         <div><label>名称 · 简体</label><input type="text" data-f="name_zh" value="${esc(d.name_zh)}"></div>
         <div><label>名称 · 繁體</label><input type="text" data-f="name_tw" value="${esc(d.name_tw)}"></div>
         <div><label>Name · EN</label><input type="text" data-f="name_en" value="${esc(d.name_en)}"></div>
-        <div><label>名前 · 日本語</label><input type="text" data-f="name_ja" value="${esc(d.name_ja)}"></div>
+        <div><label>Nama · Bahasa Melayu</label><input type="text" data-f="name_ms" value="${esc(d.name_ms)}"></div>
       </div>
       <div class="field-grid" style="grid-template-columns:120px 1fr;">
         <div><label>排序</label><input type="number" data-f="order" value="${d.order ?? 0}"></div>
@@ -378,7 +378,7 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
     try {
       await addDoc(collection(db, COL_PRICING), {
         category: 'meat', weight: '80g', price: 0,
-        name_zh: '新项目', name_tw: '新項目', name_en: 'New Item', name_ja: '新しい項目',
+        name_zh: '新项目', name_tw: '新項目', name_en: 'New Item', name_ms: 'Item Baharu',
         order: 99, active: true, created_at: serverTimestamp()
       });
     } catch (err) {
