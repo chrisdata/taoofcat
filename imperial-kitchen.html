@@ -1060,7 +1060,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 <!-- FLOATING PRICE LIST WIDGET -->
-<div id="priceWidget">
+<div id="priceWidget" hidden>
   <div class="price-panel" id="pricePanel">
     <div class="price-panel-header">
       <div class="price-panel-title" data-zh="口味与价目" data-tw="口味與價目" data-en="Flavors & Pricing" data-ms="Perisa & Harga">口味与价目</div>
@@ -1253,7 +1253,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <script>
 // GeoIP is used only to decide whether delivery is available; the location data is not stored.
 (function() {
-  var whatsappButtons = document.querySelectorAll('#whatsappCta, #whatsappFloat, [data-geo-whatsapp]');
+  var whatsappButtons = document.querySelectorAll('#whatsappCta, #whatsappFloat, [data-geo-whatsapp], #priceWidget');
   var ctaSub = document.getElementById('whatsappCtaSub');
   var deliveryNotice = document.getElementById('deliveryNotice');
 
