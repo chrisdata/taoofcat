@@ -49,6 +49,9 @@ input[type=text]:focus, input[type=number]:focus { outline: none; border-color: 
 .toggle-active { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-light); cursor: pointer; }
 .toggle-active-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(244,237,224,0.2); flex-shrink: 0; transition: background 0.2s, box-shadow 0.2s; }
 .toggle-active input:checked ~ .toggle-active-dot { background: var(--green); box-shadow: 0 0 6px rgba(76,175,80,0.65); }
+.toggle-limited input:checked ~ .toggle-active-dot { background: var(--gold); box-shadow: 0 0 6px rgba(212,168,67,0.65); }
+.toggle-lowstock input:checked ~ .toggle-active-dot { background: #e05a4e; box-shadow: 0 0 6px rgba(224,90,78,0.65); }
+.badge-toggles { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 10px; }
 .btns { display: flex; gap: 8px; }
 button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 12px; cursor: pointer; font-family: inherit; }
 .btn-save { background: var(--green); color: #fff; }
@@ -85,7 +88,8 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
   <div class="hint">
     在这里加/改/删价目表上的口味，网页悬浮的「口味与价目」窗口会实时同步更新，不用改代码、不用重新部署。<br>
     「分类」决定这个项目显示在肉包还是汤包底下。「排序」数字越小排越前面。<br>
-    右下角的<strong>绿灯开关</strong>就是库存状态：亮灯 = 现在可订购，网页上会显示绿点 + Available；不亮 = 补货中/缺货，网页上仍会显示这个口味，但会显示 Out of Stock 并变暗——不用刻意删除项目，缺货时关灯、回货时开灯即可。
+    右下角的<strong>绿灯开关</strong>就是库存状态：亮灯 = 现在可订购，网页上会显示绿点 + Available；不亮 = 制作中，网页上仍会显示这个口味，但会显示 Crafting 并变暗——不用刻意删除项目，缺货时关灯、回货时开灯即可。<br>
+    上面的两个<strong>金色/橘红色开关</strong>控制卡片右上角的角标：「限时特别制作」和「小量供应」，两个都可以单独开，也可以同时开，不需要就都关掉。
   </div>
 
   <div id="pricingList"></div>
@@ -179,6 +183,18 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
       <div class="field-grid" style="grid-template-columns:120px 1fr;">
         <div><label>排序</label><input type="number" data-f="order" value="${d.order ?? 0}"></div>
       </div>
+      <div class="badge-toggles">
+        <label class="toggle-active toggle-limited">
+          <input type="checkbox" data-f="limited" ${d.limited ? 'checked' : ''} style="display:none;">
+          <span class="toggle-active-dot"></span>
+          限时特别制作 Banner
+        </label>
+        <label class="toggle-active toggle-lowstock">
+          <input type="checkbox" data-f="lowStock" ${d.lowStock ? 'checked' : ''} style="display:none;">
+          <span class="toggle-active-dot"></span>
+          小量供应 Banner
+        </label>
+      </div>
       <div class="row-controls">
         <label class="toggle-active">
           <input type="checkbox" data-f="active" ${active ? 'checked' : ''} style="display:none;">
@@ -254,7 +270,7 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
         category: 'meat', weight: '80g', price: 0, image: '',
         name_zh: '新口味', name_tw: '新口味', name_en: 'New Flavor', name_ms: 'Perisa Baharu',
         description_zh: '', description_tw: '', description_en: '', description_ms: '',
-        order: 99, active: true, created_at: serverTimestamp()
+        order: 99, active: true, limited: false, lowStock: false, created_at: serverTimestamp()
       });
     } catch (err) {
       console.error('新增失败:', err);
