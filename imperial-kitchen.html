@@ -1047,7 +1047,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div id="priceWidget" hidden>
   <div class="price-panel" id="pricePanel">
     <div class="price-panel-header">
-      <div class="price-panel-title" data-zh="口味与价目" data-tw="口味與價目" data-en="Flavors & Pricing" data-ms="Perisa & Harga">口味与价目</div>
+      <div class="price-panel-title" data-zh="菜单" data-tw="菜單" data-en="Menu" data-ms="Menu">菜单</div>
       <button class="price-panel-close" id="pricePanelClose" type="button" aria-label="Close">×</button>
     </div>
     <div class="price-tabs" id="priceTabs">
@@ -1060,7 +1060,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
   <button class="price-toggle" id="priceToggle" type="button">
     <span class="price-toggle-dot"></span>
-    <span data-zh="口味与价目" data-tw="口味與價目" data-en="Flavors & Pricing" data-ms="Perisa & Harga">口味与价目</span>
+    <span data-zh="菜单" data-tw="菜單" data-en="Menu" data-ms="Menu">菜单</span>
   </button>
 </div>
 
@@ -1098,7 +1098,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const weightSuffix = { zh: '/包', tw: '/包', en: ' per pouch', ms: '/pek' };
     const limitedText = { zh: '限时特别制作', tw: '限時特別製作', en: 'Limited Time!', ms: 'Tempoh Terhad!' };
     const lowStockText = { zh: '小量供应', tw: '小量供應', en: 'Low Stock', ms: 'Stok Terhad' };
-    const items = latestPricing.filter(d => (d.category || 'meat') === activeCat);
+    const items = latestPricing.filter(d => d.visible !== false && (d.category || 'meat') === activeCat);
     if (items.length === 0) {
       wrap.innerHTML = `<div class="pricing-empty">${empty[lang] || empty.zh}</div>`;
       return;
