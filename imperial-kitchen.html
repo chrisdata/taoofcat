@@ -332,9 +332,13 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 
 /* FLOATING PRICE LIST WIDGET */
 #priceWidget { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 250; font-family: 'Noto Sans SC', sans-serif; }
-.price-toggle { display: flex; align-items: center; gap: 8px; background: #241d13; border: 1px solid rgba(212,168,67,0.45); color: var(--ink); font-size: 13px; padding: 10px 18px; border-radius: 30px; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.35); transition: opacity 0.3s ease, transform 0.3s ease; white-space: nowrap; }
-.price-toggle-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
-#priceWidget.hide-toggle .price-toggle { opacity: 0; transform: translateY(14px) scale(0.92); pointer-events: none; }
+.price-toggle { display: flex; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--gold-light), var(--gold)); border: 1px solid rgba(255,255,255,0.25); color: #1a1610; font-weight: 700; font-size: 13px; padding: 10px 18px; border-radius: 30px; cursor: pointer; box-shadow: 0 6px 20px rgba(212,168,67,0.45); transition: opacity 0.3s ease, transform 0.3s ease; white-space: nowrap; animation: priceFloat 2.6s ease-in-out infinite; }
+.price-toggle-dot { width: 8px; height: 8px; border-radius: 50%; background: #1a1610; flex-shrink: 0; }
+#priceWidget.hide-toggle .price-toggle { opacity: 0; transform: translateY(14px) scale(0.92); pointer-events: none; animation: none; }
+@keyframes priceFloat {
+  0%, 100% { transform: translateY(0); box-shadow: 0 6px 20px rgba(212,168,67,0.45); }
+  50% { transform: translateY(-6px); box-shadow: 0 10px 26px rgba(212,168,67,0.6); }
+}
 
 .price-panel { display: none; position: absolute; left: 50%; transform: translateX(-50%); bottom: 54px; width: min(520px, 90vw); max-height: min(68vh, 560px); overflow-y: auto; background: #241d13; border: 1px solid rgba(212,168,67,0.35); border-radius: 16px; padding: 16px; box-shadow: 0 10px 34px rgba(0,0,0,0.45); }
 .price-panel.open { display: block; }
