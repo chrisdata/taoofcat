@@ -66,6 +66,14 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
 .add-new-btn { display: block; width: 100%; background: transparent; border: 1px dashed rgba(212,168,67,0.4); color: var(--gold); padding: 14px; border-radius: 12px; font-size: 14px; cursor: pointer; margin-top: 1.5rem; font-family: inherit; }
 .add-new-btn:hover { background: rgba(212,168,67,0.06); }
 
+.save-all-bar { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; gap: 14px; background: var(--paper); padding: 10px 0; margin-bottom: 1.25rem; border-bottom: 1px solid rgba(212,168,67,0.25); }
+.btn-save-all { background: var(--gold); color: #1a1610; font-weight: 700; padding: 10px 20px; font-size: 13px; }
+.btn-save-all:hover { opacity: 0.9; }
+.btn-save-all:disabled { opacity: 0.5; cursor: default; }
+.save-all-status { font-size: 12px; color: var(--green); opacity: 0; transition: opacity 0.3s; }
+.save-all-status.show { opacity: 1; }
+.save-all-status.error { color: var(--red); }
+
 .hint { font-size: 12px; color: var(--ink-faint); line-height: 1.8; margin-bottom: 1.5rem; background: rgba(212,168,67,0.06); border: 1px solid rgba(212,168,67,0.2); border-radius: 10px; padding: 1rem 1.25rem; }
 #pricingEmptyState { text-align: center; color: var(--ink-faint); padding: 3rem 0; font-size: 13px; }
 </style>
@@ -87,8 +95,14 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
     </div>
   </div>
 
+  <div class="save-all-bar">
+    <button class="action btn-save-all" id="btnSaveAll">💾 保存全部改动</button>
+    <span class="save-all-status" id="saveAllStatus"></span>
+  </div>
+
   <div class="hint">
-    在这里加/改/删价目表上的口味，网页悬浮的「口味与价目」窗口会实时同步更新，不用改代码、不用重新部署。<br>
+    改完多个口味后，直接按最上面的 <strong>💾 保存全部改动</strong> 一次性存档，不用每张卡片各按一次「保存」。（每张卡片自己的「保存」按钮还留着，想单独存一项也可以用。）<br>
+    在这里加/改/删价目表上的口味，网页悬浮的「菜单」窗口会实时同步更新，不用改代码、不用重新部署。<br>
     「分类」决定这个项目显示在肉包还是汤包底下。「排序」数字越小排越前面。<br>
     右下角的<strong>绿灯开关</strong>就是库存状态：亮灯 = 现在可订购，网页上会显示绿点 + Available；不亮 = 制作中，网页上仍会显示这个口味，但会显示 Crafting 并变暗——不用刻意删除项目，缺货时关灯、回货时开灯即可。<br>
     上面的两个<strong>金色/橘红色开关</strong>控制卡片右上角的角标：「限时特别制作」和「小量供应」，两个都可以单独开，也可以同时开，不需要就都关掉。<br>
@@ -104,7 +118,7 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
   import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-  import { getFirestore, collection, query, orderBy, onSnapshot, doc, setDoc, deleteDoc, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+  import { getFirestore, collection, query, orderBy, onSnapshot, doc, setDoc, deleteDoc, addDoc, serverTimestamp, writeBatch } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
   const ADMIN_EMAIL = 'chrischua83@gmail.com';
 
@@ -219,15 +233,20 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
     </div>`;
   }
 
+  function readCardData(cardEl) {
+    const data = { order: 0 };
+    cardEl.querySelectorAll('[data-f]').forEach(el => {
+      const key = el.dataset.f;
+      if (el.type === 'checkbox') data[key] = el.checked;
+      else if (el.type === 'number') data[key] = Number(el.value) || 0;
+      else data[key] = el.value.trim();
+    });
+    return data;
+  }
+
   function bindPricingCard(cardEl, id) {
     cardEl.querySelector('[data-role="save"]').onclick = async () => {
-      const data = { order: 0 };
-      cardEl.querySelectorAll('[data-f]').forEach(el => {
-        const key = el.dataset.f;
-        if (el.type === 'checkbox') data[key] = el.checked;
-        else if (el.type === 'number') data[key] = Number(el.value) || 0;
-        else data[key] = el.value.trim();
-      });
+      const data = readCardData(cardEl);
       data.updated_at = serverTimestamp();
       try {
         await setDoc(doc(db, COL_PRICING, id), data, { merge: true });
@@ -288,6 +307,39 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
     } finally {
       btn.disabled = false;
       btn.textContent = '+ 新增一个口味';
+    }
+  };
+
+  document.getElementById('btnSaveAll').onclick = async () => {
+    const btn = document.getElementById('btnSaveAll');
+    const status = document.getElementById('saveAllStatus');
+    const cards = Array.from(document.querySelectorAll('#pricingList .item-card[data-id]'));
+    if (cards.length === 0) return;
+    btn.disabled = true;
+    btn.textContent = '保存中…';
+    status.classList.remove('show', 'error');
+    try {
+      const batch = writeBatch(db);
+      cards.forEach(cardEl => {
+        const id = cardEl.dataset.id;
+        const data = readCardData(cardEl);
+        data.updated_at = serverTimestamp();
+        batch.set(doc(db, COL_PRICING, id), data, { merge: true });
+        cardEl.classList.toggle('inactive', !data.active);
+        cardEl.classList.toggle('hidden-product', !data.visible);
+      });
+      await batch.commit();
+      status.textContent = `已保存全部 ${cards.length} 项 ✓`;
+      status.classList.add('show');
+      setTimeout(() => status.classList.remove('show'), 2500);
+    } catch (err) {
+      console.error('批量保存失败:', err);
+      status.textContent = '保存失败，请重试：' + (err.code || err.message);
+      status.classList.add('show', 'error');
+      alert('批量保存失败：' + err.code + '\n' + err.message);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = '💾 保存全部改动';
     }
   };
 </script>
