@@ -127,6 +127,9 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 .lang-switcher { display: flex; gap: 4px; align-items: center; }
 .lang-opt { font-size: 11px; font-family: 'Noto Sans SC', sans-serif; background: transparent; border: 1px solid rgba(244,237,224,0.25); border-radius: 20px; padding: 4px 10px; cursor: pointer; color: var(--ink-light); transition: all 0.2s; }
 .lang-opt:hover, .lang-opt.active { color: var(--gold); border-color: var(--gold); }
+.nav-fbshare { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; margin-left: 6px; background: transparent; border: 1px solid rgba(244,237,224,0.25); border-radius: 50%; color: var(--ink-light); cursor: pointer; transition: all 0.2s; flex-shrink: 0; }
+.nav-fbshare:hover { color: var(--gold); border-color: var(--gold); }
+.nav-fbshare svg { width: 13px; height: 13px; }
 
 /* HERO */
 
@@ -406,6 +409,9 @@ nav#nav.scrolled { background: rgba(26,22,16,0.95); backdrop-filter: blur(8px); 
 .btn-whatsapp svg { width: 20px; height: 20px; flex-shrink: 0; }
 .delivery-notice { margin: 2rem auto 0; max-width: 420px; color: var(--gold-light); font-family: 'Noto Sans SC', sans-serif; font-size: 15px; line-height: 1.8; }
 .btn-whatsapp[hidden], .whatsapp-float[hidden], .delivery-notice[hidden], .cta-sub[hidden] { display: none !important; }
+.btn-fbshare { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 11px 26px; background: transparent; color: var(--gold-light); text-decoration: none; font-size: 13.5px; letter-spacing: 0.05em; font-family: 'Noto Sans SC', sans-serif; font-weight: 500; border: 1px solid rgba(212,168,67,0.4); border-radius: 30px; transition: background 0.15s, transform 0.15s, border-color 0.15s; cursor: pointer; }
+.btn-fbshare:hover { background: rgba(212,168,67,0.1); border-color: var(--gold-light); transform: translateY(-2px); }
+.btn-fbshare svg { width: 16px; height: 16px; flex-shrink: 0; }
 
 /* FLOATING WHATSAPP BUTTON */
 .whatsapp-float {
@@ -444,6 +450,9 @@ footer { scroll-snap-align:end; scroll-snap-stop:always; position: relative; z-i
     <button class="lang-opt" data-lang="tw">繁</button>
     <button class="lang-opt" data-lang="en">EN</button>
     <button class="lang-opt" data-lang="ms">BM</button>
+    <button type="button" class="nav-fbshare" id="navFbShareBtn" aria-label="分享到 Facebook">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+    </button>
   </div>
 </nav>
 
@@ -947,6 +956,12 @@ footer { scroll-snap-align:end; scroll-snap-stop:always; position: relative; z-i
     <span data-zh="WhatsApp 咨询" data-tw="WhatsApp 諮詢" data-en="Chat on WhatsApp" data-ms="Berbual di WhatsApp">WhatsApp 咨询</span>
   </a>
   <div class="delivery-notice" id="deliveryNotice" hidden data-zh="目前暂不配送至东马及海外地区，敬请留意后续更新。" data-tw="目前暫不配送至東馬及海外地區，敬請留意後續更新。" data-en="Delivery is currently unavailable to East Malaysia and overseas. Please check back for updates." data-ms="Penghantaran buat masa ini tidak tersedia ke Malaysia Timur dan luar negara. Sila semak semula untuk kemas kini.">目前暂不配送至东马及海外地区，敬请留意后续更新。</div>
+  <div>
+    <button type="button" class="btn-fbshare" id="fbShareBtn" aria-label="分享到 Facebook">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+      <span data-zh="分享给猫友" data-tw="分享給貓友" data-en="Share with a Cat Friend" data-ms="Kongsi dengan Kawan">分享给猫友</span>
+    </button>
+  </div>
   <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">↑</button>
 </div>
 
@@ -997,6 +1012,16 @@ document.addEventListener('DOMContentLoaded', function() {
   backToTop.addEventListener('click', function() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
+
+  var fbShareBtn = document.getElementById('fbShareBtn');
+  var navFbShareBtn = document.getElementById('navFbShareBtn');
+  function openFbShare() {
+    var shareUrl = 'https://taoofcat.com/imperial-kitchen.html';
+    var fbUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareUrl);
+    window.open(fbUrl, 'fbshare', 'width=600,height=520,noopener,noreferrer');
+  }
+  if (fbShareBtn) fbShareBtn.addEventListener('click', openFbShare);
+  if (navFbShareBtn) navFbShareBtn.addEventListener('click', openFbShare);
 
   document.querySelectorAll('.scroll-down-hint').forEach(function(btn) {
     btn.addEventListener('click', function() {
