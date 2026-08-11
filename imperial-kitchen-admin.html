@@ -198,8 +198,14 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
           这个口味也有汤包版本
         </label>
         <div class="field-grid" style="grid-template-columns: 1fr 1fr; margin-top:8px;">
-          <div><label>汤包规格重量</label><input type="text" data-f="soupWeight" value="${esc(d.soupWeight)}" placeholder="例：50g"></div>
+          <div><label>汤包规格重量</label><input type="text" data-f="soupWeight" value="${esc(d.soupWeight || '50g')}" placeholder="例：50g"></div>
           <div><label>汤包价格 RM</label><input type="number" data-f="soupPrice" value="${d.soupPrice ?? 0}" step="0.01"></div>
+        </div>
+        <div class="field-grid" style="margin-top:8px;">
+          <div><label>汤包名称 · 简体（留空＝口味名+汤）</label><input type="text" data-f="soupName_zh" value="${esc(d.soupName_zh)}" placeholder="例：牛骨汤"></div>
+          <div><label>湯包名稱 · 繁體</label><input type="text" data-f="soupName_tw" value="${esc(d.soupName_tw)}" placeholder="例：牛骨湯"></div>
+          <div><label>Soup Name · EN</label><input type="text" data-f="soupName_en" value="${esc(d.soupName_en)}" placeholder="e.g. Beef Bone Soup"></div>
+          <div><label>Nama Sup · Bahasa Melayu</label><input type="text" data-f="soupName_ms" value="${esc(d.soupName_ms)}" placeholder="cth. Sup Tulang Lembu"></div>
         </div>
       </div>
       <div class="field-grid" style="grid-template-columns:120px 1fr;">
@@ -302,6 +308,7 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
       await addDoc(collection(db, COL_PRICING), {
         weight: '80g', price: 0, image: '',
         hasSoup: false, soupWeight: '50g', soupPrice: 0,
+        soupName_zh: '', soupName_tw: '', soupName_en: '', soupName_ms: '',
         name_zh: '新口味', name_tw: '新口味', name_en: 'New Flavor', name_ms: 'Perisa Baharu',
         description_zh: '', description_tw: '', description_en: '', description_ms: '',
         order: 99, active: true, visible: true, limited: false, lowStock: false, created_at: serverTimestamp()

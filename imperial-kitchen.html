@@ -1119,9 +1119,10 @@ document.addEventListener('DOMContentLoaded', function() {
       const isSoup = activeCat === 'soup';
       const available = d.active !== false;
       const nameBase = esc(d['name_' + lang] || d.name_zh || '');
-      const name = isSoup ? nameBase + (soupNameSuffix[lang] || soupNameSuffix.zh) : nameBase;
+      const soupNameOverride = esc(d['soupName_' + lang] || d.soupName_zh || '');
+      const name = isSoup ? (soupNameOverride || (nameBase + (soupNameSuffix[lang] || soupNameSuffix.zh))) : nameBase;
       const desc = esc(d['description_' + lang] || d.description_zh || '');
-      const rawWeight = isSoup ? d.soupWeight : d.weight;
+      const rawWeight = isSoup ? (d.soupWeight || '50g') : d.weight;
       const weight = rawWeight ? esc(rawWeight) + (weightSuffix[lang] || weightSuffix.zh) : '';
       const rawPrice = isSoup ? d.soupPrice : d.price;
       const price = (typeof rawPrice === 'number') ? `RM${rawPrice % 1 === 0 ? rawPrice : rawPrice.toFixed(2)}` : '';
