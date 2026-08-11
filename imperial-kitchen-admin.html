@@ -36,8 +36,6 @@ body { font-family: 'Noto Sans SC', sans-serif; background: var(--paper); color:
 .item-card { background: #241d13; border: 1px solid rgba(212,168,67,0.25); border-radius: 14px; padding: 1.25rem 1.5rem; margin-bottom: 14px; }
 .item-card.inactive { opacity: 0.5; }
 .item-card.hidden-product { border-color: rgba(91,155,213,0.5); opacity: 0.4; }
-select.pricing-cat { width: 100%; background: #1a1610; border: 1px solid rgba(244,237,224,0.15); color: var(--ink); padding: 8px 10px; border-radius: 6px; font-size: 13px; font-family: inherit; }
-select.pricing-cat:focus { outline: none; border-color: var(--gold); }
 .field-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 10px; }
 @media (max-width: 700px) { .field-grid { grid-template-columns: 1fr 1fr; } }
 label { display: block; font-size: 10px; color: var(--ink-faint); letter-spacing: 0.05em; margin-bottom: 4px; text-transform: uppercase; }
@@ -53,6 +51,8 @@ input[type=text]:focus, input[type=number]:focus { outline: none; border-color: 
 .toggle-limited input:checked ~ .toggle-active-dot { background: var(--gold); box-shadow: 0 0 6px rgba(212,168,67,0.65); }
 .toggle-lowstock input:checked ~ .toggle-active-dot { background: #e05a4e; box-shadow: 0 0 6px rgba(224,90,78,0.65); }
 .toggle-visible input:checked ~ .toggle-active-dot { background: #5b9bd5; box-shadow: 0 0 6px rgba(91,155,213,0.65); }
+.toggle-soup input:checked ~ .toggle-active-dot { background: #26a69a; box-shadow: 0 0 6px rgba(38,166,154,0.65); }
+.soup-block { background: rgba(38,166,154,0.06); border: 1px solid rgba(38,166,154,0.2); border-radius: 10px; padding: 0.75rem 1rem; margin-bottom: 10px; }
 .badge-toggles { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 10px; }
 .btns { display: flex; gap: 8px; }
 button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 12px; cursor: pointer; font-family: inherit; }
@@ -103,7 +103,7 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
   <div class="hint">
     改完多个口味后，直接按最上面的 <strong>💾 保存全部改动</strong> 一次性存档，不用每张卡片各按一次「保存」。（每张卡片自己的「保存」按钮还留着，想单独存一项也可以用。）<br>
     在这里加/改/删价目表上的口味，网页悬浮的「菜单」窗口会实时同步更新，不用改代码、不用重新部署。<br>
-    「分类」决定这个项目显示在肉包还是汤包底下。「排序」数字越小排越前面。<br>
+    每个口味以<strong>肉包</strong>为主体来填资料（名称、图片、简介都是肉包汤包共用）。如果这个口味<strong>也有汤包版本</strong>，打开中间的<strong>青色开关「这个口味也有汤包版本」</strong>，然后把汤包的规格重量和价格单独填好——前台「菜单」的肉包/汤包两个 tab 会自动依这个开关分流显示，不用重复建两笔资料。「排序」数字越小排越前面。<br>
     右下角的<strong>绿灯开关</strong>就是库存状态：亮灯 = 现在可订购，网页上会显示绿点 + Available；不亮 = 制作中，网页上仍会显示这个口味，但会显示 Crafting 并变暗——不用刻意删除项目，缺货时关灯、回货时开灯即可。<br>
     上面的两个<strong>金色/橘红色开关</strong>控制卡片右上角的角标：「限时特别制作」和「小量供应」，两个都可以单独开，也可以同时开，不需要就都关掉。<br>
     最左边的<strong>蓝色开关「显示此产品」</strong>决定这个口味要不要出现在前台价目表——关掉之后网页上完全看不到这个项目（比库存灯更彻底），适合还没准备好公开、或暂时下架的口味，不用删除资料，之后随时可以重新打开。
@@ -166,25 +166,18 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
   function pricingCardHTML(id, d) {
     const active = d.active !== false;
     const visible = d.visible !== false;
-    const cat = d.category || 'meat';
+    const hasSoup = !!d.hasSoup;
     return `
     <div class="item-card ${active ? '' : 'inactive'} ${visible ? '' : 'hidden-product'}" data-id="${id}">
-      <div class="field-grid" style="grid-template-columns: 1fr 1fr 1fr;">
-        <div>
-          <label>分类</label>
-          <select class="pricing-cat" data-f="category">
-            <option value="meat" ${cat === 'meat' ? 'selected' : ''}>肉包 Meat pack</option>
-            <option value="soup" ${cat === 'soup' ? 'selected' : ''}>汤包 Soup pack</option>
-          </select>
-        </div>
-        <div><label>规格重量</label><input type="text" data-f="weight" value="${esc(d.weight)}" placeholder="例：80g"></div>
-        <div><label>价格 RM</label><input type="number" data-f="price" value="${d.price ?? 0}" step="0.01"></div>
+      <div class="field-grid" style="grid-template-columns: 1fr 1fr;">
+        <div><label>肉包规格重量</label><input type="text" data-f="weight" value="${esc(d.weight)}" placeholder="例：80g"></div>
+        <div><label>肉包价格 RM</label><input type="number" data-f="price" value="${d.price ?? 0}" step="0.01"></div>
       </div>
       <div class="field-grid" style="grid-template-columns:64px 1fr;">
         <div style="display:flex;align-items:flex-end;justify-content:center;">
           ${d.image ? `<img src="${esc(d.image)}" style="width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid rgba(212,168,67,0.3);">` : ''}
         </div>
-        <div><label>小图 URL（Cloudinary 图片链接）</label><input type="text" data-f="image" value="${esc(d.image)}" placeholder="https://res.cloudinary.com/..."></div>
+        <div><label>小图 URL（Cloudinary 图片链接，肉包汤包共用）</label><input type="text" data-f="image" value="${esc(d.image)}" placeholder="https://res.cloudinary.com/..."></div>
       </div>
       <div class="field-grid">
         <div><label>名称 · 简体</label><input type="text" data-f="name_zh" value="${esc(d.name_zh)}"></div>
@@ -197,6 +190,17 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
         <div><label>簡介 · 繁體</label><input type="text" data-f="description_tw" value="${esc(d.description_tw)}"></div>
         <div><label>Description · EN</label><input type="text" data-f="description_en" value="${esc(d.description_en)}"></div>
         <div><label>Deskripsi · Bahasa Melayu</label><input type="text" data-f="description_ms" value="${esc(d.description_ms)}"></div>
+      </div>
+      <div class="soup-block">
+        <label class="toggle-active toggle-soup">
+          <input type="checkbox" data-f="hasSoup" ${hasSoup ? 'checked' : ''} style="display:none;">
+          <span class="toggle-active-dot"></span>
+          这个口味也有汤包版本
+        </label>
+        <div class="field-grid" style="grid-template-columns: 1fr 1fr; margin-top:8px;">
+          <div><label>汤包规格重量</label><input type="text" data-f="soupWeight" value="${esc(d.soupWeight)}" placeholder="例：50g"></div>
+          <div><label>汤包价格 RM</label><input type="number" data-f="soupPrice" value="${d.soupPrice ?? 0}" step="0.01"></div>
+        </div>
       </div>
       <div class="field-grid" style="grid-template-columns:120px 1fr;">
         <div><label>排序</label><input type="number" data-f="order" value="${d.order ?? 0}"></div>
@@ -296,7 +300,8 @@ button.action { border: none; border-radius: 6px; padding: 7px 16px; font-size: 
     btn.textContent = '新增中…';
     try {
       await addDoc(collection(db, COL_PRICING), {
-        category: 'meat', weight: '80g', price: 0, image: '',
+        weight: '80g', price: 0, image: '',
+        hasSoup: false, soupWeight: '50g', soupPrice: 0,
         name_zh: '新口味', name_tw: '新口味', name_en: 'New Flavor', name_ms: 'Perisa Baharu',
         description_zh: '', description_tw: '', description_en: '', description_ms: '',
         order: 99, active: true, visible: true, limited: false, lowStock: false, created_at: serverTimestamp()

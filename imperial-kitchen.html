@@ -1102,20 +1102,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const empty = { zh: '暂时没有价目资料，请稍后再来看看', tw: '暫時沒有價目資料，請稍後再來看看', en: 'No pricing available right now — check back soon', ms: 'Tiada maklumat harga buat masa ini — sila semak semula tidak lama lagi' };
     const statusText = { available: { zh: '现货', tw: '現貨', en: 'Available', ms: 'Tersedia' }, out: { zh: '制作中', tw: '製作中', en: 'Crafting', ms: 'Sedang Dibuat' } };
     const weightSuffix = { zh: '/包', tw: '/包', en: ' per pouch', ms: '/pek' };
+    const soupNameSuffix = { zh: '汤', tw: '湯', en: ' Soup', ms: ' Sup' };
     const limitedText = { zh: '限时特别制作', tw: '限時特別製作', en: 'Limited Time!', ms: 'Tempoh Terhad!' };
     const lowStockText = { zh: '小量供应', tw: '小量供應', en: 'Low Stock', ms: 'Stok Terhad' };
-    const items = latestPricing.filter(d => d.visible !== false && (d.category || 'meat') === activeCat);
+
+    // meat tab: every visible flavor. soup tab: only flavors with a soup version.
+    const items = latestPricing.filter(d => d.visible !== false && (activeCat === 'meat' || d.hasSoup));
     if (items.length === 0) {
       wrap.innerHTML = `<div class="pricing-empty">${empty[lang] || empty.zh}</div>`;
       return;
     }
 
     function cardHTML(d) {
+      const isSoup = activeCat === 'soup';
       const available = d.active !== false;
-      const name = esc(d['name_' + lang] || d.name_zh || '');
+      const nameBase = esc(d['name_' + lang] || d.name_zh || '');
+      const name = isSoup ? nameBase + (soupNameSuffix[lang] || soupNameSuffix.zh) : nameBase;
       const desc = esc(d['description_' + lang] || d.description_zh || '');
-      const weight = d.weight ? esc(d.weight) + (weightSuffix[lang] || weightSuffix.zh) : '';
-      const price = (typeof d.price === 'number') ? `RM${d.price % 1 === 0 ? d.price : d.price.toFixed(2)}` : '';
+      const rawWeight = isSoup ? d.soupWeight : d.weight;
+      const weight = rawWeight ? esc(rawWeight) + (weightSuffix[lang] || weightSuffix.zh) : '';
+      const rawPrice = isSoup ? d.soupPrice : d.price;
+      const price = (typeof rawPrice === 'number') ? `RM${rawPrice % 1 === 0 ? rawPrice : rawPrice.toFixed(2)}` : '';
       const img = d.image ? `<div class="pricing-card-img-wrap"><img class="pricing-card-img" src="${esc(d.image)}" alt="${name}" loading="lazy"></div>` : '';
       const status = available ? statusText.available : statusText.out;
       const statusLabel = status[lang] || status.zh;
