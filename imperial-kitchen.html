@@ -1183,26 +1183,22 @@ document.addEventListener('DOMContentLoaded', function() {
     btn.addEventListener('click', () => setTimeout(renderPricing, 50));
   });
 
-  // open / close the floating panel
+  // open the floating panel — only the X button closes it, so an accidental
+  // tap outside or while scrolling won't dismiss it
   const priceWidget = document.getElementById('priceWidget');
   const pricePanel = document.getElementById('pricePanel');
   document.getElementById('priceToggle').addEventListener('click', () => {
-    pricePanel.classList.toggle('open');
+    pricePanel.classList.add('open');
   });
   document.getElementById('pricePanelClose').addEventListener('click', () => {
     pricePanel.classList.remove('open');
   });
-  document.addEventListener('click', (e) => {
-    if (!priceWidget.contains(e.target)) {
-      pricePanel.classList.remove('open');
-    }
-  });
 
-  // auto-hide the toggle button while actively scrolling, and close the panel
-  // so it never blocks the view — it reappears a moment after scrolling stops
+  // auto-hide the toggle button while actively scrolling (only when the panel
+  // itself is closed) — it reappears a moment after scrolling stops
   let scrollHideTimer = null;
   window.addEventListener('scroll', () => {
-    pricePanel.classList.remove('open');
+    if (pricePanel.classList.contains('open')) return;
     priceWidget.classList.add('hide-toggle');
     clearTimeout(scrollHideTimer);
     scrollHideTimer = setTimeout(() => {
